@@ -7,6 +7,7 @@ import { Markdown } from "@/components/Markdown";
 import type { AnswerRecord } from "@/lib/storage";
 import { saveAnswers, loadBookmarks, setBookmark } from "@/lib/progress";
 import { useAuth } from "@/lib/auth";
+import { useLang, localizeQuestion } from "@/lib/i18n";
 
 interface Props {
   questions: Question[];
@@ -29,7 +30,9 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
   const [timeLeft, setTimeLeft] = useState(timeLimitSec ?? 0);
 
   const { userId } = useAuth();
+  const { lang } = useLang();
   const current = questions[idx];
+  const locCurrent = localizeQuestion(current, lang);
   const answeredCount = Object.keys(chosen).length;
 
   // Load persisted bookmarks (from Supabase if logged in, else localStorage).
@@ -169,17 +172,17 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
         </div>
 
         <div className="text-[15px] font-medium text-slate-900">
-          <Markdown>{current.stem}</Markdown>
+          <Markdown>{locCurrent.stem}</Markdown>
         </div>
 
-        {current.diagram ? (
+        {locCurrent.diagram ? (
           <div className="mt-3">
-            <Markdown>{current.diagram}</Markdown>
+            <Markdown>{locCurrent.diagram}</Markdown>
           </div>
         ) : null}
 
         <div className="mt-4 space-y-2">
-          {current.options.map((opt) => {
+          {locCurrent.options.map((opt) => {
             const selected = chosen[current.id] === opt.key;
             return (
               <button
@@ -263,6 +266,7 @@ function Results({
   correctCount: number;
   title: string;
 }) {
+  const { lang } = useLang();
   const total = questions.length;
   const pct = Math.round((correctCount / total) * 100);
   const passed = pct >= 70;
@@ -323,6 +327,7 @@ function Results({
         {questions.map((q, i) => {
           const mine = chosen[q.id];
           const ok = mine === q.answer;
+          const loc = localizeQuestion(q, lang);
           return (
             <div
               key={q.id}
@@ -343,16 +348,16 @@ function Results({
                 </span>
               </div>
               <div className="text-sm font-medium">
-                <Markdown>{q.stem}</Markdown>
+                <Markdown>{loc.stem}</Markdown>
               </div>
-              {q.diagram ? (
+              {loc.diagram ? (
                 <div className="mt-2">
-                  <Markdown>{q.diagram}</Markdown>
+                  <Markdown>{loc.diagram}</Markdown>
                 </div>
               ) : null}
 
               <div className="mt-3 space-y-1 text-sm">
-                {q.options.map((opt) => {
+                {loc.options.map((opt) => {
                   const isAnswer = opt.key === q.answer;
                   const isMine = opt.key === mine;
                   return (
