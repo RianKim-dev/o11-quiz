@@ -95,5 +95,197 @@
     "source": "Training Workbook 4 / 9 (Screen Lifecycle 연계) · Use Data → Fetch data on demand",
     "status": "verified",
     "verifyNote": ""
+  },
+  {
+    "id": "AGG-005",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["join-types", "only-with"],
+    "stem": "You need an Aggregate that lists **only** the Movies that have a Genre assigned — Movies without a Genre must be excluded. The Aggregate has `Movie` and `MovieGenre` as Sources. Which join type should you use between them?",
+    "options": [
+      { "key": "A", "text": "Only With" },
+      { "key": "B", "text": "With or Without" },
+      { "key": "C", "text": "With" },
+      { "key": "D", "text": "No join — add a Sorting instead" }
+    ],
+    "answer": "A",
+    "explanation": "**Only With** 조인은 두 Entity 간에 **일치하는 레코드만** 반환합니다(INNER JOIN). 따라서 Genre가 연결된 Movie만 나오고, Genre가 없는 Movie는 제외됩니다.",
+    "distractors": {
+      "B": "With or Without는 왼쪽(Movie)의 모든 행을 반환해서, Genre가 없는 Movie까지 포함됩니다.",
+      "C": "With는 두 Entity의 모든 행을 반환합니다.",
+      "D": "Sorting은 정렬일 뿐 행을 걸러내지 않습니다."
+    },
+    "source": "Training Workbook 4 (Advanced Aggregate → Join: Only With)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-006",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["join-types", "with"],
+    "stem": "Which statement about the **With** join type in an Aggregate is correct?",
+    "options": [
+      { "key": "A", "text": "It returns only the records that have a match in both entities." },
+      { "key": "B", "text": "It returns all rows from the left entity, even when there is no match on the right." },
+      { "key": "C", "text": "It returns all rows from both entities." },
+      { "key": "D", "text": "It automatically removes duplicate rows from the result." }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate가 지원하는 3가지 조인 중 **With**는 **두 Entity의 모든 행을 반환**합니다.",
+    "distractors": {
+      "A": "이건 Only With(일치하는 레코드만)의 동작입니다.",
+      "B": "이건 With or Without(왼쪽 전체 유지)의 동작입니다.",
+      "D": "조인 종류는 중복 제거와 무관합니다."
+    },
+    "source": "Training Workbook 4 (Advanced Aggregate → Join: With)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-007",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["calculated-attribute", "dropdown", "practical"],
+    "stem": "A Person Dropdown currently shows only each person's first name. You want each option to show the full name (`Name Surname`). What is the best way?",
+    "options": [
+      { "key": "A", "text": "In the Aggregate, add a Calculated (New) Attribute `FullName = Name + \" \" + Surname`, then set the Dropdown's Options Text to `FullName`." },
+      { "key": "B", "text": "Type `Name + \" \" + Surname` directly into the Dropdown's Options Text property." },
+      { "key": "C", "text": "Add a second Dropdown that shows the surname." },
+      { "key": "D", "text": "Rename the Person entity's `Name` attribute so it also stores the surname." }
+    ],
+    "answer": "A",
+    "explanation": "**Calculated(New) Attribute**는 같은 Aggregate의 다른 attribute로부터 계산되어 쿼리 출력에 포함됩니다. `FullName = Name + \" \" + Surname`를 만들고 Dropdown의 **Options Text**를 그 attribute로 지정하는 것이 정석입니다.",
+    "distractors": {
+      "B": "Options Text는 리스트 소스의 attribute 하나를 참조하는 자리라, 임의의 연결(concat) 식을 직접 넣을 수 없습니다.",
+      "C": "두 번째 드롭다운은 불필요하고 요구사항(한 옵션에 풀네임)을 만족하지 못합니다.",
+      "D": "원본 데이터(Name)를 훼손하는 잘못된 접근입니다."
+    },
+    "source": "Training Workbook 4 (Calculated Attributes; Adding Cast and Crew → FullName)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-008",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["hiding-columns", "output"],
+    "stem": "In an Aggregate you **hide** one of the columns. What is the effect on the data the Aggregate retrieves?",
+    "options": [
+      { "key": "A", "text": "The hidden attribute is no longer fetched from the database." },
+      { "key": "B", "text": "Hiding is only for the preview and does not affect the output; what is actually retrieved is determined by the attributes used outside the Aggregate." },
+      { "key": "C", "text": "The Aggregate throws an error until the column is shown again." },
+      { "key": "D", "text": "Every column to the right of it is also removed from the output." }
+    ],
+    "answer": "B",
+    "explanation": "컬럼 **숨기기는 미리보기 목적일 뿐** Aggregate 출력에 영향을 주지 않습니다. 실제로 가져오는 컬럼은 **Aggregate 바깥에서 사용된 attribute**에 따라 결정됩니다.",
+    "distractors": {
+      "A": "숨김은 조회 대상(fetch)을 바꾸지 않습니다.",
+      "C": "숨긴다고 오류가 나지 않습니다.",
+      "D": "오른쪽 컬럼들이 함께 사라지지 않습니다."
+    },
+    "source": "Training Workbook 4 (Advanced Aggregate → Hiding Columns)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-009",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["group-by", "functions", "negative"],
+    "stem": "When grouping records in an Aggregate, which of the following is **NOT** an available aggregation function?",
+    "options": [
+      { "key": "A", "text": "Sum" },
+      { "key": "B", "text": "Average" },
+      { "key": "C", "text": "Count" },
+      { "key": "D", "text": "Concatenate" }
+    ],
+    "answer": "D",
+    "explanation": "그룹에 적용할 수 있는 집계 함수는 **Sum, Average, Min, Max, Count**입니다. **Concatenate**는 집계 함수가 아닙니다.",
+    "distractors": {
+      "A": "Sum은 유효한 집계 함수입니다.",
+      "B": "Average는 유효한 집계 함수입니다.",
+      "C": "Count는 유효한 집계 함수입니다."
+    },
+    "source": "Training Workbook 4 (Advanced Aggregate → Aggregating Records)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-010",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": ["sources", "join", "auto"],
+    "stem": "You drag two entities that have a reference (relationship) between them into the same Aggregate as Sources. What happens regarding the join?",
+    "options": [
+      { "key": "A", "text": "OutSystems automatically generates the join based on the relationship." },
+      { "key": "B", "text": "You must write the SQL join manually." },
+      { "key": "C", "text": "No join is created; the result becomes a cross product of both entities." },
+      { "key": "D", "text": "The second entity is ignored until you add a filter." }
+    ],
+    "answer": "A",
+    "explanation": "Entity 간에 관계(참조)가 있으면 OutSystems가 **자동으로 join을 생성**합니다. 필요하면 Sources 탭에서 조인 방식을 조정할 수 있습니다.",
+    "distractors": {
+      "B": "Aggregate는 시각적 도구라 SQL을 직접 작성하지 않습니다.",
+      "C": "관계가 있으면 카티션 곱이 아니라 관계 기반 조인이 만들어집니다.",
+      "D": "두 번째 Entity는 무시되지 않고 조인되어 함께 조회됩니다."
+    },
+    "source": "Training Workbook 4 (Advanced Aggregate → Multiple Sources)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-011",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["result-access", "list-current", "practical"],
+    "stem": "An Aggregate `GetMovieById` fetches a single Movie. Which expression correctly displays that movie's title on the Screen?",
+    "options": [
+      { "key": "A", "text": "GetMovieById.Movie.Title" },
+      { "key": "B", "text": "GetMovieById.List.Current.Movie.Title" },
+      { "key": "C", "text": "GetMovieById.Current.Movie.Title" },
+      { "key": "D", "text": "GetMovieById.List.Movie.Title" }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate 결과는 리스트예요. 현재 행은 **`.List.Current`**로 접근한 뒤, 소스 Entity와 attribute를 따라갑니다 → `GetMovieById.List.Current.Movie.Title`.",
+    "distractors": {
+      "A": "`.List.Current`를 거치지 않아 잘못된 접근 경로입니다.",
+      "C": "`.Current`는 `.List` 뒤에 와야 합니다 (`.List.Current`).",
+      "D": "리스트에서 특정 행(Current)을 지정하지 않은 잘못된 경로입니다."
+    },
+    "source": "Training Workbook 4 (Adding Cast and Crew → GetMovieById.List.Current.Movie.Title)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-012",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["filters", "and"],
+    "stem": "An Aggregate has **two separate Filters** defined. How are they combined when the query runs?",
+    "options": [
+      { "key": "A", "text": "With AND — a record must satisfy all filters to be returned." },
+      { "key": "B", "text": "With OR — a record is returned if it satisfies any one filter." },
+      { "key": "C", "text": "Only the first filter is applied; the rest are ignored." },
+      { "key": "D", "text": "They conflict and must be merged into a single expression." }
+    ],
+    "answer": "A",
+    "explanation": "여러 개의 Filter는 각각 **AND 조건**으로 결합되어, 레코드가 **모든 필터를 만족**해야 반환됩니다. OR가 필요하면 하나의 필터 식 안에서 `or`로 조건을 묶습니다(워크북의 역할 필터 예: `... = Director or ... = Producer`).",
+    "distractors": {
+      "B": "서로 다른 필터끼리는 OR가 아니라 AND로 묶입니다.",
+      "C": "첫 필터만 적용되는 게 아니라 모두 적용됩니다.",
+      "D": "필터는 충돌하지 않으며, 각각이 AND로 정상 결합됩니다."
+    },
+    "source": "Training Workbook 4 (Advanced Aggregate → Filters; 역할 필터의 or 사용)",
+    "status": "verified",
+    "verifyNote": ""
   }
 ]

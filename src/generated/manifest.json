@@ -1,9 +1,9 @@
 {
-  "total": 8,
+  "total": 16,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
-      "count": 4
+      "count": 12
     },
     "Logic Flows & Exception Handling": {
       "category": "Logic",

@@ -57,13 +57,23 @@ content/
 | UI Design | 13 | Screen Widgets(9), Blocks and Events(4) |
 | Architecture & Security | 4 | Modular Dependencies(2), Role-based Security(2) |
 
+## 품질 기준 (Definition of Done — 문항 1개)
+
+- **정확성**: 정답이 정확히 1개이며 공식 출처로 검증 가능(출처 명시). 오답은 그럴듯하지만 명확히 틀림(흔한 오해 기반).
+- **중복 없음**: 기존 은행과 개념이 겹치지 않음 (단순 문구만 바꾼 변형 금지).
+- **유형 다양성**: 한 배치가 같은 형태로 쏠리지 않게 — 개념 참/거짓 · 부정형(not·cannot) · 시나리오 트러블슈팅 · best-way 판단 · 플로우/구성 추적 을 섞음.
+- **실습·이론 조화**: 손으로 하는 응용형(구성·동작 추적)과 개념형(정의·원리)을 균형 있게.
+- **시험 유사성**: 공식 샘플 20문항의 난이도·어투와 일치.
+
 ## 저작 & 검증 프로세스
 
-1. **생성** — 해당 워크북 장 + 공식문서 근거로 배치 초안 작성 (`status: "draft"`).
-2. **독립 검증** — 별도 패스로 각 문항 점검:
-   - 정답이 정확히 1개인가? · 키로 지정된 답이 맞나?
-   - 오답이 '그럴듯하지만 틀린' 게 맞나? · 실제 OutSystems 동작에 근거하나(환각 아님)?
-   - 통과 → `status: "verified"`, 불확실 → `status: "flagged"` + `verifyNote`.
-3. **스팟체크** — 앱 리뷰 화면에서 flagged 위주로 사람이 최종 확인.
+1. **근거 수집** — 해당 워크북 章 + 공식 문서를 실제로 확인해 사실 추출.
+2. **생성** — 추출된 사실만으로 초안 작성(`draft`), 문항마다 출처 명시, 위 다양성·조화 기준 적용.
+3. **독립 검증** — 별도 패스가 정답키를 안 보고 출처에서 정답 재도출 → 단일정답·오답타당성·근거·중복·유형쏠림 점검. 통과 → `verified`, 불확실 → `flagged` + `verifyNote`.
+4. **스팟체크 (나중)** — 앱 리뷰 화면에서 flagged·샘플을 사람이 최종 검수.
+
+## 주제별 목표 문항 수
+
+모의고사마다 다른 문항이 나오도록 blueprint 개수의 약 2.5~3배를 목표로 채움 (예: Aggregates 6 → ~15). 비중 큰 UI Design(13)·Logic(11)·Fetching(10)부터.
 
 id 접두사 규칙: Aggregates=AGG, Logic Flows & Exceptions=LFE, Screen Widgets=SW, Blocks&Events=BE, Entities=ENT, Data Relationships=REL, Form Validations=FV, Client/Server Actions=CSA, Screen Lifecycle=SL, Client Variables=CV, Debugging=DBG, Fetching on Screens=FDS, Modular Deps=MOD, Role Security=SEC.
