@@ -1,0 +1,99 @@
+[
+  {
+    "id": "LFE-001",
+    "category": "Logic",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": ["if", "boundary"],
+    "stem": "Consider the following Client Action. It is called with **N = 50**. What is the value of `result` when the Action ends?",
+    "diagram": "```\nClient Action: ClassifyNumber ( N : Integer )  ->  Output: result (Text)\n\n    Start\n      |\n      v\n  +---------------+  True\n  |   N > 100 ?   |------->  result = \"High\"    -->  End\n  +-------+-------+\n          | False\n          v\n  +---------------+  True\n  |   N > 50 ?    |------->  result = \"Medium\"  -->  End\n  +-------+-------+\n          | False\n          v\n   result = \"Low\"  ---------------------------------->  End\n```",
+    "options": [
+      { "key": "A", "text": "\"High\"" },
+      { "key": "B", "text": "\"Medium\"" },
+      { "key": "C", "text": "\"Low\"" },
+      { "key": "D", "text": "The Action throws an exception." }
+    ],
+    "answer": "C",
+    "explanation": "If 노드를 위에서 아래로 순서대로 평가하되 **경계값**에 주의합니다. N = 50 →\n1. `N > 100 ?` → 50 > 100 = **False** → 아래로.\n2. `N > 50 ?` → 50 > 50 = **False** (`>`는 초과이므로 50은 해당 안 됨) → 아래로.\n3. → `result = \"Low\"`.",
+    "distractors": {
+      "A": "N > 100이 True일 때(101 이상)만 해당합니다.",
+      "B": "N > 50이 True일 때(51~100)만 해당합니다. 50은 여기 함정 — 50은 50보다 크지 않습니다.",
+      "D": "모든 분기가 정상 종료되므로 예외가 발생하지 않습니다."
+    },
+    "source": "Training Workbook 5 (Logic and Validations) · Logic → Use If / decisions in flows",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "LFE-002",
+    "category": "Logic",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": ["exception", "aggregate-empty"],
+    "stem": "A Server Action fetches a record using an Aggregate `GetUserById`. If the requested user does **not** exist, the Aggregate returns zero records. By default (with no extra logic added), what happens?",
+    "options": [
+      { "key": "A", "text": "A `NotFoundException` is automatically raised." },
+      { "key": "B", "text": "No exception is raised; the Aggregate simply returns an empty list." },
+      { "key": "C", "text": "A `DatabaseException` is raised." },
+      { "key": "D", "text": "The flow stops silently and never reaches the End node." }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems에서 Aggregate는 **레코드를 못 찾아도 예외를 던지지 않습니다.** 단지 **빈 리스트(Empty list)**를 반환합니다. \"레코드 없음\"을 예외로 처리하려면 개발자가 직접 `GetUserById.List.Empty`를 검사해 Raise Exception 해야 합니다.",
+    "distractors": {
+      "A": "OutSystems가 자동으로 NotFound 예외를 던지지 않습니다.",
+      "C": "DatabaseException은 실제 DB 오류 시에만 발생합니다. 빈 결과는 오류가 아닙니다.",
+      "D": "플로우는 정상적으로 End까지 진행됩니다."
+    },
+    "source": "Training Workbook 6 (Role-based Security and Exceptions) · Logic → Handle exceptions (공식 Sample Exam Q14와 동일 논리)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "LFE-003",
+    "category": "Logic",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": ["exception-handler"],
+    "stem": "Which statement about **Exception Handlers** in OutSystems is correct?",
+    "options": [
+      { "key": "A", "text": "An Exception Handler flow set to `All Exceptions` catches every exception that is not caught by a more specific handler." },
+      { "key": "B", "text": "Each Action can have only one Exception Handler flow in total." },
+      { "key": "C", "text": "Exception Handlers can be added to Server Actions only, never to Client Actions." },
+      { "key": "D", "text": "If no Exception Handler exists, the exception is silently ignored and the flow continues." }
+    ],
+    "answer": "A",
+    "explanation": "Exception Handler 플로우는 잡을 예외 종류를 지정합니다. **All Exceptions**로 설정한 핸들러는 **더 구체적인 핸들러가 잡지 않은 모든 예외**를 받는 포괄(catch-all) 역할을 합니다. 구체적인 핸들러가 우선하고, All Exceptions가 마지막 그물입니다.",
+    "distractors": {
+      "B": "한 Action에 예외 종류별로 여러 개의 Exception Handler를 둘 수 있습니다.",
+      "C": "Client Action에도 Exception Handler를 추가할 수 있습니다.",
+      "D": "처리 핸들러가 없으면 예외는 무시되지 않고 호출 스택 위로 전파되어 결국 사용자에게 에러로 노출됩니다."
+    },
+    "source": "Training Workbook 6 · Logic → Handle exceptions (Exception Handler, All Exceptions)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "LFE-004",
+    "category": "Logic",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": ["raise-exception", "best-practice"],
+    "stem": "A Server Action must **stop processing and signal the caller** when it detects an invalid input value. What is the best way to do this?",
+    "options": [
+      { "key": "A", "text": "Add an If node; on the \"invalid\" branch, use a Raise Exception node that raises a User Exception." },
+      { "key": "B", "text": "Add an If node and connect the \"invalid\" branch directly to the End node." },
+      { "key": "C", "text": "Use an Assign to set an output variable to \"error\" and let the flow continue normally." },
+      { "key": "D", "text": "Do nothing — OutSystems raises an exception automatically whenever an input is invalid." }
+    ],
+    "answer": "A",
+    "explanation": "\"처리를 중단하고 호출자에게 알린다\" = **예외를 발생시켜 전파**하는 것이 정석입니다. 유효하지 않은 입력을 If로 감지한 뒤 **Raise Exception(User Exception)** 노드로 예외를 던지면, 현재 플로우가 중단되고 호출한 쪽에서 이를 잡아 처리할 수 있습니다.",
+    "distractors": {
+      "B": "End로 바로 가면 조용히 끝날 뿐, 호출자에게 '문제가 있었다'는 신호를 주지 못합니다.",
+      "C": "플로우가 계속 진행되므로 '중단'이 되지 않습니다.",
+      "D": "OutSystems는 임의의 비즈니스 규칙(유효하지 않은 입력)에 대해 자동으로 예외를 던지지 않습니다. 개발자가 직접 정의해야 합니다."
+    },
+    "source": "Training Workbook 5 / 6 · Logic → Raise an exception (User Exceptions) (공식 Sample Exam Q20 유형)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

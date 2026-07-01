@@ -1,0 +1,99 @@
+[
+  {
+    "id": "AGG-001",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["join-types"],
+    "stem": "An Aggregate named `GetProducts` has two Sources joined as shown below. What does this Aggregate return?",
+    "diagram": "| # | Left Source | Join type | Right Source | Join condition |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Category | Product.CategoryId = Category.Id |",
+    "options": [
+      { "key": "A", "text": "Only the Products that have a Category assigned." },
+      { "key": "B", "text": "All Products; for Products that have no Category, the Category attributes come back empty (null)." },
+      { "key": "C", "text": "Only the Categories that have at least one Product." },
+      { "key": "D", "text": "All Products and all Categories, including Categories with no Products." }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate의 **Join 종류**가 결과 집합을 결정합니다.\n- **With or Without** = 왼쪽(첫 번째) Source의 **모든 레코드를 유지**하고, 오른쪽에 매칭이 없으면 오른쪽 속성은 null (SQL의 LEFT JOIN).\n- **Only With** = 양쪽에 **모두 매칭되는 레코드만** (INNER JOIN).\n\n여기서는 `Product`가 왼쪽이고 조인이 With or Without이므로 → **모든 Product**가 반환되고, Category가 없는 Product는 Category 속성이 비어(null) 있습니다.",
+    "distractors": {
+      "A": "이건 Only With(Inner Join)일 때의 동작입니다.",
+      "C": "방향이 반대입니다. 기준(왼쪽) Source는 Category가 아니라 Product예요.",
+      "D": "Aggregate 조인은 전부×전부(카티션 곱)를 만들지 않고, 조인 조건으로 연결합니다."
+    },
+    "source": "Training Workbook 4 (Data Relationships and Aggregates) · Use Data → Fetch data using Aggregates (Join sources)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-002",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["group-by", "count"],
+    "stem": "You need an Aggregate that returns **the number of Orders per Customer**. Which configuration is correct?",
+    "options": [
+      { "key": "A", "text": "Group By over `Order.Id`, and a Count over `Customer.Id`." },
+      { "key": "B", "text": "Group By over `Customer.Id`, and a Count over `Order.Id`." },
+      { "key": "C", "text": "Sort By `Customer.Id`, and a Count over `Order.Id`." },
+      { "key": "D", "text": "Filter by `Customer.Id`, and a Count over `Order.Id`." }
+    ],
+    "answer": "B",
+    "explanation": "\"그룹마다 몇 개\"를 세려면 → **그룹 기준 속성으로 Group By**, **세고 싶은 대상으로 Count**.\n\"고객마다 주문 수\" = 고객으로 묶고(Group By `Customer.Id`) 주문을 셈(Count `Order.Id`).",
+    "distractors": {
+      "A": "Group By와 Count 대상이 뒤바뀌었습니다. Order.Id로 묶으면 주문 1건씩 쪼개져 '고객당' 집계가 안 됩니다.",
+      "C": "Sort By(정렬)는 집계가 아니라 순서만 바꿉니다.",
+      "D": "Filter(필터)는 행을 걸러낼 뿐 그룹 집계를 만들지 않습니다."
+    },
+    "source": "Training Workbook 4 · Use Data → Aggregate your data (Group by)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-003",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["group-by", "output-record"],
+    "stem": "An Aggregate groups Orders by `Status` and counts them (a Count over `Order.Id`). What attributes are available in each output record (`GetOrders.List.Current`)?",
+    "options": [
+      { "key": "A", "text": "Only the Group By attribute (`Status`) and the aggregate function result (`Count`)." },
+      { "key": "B", "text": "All attributes of the `Order` Entity, plus `Count`." },
+      { "key": "C", "text": "`Status`, `Count`, and every attribute shown as a column in the editor." },
+      { "key": "D", "text": "Only `Count`." }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate에 **Group By가 들어가면** 출력 레코드는 **Group By에 사용한 속성**과 **집계 함수(Count/Sum/Max…) 결과**만 갖습니다. Source Entity의 나머지 속성들은 그룹으로 합쳐졌으므로 개별 값이 사라져 출력 레코드에 포함되지 않습니다. 따라서 `Status`와 `Count`만 접근 가능합니다.",
+    "distractors": {
+      "B": "Group By가 있으면 Order의 개별 속성 전체에는 접근할 수 없습니다.",
+      "C": "편집기에 보이는 컬럼과 출력 레코드의 속성은 다릅니다. Group By 시 개별 컬럼은 대표 표시일 뿐 레코드 속성이 아닙니다.",
+      "D": "그룹 기준 속성(Status)도 함께 사용할 수 있습니다."
+    },
+    "source": "Training Workbook 4 · Use Data → Aggregate your data (공식 Sample Exam Q3와 동일 논리)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-004",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["fetch-property"],
+    "stem": "An Aggregate `GetOrders` has its **Fetch** property set to **Only On Demand**. Which of the following statements is **NOT true**?",
+    "options": [
+      { "key": "A", "text": "It does not run automatically when the Screen loads." },
+      { "key": "B", "text": "It must be triggered explicitly (for example, with a Refresh Data node) before it holds any data." },
+      { "key": "C", "text": "Its data is always fetched on the server before the Screen is first rendered." },
+      { "key": "D", "text": "It is useful to avoid running a query until the data is actually needed." }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate의 **Fetch** 속성은 두 값을 가집니다.\n- **At Start** = Screen이 열릴 때 자동으로 데이터를 가져옴.\n- **Only On Demand** = 자동 실행되지 않고, **Refresh Data 노드 등으로 명시적으로 호출**해야 데이터가 채워짐.\n\nC는 \"항상 Screen 렌더 전에 서버에서 가져온다\"고 했는데, 이건 **At Start**의 동작이라 Only On Demand에서는 거짓 → 정답(틀린 설명)은 C.",
+    "distractors": {
+      "A": "참인 설명입니다 — Only On Demand는 화면 로드 시 자동 실행되지 않습니다.",
+      "B": "참인 설명입니다 — 명시적으로 트리거해야 데이터가 채워집니다.",
+      "D": "참인 설명입니다 — 필요할 때만 쿼리하려고 쓰는 옵션입니다."
+    },
+    "source": "Training Workbook 4 / 9 (Screen Lifecycle 연계) · Use Data → Fetch data on demand",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

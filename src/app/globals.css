@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 @theme inline {
@@ -12,15 +12,67 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* ---- Markdown rendering (stems, diagrams, explanations) ---- */
+.md-body {
+  line-height: 1.65;
+  color: #1e293b;
+}
+.md-body > *:first-child { margin-top: 0; }
+.md-body > *:last-child { margin-bottom: 0; }
+.md-body p { margin: 0.5rem 0; }
+.md-body strong { font-weight: 600; color: #0f172a; }
+.md-body ul { list-style: disc; padding-left: 1.25rem; margin: 0.5rem 0; }
+.md-body ol { list-style: decimal; padding-left: 1.25rem; margin: 0.5rem 0; }
+.md-body li { margin: 0.2rem 0; }
+.md-body a { color: #e11d48; text-decoration: underline; }
+
+/* inline code */
+.md-body code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.85em;
+  background: #eef2f7;
+  color: #be123c;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.3rem;
+}
+
+/* code block (flowcharts) */
+.md-body pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.md-body pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+  white-space: pre;
+}
+
+/* GFM tables */
+.md-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+}
+.md-body th,
+.md-body td {
+  border: 1px solid #cbd5e1;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+.md-body th { background: #f1f5f9; font-weight: 600; }
