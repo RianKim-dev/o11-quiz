@@ -1,0 +1,181 @@
+[
+  {
+    "id": "CV-001",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "easy",
+    "tags": [
+      "client-variables",
+      "storage",
+      "persistence",
+      "fundamental"
+    ],
+    "stem": "Which of the following statements best describes how a Client Variable persists data in an OutSystems Reactive app?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is stored in the browser and reset to its default value upon logout."
+      },
+      {
+        "key": "B",
+        "text": "It is stored on the server and changes require Service Center access."
+      },
+      {
+        "key": "C",
+        "text": "It is stored in a database and persists indefinitely across sessions."
+      },
+      {
+        "key": "D",
+        "text": "It is stored in memory and is lost whenever the browser window is closed."
+      }
+    ],
+    "answer": "A",
+    "explanation": "클라이언트 변수는 브라우저에 저장되며, 로그아웃 시 기본값으로 초기화됩니다. 선택지 B는 Site Property의 특성이고, C는 클라이언트 변수의 제한사항(기본 데이터 유형 및 엔터티 식별자만)을 무시하며, D는 로그인 시 유지된다는 정의와 맞지 않습니다.",
+    "source": "Training Workbook 8, Section: Client Variable (pages 1-2)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CV-002",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "medium",
+    "tags": [
+      "client-variables",
+      "security",
+      "data-sensitivity",
+      "best-practices"
+    ],
+    "stem": "You are building an e-commerce order management module. Which of the following is NOT an appropriate use case for Client Variables?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Storing the customer's preferred number of order items to display per page"
+      },
+      {
+        "key": "B",
+        "text": "Storing the customer's payment gateway authentication token"
+      },
+      {
+        "key": "C",
+        "text": "Storing the customer's selected order filter (e.g., all orders, pending orders, completed orders)"
+      },
+      {
+        "key": "D",
+        "text": "Storing the customer's username for quick reference during the session"
+      }
+    ],
+    "answer": "B",
+    "explanation": "결제 게이트웨이 인증 토큰은 민감한 정보이므로 클라이언트 변수에 저장하면 안 됩니다. 워크북에서 명시적으로 '중요한 정보나 기밀 정보를 저장하면 안 됩니다'라고 정의합니다. A, C, D는 모두 워크북에서 권장하는 사용 사례(사용자 구성/설정, 선택한 레이아웃/필터, 사용자 이름)입니다.",
+    "source": "Training Workbook 8, Section: Client Variable (page 1) and Why we should use Client Variables (pages 2-3)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CV-003",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "hard",
+    "tags": [
+      "client-variables",
+      "aggregate-filters",
+      "edge-cases",
+      "scenario-troubleshooting"
+    ],
+    "stem": "In the movie search exercise, the aggregate filter condition for genre is: 'Client.MovieGenreId = NullIdentifier() or Movie.GenreId = Client.MovieGenreId'. Why is the NullIdentifier() check necessary in this expression?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It allows the database to distinguish between empty Client Variables and NULL values in the database."
+      },
+      {
+        "key": "B",
+        "text": "It ensures that when the user does not select any genre (Client.MovieGenreId is NullIdentifier()), all movies are shown instead of no results."
+      },
+      {
+        "key": "C",
+        "text": "It prevents the Client Variable from being set to NULL during the filtering operation."
+      },
+      {
+        "key": "D",
+        "text": "It improves performance by allowing the aggregate to use indexed database queries on the genre field."
+      }
+    ],
+    "answer": "B",
+    "explanation": "워크북의 해설에 따르면, 조건이 'Movie.GenreId = Client.MovieGenreId'만 있으면 사용자가 장르를 선택하지 않았을 때(Client.MovieGenreId = NullIdentifier()) 데이터베이스에서 Movie.GenreId가 NullIdentifier()와 같은 레코드가 없으므로 결과가 반환되지 않습니다. NullIdentifier() 체크를 추가하면 사용자가 장르를 선택하지 않았을 때 모든 영화를 표시할 수 있습니다.",
+    "source": "Training Workbook 8, Section: Apply the search filter (pages 8-9, specifically the note about NullIdentifier())",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CV-004",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "medium",
+    "tags": [
+      "client-variables",
+      "session-management",
+      "security",
+      "practical"
+    ],
+    "stem": "An employee training portal stores an 'ItemsPerPage' Client Variable to remember how many training courses each employee prefers to view at once. When an employee logs out and another employee logs in to the same browser, what happens to the 'ItemsPerPage' Client Variable?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It retains the previous employee's setting until the second employee manually changes it."
+      },
+      {
+        "key": "B",
+        "text": "It is automatically reset to its default value upon the second employee's login."
+      },
+      {
+        "key": "C",
+        "text": "It is deleted from the browser and the application crashes if accessed."
+      },
+      {
+        "key": "D",
+        "text": "It is transferred to the server database and cannot be modified by the second employee."
+      }
+    ],
+    "answer": "B",
+    "explanation": "클라이언트 변수는 로그아웃 시 기본값으로 초기화됩니다. 따라서 첫 번째 직원이 로그아웃하고 두 번째 직원이 로그인할 때, ItemsPerPage 클라이언트 변수는 기본값으로 리셋됩니다. 선택지 A는 '로그인 시 유지'의 의미를 오해한 것입니다.",
+    "source": "Training Workbook 8, Section: Client Variable (pages 1-2, specifically 'It is preserved upon login' and 'It is reset to its default value upon logout')",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CV-005",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "easy",
+    "tags": [
+      "client-variables",
+      "data-types",
+      "fundamental"
+    ],
+    "stem": "Which data types can be stored in Client Variables?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only text and numbers"
+      },
+      {
+        "key": "B",
+        "text": "Basic data types and entity identifiers"
+      },
+      {
+        "key": "C",
+        "text": "Any data type, including complex objects and records"
+      },
+      {
+        "key": "D",
+        "text": "Only identifiers from the database"
+      }
+    ],
+    "answer": "B",
+    "explanation": "워크북에서 명시적으로 '클라이언트 변수는 기본 데이터 유형 및 엔터티 식별자로 제한됩니다'라고 정의합니다. 선택지 A는 불완전하고, C는 복잡한 객체를 포함하므로 틀렸으며, D는 숫자나 텍스트와 같은 기본 데이터 유형을 배제합니다.",
+    "source": "Training Workbook 8, Section: Client Variable (page 1-2)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

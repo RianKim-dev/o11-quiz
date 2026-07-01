@@ -1,0 +1,363 @@
+[
+  {
+    "id": "BE-001",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [
+      "block-basics",
+      "scope",
+      "architecture"
+    ],
+    "stem": "You are designing a ProductRating block for an e-commerce platform. The block displays a star rating for products. Which of the following statements about block architecture is TRUE?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A block can have both Input Parameters and Output Parameters to communicate with its parent screen."
+      },
+      {
+        "key": "B",
+        "text": "A block has its own scope and cannot access elements from the parent screen."
+      },
+      {
+        "key": "C",
+        "text": "A block can be recursively nested within itself to create complex hierarchical structures."
+      },
+      {
+        "key": "D",
+        "text": "A block requires a Placeholder to be defined within the parent screen before it can be instantiated."
+      }
+    ],
+    "answer": "B",
+    "explanation": "블록은 자체 범위를 가지고 있으며, 상위 항목(부모 화면)의 요소에 접근할 수 없습니다. 블록의 주요 특징은: 1) Output Parameter가 없음, 2) 자체 범위 격리, 3) 재귀(Recursion)는 허용되지 않음, 4) 부모는 블록 내 요소에 접근 불가. 선택지 A는 틀림 - 블록은 Output Parameter를 가질 수 없음. C는 틀림 - 재귀는 허용되지 않음. D는 틀림 - Placeholder는 블록 내에서만 사용되며, 선택사항임.",
+    "distractors": {
+      "A": "Output Parameter를 가질 수 있다는 오류 - 블록은 Output Parameter가 없음",
+      "C": "재귀가 허용된다는 오류 - 명시적으로 재귀는 허용되지 않음",
+      "D": "Placeholder가 필수라는 오류 - Placeholder는 블록 인스턴스화 시에만 정의되는 선택 요소"
+    },
+    "source": "Training Workbook 7, Block Definition (lines 6-13, 24-26)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-002",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [
+      "block-events",
+      "communication",
+      "parent-child"
+    ],
+    "stem": "In your OrderSummary block, you need to notify the parent screen when a customer clicks a 'Cancel Order' button. The parent screen must execute its own logic in response. How should communication between the block and parent be implemented?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use an Output Parameter in the block to return a boolean value indicating the cancellation status."
+      },
+      {
+        "key": "B",
+        "text": "Define a block event with an Input Parameter and trigger it from the block when the button is clicked."
+      },
+      {
+        "key": "C",
+        "text": "Directly modify a variable in the parent screen's scope from within the block's action flow."
+      },
+      {
+        "key": "D",
+        "text": "Create a shared database entity that both the block and parent screen can access simultaneously."
+      }
+    ],
+    "answer": "B",
+    "explanation": "블록과 부모는 서로 다른 범위를 가지고 있으므로, 이벤트를 통해서만 통신할 수 있습니다. 블록 이벤트는 Input Parameter를 가지며, 이를 통해 데이터를 부모에게 전달합니다. 선택지 A는 틀림 - 블록은 Output Parameter를 가질 수 없음. C는 틀림 - 부모 범위에 직접 접근 불가. D는 틀림 - 데이터베이스 엔터티는 이벤트 기반 통신의 적절한 방식이 아님.",
+    "distractors": {
+      "A": "Output Parameter를 사용 - 블록은 Output Parameter를 가질 수 없음",
+      "C": "부모 요소에 직접 접근 - 범위가 격리되어 있음",
+      "D": "데이터베이스를 공유 통신 메커니즘으로 사용 - 이벤트가 정해진 방식"
+    },
+    "source": "Training Workbook 7, Block Event & Why an event needs to be triggered (lines 57-87)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-003",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "hard",
+    "tags": [
+      "block-events",
+      "initialization",
+      "on-parameters-changed"
+    ],
+    "stem": "You created a StarDisplay block that accepts a Rating input parameter. In the block's On Initialize event, you populate a local StarList variable using the RatingToBooleanList action. A parent screen instantiates two copies of the StarDisplay block with different Rating values (3 and 5). Which statements about initialization and parameter changes are correct?\n\n1. The On Initialize event is triggered separately for each block instance.\n2. If the parent changes a block's Rating input value after initialization, On Parameters Changed is automatically triggered.\n3. When Rating changes within the block itself, On Parameters Changed is triggered.",
+    "options": [
+      {
+        "key": "A",
+        "text": "Statements 1 and 2 are correct; statement 3 is incorrect."
+      },
+      {
+        "key": "B",
+        "text": "All three statements (1, 2, and 3) are correct."
+      },
+      {
+        "key": "C",
+        "text": "Only statement 1 is correct; statements 2 and 3 are incorrect."
+      },
+      {
+        "key": "D",
+        "text": "Statements 2 and 3 are correct; statement 1 is incorrect."
+      }
+    ],
+    "answer": "A",
+    "explanation": "명확한 분석: 1번 참 - 각 블록 인스턴스는 독립적으로 On Initialize 이벤트를 트리거하여 자신의 StarList를 초기화함. 2번 참 - 상위 항목(부모)이 블록의 Input parameter 값을 변경할 때마다 On Parameters Changed가 자동으로 트리거됨. 3번 거짓 - 블록 내에서 Input parameter를 변경하면 이벤트가 트리거되지 않음(라인 115-118).",
+    "distractors": {
+      "B": "3번을 참으로 잘못 선택 - 블록 내부 변경은 On Parameters Changed를 트리거하지 않음",
+      "C": "2번을 거짓으로 잘못 선택 - 부모의 변경은 자동으로 이벤트 트리거",
+      "D": "1번을 거짓으로 잘못 선택 - 각 인스턴스는 독립적으로 초기화됨"
+    },
+    "source": "Training Workbook 7, On Parameters Changed (lines 102-118, 507-515)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-004",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [
+      "event-handling",
+      "parameters",
+      "scope"
+    ],
+    "stem": "In the OrderDetail block, you define an event called OrderConfirmed with an Input Parameter called OrderId (Integer). The parent screen uses this block and defines an event handler named OnOrderConfirmedHandler. Which of the following is TRUE about the event handler?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The event handler can access the parent screen's variables but NOT the OrderId parameter value from the event."
+      },
+      {
+        "key": "B",
+        "text": "The event handler can access both the OrderId input parameter from the event and the parent screen's scope."
+      },
+      {
+        "key": "C",
+        "text": "The event handler can only access the OrderId parameter and cannot access any parent screen variables or local data."
+      },
+      {
+        "key": "D",
+        "text": "The event handler is executed in the block's scope, so it cannot access parent screen elements or event parameters."
+      }
+    ],
+    "answer": "B",
+    "explanation": "이벤트 핸들러는 두 가지 모두에 접근 가능: 1) 이벤트의 Input Parameter(OrderId)에 접근 가능(라인 97-98), 2) 부모 항목(parent)의 범위에 접근 가능(라인 99-100). 따라서 핸들러는 이벤트에서 받은 데이터와 부모 화면의 변수 모두를 사용할 수 있습니다.",
+    "distractors": {
+      "A": "OrderId 파라미터에 접근 불가라고 잘못 표기 - 핸들러는 이벤트 파라미터에 접근 가능",
+      "C": "부모 화면 변수 접근 불가라고 잘못 표기 - 핸들러는 부모 범위에 접근 가능",
+      "D": "핸들러가 블록 범위에서 실행된다고 잘못 표기 - 핸들러는 부모 화면 범위에서 실행됨"
+    },
+    "source": "Training Workbook 7, Event Handler (lines 93-100)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-005",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "easy",
+    "tags": [
+      "placeholder",
+      "block-ui",
+      "block-fundamentals"
+    ],
+    "stem": "Which of the following is NOT a valid way to use a Placeholder in an OutSystems 11 block?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Defining a Placeholder's content when the block is instantiated in a parent screen."
+      },
+      {
+        "key": "B",
+        "text": "Using the same Placeholder with different content for each instance of a block."
+      },
+      {
+        "key": "C",
+        "text": "Defining a Placeholder within the parent screen to reserve space for the block's UI."
+      },
+      {
+        "key": "D",
+        "text": "Using a Placeholder only inside the block, where it reserves space for dynamic interface content."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Placeholder는 블록 내에서만 사용되며, 부모 화면에서는 정의되지 않습니다. 올바른 사용법: Placeholder는 블록 내에서 정의되고(라인 44-45), 블록이 인스턴스화될 때 정의됨(라인 38-39), 각 인스턴스마다 다른 콘텐츠 포함 가능(라인 40-42). 선택지 C는 잘못되었음 - Placeholder는 부모가 아니라 블록 내부에서 정의됨.",
+    "distractors": {
+      "A": "올바른 Placeholder 사용법",
+      "B": "올바른 Placeholder 사용법",
+      "D": "올바른 Placeholder 사용법과 설명"
+    },
+    "source": "Training Workbook 7, Placeholder definition (lines 31-45)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-006",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [
+      "block-benefits",
+      "reusability",
+      "maintenance"
+    ],
+    "stem": "You are designing a CustomerAddress block that displays customer address information. This block will be reused in multiple screens (CustomerList, CustomerDetail, OrderCheckout). What is the PRIMARY advantage of using a block for this scenario instead of copying the same UI design to each screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Blocks automatically synchronize data between all screens without requiring any event handlers."
+      },
+      {
+        "key": "B",
+        "text": "Changes made to the block's design and logic are applied automatically to all instances across all screens."
+      },
+      {
+        "key": "C",
+        "text": "Blocks eliminate the need for Input Parameters, reducing the complexity of parameter passing."
+      },
+      {
+        "key": "D",
+        "text": "Using blocks reduces the total number of screens in the application, improving application performance."
+      }
+    ],
+    "answer": "B",
+    "explanation": "블록의 주요 장점은 유지보수성 향상입니다. 블록에 대한 변경 사항이 모든 블록 인스턴스에 반영됩니다(라인 53-54). 입력과 placeholder를 사용하여 각 인스턴스를 커스터마이즈할 수 있습니다(라인 54-56). 따라서 한 번 개발 후 여러 곳에서 재사용할 수 있으므로(라인 48-50), 유지보수가 용이합니다.",
+    "distractors": {
+      "A": "블록은 데이터 자동 동기화를 하지 않음 - 이벤트 핸들러 필요",
+      "C": "블록은 Input Parameter를 필요로 함 - Output Parameter가 없을 뿐",
+      "D": "블록 사용이 화면 개수를 줄이지는 않음 - 블록은 화면의 일부"
+    },
+    "source": "Training Workbook 7, Why Use Blocks? (lines 46-56)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-007",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "hard",
+    "tags": [
+      "event-flow",
+      "block-refresh",
+      "parameters-changed"
+    ],
+    "stem": "In your MovieDetail screen, a StarDisplay block shows user ratings (modifiable by clicking) and average ratings (read-only). When a registered user clicks a star in the user rating block:\n\n1. The StarClicked event is triggered with the selected star number\n2. The event handler in the parent screen receives the SelectedStar parameter\n3. The rating is stored in the database\n4. The StarDisplay block's On Parameters Changed event must be triggered to refresh the star display\n\nWhich steps are NECESSARY for the stars to be updated immediately on the screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only steps 1, 2, and 3; step 4 is optional since the database will automatically refresh the block."
+      },
+      {
+        "key": "B",
+        "text": "All four steps (1, 2, 3, and 4) are necessary to ensure the block displays the updated rating immediately."
+      },
+      {
+        "key": "C",
+        "text": "Only steps 1 and 2; the database update (step 3) automatically triggers step 4."
+      },
+      {
+        "key": "D",
+        "text": "Only step 3; the other steps are handled automatically by OutSystems without explicit configuration."
+      }
+    ],
+    "answer": "B",
+    "explanation": "모든 4단계가 필수입니다. 라인 474-479는 블록이 Aggregate를 사용하여 가져온 데이터에 종속되므로, 데이터가 새로고침되지 않으면 별이 변경되지 않음을 명시합니다. 라인 507-515는 부모에서 Rating Input parameter를 수정할 때 On Parameters Changed가 자동으로 트리거됨을 설명합니다. 따라서: 1) 이벤트 트리거(필수), 2) 핸들러가 파라미터 수신(필수), 3) DB 저장(필수), 4) On Parameters Changed 통해 StarList 재계산(필수).",
+    "distractors": {
+      "A": "4단계가 선택사항이라고 잘못 선택 - 데이터베이스 자동 새로고침 없음",
+      "C": "데이터베이스 업데이트가 자동으로 4단계를 트리거한다고 잘못 생각 - 명시적 구성 필요",
+      "D": "OutSystems가 자동으로 처리한다고 잘못 생각 - 각 단계를 명시적으로 구성해야 함"
+    },
+    "source": "Training Workbook 7, Let's resolve the issue (lines 474-516), Event Execution Flow",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-008",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "hard",
+    "tags": [
+      "block-events",
+      "on-initialize",
+      "on-parameters-changed",
+      "event-logic"
+    ],
+    "stem": "You have an InventoryStatus block that displays product inventory levels. The block has an Input Parameter called Quantity. Inside the block, you perform several operations that modify a local variable called CurrentStock. Later, the parent screen updates the block's Quantity input parameter. Analyze the following:\n\n1. The On Initialize event will execute when the block is first loaded.\n2. The On Parameters Changed event will execute when the parent updates the Quantity input.\n3. If you modify CurrentStock within the block's logic, the On Parameters Changed event will execute.\n4. A single block instance can have both On Initialize and On Parameters Changed events active simultaneously.",
+    "options": [
+      {
+        "key": "A",
+        "text": "Statements 1, 2, and 4 are correct; statement 3 is incorrect."
+      },
+      {
+        "key": "B",
+        "text": "All four statements (1, 2, 3, and 4) are correct."
+      },
+      {
+        "key": "C",
+        "text": "Only statements 1 and 2 are correct; statements 3 and 4 are incorrect."
+      },
+      {
+        "key": "D",
+        "text": "Only statement 1 is correct; statements 2, 3, and 4 are incorrect."
+      }
+    ],
+    "answer": "A",
+    "explanation": "분석: 1번 참 - On Initialize는 블록이 처음 로드될 때 자동으로 실행됨(라인 109-110). 2번 참 - 부모가 블록의 Input parameter 값을 변경할 때마다 On Parameters Changed가 자동으로 트리거됨(라인 111-114). 3번 거짓 - 블록 내에서 Input parameter를 변경하면 이벤트가 트리거되지 않음(라인 115-118). 4번 참 - 단일 블록 인스턴스는 On Initialize와 On Parameters Changed 이벤트 모두를 가질 수 있음(라인 102-119에서 두 이벤트 모두 설명).",
+    "distractors": {
+      "B": "3번을 참으로 잘못 선택 - 블록 내부 수정은 On Parameters Changed를 트리거하지 않음",
+      "C": "4번을 거짓으로 잘못 선택 - 단일 인스턴스는 두 이벤트 모두 가질 수 있음",
+      "D": "2번, 4번을 거짓으로 잘못 선택 - 부모 변경은 On Parameters Changed 트리거하고, 두 이벤트 공존 가능"
+    },
+    "source": "Training Workbook 7, On Parameters Changed (lines 102-119), Event Execution Flow (lines 101-119)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "BE-009",
+    "category": "UI Design",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [
+      "block-events",
+      "parent-communication",
+      "output-data"
+    ],
+    "stem": "You are implementing a DiscountCode block that allows customers to enter and validate discount codes. The block needs to communicate validation results (valid/invalid) and the discount amount back to the parent Invoice screen. What is the CORRECT approach to implement this communication?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create two Output Parameters (IsValid and DiscountAmount) in the block to return validation results to the parent."
+      },
+      {
+        "key": "B",
+        "text": "Create an event with Input Parameters (IsValid and DiscountAmount) and trigger it from the block to notify the parent."
+      },
+      {
+        "key": "C",
+        "text": "Create a database table to store validation results and have both the block and parent screen read from it."
+      },
+      {
+        "key": "D",
+        "text": "Create Input Parameters in the block and have the parent screen read the block's local variables through a reference."
+      }
+    ],
+    "answer": "B",
+    "explanation": "블록은 Output Parameter를 가질 수 없습니다(라인 12-13). 따라서 블록에서 부모에게 데이터를 전달하려면 이벤트를 사용해야 합니다. 이벤트는 상위 항목(parent)에 발생을 알릴 수 있으며(라인 58-59), 이벤트는 데이터를 보내기 위한 Input Parameter를 가집니다(라인 68-71). 따라서 IsValid와 DiscountAmount를 이벤트의 Input Parameter로 정의하고, 블록에서 이벤트를 트리거해야 합니다.",
+    "distractors": {
+      "A": "Output Parameter 사용 - 블록은 Output Parameter를 가질 수 없음",
+      "C": "데이터베이스를 통한 통신 - 이벤트가 정해진 방식",
+      "D": "부모가 블록의 지역 변수에 접근 - 범위가 격리되어 접근 불가"
+    },
+    "source": "Training Workbook 7, Block definition (lines 12-13), Block Event (lines 57-71), Communication with parent (lines 28-30)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

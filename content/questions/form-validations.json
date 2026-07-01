@@ -1,0 +1,247 @@
+[
+  {
+    "id": "FV-001",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "easy",
+    "stem": "Which property must be set to True on a button inside a form to perform built-in validation before submitting?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Validate property"
+      },
+      {
+        "key": "B",
+        "text": "Built-in Validations property"
+      },
+      {
+        "key": "C",
+        "text": "ValidationMessage property"
+      },
+      {
+        "key": "D",
+        "text": "AutoValidate property"
+      }
+    ],
+    "answer": "B",
+    "explanation": "폼 안의 버튼/링크에는 Built-in Validations 속성이 있으며, 기본 검증을 수행하려면 Yes(또는 True)로 설정해야 합니다. 이는 Mandatory 필드 확인 및 데이터 타입 검증을 자동으로 수행합니다.",
+    "distractors": {
+      "A": "OutSystems에는 'Validate' 속성이라는 것이 없습니다.",
+      "C": "ValidationMessage는 커스텀 검증 메시지를 설정할 때 사용되며, 기본 검증을 활성화하는 데는 사용되지 않습니다.",
+      "D": "AutoValidate는 OutSystems 11의 표준 속성이 아닙니다."
+    },
+    "source": "Training Workbook 5 - Form Validations, Built-in validations section (lines 131-134)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FV-002",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "stem": "After setting an input field's Valid property to False with a ValidationMessage, what must a developer check before proceeding with data persistence in the action flow?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Widget.Valid property for each invalid field"
+      },
+      {
+        "key": "B",
+        "text": "The Form.Valid property"
+      },
+      {
+        "key": "C",
+        "text": "The Input.ValidationMessage property"
+      },
+      {
+        "key": "D",
+        "text": "The ValidInput variable status"
+      }
+    ],
+    "answer": "B",
+    "explanation": "마지막 커스텀 검증 후에는 Form.Valid 속성을 확인해야 합니다. 입력 중 하나라도 유효하지 않으면 폼은 자동으로 유효하지 않게 되므로, Form.Valid를 확인하여 유효하지 않은 데이터가 저장되지 않도록 방지할 수 있습니다.",
+    "distractors": {
+      "A": "Widget 단위의 확인보다는 Form.Valid를 확인하여 전체 폼의 유효성을 한 번에 판단하는 것이 권장됩니다.",
+      "C": "ValidationMessage는 검증 실패 메시지를 설정하는 속성일 뿐, 데이터 지속성 전에 확인해야 할 조건이 아닙니다.",
+      "D": "OutSystems에는 ValidInput이라는 기본 변수가 없습니다."
+    },
+    "source": "Training Workbook 5 - Form Validations, Custom validations section (lines 140-147)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FV-003",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "easy",
+    "stem": "In an Employee form, mandatory field validation and data type validation are performed automatically without any custom code. Which of the following validation mechanisms is responsible for this behavior?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Custom validations configured in the action flow"
+      },
+      {
+        "key": "B",
+        "text": "Built-in validation of input widgets"
+      },
+      {
+        "key": "C",
+        "text": "Form.Valid check at the server level"
+      },
+      {
+        "key": "D",
+        "text": "Widget validation triggered by screen events"
+      }
+    ],
+    "answer": "B",
+    "explanation": "입력 위젯의 기본 검증은 자동으로 수행됩니다. 여기에는 Mandatory 필드 확인과 위젯에 바인딩된 변수의 데이터 타입 일치성 확인이 포함됩니다. 별도의 코드가 필요하지 않습니다.",
+    "distractors": {
+      "A": "Custom 검증은 액션 플로우에서 명시적으로 정의해야 하므로, 자동으로 수행되지 않습니다.",
+      "C": "Form.Valid는 검증 결과를 확인하는 메커니즘이지, 검증 자체를 수행하는 것이 아닙니다.",
+      "D": "기본 검증은 스크린 이벤트가 아닌 입력 위젯의 속성에 의해 자동으로 수행됩니다."
+    },
+    "source": "Training Workbook 5 - Form Validations, Built-in validations section (lines 119-126)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FV-004",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "hard",
+    "stem": "In a Product creation form, you need to validate that the ProductPrice must be greater than zero AND the DiscountPercentage (if provided) cannot exceed 100%. If validation fails, both fields should be marked invalid with appropriate messages. At what point in the action flow should you check Form.Valid before executing the server action to save the product?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Immediately after the first custom validation check, before the second validation"
+      },
+      {
+        "key": "B",
+        "text": "After all custom validations are completed, in a separate If node"
+      },
+      {
+        "key": "C",
+        "text": "Before any custom validation logic begins"
+      },
+      {
+        "key": "D",
+        "text": "Inside the Save Server Action only, not in the Client Action"
+      }
+    ],
+    "answer": "B",
+    "explanation": "마지막 커스텀 검증 후에는 Form.Valid 속성을 확인해야 합니다. 모든 개별 필드의 유효성 검사가 완료된 후, Form.Valid를 확인하는 If 노드를 사용하여 유효한 폼만 저장 작업을 진행하도록 해야 합니다.",
+    "distractors": {
+      "A": "첫 번째 검증 후에 Form.Valid를 확인하면 두 번째 검증이 수행되지 않을 수 있습니다.",
+      "C": "Custom 검증이 시작되기 전에 Form.Valid를 확인하면 커스텀 검증 결과를 반영할 수 없습니다.",
+      "D": "Form.Valid는 클라이언트 액션(Client Action)에서 확인해야 하며, 서버 액션에서만 확인하는 것은 늦습니다."
+    },
+    "source": "Training Workbook 5 - Form Validations, Custom validations and Multiple validations sections (lines 146-170)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FV-005",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "stem": "In a Customer registration form, you set Input_Email.Valid = False and Input_Email.ValidationMessage = \"Invalid email format\" as part of custom validation. When the form is rendered, which of the following will happen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The email input field will display with a red border and the validation message will appear beside it"
+      },
+      {
+        "key": "B",
+        "text": "The form submission button will be automatically disabled until the error is corrected"
+      },
+      {
+        "key": "C",
+        "text": "The ValidationMessage property will override built-in validation messages"
+      },
+      {
+        "key": "D",
+        "text": "An exception will be thrown because ValidationMessage must be set before Valid = False"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Valid 속성이 False로 설정되면, 화면 렌더링 시점에 입력 위젯은 빨간색 테두리 같은 특정 스타일을 적용받습니다. ValidationMessage는 검증 실패 메시지로 표시됩니다.",
+    "distractors": {
+      "B": "Valid 속성 설정만으로는 버튼이 자동으로 비활성화되지 않습니다. 개발자가 Form.Valid를 확인하여 명시적으로 버튼 동작을 제어해야 합니다.",
+      "C": "Custom ValidationMessage는 추가 정보이며, 기본 검증 메시지를 완전히 덮어씌우지 않습니다.",
+      "D": "Valid와 ValidationMessage는 순서와 관계없이 설정할 수 있습니다."
+    },
+    "source": "Training Workbook 5 - Form Validations, Validation Messages section (lines 183-188)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FV-006",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "hard",
+    "stem": "In an Invoice form, you need to validate that the InvoiceTotal equals the sum of all LineItems. This validation requires comparing multiple input values and performing a calculation. Where should this validation logic be placed, and why is this the appropriate location?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Built-in Validations property of the submit button, because built-in validation applies to all fields automatically"
+      },
+      {
+        "key": "B",
+        "text": "In the SaveOnClick action flow, because custom validations must be performed in the Action Flow"
+      },
+      {
+        "key": "C",
+        "text": "In a Server Action only, because custom validations cannot be performed in Client Actions"
+      },
+      {
+        "key": "D",
+        "text": "In the Form widget properties, in a validation rule section"
+      }
+    ],
+    "answer": "B",
+    "explanation": "커스텀 검증은 Action Flow에서 수행해야 합니다. 복잡한 비즈니스 로직이 필요한 검증(예: 여러 입력값 비교, 계산)은 SaveOnClick 같은 클라이언트 액션의 액션 플로우에 구현하는 것이 적절합니다.",
+    "distractors": {
+      "A": "Built-in Validations는 기본 검증(필수 필드, 데이터 타입)만 처리하며, 복잡한 비즈니스 로직을 수행할 수 없습니다.",
+      "C": "Custom 검증은 클라이언트 액션에서도 수행할 수 있습니다. 서버 액션만으로 제한되지 않습니다.",
+      "D": "OutSystems 11에는 폼 위젯에 기본 검증 규칙 섹션이 없습니다."
+    },
+    "source": "Training Workbook 5 - Form Validations, Custom validations section (lines 135-139)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FV-007",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "easy",
+    "stem": "What is the key difference between built-in validation and custom validation in OutSystems form validation?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Built-in validation checks mandatory fields and data types automatically; custom validation requires explicit logic in the Action Flow"
+      },
+      {
+        "key": "B",
+        "text": "Built-in validation uses ValidationMessage; custom validation uses Valid property"
+      },
+      {
+        "key": "C",
+        "text": "Built-in validation is performed on the server; custom validation is performed on the client"
+      },
+      {
+        "key": "D",
+        "text": "Custom validation is only available in Server Actions, while built-in validation is available everywhere"
+      }
+    ],
+    "answer": "A",
+    "explanation": "기본 검증(Built-in validation)은 Mandatory 필드 확인과 데이터 타입 검증을 자동으로 수행합니다. 커스텀 검증(Custom validation)은 비즈니스 로직이 필요한 경우 개발자가 Action Flow에서 명시적으로 구현해야 합니다.",
+    "distractors": {
+      "B": "둘 다 ValidationMessage와 Valid 속성을 사용할 수 있습니다.",
+      "C": "Built-in validation은 자동으로 수행되며, 클라이언트 또는 서버 둘 다에서 작동합니다.",
+      "D": "Custom 검증은 클라이언트 액션과 서버 액션 모두에서 수행할 수 있습니다."
+    },
+    "source": "Training Workbook 5 - Form Validations, Validating User Inputs and Built-in validations sections (lines 107-126)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

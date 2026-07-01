@@ -1,17 +1,13 @@
 import type { Question } from "@/types/question";
+import { RAW_QUESTIONS } from "@/generated/all-questions";
 import { BLUEPRINT } from "@/lib/blueprint";
 
-// Content is authored as JSON under /content/questions and bundled at build time.
-// Add a new import + spread here when a new subtopic file is created.
-import aggregates from "@content/questions/aggregates.json";
-import logicFlows from "@content/questions/logic-flows-exceptions.json";
-import screenWidgets from "@content/questions/screen-widgets.json";
-
-export const ALL_QUESTIONS: Question[] = [
-  ...(aggregates as unknown as Question[]),
-  ...(logicFlows as unknown as Question[]),
-  ...(screenWidgets as unknown as Question[]),
-];
+// Only verified questions are served; "flagged" ones stay in the repo for review
+// but never appear in quizzes. RAW_QUESTIONS is auto-generated from every
+// content/questions/*.json by scripts/gen-manifest.mjs.
+export const ALL_QUESTIONS: Question[] = RAW_QUESTIONS.filter(
+  (q) => q.status === "verified"
+);
 
 export function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -26,7 +22,7 @@ export function getBySubtopic(subtopic: string): Question[] {
   return ALL_QUESTIONS.filter((q) => q.subtopic === subtopic);
 }
 
-/** Count of available questions per subtopic. */
+/** Count of available (verified) questions per subtopic. */
 export function subtopicCounts(): Record<string, number> {
   const counts: Record<string, number> = {};
   for (const q of ALL_QUESTIONS) counts[q.subtopic] = (counts[q.subtopic] ?? 0) + 1;
@@ -36,7 +32,6 @@ export function subtopicCounts(): Record<string, number> {
 /**
  * Assemble a mock exam that follows the blueprint distribution.
  * If a subtopic has fewer questions than the blueprint asks for, takes what exists.
- * Returns the (shortfall) info so the UI can be honest about coverage.
  */
 export function assembleMock(): { questions: Question[]; shortfall: number } {
   const out: Question[] = [];

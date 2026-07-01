@@ -1,0 +1,242 @@
+[
+  {
+    "id": "REL-001",
+    "category": "Data Modeling",
+    "subtopic": "Data Relationships",
+    "difficulty": "easy",
+    "tags": [
+      "entity-reference",
+      "fundamental",
+      "data-type"
+    ],
+    "stem": "Which of the following is the correct function to set a default value for a reference attribute in OutSystems 11?",
+    "options": [
+      {
+        "key": "A",
+        "text": "NullIdentifier()"
+      },
+      {
+        "key": "B",
+        "text": "EmptyId()"
+      },
+      {
+        "key": "C",
+        "text": "NullValue()"
+      },
+      {
+        "key": "D",
+        "text": "DefaultReference()"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Reference attribute의 기본값은 NullIdentifier()입니다. 이는 워크북에서 명시적으로 언급되어 있습니다.",
+    "distractors": {
+      "B": "유사한 이름이지만 아웃시스템스에 존재하지 않는 함수입니다.",
+      "C": "레퍼런스 속성이 아닌 다른 속성 타입에 사용되는 것처럼 보이지만 정확하지 않습니다.",
+      "D": "존재하지 않는 함수로, 플레이서블하게 들리지만 아웃시스템스에서 사용하지 않습니다."
+    },
+    "source": "Workbook 4, Entity Reference section, page 2",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "REL-002",
+    "category": "Data Modeling",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [
+      "delete-rule",
+      "referential-integrity",
+      "cascading-delete"
+    ],
+    "stem": "You are designing a database for an e-commerce system. An Employee can manage multiple Orders, but when you delete an employee record, all associated orders must also be deleted automatically. Which Delete Rule should be configured on the OrderEmployeeId reference attribute?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Protect"
+      },
+      {
+        "key": "B",
+        "text": "Delete"
+      },
+      {
+        "key": "C",
+        "text": "Ignore"
+      },
+      {
+        "key": "D",
+        "text": "Cascade"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Delete 규칙은 참조 Entity의 레코드를 삭제할 때 관련된 모든 레코드를 계단식으로 삭제합니다. 워크북의 예에서 '직원이 삭제되고 이 직원에게 할당된 모든 주문이 삭제됩니다'라고 명시되어 있습니다.",
+    "distractors": {
+      "A": "Protect는 레코드 삭제를 방지합니다. 이 시나리오에서는 직원이 삭제될 수 없게 됩니다.",
+      "C": "Ignore는 참조 무결성을 보장하지 않으며, 관련 레코드가 유지됩니다. 이는 요구사항과 반대입니다.",
+      "D": "Cascade는 OutSystems 11의 표준 Delete Rule이 아닙니다. Delete가 정확한 용어입니다."
+    },
+    "source": "Workbook 4, Delete Rule section, page 3",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "REL-003",
+    "category": "Data Modeling",
+    "subtopic": "Data Relationships",
+    "difficulty": "hard",
+    "tags": [
+      "many-to-many",
+      "linking-entity",
+      "data-modeling"
+    ],
+    "stem": "A Product can belong to many Orders, and each Order can contain many Products. You need to create a relationship that also tracks the Quantity of each product in an order. What type of relationship structure is required, and what additional attributes must the linking entity have?",
+    "options": [
+      {
+        "key": "A",
+        "text": "1-to-Many relationship; the linking entity needs ProductId and Quantity attributes only"
+      },
+      {
+        "key": "B",
+        "text": "Many-to-Many relationship; the linking entity needs its own Id, ProductId, OrderId, and Quantity attributes"
+      },
+      {
+        "key": "C",
+        "text": "Many-to-Many relationship; the linking entity needs ProductId and OrderId attributes only"
+      },
+      {
+        "key": "D",
+        "text": "1-to-1 relationship; the linking entity needs ProductId, OrderId, and Quantity attributes"
+      }
+    ],
+    "answer": "B",
+    "explanation": "다대다 관계는 연결 Entity(OrderProduct)가 필요합니다. 연결 Entity는 자체 Id 속성(Long Integer, 자동번호), OrderId 참조 속성, ProductId 참조 속성을 가져야 합니다. 추가로 Quantity와 같은 비즈니스 속성도 포함할 수 있습니다. 워크북에서 '필요한 경우 Entity에 다른 속성을 포함할 수 있습니다'라고 명시되어 있습니다.",
+    "distractors": {
+      "A": "1-to-Many 관계가 아니며, Quantity를 추적하려면 연결 Entity의 구조가 불완전합니다.",
+      "C": "다대다 관계는 맞지만, 연결 Entity는 반드시 자체 Id 속성을 가져야 합니다.",
+      "D": "1-to-1 관계는 각 Order가 최대 1개의 Product만 가질 수 있으므로 요구사항에 맞지 않습니다."
+    },
+    "source": "Workbook 4, Many-to-Many and Linking Entity sections, pages 5-6",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "REL-004",
+    "category": "Data Modeling",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [
+      "aggregate",
+      "joins",
+      "multiple-sources"
+    ],
+    "stem": "When using an Aggregate with multiple sources that have a relationship, which of the following is NOT true about OutSystems 11's automatic join generation?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OutSystems automatically generates join conditions when entities have relationships"
+      },
+      {
+        "key": "B",
+        "text": "You must manually configure all join conditions, even for entities with defined relationships"
+      },
+      {
+        "key": "C",
+        "text": "The 'Only With' join type returns only records with matching entries between entities"
+      },
+      {
+        "key": "D",
+        "text": "The 'With or Without' join type returns all rows from the left entity, even without matches in the right entity"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Entity에 관계가 있는 경우 OutSystems에서 자동으로 join을 생성합니다. 따라서 B는 거짓입니다. 워크북에서 '관계가 있는 경우 OutSystems에서 자동으로 join을 생성합니다'라고 명시되어 있습니다.",
+    "distractors": {
+      "A": "워크북에서 명시적으로 참입니다.",
+      "C": "워크북의 'Only With' 설명과 일치합니다 (참).",
+      "D": "워크북의 'With or Without' 설명과 일치합니다 (참)."
+    },
+    "source": "Workbook 4, Multiple Sources and Join Example sections, page 6",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "REL-005",
+    "category": "Data Modeling",
+    "subtopic": "Data Relationships",
+    "difficulty": "easy",
+    "tags": [
+      "extension-entity",
+      "1-to-1",
+      "identifier"
+    ],
+    "stem": "In an OutSystems 11 Extension Entity, what identifier does the extension entity share with its base entity?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A unique identifier generated separately for the extension entity"
+      },
+      {
+        "key": "B",
+        "text": "The same identifier as the base entity"
+      },
+      {
+        "key": "C",
+        "text": "A composite identifier combining both entity IDs"
+      },
+      {
+        "key": "D",
+        "text": "A text-based identifier that must be configured manually"
+      }
+    ],
+    "answer": "B",
+    "explanation": "확장 Entity는 기본 Entity와 식별자를 공유합니다. 워크북에서 '기준 Entity와 식별자를 공유합니다'라고 명시되어 있습니다. OrderReceipt 예시에서 'OrderReceipt에는 Order Identifier 유형의 식별자가 있습니다'라고 설명되어 있습니다.",
+    "distractors": {
+      "A": "확장 Entity는 기본 Entity의 식별자를 공유하므로 별도로 생성되지 않습니다.",
+      "C": "복합 식별자는 OutSystems 11에서 지원되지 않으며, 확장 Entity는 기본 Entity의 식별자를 공유합니다.",
+      "D": "식별자는 자동으로 공유되며, 수동으로 구성할 필요가 없습니다."
+    },
+    "source": "Workbook 4, Extension Entity section, page 4",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "REL-006",
+    "category": "Data Modeling",
+    "subtopic": "Data Relationships",
+    "difficulty": "hard",
+    "tags": [
+      "aggregate-filtering",
+      "many-to-many",
+      "troubleshooting"
+    ],
+    "stem": "You are building a Customer Invoice system. A Customer can have many Invoices, and each Invoice contains many Products. After creating the Invoice entity with a CustomerId reference attribute and an InvoiceProduct linking entity, you notice the Aggregate that retrieves all products for a specific invoice is returning more rows than expected. The invoice has 3 products, but the Aggregate result shows 6 rows. What is the most likely cause?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The join type is set to 'With' instead of 'Only With', causing duplicate rows from unrelated invoices"
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate is missing a filter condition on InvoiceId to match the specific invoice being displayed"
+      },
+      {
+        "key": "C",
+        "text": "The InvoiceProduct entity has multiple copies of each product record in the database"
+      },
+      {
+        "key": "D",
+        "text": "Static entities are not properly initialized for the Product join"
+      }
+    ],
+    "answer": "B",
+    "explanation": "이 시나리오에서는 Aggregate에 InvoiceId 필터 조건이 없어서 특정 Invoice의 제품만 가져오지 못하고 있습니다. 워크북의 예시에서 '화면에 표시되는 Movie 에 대해서만 이 정보를 가져오도록 다른 필터를 추가합니다'라고 설명되며, 필터 조건이 PersonMovieRole.MovieId = MovieId임을 보여줍니다. 같은 원리로 InvoiceId 필터가 필요합니다.",
+    "distractors": {
+      "A": "'With' join은 모든 행을 반환하지만, 기본 필터가 있으면 영향을 받지 않습니다. 문제의 6행은 필터 부족으로 인한 것입니다.",
+      "C": "데이터베이스에 중복 레코드가 있다면 것은 데이터 모델링 문제이며, 워크북의 내용과 맞지 않습니다.",
+      "D": "Static entities는 이 시나리오와 무관하며, Product join 초기화는 표준 절차입니다."
+    },
+    "source": "Workbook 4, Aggregate filters and filtering with multiple sources sections, pages 26-27",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

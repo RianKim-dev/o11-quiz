@@ -1,0 +1,362 @@
+[
+  {
+    "id": "FDS-001",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "easy",
+    "tags": [
+      "aggregate-lifecycle",
+      "at-start-property",
+      "screen-initialization"
+    ],
+    "stem": "When a screen initializes in OutSystems 11 Reactive, what happens to Aggregates with the Fetch property set to 'At Start'?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They are automatically triggered immediately and execute asynchronously"
+      },
+      {
+        "key": "B",
+        "text": "They wait for the Initialize event to complete before running"
+      },
+      {
+        "key": "C",
+        "text": "They must be triggered manually using a Refresh Data node"
+      },
+      {
+        "key": "D",
+        "text": "They are disabled by default and require explicit developer configuration"
+      }
+    ],
+    "answer": "A",
+    "explanation": "화면 초기화 시 Fetch 속성이 'At Start'로 설정된 Aggregate는 자동으로 트리거되며 비동기적으로 실행됩니다.",
+    "distractors": {
+      "B": "Initialize 이벤트 완료 후 Ready 이벤트가 발생하지만, Aggregate는 Initialize 단계에서 자동으로 트리거됨",
+      "C": "'Only on demand' Aggregate에만 해당; At Start는 자동 트리거",
+      "D": "기본값이 At Start로 설정되어 자동으로 실행됨"
+    },
+    "source": "Workbook 9 - Screen Lifecycle, Fetching At Start section",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-002",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [
+      "aggregate-best-practice",
+      "filtering",
+      "performance"
+    ],
+    "stem": "You are designing an e-commerce application with two screens: a Product list and a Cart detail page. The Cart screen requires filtered product data based on the CartId input parameter. Which approach is INCORRECT for fetching this data?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Define an Aggregate at screen level with CartId as a filter condition; set Fetch property to 'At Start'"
+      },
+      {
+        "key": "B",
+        "text": "Use a Data Action that accepts CartId as an input parameter and returns the filtered product list"
+      },
+      {
+        "key": "C",
+        "text": "Define an Aggregate without filters at screen level, then filter the output manually in a screen action"
+      },
+      {
+        "key": "D",
+        "text": "Bind the Aggregate's output directly to a Table widget using the Source property"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate는 소스, 필터, 정렬을 사용하여 데이터베이스 수준에서 시각적으로 쿼리를 정의해야 합니다. 화면 레벨에서 수동으로 필터링하면 불필요한 전체 데이터 조회가 발생하므로 비효율적입니다.",
+    "distractors": {
+      "A": "권장되는 방식 - Aggregate에서 직접 필터 조건 정의",
+      "B": "Data Action으로도 가능한 올바른 방식",
+      "D": "Aggregate의 출력을 위젯에 바인딩하는 올바른 방식"
+    },
+    "source": "Workbook 3 - Basic Aggregate, Sources & Filters section",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-003",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "hard",
+    "tags": [
+      "asynchronous-execution",
+      "aggregate-order",
+      "screen-rendering"
+    ],
+    "stem": "In your Customer management application, you have defined two Aggregates on the same screen: GetActiveCustomers (Fetch: At Start) and GetPendingOrders (Fetch: At Start). After the screen initializes, both Aggregates are executing, but the order in which they complete is unpredictable. Which statement accurately describes this behavior and its implication?",
+    "options": [
+      {
+        "key": "A",
+        "text": "This is unexpected behavior; Aggregates should execute sequentially in the order they are defined on the screen"
+      },
+      {
+        "key": "B",
+        "text": "This is expected; Aggregates run asynchronously and completion order is not guaranteed, but both datasets are eventually bound to their respective widgets"
+      },
+      {
+        "key": "C",
+        "text": "One Aggregate must be set to 'Only on demand' to prevent race conditions"
+      },
+      {
+        "key": "D",
+        "text": "The Ready event will not fire until both Aggregates complete in the correct sequence"
+      }
+    ],
+    "answer": "B",
+    "explanation": "각 Aggregate는 비동기적으로 실행되므로 화면 렌더링의 순서는 보장되지 않습니다. 그러나 데이터가 준비되면 화면이 자동으로 업데이트됩니다.",
+    "distractors": {
+      "A": "Aggregate는 실제로 비동기적으로 실행되므로 순서가 보장되지 않음 - 이것이 예상되는 동작",
+      "C": "순서 보장이 필요하지 않으면 두 Aggregate 모두 'At Start'로 유지 가능",
+      "D": "Ready 이벤트는 Initialize 완료 후 발생하며, Aggregate 완료를 기다리지 않음"
+    },
+    "source": "Workbook 9 - Screen Lifecycle, After Fetch event section",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-004",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [
+      "aggregate-relationships",
+      "entity-relationships",
+      "data-fetching"
+    ],
+    "stem": "You need to create an Invoice detail screen that displays a single invoice based on an InvoiceId input parameter. The screen requires data from both the Invoice entity and the related Customer entity. What is the best approach to fetch this data?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create one Aggregate querying Invoice filtered by InvoiceId, then separately create another Aggregate querying Customer"
+      },
+      {
+        "key": "B",
+        "text": "Create a single Aggregate with Invoice as the source, add a filter using InvoiceId, and include the related Customer attributes through the relationship"
+      },
+      {
+        "key": "C",
+        "text": "Use two separate Data Actions: one to fetch Invoice data and another to fetch Customer data"
+      },
+      {
+        "key": "D",
+        "text": "Create an Aggregate with Customer as the source and filter by InvoiceId directly"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate는 하나 이상의 소스 Entity를 지원하며, Entity 관계를 통해 관련된 속성을 포함할 수 있습니다. 이것이 가장 효율적인 데이터 가져오기 방식입니다.",
+    "distractors": {
+      "A": "가능하지만 두 개의 Aggregate는 불필요한 복잡성 추가",
+      "C": "가능하지만 Aggregate로 더 효율적으로 처리 가능",
+      "D": "잘못된 필터링 - InvoiceId는 Invoice 엔티티의 속성이므로 Customer를 직접 필터링할 수 없음"
+    },
+    "source": "Workbook 3 - Basic Aggregate, Sources section",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-005",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "easy",
+    "tags": [
+      "reactive-ui",
+      "automatic-rendering",
+      "data-binding"
+    ],
+    "stem": "Which of the following correctly describes what happens when data from an Aggregate becomes available on a Reactive screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The developer must manually invoke a JavaScript function to update the screen display"
+      },
+      {
+        "key": "B",
+        "text": "The screen automatically re-renders to display the fetched data"
+      },
+      {
+        "key": "C",
+        "text": "The data is stored in a local database until the developer explicitly renders it"
+      },
+      {
+        "key": "D",
+        "text": "The user must manually refresh the page to see the data"
+      }
+    ],
+    "answer": "B",
+    "explanation": "데이터를 사용할 수 있게 되면 화면이 자동으로 렌더링되어 데이터를 표시합니다. 추가 작업이 필요 없습니다.",
+    "distractors": {
+      "A": "OutSystems는 선언적 UI 모델을 사용하므로 자동 업데이트 처리",
+      "C": "Aggregate는 데이터베이스에서 직접 데이터를 가져옴",
+      "D": "Reactive UI는 자동으로 업데이트됨"
+    },
+    "source": "Workbook 3 - Displaying Data on Screens, Data Action section",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-006",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "hard",
+    "tags": [
+      "only-on-demand",
+      "refresh-data",
+      "aggregate-trigger"
+    ],
+    "stem": "You have a Product search screen where users enter a search term, and an Aggregate named GetProducts is configured with Fetch property set to 'Only on demand'. After the user enters a search keyword and clicks the 'Search' button, the products are not displayed. What is the most likely cause?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate filter condition references the search variable, but the variable value was not yet assigned when the screen initialized"
+      },
+      {
+        "key": "B",
+        "text": "The GetProducts Aggregate requires a Refresh Data node in the button's On Click action to be triggered"
+      },
+      {
+        "key": "C",
+        "text": "The 'Only on demand' property prevents the Aggregate from accessing local variables on the screen"
+      },
+      {
+        "key": "D",
+        "text": "Aggregates cannot filter using local variable values; only input parameters are supported"
+      }
+    ],
+    "answer": "B",
+    "explanation": "'Only on demand'로 설정된 Aggregate는 화면 초기화 시 실행되지 않으며, Refresh Data 노드를 사용하여 프로그래밍 방식으로 트리거해야 합니다.",
+    "distractors": {
+      "A": "'At Start'가 아니므로 초기화 시 실행되지 않으며, 이것이 문제가 아님",
+      "C": "'Only on demand' Aggregate도 Local Variable 액세스 가능",
+      "D": "Local Variable과 Input Parameter 모두 필터 조건에 사용 가능"
+    },
+    "source": "Workbook 9 - Screen Lifecycle, Fetching Only On Demand section",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-007",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "easy",
+    "tags": [
+      "aggregate-iterator",
+      "current-property",
+      "list-iteration"
+    ],
+    "stem": "When displaying data from an Aggregate on a screen in OutSystems 11 Reactive, what does the Iterator Current property represent?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The total count of all records returned by the Aggregate"
+      },
+      {
+        "key": "B",
+        "text": "A cursor that moves through the list of records, initially pointing to the first row"
+      },
+      {
+        "key": "C",
+        "text": "The current value of the Aggregate's filter condition"
+      },
+      {
+        "key": "D",
+        "text": "The row number of the most recently updated record in the Aggregate"
+      }
+    ],
+    "answer": "B",
+    "explanation": "반복 실행 시 Current 커서가 목록을 순회하며, 기본적으로 첫 번째 행을 가리킵니다.",
+    "distractors": {
+      "A": "그것은 Count 속성의 역할",
+      "C": "Current는 데이터 순회용 커서이지 필터 조건 참조가 아님",
+      "D": "Current는 단순히 현재 위치를 가리키는 커서일 뿐"
+    },
+    "source": "Workbook 3 - Basic Aggregate, Output section",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-008",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [
+      "if-widget",
+      "aggregate-empty",
+      "ready-event"
+    ],
+    "stem": "A Product detail screen displays product information fetched via a GetProductById Aggregate. You want to show different content based on whether a product was found. Which widget and event should you use to check if the Aggregate returned any records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use an If widget with the condition GetProductById.Empty in the Initialize event"
+      },
+      {
+        "key": "B",
+        "text": "Use an If widget checking GetProductById.Empty property in the Ready event"
+      },
+      {
+        "key": "C",
+        "text": "Use an If widget checking GetProductById.Count > 0 in the Render event"
+      },
+      {
+        "key": "D",
+        "text": "Use an Expression widget to display GetProductById.Length directly to the user"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Ready 이벤트는 Initialize 완료 후 HTML Document 구성이 완료된 시점에 발생합니다. If 위젯으로 GetProductById.Empty 속성을 확인하여 데이터 존재 여부를 판단할 수 있습니다.",
+    "distractors": {
+      "A": "Initialize 이벤트에서는 Aggregate 데이터가 아직 준비되지 않을 수 있음",
+      "C": "Render 이벤트는 여러 번 발생하며 Early 위젯 조건 설정에 부적합",
+      "D": "Length와 Count는 다른 속성 - Empty는 레코드 없음 여부를 직접 나타냄"
+    },
+    "source": "Workbook 9 - Screen Lifecycle, Ready event and When to Use Each Screen Event sections",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "FDS-009",
+    "category": "Fetching Data",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "hard",
+    "tags": [
+      "input-parameter-change",
+      "aggregate-refresh",
+      "screen-navigation"
+    ],
+    "stem": "In a Customer maintenance application, the CustomerDetail screen accepts a CustomerId input parameter. The GetCustomerById Aggregate filters by this parameter. When the screen is navigated to from the CustomerList screen with a specific CustomerId, the Aggregate correctly returns that customer's data. However, when you later navigate to this screen again with a different CustomerId, the old customer's data is still displayed. What is the MOST LIKELY cause?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate's Fetch property was changed to 'Only on demand' and was never triggered with the new CustomerId"
+      },
+      {
+        "key": "B",
+        "text": "The GetCustomerById Aggregate was not refreshed automatically because input parameters changed after screen initialization"
+      },
+      {
+        "key": "C",
+        "text": "The If widget enclosing the customer data has a stale condition that prevents the new data from displaying"
+      },
+      {
+        "key": "D",
+        "text": "The Table widget's Source property is incorrectly bound to a local variable instead of the Aggregate output"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate는 화면 초기화 시에만 자동으로 실행됩니다. Input parameter가 변경된 후에는 Aggregate가 자동으로 재실행되지 않으므로 새 CustomerId로 데이터를 다시 가져오지 못합니다. AfterFetch 이벤트나 OnParametersChanged와 같은 메커니즘을 사용하여 명시적으로 Aggregate를 재실행해야 합니다.",
+    "distractors": {
+      "A": "'At Start'가 기본값이므로 이것이 원인이 될 가능성 낮음",
+      "C": "If 위젯의 조건은 매 렌더링마다 재평가됨",
+      "D": "If widget이 아닌 Aggregate 자동 새로고침 문제가 실제 원인"
+    },
+    "source": "Workbook 9 - Screen Lifecycle, Opening the App section",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

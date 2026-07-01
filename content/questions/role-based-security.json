@@ -1,0 +1,217 @@
+[
+  {
+    "id": "SEC-001",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "easy",
+    "tags": [
+      "Access Control",
+      "Authentication",
+      "Authorization",
+      "Security Fundamentals"
+    ],
+    "stem": "Which two components make up the complete access control mechanism in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Authentication and Authorization"
+      },
+      {
+        "key": "B",
+        "text": "Encryption and Decryption"
+      },
+      {
+        "key": "C",
+        "text": "Users and Passwords"
+      },
+      {
+        "key": "D",
+        "text": "Roles and Permissions"
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems 접근 제어는 **Authentication(인증 — 누가 접근하는지 확인)**과 **Authorization(인가 — 허용된 작업인지 판단)** 두 축으로 이뤄집니다. B·C·D는 관련 개념이지만 접근 제어의 두 핵심 요소가 아닙니다.",
+    "source": "Training Workbook 6 - What is Access Control? (Authentication and Authorization)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SEC-002",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [
+      "Role-based Access",
+      "Server Actions",
+      "Authorization Check",
+      "Order Domain"
+    ],
+    "stem": "You are developing an Order management application. You need to ensure that only users with the OrderApprover role can approve orders worth more than 10,000 units. Which action should you use to check if the currently logged-in user has the OrderApprover role?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CheckOrderApproverRole() without parameters"
+      },
+      {
+        "key": "B",
+        "text": "VerifyOrderApproverRole(GetUserId())"
+      },
+      {
+        "key": "C",
+        "text": "CheckOrderApproverRole(UserId) with an explicit user identifier"
+      },
+      {
+        "key": "D",
+        "text": "RequireOrderApproverRole() as a mandatory security check"
+      }
+    ],
+    "answer": "A",
+    "explanation": "역할마다 생성되는 **Check<Role>() 함수를 매개변수 없이 호출**하면 **현재 로그인한 사용자**의 역할 보유 여부를 검사합니다. 그래서 `CheckOrderApproverRole()`가 정답입니다. (B는 없는 액션명, C는 불필요한 명시 파라미터, D는 유효하지 않은 액션)",
+    "source": "Training Workbook 6 - Action Permission Check (Check<RoleName>Role action)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SEC-003",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [
+      "Screen Access",
+      "Role Requirements",
+      "Screen Permissions",
+      "Employee Domain"
+    ],
+    "stem": "In an Employee records application, the Payroll_Update screen is restricted to the PayrollAdmin role only. What is the minimum requirement for a user to access this screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The user must have any single role assigned by the PayrollAdmin"
+      },
+      {
+        "key": "B",
+        "text": "The user must have at least one role that includes the PayrollAdmin role"
+      },
+      {
+        "key": "C",
+        "text": "The user must be logged in with the Registered role"
+      },
+      {
+        "key": "D",
+        "text": "The user must have Anonymous access enabled"
+      }
+    ],
+    "answer": "B",
+    "explanation": "화면이 PayrollAdmin 역할로 제한되면, 사용자는 그 역할을 보유해야 접근할 수 있습니다(최소 한 개 역할 필요).",
+    "source": "Training Workbook 6 - Screen Permission Check (Screen Roles property)",
+    "status": "flagged",
+    "verifyNote": "정답 선택지 문구가 모호(‘PayrollAdmin 역할을 포함하는 최소 한 개 역할’)해 리라이트/검수 필요."
+  },
+  {
+    "id": "SEC-004",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "hard",
+    "tags": [
+      "Exception Handling",
+      "Bubble-up Mechanism",
+      "Error Flow",
+      "Product Domain"
+    ],
+    "stem": "While testing a Product creation workflow, a user with the ProductEditor role calls the ProductCreate action. The action contains a Raise Exception node inside an If block that checks for the ProductAdmin role. When the exception is raised, no specific exception handler exists in the current action flow. What happens next?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The application terminates immediately and displays a runtime error to the user"
+      },
+      {
+        "key": "B",
+        "text": "Execution bubbles up to search for a matching exception handler in outer contexts, eventually reaching the module-level global exception handler"
+      },
+      {
+        "key": "C",
+        "text": "The exception is automatically logged and the flow continues normally from the next step"
+      },
+      {
+        "key": "D",
+        "text": "The exception is silently ignored and the action returns a default success status"
+      }
+    ],
+    "answer": "B",
+    "explanation": "현재 컨텍스트에 핸들러가 없으면 런타임이 **bubble-up**으로 바깥 컨텍스트를 차례로 탐색하다가, 최종적으로 **모듈 수준의 전역 예외 핸들러**까지 올라갑니다.",
+    "source": "Training Workbook 6 - Exception Handler (Bubble-up behavior and Global Exception Handler)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SEC-005",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "hard",
+    "tags": [
+      "Exception Types",
+      "Exception Handling",
+      "Security Exceptions"
+    ],
+    "stem": "Which of the following is NOT a type of exception that can have a dedicated handler in an OutSystems action?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Database Exceptions"
+      },
+      {
+        "key": "B",
+        "text": "Security Exceptions"
+      },
+      {
+        "key": "C",
+        "text": "Business Logic Exceptions"
+      },
+      {
+        "key": "D",
+        "text": "Communication Exceptions"
+      }
+    ],
+    "answer": "C",
+    "explanation": "전용 핸들러를 둘 수 있는 예외 유형은 **Database·Security·Communication·(Custom) User Exceptions**입니다. **Business Logic Exception**은 별도 유형으로 존재하지 않습니다.",
+    "source": "Training Workbook 6 - Exception Handler (Exception handler flows)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SEC-006",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [
+      "User Management",
+      "Role Assignment",
+      "Users Application",
+      "Invoice Domain"
+    ],
+    "stem": "In a Customer management application, you have created a role called InvoiceApprover. When you manually assign this role to a user in the Users application, which of the following is NOT possible?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The user can immediately access screens restricted to the InvoiceApprover role"
+      },
+      {
+        "key": "B",
+        "text": "The InvoiceApprover role must be referenced from within an application module for it to be visible in the Users application dropdown"
+      },
+      {
+        "key": "C",
+        "text": "The role assignment creates a new user account in the OutSystems platform"
+      },
+      {
+        "key": "D",
+        "text": "The role can later be revoked from the user within the Users application"
+      }
+    ],
+    "answer": "C",
+    "explanation": "이미 존재하는 사용자에게 역할을 부여하는 것이지 **새 사용자 계정을 만들지 않습니다**(사용자는 Users 앱에서 별도로 생성·관리). A(즉시 접근), B(역할이 참조/공개돼야 목록에 보임), D(부여·회수 가능)는 모두 맞습니다.",
+    "source": "Training Workbook 6 - Users (creation and management) and Roles (role assignment)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

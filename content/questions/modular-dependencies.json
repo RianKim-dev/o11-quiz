@@ -1,0 +1,165 @@
+[
+  {
+    "id": "MOD-001",
+    "category": "Architecture & Security",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "easy",
+    "tags": [
+      "modular dependencies",
+      "producer consumer pattern",
+      "fundamental concept"
+    ],
+    "stem": "In OutSystems, what is the term for a module that uses functionality exposed by another module?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Producer"
+      },
+      {
+        "key": "B",
+        "text": "Consumer"
+      },
+      {
+        "key": "C",
+        "text": "Provider"
+      },
+      {
+        "key": "D",
+        "text": "Distributor"
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems 용어에서 다른 모듈의 기능을 사용하는 모듈을 Consumer라고 합니다. Consumer는 다른 모듈(Producer)에서 공유하는 기능을 활용하는 모듈입니다.",
+    "distractors": {
+      "A": "Producer는 기능을 공유하는 모듈입니다. 반대 개념입니다.",
+      "C": "OutSystems 용어가 아닙니다.",
+      "D": "OutSystems 용어가 아닙니다."
+    },
+    "source": "Training Workbook 1 - Producers and Consumers (lines 179-195)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "MOD-002",
+    "category": "Architecture & Security",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "medium",
+    "tags": [
+      "modular dependencies",
+      "manage dependencies",
+      "best practices",
+      "troubleshooting"
+    ],
+    "stem": "You are developing an Invoice module and need to use the Customer entity from a Product module in a different application. Which of the following is NOT a required step to reference the Customer entity?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Ensure the Customer entity is set to Public in the Product module"
+      },
+      {
+        "key": "B",
+        "text": "Open Manage Dependencies dialog in the Invoice module"
+      },
+      {
+        "key": "C",
+        "text": "Publish the Product module before referencing its entity"
+      },
+      {
+        "key": "D",
+        "text": "Delete all local Customer records in the Invoice module first"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Manage Dependencies를 통해 모듈 간 참조를 설정하기 위해 필수적인 단계는 A, B, C입니다. 하지만 D(로컬 Customer 레코드 삭제)는 참조를 위해 필요하지 않습니다. 이는 불필요한 단계이며, 오히려 데이터 손실을 야기할 수 있습니다.",
+    "distractors": {
+      "A": "공유된 요소는 반드시 Public으로 설정되어야 합니다 (wb3.txt, lines 314-319 참조).",
+      "B": "Manage Dependencies 대화상자는 의존성을 추가하는 데 필수적입니다 (wb1.txt, lines 393-405 참조).",
+      "C": "모듈을 게시해야 다른 모듈에서 참조할 수 있습니다 (wb1.txt, lines 382-383 참조)."
+    },
+    "source": "Training Workbook 1 - Manage Dependencies (lines 393-405) and Training Workbook 3 (lines 306-321)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "MOD-003",
+    "category": "Architecture & Security",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "medium",
+    "tags": [
+      "modular dependencies",
+      "compilation errors",
+      "best practices",
+      "troubleshooting"
+    ],
+    "stem": "You have a Cart module (Producer) that exposes a public Server Action called AddItemToCart. You want a Product module (Consumer) to use this action. After successfully adding the dependency via Manage Dependencies, the Product module compilation fails with an unresolved reference error. What is the BEST first troubleshooting step?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Delete the Cart module and recreate it from scratch"
+      },
+      {
+        "key": "B",
+        "text": "Verify that the Cart module has been published and the AddItemToCart action is marked as Public"
+      },
+      {
+        "key": "C",
+        "text": "Change the Product module type from Reactive Web App to Service"
+      },
+      {
+        "key": "D",
+        "text": "Remove and re-add the dependency multiple times until compilation succeeds"
+      }
+    ],
+    "answer": "B",
+    "explanation": "컴파일 실패 시 가장 먼저 확인해야 할 기본 사항은 Producer 모듈이 게시되었는지, 그리고 참조하려는 요소가 Public으로 설정되었는지 입니다. 이는 wb3.txt, lines 314-319에서 언급된 필수 확인 사항입니다.",
+    "distractors": {
+      "A": "극단적인 조치로, 먼저 기본 설정을 확인해야 합니다.",
+      "C": "모듈 유형 변경은 필요하지 않으며, 이는 문제를 해결하지 못합니다.",
+      "D": "반복적으로 추가/제거하는 것은 근본적인 문제를 해결하지 못합니다."
+    },
+    "source": "Training Workbook 3 - Configure Movies Screen, Refer existing entities (lines 306-321)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "MOD-004",
+    "category": "Architecture & Security",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "hard",
+    "tags": [
+      "modular dependencies",
+      "multi-application architecture",
+      "cross-application references",
+      "conceptual understanding"
+    ],
+    "stem": "In a multi-application system, Module A (in Application 1) needs to reference an Entity from Module B (in Application 2). Which statements accurately describe the modular dependency capability and limitations in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Producers and Consumers can be located in different applications, and entities can be freely referenced across application boundaries"
+      },
+      {
+        "key": "B",
+        "text": "Cross-application references are possible only if both modules are of the same type (e.g., both Reactive Web App)"
+      },
+      {
+        "key": "C",
+        "text": "Producers and Consumers can be located in different applications, but the entity in Module B must be marked as Public and Module B must be published"
+      },
+      {
+        "key": "D",
+        "text": "Cross-application module dependencies are not supported in OutSystems 11; all modules must be in the same application"
+      }
+    ],
+    "answer": "C",
+    "explanation": "OutSystems에서는 Producer와 Consumer가 서로 다른 애플리케이션에 위치할 수 있습니다 (wb1.txt, lines 191-194). 그러나 참조되는 요소(이 경우 Entity)는 반드시 Public으로 설정되어야 하고, 모듈은 게시되어야 합니다. 이는 기본적인 모듈 의존성 규칙입니다.",
+    "distractors": {
+      "A": "Entity를 참조하려면 단순히 Public으로 설정하는 것만으로는 부족하며, Manage Dependencies를 통해 명시적으로 참조를 추가해야 합니다.",
+      "B": "모듈 타입이 다양해도 참조는 가능합니다. 타입의 일치는 요구되지 않습니다.",
+      "D": "wb1.txt, lines 191-194에서 명확하게 다른 애플리케이션의 Producer와 Consumer가 가능함을 명시하고 있습니다."
+    },
+    "source": "Training Workbook 1 - Producers and Consumers (lines 179-195)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

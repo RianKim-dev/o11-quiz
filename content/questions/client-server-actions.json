@@ -1,0 +1,248 @@
+[
+  {
+    "id": "CSA-001",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [
+      "Client Actions",
+      "Server Actions",
+      "Logic Flow",
+      "Best Practices"
+    ],
+    "stem": "You are designing a client action for an Order entry screen that must retrieve order details from the database, validate the order total, and then update the inventory. Which of the following correctly describes how you should structure this logic in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Call Server Action 1 to fetch order details, then call Server Action 2 to update inventory, within the same Client Action"
+      },
+      {
+        "key": "B",
+        "text": "Call one Server Action to handle both database retrieval and inventory update operations"
+      },
+      {
+        "key": "C",
+        "text": "Use a Client Action only for validation; create separate Server Actions for data operations"
+      },
+      {
+        "key": "D",
+        "text": "Call multiple Server Actions sequentially to perform all three tasks in one Client Action flow"
+      }
+    ],
+    "answer": "B",
+    "explanation": "클라이언트 액션에서 둘 이상의 서버 액션을 호출하는 것은 권장되지 않습니다(wb5: '둘 이상의 Server Action 호출은 권장되지 않습니다'). 데이터 조회, 검증, 인벤토리 업데이트는 모두 서버에서 처리해야 하므로, 하나의 서버 액션이 이 모든 작업을 처리해야 합니다. 이렇게 하면 효율적인 로직 구조를 유지할 수 있습니다.",
+    "distractors": {
+      "A": "클라이언트 액션에서 여러 개의 서버 액션을 호출하는 것은 권장되지 않습니다 (wb5)",
+      "C": "검증은 액션 플로우에서 수행되어야 하며, 클라이언트 액션도 이 역할을 할 수 있습니다",
+      "D": "클라이언트 액션에서 여러 서버 액션을 순차적으로 호출하는 것은 권장되지 않습니다"
+    },
+    "source": "Training Workbook 5 - Calling Other Actions (pages 31-41)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CSA-002",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [
+      "Aggregates",
+      "Server Actions",
+      "Database Queries",
+      "Data Retrieval"
+    ],
+    "stem": "In a Product management application, you need to query the database for products matching a customer's criteria and apply multiple filters. Where should you define this database query in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In a Client Action on the Product list screen to allow real-time filtering updates"
+      },
+      {
+        "key": "B",
+        "text": "In a Server Action using an Aggregate to define the query visually"
+      },
+      {
+        "key": "C",
+        "text": "In an Aggregate on the screen, as Aggregates can be used anywhere in the application"
+      },
+      {
+        "key": "D",
+        "text": "In a Client Action because Client Actions can also execute queries synchronously"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate는 서버 액션 내에서만 직접 사용할 수 있습니다(wb5: 'Aggregates can only be used directly inside Server Actions'). 데이터베이스 쿼리는 서버에서 실행되어야 하며, Aggregate는 시각적으로 필터, 정렬 등을 정의할 수 있는 강력한 도구입니다. 클라이언트 액션에서는 Aggregate를 직접 사용할 수 없습니다.",
+    "distractors": {
+      "A": "Aggregate는 클라이언트 액션에서 직접 사용될 수 없습니다",
+      "C": "Aggregate는 서버 액션 내에서만 직접 사용할 수 있습니다",
+      "D": "클라이언트 액션은 비동기적으로 실행되며 Aggregate를 직접 포함할 수 없습니다"
+    },
+    "source": "Training Workbook 5 - Aggregate (pages 92-104)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CSA-003",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "hard",
+    "tags": [
+      "Form Validation",
+      "Client Actions",
+      "Business Logic",
+      "Data Validation"
+    ],
+    "stem": "You are implementing form validation for an Invoice creation screen. The Invoice Amount must be positive, and the Invoice Date cannot be in the future. Which statement correctly describes how these validations should be implemented?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use only built-in validations on the input widgets, as OutSystems automatically enforces all business logic"
+      },
+      {
+        "key": "B",
+        "text": "Check Form.Valid in the action flow after setting input widget Valid properties to False and ValidationMessage values in custom validation logic"
+      },
+      {
+        "key": "C",
+        "text": "Define custom validations in the Server Action because Form validation properties cannot be accessed from Client Actions"
+      },
+      {
+        "key": "D",
+        "text": "Implement both built-in and custom validations, but bypass Form.Valid check if custom validations pass"
+      }
+    ],
+    "answer": "B",
+    "explanation": "커스텀 검증은 액션 플로우에서 수행되어야 합니다(wb5: 'Must be performed in the Action Flow'). 잘못된 필드에 대해 Valid 속성을 False로, ValidationMessage를 설정한 후, 마지막에 Form.Valid 속성을 확인해야 합니다(wb5: 'After the last custom validation, check the Form.Valid property'). 이를 통해 하나의 입력이라도 유효하지 않으면 폼 전체가 유효하지 않은 상태가 됩니다.",
+    "distractors": {
+      "A": "OutSystems는 자동으로 검증을 수행하지만, 비즈니스 로직 검증은 개발자가 구현해야 합니다",
+      "C": "폼 검증은 클라이언트 액션에서도 수행될 수 있습니다",
+      "D": "Form.Valid 체크는 반드시 수행되어야 하며 건너뛸 수 없습니다"
+    },
+    "source": "Training Workbook 5 - Custom validations & Form Validations (pages 135-152)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CSA-004",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "easy",
+    "tags": [
+      "Server Actions",
+      "Action Hierarchy",
+      "Modularity"
+    ],
+    "stem": "You have created a Server Action to process a Customer order. This Server Action internally needs to validate inventory levels and then commit the order to the database. Which actions can this Server Action directly call?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Other Server Actions only"
+      },
+      {
+        "key": "B",
+        "text": "Both Client Actions and Server Actions"
+      },
+      {
+        "key": "C",
+        "text": "Client Actions only"
+      },
+      {
+        "key": "D",
+        "text": "No other actions; Server Actions must be self-contained"
+      }
+    ],
+    "answer": "A",
+    "explanation": "서버 액션은 다른 서버 액션만 호출할 수 있습니다(wb5: 'A Server Action can only call other Server Actions'). 이는 모든 서버 측 로직이 서버 레이어에서 처리되도록 보장합니다. 클라이언트 액션과의 상호작용은 없습니다.",
+    "distractors": {
+      "B": "서버 액션은 클라이언트 액션을 호출할 수 없습니다",
+      "C": "서버 액션은 클라이언트 액션을 호출할 수 없습니다",
+      "D": "서버 액션은 다른 서버 액션을 호출하여 로직을 조합할 수 있습니다"
+    },
+    "source": "Training Workbook 5 - Calling Other Actions (pages 31-41)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CSA-005",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [
+      "Client Actions",
+      "Reactive UI",
+      "Real-time Updates",
+      "Screen Interactions"
+    ],
+    "stem": "A Cart management screen uses a Client Action to update product quantities. The UI should immediately reflect the new cart total when a user changes a quantity. Which characteristic of Client Actions makes this behavior possible?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Client Actions execute on the server, so changes are instantly synchronized with the database"
+      },
+      {
+        "key": "B",
+        "text": "UI elements immediately react to data changes within Client Actions, allowing real-time updates"
+      },
+      {
+        "key": "C",
+        "text": "Client Actions automatically refresh the screen without requiring an explicit Server Action call"
+      },
+      {
+        "key": "D",
+        "text": "Client Actions bypass form validation, enabling faster data updates on the screen"
+      }
+    ],
+    "answer": "B",
+    "explanation": "클라이언트 액션의 핵심 특징 중 하나는 'UI 요소가 데이터 변경 시점에 즉시 업데이트됩니다'(wb3: 'UI elements immediately react to data changes'). 이는 클라이언트 액션이 클라이언트 측에서 실행되므로 데이터 변경이 UI에 즉시 반영되는 반응형 동작을 가능하게 합니다.",
+    "distractors": {
+      "A": "클라이언트 액션은 클라이언트 측에서 실행되며, 서버에서 실행되지 않습니다",
+      "C": "클라이언트 액션만으로는 자동 화면 새로고침이 보장되지 않습니다",
+      "D": "클라이언트 액션은 폼 검증을 우회하지 않으며, 검증을 수행해야 합니다"
+    },
+    "source": "Training Workbook 3 - Screen Actions & Client Actions (pages 35-45)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "CSA-006",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "hard",
+    "tags": [
+      "Form Validation",
+      "Client Actions",
+      "Server Actions",
+      "Business Logic",
+      "Data Validation"
+    ],
+    "stem": "You are implementing an Employee salary submission form with the following requirements: (1) validate that salary is not negative, (2) validate that salary does not exceed a company maximum based on the employee's role (fetched from the database), (3) check Form.Valid before saving. Which approach correctly implements this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Implement both validations in the screen action using an Aggregate to fetch the role maximum, then check Form.Valid"
+      },
+      {
+        "key": "B",
+        "text": "Implement validation 1 in built-in validation; call a Server Action from the Client Action for validation 2; check Form.Valid in the Client Action"
+      },
+      {
+        "key": "C",
+        "text": "Implement all validations in a single Server Action, then return a boolean indicating whether the form is valid"
+      },
+      {
+        "key": "D",
+        "text": "Use only built-in validations for validation 1; skip validation 2 since fetching data from the database is not supported in Client Actions"
+      }
+    ],
+    "answer": "B",
+    "explanation": "기본 검증(음수 값 확인)은 기본 제공 검증으로 가능하지만, 데이터베이스 기반 역할 최대값(validation 2)은 서버에서 조회해야 합니다. 클라이언트 액션은 서버 액션을 호출할 수 있으므로(wb5: 'Client Action은 다른 Client Action과 Server Action을 호출할 수 있습니다'), 마지막에 Form.Valid를 체크해야 합니다(wb5: 'After the last custom validation, check the Form.Valid property'). Aggregate는 서버 액션 내에서만 직접 사용될 수 있습니다.",
+    "distractors": {
+      "A": "Aggregate는 클라이언트 액션에서 직접 사용될 수 없습니다",
+      "C": "비즈니스 검증은 클라이언트 액션의 액션 플로우에서 수행되어야 하며, 단순히 boolean 반환으로는 부족합니다",
+      "D": "클라이언트 액션은 서버 액션을 호출하여 데이터베이스에서 데이터를 조회할 수 있습니다"
+    },
+    "source": "Training Workbook 5 - Custom validations & Calling Other Actions (pages 135-152, 31-41)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

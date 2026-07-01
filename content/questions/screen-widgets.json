@@ -4,13 +4,28 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "medium",
-    "tags": ["link-button", "concept"],
+    "tags": [
+      "link-button",
+      "concept"
+    ],
     "stem": "Regarding the difference between a **Link** and a **Button**, which statement is correct?",
     "options": [
-      { "key": "A", "text": "A Link can contain other widgets (Image, Text, Container…), while a Button cannot." },
-      { "key": "B", "text": "A Button can contain other widgets, while a Link cannot." },
-      { "key": "C", "text": "Only Buttons can trigger a Screen Action; Links cannot." },
-      { "key": "D", "text": "Links and Buttons are identical and interchangeable in every way." }
+      {
+        "key": "A",
+        "text": "A Link can contain other widgets (Image, Text, Container…), while a Button cannot."
+      },
+      {
+        "key": "B",
+        "text": "A Button can contain other widgets, while a Link cannot."
+      },
+      {
+        "key": "C",
+        "text": "Only Buttons can trigger a Screen Action; Links cannot."
+      },
+      {
+        "key": "D",
+        "text": "Links and Buttons are identical and interchangeable in every way."
+      }
     ],
     "answer": "A",
     "explanation": "Link와 Button의 주된 차이는 **UI(모양)**이며, **Link는 다른 위젯(Image·Text·Container 등)을 안에 담을 수 있지만 Button은 그럴 수 없습니다.** 둘 다 On Click으로 로직/이동을 트리거하는 건 동일합니다.",
@@ -28,13 +43,28 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "medium",
-    "tags": ["link-button", "on-click"],
+    "tags": [
+      "link-button",
+      "on-click"
+    ],
     "stem": "Which of the following is a **valid** On Click target for a Button or Link?",
     "options": [
-      { "key": "A", "text": "A Screen" },
-      { "key": "B", "text": "A Block" },
-      { "key": "C", "text": "An Aggregate" },
-      { "key": "D", "text": "An Entity" }
+      {
+        "key": "A",
+        "text": "A Screen"
+      },
+      {
+        "key": "B",
+        "text": "A Block"
+      },
+      {
+        "key": "C",
+        "text": "An Aggregate"
+      },
+      {
+        "key": "D",
+        "text": "An Entity"
+      }
     ],
     "answer": "A",
     "explanation": "Button/Link의 On Click 대상은 **Screen, Screen Action, External URL**입니다. 따라서 Screen이 유효한 대상입니다.",
@@ -52,13 +82,29 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "easy",
-    "tags": ["input", "variable", "practical"],
+    "tags": [
+      "input",
+      "variable",
+      "practical"
+    ],
     "stem": "On a Customer registration Screen, a user types their email into an Input widget. Where is that typed value stored?",
     "options": [
-      { "key": "A", "text": "In the Input widget's **Variable** property." },
-      { "key": "B", "text": "In the Screen's Title property." },
-      { "key": "C", "text": "In the Aggregate's Test Values." },
-      { "key": "D", "text": "In the Button's On Click property." }
+      {
+        "key": "A",
+        "text": "In the Input widget's **Variable** property."
+      },
+      {
+        "key": "B",
+        "text": "In the Screen's Title property."
+      },
+      {
+        "key": "C",
+        "text": "In the Aggregate's Test Values."
+      },
+      {
+        "key": "D",
+        "text": "In the Button's On Click property."
+      }
     ],
     "answer": "A",
     "explanation": "모든 입력 위젯에는 **Variable** 속성이 있고, 사용자가 입력한 값은 그 Variable에 저장됩니다.",
@@ -76,13 +122,29 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "easy",
-    "tags": ["input", "text-area", "practical"],
+    "tags": [
+      "input",
+      "text-area",
+      "practical"
+    ],
     "stem": "A Product form needs a field where users can type a **multi-line** product description. Which widget is most appropriate?",
     "options": [
-      { "key": "A", "text": "Text Area" },
-      { "key": "B", "text": "Input" },
-      { "key": "C", "text": "Dropdown" },
-      { "key": "D", "text": "Checkbox" }
+      {
+        "key": "A",
+        "text": "Text Area"
+      },
+      {
+        "key": "B",
+        "text": "Input"
+      },
+      {
+        "key": "C",
+        "text": "Dropdown"
+      },
+      {
+        "key": "D",
+        "text": "Checkbox"
+      }
     ],
     "answer": "A",
     "explanation": "**Text Area**는 여러 줄 텍스트 입력이 필요할 때 쓰는 다중 행 필드입니다. 일반 Input은 한 줄 텍스트·숫자·날짜용입니다.",
@@ -100,13 +162,28 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "easy",
-    "tags": ["switch", "concept"],
+    "tags": [
+      "switch",
+      "concept"
+    ],
     "stem": "You want a control that lets an admin toggle a Product between two states (e.g., Active / Inactive). Which widget fits best?",
     "options": [
-      { "key": "A", "text": "Switch" },
-      { "key": "B", "text": "Dropdown" },
-      { "key": "C", "text": "Text Area" },
-      { "key": "D", "text": "Table" }
+      {
+        "key": "A",
+        "text": "Switch"
+      },
+      {
+        "key": "B",
+        "text": "Dropdown"
+      },
+      {
+        "key": "C",
+        "text": "Text Area"
+      },
+      {
+        "key": "D",
+        "text": "Table"
+      }
     ],
     "answer": "A",
     "explanation": "**Switch**는 두 가지 옵션 중 하나를 고르는 토글 컨트롤입니다(예: Active/Inactive).",
@@ -124,13 +201,28 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "medium",
-    "tags": ["radio-group", "practical"],
+    "tags": [
+      "radio-group",
+      "practical"
+    ],
     "stem": "An Order form needs the user to pick a Priority from a **small set** of options (Low / Medium / High), with all options visible at once as selectable buttons. Which widget is designed for this?",
     "options": [
-      { "key": "A", "text": "Radio Group (or Button Group)" },
-      { "key": "B", "text": "Text Area" },
-      { "key": "C", "text": "Table" },
-      { "key": "D", "text": "Link" }
+      {
+        "key": "A",
+        "text": "Radio Group (or Button Group)"
+      },
+      {
+        "key": "B",
+        "text": "Text Area"
+      },
+      {
+        "key": "C",
+        "text": "Table"
+      },
+      {
+        "key": "D",
+        "text": "Link"
+      }
     ],
     "answer": "A",
     "explanation": "**Radio Group**(또는 Button Group)은 **적은 수의 선택 옵션**을 한눈에 보이는 라디오/버튼 세트로 제공합니다. Priority(Low/Medium/High) 선택에 적합합니다.",
@@ -148,13 +240,30 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "easy",
-    "tags": ["table", "list", "source", "practical"],
+    "tags": [
+      "table",
+      "list",
+      "source",
+      "practical"
+    ],
     "stem": "You dragged a Table onto a Screen to display all Orders fetched by the `GetOrders` Aggregate. What must you set so the Table shows those records?",
     "options": [
-      { "key": "A", "text": "The Table's **Source** property, set to `GetOrders.List`." },
-      { "key": "B", "text": "The Table's On Click property, set to GetOrders." },
-      { "key": "C", "text": "The Screen's Title property, set to GetOrders." },
-      { "key": "D", "text": "The Aggregate's Max. Records property, set to the Table." }
+      {
+        "key": "A",
+        "text": "The Table's **Source** property, set to `GetOrders.List`."
+      },
+      {
+        "key": "B",
+        "text": "The Table's On Click property, set to GetOrders."
+      },
+      {
+        "key": "C",
+        "text": "The Screen's Title property, set to GetOrders."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate's Max. Records property, set to the Table."
+      }
     ],
     "answer": "A",
     "explanation": "Table/List 같은 목록 위젯은 **Source** 속성으로 표시할 데이터 목록을 지정합니다. `GetOrders.List`를 Source로 설정하면 그 주문들이 표시됩니다.",
@@ -172,13 +281,29 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "medium",
-    "tags": ["if-widget", "conditional", "practical"],
+    "tags": [
+      "if-widget",
+      "conditional",
+      "practical"
+    ],
     "stem": "You want to show a “VIP” badge on a Customer Screen **only when** `Customer.IsVip` is True. Which widget should you use?",
     "options": [
-      { "key": "A", "text": "The If widget, with the badge in its True branch." },
-      { "key": "B", "text": "A Dropdown bound to IsVip." },
-      { "key": "C", "text": "A Text Area showing IsVip." },
-      { "key": "D", "text": "A Table filtered by IsVip." }
+      {
+        "key": "A",
+        "text": "The If widget, with the badge in its True branch."
+      },
+      {
+        "key": "B",
+        "text": "A Dropdown bound to IsVip."
+      },
+      {
+        "key": "C",
+        "text": "A Text Area showing IsVip."
+      },
+      {
+        "key": "D",
+        "text": "A Table filtered by IsVip."
+      }
     ],
     "answer": "A",
     "explanation": "**If 위젯**은 조건에 따라 콘텐츠를 표시합니다. 조건을 `Customer.IsVip`로 두고 True 분기에 VIP 배지를 넣으면 참일 때만 보입니다.",
@@ -196,13 +321,29 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "easy",
-    "tags": ["expression", "display", "practical"],
+    "tags": [
+      "expression",
+      "display",
+      "practical"
+    ],
     "stem": "Which widget do you use to display a **single attribute value** as text on a Screen — for example, a product's price like `GetProduct.List.Current.Product.Price`?",
     "options": [
-      { "key": "A", "text": "Expression" },
-      { "key": "B", "text": "Input" },
-      { "key": "C", "text": "Form" },
-      { "key": "D", "text": "Button" }
+      {
+        "key": "A",
+        "text": "Expression"
+      },
+      {
+        "key": "B",
+        "text": "Input"
+      },
+      {
+        "key": "C",
+        "text": "Form"
+      },
+      {
+        "key": "D",
+        "text": "Button"
+      }
     ],
     "answer": "A",
     "explanation": "**Expression** 위젯은 특정 attribute 값(예: 제품 가격)을 화면에 텍스트로 표시합니다.",
@@ -220,13 +361,28 @@
     "category": "UI Design",
     "subtopic": "Screen Widgets",
     "difficulty": "medium",
-    "tags": ["label", "concept"],
+    "tags": [
+      "label",
+      "concept"
+    ],
     "stem": "What does the **Input Widget** property of a Label do?",
     "options": [
-      { "key": "A", "text": "It links the Label to a specific input field, and shows a visual indicator when that field is mandatory." },
-      { "key": "B", "text": "It stores the value the user types into the field." },
-      { "key": "C", "text": "It converts the Label into an editable input." },
-      { "key": "D", "text": "It sets the Screen's input parameter." }
+      {
+        "key": "A",
+        "text": "It links the Label to a specific input field, and shows a visual indicator when that field is mandatory."
+      },
+      {
+        "key": "B",
+        "text": "It stores the value the user types into the field."
+      },
+      {
+        "key": "C",
+        "text": "It converts the Label into an editable input."
+      },
+      {
+        "key": "D",
+        "text": "It sets the Screen's input parameter."
+      }
     ],
     "answer": "A",
     "explanation": "Label의 **Input Widget** 속성은 그 라벨을 특정 입력 필드와 연결합니다. 연결된 필드가 Mandatory이면 시각적 표시(필수 표시)를 제공합니다.",
@@ -236,6 +392,414 @@
       "D": "화면 Input Parameter와는 무관합니다."
     },
     "source": "Training Workbook 3 (Label — Input Widget property links to a field; mandatory indicator)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-011",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [
+      "widget_binding",
+      "data_display",
+      "dropdown",
+      "source_property"
+    ],
+    "stem": "In an OutSystems reactive screen, you bind a Dropdown widget to display customer names retrieved from a database. When the screen first loads, no data appears in the dropdown. Which of the following is the most likely cause?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Dropdown's Source property is not bound to the Aggregate output list."
+      },
+      {
+        "key": "B",
+        "text": "The Dropdown widget's Label property was not configured."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate is defined but the OnClick event of the Dropdown is missing."
+      },
+      {
+        "key": "D",
+        "text": "The Dropdown requires an explicit Refresh Data action before it can display records."
+      }
+    ],
+    "answer": "A",
+    "explanation": "올바른 답은 A입니다. 데이터를 화면에 표시하려면 'Source' 속성을 사용하여 표시할 요소 목록(Aggregate 또는 Data Action의 출력)을 선택해야 합니다. 만약 Dropdown의 Source가 바인딩되지 않았다면, 데이터가 표시되지 않습니다.\n\n옵션 B (Label): Label은 입력 필드를 설명하는 텍스트를 표시할 뿐, 데이터 표시와는 무관합니다.\n\n옵션 C (OnClick): OnClick 이벤트는 Dropdown 선택 시 실행될 로직을 정의하지만, 데이터 표시와는 별개입니다.\n\n옵션 D (Refresh Data): 화면이 초기화될 때 Aggregate가 자동으로 실행되므로, 수동 Refresh는 필요하지 않습니다.",
+    "distractors": {
+      "B": "Label은 입력 필드 설명용이며 데이터 표시에 영향을 주지 않음",
+      "C": "OnClick은 사용자 상호작용 처리이며 데이터 표시와 무관",
+      "D": "화면 초기화 시 Aggregate가 자동 실행되므로 수동 새로고침 불필요"
+    },
+    "source": "Workbook 3 - Displaying Data on Screens (Lines 169-212)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-012",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [
+      "pagination",
+      "totalcount",
+      "aggregate",
+      "maxrecords"
+    ],
+    "stem": "You have created a Pagination widget on a product listing screen with MaxRecords set to 10. The GetProducts Aggregate returns 47 total records. What is the correct value for the Pagination widget's TotalCount property?",
+    "options": [
+      {
+        "key": "A",
+        "text": "10 (the maximum number of records per page)"
+      },
+      {
+        "key": "B",
+        "text": "47 (the total number of records matching the query criteria)"
+      },
+      {
+        "key": "C",
+        "text": "0 (the starting index of the first page)"
+      },
+      {
+        "key": "D",
+        "text": "5 (half the MaxRecords value for balanced pagination)"
+      }
+    ],
+    "answer": "B",
+    "explanation": "올바른 답은 B입니다. TotalCount는 테이블에 표시되는 총 레코드 수를 나타내며, 이는 쿼리 조건과 일치하는 전체 레코드 수(47개)로 설정해야 합니다. 일반적으로 GetProducts.Count를 사용합니다.\n\n옵션 A (10): MaxRecords는 페이지당 표시할 레코드 수이지 전체 수가 아닙니다.\n\n옵션 C (0): StartIndex는 각 페이지의 시작 레코드를 나타내며, TotalCount가 아닙니다.\n\n옵션 D (5): MaxRecords의 절반은 Pagination 설정과 무관한 임의의 값입니다.",
+    "distractors": {
+      "A": "MaxRecords는 페이지당 레코드 수이지 전체 레코드 수가 아님",
+      "C": "StartIndex는 페이지 시작 인덱스이며 TotalCount와 혼동하기 쉬움",
+      "D": "임의의 계산 값으로, Pagination 설정과 무관함"
+    },
+    "source": "Workbook 10 - Pagination and Sorting (Lines 12-13, 119-122)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-013",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "hard",
+    "tags": [
+      "table_sorting",
+      "dynamic_sort",
+      "onSort_event",
+      "aggregate_configuration"
+    ],
+    "stem": "In your Invoice listing screen, you implement sorting on the Table by setting Sort Attribute for each header cell. However, when a user clicks a column header, the data does not resort. What additional configuration is required in the Aggregate to make the sorting work?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the Aggregate's Max Records property to 0."
+      },
+      {
+        "key": "B",
+        "text": "Add dynamic sorting to the Aggregate using a TableSort local variable that captures the user's sort selection."
+      },
+      {
+        "key": "C",
+        "text": "Create a separate Aggregate for each sortable column."
+      },
+      {
+        "key": "D",
+        "text": "Configure the Aggregate's Execute SQL property to include an ORDER BY clause manually."
+      }
+    ],
+    "answer": "B",
+    "explanation": "올바른 답은 B입니다. 워크북에 명시되어 있듯이, Header Cell의 Sort Attribute 설정만으로는 충분하지 않습니다. 테이블/리스트에서 동적 정렬을 구현할 때는 Add Dynamic Sort 옵션을 선택하고 사용자가 선택한 정렬 기준(TableSort 로컬 변수)을 표현식으로 설정해야 합니다. OnSort 이벤트 핸들러는 TableSort 변수를 업데이트하고 Aggregate를 새로고침합니다.\n\n옵션 A (Max Records = 0): Max Records는 반환 레코드 수를 제한하며 정렬과 무관합니다.\n\n옵션 C (별도 Aggregate): 각 정렬 조건마다 별도 Aggregate를 만들 필요가 없습니다.\n\n옵션 D (수동 SQL): 서비스 스튜디오의 SQL 언어는 범용적이므로 수동 SQL은 권장되지 않습니다.",
+    "distractors": {
+      "A": "Max Records는 페이지네이션 제한이며 정렬 기능과 무관",
+      "C": "단일 Aggregate에 동적 정렬을 추가하면 다중 Aggregate 불필요",
+      "D": "SQL 언어 의존적 설정은 OutSystems의 DBMS-무관 설계와 충돌"
+    },
+    "source": "Workbook 10 - Pagination and Sorting (Lines 237-257)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-014",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": [
+      "form",
+      "aggregate",
+      "input_fields",
+      "data_binding"
+    ],
+    "stem": "When you drag an Aggregate into a Form widget on the MovieDetail screen, what automatically happens to the form?",
+    "options": [
+      {
+        "key": "A",
+        "text": "All entity attributes are added as input fields based on the Aggregate output."
+      },
+      {
+        "key": "B",
+        "text": "The Form widget becomes read-only and cannot accept user input."
+      },
+      {
+        "key": "C",
+        "text": "A new Aggregate is automatically created for each form field."
+      },
+      {
+        "key": "D",
+        "text": "The Form automatically validates all input data before display."
+      }
+    ],
+    "answer": "A",
+    "explanation": "올바른 답은 A입니다. 워크북에 명시되어 있듯이, Aggregate를 Form에 드래그하면 모든 Movie(또는 해당 엔티티) 속성이 입력 필드로 자동 추가됩니다. 이를 통해 최종 사용자는 이 필드들을 사용하여 영화 정보를 제출할 수 있습니다.\n\n옵션 B (읽기 전용): Form에 Aggregate를 추가해도 Form은 여전히 사용자 입력을 받을 수 있습니다.\n\n옵션 C (필드당 Aggregate): 각 필드마다 별도 Aggregate를 만들지 않습니다. 하나의 Aggregate가 모든 속성을 제공합니다.\n\n옵션 D (자동 검증): Form이 자동으로 데이터를 검증하지 않으며, 검증은 명시적으로 구성해야 합니다.",
+    "distractors": {
+      "B": "Form은 여전히 사용자 입력을 수락할 수 있으며 읽기 전용이 아님",
+      "C": "단일 Aggregate가 모든 필드 데이터를 제공하며 필드당 Aggregate 불필요",
+      "D": "Form의 자동 검증은 기본 동작이 아니며 명시적 설정 필요"
+    },
+    "source": "Workbook 3 - Form Configuration (Lines 397-410)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-015",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "hard",
+    "tags": [
+      "pagination_sorting_interaction",
+      "startIndex_reset",
+      "onSort_action",
+      "user_experience"
+    ],
+    "stem": "You have an Order listing table with pagination. When a user navigates to page 3 and then performs a sort by InvoiceDate, what happens to the pagination?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The table remains on page 3 and displays results sorted by InvoiceDate."
+      },
+      {
+        "key": "B",
+        "text": "The table returns to page 1 with results sorted by InvoiceDate."
+      },
+      {
+        "key": "C",
+        "text": "The sort operation is ignored, and the table stays on page 3 unsorted."
+      },
+      {
+        "key": "D",
+        "text": "The pagination widget is disabled until the user manually resets it."
+      }
+    ],
+    "answer": "B",
+    "explanation": "올바른 답은 B입니다. 워크북의 OnSort 액션 설명에 따르면, OnSort 이벤트 핸들러의 Assign 단계에서 'StartIndex ← 0'으로 설정됩니다. 이는 정렬 후 테이블이 첫 페이지로 돌아가도록 하기 위한 것입니다. 이렇게 함으로써 사용자가 새로운 정렬 기준에 따른 데이터를 일관되게 볼 수 있습니다.\n\n옵션 A (page 3 유지): StartIndex를 0으로 리셋하므로 항상 첫 페이지로 돌아옵니다.\n\n옵션 C (정렬 무시): 정렬 작업이 무시되지 않으며 정상 작동합니다.\n\n옵션 D (페이지네이션 비활성): 페이지네이션 위젯은 비활성화되지 않으며 정상 작동을 계속합니다.",
+    "distractors": {
+      "A": "StartIndex가 0으로 리셋되므로 page 3 유지 안 함",
+      "C": "정렬 작업은 정상 작동하며, OnSort 액션이 완전히 실행됨",
+      "D": "페이지네이션은 정렬 후에도 계속 활성 상태로 유지됨"
+    },
+    "source": "Workbook 10 - Pagination and Sorting (Lines 205-220)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-016",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [
+      "pagination_properties",
+      "maxrecords",
+      "widget_configuration"
+    ],
+    "stem": "Which of the following is NOT a valid property of the Pagination widget in OutSystems reactive apps?",
+    "options": [
+      {
+        "key": "A",
+        "text": "TotalCount - represents the total number of records in the data source"
+      },
+      {
+        "key": "B",
+        "text": "PageSize - sets the number of records displayed per page"
+      },
+      {
+        "key": "C",
+        "text": "StartIndex - indicates the first record position of the current page"
+      },
+      {
+        "key": "D",
+        "text": "Handler - an action triggered when the user changes pages"
+      }
+    ],
+    "answer": "B",
+    "explanation": "올바른 답은 B입니다. 워크북에 따르면, Pagination 위젯의 속성은 StartIndex, MaxRecords, TotalCount, Handler 네 가지입니다. 'PageSize'라는 속성은 존재하지 않습니다. 페이지당 레코드 수는 'MaxRecords'로 설정합니다.\n\n옵션 A (TotalCount): 테이블에 표시되는 총 레코드 수를 나타내는 유효한 속성입니다.\n\n옵션 C (StartIndex): 각 페이지의 첫 번째 레코드를 나타내는 유효한 속성입니다.\n\n옵션 D (Handler): 사용자가 페이지를 변경할 때 트리거되는 유효한 속성입니다.",
+    "distractors": {
+      "A": "TotalCount는 정확한 유효 속성이며 Aggregate.Count로 설정됨",
+      "C": "StartIndex는 정확한 유효 속성이며 정수형 로컬 변수로 설정됨",
+      "D": "Handler는 정확한 유효 속성이며 클라이언트 액션을 참조함"
+    },
+    "source": "Workbook 10 - Pagination and Sorting (Lines 8-10, 100-109)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-017",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": [
+      "label_widget",
+      "input_widget_property",
+      "mandatory_field",
+      "form_validation"
+    ],
+    "stem": "In a Customer form, you need to connect a Label widget to a required Name input field so that the form displays a visual indicator when the field is mandatory. Which property should you configure on the Label?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Mandatory property of the Label itself"
+      },
+      {
+        "key": "B",
+        "text": "The Input Widget property, linking it to the Name input field"
+      },
+      {
+        "key": "C",
+        "text": "The Variable property to bind the Label to the input field's variable"
+      },
+      {
+        "key": "D",
+        "text": "The Style property to apply a mandatory-field CSS class"
+      }
+    ],
+    "answer": "B",
+    "explanation": "올바른 답은 B입니다. 워크북에 명시되어 있듯이, Label의 'Input Widget' 속성은 선택한 입력 필드와의 연결을 생성합니다. 이를 통해 Mandatory 필드와 연결된 경우 시각적 표시(일반적으로 별표)를 제공합니다.\n\n옵션 A (Label의 Mandatory): Label 자체의 Mandatory 속성은 해당 기능을 제공하지 않습니다.\n\n옵션 C (Variable 속성): Variable 속성은 Label의 표시 텍스트를 바인딩하지만, 입력 필드 연결과는 무관합니다.\n\n옵션 D (Style 속성): CSS 스타일은 시각적 표시를 수동으로 구현할 수 있지만, OutSystems의 권장 방법이 아닙니다.",
+    "distractors": {
+      "A": "Label의 Mandatory 속성은 입력 필드 연결을 제공하지 않음",
+      "C": "Variable 속성은 텍스트 바인딩용이며 필드 연결과 무관",
+      "D": "스타일 속성은 수동 방식이며 OutSystems 권장 방법 아님"
+    },
+    "source": "Workbook 3 - Label Widget (Lines 288-293)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-018",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [
+      "dynamic_sorting",
+      "aggregate_sort_configuration",
+      "onSort_action",
+      "table_sorting"
+    ],
+    "stem": "You are building an Employee listing screen where users need to see employees sorted by department name. You create an OnSort client action that stores the sort criteria in a local variable and refreshes the GetEmployees Aggregate. However, the sorting still does not work. What is missing?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Table's OnSort event has not been bound to the OnSort client action."
+      },
+      {
+        "key": "B",
+        "text": "The GetEmployees Aggregate is missing a dynamic sort configuration using the sort criteria variable."
+      },
+      {
+        "key": "C",
+        "text": "Each table column header needs its own separate OnSort client action."
+      },
+      {
+        "key": "D",
+        "text": "The Employee entity must have a SortAttribute property defined before sorting can work."
+      }
+    ],
+    "answer": "B",
+    "explanation": "올바른 답은 B입니다. OnSort 클라이언트 액션이 정의되고 트리거되어도, Aggregate 자체가 동적 정렬을 구현하지 않으면 데이터는 정렬되지 않습니다. 워크북에 명시되어 있듯이, Aggregate의 Sorting 탭에서 'Add Dynamic Sort' 옵션을 선택하고 표현식을 정렬 기준 변수(예: TableSort)로 설정해야 합니다. 이렇게 해야만 Aggregate가 사용자가 선택한 기준에 따라 실제로 정렬합니다.\n\n옵션 A (OnSort 바인딩): 이미 완료되었다고 가정합니다.\n\n옵션 C (열마다 별도 OnSort): 모든 열이 동일한 OnSort 액션을 사용하며, 열마다 별도 액션이 필요하지 않습니다.\n\n옵션 D (SortAttribute 속성): Employee 엔티티에는 SortAttribute 속성이 없으며, Sort Attribute는 Table의 Header Cell에 설정됩니다.",
+    "distractors": {
+      "A": "이미 구성되었다고 가정하며 여기서 의심할 부분 아님",
+      "C": "모든 열이 동일한 OnSort 액션을 사용하며 개별 액션 불필요",
+      "D": "Entity에는 SortAttribute 속성이 없으며 Table의 Header Cell에만 존재"
+    },
+    "source": "Workbook 10 - Pagination and Sorting (Lines 237-257)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-019",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "hard",
+    "tags": [
+      "aggregate_count",
+      "maxrecords_property",
+      "pagination_totalcount"
+    ],
+    "stem": "In your Product listing screen, you have an Aggregate that retrieves 200 records. You set MaxRecords to 20 for pagination. When you check the Pagination widget's output using GetProducts.Count, what value is returned?",
+    "options": [
+      {
+        "key": "A",
+        "text": "20 (limited by the MaxRecords property)"
+      },
+      {
+        "key": "B",
+        "text": "200 (the total count of records matching the query criteria, regardless of MaxRecords)"
+      },
+      {
+        "key": "C",
+        "text": "0 (because MaxRecords limits the list size)"
+      },
+      {
+        "key": "D",
+        "text": "10 (half of MaxRecords for pagination balance)"
+      }
+    ],
+    "answer": "B",
+    "explanation": "올바른 답은 B입니다. 워크북에 명시되어 있듯이, MaxRecords 속성은 반환되는 레코드 수를 제한하지만, 'Count 출력에는 영향을 주지 않습니다.' GetProducts.Count는 항상 쿼리 조건과 일치하는 전체 레코드 수(200개)를 반환합니다. 이는 Pagination 위젯이 정확한 페이지 수를 계산하기 위해 필요합니다.\n\n옵션 A (20): MaxRecords는 페이지당 표시 레코드 수를 제한하지만 Count에는 영향을 주지 않습니다.\n\n옵션 C (0): MaxRecords 제한으로 Count가 0이 되지 않습니다.\n\n옵션 D (10): 임의의 계산 값으로 Count와 무관합니다.",
+    "distractors": {
+      "A": "MaxRecords는 페이지 표시를 제한하지만 Count에는 영향 없음",
+      "C": "MaxRecords 제한으로 Count가 0이 되지 않음",
+      "D": "임의의 계산값이며 Aggregate.Count와 무관"
+    },
+    "source": "Workbook 3 - Aggregate Properties (Lines 158-162)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-020",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [
+      "list_sorting",
+      "buttongroup",
+      "listsort_variable",
+      "dynamic_sorting"
+    ],
+    "stem": "When configuring a List to display sorted data, you want users to select a sort order using a ButtonGroup widget. Which of the following describes the correct approach according to the OutSystems pattern?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Bind the ButtonGroup's Variable property to a ListSort local variable, create ButtonGroupItems with sort criteria values, and implement sorting logic in the ButtonGroup's OnChange event."
+      },
+      {
+        "key": "B",
+        "text": "Set each ButtonGroupItem's OnClick event to directly modify the Aggregate's sorting definition."
+      },
+      {
+        "key": "C",
+        "text": "Use separate Lists for each sorting option and toggle their visibility based on ButtonGroup selection."
+      },
+      {
+        "key": "D",
+        "text": "Configure the Aggregate with static sorting that matches all possible ButtonGroup options."
+      }
+    ],
+    "answer": "A",
+    "explanation": "올바른 답은 A입니다. 워크북에서 List 정렬의 표준 패턴을 명시하고 있습니다: ButtonGroup을 ListSort 로컬 변수에 바인딩하고, 각 ButtonGroupItem에 정렬 기준을 정의하며, ButtonGroup의 OnChange 속성에 로직을 구현하여 List의 소스인 Aggregate를 새로고침합니다. 그 후 Aggregate의 동적 정렬에 ListSort 변수를 사용합니다.\n\n옵션 B (OnClick으로 Aggregate 수정): 클라이언트 액션에서 Aggregate 정의를 직접 수정할 수 없습니다.\n\n옵션 C (정렬별 별도 List): 비효율적이며 OutSystems 권장 패턴이 아닙니다.\n\n옵션 D (정적 정렬): 동적 정렬 요구사항을 충족하지 못하며 유연성이 없습니다.",
+    "distractors": {
+      "B": "클라이언트 액션에서 Aggregate 정의를 직접 수정할 수 없음",
+      "C": "비효율적이며 OutSystems 권장 패턴 아님",
+      "D": "정적 정렬은 동적 정렬 요구사항을 충족하지 못함"
+    },
+    "source": "Workbook 10 - Pagination and Sorting (Lines 60-76)",
     "status": "verified",
     "verifyNote": ""
   }

@@ -1,0 +1,292 @@
+[
+  {
+    "id": "SL-001",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "easy",
+    "tags": [
+      "Screen Lifecycle",
+      "Events",
+      "Ready",
+      "Reactive Apps"
+    ],
+    "stem": "Which event occurs when the HTML Document is fully built and ready for DOM manipulation?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Ready event"
+      },
+      {
+        "key": "B",
+        "text": "Initialize event"
+      },
+      {
+        "key": "C",
+        "text": "Render event"
+      },
+      {
+        "key": "D",
+        "text": "After Fetch event"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Ready 이벤트는 HTML Document 구성이 완료된 시점에 발생합니다. 화면 내 스크린 구성 관련 작업(예: JavaScript 리스너 추가, 포커스 설정)은 이 시점 이후에 진행되어야 합니다.",
+    "distractors": {
+      "B": "Initialize 이벤트는 Input Parameter와 Local Variable이 초기화되는 단계입니다. DOM 구성 후가 아닙니다.",
+      "C": "Render 이벤트는 화면 또는 Block이 렌더링될 때 발생하며 여러 번 발생할 수 있습니다.",
+      "D": "After Fetch 이벤트는 Aggregate 실행 후에 발생합니다."
+    },
+    "source": "Training Workbook 9 - Screen Lifecycle, Page 2",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SL-002",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [
+      "Screen Lifecycle",
+      "Aggregates",
+      "Asynchronous Execution",
+      "Reactive Apps"
+    ],
+    "stem": "An e-commerce application displays a Product list and its corresponding Reviews on the same screen. Both use separate Aggregates (FetchProducts and FetchReviews). Which statement is TRUE about their execution order?",
+    "options": [
+      {
+        "key": "A",
+        "text": "FetchProducts always finishes before FetchReviews because widgets access products first"
+      },
+      {
+        "key": "B",
+        "text": "The execution order is guaranteed to follow the order they appear in the screen definition"
+      },
+      {
+        "key": "C",
+        "text": "There is no guarantee which Aggregate will finish first as they run asynchronously"
+      },
+      {
+        "key": "D",
+        "text": "Both Aggregates always complete simultaneously before the Render event"
+      }
+    ],
+    "answer": "C",
+    "explanation": "각 Aggregate는 비동기적으로 실행되므로 화면 렌더링의 순서는 보장되지 않습니다. FetchProducts가 먼저 완료될 수도, FetchReviews가 먼저 완료될 수도 있습니다.",
+    "distractors": {
+      "A": "위젯이 product에 먼저 액세스한다고 해서 Aggregate 실행 순서를 보장하지 않습니다.",
+      "B": "화면 정의의 순서는 비동기 실행 순서에 영향을 주지 않습니다.",
+      "D": "Aggregate들은 비동기적으로 실행되므로 동시 완료를 보장할 수 없습니다."
+    },
+    "source": "Training Workbook 9 - Screen Lifecycle, Page 3",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SL-003",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [
+      "Screen Lifecycle",
+      "Aggregates",
+      "Fetch Properties",
+      "Reactive Apps"
+    ],
+    "stem": "You are building an Order management screen. You need to fetch orders using an Aggregate and ensure data is loaded before the screen renders. Which Fetch property setting should you use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only on demand"
+      },
+      {
+        "key": "B",
+        "text": "At Start"
+      },
+      {
+        "key": "C",
+        "text": "On Ready"
+      },
+      {
+        "key": "D",
+        "text": "On Render"
+      }
+    ],
+    "answer": "B",
+    "explanation": "기본적으로 Fetch 속성은 At Start로 설정되어 있습니다. At Start 옵션은 화면이 초기화될 때 화면 Aggregate가 자동으로 트리거되도록 정의합니다. 이렇게 하면 데이터가 화면 렌더링 전에 로드됩니다.",
+    "distractors": {
+      "A": "Only on demand는 프로그래밍 방식으로 트리거해야 하므로 자동 초기화에 적합하지 않습니다.",
+      "C": "On Ready는 OutSystems 11에서 지원하는 Fetch 속성이 아닙니다.",
+      "D": "On Render는 OutSystems 11에서 지원하는 Fetch 속성이 아닙니다."
+    },
+    "source": "Training Workbook 9 - Screen Lifecycle, Page 7",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SL-004",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "hard",
+    "tags": [
+      "Screen Lifecycle",
+      "Aggregates",
+      "Only on Demand",
+      "Reactive Apps"
+    ],
+    "stem": "In a Customer Dashboard screen, you have a GetCustomerDetails Aggregate with Fetch set to 'Only on demand'. Which of the following is NOT a correct way to trigger this Aggregate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a Refresh Data node in an Action Flow when a search button is clicked"
+      },
+      {
+        "key": "B",
+        "text": "Call the Refresh Data node automatically when the screen initializes"
+      },
+      {
+        "key": "C",
+        "text": "Rely on automatic execution when the screen's Ready event is triggered"
+      },
+      {
+        "key": "D",
+        "text": "Trigger it programmatically in response to user actions through an Action Flow"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Fetch 속성이 Only on demand로 설정된 Aggregate는 화면이 초기화될 때 실행되지 않습니다. Ready 이벤트 시에도 자동으로 실행되지 않습니다. 프로그래밍 방식(Refresh Data 노드)으로 명시적으로 트리거해야 합니다.",
+    "distractors": {
+      "A": "Refresh Data 노드를 사용하는 것이 Only on demand Aggregate를 트리거하는 정상적인 방법입니다.",
+      "B": "Action Flow에서 초기화 시점에 Refresh Data를 호출하는 것은 가능합니다.",
+      "D": "사용자 행동에 반응하여 Action Flow에서 프로그래밍 방식으로 트리거하는 것이 Only on demand의 목적입니다."
+    },
+    "source": "Training Workbook 9 - Screen Lifecycle, Page 9",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SL-005",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "easy",
+    "tags": [
+      "Screen Lifecycle",
+      "Events",
+      "After Fetch",
+      "Aggregates",
+      "Reactive Apps"
+    ],
+    "stem": "When does the After Fetch event occur in the Screen Lifecycle?",
+    "options": [
+      {
+        "key": "A",
+        "text": "After the Ready event completes"
+      },
+      {
+        "key": "B",
+        "text": "After an Aggregate is executed"
+      },
+      {
+        "key": "C",
+        "text": "After the screen finishes rendering"
+      },
+      {
+        "key": "D",
+        "text": "After the user navigates away from the screen"
+      }
+    ],
+    "answer": "B",
+    "explanation": "After Fetch 이벤트는 Aggregate 실행 후 발생합니다. 이를 통해 Aggregate에서 가져온 데이터를 화면에 바인딩하거나 데이터 변경에 대응할 수 있습니다.",
+    "distractors": {
+      "A": "Ready 이벤트 이후가 아니라 각 Aggregate 실행 후에 발생합니다.",
+      "C": "화면 렌더링 완료 후가 아니라 Aggregate 실행 후에 발생합니다.",
+      "D": "사용자가 화면을 떠날 때가 아니라 Aggregate 실행 후에 발생합니다."
+    },
+    "source": "Training Workbook 9 - Screen Lifecycle, Page 3",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SL-006",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [
+      "Screen Lifecycle",
+      "Aggregates",
+      "Dependent Queries",
+      "After Fetch",
+      "Reactive Apps"
+    ],
+    "stem": "A Product Catalog screen has multiple Aggregates set to 'At Start'. The application must ensure that dependent queries execute in a specific order (e.g., fetch Categories first, then Products filtered by selected Category). How should you ensure the correct execution sequence?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Configure the Aggregates in the order they should execute in the screen definition panel"
+      },
+      {
+        "key": "B",
+        "text": "Use the After Fetch event of the first Aggregate to trigger the second Aggregate through Refresh Data"
+      },
+      {
+        "key": "C",
+        "text": "Set both Aggregates to 'Only on demand' so you can control the exact execution sequence"
+      },
+      {
+        "key": "D",
+        "text": "Add a delay timer between Aggregate executions to ensure sequential processing"
+      }
+    ],
+    "answer": "B",
+    "explanation": "첫 번째 Aggregate의 After Fetch 이벤트를 사용하여 Refresh Data 노드를 통해 두 번째 Aggregate를 트리거하는 것이 종속 쿼리를 올바른 순서로 실행하는 방법입니다. 이것은 쿼리 결과 검증과 함께 권장되는 방식입니다.",
+    "distractors": {
+      "A": "화면 정의의 순서는 비동기 실행 순서를 보장하지 않습니다.",
+      "C": "Only on demand를 사용할 수 있지만, After Fetch를 사용하는 것이 종속 쿼리 처리에 더 직관적입니다.",
+      "D": "지연 타이머는 비효율적이고 권장되지 않습니다."
+    },
+    "source": "Training Workbook 9 - Screen Lifecycle, Page 6",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SL-007",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "hard",
+    "tags": [
+      "Screen Lifecycle",
+      "Events",
+      "Render",
+      "Asynchronous Execution",
+      "Reactive Apps"
+    ],
+    "stem": "An Invoice screen uses the Render event to bind data from multiple Aggregates to display Invoice details, line items, and payment status. Which statement correctly describes when the Render event executes and its implications?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Render executes once when all Aggregates complete, ensuring all data is available for binding"
+      },
+      {
+        "key": "B",
+        "text": "Render executes multiple times as the screen and blocks are rendered, so all Aggregate data may not be available in early renders"
+      },
+      {
+        "key": "C",
+        "text": "Render executes immediately after the Ready event, before any Aggregates start executing"
+      },
+      {
+        "key": "D",
+        "text": "Render executes only when the user interacts with screen elements"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Render 이벤트는 화면 또는 Block이 렌더링될 때 발생하며 여러 번 발생할 수 있습니다. 각 Aggregate는 비동기적으로 실행되므로, 초기 Render 이벤트에서는 모든 데이터를 사용할 수 없을 수 있습니다. After Fetch 이벤트를 통해 Aggregate에서 가져온 데이터를 화면에 바인딩하는 것이 권장됩니다.",
+    "distractors": {
+      "A": "Render 이벤트는 모든 Aggregate 완료를 기다리지 않고 여러 번 발생합니다.",
+      "C": "Render는 Ready 이후에 여러 번 발생하며, Aggregate 실행과 동시에 발생할 수 있습니다.",
+      "D": "Render 이벤트는 사용자 상호작용에만 의존하지 않으며, 화면이 렌더링될 때마다 발생합니다."
+    },
+    "source": "Training Workbook 9 - Screen Lifecycle, Pages 2-3",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

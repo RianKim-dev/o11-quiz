@@ -1,0 +1,206 @@
+[
+  {
+    "id": "DBG-001",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "medium",
+    "tags": [
+      "debugging",
+      "breakpoints",
+      "client-action"
+    ],
+    "stem": "When debugging a reactive application in OutSystems, you place a breakpoint in a Client Action for your Order entry screen. After starting the debugger and navigating through the application, the breakpoint does NOT pause execution as expected. Which of the following is the MOST LIKELY reason?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The breakpoint is set but temporarily disabled in the Debugger Breakpoints panel."
+      },
+      {
+        "key": "B",
+        "text": "Client Action breakpoints can only be set in Server Actions, not Client Actions."
+      },
+      {
+        "key": "C",
+        "text": "The Client Action is not being called because the screen failed to initialize."
+      },
+      {
+        "key": "D",
+        "text": "Breakpoints in reactive apps are only active during the Render event, not during action flows."
+      }
+    ],
+    "answer": "A",
+    "explanation": "브레이크포인트가 설정돼 있어도 **Breakpoints 패널에서 일시적으로 비활성화(disabled)** 되어 있으면 실행이 멈추지 않습니다 — 가장 흔한 원인입니다. (Client Action에도 브레이크포인트를 걸 수 있고, 브레이크포인트는 Render뿐 아니라 액션 플로우 전체에서 동작합니다.)",
+    "distractors": {
+      "B": "Client Action에도 브레이크포인트를 걸 수 있습니다(거짓).",
+      "C": "화면 초기화 실패는 추측일 뿐, 이 상황의 핵심은 브레이크포인트 설정입니다.",
+      "D": "브레이크포인트는 Render뿐 아니라 액션 실행 내내 동작합니다(거짓)."
+    },
+    "source": "wb5 - Logic and Validations: Debugging Apps / Add Breakpoints",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "DBG-002",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "medium",
+    "tags": [
+      "debugging",
+      "variable-inspection",
+      "server-action"
+    ],
+    "stem": "You are debugging a Customer management reactive screen. During execution, you reach a breakpoint in a Server Action and want to inspect the current value of a product list variable that was populated by an Aggregate. Which of the following inspection options is available to you in the OutSystems debugger?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Inspect variables in Use by the current statement, Locals to the scope, and Global app variables."
+      },
+      {
+        "key": "B",
+        "text": "Inspect only Global app variables and Screen Widgets; local variables cannot be inspected."
+      },
+      {
+        "key": "C",
+        "text": "Inspect all variables, but only after the Render event has completed."
+      },
+      {
+        "key": "D",
+        "text": "Inspect variables by adding print statements to the console, as the Inspector panel does not support Server Actions."
+      }
+    ],
+    "answer": "A",
+    "explanation": "실행이 일시정지되면 변수 값을 검사할 수 있습니다 — **현재 구문에서 사용 중(In Use), 스코프의 Locals, Screen Widgets, Client Variables, 앱/Site의 Global** 등. 따라서 A가 맞습니다.",
+    "distractors": {
+      "B": "Global뿐 아니라 Locals·현재 구문 변수도 검사할 수 있습니다(거짓).",
+      "C": "검사는 Render 이후가 아니라 브레이크포인트에서 멈춘 시점에 가능합니다(거짓).",
+      "D": "Inspector 패널이 Server Action도 지원하므로 콘솔 출력이 필요 없습니다(거짓)."
+    },
+    "source": "wb5 - Logic and Validations: Debugging Apps / Inspecting Variables",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "DBG-003",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "hard",
+    "tags": [
+      "debugging",
+      "producer-module",
+      "entry-module",
+      "cross-module"
+    ],
+    "stem": "In your reactive Invoice processing app, you have set a breakpoint in Server Action called ProcessInvoice (in the InvoiceManager module), but the execution never pauses there. You verify that the breakpoint is enabled and the Service Studio debugger is running. However, you notice that requests are going to an InvoiceFrontend module entry point. To pause at the breakpoint inside InvoiceManager, what must you do?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Select InvoiceFrontend as the Entry module when debugging InvoiceManager."
+      },
+      {
+        "key": "B",
+        "text": "You cannot debug breakpoints in called modules; move the breakpoint to InvoiceFrontend."
+      },
+      {
+        "key": "C",
+        "text": "The debugger automatically routes all breakpoints to the entry point module; this configuration cannot be changed."
+      },
+      {
+        "key": "D",
+        "text": "Enable 'Cross-Module Debugging' in the Service Studio preferences."
+      }
+    ],
+    "answer": "A",
+    "explanation": "다른(호출된) 모듈의 브레이크포인트에서 멈추려면, 디버깅하는 모듈(InvoiceManager)에서 **진입 지점 모듈(InvoiceFrontend)을 Entry module로 선택**해야 합니다. 크로스 모듈 디버깅이 지원됩니다.",
+    "distractors": {
+      "B": "호출된 모듈의 브레이크포인트도 디버깅할 수 있습니다(거짓).",
+      "C": "Entry module을 수동으로 선택해야 하며 자동 라우팅이 아닙니다(거짓).",
+      "D": "그런 preference 설정은 문서에 없습니다."
+    },
+    "source": "wb5 - Logic and Validations: Debugging Apps / Debugging the Producer Module",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "DBG-004",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "easy",
+    "tags": [
+      "screen-lifecycle",
+      "aggregates",
+      "asynchronous",
+      "monitoring"
+    ],
+    "stem": "You are developing a reactive app to manage Employee payroll data. During screen initialization, you notice that multiple Aggregates are fetching Employee records, salary data, and tax information. According to OutSystems screen lifecycle principles, which statement about Aggregate execution order is TRUE?",
+    "options": [
+      {
+        "key": "A",
+        "text": "By default, there is no guarantee which Aggregate will finish first; they execute asynchronously."
+      },
+      {
+        "key": "B",
+        "text": "Aggregates always execute in the order they are defined on the screen, guaranteed by the framework."
+      },
+      {
+        "key": "C",
+        "text": "The first Aggregate to be defined finishes before the others and blocks subsequent Aggregates."
+      },
+      {
+        "key": "D",
+        "text": "Aggregates execute synchronously only on desktop browsers; mobile browsers load them asynchronously."
+      }
+    ],
+    "answer": "A",
+    "explanation": "화면 초기화 시 여러 Aggregate는 **비동기로 병렬 실행**되어, 기본적으로 **어느 것이 먼저 끝날지 보장되지 않습니다.**",
+    "distractors": {
+      "B": "정의 순서대로 실행된다는 보장은 없습니다(거짓).",
+      "C": "비동기라 첫 Aggregate가 다른 것을 막지 않습니다(거짓).",
+      "D": "플랫폼별로 동기/비동기가 달라지지 않습니다(거짓)."
+    },
+    "source": "wb9 - Screen Lifecycle: Fetching Data On Demand / Screen Aggregate",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "DBG-005",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "medium",
+    "tags": [
+      "screen-lifecycle",
+      "aggregates",
+      "fetch-property",
+      "at-start",
+      "on-demand"
+    ],
+    "stem": "In your reactive Product catalog app, you have a screen with both an Aggregate set to 'At Start' (for core product data) and another Aggregate set to 'Only on Demand' (for related items). According to the screen lifecycle, what is the difference in WHEN these Aggregates execute?",
+    "options": [
+      {
+        "key": "A",
+        "text": "'At Start' Aggregate triggers during screen initialization; 'Only on Demand' must be triggered programmatically via Refresh Data."
+      },
+      {
+        "key": "B",
+        "text": "'At Start' Aggregate waits for user input; 'Only on Demand' executes automatically during the Ready event."
+      },
+      {
+        "key": "C",
+        "text": "Both execute at the same time; the difference is only in their fetch properties configuration."
+      },
+      {
+        "key": "D",
+        "text": "'At Start' Aggregate runs synchronously; 'Only on Demand' runs asynchronously."
+      }
+    ],
+    "answer": "A",
+    "explanation": "**At Start**는 화면 초기화 때 자동 실행되고, **Only on Demand**는 자동 실행되지 않고 **Refresh Data 노드로 명시적으로 트리거**해야 합니다.",
+    "distractors": {
+      "B": "At Start는 사용자 입력을 기다리지 않고 초기화 때 자동 실행됩니다(거짓).",
+      "C": "둘의 차이는 '언제 실행되는가'(타이밍)입니다(거짓).",
+      "D": "둘 다 비동기로 동작하며 sync/async 차이가 아닙니다(거짓)."
+    },
+    "source": "wb9 - Screen Lifecycle: Fetching Data On Demand / Fetching At Start and Fetching Only On Demand",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

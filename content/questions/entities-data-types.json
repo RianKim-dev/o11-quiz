@@ -1,0 +1,402 @@
+[
+  {
+    "id": "ENT-001",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [
+      "entity-basics",
+      "crud-operations",
+      "auto-generation"
+    ],
+    "stem": "In OutSystems 11, which of the following is NOT automatically generated for every entity created in the database?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Id attribute (Primary Key)"
+      },
+      {
+        "key": "B",
+        "text": "CRUD entity actions (Create, Retrieve, Update, Delete)"
+      },
+      {
+        "key": "C",
+        "text": "Calculated attributes for business logic"
+      },
+      {
+        "key": "D",
+        "text": "Basic structure to store data records"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Entity는 자동으로 Id attribute, CRUD 작업, 그리고 데이터 저장 구조를 생성합니다. 하지만 Calculated attribute는 필요에 따라 개발자가 수동으로 Aggregate에서 추가해야 합니다.",
+    "distractors": {
+      "A": "Entity는 자동으로 Long Integer 타입의 auto-numbered Id를 Primary Key로 생성합니다.",
+      "B": "Entity는 자동으로 Create, Retrieve(Get), Update, Delete라는 6개의 CRUD 작업을 생성합니다.",
+      "D": "Entity는 데이터 저장과 검색을 위한 기본 구조를 제공합니다."
+    },
+    "source": "Workbook 2: Modeling Data - Entity Actions",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-002",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [
+      "entity-mapping",
+      "database-table",
+      "data-model"
+    ],
+    "stem": "Which of the following best describes the relationship between an OutSystems Entity and a database table?",
+    "options": [
+      {
+        "key": "A",
+        "text": "An Entity is just a UI representation; it does not directly map to database tables"
+      },
+      {
+        "key": "B",
+        "text": "An Entity maps directly to a database table, where Attributes become Columns and Records become Rows"
+      },
+      {
+        "key": "C",
+        "text": "An Entity can map to multiple database tables depending on its attributes"
+      },
+      {
+        "key": "D",
+        "text": "An Entity requires manual SQL code to create the corresponding database table"
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems Entity는 데이터베이스 테이블로 자동 매핑됩니다. Entity의 Attribute는 column으로, Record는 row로, Id는 Primary Key로, Reference는 Foreign Key로 매핑됩니다.",
+    "distractors": {
+      "A": "Entity는 UI 요소가 아니라 비즈니스 개념을 나타내는 데이터 저장소입니다.",
+      "C": "한 Entity는 하나의 데이터베이스 테이블에만 매핑됩니다.",
+      "D": "OutSystems는 Entity를 기반으로 자동으로 필요한 데이터베이스 테이블을 생성합니다."
+    },
+    "source": "Workbook 2: Modeling Data - Entity-database mapping",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-003",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [
+      "data-type-inference",
+      "attribute-naming",
+      "developer-productivity"
+    ],
+    "stem": "You create a Customer entity with an EmailAddress attribute. When you type the attribute name, OutSystems infers the data type as Email. What is the OutSystems feature responsible for this behavior?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Automatic Type Casting"
+      },
+      {
+        "key": "B",
+        "text": "Inferring Data Types"
+      },
+      {
+        "key": "C",
+        "text": "Schema Auto-generation"
+      },
+      {
+        "key": "D",
+        "text": "Semantic Validation"
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems는 attribute 이름을 기반으로 적절한 data type을 자동 추론합니다. 예를 들어 'DateOfBirth'는 Date로, 'EmailAddress'는 Email로 자동 추론됩니다.",
+    "distractors": {
+      "A": "Type Casting은 이미 정의된 타입을 다른 타입으로 변환하는 것입니다.",
+      "C": "Schema Auto-generation은 Entity 기반으로 데이터베이스 테이블을 자동 생성하는 것입니다.",
+      "D": "Semantic Validation은 데이터 값의 의미를 검증하는 것입니다."
+    },
+    "source": "Workbook 2: Modeling Data - Inferring Data Types",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-004",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [
+      "data-types",
+      "default-values",
+      "currency"
+    ],
+    "stem": "In a Product entity, you create a UnitPrice attribute with Currency data type. What is the default value for this attribute?",
+    "options": [
+      {
+        "key": "A",
+        "text": "0"
+      },
+      {
+        "key": "B",
+        "text": "0.0"
+      },
+      {
+        "key": "C",
+        "text": "NullIdentifier()"
+      },
+      {
+        "key": "D",
+        "text": "Empty string (\"\")"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Currency 데이터 타입의 기본값은 0.0입니다. 숫자 형 데이터(Decimal, Currency)의 기본값은 0.0입니다.",
+    "distractors": {
+      "A": "Integer 타입의 기본값이 0입니다.",
+      "C": "NullIdentifier()는 Entity Identifier 타입의 기본값입니다.",
+      "D": "Text 타입의 기본값이 빈 문자열(\" \")입니다."
+    },
+    "source": "Workbook 2: Modeling Data - Basic Data Type",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-005",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [
+      "entity-relationships",
+      "foreign-key",
+      "references"
+    ],
+    "stem": "You have an Order entity and need to create a relationship where each Order references exactly one Customer. Which data type should the reference attribute in Order have?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Text"
+      },
+      {
+        "key": "B",
+        "text": "Integer"
+      },
+      {
+        "key": "C",
+        "text": "Customer Identifier"
+      },
+      {
+        "key": "D",
+        "text": "Customer Entity"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Entity 간 관계를 만들기 위해서는 reference attribute의 데이터 타입을 '참조 대상 Entity Identifier'로 설정해야 합니다. Order의 CustomerId attribute는 Customer Identifier 타입이어야 합니다.",
+    "distractors": {
+      "A": "Text 타입은 문자열 저장에 사용됩니다.",
+      "B": "Integer는 일반 숫자이며, reference로는 부적절합니다.",
+      "D": "'Customer Entity'는 데이터 타입이 아닙니다."
+    },
+    "source": "Workbook 4: Data Relationships and Aggregates - Entity Reference",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-006",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [
+      "referential-integrity",
+      "delete-rule",
+      "data-consistency"
+    ],
+    "stem": "In your Order entity, you have a CustomerId attribute that references the Customer entity with Delete Rule set to 'Protect'. A customer tries to delete their account, but the system prevents the deletion. Why?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The customer does not have the necessary permissions to delete their account"
+      },
+      {
+        "key": "B",
+        "text": "The customer has at least one Order record associated with their CustomerId, and the Delete Rule prevents orphaned Orders"
+      },
+      {
+        "key": "C",
+        "text": "The database connection is temporarily unavailable"
+      },
+      {
+        "key": "D",
+        "text": "The CustomerId attribute is mandatory and cannot be null"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Delete Rule이 'Protect'로 설정되면, 참조 Entity의 레코드를 삭제할 수 없습니다. 고객에게 할당된 주문이 있으면 그 고객을 삭제할 수 없습니다. 이는 참조 무결성을 보장합니다.",
+    "distractors": {
+      "A": "Delete Rule은 권한 문제가 아니라 데이터 무결성을 다룹니다.",
+      "C": "데이터베이스 연결 문제는 Delete Rule과 무관합니다.",
+      "D": "Mandatory 속성은 null 값을 막지만, Delete Rule의 Protect와는 다른 개념입니다."
+    },
+    "source": "Workbook 4: Data Relationships and Aggregates - Delete Rule",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-007",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [
+      "static-entity",
+      "dynamic-entity",
+      "enumeration"
+    ],
+    "stem": "What is the primary difference between a Static Entity and a regular (dynamic) Entity in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A Static Entity stores data in memory instead of the database"
+      },
+      {
+        "key": "B",
+        "text": "A Static Entity contains predefined records that cannot be changed at runtime, while a dynamic Entity can have records added and modified during runtime"
+      },
+      {
+        "key": "C",
+        "text": "A Static Entity automatically generates all CRUD actions, while a dynamic Entity only generates the Get action"
+      },
+      {
+        "key": "D",
+        "text": "A Static Entity can only have one attribute, while a dynamic Entity can have multiple attributes"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Static Entity는 설계 및 개발 중에 정의되며 런타임에 변경할 수 없습니다. 반대로 동적 Entity는 런타임 중에 새 레코드를 추가/수정할 수 있습니다. Static Entity는 열거형(enumeration)처럼 동작합니다.",
+    "distractors": {
+      "A": "Static Entity도 데이터베이스에 저장됩니다.",
+      "C": "Static Entity는 Get action만 포함합니다. 동적 Entity가 CRUD 작업을 생성합니다.",
+      "D": "Both Static과 Dynamic Entity 모두 여러 attribute를 가질 수 있습니다."
+    },
+    "source": "Workbook 2: Modeling Data - Static Entity",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-008",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [
+      "many-to-many",
+      "linking-entity",
+      "relationship-design"
+    ],
+    "stem": "You are designing an Order data model. An Order can contain multiple Products, and a Product can belong to multiple Orders. What entity structure do you need to implement this many-to-many relationship?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a ProductId reference attribute directly to the Order entity"
+      },
+      {
+        "key": "B",
+        "text": "Add multiple ProductId attributes (ProductId1, ProductId2, ProductId3) to the Order entity"
+      },
+      {
+        "key": "C",
+        "text": "Create a linking entity (e.g., OrderProduct) with reference attributes to both Order and Product"
+      },
+      {
+        "key": "D",
+        "text": "Merge the Order and Product entities into a single entity"
+      }
+    ],
+    "answer": "C",
+    "explanation": "다대다 관계는 Linking Entity(연결 Entity)를 통해 구현됩니다. OrderProduct 같은 새 Entity가 필요하며, 이 Entity는 OrderId와 ProductId 참조 특성을 가집니다. 또한 자체 Id attribute를 가집니다.",
+    "distractors": {
+      "A": "단일 ProductId로는 한 Order에 여러 Product를 연결할 수 없습니다.",
+      "B": "고정된 개수의 Product만 가능하며, 확장성이 없습니다.",
+      "D": "Entity를 병합하면 데이터 모델이 정규화되지 않습니다."
+    },
+    "source": "Workbook 4: Data Relationships and Aggregates - Many-to-Many, Linking Entity",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-009",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [
+      "one-to-one",
+      "extension-entity",
+      "mandatory-reference"
+    ],
+    "stem": "When creating an Invoice entity to extend an Order entity (1-to-1 relationship), what must you do to ensure the Invoice is linked to exactly one Order?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a regular OrderId attribute as a Text data type"
+      },
+      {
+        "key": "B",
+        "text": "Add an OrderId attribute of type 'Order Identifier' and set Is Mandatory to Yes"
+      },
+      {
+        "key": "C",
+        "text": "Add multiple OrderId attributes with different suffixes"
+      },
+      {
+        "key": "D",
+        "text": "Use a Static Entity to reference the Order"
+      }
+    ],
+    "answer": "B",
+    "explanation": "1대1 관계(Extension Entity)에서 Invoice는 Order Identifier 타입의 OrderId attribute를 가져야 합니다. 또한 Mandatory를 Yes로 설정하여 모든 Invoice가 반드시 Order와 연결되도록 합니다.",
+    "distractors": {
+      "A": "Text 타입은 proper reference를 제공하지 않습니다.",
+      "C": "여러 OrderId attribute는 1대1 관계를 구현하지 않습니다.",
+      "D": "Static Entity는 다른 Static Entity만 참조할 수 있습니다."
+    },
+    "source": "Workbook 4: Data Relationships and Aggregates - Extension Entity",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "ENT-010",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [
+      "aggregate",
+      "calculated-attributes",
+      "query-optimization"
+    ],
+    "stem": "In an Aggregate, you want to display employee names along with a calculated field showing 'FirstName LastName (DepartmentName)'. Where would you define this calculated field?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Employee entity as a new attribute"
+      },
+      {
+        "key": "B",
+        "text": "In the Aggregate as a Calculated Attribute using an Expression"
+      },
+      {
+        "key": "C",
+        "text": "In the database using a SQL view"
+      },
+      {
+        "key": "D",
+        "text": "In the user interface screen using a Text widget with a binding expression"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate 내에서 Calculated Attribute를 생성하여 여러 속성으로부터 계산된 값을 만들 수 있습니다. 이는 쿼리 결과에 포함되며 Expression을 사용하여 정의합니다. Employee.Name + \" \" + Employee.Surname + \" (\" + Department.Label + \")\" 같은 형태입니다.",
+    "distractors": {
+      "A": "Entity에 직접 추가하면 매번 런타임에 계산해야 합니다.",
+      "C": "OutSystems는 자동 데이터베이스 관리를 위해 SQL view 생성을 권장하지 않습니다.",
+      "D": "UI 바인딩도 가능하지만, Aggregate에서 정의하는 것이 성능과 재사용성 측면에서 더 낫습니다."
+    },
+    "source": "Workbook 4: Data Relationships and Aggregates - Calculated Attributes",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]
