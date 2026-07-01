@@ -4,14 +4,28 @@
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["join-types"],
+    "tags": [
+      "join-types"
+    ],
     "stem": "An Aggregate named `GetProducts` has two Sources joined as shown below. What does this Aggregate return?",
     "diagram": "| # | Left Source | Join type | Right Source | Join condition |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Category | Product.CategoryId = Category.Id |",
     "options": [
-      { "key": "A", "text": "Only the Products that have a Category assigned." },
-      { "key": "B", "text": "All Products; for Products that have no Category, the Category attributes come back empty (null)." },
-      { "key": "C", "text": "Only the Categories that have at least one Product." },
-      { "key": "D", "text": "All Products and all Categories, including Categories with no Products." }
+      {
+        "key": "A",
+        "text": "Only the Products that have a Category assigned."
+      },
+      {
+        "key": "B",
+        "text": "All Products; for Products that have no Category, the Category attributes come back empty (null)."
+      },
+      {
+        "key": "C",
+        "text": "Only the Categories that have at least one Product."
+      },
+      {
+        "key": "D",
+        "text": "All Products and all Categories, including Categories with no Products."
+      }
     ],
     "answer": "B",
     "explanation": "Aggregate의 **Join 종류**가 결과 집합을 결정합니다.\n- **With or Without** = 왼쪽(첫 번째) Source의 **모든 레코드를 유지**하고, 오른쪽에 매칭이 없으면 오른쪽 속성은 null (SQL의 LEFT JOIN).\n- **Only With** = 양쪽에 **모두 매칭되는 레코드만** (INNER JOIN).\n\n여기서는 `Product`가 왼쪽이고 조인이 With or Without이므로 → **모든 Product**가 반환되고, Category가 없는 Product는 Category 속성이 비어(null) 있습니다.",
@@ -22,20 +36,59 @@
     },
     "source": "Training Workbook 4 (Data Relationships and Aggregates) · Use Data → Fetch data using Aggregates (Join sources)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "`GetProducts`라는 이름의 Aggregate에 두 개의 Source가 아래와 같이 조인되어 있다. 이 Aggregate는 무엇을 반환하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Category가 할당된 Product만 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "모든 Product를 반환하며, Category가 없는 Product의 경우 Category 속성이 비어(null) 반환된다."
+          },
+          {
+            "key": "C",
+            "text": "Product가 하나 이상 있는 Category만 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "모든 Product와 모든 Category를 반환하며, Product가 없는 Category도 포함한다."
+          }
+        ],
+        "diagram": "| # | 왼쪽 Source | Join 종류 | 오른쪽 Source | Join 조건 |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Category | Product.CategoryId = Category.Id |"
+      }
+    }
   },
   {
     "id": "AGG-002",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["group-by", "count"],
+    "tags": [
+      "group-by",
+      "count"
+    ],
     "stem": "You need an Aggregate that returns **the number of Orders per Customer**. Which configuration is correct?",
     "options": [
-      { "key": "A", "text": "Group By over `Order.Id`, and a Count over `Customer.Id`." },
-      { "key": "B", "text": "Group By over `Customer.Id`, and a Count over `Order.Id`." },
-      { "key": "C", "text": "Sort By `Customer.Id`, and a Count over `Order.Id`." },
-      { "key": "D", "text": "Filter by `Customer.Id`, and a Count over `Order.Id`." }
+      {
+        "key": "A",
+        "text": "Group By over `Order.Id`, and a Count over `Customer.Id`."
+      },
+      {
+        "key": "B",
+        "text": "Group By over `Customer.Id`, and a Count over `Order.Id`."
+      },
+      {
+        "key": "C",
+        "text": "Sort By `Customer.Id`, and a Count over `Order.Id`."
+      },
+      {
+        "key": "D",
+        "text": "Filter by `Customer.Id`, and a Count over `Order.Id`."
+      }
     ],
     "answer": "B",
     "explanation": "\"그룹마다 몇 개\"를 세려면 → **그룹 기준 속성으로 Group By**, **세고 싶은 대상으로 Count**.\n\"고객마다 주문 수\" = 고객으로 묶고(Group By `Customer.Id`) 주문을 셈(Count `Order.Id`).",
@@ -46,20 +99,58 @@
     },
     "source": "Training Workbook 4 · Use Data → Aggregate your data (Group by)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "**고객별 오더(Order) 수**를 반환하는 Aggregate가 필요하다. 다음 중 올바른 구성은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "`Order.Id`에 대해 Group By를 생성하고, `Customer.Id`에 대해 Count를 생성한다."
+          },
+          {
+            "key": "B",
+            "text": "`Customer.Id`에 대해 Group By를 생성하고, `Order.Id`에 대해 Count를 생성한다."
+          },
+          {
+            "key": "C",
+            "text": "`Customer.Id`에 대해 Sort By를 생성하고, `Order.Id`에 대해 Count를 생성한다."
+          },
+          {
+            "key": "D",
+            "text": "`Customer.Id`로 Filter하고, `Order.Id`에 대해 Count를 생성한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-003",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["group-by", "output-record"],
+    "tags": [
+      "group-by",
+      "output-record"
+    ],
     "stem": "An Aggregate groups Orders by `Status` and counts them (a Count over `Order.Id`). What attributes are available in each output record (`GetOrders.List.Current`)?",
     "options": [
-      { "key": "A", "text": "Only the Group By attribute (`Status`) and the aggregate function result (`Count`)." },
-      { "key": "B", "text": "All attributes of the `Order` Entity, plus `Count`." },
-      { "key": "C", "text": "`Status`, `Count`, and every attribute shown as a column in the editor." },
-      { "key": "D", "text": "Only `Count`." }
+      {
+        "key": "A",
+        "text": "Only the Group By attribute (`Status`) and the aggregate function result (`Count`)."
+      },
+      {
+        "key": "B",
+        "text": "All attributes of the `Order` Entity, plus `Count`."
+      },
+      {
+        "key": "C",
+        "text": "`Status`, `Count`, and every attribute shown as a column in the editor."
+      },
+      {
+        "key": "D",
+        "text": "Only `Count`."
+      }
     ],
     "answer": "A",
     "explanation": "Aggregate에 **Group By가 들어가면** 출력 레코드는 **Group By에 사용한 속성**과 **집계 함수(Count/Sum/Max…) 결과**만 갖습니다. Source Entity의 나머지 속성들은 그룹으로 합쳐졌으므로 개별 값이 사라져 출력 레코드에 포함되지 않습니다. 따라서 `Status`와 `Count`만 접근 가능합니다.",
@@ -70,20 +161,57 @@
     },
     "source": "Training Workbook 4 · Use Data → Aggregate your data (공식 Sample Exam Q3와 동일 논리)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 오더(Order)를 `Status`로 그룹화하고 이를 카운트한다(`Order.Id`에 대한 Count). 각 출력 레코드(`GetOrders.List.Current`)에서 사용할 수 있는 속성은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Group By 속성(`Status`)과 집계 함수 결과(`Count`)만 사용할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "`Order` Entity의 모든 속성과 `Count`를 사용할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "`Status`, `Count`, 그리고 편집기에 컬럼으로 표시된 모든 속성을 사용할 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "`Count`만 사용할 수 있다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-004",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["fetch-property"],
+    "tags": [
+      "fetch-property"
+    ],
     "stem": "An Aggregate `GetOrders` has its **Fetch** property set to **Only On Demand**. Which of the following statements is **NOT true**?",
     "options": [
-      { "key": "A", "text": "It does not run automatically when the Screen loads." },
-      { "key": "B", "text": "It must be triggered explicitly (for example, with a Refresh Data node) before it holds any data." },
-      { "key": "C", "text": "Its data is always fetched on the server before the Screen is first rendered." },
-      { "key": "D", "text": "It is useful to avoid running a query until the data is actually needed." }
+      {
+        "key": "A",
+        "text": "It does not run automatically when the Screen loads."
+      },
+      {
+        "key": "B",
+        "text": "It must be triggered explicitly (for example, with a Refresh Data node) before it holds any data."
+      },
+      {
+        "key": "C",
+        "text": "Its data is always fetched on the server before the Screen is first rendered."
+      },
+      {
+        "key": "D",
+        "text": "It is useful to avoid running a query until the data is actually needed."
+      }
     ],
     "answer": "C",
     "explanation": "Aggregate의 **Fetch** 속성은 두 값을 가집니다.\n- **At Start** = Screen이 열릴 때 자동으로 데이터를 가져옴.\n- **Only On Demand** = 자동 실행되지 않고, **Refresh Data 노드 등으로 명시적으로 호출**해야 데이터가 채워짐.\n\nC는 \"항상 Screen 렌더 전에 서버에서 가져온다\"고 했는데, 이건 **At Start**의 동작이라 Only On Demand에서는 거짓 → 정답(틀린 설명)은 C.",
@@ -94,20 +222,58 @@
     },
     "source": "Training Workbook 4 / 9 (Screen Lifecycle 연계) · Use Data → Fetch data on demand",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "`GetOrders` Aggregate의 **Fetch** 속성이 **Only On Demand**로 설정되어 있다. 다음 설명 중 **올바르지 않은 것은?**",
+        "options": [
+          {
+            "key": "A",
+            "text": "Screen이 로드될 때 자동으로 실행되지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "데이터를 보유하려면 (예: Refresh Data 노드로) 명시적으로 트리거되어야 한다."
+          },
+          {
+            "key": "C",
+            "text": "데이터는 Screen이 처음 렌더링되기 전에 항상 서버에서 페칭된다."
+          },
+          {
+            "key": "D",
+            "text": "실제로 데이터가 필요할 때까지 쿼리 실행을 미루는 데 유용하다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-005",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["join-types", "only-with"],
+    "tags": [
+      "join-types",
+      "only-with"
+    ],
     "stem": "You need an Aggregate that lists **only** the Movies that have a Genre assigned — Movies without a Genre must be excluded. The Aggregate has `Movie` and `MovieGenre` as Sources. Which join type should you use between them?",
     "options": [
-      { "key": "A", "text": "Only With" },
-      { "key": "B", "text": "With or Without" },
-      { "key": "C", "text": "With" },
-      { "key": "D", "text": "No join — add a Sorting instead" }
+      {
+        "key": "A",
+        "text": "Only With"
+      },
+      {
+        "key": "B",
+        "text": "With or Without"
+      },
+      {
+        "key": "C",
+        "text": "With"
+      },
+      {
+        "key": "D",
+        "text": "No join — add a Sorting instead"
+      }
     ],
     "answer": "A",
     "explanation": "**Only With** 조인은 두 Entity 간에 **일치하는 레코드만** 반환합니다(INNER JOIN). 따라서 Genre가 연결된 Movie만 나오고, Genre가 없는 Movie는 제외됩니다.",
@@ -118,20 +284,58 @@
     },
     "source": "Training Workbook 4 (Advanced Aggregate → Join: Only With)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Genre가 할당된 Movie**만** 나열하는 Aggregate가 필요하다. Genre가 없는 Movie는 제외되어야 한다. 이 Aggregate의 Source는 `Movie`와 `MovieGenre`이다. 두 Source 사이에 어떤 Join 종류를 사용해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Only With"
+          },
+          {
+            "key": "B",
+            "text": "With or Without"
+          },
+          {
+            "key": "C",
+            "text": "With"
+          },
+          {
+            "key": "D",
+            "text": "Join을 사용하지 않고 대신 Sorting을 추가한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-006",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["join-types", "with"],
+    "tags": [
+      "join-types",
+      "with"
+    ],
     "stem": "Which statement about the **With** join type in an Aggregate is correct?",
     "options": [
-      { "key": "A", "text": "It returns only the records that have a match in both entities." },
-      { "key": "B", "text": "It returns all rows from the left entity, even when there is no match on the right." },
-      { "key": "C", "text": "It returns all rows from both entities." },
-      { "key": "D", "text": "It automatically removes duplicate rows from the result." }
+      {
+        "key": "A",
+        "text": "It returns only the records that have a match in both entities."
+      },
+      {
+        "key": "B",
+        "text": "It returns all rows from the left entity, even when there is no match on the right."
+      },
+      {
+        "key": "C",
+        "text": "It returns all rows from both entities."
+      },
+      {
+        "key": "D",
+        "text": "It automatically removes duplicate rows from the result."
+      }
     ],
     "answer": "C",
     "explanation": "Aggregate가 지원하는 3가지 조인 중 **With**는 **두 Entity의 모든 행을 반환**합니다.",
@@ -142,20 +346,59 @@
     },
     "source": "Training Workbook 4 (Advanced Aggregate → Join: With)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate의 **With** Join 종류에 대한 설명 중 올바른 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "두 Entity 모두에 매칭이 있는 레코드만 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "오른쪽에 매칭이 없더라도 왼쪽 Entity의 모든 행을 반환한다."
+          },
+          {
+            "key": "C",
+            "text": "두 Entity의 모든 행을 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "결과에서 중복 행을 자동으로 제거한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-007",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["calculated-attribute", "dropdown", "practical"],
+    "tags": [
+      "calculated-attribute",
+      "dropdown",
+      "practical"
+    ],
     "stem": "A Person Dropdown currently shows only each person's first name. You want each option to show the full name (`Name Surname`). What is the best way?",
     "options": [
-      { "key": "A", "text": "In the Aggregate, add a Calculated (New) Attribute `FullName = Name + \" \" + Surname`, then set the Dropdown's Options Text to `FullName`." },
-      { "key": "B", "text": "Type `Name + \" \" + Surname` directly into the Dropdown's Options Text property." },
-      { "key": "C", "text": "Add a second Dropdown that shows the surname." },
-      { "key": "D", "text": "Rename the Person entity's `Name` attribute so it also stores the surname." }
+      {
+        "key": "A",
+        "text": "In the Aggregate, add a Calculated (New) Attribute `FullName = Name + \" \" + Surname`, then set the Dropdown's Options Text to `FullName`."
+      },
+      {
+        "key": "B",
+        "text": "Type `Name + \" \" + Surname` directly into the Dropdown's Options Text property."
+      },
+      {
+        "key": "C",
+        "text": "Add a second Dropdown that shows the surname."
+      },
+      {
+        "key": "D",
+        "text": "Rename the Person entity's `Name` attribute so it also stores the surname."
+      }
     ],
     "answer": "A",
     "explanation": "**Calculated(New) Attribute**는 같은 Aggregate의 다른 attribute로부터 계산되어 쿼리 출력에 포함됩니다. `FullName = Name + \" \" + Surname`를 만들고 Dropdown의 **Options Text**를 그 attribute로 지정하는 것이 정석입니다.",
@@ -166,20 +409,58 @@
     },
     "source": "Training Workbook 4 (Calculated Attributes; Adding Cast and Crew → FullName)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Person Dropdown이 현재 각 사람의 이름(first name)만 표시하고 있다. 각 옵션에 전체 이름(`Name Surname`)이 표시되도록 하려고 한다. 가장 좋은 방법은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate에서 Calculated (New) Attribute `FullName = Name + \" \" + Surname`를 추가한 뒤, Dropdown의 Options Text를 `FullName`으로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "Dropdown의 Options Text 속성에 `Name + \" \" + Surname`를 직접 입력한다."
+          },
+          {
+            "key": "C",
+            "text": "Surname을 표시하는 두 번째 Dropdown을 추가한다."
+          },
+          {
+            "key": "D",
+            "text": "Person Entity의 `Name` 속성이 Surname도 함께 저장하도록 이름을 변경한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-008",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["hiding-columns", "output"],
+    "tags": [
+      "hiding-columns",
+      "output"
+    ],
     "stem": "In an Aggregate you **hide** one of the columns. What is the effect on the data the Aggregate retrieves?",
     "options": [
-      { "key": "A", "text": "The hidden attribute is no longer fetched from the database." },
-      { "key": "B", "text": "Hiding is only for the preview and does not affect the output; what is actually retrieved is determined by the attributes used outside the Aggregate." },
-      { "key": "C", "text": "The Aggregate throws an error until the column is shown again." },
-      { "key": "D", "text": "Every column to the right of it is also removed from the output." }
+      {
+        "key": "A",
+        "text": "The hidden attribute is no longer fetched from the database."
+      },
+      {
+        "key": "B",
+        "text": "Hiding is only for the preview and does not affect the output; what is actually retrieved is determined by the attributes used outside the Aggregate."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate throws an error until the column is shown again."
+      },
+      {
+        "key": "D",
+        "text": "Every column to the right of it is also removed from the output."
+      }
     ],
     "answer": "B",
     "explanation": "컬럼 **숨기기는 미리보기 목적일 뿐** Aggregate 출력에 영향을 주지 않습니다. 실제로 가져오는 컬럼은 **Aggregate 바깥에서 사용된 attribute**에 따라 결정됩니다.",
@@ -190,20 +471,59 @@
     },
     "source": "Training Workbook 4 (Advanced Aggregate → Hiding Columns)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 컬럼 중 하나를 **숨긴다(hide)**. Aggregate가 조회하는 데이터에 미치는 영향은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "숨긴 속성은 더 이상 데이터베이스에서 페칭되지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "숨기기는 미리보기용일 뿐이며 출력에는 영향을 주지 않는다. 실제로 조회되는 것은 Aggregate 바깥에서 사용된 속성에 따라 결정된다."
+          },
+          {
+            "key": "C",
+            "text": "컬럼을 다시 표시할 때까지 Aggregate가 오류를 발생시킨다."
+          },
+          {
+            "key": "D",
+            "text": "그 오른쪽에 있는 모든 컬럼도 출력에서 함께 제거된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-009",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["group-by", "functions", "negative"],
+    "tags": [
+      "group-by",
+      "functions",
+      "negative"
+    ],
     "stem": "When grouping records in an Aggregate, which of the following is **NOT** an available aggregation function?",
     "options": [
-      { "key": "A", "text": "Sum" },
-      { "key": "B", "text": "Average" },
-      { "key": "C", "text": "Count" },
-      { "key": "D", "text": "Concatenate" }
+      {
+        "key": "A",
+        "text": "Sum"
+      },
+      {
+        "key": "B",
+        "text": "Average"
+      },
+      {
+        "key": "C",
+        "text": "Count"
+      },
+      {
+        "key": "D",
+        "text": "Concatenate"
+      }
     ],
     "answer": "D",
     "explanation": "그룹에 적용할 수 있는 집계 함수는 **Sum, Average, Min, Max, Count**입니다. **Concatenate**는 집계 함수가 아닙니다.",
@@ -214,20 +534,59 @@
     },
     "source": "Training Workbook 4 (Advanced Aggregate → Aggregating Records)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 레코드를 그룹화할 때, 다음 중 사용할 수 **없는** 집계(aggregation) 함수는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Sum"
+          },
+          {
+            "key": "B",
+            "text": "Average"
+          },
+          {
+            "key": "C",
+            "text": "Count"
+          },
+          {
+            "key": "D",
+            "text": "Concatenate"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-010",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "easy",
-    "tags": ["sources", "join", "auto"],
+    "tags": [
+      "sources",
+      "join",
+      "auto"
+    ],
     "stem": "You drag two entities that have a reference (relationship) between them into the same Aggregate as Sources. What happens regarding the join?",
     "options": [
-      { "key": "A", "text": "OutSystems automatically generates the join based on the relationship." },
-      { "key": "B", "text": "You must write the SQL join manually." },
-      { "key": "C", "text": "No join is created; the result becomes a cross product of both entities." },
-      { "key": "D", "text": "The second entity is ignored until you add a filter." }
+      {
+        "key": "A",
+        "text": "OutSystems automatically generates the join based on the relationship."
+      },
+      {
+        "key": "B",
+        "text": "You must write the SQL join manually."
+      },
+      {
+        "key": "C",
+        "text": "No join is created; the result becomes a cross product of both entities."
+      },
+      {
+        "key": "D",
+        "text": "The second entity is ignored until you add a filter."
+      }
     ],
     "answer": "A",
     "explanation": "Entity 간에 관계(참조)가 있으면 OutSystems가 **자동으로 join을 생성**합니다. 필요하면 Sources 탭에서 조인 방식을 조정할 수 있습니다.",
@@ -238,20 +597,59 @@
     },
     "source": "Training Workbook 4 (Advanced Aggregate → Multiple Sources)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "서로 참조(관계)가 있는 두 Entity를 같은 Aggregate에 Source로 드래그해 넣는다. Join과 관련하여 어떤 일이 발생하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OutSystems가 관계를 기반으로 Join을 자동으로 생성한다."
+          },
+          {
+            "key": "B",
+            "text": "SQL Join을 직접 작성해야 한다."
+          },
+          {
+            "key": "C",
+            "text": "Join이 생성되지 않으며, 결과는 두 Entity의 카티션 곱(cross product)이 된다."
+          },
+          {
+            "key": "D",
+            "text": "Filter를 추가하기 전까지 두 번째 Entity는 무시된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-011",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["result-access", "list-current", "practical"],
+    "tags": [
+      "result-access",
+      "list-current",
+      "practical"
+    ],
     "stem": "An Aggregate `GetMovieById` fetches a single Movie. Which expression correctly displays that movie's title on the Screen?",
     "options": [
-      { "key": "A", "text": "GetMovieById.Movie.Title" },
-      { "key": "B", "text": "GetMovieById.List.Current.Movie.Title" },
-      { "key": "C", "text": "GetMovieById.Current.Movie.Title" },
-      { "key": "D", "text": "GetMovieById.List.Movie.Title" }
+      {
+        "key": "A",
+        "text": "GetMovieById.Movie.Title"
+      },
+      {
+        "key": "B",
+        "text": "GetMovieById.List.Current.Movie.Title"
+      },
+      {
+        "key": "C",
+        "text": "GetMovieById.Current.Movie.Title"
+      },
+      {
+        "key": "D",
+        "text": "GetMovieById.List.Movie.Title"
+      }
     ],
     "answer": "B",
     "explanation": "Aggregate 결과는 리스트예요. 현재 행은 **`.List.Current`**로 접근한 뒤, 소스 Entity와 attribute를 따라갑니다 → `GetMovieById.List.Current.Movie.Title`.",
@@ -262,20 +660,58 @@
     },
     "source": "Training Workbook 4 (Adding Cast and Crew → GetMovieById.List.Current.Movie.Title)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "`GetMovieById` Aggregate가 단일 Movie를 페칭한다. 다음 중 그 영화의 제목을 Screen에 올바르게 표시하는 표현식은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "GetMovieById.Movie.Title"
+          },
+          {
+            "key": "B",
+            "text": "GetMovieById.List.Current.Movie.Title"
+          },
+          {
+            "key": "C",
+            "text": "GetMovieById.Current.Movie.Title"
+          },
+          {
+            "key": "D",
+            "text": "GetMovieById.List.Movie.Title"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-012",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["filters", "and"],
+    "tags": [
+      "filters",
+      "and"
+    ],
     "stem": "An Aggregate has **two separate Filters** defined. How are they combined when the query runs?",
     "options": [
-      { "key": "A", "text": "With AND — a record must satisfy all filters to be returned." },
-      { "key": "B", "text": "With OR — a record is returned if it satisfies any one filter." },
-      { "key": "C", "text": "Only the first filter is applied; the rest are ignored." },
-      { "key": "D", "text": "They conflict and must be merged into a single expression." }
+      {
+        "key": "A",
+        "text": "With AND — a record must satisfy all filters to be returned."
+      },
+      {
+        "key": "B",
+        "text": "With OR — a record is returned if it satisfies any one filter."
+      },
+      {
+        "key": "C",
+        "text": "Only the first filter is applied; the rest are ignored."
+      },
+      {
+        "key": "D",
+        "text": "They conflict and must be merged into a single expression."
+      }
     ],
     "answer": "A",
     "explanation": "여러 개의 Filter는 각각 **AND 조건**으로 결합되어, 레코드가 **모든 필터를 만족**해야 반환됩니다. OR가 필요하면 하나의 필터 식 안에서 `or`로 조건을 묶습니다(워크북의 역할 필터 예: `... = Director or ... = Producer`).",
@@ -286,20 +722,59 @@
     },
     "source": "Training Workbook 4 (Advanced Aggregate → Filters; 역할 필터의 or 사용)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate에 **두 개의 별도 Filter**가 정의되어 있다. 쿼리가 실행될 때 이 Filter들은 어떻게 결합되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "AND로 결합된다 — 레코드가 반환되려면 모든 Filter를 만족해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "OR로 결합된다 — 레코드가 어느 하나의 Filter라도 만족하면 반환된다."
+          },
+          {
+            "key": "C",
+            "text": "첫 번째 Filter만 적용되고 나머지는 무시된다."
+          },
+          {
+            "key": "D",
+            "text": "서로 충돌하므로 하나의 표현식으로 병합해야 한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-013",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["sorting", "practical", "ecommerce"],
+    "tags": [
+      "sorting",
+      "practical",
+      "ecommerce"
+    ],
     "stem": "A Screen lists `Order` records, but they should appear with the **most recent first** (by `CreatedOn`). Where do you configure this in the Aggregate?",
     "options": [
-      { "key": "A", "text": "In the Sorting tab, add `Order.CreatedOn` as Descending." },
-      { "key": "B", "text": "In the Filters tab, add a condition on `Order.CreatedOn`." },
-      { "key": "C", "text": "In the Group by tab, group by `Order.CreatedOn`." },
-      { "key": "D", "text": "Hide every column except `CreatedOn`." }
+      {
+        "key": "A",
+        "text": "In the Sorting tab, add `Order.CreatedOn` as Descending."
+      },
+      {
+        "key": "B",
+        "text": "In the Filters tab, add a condition on `Order.CreatedOn`."
+      },
+      {
+        "key": "C",
+        "text": "In the Group by tab, group by `Order.CreatedOn`."
+      },
+      {
+        "key": "D",
+        "text": "Hide every column except `CreatedOn`."
+      }
     ],
     "answer": "A",
     "explanation": "정렬은 Aggregate의 **Sorting** 탭에서 정의합니다. `CreatedOn`을 **Descending(내림차순)**으로 두면 최신 주문이 먼저 나옵니다.",
@@ -310,20 +785,59 @@
     },
     "source": "Training Workbook 4 (Aggregate = sources·filters·sorting) · 도메인은 시험 유형(Order)으로 변형",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen이 `Order` 레코드를 나열하는데, `CreatedOn` 기준으로 **최신순**으로 표시되어야 한다. Aggregate에서 이를 어디에 구성하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Sorting 탭에서 `Order.CreatedOn`을 Descending으로 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "Filters 탭에서 `Order.CreatedOn`에 대한 조건을 추가한다."
+          },
+          {
+            "key": "C",
+            "text": "Group by 탭에서 `Order.CreatedOn`으로 그룹화한다."
+          },
+          {
+            "key": "D",
+            "text": "`CreatedOn`을 제외한 모든 컬럼을 숨긴다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-014",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["max-records", "practical", "ecommerce"],
+    "tags": [
+      "max-records",
+      "practical",
+      "ecommerce"
+    ],
     "stem": "You need to show only the **5 most expensive Products**. The Aggregate already sorts by `Price` descending. How do you limit the result to 5 records?",
     "options": [
-      { "key": "A", "text": "Set the Aggregate's **Max. Records** property to 5." },
-      { "key": "B", "text": "Add a Filter `Product.Price > 5`." },
-      { "key": "C", "text": "Group by `Product.Price` and Count to 5." },
-      { "key": "D", "text": "Delete all but 5 rows in the Aggregate preview." }
+      {
+        "key": "A",
+        "text": "Set the Aggregate's **Max. Records** property to 5."
+      },
+      {
+        "key": "B",
+        "text": "Add a Filter `Product.Price > 5`."
+      },
+      {
+        "key": "C",
+        "text": "Group by `Product.Price` and Count to 5."
+      },
+      {
+        "key": "D",
+        "text": "Delete all but 5 rows in the Aggregate preview."
+      }
     ],
     "answer": "A",
     "explanation": "**Max. Records** 속성이 Aggregate가 가져오는 레코드 수를 제한합니다. 가격 내림차순 정렬 + Max. Records = 5 → 가장 비싼 5개.",
@@ -334,20 +848,59 @@
     },
     "source": "Training Workbook 4 · 공식 Sample Exam Q19 (Max Records) · 도메인 변형(Product)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "**가장 비싼 Product 5개**만 표시해야 한다. Aggregate는 이미 `Price` 기준 내림차순으로 정렬되어 있다. 결과를 5개 레코드로 제한하려면 어떻게 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate의 **Max. Records** 속성을 5로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "Filter `Product.Price > 5`를 추가한다."
+          },
+          {
+            "key": "C",
+            "text": "`Product.Price`로 Group by하고 5까지 Count한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate 미리보기에서 5개 행을 제외한 나머지 행을 삭제한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-015",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["calculated-attribute", "built-in-function", "ecommerce"],
+    "tags": [
+      "calculated-attribute",
+      "built-in-function",
+      "ecommerce"
+    ],
     "stem": "Each `Order` should display **how many days ago** it was placed (from `CreatedOn`). What is the best way to make this value available in the Aggregate?",
     "options": [
-      { "key": "A", "text": "Add a Calculated (New) Attribute that uses a built-in date function, e.g. `DiffDays(Order.CreatedOn, CurrDate())`." },
-      { "key": "B", "text": "Store the day count in a new database column and update every Order every day." },
-      { "key": "C", "text": "Add a Filter on `Order.CreatedOn`." },
-      { "key": "D", "text": "Sort the Aggregate by `Order.CreatedOn`." }
+      {
+        "key": "A",
+        "text": "Add a Calculated (New) Attribute that uses a built-in date function, e.g. `DiffDays(Order.CreatedOn, CurrDate())`."
+      },
+      {
+        "key": "B",
+        "text": "Store the day count in a new database column and update every Order every day."
+      },
+      {
+        "key": "C",
+        "text": "Add a Filter on `Order.CreatedOn`."
+      },
+      {
+        "key": "D",
+        "text": "Sort the Aggregate by `Order.CreatedOn`."
+      }
     ],
     "answer": "A",
     "explanation": "**Calculated Attribute**의 Expression은 소스 attribute뿐 아니라 **내장 함수(CurrDate(), DiffDays() 등)**도 사용할 수 있고, 그 값이 쿼리 출력에 포함됩니다. 실시간 계산이라 별도 저장이 필요 없습니다.",
@@ -358,20 +911,59 @@
     },
     "source": "Training Workbook 4 (Calculated Attributes → 내장 함수 CurrDate/DiffDays) · 도메인 변형(Order)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "각 `Order`가 (`CreatedOn` 기준으로) **며칠 전**에 접수되었는지 표시해야 한다. 이 값을 Aggregate에서 사용할 수 있게 만드는 가장 좋은 방법은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "내장 날짜 함수를 사용하는 Calculated (New) Attribute를 추가한다. 예: `DiffDays(Order.CreatedOn, CurrDate())`."
+          },
+          {
+            "key": "B",
+            "text": "일수 값을 새 데이터베이스 컬럼에 저장하고 매일 모든 Order를 갱신한다."
+          },
+          {
+            "key": "C",
+            "text": "`Order.CreatedOn`에 Filter를 추가한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate를 `Order.CreatedOn`으로 정렬한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-016",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["filters", "input-parameter", "ecommerce"],
+    "tags": [
+      "filters",
+      "input-parameter",
+      "ecommerce"
+    ],
     "stem": "A Customer detail Screen has a `CustomerId` input parameter. The `GetOrders` Aggregate must return **only that customer's Orders**. What do you do?",
     "options": [
-      { "key": "A", "text": "Add a Filter `Order.CustomerId = CustomerId` (the Screen's input parameter)." },
-      { "key": "B", "text": "Set the Aggregate's Max. Records to `CustomerId`." },
-      { "key": "C", "text": "Sort the Aggregate by `Order.CustomerId`." },
-      { "key": "D", "text": "Nothing — the Aggregate filters by the current Screen automatically." }
+      {
+        "key": "A",
+        "text": "Add a Filter `Order.CustomerId = CustomerId` (the Screen's input parameter)."
+      },
+      {
+        "key": "B",
+        "text": "Set the Aggregate's Max. Records to `CustomerId`."
+      },
+      {
+        "key": "C",
+        "text": "Sort the Aggregate by `Order.CustomerId`."
+      },
+      {
+        "key": "D",
+        "text": "Nothing — the Aggregate filters by the current Screen automatically."
+      }
     ],
     "answer": "A",
     "explanation": "Filter 식은 화면의 **Input Parameter나 변수**를 참조할 수 있습니다. `Order.CustomerId = CustomerId`로 해당 고객의 주문만 걸러냅니다.",
@@ -382,20 +974,59 @@
     },
     "source": "Training Workbook 4 (필터가 Input Parameter 참조: 예 MovieId) · 도메인 변형(Customer/Order)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Customer 상세 Screen에 `CustomerId` Input Parameter가 있다. `GetOrders` Aggregate는 **해당 고객의 Order만** 반환해야 한다. 어떻게 해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Filter `Order.CustomerId = CustomerId`(Screen의 Input Parameter)를 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate의 Max. Records를 `CustomerId`로 설정한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate를 `Order.CustomerId`로 정렬한다."
+          },
+          {
+            "key": "D",
+            "text": "아무것도 하지 않아도 된다 — Aggregate가 현재 Screen을 기준으로 자동으로 필터링한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-017",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "hard",
-    "tags": ["join", "one-to-many", "row-multiplication"],
+    "tags": [
+      "join",
+      "one-to-many",
+      "row-multiplication"
+    ],
     "stem": "An Aggregate joins `Customer` and `Order` (one Customer has many Orders) using **Only With**. If a particular customer has 3 orders, how do that customer's records appear in the result?",
     "options": [
-      { "key": "A", "text": "As 3 rows (one per Order), with the Customer's attributes repeated on each row." },
-      { "key": "B", "text": "As 1 row for the Customer, with the 3 Orders nested inside it." },
-      { "key": "C", "text": "As 1 row total, showing only the customer's most recent order." },
-      { "key": "D", "text": "As 3 Customer rows that contain no order data." }
+      {
+        "key": "A",
+        "text": "As 3 rows (one per Order), with the Customer's attributes repeated on each row."
+      },
+      {
+        "key": "B",
+        "text": "As 1 row for the Customer, with the 3 Orders nested inside it."
+      },
+      {
+        "key": "C",
+        "text": "As 1 row total, showing only the customer's most recent order."
+      },
+      {
+        "key": "D",
+        "text": "As 3 Customer rows that contain no order data."
+      }
     ],
     "answer": "A",
     "explanation": "조인 결과는 **일치하는 쌍마다 한 행**입니다. 'many' 쪽(Order)의 각 레코드가 한 행이 되고, 'one' 쪽(Customer) 값은 각 행에 **반복**됩니다. 그래서 주문이 3건이면 그 고객은 3행으로 나오고 고객 정보가 반복됩니다.",
@@ -406,20 +1037,59 @@
     },
     "source": "Training Workbook 4 (Multiple Sources/Join) · 조인 행 배수는 표준 SQL 조인 의미",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 `Customer`와 `Order`(한 Customer가 여러 Order를 가짐)를 **Only With**로 조인한다. 특정 고객이 3개의 오더를 가지고 있다면, 그 고객의 레코드는 결과에 어떻게 나타나는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "3개의 행으로(오더당 1행) 나타나며, Customer 속성이 각 행에 반복된다."
+          },
+          {
+            "key": "B",
+            "text": "Customer에 대해 1개의 행으로 나타나며, 3개의 Order가 그 안에 중첩된다."
+          },
+          {
+            "key": "C",
+            "text": "총 1개의 행으로 나타나며, 그 고객의 가장 최근 오더만 표시된다."
+          },
+          {
+            "key": "D",
+            "text": "오더 데이터를 포함하지 않는 3개의 Customer 행으로 나타난다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-018",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["group-by", "sum-vs-count", "ecommerce"],
+    "tags": [
+      "group-by",
+      "sum-vs-count",
+      "ecommerce"
+    ],
     "stem": "A `Cart` has many `CartItem` records, each with a `Quantity`. To display the **total quantity of items** in the cart (e.g. 2 + 3 = 5), which aggregation function do you apply over `CartItem.Quantity`?",
     "options": [
-      { "key": "A", "text": "Sum" },
-      { "key": "B", "text": "Count" },
-      { "key": "C", "text": "Max" },
-      { "key": "D", "text": "Average" }
+      {
+        "key": "A",
+        "text": "Sum"
+      },
+      {
+        "key": "B",
+        "text": "Count"
+      },
+      {
+        "key": "C",
+        "text": "Max"
+      },
+      {
+        "key": "D",
+        "text": "Average"
+      }
     ],
     "answer": "A",
     "explanation": "**Sum**은 Quantity 값들을 더합니다(2+3=5). **Count**를 쓰면 CartItem '행의 개수'(2)가 나와서 총 수량과 다릅니다 — 이 차이가 핵심입니다.",
@@ -430,21 +1100,60 @@
     },
     "source": "Training Workbook 4 (Aggregating Records → Sum/Count) · 도메인 변형(Cart)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "하나의 `Cart`는 여러 개의 `CartItem` 레코드를 가지며, 각 CartItem에는 `Quantity`가 있다. 장바구니에 담긴 **품목의 총 수량**(예: 2 + 3 = 5)을 표시하려면 `CartItem.Quantity`에 어떤 집계 함수를 적용해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Sum"
+          },
+          {
+            "key": "B",
+            "text": "Count"
+          },
+          {
+            "key": "C",
+            "text": "Max"
+          },
+          {
+            "key": "D",
+            "text": "Average"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "AGG-019",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["visual-style", "join-types", "ecommerce"],
+    "tags": [
+      "visual-style",
+      "join-types",
+      "ecommerce"
+    ],
     "stem": "Read the Aggregate and its data preview below. Which statement is correct?",
     "diagram": "**Aggregate `GetProducts`** — Sources: `Product`, `Supplier`\n\n| # | Left | Join | Right | Condition |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Supplier | Product.SupplierId = Supplier.Id |\n\n**Preview (output):**\n\n| Product.Name | Product.Price | Supplier.Name |\n|---|---|---|\n| Keyboard | 25 | Logitech |\n| Mouse | 15 | — |\n| Monitor | 120 | Dell |\n| Webcam | 40 | — |",
     "options": [
-      { "key": "A", "text": "Only products that have a Supplier are returned." },
-      { "key": "B", "text": "All products are returned; products without a Supplier show empty Supplier attributes." },
-      { "key": "C", "text": "Only suppliers that have at least one product are returned." },
-      { "key": "D", "text": "The Aggregate errors out because some Supplier values are empty." }
+      {
+        "key": "A",
+        "text": "Only products that have a Supplier are returned."
+      },
+      {
+        "key": "B",
+        "text": "All products are returned; products without a Supplier show empty Supplier attributes."
+      },
+      {
+        "key": "C",
+        "text": "Only suppliers that have at least one product are returned."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate errors out because some Supplier values are empty."
+      }
     ],
     "answer": "B",
     "explanation": "조인이 **With or Without**(왼쪽=Product)이므로 **모든 Product**가 반환되고, Supplier가 없는 행(Mouse, Webcam)은 Supplier 속성이 비어(—) 있습니다. 미리보기의 빈 셀이 바로 그 증거예요.",
@@ -455,21 +1164,61 @@
     },
     "source": "Training Workbook 4 (Join: With or Without) · 공식 Sample Exam Q4 유형(비주얼) · 도메인 변형(Product/Supplier)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "아래의 Aggregate와 데이터 미리보기를 확인하라. 다음 중 올바른 설명은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Supplier가 있는 Product만 반환된다."
+          },
+          {
+            "key": "B",
+            "text": "모든 Product가 반환되며, Supplier가 없는 Product는 Supplier 속성이 비어 표시된다."
+          },
+          {
+            "key": "C",
+            "text": "Product가 하나 이상 있는 Supplier만 반환된다."
+          },
+          {
+            "key": "D",
+            "text": "일부 Supplier 값이 비어 있으므로 Aggregate가 오류를 발생시킨다."
+          }
+        ],
+        "diagram": "**Aggregate `GetProducts`** — Source: `Product`, `Supplier`\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Supplier | Product.SupplierId = Supplier.Id |\n\n**미리보기(출력):**\n\n| Product.Name | Product.Price | Supplier.Name |\n|---|---|---|\n| Keyboard | 25 | Logitech |\n| Mouse | 15 | — |\n| Monitor | 120 | Dell |\n| Webcam | 40 | — |"
+      }
+    }
   },
   {
     "id": "AGG-020",
     "category": "Fetching Data",
     "subtopic": "Aggregates",
     "difficulty": "medium",
-    "tags": ["visual-style", "group-by", "ecommerce"],
+    "tags": [
+      "visual-style",
+      "group-by",
+      "ecommerce"
+    ],
     "stem": "The Aggregate below groups Orders by `Status` with a Count of `Order.Id` (preview shown). How many records will `GetOrdersByStatus.List` contain?",
     "diagram": "**Aggregate `GetOrdersByStatus`** — Group By `Order.Status`, Count of `Order.Id`\n\n**Preview (output):**\n\n| Status (Group) | Count |\n|---|---|\n| Shipped | 12 |\n| Pending | 5 |\n| Cancelled | 3 |",
     "options": [
-      { "key": "A", "text": "3 — one record per Status group." },
-      { "key": "B", "text": "20 — the total number of Orders." },
-      { "key": "C", "text": "1 — a single summary record." },
-      { "key": "D", "text": "It depends on the number of attributes in the Order entity." }
+      {
+        "key": "A",
+        "text": "3 — one record per Status group."
+      },
+      {
+        "key": "B",
+        "text": "20 — the total number of Orders."
+      },
+      {
+        "key": "C",
+        "text": "1 — a single summary record."
+      },
+      {
+        "key": "D",
+        "text": "It depends on the number of attributes in the Order entity."
+      }
     ],
     "answer": "A",
     "explanation": "Group By는 행을 **그룹 값마다 한 행**으로 합칩니다. Status가 3종(Shipped/Pending/Cancelled)이므로 List에는 **3개 레코드**가 있습니다. 12·5·3은 각 그룹의 Count일 뿐이고, 그 합(20)은 전체 주문 수이지 레코드 수가 아닙니다.",
@@ -480,6 +1229,30 @@
     },
     "source": "Training Workbook 4 (Aggregating Records) · 공식 Sample Exam Q3·Q5 유형(비주얼) · 도메인 변형(Order/Status)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "아래 Aggregate는 오더(Order)를 `Status`로 그룹화하고 `Order.Id`를 Count한다(미리보기 표시). `GetOrdersByStatus.List`에는 몇 개의 레코드가 포함되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "3 — Status 그룹당 레코드 1개."
+          },
+          {
+            "key": "B",
+            "text": "20 — 오더의 총 개수."
+          },
+          {
+            "key": "C",
+            "text": "1 — 단일 요약 레코드."
+          },
+          {
+            "key": "D",
+            "text": "Order Entity의 속성 개수에 따라 달라진다."
+          }
+        ],
+        "diagram": "**Aggregate `GetOrdersByStatus`** — `Order.Status`로 Group By, `Order.Id` Count\n\n**미리보기(출력):**\n\n| Status (그룹) | Count |\n|---|---|\n| Shipped | 12 |\n| Pending | 5 |\n| Cancelled | 3 |"
+      }
+    }
   }
 ]

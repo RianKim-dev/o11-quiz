@@ -37,7 +37,30 @@
     },
     "source": "Workbook 9 - Screen Lifecycle, Fetching At Start section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11 Reactive에서 화면(Screen)이 초기화될 때, Fetch 속성이 'At Start'로 설정된 Aggregate는 어떻게 동작하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "자동으로 즉시 트리거되어 비동기적으로 실행된다."
+          },
+          {
+            "key": "B",
+            "text": "실행되기 전에 Initialize 이벤트가 완료될 때까지 기다린다."
+          },
+          {
+            "key": "C",
+            "text": "Refresh Data 노드를 사용하여 수동으로 트리거해야 한다."
+          },
+          {
+            "key": "D",
+            "text": "기본적으로 비활성화되어 있으며, 개발자의 명시적인 설정이 필요하다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-002",
@@ -77,7 +100,30 @@
     },
     "source": "Workbook 3 - Basic Aggregate, Sources & Filters section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product 목록 화면과 Cart 상세 화면이라는 두 개의 Screen으로 구성된 전자상거래 애플리케이션을 설계하고 있다. Cart 화면은 CartId 인풋 파라미터(Input Parameter)를 기반으로 필터링된 프로덕트 데이터를 필요로 한다. 이 데이터를 가져오는 방식으로 올바르지 않은 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "화면 레벨에서 CartId를 필터 조건으로 하는 Aggregate를 정의하고, Fetch 속성을 'At Start'로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "CartId를 인풋 파라미터로 받아 필터링된 프로덕트 목록을 반환하는 Data Action을 사용한다."
+          },
+          {
+            "key": "C",
+            "text": "화면 레벨에서 필터 없이 Aggregate를 정의한 후, Screen Action에서 출력 결과를 수동으로 필터링한다."
+          },
+          {
+            "key": "D",
+            "text": "Table 위젯의 Source 속성을 사용하여 Aggregate의 출력을 직접 바인딩한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-003",
@@ -117,7 +163,30 @@
     },
     "source": "Workbook 9 - Screen Lifecycle, After Fetch event section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Customer 관리 애플리케이션에서 동일한 화면에 GetActiveCustomers (Fetch: At Start)와 GetPendingOrders (Fetch: At Start)라는 두 개의 Aggregate를 정의했다. 화면 초기화 후 두 Aggregate가 모두 실행되지만, 완료되는 순서는 예측할 수 없다. 이 동작과 그 의미를 정확하게 설명한 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "이는 예상치 못한 동작이다. Aggregate는 화면에 정의된 순서대로 순차적으로 실행되어야 한다."
+          },
+          {
+            "key": "B",
+            "text": "이는 예상되는 동작이다. Aggregate는 비동기적으로 실행되어 완료 순서가 보장되지 않지만, 두 데이터셋 모두 결국 각각의 위젯에 바인딩된다."
+          },
+          {
+            "key": "C",
+            "text": "경합 상태(race condition)를 방지하려면 하나의 Aggregate를 'Only on demand'로 설정해야 한다."
+          },
+          {
+            "key": "D",
+            "text": "두 Aggregate가 올바른 순서로 완료될 때까지 Ready 이벤트가 발생하지 않는다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-004",
@@ -157,7 +226,30 @@
     },
     "source": "Workbook 3 - Basic Aggregate, Sources section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "InvoiceId 인풋 파라미터(Input Parameter)를 기반으로 단일 인보이스를 표시하는 Invoice 상세 화면을 만들어야 한다. 이 화면은 Invoice Entity와 관련된 Customer Entity 양쪽의 데이터를 필요로 한다. 이 데이터를 가져오는 가장 적절한 방식은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "InvoiceId로 필터링하여 Invoice를 조회하는 Aggregate를 하나 만들고, 별도로 Customer를 조회하는 또 다른 Aggregate를 만든다."
+          },
+          {
+            "key": "B",
+            "text": "Invoice를 Source로 하는 단일 Aggregate를 만들고, InvoiceId를 사용하는 필터를 추가하며, Entity 관계를 통해 관련된 Customer 속성을 포함한다."
+          },
+          {
+            "key": "C",
+            "text": "두 개의 별도 Data Action을 사용한다. 하나는 Invoice 데이터를, 다른 하나는 Customer 데이터를 가져온다."
+          },
+          {
+            "key": "D",
+            "text": "Customer를 Source로 하는 Aggregate를 만들고 InvoiceId로 직접 필터링한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-005",
@@ -197,7 +289,30 @@
     },
     "source": "Workbook 3 - Displaying Data on Screens, Data Action section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive 화면에서 Aggregate의 데이터를 사용할 수 있게 되었을 때 발생하는 동작을 올바르게 설명한 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "개발자가 화면 표시를 업데이트하기 위해 JavaScript 함수를 수동으로 호출해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "화면이 자동으로 다시 렌더링되어 가져온 데이터를 표시한다."
+          },
+          {
+            "key": "C",
+            "text": "개발자가 명시적으로 렌더링할 때까지 데이터가 로컬 데이터베이스에 저장된다."
+          },
+          {
+            "key": "D",
+            "text": "사용자가 데이터를 보려면 페이지를 수동으로 새로고침해야 한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-006",
@@ -237,7 +352,30 @@
     },
     "source": "Workbook 9 - Screen Lifecycle, Fetching Only On Demand section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "사용자가 검색어를 입력하는 Product 검색 화면이 있으며, GetProducts라는 Aggregate의 Fetch 속성이 'Only on demand'로 설정되어 있다. 사용자가 검색 키워드를 입력하고 'Search' 버튼을 클릭했으나 프로덕트가 표시되지 않는다. 가장 가능성이 높은 원인은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate 필터 조건이 검색 변수를 참조하지만, 화면 초기화 시점에 해당 변수 값이 아직 할당되지 않았다."
+          },
+          {
+            "key": "B",
+            "text": "GetProducts Aggregate를 트리거하려면 버튼의 On Click 액션에 Refresh Data 노드가 필요하다."
+          },
+          {
+            "key": "C",
+            "text": "'Only on demand' 속성으로 인해 Aggregate가 화면의 Local Variable에 접근할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate는 Local Variable 값으로 필터링할 수 없으며, 인풋 파라미터(Input Parameter)만 지원한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-007",
@@ -277,7 +415,30 @@
     },
     "source": "Workbook 3 - Basic Aggregate, Output section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11 Reactive에서 화면에 Aggregate의 데이터를 표시할 때, Iterator의 Current 속성은 무엇을 나타내는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate가 반환한 전체 레코드의 총 개수"
+          },
+          {
+            "key": "B",
+            "text": "레코드 목록을 순회하는 커서로, 초기에는 첫 번째 행을 가리킨다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate 필터 조건의 현재 값"
+          },
+          {
+            "key": "D",
+            "text": "Aggregate에서 가장 최근에 업데이트된 레코드의 행 번호"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-008",
@@ -317,7 +478,30 @@
     },
     "source": "Workbook 9 - Screen Lifecycle, Ready event and When to Use Each Screen Event sections",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product 상세 화면이 GetProductById Aggregate를 통해 가져온 프로덕트 정보를 표시한다. 프로덕트를 찾았는지 여부에 따라 다른 내용을 보여주려고 한다. Aggregate가 레코드를 반환했는지 확인하기 위해 사용해야 할 위젯과 이벤트는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Initialize 이벤트에서 GetProductById.Empty 조건을 사용하는 If 위젯을 사용한다."
+          },
+          {
+            "key": "B",
+            "text": "Ready 이벤트에서 GetProductById.Empty 속성을 확인하는 If 위젯을 사용한다."
+          },
+          {
+            "key": "C",
+            "text": "Render 이벤트에서 GetProductById.Count > 0을 확인하는 If 위젯을 사용한다."
+          },
+          {
+            "key": "D",
+            "text": "Expression 위젯을 사용하여 GetProductById.Length를 사용자에게 직접 표시한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "FDS-009",
@@ -357,6 +541,29 @@
     },
     "source": "Workbook 9 - Screen Lifecycle, Opening the App section",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Customer 유지관리 애플리케이션에서 CustomerDetail 화면은 CustomerId 인풋 파라미터(Input Parameter)를 받는다. GetCustomerById Aggregate는 이 파라미터로 필터링한다. CustomerList 화면에서 특정 CustomerId로 이 화면에 이동하면 Aggregate가 해당 고객의 데이터를 올바르게 반환한다. 그러나 이후 다른 CustomerId로 이 화면에 다시 이동하면 이전 고객의 데이터가 계속 표시된다. 가장 가능성이 높은 원인은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate의 Fetch 속성이 'Only on demand'로 변경되었으며, 새 CustomerId로 트리거된 적이 없다."
+          },
+          {
+            "key": "B",
+            "text": "화면 초기화 이후 인풋 파라미터가 변경되었기 때문에 GetCustomerById Aggregate가 자동으로 새로고침되지 않았다."
+          },
+          {
+            "key": "C",
+            "text": "고객 데이터를 감싸는 If 위젯의 조건이 오래된 상태로 남아 있어 새 데이터가 표시되지 않는다."
+          },
+          {
+            "key": "D",
+            "text": "Table 위젯의 Source 속성이 Aggregate 출력 대신 Local Variable에 잘못 바인딩되어 있다."
+          }
+        ]
+      }
+    }
   }
 ]

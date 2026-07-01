@@ -33,7 +33,30 @@
     "explanation": "OutSystems 접근 제어는 **Authentication(인증 — 누가 접근하는지 확인)**과 **Authorization(인가 — 허용된 작업인지 판단)** 두 축으로 이뤄집니다. B·C·D는 관련 개념이지만 접근 제어의 두 핵심 요소가 아닙니다.",
     "source": "Training Workbook 6 - What is Access Control? (Authentication and Authorization)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems에서 완전한 접근 제어(Access Control) 메커니즘을 구성하는 두 가지 요소는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Authentication과 Authorization"
+          },
+          {
+            "key": "B",
+            "text": "암호화(Encryption)와 복호화(Decryption)"
+          },
+          {
+            "key": "C",
+            "text": "사용자(Users)와 비밀번호(Passwords)"
+          },
+          {
+            "key": "D",
+            "text": "Role과 권한(Permissions)"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SEC-002",
@@ -69,7 +92,30 @@
     "explanation": "역할마다 생성되는 **Check<Role>() 함수를 매개변수 없이 호출**하면 **현재 로그인한 사용자**의 역할 보유 여부를 검사합니다. 그래서 `CheckOrderApproverRole()`가 정답입니다. (B는 없는 액션명, C는 불필요한 명시 파라미터, D는 유효하지 않은 액션)",
     "source": "Training Workbook 6 - Action Permission Check (Check<RoleName>Role action)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order 관리 애플리케이션을 개발하고 있다. OrderApprover Role을 가진 사용자만 10,000 단위를 초과하는 오더를 승인할 수 있도록 해야 한다. 현재 로그인한 사용자가 OrderApprover Role을 보유하고 있는지 확인하려면 어떤 액션을 사용해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "매개변수 없이 CheckOrderApproverRole()을 호출한다"
+          },
+          {
+            "key": "B",
+            "text": "VerifyOrderApproverRole(GetUserId())"
+          },
+          {
+            "key": "C",
+            "text": "명시적인 사용자 식별자를 전달하는 CheckOrderApproverRole(UserId)"
+          },
+          {
+            "key": "D",
+            "text": "필수 보안 검사로서 RequireOrderApproverRole()"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SEC-003",
@@ -105,7 +151,30 @@
     "explanation": "화면이 PayrollAdmin 역할로 제한되면, 사용자는 그 역할을 보유해야 접근할 수 있습니다(최소 한 개 역할 필요).",
     "source": "Training Workbook 6 - Screen Permission Check (Screen Roles property)",
     "status": "flagged",
-    "verifyNote": "정답 선택지 문구가 모호(‘PayrollAdmin 역할을 포함하는 최소 한 개 역할’)해 리라이트/검수 필요."
+    "verifyNote": "정답 선택지 문구가 모호(‘PayrollAdmin 역할을 포함하는 최소 한 개 역할’)해 리라이트/검수 필요.",
+    "i18n": {
+      "ko": {
+        "stem": "Employee 레코드 애플리케이션에서 Payroll_Update 화면(Screen)은 PayrollAdmin Role로만 제한되어 있다. 사용자가 이 화면에 접근하기 위한 최소 요건은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "사용자는 PayrollAdmin이 부여한 아무 단일 Role을 하나 보유해야 한다"
+          },
+          {
+            "key": "B",
+            "text": "사용자는 PayrollAdmin Role을 포함하는 Role을 최소 하나 이상 보유해야 한다"
+          },
+          {
+            "key": "C",
+            "text": "사용자는 Registered Role로 로그인되어 있어야 한다"
+          },
+          {
+            "key": "D",
+            "text": "사용자는 Anonymous 접근이 활성화되어 있어야 한다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SEC-004",
@@ -141,7 +210,30 @@
     "explanation": "현재 컨텍스트에 핸들러가 없으면 런타임이 **bubble-up**으로 바깥 컨텍스트를 차례로 탐색하다가, 최종적으로 **모듈 수준의 전역 예외 핸들러**까지 올라갑니다.",
     "source": "Training Workbook 6 - Exception Handler (Bubble-up behavior and Global Exception Handler)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product 생성 워크플로우를 테스트하던 중, ProductEditor Role을 가진 사용자가 ProductCreate 액션을 호출한다. 이 액션에는 ProductAdmin Role을 검사하는 If 블록(Block) 안에 Raise Exception 노드가 포함되어 있다. 예외가 발생했을 때 현재 액션 플로우에는 해당하는 예외 핸들러(Exception Handler)가 존재하지 않는다. 다음에는 무슨 일이 일어나는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "애플리케이션이 즉시 종료되고 사용자에게 런타임 오류가 표시된다"
+          },
+          {
+            "key": "B",
+            "text": "실행이 bubble-up 되어 바깥 컨텍스트에서 일치하는 예외 핸들러를 탐색하며, 최종적으로 모듈 수준의 전역 예외 핸들러(Global Exception Handler)까지 도달한다"
+          },
+          {
+            "key": "C",
+            "text": "예외가 자동으로 로그에 기록되고 플로우는 다음 단계부터 정상적으로 계속된다"
+          },
+          {
+            "key": "D",
+            "text": "예외가 조용히 무시되고 액션은 기본 성공 상태를 반환한다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SEC-005",
@@ -176,7 +268,30 @@
     "explanation": "전용 핸들러를 둘 수 있는 예외 유형은 **Database·Security·Communication·(Custom) User Exceptions**입니다. **Business Logic Exception**은 별도 유형으로 존재하지 않습니다.",
     "source": "Training Workbook 6 - Exception Handler (Exception handler flows)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다음 중 OutSystems 액션에서 전용 핸들러(dedicated handler)를 가질 수 있는 예외(Exception) 유형이 아닌 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Database Exceptions"
+          },
+          {
+            "key": "B",
+            "text": "Security Exceptions"
+          },
+          {
+            "key": "C",
+            "text": "Business Logic Exceptions"
+          },
+          {
+            "key": "D",
+            "text": "Communication Exceptions"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SEC-006",
@@ -212,6 +327,29 @@
     "explanation": "이미 존재하는 사용자에게 역할을 부여하는 것이지 **새 사용자 계정을 만들지 않습니다**(사용자는 Users 앱에서 별도로 생성·관리). A(즉시 접근), B(역할이 참조/공개돼야 목록에 보임), D(부여·회수 가능)는 모두 맞습니다.",
     "source": "Training Workbook 6 - Users (creation and management) and Roles (role assignment)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Customer 관리 애플리케이션에서 InvoiceApprover라는 Role을 생성했다. Users 애플리케이션에서 이 Role을 사용자에게 수동으로 할당할 때, 다음 중 가능하지 않은 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "사용자는 InvoiceApprover Role로 제한된 화면(Screen)에 즉시 접근할 수 있다"
+          },
+          {
+            "key": "B",
+            "text": "InvoiceApprover Role이 Users 애플리케이션의 Dropdown에 표시되려면 애플리케이션 모듈 내에서 참조되어야 한다"
+          },
+          {
+            "key": "C",
+            "text": "Role 할당이 OutSystems 플랫폼에 새로운 사용자 계정을 생성한다"
+          },
+          {
+            "key": "D",
+            "text": "이후 Users 애플리케이션에서 해당 Role을 사용자로부터 회수(revoke)할 수 있다"
+          }
+        ]
+      }
+    }
   }
 ]

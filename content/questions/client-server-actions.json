@@ -38,7 +38,30 @@
     },
     "source": "Training Workbook 5 - Calling Other Actions (pages 31-41)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "데이터베이스에서 오더 상세 정보를 조회하고, 오더 총액을 검증한 후, 인벤토리를 업데이트해야 하는 Order 입력 화면용 Client Action을 설계하고 있다. 다음 중 OutSystems에서 이 로직을 구성하는 올바른 방법을 설명한 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "동일한 Client Action 내에서, Server Action 1을 호출하여 오더 상세 정보를 조회한 다음, Server Action 2를 호출하여 인벤토리를 업데이트한다."
+          },
+          {
+            "key": "B",
+            "text": "하나의 Server Action을 호출하여 데이터베이스 조회와 인벤토리 업데이트 작업을 모두 처리한다."
+          },
+          {
+            "key": "C",
+            "text": "검증에만 Client Action을 사용하고, 데이터 작업을 위해서는 별도의 Server Action들을 생성한다."
+          },
+          {
+            "key": "D",
+            "text": "하나의 Client Action 플로우 내에서 여러 Server Action을 순차적으로 호출하여 세 가지 작업을 모두 수행한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "CSA-002",
@@ -79,7 +102,30 @@
     },
     "source": "Training Workbook 5 - Aggregate (pages 92-104)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product 관리 애플리케이션에서, 고객의 기준에 일치하는 프로덕트를 데이터베이스에서 조회하고 여러 개의 필터를 적용해야 한다. OutSystems에서 이 데이터베이스 쿼리를 어디에 정의해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "실시간 필터링 업데이트가 가능하도록 Product 목록 화면의 Client Action 내에 정의한다."
+          },
+          {
+            "key": "B",
+            "text": "쿼리를 시각적으로 정의하기 위해 Aggregate를 사용하는 Server Action 내에 정의한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate는 애플리케이션 어디에서나 사용할 수 있으므로, 화면의 Aggregate에 정의한다."
+          },
+          {
+            "key": "D",
+            "text": "Client Action도 쿼리를 동기적으로 실행할 수 있으므로, Client Action 내에 정의한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "CSA-003",
@@ -120,7 +166,30 @@
     },
     "source": "Training Workbook 5 - Custom validations & Form Validations (pages 135-152)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Invoice 생성 화면에 대한 폼 검증을 구현하고 있다. Invoice Amount는 양수여야 하며, Invoice Date는 미래일 수 없다. 다음 중 이러한 검증을 구현하는 방법을 올바르게 설명한 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OutSystems가 모든 비즈니스 로직을 자동으로 적용하므로, input 위젯의 빌트인 유효성 검사(Built-in Validations)만 사용한다."
+          },
+          {
+            "key": "B",
+            "text": "커스텀 검증 로직에서 input 위젯의 Valid 속성을 False로, ValidationMessage 값을 설정한 후, 액션 플로우에서 Form.Valid를 확인한다."
+          },
+          {
+            "key": "C",
+            "text": "Form 검증 속성은 Client Action에서 접근할 수 없으므로, 커스텀 검증을 Server Action에서 정의한다."
+          },
+          {
+            "key": "D",
+            "text": "빌트인 검증과 커스텀 검증을 모두 구현하되, 커스텀 검증을 통과하면 Form.Valid 확인은 건너뛴다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "CSA-004",
@@ -160,7 +229,30 @@
     },
     "source": "Training Workbook 5 - Calling Other Actions (pages 31-41)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Customer 오더를 처리하기 위한 Server Action을 생성했다. 이 Server Action은 내부적으로 인벤토리 수준을 검증한 다음 오더를 데이터베이스에 커밋해야 한다. 이 Server Action이 직접 호출할 수 있는 액션은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "다른 Server Action만 호출할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "Client Action과 Server Action을 모두 호출할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Client Action만 호출할 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "다른 어떤 액션도 호출할 수 없으며, Server Action은 자체적으로 완결되어야 한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "CSA-005",
@@ -201,7 +293,30 @@
     },
     "source": "Training Workbook 3 - Screen Actions & Client Actions (pages 35-45)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Cart 관리 화면은 프로덕트 수량을 업데이트하기 위해 Client Action을 사용한다. 사용자가 수량을 변경하면 UI에 새로운 장바구니 총액이 즉시 반영되어야 한다. Client Action의 어떤 특성이 이러한 동작을 가능하게 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Action은 서버에서 실행되므로, 변경 사항이 데이터베이스와 즉시 동기화된다."
+          },
+          {
+            "key": "B",
+            "text": "Client Action 내에서 데이터가 변경되면 UI 요소가 즉시 반응하여 실시간 업데이트가 가능하다."
+          },
+          {
+            "key": "C",
+            "text": "Client Action은 명시적인 Server Action 호출 없이 화면을 자동으로 새로고침한다."
+          },
+          {
+            "key": "D",
+            "text": "Client Action은 폼 검증을 우회하여 화면에서 더 빠른 데이터 업데이트를 가능하게 한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "CSA-006",
@@ -243,6 +358,29 @@
     },
     "source": "Training Workbook 5 - Custom validations & Calling Other Actions (pages 135-152, 31-41)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다음 요구사항을 가진 Employee 급여 제출 폼을 구현하고 있다: (1) 급여가 음수가 아닌지 검증, (2) 급여가 직원의 역할(데이터베이스에서 조회)에 따른 회사 최대값을 초과하지 않는지 검증, (3) 저장 전 Form.Valid 확인. 다음 중 이를 올바르게 구현하는 방법은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate를 사용하여 역할 최대값을 조회하며 두 검증을 모두 Screen Action에서 구현한 후, Form.Valid를 확인한다."
+          },
+          {
+            "key": "B",
+            "text": "검증 1은 빌트인 검증으로 구현하고, 검증 2는 Client Action에서 Server Action을 호출하여 처리하며, Client Action에서 Form.Valid를 확인한다."
+          },
+          {
+            "key": "C",
+            "text": "모든 검증을 하나의 Server Action에서 구현한 후, 폼의 유효 여부를 나타내는 boolean을 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "검증 1에는 빌트인 검증만 사용하고, Client Action에서는 데이터베이스로부터 데이터를 조회할 수 없으므로 검증 2는 생략한다."
+          }
+        ]
+      }
+    }
   }
 ]

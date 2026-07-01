@@ -38,7 +38,30 @@
     },
     "source": "Training Workbook 9 - Screen Lifecycle, Page 2",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "HTML Document 구성이 완료되어 DOM 조작이 가능한 시점에 발생하는 이벤트는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Ready 이벤트"
+          },
+          {
+            "key": "B",
+            "text": "Initialize 이벤트"
+          },
+          {
+            "key": "C",
+            "text": "Render 이벤트"
+          },
+          {
+            "key": "D",
+            "text": "After Fetch 이벤트"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SL-002",
@@ -79,7 +102,30 @@
     },
     "source": "Training Workbook 9 - Screen Lifecycle, Page 3",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 이커머스 애플리케이션의 동일한 화면에 Product 목록과 그에 해당하는 Reviews가 표시된다. 두 목록은 각각 별도의 Aggregate(FetchProducts와 FetchReviews)를 사용한다. 이들의 실행 순서에 대한 설명 중 올바른 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "위젯이 product에 먼저 액세스하므로 FetchProducts는 항상 FetchReviews보다 먼저 완료된다."
+          },
+          {
+            "key": "B",
+            "text": "실행 순서는 화면 정의에 나타나는 순서를 따르도록 보장된다."
+          },
+          {
+            "key": "C",
+            "text": "두 Aggregate는 비동기적으로 실행되므로 어느 것이 먼저 완료될지 보장되지 않는다."
+          },
+          {
+            "key": "D",
+            "text": "두 Aggregate는 Render 이벤트 전에 항상 동시에 완료된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SL-003",
@@ -120,7 +166,30 @@
     },
     "source": "Training Workbook 9 - Screen Lifecycle, Page 7",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order 관리 화면을 구축하고 있다. Aggregate를 사용하여 order를 가져오고, 화면이 렌더링되기 전에 데이터가 로드되도록 해야 한다. 어떤 Fetch 속성 설정을 사용해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Only on demand"
+          },
+          {
+            "key": "B",
+            "text": "At Start"
+          },
+          {
+            "key": "C",
+            "text": "On Ready"
+          },
+          {
+            "key": "D",
+            "text": "On Render"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SL-004",
@@ -161,7 +230,30 @@
     },
     "source": "Training Workbook 9 - Screen Lifecycle, Page 9",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Customer Dashboard 화면에 Fetch 속성이 'Only on demand'로 설정된 GetCustomerDetails Aggregate가 있다. 다음 중 이 Aggregate를 트리거하는 올바른 방법이 아닌 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "검색 버튼이 클릭될 때 Action Flow의 Refresh Data 노드를 사용한다."
+          },
+          {
+            "key": "B",
+            "text": "화면이 초기화될 때 Refresh Data 노드를 자동으로 호출한다."
+          },
+          {
+            "key": "C",
+            "text": "화면의 Ready 이벤트가 트리거될 때 자동으로 실행되도록 의존한다."
+          },
+          {
+            "key": "D",
+            "text": "Action Flow를 통해 사용자 행동에 반응하여 프로그래밍 방식으로 트리거한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SL-005",
@@ -203,7 +295,30 @@
     },
     "source": "Training Workbook 9 - Screen Lifecycle, Page 3",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Screen Lifecycle에서 After Fetch 이벤트는 언제 발생하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Ready 이벤트가 완료된 후"
+          },
+          {
+            "key": "B",
+            "text": "Aggregate가 실행된 후"
+          },
+          {
+            "key": "C",
+            "text": "화면 렌더링이 완료된 후"
+          },
+          {
+            "key": "D",
+            "text": "사용자가 화면에서 다른 곳으로 이동한 후"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SL-006",
@@ -245,7 +360,30 @@
     },
     "source": "Training Workbook 9 - Screen Lifecycle, Page 6",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product Catalog 화면에 'At Start'로 설정된 여러 개의 Aggregate가 있다. 애플리케이션은 종속 쿼리가 특정 순서로 실행되도록 보장해야 한다(예: 먼저 Categories를 가져온 다음 선택된 Category로 필터링된 Products를 가져옴). 올바른 실행 순서를 어떻게 보장해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "화면 정의 패널에서 Aggregate들을 실행되어야 하는 순서대로 구성한다."
+          },
+          {
+            "key": "B",
+            "text": "첫 번째 Aggregate의 After Fetch 이벤트를 사용하여 Refresh Data를 통해 두 번째 Aggregate를 트리거한다."
+          },
+          {
+            "key": "C",
+            "text": "정확한 실행 순서를 제어할 수 있도록 두 Aggregate를 모두 'Only on demand'로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "순차 처리를 보장하기 위해 Aggregate 실행 사이에 지연 타이머를 추가한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "SL-007",
@@ -287,6 +425,29 @@
     },
     "source": "Training Workbook 9 - Screen Lifecycle, Pages 2-3",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Invoice 화면은 Render 이벤트를 사용하여 여러 Aggregate의 데이터를 바인딩해 Invoice 세부 정보, line item, 결제 상태를 표시한다. Render 이벤트가 언제 실행되는지와 그 영향을 올바르게 설명한 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Render는 모든 Aggregate가 완료될 때 한 번 실행되어 모든 데이터를 바인딩에 사용할 수 있도록 보장한다."
+          },
+          {
+            "key": "B",
+            "text": "Render는 화면과 block이 렌더링되면서 여러 번 실행되므로, 초기 렌더링에서는 모든 Aggregate 데이터를 사용하지 못할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Render는 Ready 이벤트 직후, 어떤 Aggregate도 실행되기 전에 실행된다."
+          },
+          {
+            "key": "D",
+            "text": "Render는 사용자가 화면 요소와 상호작용할 때에만 실행된다."
+          }
+        ]
+      }
+    }
   }
 ]

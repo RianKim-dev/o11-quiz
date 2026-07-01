@@ -37,7 +37,30 @@
     },
     "source": "Workbook 4, Entity Reference section, page 2",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다음 중 OutSystems 11에서 reference 속성의 기본값을 설정하기 위한 올바른 함수는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "NullIdentifier()"
+          },
+          {
+            "key": "B",
+            "text": "EmptyId()"
+          },
+          {
+            "key": "C",
+            "text": "NullValue()"
+          },
+          {
+            "key": "D",
+            "text": "DefaultReference()"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "REL-002",
@@ -77,7 +100,30 @@
     },
     "source": "Workbook 4, Delete Rule section, page 3",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "귀하는 e-커머스 시스템의 데이터베이스를 설계하고 있다. 한 명의 Employee는 여러 개의 Order를 관리할 수 있으나, Employee 레코드를 삭제하면 관련된 모든 Order도 자동으로 삭제되어야 한다. OrderEmployeeId reference 속성에 어떤 Delete Rule을 설정해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Protect"
+          },
+          {
+            "key": "B",
+            "text": "Delete"
+          },
+          {
+            "key": "C",
+            "text": "Ignore"
+          },
+          {
+            "key": "D",
+            "text": "Cascade"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "REL-003",
@@ -117,7 +163,30 @@
     },
     "source": "Workbook 4, Many-to-Many and Linking Entity sections, pages 5-6",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "하나의 Product는 여러 Order에 속할 수 있고, 각 Order는 여러 Product를 포함할 수 있다. 여기에 더해 각 Order 내 Product의 Quantity도 추적하는 관계를 생성해야 한다. 어떤 유형의 관계 구조가 필요하며, linking entity는 어떤 추가 속성을 가져야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "1-to-Many 관계이며, linking entity는 ProductId와 Quantity 속성만 필요하다"
+          },
+          {
+            "key": "B",
+            "text": "Many-to-Many 관계이며, linking entity는 자체 Id, ProductId, OrderId, Quantity 속성을 가져야 한다"
+          },
+          {
+            "key": "C",
+            "text": "Many-to-Many 관계이며, linking entity는 ProductId와 OrderId 속성만 필요하다"
+          },
+          {
+            "key": "D",
+            "text": "1-to-1 관계이며, linking entity는 ProductId, OrderId, Quantity 속성을 가져야 한다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "REL-004",
@@ -157,7 +226,30 @@
     },
     "source": "Workbook 4, Multiple Sources and Join Example sections, page 6",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "관계가 있는 여러 source를 사용하는 Aggregate에서, OutSystems 11의 자동 join 생성에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Entity에 관계가 있는 경우 OutSystems가 자동으로 join 조건을 생성한다"
+          },
+          {
+            "key": "B",
+            "text": "관계가 정의된 Entity의 경우에도 모든 join 조건을 수동으로 구성해야 한다"
+          },
+          {
+            "key": "C",
+            "text": "'Only With' join 유형은 Entity 간에 일치하는 항목이 있는 레코드만 반환한다"
+          },
+          {
+            "key": "D",
+            "text": "'With or Without' join 유형은 오른쪽 Entity에 일치하는 항목이 없더라도 왼쪽 Entity의 모든 행을 반환한다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "REL-005",
@@ -197,7 +289,30 @@
     },
     "source": "Workbook 4, Extension Entity section, page 4",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11의 Extension Entity에서, extension entity는 base entity와 어떤 식별자(identifier)를 공유하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "extension entity를 위해 별도로 생성된 고유 식별자"
+          },
+          {
+            "key": "B",
+            "text": "base entity와 동일한 식별자"
+          },
+          {
+            "key": "C",
+            "text": "두 entity의 ID를 결합한 복합 식별자"
+          },
+          {
+            "key": "D",
+            "text": "수동으로 구성해야 하는 텍스트 기반 식별자"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "REL-006",
@@ -237,6 +352,29 @@
     },
     "source": "Workbook 4, Aggregate filters and filtering with multiple sources sections, pages 26-27",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "귀하는 Customer Invoice 시스템을 구축하고 있다. 한 명의 Customer는 여러 개의 Invoice를 가질 수 있고, 각 Invoice는 여러 Product를 포함한다. CustomerId reference 속성을 가진 Invoice entity와 InvoiceProduct linking entity를 생성한 후, 특정 invoice의 모든 product를 조회하는 Aggregate가 예상보다 많은 행을 반환하는 것을 발견했다. 해당 invoice에는 3개의 product가 있으나 Aggregate 결과에는 6개의 행이 표시된다. 가장 유력한 원인은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "join 유형이 'Only With'가 아닌 'With'로 설정되어 있어, 관련 없는 invoice에서 중복 행이 발생한다"
+          },
+          {
+            "key": "B",
+            "text": "Aggregate에 표시 대상인 특정 invoice와 일치시키기 위한 InvoiceId 필터 조건이 누락되어 있다"
+          },
+          {
+            "key": "C",
+            "text": "InvoiceProduct entity에 각 product 레코드가 데이터베이스에 여러 개 복제되어 있다"
+          },
+          {
+            "key": "D",
+            "text": "Product join을 위한 Static entity가 제대로 초기화되지 않았다"
+          }
+        ]
+      }
+    }
   }
 ]

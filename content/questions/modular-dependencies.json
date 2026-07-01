@@ -37,7 +37,30 @@
     },
     "source": "Training Workbook 1 - Producers and Consumers (lines 179-195)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems에서 다른 모듈이 노출한 기능을 사용하는 모듈을 지칭하는 용어는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Producer"
+          },
+          {
+            "key": "B",
+            "text": "Consumer"
+          },
+          {
+            "key": "C",
+            "text": "Provider"
+          },
+          {
+            "key": "D",
+            "text": "Distributor"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "MOD-002",
@@ -78,7 +101,30 @@
     },
     "source": "Training Workbook 1 - Manage Dependencies (lines 393-405) and Training Workbook 3 (lines 306-321)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Invoice 모듈을 개발하고 있으며, 다른 애플리케이션에 있는 Product 모듈의 Customer entity를 사용해야 한다. 다음 중 Customer entity를 참조하기 위해 필요한 단계가 아닌 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Product 모듈에서 Customer entity가 Public으로 설정되어 있는지 확인한다."
+          },
+          {
+            "key": "B",
+            "text": "Invoice 모듈에서 Manage Dependencies 대화상자를 연다."
+          },
+          {
+            "key": "C",
+            "text": "entity를 참조하기 전에 Product 모듈을 게시(publish)한다."
+          },
+          {
+            "key": "D",
+            "text": "먼저 Invoice 모듈의 모든 로컬 Customer 레코드를 삭제한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "MOD-003",
@@ -119,7 +165,30 @@
     },
     "source": "Training Workbook 3 - Configure Movies Screen, Refer existing entities (lines 306-321)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "AddItemToCart라는 Public Server Action을 노출하는 Cart 모듈(Producer)이 있다. Product 모듈(Consumer)에서 이 액션을 사용하려고 한다. Manage Dependencies를 통해 의존성을 성공적으로 추가했으나, Product 모듈 컴파일이 미해결 참조(unresolved reference) 오류로 실패한다. 가장 먼저 수행해야 할 문제 해결(troubleshooting) 단계는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Cart 모듈을 삭제하고 처음부터 다시 만든다."
+          },
+          {
+            "key": "B",
+            "text": "Cart 모듈이 게시되었는지, 그리고 AddItemToCart 액션이 Public으로 설정되어 있는지 확인한다."
+          },
+          {
+            "key": "C",
+            "text": "Product 모듈 유형을 Reactive Web App에서 Service로 변경한다."
+          },
+          {
+            "key": "D",
+            "text": "컴파일이 성공할 때까지 의존성을 여러 번 제거하고 다시 추가한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "MOD-004",
@@ -160,6 +229,29 @@
     },
     "source": "Training Workbook 1 - Producers and Consumers (lines 179-195)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다중 애플리케이션 시스템에서 Module A(Application 1에 위치)가 Module B(Application 2에 위치)의 Entity를 참조해야 한다. 다음 중 OutSystems의 모듈 의존성 기능과 제약 사항을 정확하게 설명한 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Producer와 Consumer는 서로 다른 애플리케이션에 위치할 수 있으며, entity는 애플리케이션 경계를 넘어 자유롭게 참조될 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "애플리케이션 간 참조는 두 모듈의 유형이 동일한 경우(예: 둘 다 Reactive Web App)에만 가능하다."
+          },
+          {
+            "key": "C",
+            "text": "Producer와 Consumer는 서로 다른 애플리케이션에 위치할 수 있으나, Module B의 entity는 반드시 Public으로 설정되어야 하고 Module B는 게시되어야 한다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems 11에서는 애플리케이션 간 모듈 의존성이 지원되지 않으며, 모든 모듈은 동일한 애플리케이션에 있어야 한다."
+          }
+        ]
+      }
+    }
   }
 ]

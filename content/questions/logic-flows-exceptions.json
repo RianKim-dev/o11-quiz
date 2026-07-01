@@ -37,7 +37,30 @@
     },
     "source": "Training Workbook 5 (Logic and Validations) · Logic → Use If / decisions in flows",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다음 Client Action을 살펴보십시오. 이 Action이 **N = 50**으로 호출됩니다. Action이 종료될 때 `result`의 값은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "\"High\""
+          },
+          {
+            "key": "B",
+            "text": "\"Medium\""
+          },
+          {
+            "key": "C",
+            "text": "\"Low\""
+          },
+          {
+            "key": "D",
+            "text": "Action이 예외를 발생시킨다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-002",
@@ -76,7 +99,30 @@
     },
     "source": "Training Workbook 6 (Role-based Security and Exceptions) · Logic → Handle exceptions (공식 Sample Exam Q14와 동일 논리)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Server Action이 Aggregate `GetUserById`를 사용하여 레코드를 가져옵니다. 요청한 사용자가 존재하지 **않으면** Aggregate는 0개의 레코드를 반환합니다. 기본적으로(추가 로직을 넣지 않은 상태에서), 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "`NotFoundException`이 자동으로 발생한다."
+          },
+          {
+            "key": "B",
+            "text": "예외가 발생하지 않으며, Aggregate는 단순히 빈 리스트를 반환한다."
+          },
+          {
+            "key": "C",
+            "text": "`DatabaseException`이 발생한다."
+          },
+          {
+            "key": "D",
+            "text": "플로우가 조용히 멈추고 End 노드에 도달하지 않는다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-003",
@@ -114,7 +160,30 @@
     },
     "source": "Training Workbook 6 · Logic → Handle exceptions (Exception Handler, All Exceptions)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems의 **Exception Handler**에 대한 다음 설명 중 올바른 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "`All Exceptions`로 설정된 Exception Handler 플로우는 더 구체적인 핸들러가 잡지 않은 모든 예외를 잡는다."
+          },
+          {
+            "key": "B",
+            "text": "각 Action은 총 하나의 Exception Handler 플로우만 가질 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Exception Handler는 Server Action에만 추가할 수 있으며, Client Action에는 절대 추가할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "Exception Handler가 없으면 예외는 조용히 무시되고 플로우가 계속 진행된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-004",
@@ -153,7 +222,30 @@
     },
     "source": "Training Workbook 5 / 6 · Logic → Raise an exception (User Exceptions) (공식 Sample Exam Q20 유형)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Server Action이 유효하지 않은 입력 값을 감지했을 때 **처리를 중단하고 호출자에게 이를 알려야** 합니다. 이를 수행하는 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "If 노드를 추가하고, \"invalid\" 분기에서 Raise Exception 노드를 사용하여 User Exception을 발생시킨다."
+          },
+          {
+            "key": "B",
+            "text": "If 노드를 추가하고 \"invalid\" 분기를 End 노드에 직접 연결한다."
+          },
+          {
+            "key": "C",
+            "text": "Assign을 사용하여 출력 변수를 \"error\"로 설정하고 플로우가 정상적으로 계속되도록 둔다."
+          },
+          {
+            "key": "D",
+            "text": "아무것도 하지 않는다 — OutSystems는 입력이 유효하지 않을 때마다 자동으로 예외를 발생시킨다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-005",
@@ -193,7 +285,30 @@
     },
     "source": "Training Workbook 5 - Logic Flow section (p.1)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11에서 하나의 Logic Flow는 몇 개의 Start 노드를 포함할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "정확히 하나"
+          },
+          {
+            "key": "B",
+            "text": "0개 또는 1개"
+          },
+          {
+            "key": "C",
+            "text": "1개 이상"
+          },
+          {
+            "key": "D",
+            "text": "필요한 만큼, 제한이 없다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-006",
@@ -233,7 +348,30 @@
     },
     "source": "Training Workbook 5 - Assign section (p.1-2)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 로직 플로우에서, 하나의 Assign 노드에 여러 할당을 정의하면 변수에 값이 어떤 순서로 대입됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "병렬로; 모든 할당이 동시에 실행된다"
+          },
+          {
+            "key": "B",
+            "text": "노드에 나타난 순서대로 위에서 아래로"
+          },
+          {
+            "key": "C",
+            "text": "역순으로 아래에서 위로"
+          },
+          {
+            "key": "D",
+            "text": "런타임 엔진이 결정하는 무작위 순서로"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-007",
@@ -273,7 +411,30 @@
     },
     "source": "Training Workbook 5 - Calling Other Actions section (p.1)",
     "status": "flagged",
-    "verifyNote": "‘여러 Server Action 호출은 권장되지 않는다’가 공식 베스트프랙티스로 확실치 않아 검수 필요."
+    "verifyNote": "‘여러 Server Action 호출은 권장되지 않는다’가 공식 베스트프랙티스로 확실치 않아 검수 필요.",
+    "i18n": {
+      "ko": {
+        "stem": "한 Server Action이 자신의 로직 플로우 내에서 여러 Server Action을 순차적으로 호출합니다. OutSystems 11 베스트 프랙티스에 따르면, 이 접근 방식의 주된 우려 사항은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "명시적으로 금지되어 있으며 컴파일 오류를 발생시킨다"
+          },
+          {
+            "key": "B",
+            "text": "여러 Server Action을 호출하는 것은 트랜잭션 처리와 오류 복구를 복잡하게 만들기 때문에 권장되지 않는다"
+          },
+          {
+            "key": "C",
+            "text": "Server Action은 다른 Server Action이 아니라 Client Action만 호출할 수 있다"
+          },
+          {
+            "key": "D",
+            "text": "여러 Server Action 호출은 자동으로 별도의 데이터베이스 트랜잭션을 생성한다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-008",
@@ -313,7 +474,30 @@
     },
     "source": "Training Workbook 6 - Exception Occurrence and Exception Handler sections (p.4)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 예외 처리에 대한 다음 설명 중 올바르지 **않은** 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예외가 발생하면 실행이 중단되고 Exception Handler 플로우로 이동한다"
+          },
+          {
+            "key": "B",
+            "text": "예외가 처리된 후 실행이 원래 플로우로 자동으로 복귀한다"
+          },
+          {
+            "key": "C",
+            "text": "하나의 Action 플로우는 서로 다른 예외 유형에 대해 여러 개의 예외 처리기를 포함할 수 있다"
+          },
+          {
+            "key": "D",
+            "text": "현재 컨텍스트에 핸들러가 없으면 런타임은 bubble-up을 수행하여 바깥 컨텍스트를 확인한다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-009",
@@ -354,7 +538,30 @@
     },
     "source": "Training Workbook 6 - Exception Handler section (p.4-5)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OrderProcessing 액션에서 고객의 Credit Limit을 초과할 때 Raise Exception 노드가 트리거됩니다. 예외가 발생한 후의 올바른 동작은 다음 중 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예외가 발생하고 Raise Exception 노드 이후에도 액션이 실행을 계속한다"
+          },
+          {
+            "key": "B",
+            "text": "예외가 발생하고, 실행이 매칭되는 Exception Handler로 점프하며, 원래 플로우는 우회된다"
+          },
+          {
+            "key": "C",
+            "text": "예외 메시지가 기록되지만 실행은 정상적으로 계속된다"
+          },
+          {
+            "key": "D",
+            "text": "액션이 Exception Handler로 진행하기 전에 사용자 확인을 기다린다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-010",
@@ -395,7 +602,30 @@
     },
     "source": "Training Workbook 6 - Checking Roles in Logic section and exercise (p.8-12)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "ProductValidation Server Action에서 제품 삭제를 허용하기 전에 현재 사용자가 'WarehouseManager' 역할을 가지고 있는지 확인해야 합니다. 이 액션은 Success 플래그와 Message를 반환해야 합니다. Raise Exception으로 역할 확인을 추가한 후, If 노드에서 False 분기가 Raise Exception으로 연결되어 있는 것으로 나타납니다. 필요한 수정 조치는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Raise Exception 노드를 삭제한다; 역할 확인은 다른 방식을 사용해야 한다"
+          },
+          {
+            "key": "B",
+            "text": "If 커넥터를 서로 바꿔(Swap) True 분기(역할 확인 통과)가 메인 플로우로 가고 False가 Raise Exception으로 가도록 한다"
+          },
+          {
+            "key": "C",
+            "text": "예외 유형을 확인하기 위해 Raise Exception 앞에 추가 If 노드를 넣는다"
+          },
+          {
+            "key": "D",
+            "text": "Exception Handler를 특정 유형 대신 모든 예외를 잡도록 변경한다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-011",
@@ -436,7 +666,30 @@
     },
     "source": "Training Workbook 5 - For Each section (p.2-3)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "InvoiceSubmit 액션에서 모든 Invoice Item을 순회하며 각각에 할인을 적용하려고 합니다. 어떤 OutSystems 로직 플로우 구성 요소를 사용해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "각 항목을 확인하는 If 문"
+          },
+          {
+            "key": "B",
+            "text": "항목 유형에 따라 라우팅하는 Switch 문"
+          },
+          {
+            "key": "C",
+            "text": "Invoice Item 리스트를 순회하는 For Each 루프"
+          },
+          {
+            "key": "D",
+            "text": "처리 전에 모든 항목을 가져오는 Aggregate"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-012",
@@ -477,7 +730,30 @@
     },
     "source": "Training Workbook 5 - Aggregate section (p.3)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "EmployeeDataSync Server Action에서 직원 레코드를 가져오기 위해 Aggregate를 추가한 다음 이를 수정합니다. Aggregate는 액션 플로우의 어느 시점에 실행됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Server Action 내의 Aggregate는 백그라운드에서 비동기적으로 실행된다"
+          },
+          {
+            "key": "B",
+            "text": "Action 플로우의 순서에 따라 동기적으로"
+          },
+          {
+            "key": "C",
+            "text": "Server Action 내의 Aggregate는 지연되어 액션이 배포될 때만 실행된다"
+          },
+          {
+            "key": "D",
+            "text": "Aggregate는 If 조건에서 참조되는 경우에만 자동으로 실행된다"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "LFE-013",
@@ -518,6 +794,29 @@
     },
     "source": "Training Workbook 6 - Exception Handler section (p.4-5) and exercise (p.8-12)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "CartCheckout Server Action은 재고가 소진되었을 때 커스텀 'InsufficientStock' 예외를 발생시키도록 설계되어 있습니다. 그러나 개발자는 commit 중에 발생할 수 있는 database 예외도 처리해야 하며, 각 예외 유형에 대해 서로 다른 메시지를 표시하고자 합니다. 이 액션에서 예외 처리기는 어떻게 구성되어야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "모든 예외 유형을 잡는 단일 'All Exceptions' 핸들러를 만들고 그 안에서 예외 유형에 따라 메시지를 결정한다"
+          },
+          {
+            "key": "B",
+            "text": "'InsufficientStock'(커스텀), 'Database Exceptions', 'All Exceptions'(포괄)에 대한 별도의 예외 처리기를 순서대로 만든다"
+          },
+          {
+            "key": "C",
+            "text": "Database Exceptions 핸들러만 만든다; 커스텀 예외는 같은 액션에서 database 예외와 함께 처리할 수 없다"
+          },
+          {
+            "key": "D",
+            "text": "'All Exceptions' 핸들러를 유일한 핸들러로 만든다; 특정 예외 유형은 OutSystems가 자동으로 처리한다"
+          }
+        ]
+      }
+    }
   }
 ]

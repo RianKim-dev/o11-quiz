@@ -37,7 +37,30 @@
     },
     "source": "Training Workbook 7, Block Definition (lines 6-13, 24-26)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "당신은 e-커머스 플랫폼을 위한 ProductRating Block을 설계하고 있다. 이 Block은 제품의 별점(star rating)을 표시한다. 다음 중 Block 아키텍처에 대한 설명으로 올바른 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Block은 상위 Screen과 통신하기 위해 Input Parameter와 Output Parameter를 모두 가질 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "Block은 자체 범위(scope)를 가지며, 상위 Screen의 요소에 접근할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "Block은 복잡한 계층 구조를 생성하기 위해 자기 자신 내부에 재귀적으로 중첩될 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "Block은 인스턴스화되기 전에 상위 Screen 내에 Placeholder가 정의되어 있어야 한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-002",
@@ -77,7 +100,30 @@
     },
     "source": "Training Workbook 7, Block Event & Why an event needs to be triggered (lines 57-87)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OrderSummary Block에서, 고객이 'Cancel Order' 버튼을 클릭할 때 상위 Screen에 이를 알려야 한다. 상위 Screen은 이에 대응하여 자체 로직을 실행해야 한다. Block과 상위 항목(parent) 간의 통신은 어떻게 구현해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Block에 Output Parameter를 사용하여 취소 상태를 나타내는 boolean 값을 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "Input Parameter를 가진 Block 이벤트를 정의하고, 버튼이 클릭될 때 Block에서 이를 트리거한다."
+          },
+          {
+            "key": "C",
+            "text": "Block의 액션 플로우 내에서 상위 Screen 범위의 변수를 직접 수정한다."
+          },
+          {
+            "key": "D",
+            "text": "Block과 상위 Screen이 동시에 접근할 수 있는 공유 데이터베이스 Entity를 생성한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-003",
@@ -117,7 +163,30 @@
     },
     "source": "Training Workbook 7, On Parameters Changed (lines 102-118, 507-515)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "당신은 Rating Input Parameter를 받는 StarDisplay Block을 만들었다. Block의 On Initialize 이벤트에서 RatingToBooleanList 액션을 사용하여 로컬 StarList 변수를 채운다. 상위 Screen은 서로 다른 Rating 값(3과 5)으로 StarDisplay Block의 인스턴스 2개를 인스턴스화한다. 초기화 및 파라미터 변경에 대한 다음 설명 중 올바른 것은?\n\n1. On Initialize 이벤트는 각 Block 인스턴스마다 개별적으로 트리거된다.\n2. 상위 항목이 초기화 이후 Block의 Rating Input 값을 변경하면, On Parameters Changed가 자동으로 트리거된다.\n3. Block 자체 내부에서 Rating이 변경되면, On Parameters Changed가 트리거된다.",
+        "options": [
+          {
+            "key": "A",
+            "text": "설명 1과 2는 올바르고, 설명 3은 올바르지 않다."
+          },
+          {
+            "key": "B",
+            "text": "세 가지 설명(1, 2, 3) 모두 올바르다."
+          },
+          {
+            "key": "C",
+            "text": "설명 1만 올바르고, 설명 2와 3은 올바르지 않다."
+          },
+          {
+            "key": "D",
+            "text": "설명 2와 3은 올바르고, 설명 1은 올바르지 않다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-004",
@@ -157,7 +226,30 @@
     },
     "source": "Training Workbook 7, Event Handler (lines 93-100)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OrderDetail Block에서, 당신은 OrderId(Integer) Input Parameter를 가진 OrderConfirmed라는 이벤트를 정의한다. 상위 Screen은 이 Block을 사용하며 OnOrderConfirmedHandler라는 이벤트 핸들러를 정의한다. 이 이벤트 핸들러에 대한 다음 설명 중 올바른 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "이벤트 핸들러는 상위 Screen의 변수에는 접근할 수 있지만, 이벤트의 OrderId 파라미터 값에는 접근할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "이벤트 핸들러는 이벤트의 OrderId Input Parameter와 상위 Screen의 범위 모두에 접근할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "이벤트 핸들러는 OrderId 파라미터에만 접근할 수 있으며, 상위 Screen의 변수나 로컬 데이터에는 접근할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "이벤트 핸들러는 Block의 범위에서 실행되므로, 상위 Screen 요소나 이벤트 파라미터에 접근할 수 없다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-005",
@@ -197,7 +289,30 @@
     },
     "source": "Training Workbook 7, Placeholder definition (lines 31-45)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다음 중 OutSystems 11 Block에서 Placeholder를 사용하는 올바른 방법이 아닌 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Block이 상위 Screen에서 인스턴스화될 때 Placeholder의 콘텐츠를 정의한다."
+          },
+          {
+            "key": "B",
+            "text": "Block의 각 인스턴스마다 동일한 Placeholder를 서로 다른 콘텐츠로 사용한다."
+          },
+          {
+            "key": "C",
+            "text": "Block의 UI를 위한 공간을 확보하기 위해 상위 Screen 내에 Placeholder를 정의한다."
+          },
+          {
+            "key": "D",
+            "text": "동적 인터페이스 콘텐츠를 위한 공간을 확보하는 Block 내부에서만 Placeholder를 사용한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-006",
@@ -237,7 +352,30 @@
     },
     "source": "Training Workbook 7, Why Use Blocks? (lines 46-56)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "당신은 고객 주소 정보를 표시하는 CustomerAddress Block을 설계하고 있다. 이 Block은 여러 Screen(CustomerList, CustomerDetail, OrderCheckout)에서 재사용될 것이다. 동일한 UI 디자인을 각 Screen에 복사하는 대신 Block을 사용하는 것의 주요(PRIMARY) 장점은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Block은 이벤트 핸들러 없이도 모든 Screen 간에 데이터를 자동으로 동기화한다."
+          },
+          {
+            "key": "B",
+            "text": "Block의 디자인과 로직에 대한 변경 사항이 모든 Screen에 걸친 모든 인스턴스에 자동으로 적용된다."
+          },
+          {
+            "key": "C",
+            "text": "Block은 Input Parameter의 필요성을 없애, 파라미터 전달의 복잡성을 줄인다."
+          },
+          {
+            "key": "D",
+            "text": "Block을 사용하면 애플리케이션의 전체 Screen 수가 줄어들어 애플리케이션 성능이 향상된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-007",
@@ -277,7 +415,30 @@
     },
     "source": "Training Workbook 7, Let's resolve the issue (lines 474-516), Event Execution Flow",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "당신의 MovieDetail Screen에서, StarDisplay Block은 사용자 평점(클릭으로 수정 가능)과 평균 평점(읽기 전용)을 표시한다. 등록된 사용자가 사용자 평점 Block에서 별을 클릭하면:\n\n1. 선택한 별 번호와 함께 StarClicked 이벤트가 트리거된다\n2. 상위 Screen의 이벤트 핸들러가 SelectedStar 파라미터를 받는다\n3. 평점이 데이터베이스에 저장된다\n4. 별 표시를 새로고침하기 위해 StarDisplay Block의 On Parameters Changed 이벤트가 트리거되어야 한다\n\n별이 Screen에서 즉시 업데이트되기 위해 필요한(NECESSARY) 단계는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "1, 2, 3단계만 필요하다. 데이터베이스가 Block을 자동으로 새로고침하므로 4단계는 선택사항이다."
+          },
+          {
+            "key": "B",
+            "text": "Block이 업데이트된 평점을 즉시 표시하도록 하려면 네 단계(1, 2, 3, 4) 모두 필요하다."
+          },
+          {
+            "key": "C",
+            "text": "1과 2단계만 필요하다. 데이터베이스 업데이트(3단계)가 4단계를 자동으로 트리거한다."
+          },
+          {
+            "key": "D",
+            "text": "3단계만 필요하다. 나머지 단계는 명시적인 구성 없이 OutSystems에 의해 자동으로 처리된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-008",
@@ -318,7 +479,30 @@
     },
     "source": "Training Workbook 7, On Parameters Changed (lines 102-119), Event Execution Flow (lines 101-119)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "당신은 제품 재고 수준을 표시하는 InventoryStatus Block을 가지고 있다. 이 Block은 Quantity라는 Input Parameter를 가진다. Block 내부에서, CurrentStock이라는 로컬 변수를 수정하는 여러 작업을 수행한다. 이후, 상위 Screen이 Block의 Quantity Input Parameter를 업데이트한다. 다음을 분석하시오:\n\n1. On Initialize 이벤트는 Block이 처음 로드될 때 실행된다.\n2. On Parameters Changed 이벤트는 상위 항목이 Quantity Input을 업데이트할 때 실행된다.\n3. Block의 로직 내에서 CurrentStock을 수정하면, On Parameters Changed 이벤트가 실행된다.\n4. 단일 Block 인스턴스는 On Initialize와 On Parameters Changed 이벤트를 동시에 모두 활성화할 수 있다.",
+        "options": [
+          {
+            "key": "A",
+            "text": "설명 1, 2, 4는 올바르고, 설명 3은 올바르지 않다."
+          },
+          {
+            "key": "B",
+            "text": "네 가지 설명(1, 2, 3, 4) 모두 올바르다."
+          },
+          {
+            "key": "C",
+            "text": "설명 1과 2만 올바르고, 설명 3과 4는 올바르지 않다."
+          },
+          {
+            "key": "D",
+            "text": "설명 1만 올바르고, 설명 2, 3, 4는 올바르지 않다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "BE-009",
@@ -358,6 +542,29 @@
     },
     "source": "Training Workbook 7, Block definition (lines 12-13), Block Event (lines 57-71), Communication with parent (lines 28-30)",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "당신은 고객이 할인 코드를 입력하고 검증할 수 있는 DiscountCode Block을 구현하고 있다. 이 Block은 검증 결과(유효/무효)와 할인 금액을 상위 Invoice Screen에 다시 전달해야 한다. 이 통신을 구현하는 올바른(CORRECT) 방법은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "검증 결과를 상위 항목에 반환하기 위해 Block에 두 개의 Output Parameter(IsValid와 DiscountAmount)를 생성한다."
+          },
+          {
+            "key": "B",
+            "text": "Input Parameter(IsValid와 DiscountAmount)를 가진 이벤트를 생성하고, 상위 항목에 알리기 위해 Block에서 이를 트리거한다."
+          },
+          {
+            "key": "C",
+            "text": "검증 결과를 저장할 데이터베이스 테이블을 생성하고, Block과 상위 Screen이 모두 이를 읽도록 한다."
+          },
+          {
+            "key": "D",
+            "text": "Block에 Input Parameter를 생성하고, 상위 Screen이 참조를 통해 Block의 로컬 변수를 읽도록 한다."
+          }
+        ]
+      }
+    }
   }
 ]

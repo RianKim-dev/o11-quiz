@@ -37,7 +37,30 @@
     },
     "source": "Workbook 2: Modeling Data - Entity Actions",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11에서 데이터베이스에 생성되는 모든 Entity에 대해 자동으로 생성되지 않는 것은 다음 중 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Id 속성(기본키, Primary Key)"
+          },
+          {
+            "key": "B",
+            "text": "CRUD Entity 액션(Create, Retrieve, Update, Delete)"
+          },
+          {
+            "key": "C",
+            "text": "비즈니스 로직을 위한 계산 속성(Calculated attribute)"
+          },
+          {
+            "key": "D",
+            "text": "데이터 레코드를 저장하기 위한 기본 구조"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-002",
@@ -77,7 +100,30 @@
     },
     "source": "Workbook 2: Modeling Data - Entity-database mapping",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems의 Entity와 데이터베이스 테이블 간의 관계를 가장 잘 설명한 것은 다음 중 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Entity는 단지 UI 표현일 뿐이며, 데이터베이스 테이블에 직접 매핑되지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "Entity는 데이터베이스 테이블에 직접 매핑되며, Attribute는 Column이 되고 Record는 Row가 된다."
+          },
+          {
+            "key": "C",
+            "text": "Entity는 자신의 속성에 따라 여러 개의 데이터베이스 테이블에 매핑될 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "Entity에 대응하는 데이터베이스 테이블을 생성하려면 수동으로 SQL 코드를 작성해야 한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-003",
@@ -117,7 +163,30 @@
     },
     "source": "Workbook 2: Modeling Data - Inferring Data Types",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "EmailAddress 속성을 가진 Customer Entity를 생성한다. 속성 이름을 입력하면 OutSystems가 데이터 타입을 Email로 추론한다. 이러한 동작을 담당하는 OutSystems의 기능은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Automatic Type Casting"
+          },
+          {
+            "key": "B",
+            "text": "Inferring Data Types"
+          },
+          {
+            "key": "C",
+            "text": "Schema Auto-generation"
+          },
+          {
+            "key": "D",
+            "text": "Semantic Validation"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-004",
@@ -157,7 +226,30 @@
     },
     "source": "Workbook 2: Modeling Data - Basic Data Type",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product Entity에서 Currency 데이터 타입을 가진 UnitPrice 속성을 생성한다. 이 속성의 기본값(default value)은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "0"
+          },
+          {
+            "key": "B",
+            "text": "0.0"
+          },
+          {
+            "key": "C",
+            "text": "NullIdentifier()"
+          },
+          {
+            "key": "D",
+            "text": "빈 문자열(\"\")"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-005",
@@ -197,7 +289,30 @@
     },
     "source": "Workbook 4: Data Relationships and Aggregates - Entity Reference",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order Entity가 있으며, 각 Order가 정확히 하나의 Customer를 참조하는 관계를 생성해야 한다. Order의 참조 속성(reference attribute)은 어떤 데이터 타입이어야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Text"
+          },
+          {
+            "key": "B",
+            "text": "Integer"
+          },
+          {
+            "key": "C",
+            "text": "Customer Identifier"
+          },
+          {
+            "key": "D",
+            "text": "Customer Entity"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-006",
@@ -237,7 +352,30 @@
     },
     "source": "Workbook 4: Data Relationships and Aggregates - Delete Rule",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order Entity에 Delete Rule이 'Protect'로 설정되어 Customer Entity를 참조하는 CustomerId 속성이 있다. 한 고객이 자신의 계정을 삭제하려고 하지만 시스템이 삭제를 막는다. 그 이유는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "해당 고객에게 계정을 삭제할 수 있는 필요한 권한이 없다."
+          },
+          {
+            "key": "B",
+            "text": "해당 고객의 CustomerId와 연결된 Order 레코드가 하나 이상 존재하며, Delete Rule이 고아(orphaned) Order가 생기는 것을 방지한다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스 연결이 일시적으로 사용 불가능하다."
+          },
+          {
+            "key": "D",
+            "text": "CustomerId 속성이 필수(mandatory)이며 null이 될 수 없다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-007",
@@ -277,7 +415,30 @@
     },
     "source": "Workbook 2: Modeling Data - Static Entity",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems에서 Static Entity와 일반(동적, dynamic) Entity의 주요 차이점은 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Static Entity는 데이터베이스가 아닌 메모리에 데이터를 저장한다."
+          },
+          {
+            "key": "B",
+            "text": "Static Entity는 런타임에 변경할 수 없는 사전 정의된 레코드를 포함하는 반면, 동적 Entity는 런타임 중에 레코드를 추가하고 수정할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Static Entity는 모든 CRUD 액션을 자동으로 생성하는 반면, 동적 Entity는 Get 액션만 생성한다."
+          },
+          {
+            "key": "D",
+            "text": "Static Entity는 오직 하나의 속성만 가질 수 있는 반면, 동적 Entity는 여러 속성을 가질 수 있다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-008",
@@ -317,7 +478,30 @@
     },
     "source": "Workbook 4: Data Relationships and Aggregates - Many-to-Many, Linking Entity",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order 데이터 모델을 설계하고 있다. 하나의 Order는 여러 Product를 포함할 수 있고, 하나의 Product는 여러 Order에 속할 수 있다. 이 다대다(many-to-many) 관계를 구현하려면 어떤 Entity 구조가 필요한가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Order Entity에 ProductId 참조 속성을 직접 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "Order Entity에 여러 개의 ProductId 속성(ProductId1, ProductId2, ProductId3)을 추가한다."
+          },
+          {
+            "key": "C",
+            "text": "Order와 Product 양쪽을 참조하는 참조 속성을 가진 연결 Entity(linking entity, 예: OrderProduct)를 생성한다."
+          },
+          {
+            "key": "D",
+            "text": "Order와 Product Entity를 하나의 Entity로 병합한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-009",
@@ -357,7 +541,30 @@
     },
     "source": "Workbook 4: Data Relationships and Aggregates - Extension Entity",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order Entity를 확장하기 위해 Invoice Entity를 생성할 때(1대1 관계), Invoice가 정확히 하나의 Order에 연결되도록 보장하려면 무엇을 해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Text 데이터 타입의 일반 OrderId 속성을 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "'Order Identifier' 타입의 OrderId 속성을 추가하고 Is Mandatory를 Yes로 설정한다."
+          },
+          {
+            "key": "C",
+            "text": "서로 다른 접미사를 가진 여러 개의 OrderId 속성을 추가한다."
+          },
+          {
+            "key": "D",
+            "text": "Order를 참조하기 위해 Static Entity를 사용한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "ENT-010",
@@ -397,6 +604,29 @@
     },
     "source": "Workbook 4: Data Relationships and Aggregates - Calculated Attributes",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 직원 이름과 함께 'FirstName LastName (DepartmentName)' 형식으로 표시되는 계산 필드를 함께 표시하려고 한다. 이 계산 필드를 어디에 정의해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Employee Entity에 새로운 속성으로 정의한다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate에서 Expression을 사용하는 Calculated Attribute로 정의한다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스에서 SQL view를 사용하여 정의한다."
+          },
+          {
+            "key": "D",
+            "text": "사용자 인터페이스 화면에서 바인딩 Expression을 가진 Text 위젯을 사용하여 정의한다."
+          }
+        ]
+      }
+    }
   }
 ]

@@ -37,7 +37,30 @@
     },
     "source": "wb5 - Logic and Validations: Debugging Apps / Add Breakpoints",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems에서 리액티브 애플리케이션을 디버깅할 때, Order 입력 화면의 Client Action에 브레이크포인트를 설정합니다. 디버거를 시작하고 애플리케이션을 탐색했으나, 예상과 달리 브레이크포인트에서 실행이 멈추지 않습니다. 다음 중 가장 가능성이 높은 원인은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "브레이크포인트가 설정되어 있으나 Debugger의 Breakpoints 패널에서 일시적으로 비활성화(disabled)되어 있다."
+          },
+          {
+            "key": "B",
+            "text": "Client Action에는 브레이크포인트를 설정할 수 없으며, Server Action에만 설정할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "화면 초기화에 실패하여 Client Action이 호출되지 않고 있다."
+          },
+          {
+            "key": "D",
+            "text": "리액티브 앱의 브레이크포인트는 액션 플로우가 아니라 Render 이벤트 동안에만 활성화된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "DBG-002",
@@ -77,7 +100,30 @@
     },
     "source": "wb5 - Logic and Validations: Debugging Apps / Inspecting Variables",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Customer 관리 리액티브 화면을 디버깅하고 있습니다. 실행 중 Server Action의 브레이크포인트에 도달했으며, Aggregate로 채워진 product 목록 변수의 현재 값을 검사하려고 합니다. OutSystems 디버거에서 사용할 수 있는 검사(inspection) 옵션은 다음 중 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "현재 구문에서 사용 중(In Use)인 변수, 해당 스코프의 Locals, 그리고 앱의 Global 변수를 검사할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "Global 앱 변수와 Screen Widgets만 검사할 수 있으며, 로컬 변수는 검사할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "모든 변수를 검사할 수 있으나, Render 이벤트가 완료된 이후에만 가능하다."
+          },
+          {
+            "key": "D",
+            "text": "Inspector 패널이 Server Action을 지원하지 않으므로, 콘솔에 print 구문을 추가하여 변수를 검사한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "DBG-003",
@@ -118,7 +164,30 @@
     },
     "source": "wb5 - Logic and Validations: Debugging Apps / Debugging the Producer Module",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "리액티브 Invoice 처리 앱에서 ProcessInvoice라는 Server Action(InvoiceManager 모듈)에 브레이크포인트를 설정했으나, 실행이 해당 지점에서 전혀 멈추지 않습니다. 브레이크포인트가 활성화되어 있고 Service Studio 디버거가 실행 중임을 확인했습니다. 그러나 요청이 InvoiceFrontend 모듈의 진입 지점(entry point)으로 전달되고 있음을 확인했습니다. InvoiceManager 내부의 브레이크포인트에서 멈추게 하려면 무엇을 해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "InvoiceManager를 디버깅할 때 InvoiceFrontend를 Entry module로 선택한다."
+          },
+          {
+            "key": "B",
+            "text": "호출된 모듈의 브레이크포인트는 디버깅할 수 없으므로, 브레이크포인트를 InvoiceFrontend로 옮긴다."
+          },
+          {
+            "key": "C",
+            "text": "디버거가 모든 브레이크포인트를 진입 지점 모듈로 자동 라우팅하며, 이 구성은 변경할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "Service Studio 환경설정(preferences)에서 'Cross-Module Debugging'을 활성화한다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "DBG-004",
@@ -159,7 +228,30 @@
     },
     "source": "wb9 - Screen Lifecycle: Fetching Data On Demand / Screen Aggregate",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee 급여 데이터를 관리하는 리액티브 앱을 개발하고 있습니다. 화면 초기화 중에 여러 Aggregate가 Employee 레코드, 급여 데이터, 세금 정보를 가져오고 있음을 확인했습니다. OutSystems 화면 라이프사이클 원칙에 따를 때, Aggregate 실행 순서에 대한 올바른 설명은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "기본적으로 어느 Aggregate가 먼저 끝날지 보장되지 않으며, 비동기로 실행된다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate는 항상 화면에 정의된 순서대로 실행되며, 이는 프레임워크에 의해 보장된다."
+          },
+          {
+            "key": "C",
+            "text": "가장 먼저 정의된 Aggregate가 나머지보다 먼저 끝나며 후속 Aggregate를 차단한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate는 데스크톱 브라우저에서만 동기로 실행되며, 모바일 브라우저에서는 비동기로 로드된다."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "DBG-005",
@@ -201,6 +293,29 @@
     },
     "source": "wb9 - Screen Lifecycle: Fetching Data On Demand / Fetching At Start and Fetching Only On Demand",
     "status": "verified",
-    "verifyNote": ""
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "리액티브 Product 카탈로그 앱에서, 하나의 화면에 'At Start'로 설정된 Aggregate(핵심 product 데이터용)와 'Only on Demand'로 설정된 또 다른 Aggregate(관련 항목용)가 함께 있습니다. 화면 라이프사이클에 따를 때, 이 두 Aggregate가 실행되는 '시점'의 차이는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'At Start' Aggregate는 화면 초기화 중에 트리거되고, 'Only on Demand'는 Refresh Data를 통해 프로그래밍 방식으로 트리거해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "'At Start' Aggregate는 사용자 입력을 기다리고, 'Only on Demand'는 Ready 이벤트 동안 자동으로 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "둘 다 동시에 실행되며, 차이는 fetch 속성 구성에만 있다."
+          },
+          {
+            "key": "D",
+            "text": "'At Start' Aggregate는 동기로 실행되고, 'Only on Demand'는 비동기로 실행된다."
+          }
+        ]
+      }
+    }
   }
 ]
