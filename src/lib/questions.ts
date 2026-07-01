@@ -5,10 +5,12 @@ import { BLUEPRINT } from "@/lib/blueprint";
 // Add a new import + spread here when a new subtopic file is created.
 import aggregates from "@content/questions/aggregates.json";
 import logicFlows from "@content/questions/logic-flows-exceptions.json";
+import screenWidgets from "@content/questions/screen-widgets.json";
 
 export const ALL_QUESTIONS: Question[] = [
   ...(aggregates as unknown as Question[]),
   ...(logicFlows as unknown as Question[]),
+  ...(screenWidgets as unknown as Question[]),
 ];
 
 export function shuffle<T>(arr: T[]): T[] {

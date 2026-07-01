@@ -1,0 +1,242 @@
+[
+  {
+    "id": "SW-001",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": ["link-button", "concept"],
+    "stem": "Regarding the difference between a **Link** and a **Button**, which statement is correct?",
+    "options": [
+      { "key": "A", "text": "A Link can contain other widgets (Image, Text, Container…), while a Button cannot." },
+      { "key": "B", "text": "A Button can contain other widgets, while a Link cannot." },
+      { "key": "C", "text": "Only Buttons can trigger a Screen Action; Links cannot." },
+      { "key": "D", "text": "Links and Buttons are identical and interchangeable in every way." }
+    ],
+    "answer": "A",
+    "explanation": "Link와 Button의 주된 차이는 **UI(모양)**이며, **Link는 다른 위젯(Image·Text·Container 등)을 안에 담을 수 있지만 Button은 그럴 수 없습니다.** 둘 다 On Click으로 로직/이동을 트리거하는 건 동일합니다.",
+    "distractors": {
+      "B": "반대입니다 — 위젯을 품을 수 있는 건 Link입니다.",
+      "C": "Link도 Screen Action을 트리거할 수 있습니다.",
+      "D": "동일하지 않습니다. 위젯 포함 가능 여부 등 차이가 있습니다."
+    },
+    "source": "Training Workbook 3 (Link and Button — Links can contain other widgets)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-002",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": ["link-button", "on-click"],
+    "stem": "Which of the following is a **valid** On Click target for a Button or Link?",
+    "options": [
+      { "key": "A", "text": "A Screen" },
+      { "key": "B", "text": "A Block" },
+      { "key": "C", "text": "An Aggregate" },
+      { "key": "D", "text": "An Entity" }
+    ],
+    "answer": "A",
+    "explanation": "Button/Link의 On Click 대상은 **Screen, Screen Action, External URL**입니다. 따라서 Screen이 유효한 대상입니다.",
+    "distractors": {
+      "B": "Block은 On Click 대상이 아닙니다(화면에 인스턴스화하는 구성요소).",
+      "C": "Aggregate는 쿼리이지 이동/실행 대상이 아닙니다.",
+      "D": "Entity는 데이터 정의이지 On Click 대상이 아닙니다."
+    },
+    "source": "Training Workbook 3 (Link and Button — On Click: Screen / Screen Action / External URL)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-003",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": ["input", "variable", "practical"],
+    "stem": "On a Customer registration Screen, a user types their email into an Input widget. Where is that typed value stored?",
+    "options": [
+      { "key": "A", "text": "In the Input widget's **Variable** property." },
+      { "key": "B", "text": "In the Screen's Title property." },
+      { "key": "C", "text": "In the Aggregate's Test Values." },
+      { "key": "D", "text": "In the Button's On Click property." }
+    ],
+    "answer": "A",
+    "explanation": "모든 입력 위젯에는 **Variable** 속성이 있고, 사용자가 입력한 값은 그 Variable에 저장됩니다.",
+    "distractors": {
+      "B": "Title은 화면 제목 텍스트일 뿐입니다.",
+      "C": "Test Values는 디자인타임 미리보기용이며 런타임 입력을 저장하지 않습니다.",
+      "D": "On Click은 클릭 시 실행할 대상이지 입력값 저장소가 아닙니다."
+    },
+    "source": "Training Workbook 3 (Input Widgets — every input widget has a Variable property)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-004",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": ["input", "text-area", "practical"],
+    "stem": "A Product form needs a field where users can type a **multi-line** product description. Which widget is most appropriate?",
+    "options": [
+      { "key": "A", "text": "Text Area" },
+      { "key": "B", "text": "Input" },
+      { "key": "C", "text": "Dropdown" },
+      { "key": "D", "text": "Checkbox" }
+    ],
+    "answer": "A",
+    "explanation": "**Text Area**는 여러 줄 텍스트 입력이 필요할 때 쓰는 다중 행 필드입니다. 일반 Input은 한 줄 텍스트·숫자·날짜용입니다.",
+    "distractors": {
+      "B": "Input은 단일 행 입력에 적합합니다.",
+      "C": "Dropdown은 목록에서 값을 선택하는 위젯입니다.",
+      "D": "Checkbox는 옵션 선택/해제용입니다."
+    },
+    "source": "Training Workbook 3 (Input and Text Area)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-005",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": ["switch", "concept"],
+    "stem": "You want a control that lets an admin toggle a Product between two states (e.g., Active / Inactive). Which widget fits best?",
+    "options": [
+      { "key": "A", "text": "Switch" },
+      { "key": "B", "text": "Dropdown" },
+      { "key": "C", "text": "Text Area" },
+      { "key": "D", "text": "Table" }
+    ],
+    "answer": "A",
+    "explanation": "**Switch**는 두 가지 옵션 중 하나를 고르는 토글 컨트롤입니다(예: Active/Inactive).",
+    "distractors": {
+      "B": "Dropdown은 여러 값 중 선택이지 두 상태 토글에 과합니다.",
+      "C": "Text Area는 다중 행 텍스트 입력용입니다.",
+      "D": "Table은 데이터 목록 표시용입니다."
+    },
+    "source": "Training Workbook 3 (Checkbox and Switch — Switch is a toggle between two options)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-006",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": ["radio-group", "practical"],
+    "stem": "An Order form needs the user to pick a Priority from a **small set** of options (Low / Medium / High), with all options visible at once as selectable buttons. Which widget is designed for this?",
+    "options": [
+      { "key": "A", "text": "Radio Group (or Button Group)" },
+      { "key": "B", "text": "Text Area" },
+      { "key": "C", "text": "Table" },
+      { "key": "D", "text": "Link" }
+    ],
+    "answer": "A",
+    "explanation": "**Radio Group**(또는 Button Group)은 **적은 수의 선택 옵션**을 한눈에 보이는 라디오/버튼 세트로 제공합니다. Priority(Low/Medium/High) 선택에 적합합니다.",
+    "distractors": {
+      "B": "Text Area는 자유 텍스트 입력용입니다.",
+      "C": "Table은 데이터 목록 표시용입니다.",
+      "D": "Link는 이동/액션 트리거용입니다."
+    },
+    "source": "Training Workbook 3 (Radio Group and Button Group — small number of selectable options)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-007",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": ["table", "list", "source", "practical"],
+    "stem": "You dragged a Table onto a Screen to display all Orders fetched by the `GetOrders` Aggregate. What must you set so the Table shows those records?",
+    "options": [
+      { "key": "A", "text": "The Table's **Source** property, set to `GetOrders.List`." },
+      { "key": "B", "text": "The Table's On Click property, set to GetOrders." },
+      { "key": "C", "text": "The Screen's Title property, set to GetOrders." },
+      { "key": "D", "text": "The Aggregate's Max. Records property, set to the Table." }
+    ],
+    "answer": "A",
+    "explanation": "Table/List 같은 목록 위젯은 **Source** 속성으로 표시할 데이터 목록을 지정합니다. `GetOrders.List`를 Source로 설정하면 그 주문들이 표시됩니다.",
+    "distractors": {
+      "B": "Table의 데이터 바인딩은 On Click이 아니라 Source로 합니다.",
+      "C": "Title은 화면 제목이라 데이터 표시와 무관합니다.",
+      "D": "Max. Records는 개수 제한 속성이지 위젯 바인딩이 아닙니다."
+    },
+    "source": "Training Workbook 3 (Displaying a data set — Source property; Table Source = Aggregate output)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-008",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": ["if-widget", "conditional", "practical"],
+    "stem": "You want to show a “VIP” badge on a Customer Screen **only when** `Customer.IsVip` is True. Which widget should you use?",
+    "options": [
+      { "key": "A", "text": "The If widget, with the badge in its True branch." },
+      { "key": "B", "text": "A Dropdown bound to IsVip." },
+      { "key": "C", "text": "A Text Area showing IsVip." },
+      { "key": "D", "text": "A Table filtered by IsVip." }
+    ],
+    "answer": "A",
+    "explanation": "**If 위젯**은 조건에 따라 콘텐츠를 표시합니다. 조건을 `Customer.IsVip`로 두고 True 분기에 VIP 배지를 넣으면 참일 때만 보입니다.",
+    "distractors": {
+      "B": "Dropdown은 값 선택용이지 조건부 표시 도구가 아닙니다.",
+      "C": "Text Area는 텍스트 입력용입니다.",
+      "D": "Table은 목록 표시용이며 단일 배지의 조건부 노출에 맞지 않습니다."
+    },
+    "source": "Training Workbook 3 (Displaying data conditionally — the If widget)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-009",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": ["expression", "display", "practical"],
+    "stem": "Which widget do you use to display a **single attribute value** as text on a Screen — for example, a product's price like `GetProduct.List.Current.Product.Price`?",
+    "options": [
+      { "key": "A", "text": "Expression" },
+      { "key": "B", "text": "Input" },
+      { "key": "C", "text": "Form" },
+      { "key": "D", "text": "Button" }
+    ],
+    "answer": "A",
+    "explanation": "**Expression** 위젯은 특정 attribute 값(예: 제품 가격)을 화면에 텍스트로 표시합니다.",
+    "distractors": {
+      "B": "Input은 사용자 입력을 받는 위젯입니다(표시 전용이 아님).",
+      "C": "Form은 입력 위젯을 묶는 컨테이너입니다.",
+      "D": "Button은 액션 트리거용입니다."
+    },
+    "source": "Training Workbook 3 (Displaying a specific attribute — Expression)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "SW-010",
+    "category": "UI Design",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": ["label", "concept"],
+    "stem": "What does the **Input Widget** property of a Label do?",
+    "options": [
+      { "key": "A", "text": "It links the Label to a specific input field, and shows a visual indicator when that field is mandatory." },
+      { "key": "B", "text": "It stores the value the user types into the field." },
+      { "key": "C", "text": "It converts the Label into an editable input." },
+      { "key": "D", "text": "It sets the Screen's input parameter." }
+    ],
+    "answer": "A",
+    "explanation": "Label의 **Input Widget** 속성은 그 라벨을 특정 입력 필드와 연결합니다. 연결된 필드가 Mandatory이면 시각적 표시(필수 표시)를 제공합니다.",
+    "distractors": {
+      "B": "입력값은 입력 위젯의 Variable에 저장됩니다(Label이 아님).",
+      "C": "Label은 설명 텍스트를 표시할 뿐 입력창으로 바뀌지 않습니다.",
+      "D": "화면 Input Parameter와는 무관합니다."
+    },
+    "source": "Training Workbook 3 (Label — Input Widget property links to a field; mandatory indicator)",
+    "status": "verified",
+    "verifyNote": ""
+  }
+]

@@ -1,5 +1,5 @@
 {
-  "total": 24,
+  "total": 34,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
@@ -8,6 +8,10 @@
     "Logic Flows & Exception Handling": {
       "category": "Logic",
       "count": 4
+    },
+    "Screen Widgets": {
+      "category": "UI Design",
+      "count": 10
     }
   }
 }
