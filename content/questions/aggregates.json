@@ -431,5 +431,55 @@
     "source": "Training Workbook 4 (Aggregating Records → Sum/Count) · 도메인 변형(Cart)",
     "status": "verified",
     "verifyNote": ""
+  },
+  {
+    "id": "AGG-019",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["visual-style", "join-types", "ecommerce"],
+    "stem": "Read the Aggregate and its data preview below. Which statement is correct?",
+    "diagram": "**Aggregate `GetProducts`** — Sources: `Product`, `Supplier`\n\n| # | Left | Join | Right | Condition |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Supplier | Product.SupplierId = Supplier.Id |\n\n**Preview (output):**\n\n| Product.Name | Product.Price | Supplier.Name |\n|---|---|---|\n| Keyboard | 25 | Logitech |\n| Mouse | 15 | — |\n| Monitor | 120 | Dell |\n| Webcam | 40 | — |",
+    "options": [
+      { "key": "A", "text": "Only products that have a Supplier are returned." },
+      { "key": "B", "text": "All products are returned; products without a Supplier show empty Supplier attributes." },
+      { "key": "C", "text": "Only suppliers that have at least one product are returned." },
+      { "key": "D", "text": "The Aggregate errors out because some Supplier values are empty." }
+    ],
+    "answer": "B",
+    "explanation": "조인이 **With or Without**(왼쪽=Product)이므로 **모든 Product**가 반환되고, Supplier가 없는 행(Mouse, Webcam)은 Supplier 속성이 비어(—) 있습니다. 미리보기의 빈 셀이 바로 그 증거예요.",
+    "distractors": {
+      "A": "이건 Only With(일치하는 것만)의 동작입니다. 미리보기에 빈 Supplier 행이 있으니 아닙니다.",
+      "C": "기준(왼쪽)은 Supplier가 아니라 Product입니다.",
+      "D": "매칭 없는 행의 빈 값은 정상이며 오류가 아닙니다."
+    },
+    "source": "Training Workbook 4 (Join: With or Without) · 공식 Sample Exam Q4 유형(비주얼) · 도메인 변형(Product/Supplier)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-020",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["visual-style", "group-by", "ecommerce"],
+    "stem": "The Aggregate below groups Orders by `Status` with a Count of `Order.Id` (preview shown). How many records will `GetOrdersByStatus.List` contain?",
+    "diagram": "**Aggregate `GetOrdersByStatus`** — Group By `Order.Status`, Count of `Order.Id`\n\n**Preview (output):**\n\n| Status (Group) | Count |\n|---|---|\n| Shipped | 12 |\n| Pending | 5 |\n| Cancelled | 3 |",
+    "options": [
+      { "key": "A", "text": "3 — one record per Status group." },
+      { "key": "B", "text": "20 — the total number of Orders." },
+      { "key": "C", "text": "1 — a single summary record." },
+      { "key": "D", "text": "It depends on the number of attributes in the Order entity." }
+    ],
+    "answer": "A",
+    "explanation": "Group By는 행을 **그룹 값마다 한 행**으로 합칩니다. Status가 3종(Shipped/Pending/Cancelled)이므로 List에는 **3개 레코드**가 있습니다. 12·5·3은 각 그룹의 Count일 뿐이고, 그 합(20)은 전체 주문 수이지 레코드 수가 아닙니다.",
+    "distractors": {
+      "B": "20은 Count들의 합(전체 주문 수)이지 그룹 레코드 수가 아닙니다.",
+      "C": "그룹이 여러 개면 요약 1행이 아니라 그룹 수만큼 나옵니다.",
+      "D": "레코드 수는 그룹 값의 개수로 결정되지, attribute 수와 무관합니다."
+    },
+    "source": "Training Workbook 4 (Aggregating Records) · 공식 Sample Exam Q3·Q5 유형(비주얼) · 도메인 변형(Order/Status)",
+    "status": "verified",
+    "verifyNote": ""
   }
 ]
