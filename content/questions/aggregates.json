@@ -287,5 +287,149 @@
     "source": "Training Workbook 4 (Advanced Aggregate → Filters; 역할 필터의 or 사용)",
     "status": "verified",
     "verifyNote": ""
+  },
+  {
+    "id": "AGG-013",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["sorting", "practical", "ecommerce"],
+    "stem": "A Screen lists `Order` records, but they should appear with the **most recent first** (by `CreatedOn`). Where do you configure this in the Aggregate?",
+    "options": [
+      { "key": "A", "text": "In the Sorting tab, add `Order.CreatedOn` as Descending." },
+      { "key": "B", "text": "In the Filters tab, add a condition on `Order.CreatedOn`." },
+      { "key": "C", "text": "In the Group by tab, group by `Order.CreatedOn`." },
+      { "key": "D", "text": "Hide every column except `CreatedOn`." }
+    ],
+    "answer": "A",
+    "explanation": "정렬은 Aggregate의 **Sorting** 탭에서 정의합니다. `CreatedOn`을 **Descending(내림차순)**으로 두면 최신 주문이 먼저 나옵니다.",
+    "distractors": {
+      "B": "Filter는 행을 걸러낼 뿐 순서를 바꾸지 않습니다.",
+      "C": "Group by는 행을 묶어 집계하는 것이라 목적이 다릅니다.",
+      "D": "컬럼 숨김은 미리보기용이라 정렬과 무관합니다."
+    },
+    "source": "Training Workbook 4 (Aggregate = sources·filters·sorting) · 도메인은 시험 유형(Order)으로 변형",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-014",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["max-records", "practical", "ecommerce"],
+    "stem": "You need to show only the **5 most expensive Products**. The Aggregate already sorts by `Price` descending. How do you limit the result to 5 records?",
+    "options": [
+      { "key": "A", "text": "Set the Aggregate's **Max. Records** property to 5." },
+      { "key": "B", "text": "Add a Filter `Product.Price > 5`." },
+      { "key": "C", "text": "Group by `Product.Price` and Count to 5." },
+      { "key": "D", "text": "Delete all but 5 rows in the Aggregate preview." }
+    ],
+    "answer": "A",
+    "explanation": "**Max. Records** 속성이 Aggregate가 가져오는 레코드 수를 제한합니다. 가격 내림차순 정렬 + Max. Records = 5 → 가장 비싼 5개.",
+    "distractors": {
+      "B": "`Price > 5`는 5달러 초과를 거르는 조건일 뿐 '상위 5개'가 아닙니다.",
+      "C": "Group by/Count는 개수 집계이지 행 수 제한이 아닙니다.",
+      "D": "미리보기에서 행을 지운다고 실제 출력이 제한되지 않습니다."
+    },
+    "source": "Training Workbook 4 · 공식 Sample Exam Q19 (Max Records) · 도메인 변형(Product)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-015",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["calculated-attribute", "built-in-function", "ecommerce"],
+    "stem": "Each `Order` should display **how many days ago** it was placed (from `CreatedOn`). What is the best way to make this value available in the Aggregate?",
+    "options": [
+      { "key": "A", "text": "Add a Calculated (New) Attribute that uses a built-in date function, e.g. `DiffDays(Order.CreatedOn, CurrDate())`." },
+      { "key": "B", "text": "Store the day count in a new database column and update every Order every day." },
+      { "key": "C", "text": "Add a Filter on `Order.CreatedOn`." },
+      { "key": "D", "text": "Sort the Aggregate by `Order.CreatedOn`." }
+    ],
+    "answer": "A",
+    "explanation": "**Calculated Attribute**의 Expression은 소스 attribute뿐 아니라 **내장 함수(CurrDate(), DiffDays() 등)**도 사용할 수 있고, 그 값이 쿼리 출력에 포함됩니다. 실시간 계산이라 별도 저장이 필요 없습니다.",
+    "distractors": {
+      "B": "매일 모든 주문을 갱신하는 건 과도하고 불필요합니다(계산으로 즉시 구함).",
+      "C": "Filter는 값을 계산하지 않고 행을 거릅니다.",
+      "D": "Sort는 순서만 바꿀 뿐 '며칠 전' 값을 만들지 않습니다."
+    },
+    "source": "Training Workbook 4 (Calculated Attributes → 내장 함수 CurrDate/DiffDays) · 도메인 변형(Order)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-016",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["filters", "input-parameter", "ecommerce"],
+    "stem": "A Customer detail Screen has a `CustomerId` input parameter. The `GetOrders` Aggregate must return **only that customer's Orders**. What do you do?",
+    "options": [
+      { "key": "A", "text": "Add a Filter `Order.CustomerId = CustomerId` (the Screen's input parameter)." },
+      { "key": "B", "text": "Set the Aggregate's Max. Records to `CustomerId`." },
+      { "key": "C", "text": "Sort the Aggregate by `Order.CustomerId`." },
+      { "key": "D", "text": "Nothing — the Aggregate filters by the current Screen automatically." }
+    ],
+    "answer": "A",
+    "explanation": "Filter 식은 화면의 **Input Parameter나 변수**를 참조할 수 있습니다. `Order.CustomerId = CustomerId`로 해당 고객의 주문만 걸러냅니다.",
+    "distractors": {
+      "B": "Max. Records는 개수 제한이지 필터가 아닙니다.",
+      "C": "Sort는 정렬일 뿐 다른 고객의 주문을 제거하지 못합니다.",
+      "D": "Aggregate는 자동으로 화면 기준 필터링을 하지 않습니다 — 직접 Filter를 넣어야 합니다."
+    },
+    "source": "Training Workbook 4 (필터가 Input Parameter 참조: 예 MovieId) · 도메인 변형(Customer/Order)",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-017",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": ["join", "one-to-many", "row-multiplication"],
+    "stem": "An Aggregate joins `Customer` and `Order` (one Customer has many Orders) using **Only With**. If a particular customer has 3 orders, how do that customer's records appear in the result?",
+    "options": [
+      { "key": "A", "text": "As 3 rows (one per Order), with the Customer's attributes repeated on each row." },
+      { "key": "B", "text": "As 1 row for the Customer, with the 3 Orders nested inside it." },
+      { "key": "C", "text": "As 1 row total, showing only the customer's most recent order." },
+      { "key": "D", "text": "As 3 Customer rows that contain no order data." }
+    ],
+    "answer": "A",
+    "explanation": "조인 결과는 **일치하는 쌍마다 한 행**입니다. 'many' 쪽(Order)의 각 레코드가 한 행이 되고, 'one' 쪽(Customer) 값은 각 행에 **반복**됩니다. 그래서 주문이 3건이면 그 고객은 3행으로 나오고 고객 정보가 반복됩니다.",
+    "distractors": {
+      "B": "Aggregate 결과는 평면(flat) 행 집합이라 주문을 고객 안에 중첩하지 않습니다.",
+      "C": "Only With는 일치하는 모든 주문을 반환하지 최신 1건만 주지 않습니다.",
+      "D": "조인이므로 각 행에 주문 데이터가 함께 들어갑니다."
+    },
+    "source": "Training Workbook 4 (Multiple Sources/Join) · 조인 행 배수는 표준 SQL 조인 의미",
+    "status": "verified",
+    "verifyNote": ""
+  },
+  {
+    "id": "AGG-018",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": ["group-by", "sum-vs-count", "ecommerce"],
+    "stem": "A `Cart` has many `CartItem` records, each with a `Quantity`. To display the **total quantity of items** in the cart (e.g. 2 + 3 = 5), which aggregation function do you apply over `CartItem.Quantity`?",
+    "options": [
+      { "key": "A", "text": "Sum" },
+      { "key": "B", "text": "Count" },
+      { "key": "C", "text": "Max" },
+      { "key": "D", "text": "Average" }
+    ],
+    "answer": "A",
+    "explanation": "**Sum**은 Quantity 값들을 더합니다(2+3=5). **Count**를 쓰면 CartItem '행의 개수'(2)가 나와서 총 수량과 다릅니다 — 이 차이가 핵심입니다.",
+    "distractors": {
+      "B": "Count는 품목 줄 수(2)를 세지, 수량 합계가 아닙니다.",
+      "C": "Max는 가장 큰 단일 수량(3)만 반환합니다.",
+      "D": "Average는 평균(2.5)이라 총량이 아닙니다."
+    },
+    "source": "Training Workbook 4 (Aggregating Records → Sum/Count) · 도메인 변형(Cart)",
+    "status": "verified",
+    "verifyNote": ""
   }
 ]
