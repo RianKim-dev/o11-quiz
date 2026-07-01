@@ -351,5 +351,241 @@
         ]
       }
     }
+  },
+  {
+    "id": "SEC-007",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [
+      "Built-in Roles",
+      "Screen Access",
+      "Anonymous Users",
+      "eCommerce Domain"
+    ],
+    "stem": "You are designing an eCommerce application with a product catalog. The Browse_Products screen should be accessible to everyone—both anonymous users and registered users. How should you configure the screen's role settings?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Assign both the Anonymous and Registered roles to the screen"
+      },
+      {
+        "key": "B",
+        "text": "Assign only the Registered role, since all users must log in first"
+      },
+      {
+        "key": "C",
+        "text": "Leave the Roles property empty so the screen is open to everyone"
+      },
+      {
+        "key": "D",
+        "text": "Create a custom PublicBrowse role and assign it to the screen"
+      }
+    ],
+    "answer": "A",
+    "explanation": "스크린에 **Anonymous 및 Registered 역할을 모두** 할당하면 로그인하지 않은 사용자도 접근 가능합니다. Anonymous는 로그인 전, Registered는 로그인 후 자동 할당되는 내장 역할입니다. 역할 속성이 비어있으면(C) 아무도 접근할 수 없습니다.",
+    "source": "Training Workbook 6 - Roles (Built-in roles: Anonymous, Registered) and Screen Roles property",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "eCommerce 애플리케이션을 설계하고 있고, Browse_Products 스크린은 익명 사용자와 등록된 사용자 모두가 접근할 수 있어야 한다. 스크린의 Role 설정을 어떻게 구성해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "스크린에 Anonymous 및 Registered 역할을 모두 할당한다"
+          },
+          {
+            "key": "B",
+            "text": "모든 사용자가 먼저 로그인해야 하므로 Registered 역할만 할당한다"
+          },
+          {
+            "key": "C",
+            "text": "역할 속성을 비워두어 모두가 스크린에 접근할 수 있도록 한다"
+          },
+          {
+            "key": "D",
+            "text": "PublicBrowse라는 사용자 지정 역할을 생성하여 스크린에 할당한다"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-008",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [
+      "Programmatic Role Management",
+      "Revoke Actions",
+      "Server Actions",
+      "Project Management Domain"
+    ],
+    "stem": "In a Project management application, you need to programmatically revoke the ProjectViewer role from a user who no longer has viewing permissions for projects. Which of the following is the correct way to do this inside a Server Action?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the RevokeProjectViewerRole(UserId) action to remove the role from the user"
+      },
+      {
+        "key": "B",
+        "text": "Use the DeleteUserRole(UserId, RoleName) function to permanently remove the role assignment"
+      },
+      {
+        "key": "C",
+        "text": "Navigate to the Users application and manually deselect the ProjectViewer role"
+      },
+      {
+        "key": "D",
+        "text": "Create a new user account without the ProjectViewer role to replace the old one"
+      }
+    ],
+    "answer": "A",
+    "explanation": "각 역할마다 **Revoke<RoleName>(UserId) 액션**이 자동으로 생성됩니다. 이를 서버 액션 내에서 호출하여 사용자로부터 역할을 프로그래밍 방식으로 회수할 수 있습니다. B는 잘못된 함수, C는 수동 방식(프로그래밍 아님), D는 사용자 관리 오류입니다.",
+    "source": "Training Workbook 6 - Roles (Grant and Revoke actions available within Server Actions)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Project 관리 애플리케이션에서 더 이상 프로젝트 조회 권한이 없는 사용자로부터 ProjectViewer Role을 프로그래밍 방식으로 회수해야 한다. Server Action 내에서 이를 수행하는 올바른 방법은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "RevokeProjectViewerRole(UserId) 액션을 사용하여 사용자로부터 역할을 제거한다"
+          },
+          {
+            "key": "B",
+            "text": "DeleteUserRole(UserId, RoleName) 함수를 사용하여 역할 할당을 영구적으로 제거한다"
+          },
+          {
+            "key": "C",
+            "text": "Users 애플리케이션으로 이동하여 수동으로 ProjectViewer Role을 선택 해제한다"
+          },
+          {
+            "key": "D",
+            "text": "ProjectViewer Role이 없는 새로운 사용자 계정을 생성하여 기존 사용자를 대체한다"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-009",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "hard",
+    "tags": [
+      "Screen Roles",
+      "UI Visibility Control",
+      "Role-based Visibility",
+      "Document Management Domain"
+    ],
+    "stem": "In a Document management system, the DocumentDetail screen is restricted to the DocumentViewer role. Inside the screen, the Edit button's Visible property is set to CheckDocumentEditorRole.HasRole (a data action that checks for DocumentEditor role). A user with only the DocumentViewer role successfully accesses the screen but cannot see the Edit button. Later, the same user is granted the DocumentEditor role. After logging out and logging back in, which of the following is true?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The user can access the screen and see the Edit button immediately"
+      },
+      {
+        "key": "B",
+        "text": "The user is now blocked from accessing the screen because they have two roles"
+      },
+      {
+        "key": "C",
+        "text": "The Edit button remains hidden because the Visible property was already evaluated when the user first accessed the screen"
+      },
+      {
+        "key": "D",
+        "text": "The user must contact the administrator to refresh their role cache before seeing changes"
+      }
+    ],
+    "answer": "A",
+    "explanation": "스크린이 DocumentViewer로만 제한되는 것과, Edit 버튼의 Visible 속성이 CheckDocumentEditorRole.HasRole로 바인딩되는 것은 별개입니다. 사용자가 DocumentEditor 역할을 부여받고 로그인하면, 스크린 접근(DocumentViewer 보유)과 버튼 가시성(DocumentEditor 확인)이 모두 조건을 충족합니다.",
+    "source": "Training Workbook 6 - Screen Roles property and Screen Input Disable (Enabled/Visible properties with role checks)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Document 관리 시스템의 DocumentDetail 스크린은 DocumentViewer Role로 제한되어 있다. 스크린 내부에서 Edit 버튼의 Visible 속성이 CheckDocumentEditorRole.HasRole(DocumentEditor Role을 확인하는 Data Action)로 설정되어 있다. DocumentViewer Role만 가진 사용자가 스크린에 성공적으로 접근하지만 Edit 버튼이 표시되지 않는다. 나중에 같은 사용자에게 DocumentEditor Role이 부여되고, 로그아웃 후 다시 로그인하면 다음 중 참인 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "사용자는 스크린에 접근할 수 있고 Edit 버튼을 바로 볼 수 있다"
+          },
+          {
+            "key": "B",
+            "text": "두 개의 Role을 보유하고 있기 때문에 사용자는 이제 스크린 접근이 차단된다"
+          },
+          {
+            "key": "C",
+            "text": "Edit 버튼은 숨겨진 상태로 유지된다. Visible 속성이 사용자가 스크린에 처음 접근할 때 이미 평가되었기 때문이다"
+          },
+          {
+            "key": "D",
+            "text": "사용자는 변경 사항을 보기 전에 관리자에게 연락하여 역할 캐시를 새로고침해야 한다"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-010",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "easy",
+    "tags": [
+      "User Management",
+      "Users Application",
+      "Access Control",
+      "Fundamentals"
+    ],
+    "stem": "In OutSystems, end-users are created and managed through a default built-in application. What is the URL to access this application?",
+    "options": [
+      {
+        "key": "A",
+        "text": "https://<your_server>/Accounts"
+      },
+      {
+        "key": "B",
+        "text": "https://<your_server>/Users"
+      },
+      {
+        "key": "C",
+        "text": "https://<your_server>/Admin/Users"
+      },
+      {
+        "key": "D",
+        "text": "https://<your_server>/Portal"
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems의 기본 제공 **Users 애플리케이션**은 `https://<your_server>/Users` URL로 접근합니다. 여기서 End-user를 생성, 관리하고 역할을 할당할 수 있습니다.",
+    "source": "Training Workbook 6 - Users (end-user provider and management)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems에서 End-user는 기본 제공 애플리케이션을 통해 생성 및 관리된다. 이 애플리케이션에 접근하기 위한 URL은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "https://<your_server>/Accounts"
+          },
+          {
+            "key": "B",
+            "text": "https://<your_server>/Users"
+          },
+          {
+            "key": "C",
+            "text": "https://<your_server>/Admin/Users"
+          },
+          {
+            "key": "D",
+            "text": "https://<your_server>/Portal"
+          }
+        ]
+      }
+    }
   }
 ]

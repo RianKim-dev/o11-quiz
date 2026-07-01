@@ -292,5 +292,302 @@
         ]
       }
     }
+  },
+  {
+    "id": "CV-006",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "medium",
+    "tags": [
+      "client-variables",
+      "site-properties",
+      "comparison",
+      "configuration"
+    ],
+    "stem": "You need to store a configuration value that controls which features are enabled across your entire application. This value should be changeable at runtime without code deployment. Which storage mechanism is most appropriate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Client Variable, because it can be modified by users in their browser"
+      },
+      {
+        "key": "B",
+        "text": "Site Property, because it stores application-level information and can be changed at runtime using Service Center"
+      },
+      {
+        "key": "C",
+        "text": "Client Variable, because it is preserved upon login and provides per-user customization"
+      },
+      {
+        "key": "D",
+        "text": "Site Property, because it allows each user to have different feature configurations"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Site Property는 애플리케이션 수준의 정보를 저장하며, Service Center를 통해 런타임에 값을 변경할 수 있습니다(개발 필요 없음). Client Variable은 사용자별 정보를 저장하는 것이므로 애플리케이션 전체에 영향을 주는 설정에는 부적합합니다. 선택지 A와 C는 Client Variable의 용도를 잘못 이해하고 있으며, D는 Site Property의 특성을 오해하고 있습니다.",
+    "source": "Training Workbook 8, Section: Site Property (pages 3-4) and Client Variable (pages 1-3)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "전체 애플리케이션에서 활성화된 기능을 제어하는 구성 값을 저장해야 합니다. 이 값은 코드 배포 없이 런타임에 변경 가능해야 합니다. 가장 적절한 저장소는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Variable입니다. 사용자가 브라우저에서 수정할 수 있기 때문입니다."
+          },
+          {
+            "key": "B",
+            "text": "Site Property입니다. 애플리케이션 수준의 정보를 저장하며, Service Center를 통해 런타임에 변경할 수 있기 때문입니다."
+          },
+          {
+            "key": "C",
+            "text": "Client Variable입니다. 로그인 시 유지되며 사용자별 커스터마이징을 제공하기 때문입니다."
+          },
+          {
+            "key": "D",
+            "text": "Site Property입니다. 각 사용자가 다른 기능 구성을 가질 수 있기 때문입니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CV-007",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "medium",
+    "tags": [
+      "client-variables",
+      "filtering",
+      "wildcards",
+      "aggregate-filters",
+      "scenario"
+    ],
+    "stem": "In the movie search implementation, the filter expression uses 'Client.MovieSearchText' in a LIKE condition with wildcards: Movie.Title like \"%\" + Client.MovieSearchText + \"%\". If the user clears the input field, what will be the behavior of the filter?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The filter will show no results because an empty string cannot match the LIKE pattern"
+      },
+      {
+        "key": "B",
+        "text": "The filter will show all movies because the pattern matches any title containing any text or empty text"
+      },
+      {
+        "key": "C",
+        "text": "The filter will throw an error because Client Variables cannot be empty"
+      },
+      {
+        "key": "D",
+        "text": "The filter will reset the Client.MovieSearchText to its default value and show no movies"
+      }
+    ],
+    "answer": "B",
+    "explanation": "LIKE 패턴 '%' + (빈 문자열) + '%'는 '%' + '%'이 되며, 이는 모든 제목과 일치합니다. 워크북의 설명에 따르면 '%'는 와일드카드로 사용되고 '텍스트(비워 둘 수 있음), 키워드, 다른 텍스트(비워 둘 수 있음)'로 해석됩니다. 따라서 사용자가 입력 필드를 비우면 모든 영화가 표시됩니다.",
+    "source": "Training Workbook 8, Section: Apply the search filter (page 8, the note about wildcard LIKE expressions)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "영화 검색 구현에서 필터 표현식은 와일드카드를 포함한 LIKE 조건에서 'Client.MovieSearchText'를 사용합니다: Movie.Title like \"%\" + Client.MovieSearchText + \"%\". 사용자가 입력 필드를 지우면 필터의 동작은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "빈 문자열은 LIKE 패턴과 일치할 수 없으므로 필터가 결과를 표시하지 않습니다."
+          },
+          {
+            "key": "B",
+            "text": "패턴이 모든 제목이나 빈 텍스트를 포함하는 모든 제목과 일치하므로 필터가 모든 영화를 표시합니다."
+          },
+          {
+            "key": "C",
+            "text": "Client Variable은 비울 수 없으므로 필터가 오류를 발생시킵니다."
+          },
+          {
+            "key": "D",
+            "text": "필터가 Client.MovieSearchText를 기본값으로 초기화하고 영화를 표시하지 않습니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CV-008",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "hard",
+    "tags": [
+      "client-variables",
+      "event-handling",
+      "onchange",
+      "client-actions",
+      "best-practices"
+    ],
+    "stem": "A developer needs to track which columns a user has chosen to display in a data table (a user preference). The developer creates a Client Variable to store this preference. However, the variable must be updated every time the user changes the visible columns. What is the most appropriate way to capture and update this Client Variable?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a Service Center action that runs every time the table is refreshed"
+      },
+      {
+        "key": "B",
+        "text": "Use the OnChange event on the table columns to trigger a Client Action that updates the Client Variable"
+      },
+      {
+        "key": "C",
+        "text": "Manually bind the Client Variable to each column's checkbox in the UI and let it update automatically"
+      },
+      {
+        "key": "D",
+        "text": "Create a Server Action that captures column changes and synchronizes them with the Client Variable at login"
+      }
+    ],
+    "answer": "B",
+    "explanation": "워크북의 실습 예제에서 보듯이, OnChange 이벤트를 사용하여 클라이언트 작업을 트리거하는 것이 Client Variable을 업데이트하는 올바른 방식입니다. '최종 사용자가 입력을 중지하거나 드롭다운 옵션을 선택하는 즉시 클라이언트 작업이 자동으로 트리거됩니다'라고 명시되어 있습니다. Service Center는 런타임 변경용이 아니고, 단순 바인딩만으로는 업데이트를 캡처할 수 없으며, Server Action은 Client Variable 업데이트에 적합하지 않습니다.",
+    "source": "Training Workbook 8, Section: Apply the search filter (pages 10-11, specifically the OnChange event usage and Client Action triggering)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 사용자가 데이터 테이블에 표시하도록 선택한 열을 추적해야 합니다(사용자 선호도). 개발자는 이 선호도를 저장하기 위해 Client Variable을 생성합니다. 그러나 사용자가 표시 열을 변경할 때마다 변수를 업데이트해야 합니다. 이 Client Variable을 캡처하고 업데이트하는 가장 적절한 방법은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "테이블이 새로 고쳐질 때마다 실행되는 Service Center 작업을 사용합니다."
+          },
+          {
+            "key": "B",
+            "text": "테이블 열의 OnChange 이벤트를 사용하여 Client Variable을 업데이트하는 Client Action을 트리거합니다."
+          },
+          {
+            "key": "C",
+            "text": "Client Variable을 각 열의 체크박스에 수동으로 바인딩하고 자동으로 업데이트하도록 합니다."
+          },
+          {
+            "key": "D",
+            "text": "열 변경을 캡처하고 로그인 시 Client Variable과 동기화하는 Server Action을 생성합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CV-009",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "medium",
+    "tags": [
+      "client-variables",
+      "persistence",
+      "navigation",
+      "practical-scenario"
+    ],
+    "stem": "An e-learning platform uses a Client Variable 'SelectedCourseId' to track which course a student is viewing. When the student is viewing Course A, navigates to a different screen to check their grades, and then returns to the course screen, what is the state of the 'SelectedCourseId' Client Variable?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It retains the value for Course A because Client Variables persist when navigating between screens"
+      },
+      {
+        "key": "B",
+        "text": "It is reset to its default value because the student left the course screen"
+      },
+      {
+        "key": "C",
+        "text": "It is converted to a Site Property because the value persists across multiple screens"
+      },
+      {
+        "key": "D",
+        "text": "It is deleted from the browser because the student is not actively on the course screen"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Client Variable은 '사용자별 정보를 장기적으로 저장할 수 있는 구성 변수'이며, 값이 '브라우저에 저장'됩니다. 따라서 화면을 벗어났다가 돌아와도 값이 유지됩니다. 이는 워크북의 실습 예제에서 '다른 화면으로 변경했다가 Movies 화면으로 돌아올 때 검색 필터가 손실되지 않도록' 클라이언트 변수를 사용한다는 설명과 일치합니다.",
+    "source": "Training Workbook 8, Section: Client Variable (pages 1-3) and Exercise explanation (page 4)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "e-러닝 플랫폼에서는 Client Variable 'SelectedCourseId'를 사용하여 학생이 보고 있는 코스를 추적합니다. 학생이 코스 A를 보고 있다가 등급을 확인하기 위해 다른 화면으로 이동했다가 코스 화면으로 돌아올 때, 'SelectedCourseId' Client Variable의 상태는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "화면 간 탐색 시 Client Variable이 유지되므로 코스 A의 값을 유지합니다."
+          },
+          {
+            "key": "B",
+            "text": "학생이 코스 화면을 떠났으므로 기본값으로 초기화됩니다."
+          },
+          {
+            "key": "C",
+            "text": "값이 여러 화면에 걸쳐 유지되므로 Site Property로 변환됩니다."
+          },
+          {
+            "key": "D",
+            "text": "학생이 코스 화면에 활발하게 있지 않으므로 브라우저에서 삭제됩니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CV-010",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "easy",
+    "tags": [
+      "client-variables",
+      "persistence",
+      "fundamentals",
+      "comparison"
+    ],
+    "stem": "Which of the following is a primary reason to use Client Variables rather than storing the same information as Screen or Local Variables?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Client Variables are processed faster by the server"
+      },
+      {
+        "key": "B",
+        "text": "Client Variables persist across screen navigation and are preserved upon login"
+      },
+      {
+        "key": "C",
+        "text": "Client Variables can store sensitive information securely"
+      },
+      {
+        "key": "D",
+        "text": "Client Variables automatically synchronize with the database at regular intervals"
+      }
+    ],
+    "answer": "B",
+    "explanation": "워크북에서 Client Variable의 주요 특징은 '값이 브라우저에 저장되며 로그인 시 유지'된다는 점입니다. 이는 Screen Variable이나 Local Variable과 달리 화면 탐색을 벗어나도 값이 유지되는 핵심 차이점입니다. 선택지 A는 사실이 아니고, C는 Client Variable의 정의와 모순되며(민감한 정보를 저장하면 안됨), D는 Client Variable의 특성에 해당하지 않습니다.",
+    "source": "Training Workbook 8, Section: Client Variable (pages 1-3) and Exercise explanation (page 4)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "같은 정보를 Screen Variable이나 Local Variable로 저장하는 대신 Client Variable을 사용해야 하는 주요 이유는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Variable은 서버에서 더 빠르게 처리된다."
+          },
+          {
+            "key": "B",
+            "text": "Client Variable은 화면 탐색 전체에 걸쳐 유지되며 로그인 시 보존된다."
+          },
+          {
+            "key": "C",
+            "text": "Client Variable은 민감한 정보를 안전하게 저장할 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "Client Variable은 정기적으로 자동으로 데이터베이스와 동기화된다."
+          }
+        ]
+      }
+    }
   }
 ]

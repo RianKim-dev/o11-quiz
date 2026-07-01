@@ -1254,5 +1254,272 @@
         "diagram": "**Aggregate `GetOrdersByStatus`** — `Order.Status`로 Group By, `Order.Id` Count\n\n**미리보기(출력):**\n\n| Status (그룹) | Count |\n|---|---|\n| Shipped | 12 |\n| Pending | 5 |\n| Cancelled | 3 |"
       }
     }
+  },
+  {
+    "id": "AGG-021",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [
+      "join-types",
+      "group-by",
+      "sum",
+      "null-handling"
+    ],
+    "stem": "You need a list of all Customers and the total value (Sum of Amount) of their Orders. The Aggregate joins Customer and Order using **With or Without**, then groups by Customer.Id and applies Sum on Order.Amount. Look at the preview below—what does each row represent?",
+    "diagram": "**Aggregate `GetCustomerTotalSpent`** — Sources: Customer (With or Without) Order\n\n| # | Left | Join | Right | Condition |\n|---|---|---|---|---|\n| 1 | Customer | With or Without | Order | Customer.Id = Order.CustomerId |\n\n**Group By:** `Customer.Id`, **Sum:** `Order.Amount`\n\n**Preview (output):**\n\n| Customer.Id | Customer.Name | Sum(Order.Amount) |\n|---|---|---|\n| 1 | Alice | 250 |\n| 2 | Bob | null |\n| 3 | Carol | 500 |\n| 4 | Dave | 150 |",
+    "options": [
+      {
+        "key": "A",
+        "text": "Each row is a Customer; those with null Sum have no Orders (the With or Without join preserved them)."
+      },
+      {
+        "key": "B",
+        "text": "Each row is a single Order, with its Customer repeated; null Sum means the Order amount is missing."
+      },
+      {
+        "key": "C",
+        "text": "Only Customers with Orders appear (null rows are filtered out automatically)."
+      },
+      {
+        "key": "D",
+        "text": "Rows with null Sum are errors and must be removed before the Aggregate can run."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Group By 쿼리는 **각 그룹마다 한 행**을 출력합니다. 조인이 **With or Without**이고 Group By가 Customer.Id이므로, **모든 Customer가 한 행씩** 나타납니다. Order가 없는 Customer(Bob)는 Sum(Order.Amount)가 null이 되는데, 이는 정상입니다(With or Without가 그들을 보존했기 때문). null은 오류가 아니라 \"해당 그룹에 매칭 Order 없음\"을 의미합니다.",
+    "distractors": {
+      "A": "정답입니다.",
+      "B": "Group By와 aggregation이 있으므로 각 행은 '한 주문'이 아니라 '한 고객 그룹'입니다.",
+      "C": "With or Without 조인이므로 Order 없는 고객도 포함됩니다.",
+      "D": "null Sum은 정상이며 오류가 아닙니다."
+    },
+    "source": "Training Workbook 4 (Join: With or Without + Group By + Sum) · 도메인: Customer/Order (고객별 총지출)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "모든 고객(Customer) 목록과 각 고객의 주문(Order) 총액(Sum of Amount)을 가져오는 Aggregate가 필요하다. Aggregate는 Customer와 Order를 **With or Without**로 조인하고, Customer.Id로 그룹화하며, Order.Amount의 Sum을 적용한다. 아래 미리보기를 보면, 각 행은 무엇을 나타내는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "각 행은 한 고객(Customer)이다. Sum이 null인 고객은 Order가 없으며, With or Without 조인이 이들을 보존했다."
+          },
+          {
+            "key": "B",
+            "text": "각 행은 한 주문(Order)이며, 고객이 반복된다. Sum이 null은 주문 금액이 누락되었음을 의미한다."
+          },
+          {
+            "key": "C",
+            "text": "Order가 있는 고객만 나타나며, null 행은 자동으로 필터링된다."
+          },
+          {
+            "key": "D",
+            "text": "Sum이 null인 행은 오류이며, Aggregate를 실행하기 전에 제거해야 한다."
+          }
+        ],
+        "diagram": "**Aggregate `GetCustomerTotalSpent`** — Source: Customer (With or Without) Order\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Customer | With or Without | Order | Customer.Id = Order.CustomerId |\n\n**Group By:** `Customer.Id`, **Sum:** `Order.Amount`\n\n**미리보기(출력):**\n\n| Customer.Id | Customer.Name | Sum(Order.Amount) |\n|---|---|---|\n| 1 | Alice | 250 |\n| 2 | Bob | null |\n| 3 | Carol | 500 |\n| 4 | Dave | 150 |"
+      }
+    }
+  },
+  {
+    "id": "AGG-022",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [
+      "multiple-sources",
+      "join-chain",
+      "group-by",
+      "count",
+      "many-to-many"
+    ],
+    "stem": "An Aggregate has **three Sources** joined in sequence: Movie → (Only With) → PersonMovieRole → (Only With) → Person. You want to count how many people have acted in each movie (PersonRole = 'Actor'). The Aggregate groups by Movie.Id and applies Count on Person.Id. Based on the preview, which interpretation is correct?",
+    "diagram": "**Aggregate `GetMovieActorCount`** — Sources: Movie, PersonMovieRole, Person (joined in chain)\n\n| # | Left | Join | Right | Condition |\n|---|---|---|---|---|\n| 1 | Movie | Only With | PersonMovieRole | Movie.Id = PersonMovieRole.MovieId |\n| 2 | PersonMovieRole | Only With | Person | PersonMovieRole.PersonId = Person.Id |\n\n**Filter:** `PersonMovieRole.PersonRoleId = Entities.PersonRole.Actor`\n\n**Group By:** `Movie.Id`, **Count:** `Person.Id`\n\n**Preview (output):**\n\n| Movie.Id | Movie.Title | Count(Person.Id) |\n|---|---|---|\n| 101 | Inception | 8 |\n| 102 | Avatar | 12 |\n| 103 | Titanic | 6 |",
+    "options": [
+      {
+        "key": "A",
+        "text": "Each row shows one Movie; the Count is the number of unique Persons who acted in that Movie."
+      },
+      {
+        "key": "B",
+        "text": "Only Movies with PersonMovieRole records appear; Movies with no cast are excluded (because of Only With)."
+      },
+      {
+        "key": "C",
+        "text": "The join chain is invalid; you cannot have three Sources with multiple Only With joins."
+      },
+      {
+        "key": "D",
+        "text": "Each row represents one PersonMovieRole record, grouped and counted by Movie."
+      }
+    ],
+    "answer": "A",
+    "explanation": "여러 Sources를 순차 조인할 수 있습니다. **Only With** 조인 2번 + Filter (Actor role) → 각 Movie마다 배우 역할의 Person만 선택됨. **Group By Movie.Id**이므로 각 행은 **한 Movie**를 나타내고, **Count(Person.Id)**는 그 Movie의 배우 **고유 인물 수**입니다. Inception: 8명 배우, Avatar: 12명 배우 등.",
+    "distractors": {
+      "B": "Only With 조인이 있어도 Group By로 Movie별로 집계되면 배우 없는 Movie는 결과에 안 나옵니다(맞음). 하지만 A가 더 정확한 설명입니다.",
+      "C": "여러 Only With 조인은 유효합니다.",
+      "D": "Group By가 있으므로 개별 PersonMovieRole 행이 아니라 Movie 그룹 행입니다."
+    },
+    "source": "Training Workbook 4 (Multiple Sources · Join chain) · 도메인: Movie/Person/PersonMovieRole (다대다 조회)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 **세 개의 Source를 순차 조인**한다: Movie → (Only With) → PersonMovieRole → (Only With) → Person. 각 영화에서 배우(Actor)로 출연한 사람 수를 세고 싶다(PersonRole = 'Actor'). Aggregate는 Movie.Id로 그룹화하고 Person.Id를 Count한다. 미리보기를 보면 다음 중 올바른 해석은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "각 행은 한 영화를 나타내며, Count는 그 영화에서 배우로 출연한 고유 인물 수이다."
+          },
+          {
+            "key": "B",
+            "text": "PersonMovieRole 레코드가 있는 영화만 나타나며, 출연진이 없는 영화는 제외된다(Only With 때문)."
+          },
+          {
+            "key": "C",
+            "text": "세 개의 Source를 여러 Only With 조인으로 사용하는 것은 유효하지 않다."
+          },
+          {
+            "key": "D",
+            "text": "각 행은 하나의 PersonMovieRole 레코드를 나타내며, Movie로 그룹화되고 카운트된다."
+          }
+        ],
+        "diagram": "**Aggregate `GetMovieActorCount`** — Source: Movie, PersonMovieRole, Person (순차 조인)\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Movie | Only With | PersonMovieRole | Movie.Id = PersonMovieRole.MovieId |\n| 2 | PersonMovieRole | Only With | Person | PersonMovieRole.PersonId = Person.Id |\n\n**Filter:** `PersonMovieRole.PersonRoleId = Entities.PersonRole.Actor`\n\n**Group By:** `Movie.Id`, **Count:** `Person.Id`\n\n**미리보기(출력):**\n\n| Movie.Id | Movie.Title | Count(Person.Id) |\n|---|---|---|\n| 101 | Inception | 8 |\n| 102 | Avatar | 12 |\n| 103 | Titanic | 6 |"
+      }
+    }
+  },
+  {
+    "id": "AGG-023",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [
+      "join-types",
+      "only-with",
+      "with-or-without",
+      "null-handling",
+      "visual-comparison"
+    ],
+    "stem": "Compare two Aggregates with the same sources but different join types. Both query `Movie` and `Genre`—one uses **Only With**, the other uses **With or Without**. The preview columns show which Genres are missing. Which conclusion is correct?",
+    "diagram": "**Aggregate 1: `GetMoviesWithGenres` (Only With)**\n\n| # | Left | Join | Right | Condition |\n|---|---|---|---|---|\n| 1 | Movie | Only With | Genre | Movie.GenreId = Genre.Id |\n\n**Preview:**\n\n| Movie.Title | Genre.Name |\n|---|---|\n| Inception | Sci-Fi |\n| Avatar | Sci-Fi |\n| Titanic | Drama |\n\n---\n\n**Aggregate 2: `GetAllMovies` (With or Without)**\n\n| # | Left | Join | Right | Condition |\n|---|---|---|---|---|\n| 1 | Movie | With or Without | Genre | Movie.GenreId = Genre.Id |\n\n**Preview:**\n\n| Movie.Title | Genre.Name |\n|---|---|\n| Inception | Sci-Fi |\n| Avatar | Sci-Fi |\n| Titanic | Drama |\n| Gladiator | — |",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only With excludes Movies without a Genre; With or Without keeps all Movies and shows empty Genre when there's no match."
+      },
+      {
+        "key": "B",
+        "text": "Only With and With or Without return the same result; the difference in previews is just cosmetic."
+      },
+      {
+        "key": "C",
+        "text": "Only With is used for Genres, and With or Without is used for Movies—they filter opposite sides."
+      },
+      {
+        "key": "D",
+        "text": "The — (empty) symbol in Gladiator's row means the Aggregate has an error for that record."
+      }
+    ],
+    "answer": "A",
+    "explanation": "**Only With** (INNER JOIN): Movie와 Genre가 **양쪽 모두 매칭**되는 행만 → Inception, Avatar, Titanic만 (Gladiator 제외). **With or Without** (LEFT JOIN): 왼쪽(Movie) **모든 행 유지**, 오른쪽(Genre) 미매칭 시 null → Gladiator의 Genre.Name은 빈 값(—). 미리보기의 행 개수와 빈 셀이 바로 그 차이를 보여줍니다.",
+    "distractors": {
+      "B": "두 조인은 동작이 다릅니다. 미리보기에서 행 수 차이가 보입니다.",
+      "C": "조인 방향이 반대입니다. 조인은 '기준(왼쪽) Source의 모든 행 유지' vs. '양쪽 일치만' 차이입니다.",
+      "D": "— (빈 값)은 정상이며 오류가 아닙니다."
+    },
+    "source": "Training Workbook 4 (Join Types: Only With vs. With or Without) · 공식 Sample Exam 유형(비교 다이어그램) · 도메인: Movie/Genre",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "같은 Source를 가지지만 다른 Join 종류를 사용하는 두 개의 Aggregate를 비교하자. 둘 다 `Movie`와 `Genre`를 조회한다—하나는 **Only With**를 사용하고, 다른 하나는 **With or Without**를 사용한다. 미리보기 컬럼은 어느 Genre가 빠졌는지 보여준다. 다음 중 올바른 결론은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Only With는 Genre가 없는 Movie를 제외하고, With or Without는 모든 Movie를 유지하며 매칭이 없을 때 Genre가 빈 값으로 나타난다."
+          },
+          {
+            "key": "B",
+            "text": "Only With와 With or Without는 같은 결과를 반환하며, 미리보기의 차이는 단순히 시각적일 뿐이다."
+          },
+          {
+            "key": "C",
+            "text": "Only With는 Genre에 사용되고, With or Without는 Movie에 사용된다. 즉, 반대쪽을 필터링한다."
+          },
+          {
+            "key": "D",
+            "text": "Gladiator 행의 — (빈 값) 기호는 그 레코드에 Aggregate 오류가 있음을 의미한다."
+          }
+        ],
+        "diagram": "**Aggregate 1: `GetMoviesWithGenres` (Only With)**\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Movie | Only With | Genre | Movie.GenreId = Genre.Id |\n\n**미리보기:**\n\n| Movie.Title | Genre.Name |\n|---|---|\n| Inception | Sci-Fi |\n| Avatar | Sci-Fi |\n| Titanic | Drama |\n\n---\n\n**Aggregate 2: `GetAllMovies` (With or Without)**\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Movie | With or Without | Genre | Movie.GenreId = Genre.Id |\n\n**미리보기:**\n\n| Movie.Title | Genre.Name |\n|---|---|\n| Inception | Sci-Fi |\n| Avatar | Sci-Fi |\n| Titanic | Drama |\n| Gladiator | — |"
+      }
+    }
+  },
+  {
+    "id": "AGG-024",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [
+      "group-by",
+      "output-attributes",
+      "preview-vs-actual",
+      "conceptual"
+    ],
+    "stem": "An Aggregate with a Group By outputs only the Group By attribute(s) and aggregated values—other attributes are not available. However, the preview table shows all columns. What is the difference between what the **preview displays** and what **output records actually contain**?",
+    "diagram": "**Aggregate `GetProductSales`** — Source: `Product`, `OrderItem`\n\n| # | Left | Join | Right | Condition |\n|---|---|---|---|---|\n| 1 | Product | Only With | OrderItem | Product.Id = OrderItem.ProductId |\n\n**Group By:** `Product.Id`, **Sum:** `OrderItem.Quantity`\n\n**Columns (visible in editor):**\nProduct.Id, Product.Name, Product.Price, Sum(OrderItem.Quantity)\n\n**Preview (editor display):**\n\n| Product.Id | Product.Name | Product.Price | Sum(Qty) |\n|---|---|---|---|\n| 1 | Widget A | 10 | 25 |\n| 2 | Widget B | 20 | 15 |\n| 3 | Widget C | 15 | 30 |",
+    "options": [
+      {
+        "key": "A",
+        "text": "The preview shows all columns for convenience; the actual records contain only Product.Id and Sum(Qty), and Product.Name and Product.Price are inaccessible in code."
+      },
+      {
+        "key": "B",
+        "text": "The preview shows exactly what the records contain; you can access all four columns: Product.Id, Product.Name, Product.Price, and Sum(Qty)."
+      },
+      {
+        "key": "C",
+        "text": "Hidden columns are excluded from output, so Product.Price is inaccessible because it is shown smaller in the preview."
+      },
+      {
+        "key": "D",
+        "text": "Aggregated records contain all attributes from the Source entity, plus the Sum value; the Group By just organizes them."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Group By가 있는 Aggregate의 **미리보기**는 편집자 편의상 모든 column을 표시합니다. 하지만 **실제 출력 레코드**는 **Group By attribute(Product.Id)와 aggregated 함수(Sum(Qty))**만 가집니다. Product.Name과 Product.Price는 그룹 내에서 집계되지 않았으므로, 코드에서 `.List.Current.Product.Name` 같은 접근은 불가능합니다(컴파일 오류 또는 null). 이것이 Group By 쿼리의 중요한 제한사항입니다.",
+    "distractors": {
+      "B": "미리보기는 시각적 참고일 뿐, 실제 레코드 구조를 반영하지 않습니다.",
+      "C": "컬럼 숨김은 미리보기용이라 이것도 틀렸습니다.",
+      "D": "Group By가 있으면 다른 attribute는 포함되지 않습니다."
+    },
+    "source": "Training Workbook 4 (Aggregate Output + Group By 제약) · 공식 교육 자료 (preview vs. actual output) · 도메인: Product/OrderItem (판매 요약)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Group By를 가진 Aggregate는 Group By attribute(들)와 집계 값만 출력하며, 다른 attribute들은 사용 불가능하다. 그런데 미리보기 테이블은 모든 컬럼을 표시한다. **미리보기가 표시하는 것**과 **실제 출력 레코드가 포함하는 것** 사이의 차이는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "미리보기는 편의상 모든 컬럼을 표시하지만, 실제 레코드는 Product.Id와 Sum(Qty)만 포함하며, Product.Name과 Product.Price는 코드에서 접근 불가능하다."
+          },
+          {
+            "key": "B",
+            "text": "미리보기는 정확히 레코드가 포함하는 것을 나타내며, 네 가지 컬럼(Product.Id, Product.Name, Product.Price, Sum(Qty))을 모두 접근할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "숨긴 컬럼은 출력에서 제외되므로 Product.Price는 미리보기에서 작게 표시되어 접근 불가능하다."
+          },
+          {
+            "key": "D",
+            "text": "집계 레코드는 Source Entity의 모든 속성과 Sum 값을 포함하며, Group By는 단지 이들을 정렬할 뿐이다."
+          }
+        ],
+        "diagram": "**Aggregate `GetProductSales`** — Source: `Product`, `OrderItem`\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Product | Only With | OrderItem | Product.Id = OrderItem.ProductId |\n\n**Group By:** `Product.Id`, **Sum:** `OrderItem.Quantity`\n\n**컬럼(편집기에서 보이는 것):**\nProduct.Id, Product.Name, Product.Price, Sum(OrderItem.Quantity)\n\n**미리보기(편집기 표시):**\n\n| Product.Id | Product.Name | Product.Price | Sum(Qty) |\n|---|---|---|---|\n| 1 | Widget A | 10 | 25 |\n| 2 | Widget B | 20 | 15 |\n| 3 | Widget C | 15 | 30 |"
+      }
+    }
   }
 ]
