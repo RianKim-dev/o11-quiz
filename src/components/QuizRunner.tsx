@@ -381,9 +381,9 @@ function Results({
                 ) : null}
               </div>
 
-              <details className="mt-3">
+              <details className="mt-3" open>
                 <summary className="cursor-pointer text-sm font-medium text-rose-600">
-                  해설 보기
+                  해설
                 </summary>
                 <div className="mt-2 rounded-lg bg-slate-50 p-3 text-sm">
                   <Markdown>{q.explanation}</Markdown>
