@@ -1,5 +1,5 @@
 {
-  "total": 639,
+  "total": 682,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
@@ -23,15 +23,15 @@
     },
     "Debugging and Monitoring": {
       "category": "Reactive Apps in OutSystems",
-      "count": 13
+      "count": 16
     },
     "Entities & Data Types": {
       "category": "Data Modeling",
-      "count": 69
+      "count": 71
     },
     "Fetching Data on Screens": {
       "category": "Fetching Data",
-      "count": 69
+      "count": 70
     },
     "Form Validations": {
       "category": "Logic",
@@ -39,7 +39,7 @@
     },
     "Logic Flows & Exception Handling": {
       "category": "Logic",
-      "count": 59
+      "count": 96
     },
     "Modular Dependencies": {
       "category": "Architecture & Security",

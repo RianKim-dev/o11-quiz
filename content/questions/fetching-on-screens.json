@@ -3720,5 +3720,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "FDS-070",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen uses a Data Action ('Fetch Data from Other Sources') to load Product data. If this Data Action fails with an unhandled exception, what is the impact on the Screen's UI?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Screen may still load, but widgets bound to that Data Action's output will not display data"
+      },
+      {
+        "key": "B",
+        "text": "The browser automatically retries the request 3 times"
+      },
+      {
+        "key": "C",
+        "text": "The user is immediately redirected to an 'Invalid URL' page"
+      },
+      {
+        "key": "D",
+        "text": "The entire Screen turns blank"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Data Action은 화면 렌더링과 비동기로 실행되므로, 실패하더라도 화면 자체는 로드되고 해당 output에 연결된 widget만 데이터를 표시하지 못합니다. 자동 재시도(B), 'Invalid URL' 리디렉션(C), 화면 전체가 빈 화면이 됨(D)은 OutSystems의 동작이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen이 Data Action('Fetch Data from Other Sources')으로 Product 데이터를 불러옵니다. 이 Data Action이 처리되지 않은 예외로 실패하면 Screen UI에 어떤 영향이 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Screen은 그래도 로드될 수 있으나, 그 Data Action 출력에 연결된 widget은 데이터를 표시하지 못한다"
+          },
+          {
+            "key": "B",
+            "text": "브라우저가 자동으로 요청을 3번 재시도한다"
+          },
+          {
+            "key": "C",
+            "text": "사용자가 즉시 'Invalid URL' 페이지로 리디렉션된다"
+          },
+          {
+            "key": "D",
+            "text": "Screen 전체가 빈 화면이 된다"
+          }
+        ]
+      }
+    }
   }
 ]

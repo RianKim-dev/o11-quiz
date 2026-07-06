@@ -3727,5 +3727,109 @@
         ]
       }
     }
+  },
+  {
+    "id": "ENT-070",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Server Action, an Aggregate 'GetProducts' is followed by an 'Assign' that sets a local record variable to 'GetProducts.List.Current'. If the Aggregate returns no records, what is the value of the 'Name' attribute (Text type) in that local variable?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The logic crashes with a 'Record Not Found' exception."
+      },
+      {
+        "key": "B",
+        "text": "NULL."
+      },
+      {
+        "key": "C",
+        "text": "An empty string (\"\")."
+      },
+      {
+        "key": "D",
+        "text": "The 'Name' of the first product in the database."
+      }
+    ],
+    "answer": "C",
+    "explanation": "빈 List에서 .Current를 참조하면 각 attribute의 기본값을 가진 빈 record가 반환됩니다. Text 타입의 기본값은 NULL이 아니라 빈 문자열(\"\")입니다. OutSystems는 Text에 대해 NULL 개념을 사용하지 않으므로 정답은 C입니다. B(NULL)는 틀리고, A처럼 크래시가 발생하지도 않으며 D처럼 임의의 다른 record가 들어오지도 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Server Action에서 Aggregate 'GetProducts' 다음에 'Assign'이 로컬 record 변수에 'GetProducts.List.Current'를 설정합니다. Aggregate가 아무 record도 반환하지 않으면 그 로컬 변수의 'Name' attribute(Text 타입) 값은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Record Not Found' exception이 발생하며 로직이 크래시된다."
+          },
+          {
+            "key": "B",
+            "text": "NULL."
+          },
+          {
+            "key": "C",
+            "text": "빈 문자열(\"\")."
+          },
+          {
+            "key": "D",
+            "text": "데이터베이스의 첫 번째 product의 'Name'."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-071",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Inside a Screen Action, a developer needs to check whether a Date variable 'AppointmentDate' has been set by comparing it against an empty/null value. What is the correct expression?",
+    "options": [
+      {
+        "key": "A",
+        "text": "AppointmentDate = Null"
+      },
+      {
+        "key": "B",
+        "text": "AppointmentDate = 0"
+      },
+      {
+        "key": "C",
+        "text": "AppointmentDate = NullDate()"
+      },
+      {
+        "key": "D",
+        "text": "AppointmentDate = \"\""
+      }
+    ],
+    "answer": "C",
+    "explanation": "Date/DateTime 변수가 설정되지 않았는지 확인하려면 NullDate() 함수와 비교합니다(AppointmentDate = NullDate()). OutSystems에는 'Null'이라는 리터럴이 없고(A), Text의 빈 문자열 \"\"(D)이나 숫자 0(B)으로는 Date의 빈 값을 올바르게 비교할 수 없습니다. 따라서 정답은 C입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Screen Action 안에서 개발자가 Date 변수 'AppointmentDate'가 설정되었는지 비어있는/null 값과 비교하여 확인하려 합니다. 올바른 표현식은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "AppointmentDate = Null"
+          },
+          {
+            "key": "B",
+            "text": "AppointmentDate = 0"
+          },
+          {
+            "key": "C",
+            "text": "AppointmentDate = NullDate()"
+          },
+          {
+            "key": "D",
+            "text": "AppointmentDate = \"\""
+          }
+        ]
+      }
+    }
   }
 ]
