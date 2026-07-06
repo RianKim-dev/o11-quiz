@@ -360,7 +360,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "OSMDb_Movie 모듈에서 복잡한 영화 검증 로직을 수행하는 Server Action을 생성했다. 이 액션을 OSMDb_Homepage 모듈과 다른 애플리케이션의 다른 모듈에서 재사용하도록 사용 가능하게 하려면 어떻게 해야 하나?",
+        "stem": "OSMDb_Movie 모듈에서 복잡한 영화(Movie) 검증 로직을 수행하는 Server Action을 생성했다. 이 액션을 OSMDb_Homepage 모듈과 다른 애플리케이션의 다른 모듈에서 재사용하도록 사용 가능하게 하려면 어떻게 해야 하나?",
         "options": [
           {
             "key": "A",
@@ -488,11 +488,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "실습에서 OSMDb_Movie 모듈이 Movie와 Person entity를 OSMDb_Homepage 모듈에 노출할 때, 읽기 전용(read-only)으로 노출되었다. 나중에 OSMDb_Homepage에서 영화를 생성하고 업데이트할 수 있도록 하기 위해 OSMDb_Movie에 별도의 Public Server Action(MovieCreateOrUpdate)을 생성했다. entity의 Create/Update 액션을 직접 노출하지 않고 이런 방식을 사용한 이유는?",
+        "stem": "실습에서 OSMDb_Movie 모듈이 Movie와 Person Entity를 OSMDb_Homepage 모듈에 노출할 때, 읽기 전용(read-only)으로 노출되었다. 나중에 OSMDb_Homepage에서 영화(Movie)를 생성하고 업데이트할 수 있도록 하기 위해 OSMDb_Movie에 별도의 Public Server Action(MovieCreateOrUpdate)을 생성했다. Entity의 Create/Update 액션을 직접 노출하지 않고 이런 방식을 사용한 이유는?",
         "options": [
           {
             "key": "A",
-            "text": "OutSystems는 entity Create/Update 액션을 모듈 간 노출하지 못하도록 제한한다."
+            "text": "OutSystems는 Entity의 Create/Update 액션을 모듈 간 노출하지 못하도록 제한한다."
           },
           {
             "key": "B",
@@ -500,7 +500,7 @@
           },
           {
             "key": "C",
-            "text": "custom Server Action을 생성하는 것이 entity 액션을 노출하는 것보다 더 빠르다."
+            "text": "custom Server Action을 생성하는 것이 Entity 액션을 노출하는 것보다 더 빠르다."
           },
           {
             "key": "D",

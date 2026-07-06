@@ -39,23 +39,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "`GetProducts`라는 이름의 Aggregate에 두 개의 Source가 아래와 같이 조인되어 있다. 이 Aggregate는 무엇을 반환하는가?",
+        "stem": "`GetProducts`라는 이름의 Aggregate에 두 개의 Source가 아래와 같이 Join되어 있다. 이 Aggregate는 무엇을 반환하는가?",
         "options": [
           {
             "key": "A",
-            "text": "Category가 할당된 Product만 반환한다."
+            "text": "카테고리(Category)가 할당된 상품(Product)만 반환한다."
           },
           {
             "key": "B",
-            "text": "모든 Product를 반환하며, Category가 없는 Product의 경우 Category 속성이 비어(null) 반환된다."
+            "text": "모든 상품을 반환하며, 카테고리가 없는 상품의 경우 카테고리 속성이 비어(null) 반환된다."
           },
           {
             "key": "C",
-            "text": "Product가 하나 이상 있는 Category만 반환한다."
+            "text": "상품이 하나 이상 있는 카테고리만 반환한다."
           },
           {
             "key": "D",
-            "text": "모든 Product와 모든 Category를 반환하며, Product가 없는 Category도 포함한다."
+            "text": "모든 상품과 모든 카테고리를 반환하며, 상품이 없는 카테고리도 포함한다."
           }
         ],
         "diagram": "| # | 왼쪽 Source | Join 종류 | 오른쪽 Source | Join 조건 |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Category | Product.CategoryId = Category.Id |"
@@ -102,7 +102,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "**고객별 오더(Order) 수**를 반환하는 Aggregate가 필요하다. 다음 중 올바른 구성은?",
+        "stem": "**고객(Customer)별 주문(Order) 수**를 반환하는 Aggregate가 필요하다. 다음 중 올바른 구성은?",
         "options": [
           {
             "key": "A",
@@ -164,7 +164,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 오더(Order)를 `Status`로 그룹화하고 이를 카운트한다(`Order.Id`에 대한 Count). 각 출력 레코드(`GetOrders.List.Current`)에서 사용할 수 있는 속성은 무엇인가?",
+        "stem": "한 Aggregate가 주문(Order)을 `Status`로 그룹화하고 이를 카운트한다(`Order.Id`에 대한 Count). 각 출력 레코드(`GetOrders.List.Current`)에서 사용할 수 있는 속성은 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -287,7 +287,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Genre가 할당된 Movie**만** 나열하는 Aggregate가 필요하다. Genre가 없는 Movie는 제외되어야 한다. 이 Aggregate의 Source는 `Movie`와 `MovieGenre`이다. 두 Source 사이에 어떤 Join 종류를 사용해야 하는가?",
+        "stem": "장르(Genre)가 할당된 영화(Movie)**만** 나열하는 Aggregate가 필요하다. 장르가 없는 영화는 제외되어야 한다. 이 Aggregate의 Source는 `Movie`와 `MovieGenre`이다. 두 Source 사이에 어떤 Join 종류를 사용해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -412,7 +412,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Person Dropdown이 현재 각 사람의 이름(first name)만 표시하고 있다. 각 옵션에 전체 이름(`Name Surname`)이 표시되도록 하려고 한다. 가장 좋은 방법은 무엇인가?",
+        "stem": "사람(Person) Dropdown이 현재 각 사람의 이름(first name)만 표시하고 있다. 각 옵션에 전체 이름(`Name Surname`)이 표시되도록 하려고 한다. 가장 좋은 방법은 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -663,7 +663,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "`GetMovieById` Aggregate가 단일 Movie를 페칭한다. 다음 중 그 영화의 제목을 Screen에 올바르게 표시하는 표현식은?",
+        "stem": "`GetMovieById` Aggregate가 단일 영화(Movie)를 페칭한다. 다음 중 그 영화의 제목을 Screen에 올바르게 표시하는 표현식은?",
         "options": [
           {
             "key": "A",
@@ -788,7 +788,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Screen이 `Order` 레코드를 나열하는데, `CreatedOn` 기준으로 **최신순**으로 표시되어야 한다. Aggregate에서 이를 어디에 구성하는가?",
+        "stem": "한 Screen이 주문(Order) 레코드를 나열하는데, `CreatedOn` 기준으로 **최신순**으로 표시되어야 한다. Aggregate에서 이를 어디에 구성하는가?",
         "options": [
           {
             "key": "A",
@@ -851,7 +851,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "**가장 비싼 Product 5개**만 표시해야 한다. Aggregate는 이미 `Price` 기준 내림차순으로 정렬되어 있다. 결과를 5개 레코드로 제한하려면 어떻게 하는가?",
+        "stem": "**가장 비싼 상품(Product) 5개**만 표시해야 한다. Aggregate는 이미 `Price` 기준 내림차순으로 정렬되어 있다. 결과를 5개 레코드로 제한하려면 어떻게 하는가?",
         "options": [
           {
             "key": "A",
@@ -914,7 +914,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "각 `Order`가 (`CreatedOn` 기준으로) **며칠 전**에 접수되었는지 표시해야 한다. 이 값을 Aggregate에서 사용할 수 있게 만드는 가장 좋은 방법은 무엇인가?",
+        "stem": "각 주문(Order)이 (`CreatedOn` 기준으로) **며칠 전**에 접수되었는지 표시해야 한다. 이 값을 Aggregate에서 사용할 수 있게 만드는 가장 좋은 방법은 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -922,7 +922,7 @@
           },
           {
             "key": "B",
-            "text": "일수 값을 새 데이터베이스 컬럼에 저장하고 매일 모든 Order를 갱신한다."
+            "text": "일수 값을 새 데이터베이스 컬럼에 저장하고 매일 모든 주문을 갱신한다."
           },
           {
             "key": "C",
@@ -977,7 +977,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Customer 상세 Screen에 `CustomerId` Input Parameter가 있다. `GetOrders` Aggregate는 **해당 고객의 Order만** 반환해야 한다. 어떻게 해야 하는가?",
+        "stem": "고객(Customer) 상세 Screen에 `CustomerId` Input Parameter가 있다. `GetOrders` Aggregate는 **해당 고객의 주문(Order)만** 반환해야 한다. 어떻게 해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -1040,23 +1040,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 `Customer`와 `Order`(한 Customer가 여러 Order를 가짐)를 **Only With**로 조인한다. 특정 고객이 3개의 오더를 가지고 있다면, 그 고객의 레코드는 결과에 어떻게 나타나는가?",
+        "stem": "한 Aggregate가 고객(Customer)과 주문(Order)(한 고객이 여러 주문을 가짐)을 **Only With**로 조인한다. 특정 고객이 3개의 주문을 가지고 있다면, 그 고객의 레코드는 결과에 어떻게 나타나는가?",
         "options": [
           {
             "key": "A",
-            "text": "3개의 행으로(오더당 1행) 나타나며, Customer 속성이 각 행에 반복된다."
+            "text": "3개의 행으로(주문당 1행) 나타나며, 고객 속성이 각 행에 반복된다."
           },
           {
             "key": "B",
-            "text": "Customer에 대해 1개의 행으로 나타나며, 3개의 Order가 그 안에 중첩된다."
+            "text": "고객에 대해 1개의 행으로 나타나며, 3개의 주문이 그 안에 중첩된다."
           },
           {
             "key": "C",
-            "text": "총 1개의 행으로 나타나며, 그 고객의 가장 최근 오더만 표시된다."
+            "text": "총 1개의 행으로 나타나며, 그 고객의 가장 최근 주문만 표시된다."
           },
           {
             "key": "D",
-            "text": "오더 데이터를 포함하지 않는 3개의 Customer 행으로 나타난다."
+            "text": "주문 데이터를 포함하지 않는 3개의 고객 행으로 나타난다."
           }
         ]
       }
@@ -1103,7 +1103,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "하나의 `Cart`는 여러 개의 `CartItem` 레코드를 가지며, 각 CartItem에는 `Quantity`가 있다. 장바구니에 담긴 **품목의 총 수량**(예: 2 + 3 = 5)을 표시하려면 `CartItem.Quantity`에 어떤 집계 함수를 적용해야 하는가?",
+        "stem": "하나의 장바구니(Cart)는 여러 개의 CartItem 레코드를 가지며, 각 CartItem에는 `Quantity`가 있다. 장바구니에 담긴 **품목의 총 수량**(예: 2 + 3 = 5)을 표시하려면 `CartItem.Quantity`에 어떤 집계 함수를 적용해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -1171,19 +1171,19 @@
         "options": [
           {
             "key": "A",
-            "text": "Supplier가 있는 Product만 반환된다."
+            "text": "공급업체(Supplier)가 있는 상품(Product)만 반환된다."
           },
           {
             "key": "B",
-            "text": "모든 Product가 반환되며, Supplier가 없는 Product는 Supplier 속성이 비어 표시된다."
+            "text": "모든 상품이 반환되며, 공급업체가 없는 상품은 공급업체 속성이 비어 표시된다."
           },
           {
             "key": "C",
-            "text": "Product가 하나 이상 있는 Supplier만 반환된다."
+            "text": "상품이 하나 이상 있는 공급업체만 반환된다."
           },
           {
             "key": "D",
-            "text": "일부 Supplier 값이 비어 있으므로 Aggregate가 오류를 발생시킨다."
+            "text": "일부 공급업체 값이 비어 있으므로 Aggregate가 오류를 발생시킨다."
           }
         ],
         "diagram": "**Aggregate `GetProducts`** — Source: `Product`, `Supplier`\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Product | With or Without | Supplier | Product.SupplierId = Supplier.Id |\n\n**미리보기(출력):**\n\n| Product.Name | Product.Price | Supplier.Name |\n|---|---|---|\n| Keyboard | 25 | Logitech |\n| Mouse | 15 | — |\n| Monitor | 120 | Dell |\n| Webcam | 40 | — |"
@@ -1232,7 +1232,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "아래 Aggregate는 오더(Order)를 `Status`로 그룹화하고 `Order.Id`를 Count한다(미리보기 표시). `GetOrdersByStatus.List`에는 몇 개의 레코드가 포함되는가?",
+        "stem": "아래 Aggregate는 주문(Order)을 `Status`로 그룹화하고 `Order.Id`를 Count한다(미리보기 표시). `GetOrdersByStatus.List`에는 몇 개의 레코드가 포함되는가?",
         "options": [
           {
             "key": "A",
@@ -1240,7 +1240,7 @@
           },
           {
             "key": "B",
-            "text": "20 — 오더의 총 개수."
+            "text": "20 — 주문의 총 개수."
           },
           {
             "key": "C",
@@ -1299,19 +1299,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "모든 고객(Customer) 목록과 각 고객의 주문(Order) 총액(Sum of Amount)을 가져오는 Aggregate가 필요하다. Aggregate는 Customer와 Order를 **With or Without**로 조인하고, Customer.Id로 그룹화하며, Order.Amount의 Sum을 적용한다. 아래 미리보기를 보면, 각 행은 무엇을 나타내는가?",
+        "stem": "모든 고객(Customer) 목록과 각 고객의 주문(Order) 총액(Sum of Amount)을 가져오는 Aggregate가 필요하다. Aggregate는 고객과 주문을 **With or Without**로 조인하고, Customer.Id로 그룹화하며, Order.Amount의 Sum을 적용한다. 아래 미리보기를 보면, 각 행은 무엇을 나타내는가?",
         "options": [
           {
             "key": "A",
-            "text": "각 행은 한 고객(Customer)이다. Sum이 null인 고객은 Order가 없으며, With or Without 조인이 이들을 보존했다."
+            "text": "각 행은 한 고객(Customer)이다. Sum이 null인 고객은 주문(Order)이 없으며, With or Without 조인이 이들을 보존했다."
           },
           {
             "key": "B",
-            "text": "각 행은 한 주문(Order)이며, 고객이 반복된다. Sum이 null은 주문 금액이 누락되었음을 의미한다."
+            "text": "각 행은 한 주문(Order)이며, 고객(Customer)이 반복된다. Sum이 null은 주문 금액이 누락되었음을 의미한다."
           },
           {
             "key": "C",
-            "text": "Order가 있는 고객만 나타나며, null 행은 자동으로 필터링된다."
+            "text": "주문(Order)이 있는 고객(Customer)만 나타나며, null 행은 자동으로 필터링된다."
           },
           {
             "key": "D",
@@ -1366,15 +1366,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 **세 개의 Source를 순차 조인**한다: Movie → (Only With) → PersonMovieRole → (Only With) → Person. 각 영화에서 배우(Actor)로 출연한 사람 수를 세고 싶다(PersonRole = 'Actor'). Aggregate는 Movie.Id로 그룹화하고 Person.Id를 Count한다. 미리보기를 보면 다음 중 올바른 해석은?",
+        "stem": "한 Aggregate가 **세 개의 Source를 순차 조인**한다: Movie → (Only With) → PersonMovieRole → (Only With) → Person. 각 영화(Movie)에서 배우(Actor)로 출연한 인물(Person) 수를 세고 싶다(PersonRole = 'Actor'). Aggregate는 Movie.Id로 그룹화하고 Person.Id를 Count한다. 미리보기를 보면 다음 중 올바른 해석은?",
         "options": [
           {
             "key": "A",
-            "text": "각 행은 한 영화를 나타내며, Count는 그 영화에서 배우로 출연한 고유 인물 수이다."
+            "text": "각 행은 한 영화(Movie)를 나타내며, Count는 그 영화에서 배우(Actor)로 출연한 고유 인물(Person) 수이다."
           },
           {
             "key": "B",
-            "text": "PersonMovieRole 레코드가 있는 영화만 나타나며, 출연진이 없는 영화는 제외된다(Only With 때문)."
+            "text": "PersonMovieRole 레코드가 있는 영화(Movie)만 나타나며, 출연진이 없는 영화는 제외된다(Only With 때문)."
           },
           {
             "key": "C",
@@ -1433,11 +1433,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "같은 Source를 가지지만 다른 Join 종류를 사용하는 두 개의 Aggregate를 비교하자. 둘 다 `Movie`와 `Genre`를 조회한다—하나는 **Only With**를 사용하고, 다른 하나는 **With or Without**를 사용한다. 미리보기 컬럼은 어느 Genre가 빠졌는지 보여준다. 다음 중 올바른 결론은?",
+        "stem": "같은 Source를 가지지만 다른 Join 종류를 사용하는 두 개의 Aggregate를 비교하자. 둘 다 `Movie`와 `Genre`를 조회한다—하나는 **Only With**를 사용하고, 다른 하나는 **With or Without**를 사용한다. 미리보기 컬럼은 어느 장르(Genre)가 빠졌는지 보여준다. 다음 중 올바른 결론은?",
         "options": [
           {
             "key": "A",
-            "text": "Only With는 Genre가 없는 Movie를 제외하고, With or Without는 모든 Movie를 유지하며 매칭이 없을 때 Genre가 빈 값으로 나타난다."
+            "text": "Only With는 장르(Genre)가 없는 영화(Movie)를 제외하고, With or Without는 모든 영화를 유지하며 매칭이 없을 때 장르가 빈 값으로 나타난다."
           },
           {
             "key": "B",
@@ -1445,7 +1445,7 @@
           },
           {
             "key": "C",
-            "text": "Only With는 Genre에 사용되고, With or Without는 Movie에 사용된다. 즉, 반대쪽을 필터링한다."
+            "text": "Only With는 장르(Genre)에 사용되고, With or Without는 영화(Movie)에 사용된다. 즉, 반대쪽을 필터링한다."
           },
           {
             "key": "D",
@@ -1515,7 +1515,7 @@
           },
           {
             "key": "D",
-            "text": "집계 레코드는 Source Entity의 모든 속성과 Sum 값을 포함하며, Group By는 단지 이들을 정렬할 뿐이다."
+            "text": "집계 레코드는 Source Entity의 모든 attribute와 Sum 값을 포함하며, Group By는 단지 이들을 정렬할 뿐이다."
           }
         ],
         "diagram": "**Aggregate `GetProductSales`** — Source: `Product`, `OrderItem`\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Product | Only With | OrderItem | Product.Id = OrderItem.ProductId |\n\n**Group By:** `Product.Id`, **Sum:** `OrderItem.Quantity`\n\n**컬럼(편집기에서 보이는 것):**\nProduct.Id, Product.Name, Product.Price, Sum(OrderItem.Quantity)\n\n**미리보기(편집기 표시):**\n\n| Product.Id | Product.Name | Product.Price | Sum(Qty) |\n|---|---|---|---|\n| 1 | Widget A | 10 | 25 |\n| 2 | Widget B | 20 | 15 |\n| 3 | Widget C | 15 | 30 |"
@@ -1559,7 +1559,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity Priority에는 추가 attribute Color(Text)가 있고 Low/Medium/High 레코드가 있습니다. Task Entity에는 PriorityId 외래 키가 있습니다. Screen에서 Task 목록을 표시하며 priority의 Label을 보여주고 Color로 텍스트 색을 지정하려고 합니다. 이 데이터를 Aggregate에서 어떻게 가져와야 합니까?",
+        "stem": "Static Entity Priority에는 추가 attribute Color(Text)가 있고 Low/Medium/High 레코드가 있습니다. Task Entity에는 PriorityId 외래 키가 있습니다. Screen에서 태스크(Task) 목록을 표시하며 Priority의 Label을 보여주고 Color로 텍스트 색을 지정하려고 합니다. 이 데이터를 Aggregate에서 어떻게 가져와야 합니까?",
         "options": [
           {
             "key": "A",
@@ -1618,7 +1618,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 TravelRequest와 ExpenseReport를 join하며 join이 'Only With'(TravelRequest with ExpenseReport)로 설정되어 있습니다. TravelRequest 10건 중 5건은 연결된 ExpenseReport가 있고 5건은 없습니다. 필터 TravelRequest.StatusId = Entities.TravelStatus.Open을 추가합니다. Open 요청 중 3건은 expense report가 있고 2건은 없습니다. Aggregate는 몇 건을 반환합니까?",
+        "stem": "한 Aggregate가 TravelRequest와 ExpenseReport를 join하며 join이 'Only With'(TravelRequest with ExpenseReport)로 설정되어 있습니다. TravelRequest 10건 중 5건은 연결된 ExpenseReport가 있고 5건은 없습니다. 필터 TravelRequest.StatusId = Entities.TravelStatus.Open을 추가합니다. Open 요청 중 3건은 ExpenseReport가 있고 2건은 없습니다. Aggregate는 몇 건을 반환합니까?",
         "options": [
           {
             "key": "A",
@@ -1677,11 +1677,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Entity Invoice에는 TotalAmount(Decimal) attribute가 있습니다. 'Paid' 상태인 모든 invoice의 총합을 표시하려고 합니다. Aggregate를 사용하는 가장 좋은 방법은 무엇입니까?",
+        "stem": "Entity Invoice에는 TotalAmount(Decimal) attribute가 있습니다. 'Paid' 상태인 모든 청구서(Invoice)의 총합을 표시하려고 합니다. Aggregate를 사용하는 가장 좋은 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "모든 invoice를 가져온 뒤 Screen에서 For Each 루프로 변수에 더한다."
+            "text": "모든 청구서(Invoice)를 가져온 뒤 Screen에서 For Each 루프로 변수에 더한다."
           },
           {
             "key": "B",
@@ -1736,7 +1736,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Product와 Category를 join합니다. Product.Id를 우클릭해 Count를 선택하고, Category.Label을 우클릭해 Group by를 선택했습니다. 이 Aggregate의 output에 대해 옳은 설명은?",
+        "stem": "한 Aggregate가 상품(Product)과 카테고리(Category)를 join합니다. Product.Id를 우클릭해 Count를 선택하고, Category.Label을 우클릭해 Group by를 선택했습니다. 이 Aggregate의 output에 대해 옳은 설명은?",
         "options": [
           {
             "key": "A",
@@ -1744,11 +1744,11 @@
           },
           {
             "key": "B",
-            "text": "output은 각 레코드가 Category.Label과 Product Id의 Count만 담는 list가 된다."
+            "text": "output은 각 레코드가 Category.Label과 상품(Product) Id의 Count만 담는 list가 된다."
           },
           {
             "key": "C",
-            "text": "List.Current에는 원본 Product attribute가 모두 남아 있지만 값이 비어 있다."
+            "text": "List.Current에는 원본 상품(Product) attribute가 모두 남아 있지만 값이 비어 있다."
           },
           {
             "key": "D",
@@ -1795,7 +1795,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product를 가져오는 Aggregate에 계산 New Attribute DiscountedPrice = Product.Price * 0.9 를 추가한 뒤 Filter DiscountedPrice > 100 을 추가했습니다. 옳은 설명은?",
+        "stem": "상품(Product)을 가져오는 Aggregate에 계산 New Attribute DiscountedPrice = Product.Price * 0.9 를 추가한 뒤 Filter DiscountedPrice > 100 을 추가했습니다. 옳은 설명은?",
         "options": [
           {
             "key": "A",
@@ -1854,7 +1854,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 화면이 Order 목록을 보여줍니다. Aggregate는 최대 10,000건을 반환할 수 있지만 Pagination 위젯이 한 번에 10건만 표시합니다(Max Records = 10). OutSystems는 이 Aggregate 실행을 어떻게 최적화합니까?",
+        "stem": "한 Screen이 주문(Order) 목록을 보여줍니다. Aggregate는 최대 10,000건을 반환할 수 있지만 Pagination Widget이 한 번에 10건만 표시합니다(Max Records = 10). OutSystems는 이 Aggregate 실행을 어떻게 최적화합니까?",
         "options": [
           {
             "key": "A",
@@ -1913,7 +1913,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product를 가져오는 Aggregate에 Filter: Product.Price > GetMinimumPrice() 가 있습니다. GetMinimumPrice()는 설정 테이블을 조회해 값을 반환하는 Server Action(function)입니다. 이 필터의 성능상 함의는?",
+        "stem": "상품(Product)을 가져오는 Aggregate에 Filter: Product.Price > GetMinimumPrice() 가 있습니다. GetMinimumPrice()는 설정 테이블을 조회해 값을 반환하는 Server Action(function)입니다. 이 필터의 성능상 함의는?",
         "options": [
           {
             "key": "A",
@@ -1921,7 +1921,7 @@
           },
           {
             "key": "B",
-            "text": "플랫폼이 GetMinimumPrice()를 SQL로 변환할 수 없다고 경고하며, 모든 product를 가져온 뒤 웹 서버 메모리에서 필터링한다."
+            "text": "플랫폼이 GetMinimumPrice()를 SQL로 변환할 수 없다고 경고하며, 모든 상품을 가져온 뒤 웹 서버 메모리에서 필터링한다."
           },
           {
             "key": "C",
@@ -1976,7 +1976,7 @@
         "options": [
           {
             "key": "A",
-            "text": "OR로 결합 — 활성 직원 또는 HR 소속 전원을 보여준다."
+            "text": "OR로 결합 — 활성 직원(Employee) 또는 HR 소속 전원을 보여준다."
           },
           {
             "key": "B",
@@ -2024,23 +2024,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Project'와 'Task' 사이에 'With or Without' 조인을 사용합니다. 여기에 'Task.IsActive = True' 필터를 추가합니다. 출력에 어떤 영향을 줍니까?",
+        "stem": "한 Aggregate가 '프로젝트(Project)'와 '태스크(Task)' 사이에 'With or Without' 조인을 사용합니다. 여기에 'Task.IsActive = True' 필터를 추가합니다. 출력에 어떤 영향을 줍니까?",
         "options": [
           {
             "key": "A",
-            "text": "선택적으로 조인된 엔티티에는 필터를 걸 수 없으므로 Aggregate가 오류를 반환한다."
+            "text": "선택적으로 조인된 Entity에는 필터를 걸 수 없으므로 Aggregate가 오류를 반환한다."
           },
           {
             "key": "B",
-            "text": "모든 Project와 모든 Task를 반환하며 'Without' 행에 대해서는 필터를 무시한다."
+            "text": "모든 프로젝트와 모든 태스크를 반환하며 'Without' 행에 대해서는 필터를 무시한다."
           },
           {
             "key": "C",
-            "text": "활성 Task를 하나 이상 가진 Project만 반환한다."
+            "text": "활성 태스크를 하나 이상 가진 프로젝트만 반환한다."
           },
           {
             "key": "D",
-            "text": "모든 Project를 반환하되 비활성 Task의 Task 속성은 비어 있게 표시한다."
+            "text": "모든 프로젝트를 반환하되 비활성 태스크의 태스크 속성은 비어 있게 표시한다."
           }
         ]
       }
@@ -2077,19 +2077,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity 'Priority'에 Low, Medium, High 레코드가 있습니다. Entity 'Ticket'에는 'PriorityId' 속성이 있습니다. 'Ticket'과 'Priority'를 조인(Only With)하는 Aggregate에서, 'PriorityId'가 NullIdentifier()인 Ticket의 결과는 어떻게 됩니까?",
+        "stem": "Static Entity 'Priority'에 Low, Medium, High 레코드가 있습니다. Entity 'Ticket'에는 'PriorityId' 속성이 있습니다. '티켓(Ticket)'과 'Priority'를 조인(Only With)하는 Aggregate에서, 'PriorityId'가 NullIdentifier()인 티켓의 결과는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Ticket이 포함되고 Priority 속성은 기본값 'Low'로 표시된다."
+            "text": "티켓이 포함되고 Priority 속성은 기본값 'Low'로 표시된다."
           },
           {
             "key": "B",
-            "text": "Ticket이 포함되고 Priority 속성은 비어 있게 표시된다."
+            "text": "티켓이 포함되고 Priority 속성은 비어 있게 표시된다."
           },
           {
             "key": "C",
-            "text": "Ticket이 Aggregate 결과에서 제외된다."
+            "text": "티켓이 Aggregate 결과에서 제외된다."
           },
           {
             "key": "D",
@@ -2130,7 +2130,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Orders' 목록과 각 주문의 'OrderItems' 총 개수를 표시하려고 합니다. Order.Id에 'Group By', OrderItem.Id에 'Count'를 사용하는 Aggregate를 만듭니다. OrderDate 같은 다른 Order 속성은 어떻게 됩니까?",
+        "stem": "주문(Order) 목록과 각 주문의 주문 항목(OrderItem) 총 개수를 표시하려고 합니다. Order.Id에 'Group By', OrderItem.Id에 'Count'를 사용하는 Aggregate를 만듭니다. OrderDate 같은 다른 주문 속성은 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -2191,7 +2191,7 @@
           },
           {
             "key": "B",
-            "text": "대신 Aggregate에 Filter를 추가해 사진이 없는 직원을 제외해야 한다."
+            "text": "대신 Aggregate에 Filter를 추가해 사진이 없는 직원(Employee)을 제외해야 한다."
           },
           {
             "key": "C",
@@ -2236,7 +2236,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "화면에서 Aggregate로 Ticket을 조회하고, 'Priority'(Static Entity)로 필터하려고 합니다. Dropdown을 Local Variable 'SelectedPriorityId'에 바인딩했습니다. Dropdown이 비어 있을 때 모든 Ticket을 보여주려면 올바른 Filter 식은 무엇입니까?",
+        "stem": "Screen에서 Aggregate로 티켓(Ticket)을 조회하고, 'Priority'(Static Entity)로 필터하려고 합니다. Dropdown을 Local Variable 'SelectedPriorityId'에 바인딩했습니다. Dropdown이 비어 있을 때 모든 티켓을 보여주려면 올바른 Filter 식은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2289,19 +2289,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 'Product'에서 'Supplier'로 'With or Without' join을 사용합니다. 여기에 Filter 'Supplier.Id <> NullIdentifier()'를 추가하면 결과는 어떻게 됩니까?",
+        "stem": "Aggregate가 '상품(Product)'에서 '공급업체(Supplier)'로 'With or Without' join을 사용합니다. 여기에 Filter 'Supplier.Id <> NullIdentifier()'를 추가하면 결과는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "'Only With' join처럼 동작하여, 매칭되는 Supplier가 있는 Product만 반환한다."
+            "text": "'Only With' join처럼 동작하여, 매칭되는 공급업체가 있는 상품만 반환한다."
           },
           {
             "key": "B",
-            "text": "모든 Product를 반환하되 매칭이 없는 곳은 Supplier 값이 비어 있게 표시된다."
+            "text": "모든 상품을 반환하되 매칭이 없는 곳은 공급업체 값이 비어 있게 표시된다."
           },
           {
             "key": "C",
-            "text": "매칭되는 Supplier가 없는 Product만 반환한다."
+            "text": "매칭되는 공급업체가 없는 상품만 반환한다."
           },
           {
             "key": "D",
@@ -2342,11 +2342,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 'Only With'로 'Order'와 'Customer'를 join합니다. 어떤 Order의 CustomerId가 (DB에서 직접 삭제되어) Customer에 더 이상 존재하지 않습니다. Aggregate가 실행되면 어떻게 됩니까?",
+        "stem": "Aggregate가 'Only With'로 '주문(Order)'과 '고객(Customer)'을 join합니다. 어떤 주문의 CustomerId가 (DB에서 직접 삭제되어) 고객에 더 이상 존재하지 않습니다. Aggregate가 실행되면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "해당 Order 레코드가 결과에서 제외된다."
+            "text": "해당 주문 레코드가 결과에서 제외된다."
           },
           {
             "key": "B",
@@ -2354,7 +2354,7 @@
           },
           {
             "key": "C",
-            "text": "Aggregate가 그 Order를 빈 Customer 데이터와 함께 반환한다."
+            "text": "Aggregate가 그 주문을 빈 고객 데이터와 함께 반환한다."
           },
           {
             "key": "D",
@@ -2395,7 +2395,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate로 Product 검색을 구현합니다. 검색창이 비어 있으면 모든 Product가 보여야 합니다. 가장 간단하고 올바른 단일 Filter는 무엇입니까?",
+        "stem": "Aggregate로 상품(Product) 검색을 구현합니다. 검색창이 비어 있으면 모든 상품이 보여야 합니다. 가장 간단하고 올바른 단일 Filter는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2448,7 +2448,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate에서 'Group By' Region으로 Region별 총 매출을 계산하면서, 각 Region의 'ManagerName'도 표시하려고 합니다. 'ManagerName'은 어떻게 처리해야 합니까?",
+        "stem": "Aggregate에서 'Group By' 지역(Region)으로 지역별 총 매출을 계산하면서, 각 지역의 'ManagerName'도 표시하려고 합니다. 'ManagerName'은 어떻게 처리해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -2460,7 +2460,7 @@
           },
           {
             "key": "C",
-            "text": "Region이 Aggregate source에 있기만 하면 그냥 표시할 수 있다."
+            "text": "지역이 Aggregate source에 있기만 하면 그냥 표시할 수 있다."
           },
           {
             "key": "D",
@@ -2554,7 +2554,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Employee'와 'Profile' 사이에 'With or Without' join이 있는 Aggregate가 있습니다. 여기에 'Profile.IsActive = True' Filter를 추가하면 반환되는 레코드에 어떤 영향을 줍니까?",
+        "stem": "직원(Employee)과 프로필(Profile) 사이에 'With or Without' join이 있는 Aggregate가 있습니다. 여기에 'Profile.IsActive = True' Filter를 추가하면 반환되는 레코드에 어떤 영향을 줍니까?",
         "options": [
           {
             "key": "A",
@@ -2562,15 +2562,15 @@
           },
           {
             "key": "B",
-            "text": "활성 Profile을 가진 Employee만 반환된다."
+            "text": "활성 프로필을 가진 직원만 반환된다."
           },
           {
             "key": "C",
-            "text": "필터와 상관없이 모든 Employee와 모든 Profile을 반환한다."
+            "text": "필터와 상관없이 모든 직원과 모든 프로필을 반환한다."
           },
           {
             "key": "D",
-            "text": "모든 Employee를 반환하며, 활성 Profile이 없으면 profile 컬럼이 null이 된다."
+            "text": "모든 직원을 반환하며, 활성 프로필이 없으면 프로필 컬럼이 null이 된다."
           }
         ]
       }
@@ -2607,7 +2607,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Dashboard를 만들고 있습니다. 'Sales' 목록을 가져오고 이번 달의 'Total Revenue'(Sum)와 'Average Sale'(Avg)을 계산해야 합니다. 이 두 계산을 수행하기에 가장 효율적인 위치는 어디입니까?",
+        "stem": "Dashboard를 만들고 있습니다. '판매(Sales)' 목록을 가져오고 이번 달의 'Total Revenue'(Sum)와 'Average Sale'(Avg)을 계산해야 합니다. 이 두 계산을 수행하기에 가장 효율적인 위치는 어디입니까?",
         "options": [
           {
             "key": "A",
@@ -2619,7 +2619,7 @@
           },
           {
             "key": "C",
-            "text": "'OnReady' 이벤트에서 Sales 목록에 대해 'For Each' 루프를 사용한다."
+            "text": "'OnReady' 이벤트에서 판매 목록에 대해 'For Each' 루프를 사용한다."
           },
           {
             "key": "D",
@@ -2660,11 +2660,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Ticket' Entity에 Static Entity 'Priority'를 참조하는 'PriorityId'가 있습니다. 어떤 Ticket 레코드의 'PriorityId'가 'NullIdentifier()'인 경우, 'Ticket'을 'Priority'와 'Only With'로 join하는 Aggregate에서 어떤 일이 발생합니까?",
+        "stem": "'Ticket' Entity에 Static Entity 'Priority'를 참조하는 'PriorityId'가 있습니다. 어떤 티켓(Ticket) 레코드의 'PriorityId'가 'NullIdentifier()'인 경우, 티켓을 'Priority'와 'Only With'로 join하는 Aggregate에서 어떤 일이 발생합니까?",
         "options": [
           {
             "key": "A",
-            "text": "해당 Ticket은 결과 집합에서 완전히 제외된다."
+            "text": "해당 티켓은 결과 집합에서 완전히 제외된다."
           },
           {
             "key": "B",
@@ -2672,11 +2672,11 @@
           },
           {
             "key": "C",
-            "text": "해당 Ticket은 기본값인 'Low' priority로 표시된다."
+            "text": "해당 티켓은 기본값인 'Low' priority로 표시된다."
           },
           {
             "key": "D",
-            "text": "해당 Ticket은 표시되지만 Priority 라벨이 빈 문자열이 된다."
+            "text": "해당 티켓은 표시되지만 Priority 라벨이 빈 문자열이 된다."
           }
         ]
       }
@@ -2713,7 +2713,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "화면에 목록용으로 5,000개의 'Product' 레코드를 가져오는 Aggregate가 있습니다. Header에 'Total Stock' 합계도 표시하려고 합니다. 최고의 사용자 경험을 위해 이 합계를 계산하기에 가장 좋은 위치는 어디입니까?",
+        "stem": "화면에 목록용으로 5,000개의 상품(Product) 레코드를 가져오는 Aggregate가 있습니다. Header에 'Total Stock' 합계도 표시하려고 합니다. 최고의 사용자 경험을 위해 이 합계를 계산하기에 가장 좋은 위치는 어디입니까?",
         "options": [
           {
             "key": "A",
@@ -2766,7 +2766,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "어떤 Aggregate가 'Customer'와 'Invoice' 사이에 'With or Without' join을 사용합니다. 인보이스를 한 번도 받은 적 없는 Customer만 반환하려고 합니다. 이를 달성하는 필터는 무엇입니까?",
+        "stem": "어떤 Aggregate가 '고객(Customer)'과 '청구서(Invoice)' 사이에 'With or Without' join을 사용합니다. 청구서를 한 번도 받은 적 없는 고객만 반환하려고 합니다. 이를 달성하는 필터는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2819,7 +2819,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "어떤 Aggregate가 'Tickets'를 'Priority'로 group by 하고 개수를 셉니다. 티켓이 5개를 초과하는 Priority만 표시하려고 합니다. 이 로직을 어디에 구현합니까?",
+        "stem": "어떤 Aggregate가 티켓(Tickets)을 'Priority'로 group by 하고 개수를 셉니다. 티켓이 5개를 초과하는 Priority만 표시하려고 합니다. 이 로직을 어디에 구현합니까?",
         "options": [
           {
             "key": "A",
@@ -2872,7 +2872,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity 'MembershipTier'에 Bronze, Silver, Gold 레코드가 있습니다. 'Member' Entity에는 'TierId'가 있습니다. 'Gold'가 아닌 모든 Member를 보여주는 Aggregate를 만들려면, 가장 견고한 필터는 무엇입니까?",
+        "stem": "Static Entity 'MembershipTier'에 Bronze, Silver, Gold 레코드가 있습니다. 'Member' Entity에는 'TierId'가 있습니다. 'Gold'가 아닌 모든 회원(Member)을 보여주는 Aggregate를 만들려면, 가장 견고한 필터는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2925,11 +2925,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Reactive Screen에서 'Max Records'가 50으로 설정된 Aggregate로 Product 카탈로그를 보여주고 있으며, 테이블에는 1,000건의 Product가 있습니다. 동시에 헤더 위젯에 전체 1,000건의 'Grand Total Price'(총액)를 표시해야 합니다. 올바른 방법은 무엇입니까?",
+        "stem": "Reactive Screen에서 'Max Records'가 50으로 설정된 Aggregate로 상품(Product) 카탈로그를 보여주고 있으며, 테이블에는 1,000건의 상품이 있습니다. 동시에 헤더 위젯에 전체 1,000건의 'Grand Total Price'(총액)를 표시해야 합니다. 올바른 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "목록 Aggregate의 'Max Records'를 1000으로 올려 그 Sum이 모든 Product를 포함하도록 한다."
+            "text": "목록 Aggregate의 'Max Records'를 1000으로 올려 그 Sum이 모든 상품을 포함하도록 한다."
           },
           {
             "key": "B",
@@ -2978,7 +2978,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Entity 'Order'에 Date 타입의 'ShipDate' 속성이 있습니다. Reactive Aggregate에서 'ShipDate'가 미래인 Order만 남기고 싶습니다. 올바른 필터 표현식은 무엇입니까?",
+        "stem": "Entity 'Order'에 Date 타입의 'ShipDate' 속성이 있습니다. Reactive Aggregate에서 'ShipDate'가 미래인 주문(Order)만 남기고 싶습니다. 올바른 필터 표현식은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3031,7 +3031,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Product'에 대한 Aggregate에서 'Category'로 'Group By'를 적용했습니다. 각 Category 내에서 가장 높은 가격을 구하고 싶습니다. 어떤 작업이 이를 만들어냅니까?",
+        "stem": "'Product'에 대한 Aggregate에서 'Category'로 'Group By'를 적용했습니다. 각 카테고리(Category) 내에서 가장 높은 가격을 구하고 싶습니다. 어떤 작업이 이를 만들어냅니까?",
         "options": [
           {
             "key": "A",
@@ -3088,7 +3088,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Ticket을 읽는 모든 Aggregate(및 쿼리)에 'IsDeleted = False' 조건을 추가한다."
+            "text": "티켓(Ticket)을 읽는 모든 Aggregate(및 쿼리)에 'IsDeleted = False' 조건을 추가한다."
           },
           {
             "key": "B",
@@ -3190,7 +3190,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "어떤 Aggregate가 'Sales'를 'Region'으로 group by 하고 'AverageAmount'를 계산합니다. 출력에 'RegionName'도 포함하려고 합니다. 어떻게 포함합니까?",
+        "stem": "어떤 Aggregate가 'Sales'를 'Region'으로 'Group By' 하고 'AverageAmount'를 계산합니다. 출력에 'RegionName'도 포함하려고 합니다. 어떻게 포함합니까?",
         "options": [
           {
             "key": "A",
@@ -3198,11 +3198,11 @@
           },
           {
             "key": "B",
-            "text": "grouped Region Entity에 속하므로 자동으로 표시된다."
+            "text": "그룹화된 Region Entity에 속하므로 자동으로 표시된다."
           },
           {
             "key": "C",
-            "text": "계산된 속성은 group된 속성과 함께 표시할 수 없다."
+            "text": "계산된 속성은 그룹화된 속성과 함께 표시할 수 없다."
           },
           {
             "key": "D",
@@ -3243,7 +3243,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "각 'Supplier'와 그 Supplier가 공급하는 'Product'의 개수를 함께 나열하는 Screen이 필요합니다(Product는 하나의 Supplier에 속함). 이를 얻는 가장 효율적인 단일 Aggregate 구성은 무엇입니까?",
+        "stem": "각 공급업체(Supplier)와 그 공급업체가 공급하는 상품(Product)의 개수를 함께 나열하는 Screen이 필요합니다(상품은 하나의 공급업체에 속함). 이를 얻는 가장 효율적인 단일 Aggregate 구성은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3296,7 +3296,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Sales'를 'Region'별로 그룹핑하고 'Amount'의 'Sum'을 계산한다. 합계가 10,000을 초과하는 Region만 보이도록 Filter를 추가한다. 플랫폼은 이를 어떻게 처리하는가?",
+        "stem": "한 Aggregate가 'Sales'를 'Region'별로 'Group By'하고 'Amount'의 'Sum'을 계산한다. 합계가 10,000을 초과하는 Region만 보이도록 Filter를 추가한다. 플랫폼은 이를 어떻게 처리하는가?",
         "options": [
           {
             "key": "A",
@@ -3304,7 +3304,7 @@
           },
           {
             "key": "B",
-            "text": "플랫폼이 이를 SQL 'HAVING' 절로 변환해 그룹핑과 합계 계산이 끝난 뒤 결과를 필터링한다."
+            "text": "플랫폼이 이를 SQL 'HAVING' 절로 변환해 Group By와 합계 계산이 끝난 뒤 결과를 필터링한다."
           },
           {
             "key": "C",
@@ -3349,7 +3349,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity 'RequestStatus'에 'Draft', 'Submitted', 'Approved' 레코드가 있다. 'Request' 엔티티에는 'StatusId'가 있다. Aggregate에서 상태가 'Draft' 또는 'Submitted'인 모든 Request를 찾으려 한다. 가장 유지보수하기 좋은 Filter는?",
+        "stem": "Static Entity 'RequestStatus'에 'Draft', 'Submitted', 'Approved' 레코드가 있다. 'Request' Entity에는 'StatusId'가 있다. Aggregate에서 상태가 'Draft' 또는 'Submitted'인 모든 요청(Request)을 찾으려 한다. 가장 유지보수하기 좋은 Filter는?",
         "options": [
           {
             "key": "A",
@@ -3402,7 +3402,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 번도 주문한 적이 없는(‘Order' Entity에 매칭 레코드가 없는) 모든 'Customer'를 찾으려고 합니다. 표준 anti-join 방식의 Aggregate 구성은 무엇입니까?",
+        "stem": "한 번도 주문(Order)한 적이 없는('Order' Entity에 매칭 레코드가 없는) 모든 고객(Customer)을 찾으려고 합니다. 표준 anti-join 방식의 Aggregate 구성은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3410,7 +3410,7 @@
           },
           {
             "key": "B",
-            "text": "Data Action으로 모든 Customer를 가져온 뒤, 반복문으로 각 Customer마다 Server Action을 호출해 주문 여부를 확인한다."
+            "text": "Data Action으로 모든 Customer를 가져온 뒤, 반복문으로 각 Customer마다 Server Action을 호출해 각각 Order가 있는지 확인한다."
           },
           {
             "key": "C",
@@ -3459,7 +3459,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Aggregate가 모든 Employee 레코드를 반환한다."
+            "text": "Aggregate가 모든 직원(Employee) 레코드를 반환한다."
           },
           {
             "key": "B",
@@ -3508,7 +3508,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Project' Entity에 'Name' 속성이 있습니다. 화면에 Name을 표시하되 Name이 비어 있으면 'Untitled Project'를 보여줘야 하며, 대상은 1,000건의 프로젝트 리스트입니다. 가장 효율적인 방법은 무엇입니까?",
+        "stem": "'Project' Entity에 'Name' 속성이 있습니다. 화면에 Name을 표시하되 Name이 비어 있으면 'Untitled Project'를 보여줘야 하며, 대상은 1,000건의 프로젝트(Project) 리스트입니다. 가장 효율적인 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3561,11 +3561,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Employee를 Department와 'With or Without'로 조인하고 'Department.Name = \"Sales\"' 필터를 적용합니다. 실질적인 결과는 무엇인가요?",
+        "stem": "한 Aggregate가 직원(Employee)을 부서(Department)와 'With or Without'로 조인하고 'Department.Name = \"Sales\"' 필터를 적용합니다. 실질적인 결과는 무엇인가요?",
         "options": [
           {
             "key": "A",
-            "text": "모든 Employee가 표시되지만, Department 이름은 Sales 소속인 경우에만 보인다."
+            "text": "모든 직원(Employee)이 표시되지만, 부서(Department) 이름은 Sales 소속인 경우에만 보인다."
           },
           {
             "key": "B",
@@ -3573,11 +3573,11 @@
           },
           {
             "key": "C",
-            "text": "Sales 소속 Employee에 더해, Department가 아예 없는 모든 Employee도 함께 표시된다."
+            "text": "Sales 소속 직원(Employee)에 더해, 부서(Department)가 아예 없는 모든 직원도 함께 표시된다."
           },
           {
             "key": "D",
-            "text": "'Only With' 조인처럼 동작하여 Sales 부서 Employee만 반환한다."
+            "text": "'Only With' 조인처럼 동작하여 Sales 부서의 직원(Employee)만 반환한다."
           }
         ]
       }
@@ -3614,11 +3614,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "비활성 Customer를 찾기 위해 개발자가 'Customer (With or Without) Order' Aggregate를 만들고 'Order.Date > AddYears(CurrDate(), -1)' 필터를 추가했습니다. 이 Aggregate가 실제로 반환하는 결과는?",
+        "stem": "비활성 고객(Customer)을 찾기 위해 개발자가 'Customer (With or Without) Order' Aggregate를 만들고 'Order.Date > AddYears(CurrDate(), -1)' 필터를 추가했습니다. 이 Aggregate가 실제로 반환하는 결과는?",
         "options": [
           {
             "key": "A",
-            "text": "주문이 전혀 없는 Customer만 반환한다."
+            "text": "주문(Order)이 전혀 없는 고객(Customer)만 반환한다."
           },
           {
             "key": "B",
@@ -3626,11 +3626,11 @@
           },
           {
             "key": "C",
-            "text": "최근 1년 이내에 주문한 Customer만 반환한다."
+            "text": "최근 1년 이내에 주문한 고객(Customer)만 반환한다."
           },
           {
             "key": "D",
-            "text": "모든 Customer를 반환하되, 최근 주문이 없는 경우 Order 정보가 null이다."
+            "text": "모든 고객(Customer)을 반환하되, 최근 주문(Order)이 없는 경우 주문 정보가 null이다."
           }
         ]
       }
@@ -3667,7 +3667,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Doctor와 Patient가 'Enrollment' 엔티티를 통해 Many-to-Many 관계입니다. 배정된 Patient가 전혀 없는 Doctor 목록을 보여주는 Aggregate가 필요합니다. 어떻게 구성하나요?",
+        "stem": "의사(Doctor)와 환자(Patient)가 'Enrollment' 엔티티를 통해 Many-to-Many 관계입니다. 배정된 환자가 전혀 없는 의사 목록을 보여주는 Aggregate가 필요합니다. 어떻게 구성하나요?",
         "options": [
           {
             "key": "A",
@@ -3773,7 +3773,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "현재 'Employee'가 한 명도 없는 'Department'를 나열하려고 합니다. Aggregate는 Department (With or Without) Employee 입니다. 빈 부서만 정확히 반환하는 필터는 무엇입니까?",
+        "stem": "현재 직원(Employee)이 한 명도 없는 부서(Department)를 나열하려고 합니다. Aggregate는 Department (With or Without) Employee 입니다. 빈 부서만 정확히 반환하는 필터는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3879,23 +3879,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Order' (Only With) 'Customer'를 조인하고 'Customer.IsActive = True' 필터를 추가했습니다. Customer가 비활성(Inactive)인 Order가 존재할 때, 그 Order에 대해 Aggregate는 무엇을 반환합니까?",
+        "stem": "한 Aggregate가 'Order' (Only With) 'Customer'를 조인하고 'Customer.IsActive = True' 필터를 추가했습니다. 고객(Customer)이 비활성(Inactive)인 주문(Order)이 존재할 때, 그 주문에 대해 Aggregate는 무엇을 반환합니까?",
         "options": [
           {
             "key": "A",
-            "text": "Order는 반환되지만 모든 Customer 필드가 비어 있다."
+            "text": "주문(Order)은 반환되지만 모든 고객(Customer) 필드가 비어 있다."
           },
           {
             "key": "B",
-            "text": "해당 Order 레코드가 결과에서 완전히 제외된다."
+            "text": "해당 주문(Order) 레코드가 결과에서 완전히 제외된다."
           },
           {
             "key": "C",
-            "text": "Order와 Customer 데이터가 반환되지만 경고 로그가 남는다."
+            "text": "주문(Order)과 고객(Customer) 데이터가 반환되지만 경고 로그가 남는다."
           },
           {
             "key": "D",
-            "text": "필터가 조인된 엔티티에 걸려 있으므로 Aggregate가 필터를 무시하고 모든 order를 반환한다."
+            "text": "필터가 조인된 엔티티에 걸려 있으므로 Aggregate가 필터를 무시하고 모든 주문(Order)을 반환한다."
           }
         ]
       }
@@ -3932,11 +3932,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Student' (With or Without) 'ClubMembership'를 반환합니다. 클럽이 없는 학생을 보여주기 위해 'ClubMembership.Id = NullIdentifier()'로 필터링합니다. 이후 두 번째 필터 'ClubMembership.JoinDate > #2020-01-01#'를 추가합니다. 결과는 무엇입니까?",
+        "stem": "한 Aggregate가 'Student' (With or Without) 'ClubMembership'를 반환합니다. 클럽(Club)이 없는 학생(Student)을 보여주기 위해 'ClubMembership.Id = NullIdentifier()'로 필터링합니다. 이후 두 번째 필터 'ClubMembership.JoinDate > #2020-01-01#'를 추가합니다. 결과는 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "Aggregate가 여전히 클럽 없는 학생들을 반환한다."
+            "text": "Aggregate가 여전히 클럽(Club) 없는 학생(Student)들을 반환한다."
           },
           {
             "key": "B",
@@ -3985,7 +3985,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Employee' (With or Without) 'Vehicle'를 조인합니다. 차량이 아예 없거나(NO vehicle) 또는 'Status'가 'Maintenance'인 차량을 가진 Employee를 찾으려 합니다. 올바른 Filter 조건은 무엇입니까?",
+        "stem": "한 Aggregate가 'Employee' (With or Without) 'Vehicle'를 조인합니다. 차량(Vehicle)이 아예 없거나(NO vehicle) 또는 'Status'가 'Maintenance'인 차량을 가진 직원(Employee)을 찾으려 합니다. 올바른 Filter 조건은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -4038,7 +4038,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "multi-tenant 애플리케이션에서 'Advanced SQL' 노드를 사용해 multi-tenant 엔티티의 레코드를 DELETE합니다. Aggregate는 자동으로 처리하지만 여기서는 직접 관리해야 하는 핵심 보안 문제는 무엇입니까?",
+        "stem": "multi-tenant 애플리케이션에서 'Advanced SQL' 노드를 사용해 multi-tenant Entity의 레코드를 DELETE합니다. Aggregate는 자동으로 처리하지만 여기서는 직접 관리해야 하는 핵심 보안 문제는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -4050,7 +4050,7 @@
           },
           {
             "key": "C",
-            "text": "엔티티의 'Is Multi-tenant' 속성이 True이면 SQL 노드가 자동으로 crash한다."
+            "text": "Entity의 'Is Multi-tenant' 속성이 True이면 SQL 노드가 자동으로 crash한다."
           },
           {
             "key": "D",
@@ -4091,7 +4091,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate의 'Max Records'가 50으로 설정되어 있고 'Orders'와 'OrderItems' 사이에 'Only With' join을 사용합니다. 한 Order에 item이 100개 있고 Aggregate를 'Order.Id'로 그룹화하면, 해당 Order에 대해 몇 개의 레코드를 반환합니까?",
+        "stem": "한 Aggregate의 'Max Records'가 50으로 설정되어 있고 'Orders'와 'OrderItems' 사이에 'Only With' join을 사용합니다. 한 주문(Order)에 항목(item)이 100개 있고 Aggregate를 'Order.Id'로 그룹화하면, 해당 주문에 대해 몇 개의 레코드를 반환합니까?",
         "options": [
           {
             "key": "A",
@@ -4144,7 +4144,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Entity 'Document'에 'Binary Data' 타입의 'Content' attribute가 있습니다. 문서 이름만 테이블로 표시하려고 합니다. 이 Aggregate에서 가장 중요한 성능 최적화는 무엇입니까?",
+        "stem": "Entity 'Document'에 'Binary Data' 타입의 'Content' attribute가 있습니다. 문서(Document) 이름만 테이블로 표시하려고 합니다. 이 Aggregate에서 가장 중요한 성능 최적화는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -4197,19 +4197,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Employee'와 'Manager'를 'Only With'로 조인하는데, 'Manager'는 'Employee'로 되돌아가는 self-reference입니다. ManagerId가 Null인(매니저가 지정되지 않은) 직원의 경우, 결과에서 그 행은 어떻게 됩니까?",
+        "stem": "한 Aggregate가 'Employee'와 'Manager'를 'Only With'로 조인하는데, 'Manager'는 'Employee'로 되돌아가는 self-reference입니다. ManagerId가 Null인 직원(Employee), 즉 매니저(Manager)가 배정되지 않은 경우 결과에서 그 행은 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "그 직원 행은 결과에서 제외된다."
+            "text": "그 직원(Employee) 행은 결과에서 제외된다."
           },
           {
             "key": "B",
-            "text": "행을 유지하기 위해 그 직원이 자기 자신의 매니저로 자동 표시된다."
+            "text": "행을 유지하기 위해 그 직원(Employee)이 자기 자신의 매니저(Manager)로 자동 표시된다."
           },
           {
             "key": "C",
-            "text": "그 직원 행은 유지되지만 'Manager' 쪽의 모든 속성은 비어 있게 된다."
+            "text": "그 직원(Employee) 행은 유지되지만 'Manager' 쪽의 모든 속성은 비어 있게 된다."
           },
           {
             "key": "D",
@@ -4250,19 +4250,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Customer'와 'Order' 사이에 'With or Without' join을 가진 Aggregate가 있습니다. 주문이 없는 Customer 또는 모든 주문이 'Completed'인 Customer를 찾으려 합니다. 여기에 'Order.Status = Entities.OrderStatus.Completed' Filter를 추가했습니다. 실제 결과는 무엇입니까?",
+        "stem": "'Customer'와 'Order' 사이에 'With or Without' join을 가진 Aggregate가 있습니다. 주문(Order)이 없는 고객(Customer), 또는 모든 주문이 'Completed'인 고객을 찾으려 합니다. 여기에 'Order.Status = Entities.OrderStatus.Completed' Filter를 추가했습니다. 실제 결과는 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "의도대로 주문이 없는 Customer와 'Completed' 주문이 있는 Customer를 모두 반환한다."
+            "text": "의도대로 주문(Order)이 없는 고객(Customer)과 'Completed' 주문이 있는 고객을 모두 반환한다."
           },
           {
             "key": "B",
-            "text": "모든 Customer를 반환하되, 'Completed' 주문이 없는 Customer는 Order 정보가 비어 있다."
+            "text": "모든 고객(Customer)을 반환하되, 'Completed' 주문(Order)이 없는 고객은 주문 정보가 비어 있다."
           },
           {
             "key": "C",
-            "text": "'Completed' 주문이 하나 이상 있는 Customer만 반환하여 사실상 'Only With'(inner join)처럼 동작한다."
+            "text": "'Completed' 주문(Order)이 하나 이상 있는 고객(Customer)만 반환하여 사실상 'Only With'(inner join)처럼 동작한다."
           },
           {
             "key": "D",
@@ -4307,7 +4307,7 @@
         "options": [
           {
             "key": "A",
-            "text": "데이터베이스가 원시 트랜잭션 행을 반환한 뒤 OutSystems 애플리케이션 서버에서 실행된다."
+            "text": "데이터베이스가 원시 Transaction 행을 반환한 뒤 OutSystems 애플리케이션 서버에서 실행된다."
           },
           {
             "key": "B",
@@ -4356,7 +4356,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee (With or Without) Profile join을 가진 Aggregate가 있습니다. Profile이 활성인 Employee는 물론, 아직 Profile이 없는 Employee도 포함하고자 합니다. 정확하면서 가장 효율적인 단일 Filter 표현식은 무엇입니까?",
+        "stem": "직원(Employee) (With or Without) 프로필(Profile) join을 가진 Aggregate가 있습니다. 프로필이 활성인 직원은 물론, 아직 프로필이 없는 직원도 포함하고자 합니다. 정확하면서 가장 효율적인 단일 Filter 표현식은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -4466,11 +4466,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Active 상태와 무관하게 각 Category의 총 제품 수."
+            "text": "Active 상태와 무관하게 각 Category의 총 Product 수."
           },
           {
             "key": "B",
-            "text": "Category와 Active 상태의 고유 조합별 제품 수."
+            "text": "Category와 Active 상태의 고유 조합별 Product 수."
           },
           {
             "key": "C",
@@ -4478,7 +4478,7 @@
           },
           {
             "key": "D",
-            "text": "제품이 하나 이상 있는 Category의 총 개수."
+            "text": "Product가 하나 이상 있는 Category의 총 개수."
           }
         ]
       }
@@ -4515,7 +4515,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 10,000건의 Order 레코드를 조회하지만 List 위젯에는 처음 20건만 표시합니다. 'Max. Records' 속성은 비워 두었습니다. 성능에 어떤 영향이 있습니까?",
+        "stem": "한 Aggregate가 10,000건의 주문(Order) 레코드를 조회하지만 List Widget에는 처음 20건만 표시합니다. 'Max. Records' 속성은 비워 두었습니다. 성능에 어떤 영향이 있습니까?",
         "options": [
           {
             "key": "A",
@@ -4523,7 +4523,7 @@
           },
           {
             "key": "B",
-            "text": "'Max. Records'가 비어 있으면 플랫폼이 위젯을 채울 만큼(약간의 버퍼 포함)만 조회하도록 쿼리를 자동 최적화한다."
+            "text": "'Max. Records'가 비어 있으면 플랫폼이 Widget을 채울 만큼(약간의 버퍼 포함)만 조회하도록 쿼리를 자동 최적화한다."
           },
           {
             "key": "C",
@@ -4568,11 +4568,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'ManagerId'를 가진 self-referencing 'Employee' 엔티티가 있습니다. 모든 Employee와 (있다면) 그 관리자의 이름을 함께 조회하기 위해 'Employee' (With or Without) 'Employee' join을 만들었습니다. 이제 'Sales' 부서 소속 Employee만 남기려고 합니다. Filter는 어느 'Department' 속성을 사용해야 합니까?",
+        "stem": "'ManagerId'를 가진 self-referencing 'Employee' Entity가 있습니다. 모든 직원(Employee)과 (있다면) 그 관리자의 이름을 함께 조회하기 위해 'Employee' (With or Without) 'Employee' join을 만들었습니다. 이제 'Sales' 부서(Department) 소속 직원만 남기려고 합니다. Filter는 어느 'Department' 속성을 사용해야 합니까?",
         "options": [
           {
             "key": "A",
-            "text": "두 번째 'Employee' 엔티티(join의 오른쪽)의 속성."
+            "text": "두 번째 'Employee' Entity(join의 오른쪽)의 속성."
           },
           {
             "key": "B",
@@ -4580,7 +4580,7 @@
           },
           {
             "key": "C",
-            "text": "source 'Employee' 엔티티(join의 왼쪽)의 속성."
+            "text": "source 'Employee' Entity(join의 왼쪽)의 속성."
           },
           {
             "key": "D",
@@ -4621,7 +4621,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Product 가격의 'Average'를 계산합니다. 가격이 0인 제품을 이 평균에서 제외하려고 합니다. 이 제외 조건은 어디에 두어야 합니까?",
+        "stem": "한 Aggregate가 상품(Product) 가격의 'Average'를 계산합니다. 가격이 0인 상품을 이 평균에서 제외하려고 합니다. 이 제외 조건은 어디에 두어야 합니까?",
         "options": [
           {
             "key": "A",
@@ -4674,7 +4674,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate에 두 개의 Filter가 있습니다: 'Product.Name like \"%\" + SearchVar + \"%\"'와 'Product.IsActive = True'. 'SearchVar'가 비어 있고 활성 Product가 10개, 비활성 Product가 5개일 때 몇 건이 반환됩니까?",
+        "stem": "한 Aggregate에 두 개의 Filter가 있습니다: 'Product.Name like \"%\" + SearchVar + \"%\"'와 'Product.IsActive = True'. 'SearchVar'가 비어 있고 활성 상품(Product)이 10개, 비활성 상품이 5개일 때 몇 건이 반환됩니까?",
         "options": [
           {
             "key": "A",
@@ -4780,7 +4780,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Ticket' (With or Without) 'Agent'를 조인하는 Aggregate에서, Agent 이름을 보여주되 담당 Agent가 없는 Ticket에는 'Unassigned' 텍스트를 표시하는 Calculated Attribute를 추가합니다. 올바른 식은 무엇입니까?",
+        "stem": "'Ticket' (With or Without) 'Agent'를 조인하는 Aggregate에서, Agent 이름을 보여주되 담당 Agent가 없는 티켓(Ticket)에는 'Unassigned' 텍스트를 표시하는 Calculated Attribute를 추가합니다. 올바른 식은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -4833,11 +4833,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Max Records'를 50으로, 'Category.Id'에 'Group By'를 설정했습니다. 대상 Product 테이블에는 5개 Category에 걸쳐 1,000개의 제품이 있습니다. 그룹화된 결과를 만들기 위해 데이터베이스가 스캔해야 하는 레코드는 몇 개입니까?",
+        "stem": "한 Aggregate가 'Max Records'를 50으로, 'Category.Id'에 'Group By'를 설정했습니다. 대상 상품(Product) 테이블에는 5개 카테고리(Category)에 걸쳐 1,000개의 상품이 있습니다. 그룹화된 결과를 만들기 위해 데이터베이스가 스캔해야 하는 레코드는 몇 개입니까?",
         "options": [
           {
             "key": "A",
-            "text": "5개 — Category당 1개."
+            "text": "5개 — 카테고리당 1개."
           },
           {
             "key": "B",
@@ -4886,7 +4886,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Order.Date'에 'Group By'를 적용하고, 최신 날짜가 위에 오도록 'Order.Date'에 'Descending' 정렬을 겁니다. 여러 주문이 같은 날짜를 가질 때 결과는 어떻게 됩니까?",
+        "stem": "한 Aggregate가 'Order.Date'에 'Group By'를 적용하고, 최신 날짜가 위에 오도록 'Order.Date'에 'Descending' 정렬을 겁니다. 여러 주문(Order)이 같은 날짜를 가질 때 결과는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -4939,7 +4939,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Employee'와 'Badge' 사이에 'With or Without' 조인이 있는 Aggregate가 있습니다. Filter 없이 'Group By'와 'Count'만 사용해서, 배지가 '없는' 직원 수를 어떻게 구할 수 있습니까?",
+        "stem": "'Employee'와 'Badge' 사이에 'With or Without' 조인이 있는 Aggregate가 있습니다. Filter 없이 'Group By'와 'Count'만 사용해서, 배지(Badge)가 '없는' 직원(Employee) 수를 어떻게 구할 수 있습니까?",
         "options": [
           {
             "key": "A",
@@ -4996,11 +4996,11 @@
         "options": [
           {
             "key": "A",
-            "text": "enrollment 조건을 무시하고 모든 Student를 반환한다."
+            "text": "등록(Enrollment) 조건을 무시하고 모든 학생(Student)을 반환한다."
           },
           {
             "key": "B",
-            "text": "어떤 course에도 등록되지 않은 Student만 반환한다."
+            "text": "어떤 코스(Course)에도 등록되지 않은 학생만 반환한다."
           },
           {
             "key": "C",
@@ -5098,23 +5098,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate에 Filter 'Customer.Name like SearchVar + \"%\"'가 있습니다. 이 쿼리를 최적화하기 위해 데이터베이스가 'Customer' 테이블에서 사용할 가능성이 가장 높은 인덱스는 무엇입니까?",
+        "stem": "한 Aggregate에 Filter 'Customer.Name like SearchVar + \"%\"'가 있습니다. 이 쿼리를 최적화하기 위해 데이터베이스가 'Customer' 테이블에서 사용할 가능성이 가장 높은 index는 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "'Id' 속성에 대한 인덱스."
+            "text": "'Id' 속성에 대한 index."
           },
           {
             "key": "B",
-            "text": "'like'는 항상 풀 테이블 스캔을 유발하므로 어떤 인덱스도 도움이 되지 않는다."
+            "text": "'like'는 항상 풀 테이블 스캔을 유발하므로 어떤 index도 도움이 되지 않는다."
           },
           {
             "key": "C",
-            "text": "패턴과 무관하게 Full-Text Search 인덱스."
+            "text": "패턴과 무관하게 Full-Text Search index."
           },
           {
             "key": "D",
-            "text": "'Name' 속성에 대한 인덱스."
+            "text": "'Name' 속성에 대한 index."
           }
         ]
       }
@@ -5151,7 +5151,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate에서 'Product'와 'Review' 사이에 'With or Without' join이 있고, 'Review.Rating > 3' 필터를 추가했습니다. 그런데 리뷰가 하나도 없는 Product들이 결과에서 사라졌습니다. 이들을 다시 포함시키는 가장 효율적인 방법은?",
+        "stem": "Aggregate에서 상품(Product)과 리뷰(Review) 사이에 'With or Without' join이 있고, 'Review.Rating > 3' 필터를 추가했습니다. 그런데 리뷰가 하나도 없는 상품이 결과에서 사라졌습니다. 이들을 다시 포함시키는 가장 효율적인 방법은?",
         "options": [
           {
             "key": "A",
@@ -5163,7 +5163,7 @@
           },
           {
             "key": "C",
-            "text": "리뷰가 없는 Product용 Aggregate를 하나 더 만들어 두 리스트를 병합한다."
+            "text": "리뷰가 없는 상품용 Aggregate를 하나 더 만들어 두 리스트를 병합한다."
           },
           {
             "key": "D",
@@ -5204,7 +5204,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Product를 'Category'로 그룹핑하여 자연스럽게 10개의 그룹이 생깁니다. 이 Aggregate의 'Max Records' 속성을 1로 설정하면 무엇이 반환됩니까?",
+        "stem": "한 Aggregate가 상품(Product)을 카테고리(Category)로 그룹핑하여 자연스럽게 10개의 그룹이 생깁니다. 이 Aggregate의 'Max Records' 속성을 1로 설정하면 무엇이 반환됩니까?",
         "options": [
           {
             "key": "A",
@@ -5257,7 +5257,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "런타임에 만든 동적 Id 리스트에 포함된 Customer만 Aggregate가 반환하도록 하려고 합니다. 이와 관련된 Aggregate의 제약은 무엇입니까?",
+        "stem": "런타임에 만든 동적 Id 리스트에 포함된 고객(Customer)만 Aggregate가 반환하도록 하려고 합니다. 이와 관련된 Aggregate의 제약은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -5416,7 +5416,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Order.Id'를 세고(Count) 'Customer.Country'로 그룹핑합니다. 주문이 50건을 초과하는 국가만 보이도록 'Count(Order.Id) > 50' 필터를 추가합니다. 이것이 지원됩니까?",
+        "stem": "한 Aggregate가 'Order.Id'를 세고(Count) 'Customer.Country'로 그룹핑합니다. 주문(Order)이 50건을 초과하는 국가(Country)만 보이도록 'Count(Order.Id) > 50' 필터를 추가합니다. 이것이 지원됩니까?",
         "options": [
           {
             "key": "A",
@@ -5469,7 +5469,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order 관리 화면의 Aggregate에 'Filter' 줄 10개를 각각 따로 추가했습니다. OutSystems 플랫폼은 이 필터들을 어떻게 결합합니까?",
+        "stem": "주문(Order) 관리 화면의 Aggregate에 'Filter' 줄 10개를 각각 따로 추가했습니다. OutSystems 플랫폼은 이 필터들을 어떻게 결합합니까?",
         "options": [
           {
             "key": "A",
@@ -5575,7 +5575,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 'Customer'와 'CustomerProfile'을 'Only With' 조인으로 연결합니다. Customer 레코드는 있지만 대응하는 'CustomerProfile' 레코드가 없다면, Aggregate 결과에서 해당 Customer 데이터는 어떻게 됩니까?",
+        "stem": "Aggregate가 고객(Customer)과 'CustomerProfile'을 'Only With' join으로 연결합니다. 고객 레코드는 있지만 대응하는 'CustomerProfile' 레코드가 없다면, Aggregate 결과에서 해당 고객 데이터는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -5583,7 +5583,7 @@
           },
           {
             "key": "B",
-            "text": "'Customer' 데이터는 반환되고 'CustomerProfile' 속성은 비어 있다."
+            "text": "고객 데이터는 반환되고 'CustomerProfile' 속성은 비어 있다."
           },
           {
             "key": "C",
@@ -5628,7 +5628,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate에 'Product.Category'로 'Group By'를 걸고 'Product.Stock'에 'Sum'을 적용했습니다. 총 재고가 가장 많은 카테고리가 맨 위에 오도록 dynamic Sort(텍스트 표현식)로 정렬하려면 어떤 값을 전달해야 합니까?",
+        "stem": "Aggregate에 'Product.Category'로 'Group By'를 걸고 'Product.Stock'에 'Sum'을 적용했습니다. 총 재고가 가장 많은 카테고리(Category)가 맨 위에 오도록 dynamic Sort(텍스트 표현식)로 정렬하려면 어떤 값을 전달해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -5681,7 +5681,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 'Order'를 'Customer'와 'Only With' 조인합니다. 'ShippedDate'가 최근 30일 이내인 주문을 찾으려 합니다. 대용량 테이블에서 가장 성능이 좋은 필터는 무엇입니까?",
+        "stem": "Aggregate가 주문(Order)을 고객(Customer)과 'Only With' 조인합니다. 'ShippedDate'가 최근 30일 이내인 주문을 찾으려 합니다. 대용량 테이블에서 가장 성능이 좋은 필터는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -5787,7 +5787,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 'Ticket'을 'Agent'와 'With or Without'로 조인합니다. 'Agent.IsActive = True' 필터를 걸었더니 Agent가 배정되지 않은 Ticket이 사라졌습니다. 미배정 Ticket과 활성 Agent인 Ticket을 모두 남기려면 어떤 필터 표현식을 써야 합니까?",
+        "stem": "Aggregate가 티켓(Ticket)을 상담원(Agent)과 'With or Without'로 조인합니다. 'Agent.IsActive = True' 필터를 걸었더니 상담원이 배정되지 않은 티켓이 사라졌습니다. 미배정 티켓과 활성 상담원인 티켓을 모두 남기려면 어떤 필터 표현식을 써야 합니까?",
         "options": [
           {
             "key": "A",
@@ -6052,11 +6052,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Customer'와 'Order'를 조인하여, 단일 Aggregate로 모든 고객과 그들의 가장 최근 주문 날짜 목록을 보여주려 합니다. 어떻게 해야 합니까?",
+        "stem": "고객(Customer)과 주문(Order)을 조인하여, 단일 Aggregate로 모든 고객과 그들의 가장 최근 주문 날짜 목록을 보여주려 합니다. 어떻게 해야 합니까?",
         "options": [
           {
             "key": "A",
-            "text": "Customer (Only With) Order로 조인하고 Max Records를 1로 설정한다."
+            "text": "고객을 주문과 'Only With'로 조인하고 Max Records를 1로 설정한다."
           },
           {
             "key": "B",
@@ -6105,7 +6105,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "지난 한 달 동안 3건보다 많은 Order를 낸 Customer를 찾으려 합니다. Customer (Only With) Order로 조인하고 Customer.Id로 Group By, Order.Id를 Count합니다. 최대 효율을 위해 'Order.Date > AddMonths(CurrDate(), -1)' 조건은 어디에 두어야 합니까?",
+        "stem": "지난 한 달 동안 3건보다 많은 주문(Order)을 낸 고객(Customer)을 찾으려 합니다. 고객 (Only With) 주문으로 조인하고 Customer.Id로 Group By, Order.Id를 Count합니다. 최대 효율을 위해 'Order.Date > AddMonths(CurrDate(), -1)' 조건은 어디에 두어야 합니까?",
         "options": [
           {
             "key": "A",
@@ -6158,7 +6158,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "어떤 Aggregate가 Category (With or Without) Product 조인을 사용해 제품이 없는 Category까지 모두 나오도록 했습니다. 여기에 filter 'Product.Price > 100'을 추가하면, 제품이 없는 Category는 어떻게 됩니까?",
+        "stem": "어떤 Aggregate가 Category (With or Without) Product 조인을 사용해 상품(Product)이 없는 카테고리(Category)까지 모두 나오도록 했습니다. 여기에 filter 'Product.Price > 100'을 추가하면, 상품이 없는 카테고리는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -6264,7 +6264,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Max Records'가 50으로 설정된 Aggregate가 있습니다. 여기에 'Supplier.Region'으로 'Group By'를 추가합니다. 10개 region에 걸쳐 200명의 supplier가 있습니다. 이 Aggregate는 몇 개의 행을 반환합니까?",
+        "stem": "'Max Records'가 50으로 설정된 Aggregate가 있습니다. 여기에 'Supplier.Region'으로 'Group By'를 추가합니다. 10개 지역(Region)에 걸쳐 200개의 공급업체(Supplier)가 있습니다. 이 Aggregate는 몇 개의 행을 반환합니까?",
         "options": [
           {
             "key": "A",
@@ -6317,7 +6317,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate 필터에서 상품 검색을 위해 'like' 연산자를 사용합니다(예: Product.Name like \"%\" + SearchTerm + \"%\"). 주요 성능 위험은 무엇입니까?",
+        "stem": "Aggregate 필터에서 상품(Product) 검색을 위해 'like' 연산자를 사용합니다(예: Product.Name like \"%\" + SearchTerm + \"%\"). 주요 성능 위험은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -6370,7 +6370,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 'Ticket'을 'With or Without'으로 'Comment'와 조인합니다. 댓글이 하나도 없는 Ticket만 표시하려면 올바른 필터는 무엇입니까?",
+        "stem": "Aggregate가 'Ticket'을 'With or Without'으로 'Comment'와 조인합니다. 댓글(Comment)이 하나도 없는 티켓(Ticket)만 표시하려면 올바른 필터는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -6423,7 +6423,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 두 엔티티를 'With or Without' 조인합니다. 'Max Records'를 10으로 설정했는데도 데이터베이스 실행 시간이 매우 깁니다. 이유는 무엇입니까?",
+        "stem": "Aggregate가 두 개의 Entity를 'With or Without' 조인합니다. 'Max Records'를 10으로 설정했는데도 데이터베이스 실행 시간이 매우 깁니다. 이유는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -6476,7 +6476,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "주문 검색 화면에서 키 입력마다 서버를 호출하지 않도록, 사용자가 타이핑을 500ms 동안 멈춘 뒤에 Aggregate를 새로고침하려 합니다('디바운싱'). 이 로직은 어디에 구현합니까?",
+        "stem": "주문(Order) 검색 화면에서 키 입력마다 서버를 호출하지 않도록, 사용자가 타이핑을 500ms 동안 멈춘 뒤에 Aggregate를 새로고침하려 합니다('디바운싱'). 이 로직은 어디에 구현합니까?",
         "options": [
           {
             "key": "A",
@@ -6582,11 +6582,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 'Department'와 'Employee' 사이에 'With or Without' join을 사용하고 'Employee.Salary'의 평균(Average)을 Department별로 계산합니다. 직원이 한 명도 없는 Department의 경우 Average 값은 무엇으로 표시됩니까?",
+        "stem": "한 Aggregate가 'Department'와 'Employee' 사이에 'With or Without' join을 사용하고 'Employee.Salary'의 평균(Average)을 부서(Department)별로 계산합니다. 직원(Employee)이 한 명도 없는 부서의 경우 Average 값은 무엇으로 표시됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "해당 Department는 결과에서 완전히 제외된다."
+            "text": "해당 부서(Department)는 결과에서 완전히 제외된다."
           },
           {
             "key": "B",
@@ -6688,7 +6688,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate가 'Employee'와 'Department'를 'With or Without'로 조인합니다. 부서가 없는 직원은 'Floating'으로 보이도록 calculated attribute로 If(Department.Name = \"\", \"Floating\", Department.Name)를 추가했습니다. 동료는 이게 실패할 것이라고 합니다. 실제로 맞는 설명은 무엇입니까?",
+        "stem": "Aggregate가 직원(Employee)과 부서(Department)를 'With or Without'로 조인합니다. 부서가 없는 직원은 'Floating'으로 보이도록 calculated attribute로 If(Department.Name = \"\", \"Floating\", Department.Name)를 추가했습니다. 동료는 이게 실패할 것이라고 합니다. 실제로 맞는 설명은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -6741,7 +6741,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity 'OrderType'에 Boolean 속성 'IsDigital'이 있습니다. 일반 Entity 'Order'는 'OrderType'을 참조합니다. 디지털이 아닌 모든 Order를 조회하려고 합니다. 가장 좋은 방법은 무엇입니까?",
+        "stem": "Static Entity 'OrderType'에 Boolean 속성 'IsDigital'이 있습니다. 일반 Entity 'Order'는 'OrderType'을 참조합니다. 디지털이 아닌 모든 주문(Order)을 조회하려고 합니다. 가장 좋은 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -6749,7 +6749,7 @@
           },
           {
             "key": "B",
-            "text": "모든 Order를 가져온 뒤 로직에서 ListFilter 액션으로 디지털 항목을 제거한다."
+            "text": "모든 주문(Order)을 가져온 뒤 로직에서 ListFilter 액션으로 디지털 항목을 제거한다."
           },
           {
             "key": "C",
@@ -6794,7 +6794,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Order' Entity에 'OrderDate' 속성이 있고, Aggregate가 가장 최근 주문 10건을 반환해야 합니다. 'OrderDate'에 Index를 추가하는 것이 이 Aggregate에 도움이 되는 이유는 무엇입니까?",
+        "stem": "'Order' Entity에 'OrderDate' 속성이 있고, Aggregate가 가장 최근 주문(Order) 10건을 반환해야 합니다. 'OrderDate'에 Index를 추가하는 것이 이 Aggregate에 도움이 되는 이유는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -6847,11 +6847,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate에서 Customer와 Order를 'Only With'로 조인합니다(Order가 Customer를 참조). 특정 Customer에게 Order가 하나도 없다면 결과에서 그 Customer 행은 어떻게 됩니까?",
+        "stem": "Aggregate에서 고객(Customer)과 주문(Order)을 'Only With'로 조인합니다(Order가 Customer를 참조). 특정 고객에게 주문이 하나도 없다면 결과에서 그 고객 행은 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Customer 행이 Order 속성이 Null인 채로 표시된다."
+            "text": "고객(Customer) 행이 Order 속성이 Null인 채로 표시된다."
           },
           {
             "key": "B",
@@ -6859,11 +6859,11 @@
           },
           {
             "key": "C",
-            "text": "안전을 위해 Customer 행이 매칭되지 않음으로 표시되어 한 번 나타난다."
+            "text": "안전을 위해 고객 행이 매칭되지 않음으로 표시되어 한 번 나타난다."
           },
           {
             "key": "D",
-            "text": "Customer 행이 Aggregate 결과에서 제외된다."
+            "text": "고객 행이 Aggregate 결과에서 제외된다."
           }
         ]
       }
@@ -7006,7 +7006,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Product 엔티티에서 레코드를 가져옵니다. 개발자가 Product.IsActive = True 필터를 추가했습니다. 이 필터는 어떻게 실행됩니까?",
+        "stem": "한 Aggregate가 Product Entity에서 레코드를 가져옵니다. 개발자가 Product.IsActive = True 필터를 추가했습니다. 이 필터는 어떻게 실행됩니까?",
         "options": [
           {
             "key": "A",
@@ -7014,7 +7014,7 @@
           },
           {
             "key": "B",
-            "text": "모든 product를 먼저 가져온 뒤 브라우저 메모리에서 걸러진다."
+            "text": "모든 상품(Product)을 먼저 가져온 뒤 브라우저 메모리에서 걸러진다."
           },
           {
             "key": "C",
@@ -7059,7 +7059,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate에서 개발자가 Customer와 Order를 조인합니다. 일부 Customer는 아직 Order가 하나도 없지만, 목록에는 모든 Customer가 반드시 표시되어야 합니다. 어떤 Join 타입을 사용해야 합니까?",
+        "stem": "한 Aggregate에서 개발자가 고객(Customer)과 주문(Order)을 조인합니다. 일부 고객은 아직 주문이 하나도 없지만, 목록에는 모든 고객이 반드시 표시되어야 합니다. 어떤 Join 타입을 사용해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -7271,7 +7271,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product를 조회하는 Aggregate에서 'Max Records' 속성을 1로 설정했습니다. GetProducts.List.Current는 무엇을 나타냅니까?",
+        "stem": "상품(Product)을 조회하는 Aggregate에서 'Max Records' 속성을 1로 설정했습니다. GetProducts.List.Current는 무엇을 나타냅니까?",
         "options": [
           {
             "key": "A",
@@ -7279,7 +7279,7 @@
           },
           {
             "key": "B",
-            "text": "필터나 정렬을 무시한 Product 테이블 전체의 첫 레코드."
+            "text": "필터나 정렬을 무시한 상품 테이블 전체의 첫 레코드."
           },
           {
             "key": "C",
@@ -7324,23 +7324,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Customer와 Profile을 \"With or Without\"으로 join한다. 필터 Profile.Bio <> \"\" 가 적용되어 있다. 이 Aggregate의 결과는?",
+        "stem": "한 Aggregate가 고객(Customer)과 프로필(Profile)을 \"With or Without\"으로 join한다. 필터 Profile.Bio <> \"\" 가 적용되어 있다. 이 Aggregate의 결과는?",
         "options": [
           {
             "key": "A",
-            "text": "Profile이 있고 Bio가 비어 있지 않은 Customer만 반환된다."
+            "text": "프로필이 있고 Bio가 비어 있지 않은 고객만 반환된다."
           },
           {
             "key": "B",
-            "text": "Profile이 없는 Customer를 포함해 모든 Customer가 반환된다."
+            "text": "프로필이 없는 고객을 포함해 모든 고객이 반환된다."
           },
           {
             "key": "C",
-            "text": "Profile이 없는 Customer만 반환된다."
+            "text": "프로필이 없는 고객만 반환된다."
           },
           {
             "key": "D",
-            "text": "모든 Customer가 반환되지만 매칭되지 않는 경우 Bio는 비어 있다."
+            "text": "모든 고객이 반환되지만 매칭되지 않는 경우 Bio는 비어 있다."
           }
         ]
       }
@@ -7377,11 +7377,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate에서 Product.Category attribute에 Group By를 적용했고, 각 category마다 제품의 Name을 보여주는 컬럼도 원합니다. Name처럼 그룹화하지 않은 attribute를 Aggregate는 어떻게 처리해야 합니까?",
+        "stem": "Aggregate에서 Product.Category attribute에 Group By를 적용했고, 각 카테고리(Category)마다 상품(Product)의 Name을 보여주는 컬럼도 원합니다. Name처럼 그룹화하지 않은 attribute를 Aggregate는 어떻게 처리해야 합니까?",
         "options": [
           {
             "key": "A",
-            "text": "Name을 그냥 추가하면 Aggregate가 각 category의 첫 번째 제품을 자동으로 보여준다."
+            "text": "Name을 그냥 추가하면 Aggregate가 각 카테고리의 첫 번째 상품을 자동으로 보여준다."
           },
           {
             "key": "B",
@@ -7434,7 +7434,7 @@
         "options": [
           {
             "key": "A",
-            "text": "\"No Data Found\" 예외가 발생한다."
+            "text": "\"No Data Found\" Exception이 발생한다."
           },
           {
             "key": "B",
@@ -7536,7 +7536,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Order 레코드 100개를 GetOrders.List에 로드했습니다(Max Records = 100). For Each가 이 리스트를 순회하며 각 항목마다 GetOrders.List.Current를 DB에서 삭제하는 Server Action을 호출합니다. 반복이 끝난 후 메모리상의 리스트에 대해 참인 것은?",
+        "stem": "한 Aggregate가 주문(Order) 레코드 100개를 GetOrders.List에 로드했습니다(Max Records = 100). For Each가 이 리스트를 순회하며 각 항목마다 GetOrders.List.Current를 DB에서 삭제하는 Server Action을 호출합니다. 반복이 끝난 후 메모리상의 리스트에 대해 참인 것은?",
         "options": [
           {
             "key": "A",

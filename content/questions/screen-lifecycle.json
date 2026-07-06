@@ -105,11 +105,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 이커머스 애플리케이션의 동일한 화면에 Product 목록과 그에 해당하는 Reviews가 표시된다. 두 목록은 각각 별도의 Aggregate(FetchProducts와 FetchReviews)를 사용한다. 이들의 실행 순서에 대한 설명 중 올바른 것은?",
+        "stem": "한 이커머스 애플리케이션의 동일한 화면에 상품(Product) 목록과 그에 해당하는 리뷰(Reviews)가 표시된다. 두 목록은 각각 별도의 Aggregate(FetchProducts와 FetchReviews)를 사용한다. 이들의 실행 순서에 대한 설명 중 올바른 것은?",
         "options": [
           {
             "key": "A",
-            "text": "위젯이 product에 먼저 액세스하므로 FetchProducts는 항상 FetchReviews보다 먼저 완료된다."
+            "text": "Widget이 상품에 먼저 액세스하므로 FetchProducts는 항상 FetchReviews보다 먼저 완료된다."
           },
           {
             "key": "B",
@@ -169,7 +169,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order 관리 화면을 구축하고 있다. Aggregate를 사용하여 order를 가져오고, 화면이 렌더링되기 전에 데이터가 로드되도록 해야 한다. 어떤 Fetch 속성 설정을 사용해야 하는가?",
+        "stem": "주문(Order) 관리 화면을 구축하고 있다. Aggregate를 사용하여 주문을 가져오고, 화면이 렌더링되기 전에 데이터가 로드되도록 해야 한다. 어떤 Fetch 속성 설정을 사용해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -363,7 +363,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product Catalog 화면에 'At Start'로 설정된 여러 개의 Aggregate가 있다. 애플리케이션은 종속 쿼리가 특정 순서로 실행되도록 보장해야 한다(예: 먼저 Categories를 가져온 다음 선택된 Category로 필터링된 Products를 가져옴). 올바른 실행 순서를 어떻게 보장해야 하는가?",
+        "stem": "Product Catalog 화면에 'At Start'로 설정된 여러 개의 Aggregate가 있다. 애플리케이션은 종속 쿼리가 특정 순서로 실행되도록 보장해야 한다(예: 먼저 카테고리(Categories)를 가져온 다음 선택된 카테고리로 필터링된 상품(Products)을 가져옴). 올바른 실행 순서를 어떻게 보장해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -428,7 +428,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Invoice 화면은 Render 이벤트를 사용하여 여러 Aggregate의 데이터를 바인딩해 Invoice 세부 정보, line item, 결제 상태를 표시한다. Render 이벤트가 언제 실행되는지와 그 영향을 올바르게 설명한 것은?",
+        "stem": "한 청구서(Invoice) 화면은 Render 이벤트를 사용하여 여러 Aggregate의 데이터를 바인딩해 청구서 세부 정보, line item, 결제 상태를 표시한다. Render 이벤트가 언제 실행되는지와 그 영향을 올바르게 설명한 것은?",
         "options": [
           {
             "key": "A",
@@ -436,7 +436,7 @@
           },
           {
             "key": "B",
-            "text": "Render는 화면과 block이 렌더링되면서 여러 번 실행되므로, 초기 렌더링에서는 모든 Aggregate 데이터를 사용하지 못할 수 있다."
+            "text": "Render는 화면과 Block이 렌더링되면서 여러 번 실행되므로, 초기 렌더링에서는 모든 Aggregate 데이터를 사용하지 못할 수 있다."
           },
           {
             "key": "C",
@@ -818,7 +818,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Reactive Web App에서 Data Action으로 복잡한 Order 데이터를 조회합니다. 그 결과를 바탕으로 계산하여 Screen Variable에 저장하되, fetch당 정확히 한 번만 실행되어야 합니다. 이 로직은 어디에 두어야 합니까?",
+        "stem": "Reactive Web App에서 Data Action으로 복잡한 주문(Order) 데이터를 조회합니다. 그 결과를 바탕으로 계산하여 Screen Variable에 저장하되, fetch당 정확히 한 번만 실행되어야 합니다. 이 로직은 어디에 두어야 합니까?",
         "options": [
           {
             "key": "A",
@@ -871,7 +871,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Fetch: At Start'로 설정된 Aggregate가 Orders를 Local Variable 'StatusFilter'로 필터링합니다. 화면의 'OnInitialize'에서 'StatusFilter'에 새 값을 할당합니다. 화면이 열리자마자 새 값으로 필터링된 데이터를 표시하려면 어떻게 해야 합니까?",
+        "stem": "'Fetch: At Start'로 설정된 Aggregate가 주문(Order)을 Local Variable 'StatusFilter'로 필터링합니다. 화면의 'OnInitialize'에서 'StatusFilter'에 새 값을 할당합니다. 화면이 열리자마자 새 값으로 필터링된 데이터를 표시하려면 어떻게 해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -1083,7 +1083,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Screen에 'Employee'와 'Department'를 조인(Only With)하는 'Fetch At Start' Aggregate가 있습니다. 이 Screen의 'OnInitialize' 이벤트에서 Client Action이 해당 Aggregate의 Filter에 사용되는 Local Variable을 갱신합니다. Screen 로딩이 끝났을 때 어떤 일이 발생합니까?",
+        "stem": "한 Screen에 '직원(Employee)'과 '부서(Department)'를 조인(Only With)하는 'Fetch At Start' Aggregate가 있습니다. 이 Screen의 'OnInitialize' 이벤트에서 Client Action이 해당 Aggregate의 Filter에 사용되는 Local Variable을 갱신합니다. Screen 로딩이 끝났을 때 어떤 일이 발생합니까?",
         "options": [
           {
             "key": "A",
@@ -1136,7 +1136,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Screen에 'Tickets'를 조회하는 'At Start' Aggregate가 있다. Screen의 'On Ready' 이벤트에서 Client Action이 Aggregate 필터에 쓰이는 Local Variable을 변경한 뒤 그 Aggregate에 대해 'Refresh Data'를 호출한다. 서버가 느릴 때 사용자가 화면에 진입하면 가장 가능성 높은 동작은?",
+        "stem": "한 Screen에 티켓(Ticket)을 조회하는 'At Start' Aggregate가 있다. Screen의 'On Ready' 이벤트에서 Client Action이 Aggregate 필터에 쓰이는 Local Variable을 변경한 뒤 그 Aggregate에 대해 'Refresh Data'를 호출한다. 서버가 느릴 때 사용자가 Screen에 진입하면 가장 가능성 높은 동작은?",
         "options": [
           {
             "key": "A",
@@ -1242,7 +1242,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Screen Variable 'ShowBanner'의 기본값은 False입니다. Screen의 'OnInitialize'에서 True로 설정하고, Screen의 'OnReady'에서 다시 False로 설정합니다. 화면이 처음 렌더링을 마치는 순간 표시되는 값은 무엇입니까?",
+        "stem": "Screen Variable 'ShowBanner'의 기본값은 False입니다. Screen의 'OnInitialize'에서 True로 설정하고, Screen의 'OnReady'에서 다시 False로 설정합니다. Screen이 처음 렌더링을 마치는 순간 표시되는 값은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1258,7 +1258,7 @@
           },
           {
             "key": "D",
-            "text": "화면이 True와 False 사이를 무한히 깜빡인다."
+            "text": "Screen이 True와 False 사이를 무한히 깜빡인다."
           }
         ]
       }
@@ -1295,7 +1295,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 화면에 'At Start'로 데이터를 가져오는 Data Action이 있고, 실행에 5초가 걸리는 'OnInitialize' 이벤트도 있습니다. Data Action은 언제 시작됩니까?",
+        "stem": "한 Screen에 'At Start'로 데이터를 가져오는 Data Action이 있고, 실행에 5초가 걸리는 'OnInitialize' 이벤트도 있습니다. Data Action은 언제 시작됩니까?",
         "options": [
           {
             "key": "A",
@@ -1303,11 +1303,11 @@
           },
           {
             "key": "B",
-            "text": "화면이 처음 렌더링된 후에야 시작된다."
+            "text": "Screen이 처음 렌더링된 후에야 시작된다."
           },
           {
             "key": "C",
-            "text": "화면이 로딩을 시작하는 즉시, OnInitialize 이벤트와 병렬로 시작된다."
+            "text": "Screen이 로딩을 시작하는 즉시, OnInitialize 이벤트와 병렬로 시작된다."
           },
           {
             "key": "D",
@@ -1348,7 +1348,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "개발자가 Screen의 'On Initialize' event에서 'Text' widget에 연결된 변수에 값을 할당한다. 화면 렌더링이 끝나면 사용자는 무엇을 보게 되는가?",
+        "stem": "개발자가 Screen의 'On Initialize' event에서 'Text' widget에 연결된 변수에 값을 할당한다. Screen 렌더링이 끝나면 사용자는 무엇을 보게 되는가?",
         "options": [
           {
             "key": "A",
@@ -1454,7 +1454,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "개발자가 화면이 사용자에게 보이는 즉시 JavaScript로 특정 검색 Input widget에 키보드 focus를 주려고 합니다. 이 로직을 넣기에 가장 적합한 Screen lifecycle 이벤트는 무엇입니까?",
+        "stem": "개발자가 Screen이 사용자에게 보이는 즉시 JavaScript로 특정 검색 Input widget에 키보드 focus를 주려고 합니다. 이 로직을 넣기에 가장 적합한 Screen lifecycle 이벤트는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1825,7 +1825,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "제품 검색 화면에 Local Variable 'SearchKeyword'가 있습니다. 사용자가 동일한 화면으로 이동하는 Link(Self-Navigation)를 클릭합니다. 이동 후 'SearchKeyword' 값은 어떻게 됩니까?",
+        "stem": "상품(Product) 검색 화면에 Local Variable 'SearchKeyword'가 있습니다. 사용자가 동일한 화면으로 이동하는 Link(Self-Navigation)를 클릭합니다. 이동 후 'SearchKeyword' 값은 어떻게 됩니까?",
         "options": [
           {
             "key": "A",

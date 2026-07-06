@@ -103,7 +103,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product 목록 화면과 Cart 상세 화면이라는 두 개의 Screen으로 구성된 전자상거래 애플리케이션을 설계하고 있다. Cart 화면은 CartId 인풋 파라미터(Input Parameter)를 기반으로 필터링된 프로덕트 데이터를 필요로 한다. 이 데이터를 가져오는 방식으로 올바르지 않은 것은?",
+        "stem": "상품(Product) 목록 화면과 장바구니(Cart) 상세 화면이라는 두 개의 Screen으로 구성된 전자상거래 애플리케이션을 설계하고 있다. 장바구니 화면은 CartId 인풋 파라미터(Input Parameter)를 기반으로 필터링된 상품 데이터를 필요로 한다. 이 데이터를 가져오는 방식으로 올바르지 않은 것은?",
         "options": [
           {
             "key": "A",
@@ -111,7 +111,7 @@
           },
           {
             "key": "B",
-            "text": "CartId를 인풋 파라미터로 받아 필터링된 프로덕트 목록을 반환하는 Data Action을 사용한다."
+            "text": "CartId를 인풋 파라미터로 받아 필터링된 상품 목록을 반환하는 Data Action을 사용한다."
           },
           {
             "key": "C",
@@ -166,7 +166,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Customer 관리 애플리케이션에서 동일한 화면에 GetActiveCustomers (Fetch: At Start)와 GetPendingOrders (Fetch: At Start)라는 두 개의 Aggregate를 정의했다. 화면 초기화 후 두 Aggregate가 모두 실행되지만, 완료되는 순서는 예측할 수 없다. 이 동작과 그 의미를 정확하게 설명한 것은?",
+        "stem": "고객(Customer) 관리 애플리케이션에서 동일한 화면에 GetActiveCustomers (Fetch: At Start)와 GetPendingOrders (Fetch: At Start)라는 두 개의 Aggregate를 정의했다. 화면 초기화 후 두 Aggregate가 모두 실행되지만, 완료되는 순서는 예측할 수 없다. 이 동작과 그 의미를 정확하게 설명한 것은?",
         "options": [
           {
             "key": "A",
@@ -229,7 +229,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "InvoiceId 인풋 파라미터(Input Parameter)를 기반으로 단일 인보이스를 표시하는 Invoice 상세 화면을 만들어야 한다. 이 화면은 Invoice Entity와 관련된 Customer Entity 양쪽의 데이터를 필요로 한다. 이 데이터를 가져오는 가장 적절한 방식은?",
+        "stem": "InvoiceId 인풋 파라미터(Input Parameter)를 기반으로 단일 청구서(Invoice)를 표시하는 청구서 상세 화면을 만들어야 한다. 이 화면은 Invoice Entity와 관련된 Customer Entity 양쪽의 데이터를 필요로 한다. 이 데이터를 가져오는 가장 적절한 방식은?",
         "options": [
           {
             "key": "A",
@@ -355,7 +355,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "사용자가 검색어를 입력하는 Product 검색 화면이 있으며, GetProducts라는 Aggregate의 Fetch 속성이 'Only on demand'로 설정되어 있다. 사용자가 검색 키워드를 입력하고 'Search' 버튼을 클릭했으나 프로덕트가 표시되지 않는다. 가장 가능성이 높은 원인은?",
+        "stem": "사용자가 검색어를 입력하는 상품(Product) 검색 화면이 있으며, GetProducts라는 Aggregate의 Fetch 속성이 'Only on demand'로 설정되어 있다. 사용자가 검색 키워드를 입력하고 'Search' 버튼을 클릭했으나 상품이 표시되지 않는다. 가장 가능성이 높은 원인은?",
         "options": [
           {
             "key": "A",
@@ -481,7 +481,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product 상세 화면이 GetProductById Aggregate를 통해 가져온 프로덕트 정보를 표시한다. 프로덕트를 찾았는지 여부에 따라 다른 내용을 보여주려고 한다. Aggregate가 레코드를 반환했는지 확인하기 위해 사용해야 할 위젯과 이벤트는?",
+        "stem": "상품(Product) 상세 화면이 GetProductById Aggregate를 통해 가져온 상품 정보를 표시한다. 상품을 찾았는지 여부에 따라 다른 내용을 보여주려고 한다. Aggregate가 레코드를 반환했는지 확인하기 위해 사용해야 할 위젯과 이벤트는?",
         "options": [
           {
             "key": "A",
@@ -544,7 +544,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Customer 유지관리 애플리케이션에서 CustomerDetail 화면은 CustomerId 인풋 파라미터(Input Parameter)를 받는다. GetCustomerById Aggregate는 이 파라미터로 필터링한다. CustomerList 화면에서 특정 CustomerId로 이 화면에 이동하면 Aggregate가 해당 고객의 데이터를 올바르게 반환한다. 그러나 이후 다른 CustomerId로 이 화면에 다시 이동하면 이전 고객의 데이터가 계속 표시된다. 가장 가능성이 높은 원인은?",
+        "stem": "고객(Customer) 유지관리 애플리케이션에서 CustomerDetail 화면은 CustomerId 인풋 파라미터(Input Parameter)를 받는다. GetCustomerById Aggregate는 이 파라미터로 필터링한다. CustomerList 화면에서 특정 CustomerId로 이 화면에 이동하면 Aggregate가 해당 고객의 데이터를 올바르게 반환한다. 그러나 이후 다른 CustomerId로 이 화면에 다시 이동하면 이전 고객의 데이터가 계속 표시된다. 가장 가능성이 높은 원인은?",
         "options": [
           {
             "key": "A",
@@ -780,7 +780,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Aggregate가 Expenses 리스트를 가져옵니다. 이 리스트 전체 비용의 총합(Grand Total)을 계산해 지역 변수에 저장하고 footer 위젯에 표시하려 합니다. 이 계산을 수행하기에 가장 최적이고 안정적인 위치는?",
+        "stem": "한 Aggregate가 비용(Expenses) List를 가져옵니다. 이 List 전체 비용의 총합(Grand Total)을 계산해 Local Variable에 저장하고 footer widget에 표시하려 합니다. 이 계산을 수행하기에 가장 최적이고 안정적인 위치는?",
         "options": [
           {
             "key": "A",
@@ -788,7 +788,7 @@
           },
           {
             "key": "B",
-            "text": "Expenses Aggregate의 OnAfterFetch 이벤트"
+            "text": "비용 Aggregate의 OnAfterFetch 이벤트"
           },
           {
             "key": "C",
@@ -843,7 +843,7 @@
         "options": [
           {
             "key": "A",
-            "text": "이름에 \"John\"이 포함된 직원 수"
+            "text": "이름에 \"John\"이 포함된 직원(Employee) 수"
           },
           {
             "key": "B",
@@ -891,7 +891,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Reactive Web App에서 Data Action이 'Student' 레코드 목록과 그들의 'Grades'를 가져옵니다. List 바깥의 별도 Expression widget에 'Top Student' 이름을 표시하려고 합니다. Top Student를 계산하기에 가장 효율적인 위치는 어디입니까?",
+        "stem": "Reactive Web App에서 Data Action이 학생(Student) 레코드 목록과 그들의 성적(Grades)을 가져옵니다. List 바깥의 별도 Expression widget에 '최우수 학생(Top Student)' 이름을 표시하려고 합니다. 최우수 학생을 계산하기에 가장 효율적인 위치는 어디입니까?",
         "options": [
           {
             "key": "A",
@@ -903,7 +903,7 @@
           },
           {
             "key": "C",
-            "text": "Expression widget에서 직접 ListFilter client action을 호출."
+            "text": "Expression widget에서 직접 ListFilter Client Action을 호출."
           },
           {
             "key": "D",
@@ -1050,11 +1050,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "사용자가 Input에 입력하면 Product List가 입력하는 대로 갱신되는 검색 기능을 만들고 있습니다. 가장 부드러운 사용자 경험을 제공하는 방법은 무엇입니까?",
+        "stem": "사용자가 Input에 입력하면 상품(Product) List가 입력하는 대로 갱신되는 검색 기능을 만들고 있습니다. 가장 부드러운 사용자 경험을 제공하는 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "시작 시 10,000개의 Product 레코드를 모두 가져와 JavaScript로 로컬에서 필터링한다."
+            "text": "시작 시 10,000개의 상품(Product) 레코드를 모두 가져와 JavaScript로 로컬에서 필터링한다."
           },
           {
             "key": "B",
@@ -1103,7 +1103,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Reactive Screen이 Employee 목록을 표시합니다. Aggregate 소스는 20개 속성을 노출하지만 List는 화면에서 그중 3개만 사용합니다. OutSystems는 실제로 가져오는 컬럼을 어떻게 처리합니까?",
+        "stem": "Reactive Screen이 직원(Employee) 목록을 표시합니다. Aggregate 소스는 20개 속성을 노출하지만 List는 화면에서 그중 3개만 사용합니다. OutSystems는 실제로 가져오는 컬럼을 어떻게 처리합니까?",
         "options": [
           {
             "key": "A",
@@ -1262,7 +1262,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "화면에 Aggregate로 조회한 Product 레코드 목록이 있고, 각 행에는 해당 제품을 삭제하는 Server Action을 호출하는 Delete 버튼이 있습니다. 삭제가 성공한 후 표시된 목록을 갱신하는 권장 방법은 무엇입니까?",
+        "stem": "화면에 Aggregate로 조회한 상품(Product) 레코드 목록이 있고, 각 행에는 해당 상품을 삭제하는 Server Action을 호출하는 Delete 버튼이 있습니다. 삭제가 성공한 후 표시된 목록을 갱신하는 권장 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1278,7 +1278,7 @@
           },
           {
             "key": "D",
-            "text": "제품을 조회하는 Aggregate에 'Refresh Data'를 호출한다."
+            "text": "상품을 조회하는 Aggregate에 'Refresh Data'를 호출한다."
           }
         ]
       }
@@ -1368,7 +1368,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Screen에 'At Start' Aggregate가 'With or Without'로 'Customer'와 'Subscription'을 join하고 'Subscription.IsActive = True' 필터를 적용합니다. Screen의 'OnInitialize'에서 Client Action이 Server Action을 호출해 Subscription 하나를 Inactive에서 Active로 변경한 뒤 해당 Aggregate에 대한 'Refresh Data'를 실행합니다. 서버 요청은 몇 번 발생하며 화면은 최종적으로 무엇을 보여줍니까?",
+        "stem": "한 Screen에 'At Start' Aggregate가 'With or Without'로 고객(Customer)과 구독(Subscription)을 join하고 'Subscription.IsActive = True' 필터를 적용합니다. Screen의 'OnInitialize'에서 Client Action이 Server Action을 호출해 구독 하나를 Inactive에서 Active로 변경한 뒤 해당 Aggregate에 대한 'Refresh Data'를 실행합니다. 서버 요청은 몇 번 발생하며 화면은 최종적으로 무엇을 보여줍니까?",
         "options": [
           {
             "key": "A",
@@ -1380,7 +1380,7 @@
           },
           {
             "key": "C",
-            "text": "3번 요청; 화면은 Customer와 이제 Active가 된 Subscription을 함께 표시한다."
+            "text": "3번 요청; 화면은 고객과 이제 Active가 된 구독을 함께 표시한다."
           },
           {
             "key": "D",
@@ -1539,7 +1539,7 @@
           },
           {
             "key": "C",
-            "text": "Data Action이 서버에서 다시 실행되어 가장 최신 notification을 반환한다."
+            "text": "Data Action이 서버에서 다시 실행되어 가장 최신 알림(Notification)을 반환한다."
           },
           {
             "key": "D",
@@ -1686,7 +1686,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product 검색 Screen에서 Aggregate 'GetProducts'가 'At Start'로 실행됩니다. 'OnReady'에서 filter 변수를 바꾼 뒤 곧바로 'GetProducts'에 대해 'Refresh Data'를 호출하는 Client Action을 실행합니다. 'Refresh Data'가 호출될 때 최초 요청이 아직 실행 중이라면 어떻게 됩니까?",
+        "stem": "상품(Product) 검색 Screen에서 Aggregate 'GetProducts'가 'At Start'로 실행됩니다. 'OnReady'에서 filter 변수를 바꾼 뒤 곧바로 'GetProducts'에 대해 'Refresh Data'를 호출하는 Client Action을 실행합니다. 'Refresh Data'가 호출될 때 최초 요청이 아직 실행 중이라면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -1792,7 +1792,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order 화면에서 Data Action과 Aggregate가 모두 'Fetch: At Start'로 설정되어 있습니다. 화면이 로드될 때 이 둘은 어떻게 실행되나요?",
+        "stem": "주문(Order) 화면에서 Data Action과 Aggregate가 모두 'Fetch: At Start'로 설정되어 있습니다. 화면이 로드될 때 이 둘은 어떻게 실행되나요?",
         "options": [
           {
             "key": "A",
@@ -1955,7 +1955,7 @@
         "options": [
           {
             "key": "A",
-            "text": "두 번: Category 1에 한 번, Category 2에 한 번."
+            "text": "두 번: 카테고리(Category) 1에 한 번, 카테고리 2에 한 번."
           },
           {
             "key": "B",
@@ -2481,7 +2481,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Screen의 Aggregate가 최대 1000건의 Ticket 레코드를 반환할 수 있고, Table 위젯이 여기에 바인딩되어 있습니다. 페이지네이션을 위해 개발자가 Pagination 위젯을 추가하고 Aggregate의 'Max Records'를 10으로 설정합니다. 나머지 990건은 어떻게 됩니까?",
+        "stem": "한 Screen의 Aggregate가 최대 1000건의 티켓(Ticket) 레코드를 반환할 수 있고, Table 위젯이 여기에 바인딩되어 있습니다. 페이지네이션을 위해 개발자가 Pagination 위젯을 추가하고 Aggregate의 'Max Records'를 10으로 설정합니다. 나머지 990건은 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -2587,7 +2587,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Screen의 한 Data Action이 'Fetch'가 'At Start'로 설정되어 Customer 프로필을 조회합니다. 개발자는 'RefreshProfile' Event가 처리될 때마다 이 프로필을 다시 불러오고 싶습니다. 어떻게 해야 합니까?",
+        "stem": "Screen의 한 Data Action이 'Fetch'가 'At Start'로 설정되어 고객(Customer) 프로필을 조회합니다. 개발자는 'RefreshProfile' Event가 처리될 때마다 이 프로필을 다시 불러오고 싶습니다. 어떻게 해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -2746,7 +2746,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Screen에 Aggregate 'GetProducts'가 있다. 한 Button이 Client Action을 실행하여 Local Variable 'MaxPrice'를 변경하며, 이 변수는 'GetProducts'의 Filter에 사용된다. Client Action 안에서 변수가 변경된 후 화면에 표시되는 제품 목록은 어떻게 되는가?",
+        "stem": "한 Screen에 Aggregate 'GetProducts'가 있다. 한 Button이 Client Action을 실행하여 Local Variable 'MaxPrice'를 변경하며, 이 변수는 'GetProducts'의 Filter에 사용된다. Client Action 안에서 변수가 변경된 후 화면에 표시되는 상품(Product) 목록은 어떻게 되는가?",
         "options": [
           {
             "key": "A",
@@ -2860,11 +2860,11 @@
           },
           {
             "key": "B",
-            "text": "Client Action의 Refresh Data 노드로 명시적으로 호출될 때만 실행된다."
+            "text": "Client Action의 Refresh Data node로 명시적으로 호출될 때만 실행된다."
           },
           {
             "key": "C",
-            "text": "입력 파라미터에 사용된 변수가 바뀔 때마다 자동으로 실행된다."
+            "text": "Input Parameter에 사용된 변수가 바뀔 때마다 자동으로 실행된다."
           },
           {
             "key": "D",
@@ -2905,15 +2905,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order Screen에 필터가 Screen Variable을 참조하는 Aggregate가 있습니다. Client Action 안에서 그 Screen Variable을 새 값으로 변경하면 Aggregate는 어떻게 됩니까?",
+        "stem": "Order Screen에 Filter가 Screen Variable을 참조하는 Aggregate가 있습니다. Client Action 안에서 그 Screen Variable을 새 값으로 변경하면 Aggregate는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "변수가 바뀌는 즉시 자동으로 새로고침된다."
+            "text": "변수가 바뀌는 즉시 자동으로 refresh된다."
           },
           {
             "key": "B",
-            "text": "자동으로 새로고침되지 않으며, 해당 Aggregate에 대한 Refresh Data 노드를 추가해야 한다."
+            "text": "자동으로 refresh되지 않으며, 해당 Aggregate에 대한 Refresh Data node를 추가해야 한다."
           },
           {
             "key": "C",
@@ -3011,11 +3011,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "List widget이 500개의 Product를 표시하고 있는데 개발자가 페이지가 매우 느린 것을 발견했습니다. 가장 먼저 확인해야 할 것은 무엇입니까?",
+        "stem": "List widget이 500개의 상품(Product)을 표시하고 있는데 개발자가 페이지가 매우 느린 것을 발견했습니다. 가장 먼저 확인해야 할 것은 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "Product를 Aggregate 대신 Data Action으로 가져오는지 여부"
+            "text": "상품을 Aggregate 대신 Data Action으로 가져오는지 여부"
           },
           {
             "key": "B",
@@ -3027,7 +3027,7 @@
           },
           {
             "key": "D",
-            "text": "제품 이미지 해상도가 너무 높은지 여부"
+            "text": "상품 이미지 해상도가 너무 높은지 여부"
           }
         ]
       }
@@ -3064,7 +3064,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Customer Detail Screen이 세 개의 탭(Orders, Invoices, Tickets)을 가진 Tabs 위젯을 사용하며 각 탭에는 무거운 Aggregate가 들어 있습니다. 각 Aggregate의 데이터를 해당 탭이 실제로 열릴 때만 가져오게 하려면 어떻게 해야 합니까?",
+        "stem": "Customer Detail Screen이 세 개의 탭(Orders, Invoices, Tickets)을 가진 Tabs widget을 사용하며 각 탭에는 무거운 Aggregate가 들어 있습니다. 각 Aggregate의 데이터를 해당 탭이 실제로 열릴 때만 가져오게 하려면 어떻게 해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -3072,7 +3072,7 @@
           },
           {
             "key": "B",
-            "text": "각 Aggregate를 If 위젯으로 감싸서 탭이 보이기 전에는 fetch되지 않게 한다."
+            "text": "각 Aggregate를 If widget으로 감싸서 탭이 보이기 전에는 fetch되지 않게 한다."
           },
           {
             "key": "C",
@@ -3121,7 +3121,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Aggregate에 ShowOrders = True 필터를 추가한다."
+            "text": "Aggregate에 ShowOrders = True Filter를 추가한다."
           },
           {
             "key": "B",
@@ -3329,7 +3329,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "티켓 화면에 Fetch = 'At Start'인 Aggregate와 Fetch = 'Only on Demand'인 Data Action이 있습니다. 화면의 OnReady 이벤트 안에서 이 Data Action에 대해 'Refresh Data'를 호출합니다. 이 설계의 주된 위험은 무엇입니까?",
+        "stem": "티켓(Ticket) 화면에 Fetch = 'At Start'인 Aggregate와 Fetch = 'Only on Demand'인 Data Action이 있습니다. 화면의 OnReady 이벤트 안에서 이 Data Action에 대해 'Refresh Data'를 호출합니다. 이 설계의 주된 위험은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3382,7 +3382,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "고객 화면의 Aggregate가 'On After Fetch' 이벤트로 Client Action을 실행합니다. 이 Client Action은 해당 Aggregate의 filter에도 사용되는 변수를 변경합니다. 예상되는 결과는 무엇입니까?",
+        "stem": "고객(Customer) 화면의 Aggregate가 'On After Fetch' 이벤트로 Client Action을 실행합니다. 이 Client Action은 해당 Aggregate의 filter에도 사용되는 변수를 변경합니다. 예상되는 결과는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3435,7 +3435,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Fetch가 'Only on Demand'인 Data Action이 Ticket 목록 화면에서 사용자가 'Search' 버튼을 클릭할 때만 실행되도록 하려고 합니다. Refresh Data는 어디에서 호출해야 하나요?",
+        "stem": "Fetch가 'Only on Demand'인 Data Action이 티켓(Ticket) 목록 화면에서 사용자가 'Search' 버튼을 클릭할 때만 실행되도록 하려고 합니다. Refresh Data는 어디에서 호출해야 하나요?",
         "options": [
           {
             "key": "A",
@@ -3647,7 +3647,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product 목록 화면에 'Fetch' 속성이 'Only on Demand'로 설정된 Aggregate가 있습니다. 화면의 On Initialize 이벤트에 그 Aggregate에 대한 'Refresh Data' node를 추가합니다. 어떤 결과가 발생합니까?",
+        "stem": "상품(Product) 목록 화면에 'Fetch' 속성이 'Only on Demand'로 설정된 Aggregate가 있습니다. 화면의 On Initialize 이벤트에 그 Aggregate에 대한 'Refresh Data' node를 추가합니다. 어떤 결과가 발생합니까?",
         "options": [
           {
             "key": "A",
@@ -3806,7 +3806,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 Screen이 Data Action('Fetch Data from Other Sources')으로 Product 데이터를 불러옵니다. 이 Data Action이 처리되지 않은 예외로 실패하면 Screen UI에 어떤 영향이 있습니까?",
+        "stem": "한 Screen이 Data Action('Fetch Data from Other Sources')으로 상품(Product) 데이터를 불러옵니다. 이 Data Action이 처리되지 않은 예외로 실패하면 Screen UI에 어떤 영향이 있습니까?",
         "options": [
           {
             "key": "A",
@@ -3875,7 +3875,7 @@
           },
           {
             "key": "D",
-            "text": "On After Fetch는 한 번만 실행되므로 Customer가 바뀌어도 GetOrders는 갱신되지 않는다."
+            "text": "On After Fetch는 한 번만 실행되므로 고객(Customer)이 바뀌어도 GetOrders는 갱신되지 않는다."
           }
         ]
       }
@@ -4124,7 +4124,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Reactive Product 목록 화면에서 두 Aggregate의 Fetch가 모두 'At Start'로 설정되어 있고, 개발자는 화면의 On Initialize 이벤트에 변수 할당 로직을 추가했습니다. On Initialize는 이 At Start Aggregate들에 대해 어떻게 실행됩니까?",
+        "stem": "Reactive 상품(Product) 목록 화면에서 두 Aggregate의 Fetch가 모두 'At Start'로 설정되어 있고, 개발자는 화면의 On Initialize 이벤트에 변수 할당 로직을 추가했습니다. On Initialize는 이 At Start Aggregate들에 대해 어떻게 실행됩니까?",
         "options": [
           {
             "key": "A",
@@ -4177,7 +4177,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Traditional Web 앱에서 Button(Method: Ajax Submit)이 Screen Action을 실행해 Order 레코드를 DB에서 수정합니다. 같은 화면의 Form에 수정된 값을 표시하려면 올바른 노드 순서는 무엇입니까?",
+        "stem": "Traditional Web 앱에서 Button(Method: Ajax Submit)이 Screen Action을 실행해 주문(Order) 레코드를 DB에서 수정합니다. 같은 화면의 Form에 수정된 값을 표시하려면 올바른 노드 순서는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -4393,11 +4393,11 @@
         "options": [
           {
             "key": "A",
-            "text": "이전에 가져온(Active) 제품을 계속 표시한다."
+            "text": "이전에 가져온 Active 상태의 제품(Product)을 계속 표시한다."
           },
           {
             "key": "B",
-            "text": "즉시 Inactive 제품만 표시한다."
+            "text": "즉시 Inactive 상태의 제품만 표시한다."
           },
           {
             "key": "C",
@@ -5143,7 +5143,7 @@
           },
           {
             "key": "C",
-            "text": "GetCities는 사용자가 GetCountries에 연결된 위젯과 상호작용해야만 실행된다."
+            "text": "GetCities는 사용자가 GetCountries에 연결된 Widget과 상호작용해야만 실행된다."
           },
           {
             "key": "D",
@@ -5184,7 +5184,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Reactive Web App에서 Category를 선택하면 Products 목록이 갱신되는 cascading dropdown을 만든다. GetProducts는 Fetch: At Start이고 filter는 'Product.CategoryId = SelectedCategoryId'이며, SelectedCategoryId는 Category dropdown에 연결된 Local Variable이다. 사용자가 Category 선택을 바꾸면 어떻게 되는가?",
+        "stem": "Reactive Web App에서 카테고리(Category)를 선택하면 상품(Product) 목록이 갱신되는 cascading dropdown을 만든다. GetProducts는 Fetch: At Start이고 filter는 'Product.CategoryId = SelectedCategoryId'이며, SelectedCategoryId는 카테고리 dropdown에 연결된 Local Variable이다. 사용자가 카테고리 선택을 바꾸면 어떻게 되는가?",
         "options": [
           {
             "key": "A",

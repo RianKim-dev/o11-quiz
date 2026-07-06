@@ -151,7 +151,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee Form에서 별도의 사용자 정의 코드 없이 필수 필드 유효성 검사와 데이터 타입 유효성 검사가 자동으로 수행된다. 이러한 동작을 담당하는 유효성 검사 메커니즘은 다음 중 무엇인가?",
+        "stem": "직원(Employee) Form에서 별도의 사용자 정의 코드 없이 필수 필드 유효성 검사와 데이터 타입 유효성 검사가 자동으로 수행된다. 이러한 동작을 담당하는 유효성 검사 메커니즘은 다음 중 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -209,7 +209,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product 생성 Form에서, ProductPrice는 반드시 0보다 커야 하고 DiscountPercentage는 (입력된 경우) 100%를 초과할 수 없음을 검증해야 한다. 유효성 검사에 실패하면 두 필드 모두 적절한 메시지와 함께 유효하지 않은 것으로 표시되어야 한다. Product를 저장하는 Server Action을 실행하기 전에, 액션 플로우의 어느 시점에서 Form.Valid를 확인해야 하는가?",
+        "stem": "상품(Product) 생성 Form에서, ProductPrice는 반드시 0보다 커야 하고 DiscountPercentage는 (입력된 경우) 100%를 초과할 수 없음을 검증해야 한다. 유효성 검사에 실패하면 두 필드 모두 적절한 메시지와 함께 유효하지 않은 것으로 표시되어야 한다. 상품을 저장하는 Server Action을 실행하기 전에, 액션 플로우의 어느 시점에서 Form.Valid를 확인해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -267,7 +267,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Customer 등록 Form에서, 사용자 정의 유효성 검사의 일부로 Input_Email.Valid = False 및 Input_Email.ValidationMessage = \"Invalid email format\"으로 설정했다. Form이 렌더링될 때 다음 중 어떤 일이 발생하는가?",
+        "stem": "고객(Customer) 등록 Form에서, 사용자 정의 유효성 검사의 일부로 Input_Email.Valid = False 및 Input_Email.ValidationMessage = \"Invalid email format\"으로 설정했다. Form이 렌더링될 때 다음 중 어떤 일이 발생하는가?",
         "options": [
           {
             "key": "A",
@@ -325,7 +325,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Invoice Form에서, InvoiceTotal이 모든 LineItems의 합계와 같은지 검증해야 한다. 이 유효성 검사는 여러 Input 값을 비교하고 계산을 수행해야 한다. 이 유효성 검사 로직을 어디에 배치해야 하며, 그 위치가 적절한 이유는 무엇인가?",
+        "stem": "청구서(Invoice) Form에서, InvoiceTotal이 모든 LineItems의 합계와 같은지 검증해야 한다. 이 유효성 검사는 여러 Input 값을 비교하고 계산을 수행해야 한다. 이 유효성 검사 로직을 어디에 배치해야 하며, 그 위치가 적절한 이유는 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -619,7 +619,7 @@
           },
           {
             "key": "D",
-            "text": "오류를 막기 위해 Dropdown이 목록의 첫 Department를 자동 선택한다."
+            "text": "오류를 막기 위해 Dropdown이 목록의 첫 번째 부서(Department)를 자동 선택한다."
           }
         ]
       }
@@ -922,7 +922,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "고객 등록 Screen의 Button이 Validation 속성을 \"Client & Server\"로 설정했습니다. 사용자가 Mandatory Input을 비운 채 버튼을 클릭하면 어떤 일이 일어납니까?",
+        "stem": "고객(Customer) 등록 Screen의 Button이 Validation 속성을 \"Client & Server\"로 설정했습니다. 사용자가 Mandatory Input을 비운 채 버튼을 클릭하면 어떤 일이 일어납니까?",
         "options": [
           {
             "key": "A",

@@ -40,7 +40,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "OutSystems에서 리액티브 애플리케이션을 디버깅할 때, Order 입력 화면의 Client Action에 브레이크포인트를 설정합니다. 디버거를 시작하고 애플리케이션을 탐색했으나, 예상과 달리 브레이크포인트에서 실행이 멈추지 않습니다. 다음 중 가장 가능성이 높은 원인은?",
+        "stem": "OutSystems에서 리액티브 애플리케이션을 디버깅할 때, 주문(Order) 입력 화면의 Client Action에 브레이크포인트를 설정합니다. 디버거를 시작하고 애플리케이션을 탐색했으나, 예상과 달리 브레이크포인트에서 실행이 멈추지 않습니다. 다음 중 가장 가능성이 높은 원인은?",
         "options": [
           {
             "key": "A",
@@ -103,7 +103,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Customer 관리 리액티브 화면을 디버깅하고 있습니다. 실행 중 Server Action의 브레이크포인트에 도달했으며, Aggregate로 채워진 product 목록 변수의 현재 값을 검사하려고 합니다. OutSystems 디버거에서 사용할 수 있는 검사(inspection) 옵션은 다음 중 무엇인가?",
+        "stem": "고객(Customer) 관리 리액티브 화면을 디버깅하고 있습니다. 실행 중 Server Action의 브레이크포인트에 도달했으며, Aggregate로 채워진 상품(product) 목록 변수의 현재 값을 검사하려고 합니다. OutSystems 디버거에서 사용할 수 있는 검사(inspection) 옵션은 다음 중 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -167,7 +167,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "리액티브 Invoice 처리 앱에서 ProcessInvoice라는 Server Action(InvoiceManager 모듈)에 브레이크포인트를 설정했으나, 실행이 해당 지점에서 전혀 멈추지 않습니다. 브레이크포인트가 활성화되어 있고 Service Studio 디버거가 실행 중임을 확인했습니다. 그러나 요청이 InvoiceFrontend 모듈의 진입 지점(entry point)으로 전달되고 있음을 확인했습니다. InvoiceManager 내부의 브레이크포인트에서 멈추게 하려면 무엇을 해야 하는가?",
+        "stem": "리액티브 청구서(Invoice) 처리 앱에서 ProcessInvoice라는 Server Action(InvoiceManager 모듈)에 브레이크포인트를 설정했으나, 실행이 해당 지점에서 전혀 멈추지 않습니다. 브레이크포인트가 활성화되어 있고 Service Studio 디버거가 실행 중임을 확인했습니다. 그러나 요청이 InvoiceFrontend 모듈의 진입 지점(entry point)으로 전달되고 있음을 확인했습니다. InvoiceManager 내부의 브레이크포인트에서 멈추게 하려면 무엇을 해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -231,7 +231,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee 급여 데이터를 관리하는 리액티브 앱을 개발하고 있습니다. 화면 초기화 중에 여러 Aggregate가 Employee 레코드, 급여 데이터, 세금 정보를 가져오고 있음을 확인했습니다. OutSystems 화면 라이프사이클 원칙에 따를 때, Aggregate 실행 순서에 대한 올바른 설명은?",
+        "stem": "직원(Employee) 급여 데이터를 관리하는 리액티브 앱을 개발하고 있습니다. 화면 초기화 중에 여러 Aggregate가 직원 레코드, 급여 데이터, 세금 정보를 가져오고 있음을 확인했습니다. OutSystems 화면 라이프사이클 원칙에 따를 때, Aggregate 실행 순서에 대한 올바른 설명은?",
         "options": [
           {
             "key": "A",
@@ -296,7 +296,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "리액티브 Product 카탈로그 앱에서, 하나의 화면에 'At Start'로 설정된 Aggregate(핵심 product 데이터용)와 'Only on Demand'로 설정된 또 다른 Aggregate(관련 항목용)가 함께 있습니다. 화면 라이프사이클에 따를 때, 이 두 Aggregate가 실행되는 '시점'의 차이는 무엇인가?",
+        "stem": "리액티브 상품(Product) 카탈로그 앱에서, 하나의 화면에 'At Start'로 설정된 Aggregate(핵심 상품 데이터용)와 'Only on Demand'로 설정된 또 다른 Aggregate(관련 항목용)가 함께 있습니다. 화면 라이프사이클에 따를 때, 이 두 Aggregate가 실행되는 '시점'의 차이는 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -355,7 +355,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "리액티브 Expense Report 화면을 디버깅하고 있으며, 여러 중첩된 Client Action 호출이 있는 Server Action을 단계별로 실행하고 있습니다. 호출된 Client Action 내부의 로직을 건너뛰고 현재 액션으로 돌아오고 싶습니다. 어떤 디버깅 작업(debug operation)을 사용해야 하는가?",
+        "stem": "Reactive 경비 보고서(Expense Report) 화면을 디버깅하고 있으며, 여러 중첩된 Client Action 호출이 있는 Server Action을 단계별로 실행하고 있습니다. 호출된 Client Action 내부의 로직을 건너뛰고 현재 Action으로 돌아오고 싶습니다. 어떤 디버깅 작업(debug operation)을 사용해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -363,11 +363,11 @@
           },
           {
             "key": "B",
-            "text": "Step Over - 호출된 액션을 건너뛰고 현재 액션의 다음 라인에서 일시정지한다"
+            "text": "Step Over - 호출된 Action을 건너뛰고 현재 Action의 다음 라인에서 일시정지한다"
           },
           {
             "key": "C",
-            "text": "Step Out - 현재 액션을 완료하고 호출자(caller)로 돌아간다"
+            "text": "Step Out - 현재 Action을 완료하고 호출자(caller)로 돌아간다"
           },
           {
             "key": "D",
@@ -414,7 +414,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "리액티브 Payment Processing 화면을 디버깅하고 있습니다. Server Action에서 예상치 못한 예외가 발생하지만, 그 지점의 브레이크포인트에서 실행이 멈추지 않습니다. 애플리케이션에서 ANY 예외가 발생할 때마다 디버거가 자동으로 멈추도록 하려면 어떤 기능을 활성화해야 하는가?",
+        "stem": "Reactive 결제 처리(Payment Processing) 화면을 디버깅하고 있습니다. Server Action에서 예상치 못한 예외가 발생하지만, 그 지점의 브레이크포인트에서 실행이 멈추지 않습니다. 애플리케이션에서 어떤 예외라도 발생할 때마다 디버거가 자동으로 멈추도록 하려면 어떤 기능을 활성화해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -422,7 +422,7 @@
           },
           {
             "key": "B",
-            "text": "액션 플로우의 Exception handler 노드에 브레이크포인트를 설정한다"
+            "text": "Action 플로우의 Exception handler 노드에 브레이크포인트를 설정한다"
           },
           {
             "key": "C",
@@ -430,7 +430,7 @@
           },
           {
             "key": "D",
-            "text": "모든 런타임 에러를 캡처하는 dedicated Exception Aggregate를 생성한다"
+            "text": "모든 런타임 에러를 캡처하는 전용 Exception Aggregate를 생성한다"
           }
         ]
       }
@@ -475,7 +475,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "리액티브 Inventory Management 앱에서, 두 개의 Aggregate(GetInventory와 GetPricing, 둘 다 At Start)가 있는 화면이 있습니다. 화면에 재고 수량과 가격 데이터를 표시합니다. 디버깅 중 Render 이벤트가 '모든 Aggregate가 완료된 후에 정확히 한 번' 발생하는지, 아니면 '각 Aggregate가 완료될 때마다 여러 번' 발생할 수 있는지 이해하고 싶습니다. 올바른 동작은?",
+        "stem": "Reactive 재고 관리(Inventory Management) 앱에서, 두 개의 Aggregate(GetInventory와 GetPricing, 둘 다 At Start)가 있는 화면이 있습니다. 화면에 재고 수량과 가격 데이터를 표시합니다. 디버깅 중 Render 이벤트가 '모든 Aggregate가 완료된 후에 정확히 한 번' 발생하는지, 아니면 '각 Aggregate가 완료될 때마다 여러 번' 발생할 수 있는지 이해하고 싶습니다. 올바른 동작은?",
         "options": [
           {
             "key": "A",
@@ -535,7 +535,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "복잡한 리액티브 Shipping Tracking 앱을 디버깅하고 있으며, Server Action의 브레이크포인트에서 변수 값을 검사하고 있습니다. 액션이 여러 조건과 루프를 통해 실행될 때 배송 비용 변수가 어떻게 변경되는지 지속적으로 모니터링하고 싶습니다. 각 브레이크포인트에서 수동으로 변수 값을 검사하는 대신, 가장 좋은 방법은 무엇인가?",
+        "stem": "복잡한 Reactive 배송 추적(Shipping Tracking) 앱을 디버깅하고 있으며, Server Action의 브레이크포인트에서 변수 값을 검사하고 있습니다. Action이 여러 조건과 루프를 통해 실행될 때 배송 비용 변수가 어떻게 변경되는지 지속적으로 모니터링하고 싶습니다. 각 브레이크포인트에서 수동으로 변수 값을 검사하는 대신, 가장 좋은 방법은 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -547,7 +547,7 @@
           },
           {
             "key": "C",
-            "text": "액션 전체에 Refresh Data 노드를 사용하여 변수 값을 데이터베이스에 기록한다"
+            "text": "Action 전체에 Refresh Data 노드를 사용하여 변수 값을 데이터베이스에 기록한다"
           },
           {
             "key": "D",
@@ -693,7 +693,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "모바일 주문 추적 앱의 사용자 테스트 중에 팀이 OutSystems App Feedback 도구를 활성화합니다. 이 도구의 목적은 무엇입니까?",
+        "stem": "모바일 주문 추적(order-tracking) 앱의 사용자 테스트 중에 팀이 OutSystems App Feedback 도구를 활성화합니다. 이 도구의 목적은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -811,7 +811,7 @@
           },
           {
             "key": "C",
-            "text": "action이 끝날 때까지 다시 멈추지 않는다."
+            "text": "Action이 끝날 때까지 다시 멈추지 않는다."
           },
           {
             "key": "D",

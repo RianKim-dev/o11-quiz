@@ -41,15 +41,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "데이터베이스에서 오더 상세 정보를 조회하고, 오더 총액을 검증한 후, 인벤토리를 업데이트해야 하는 Order 입력 화면용 Client Action을 설계하고 있다. 다음 중 OutSystems에서 이 로직을 구성하는 올바른 방법을 설명한 것은?",
+        "stem": "데이터베이스에서 주문(Order) 상세 정보를 조회하고, 주문 총액을 검증한 후, 재고(Inventory)를 업데이트해야 하는 주문 입력 Screen용 Client Action을 설계하고 있다. 다음 중 OutSystems에서 이 로직을 구성하는 올바른 방법을 설명한 것은?",
         "options": [
           {
             "key": "A",
-            "text": "동일한 Client Action 내에서, Server Action 1을 호출하여 오더 상세 정보를 조회한 다음, Server Action 2를 호출하여 인벤토리를 업데이트한다."
+            "text": "동일한 Client Action 내에서, Server Action 1을 호출하여 주문 상세 정보를 조회한 다음, Server Action 2를 호출하여 재고를 업데이트한다."
           },
           {
             "key": "B",
-            "text": "하나의 Server Action을 호출하여 데이터베이스 조회와 인벤토리 업데이트 작업을 모두 처리한다."
+            "text": "하나의 Server Action을 호출하여 데이터베이스 조회와 재고 업데이트 작업을 모두 처리한다."
           },
           {
             "key": "C",
@@ -105,11 +105,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product 관리 애플리케이션에서, 고객의 기준에 일치하는 프로덕트를 데이터베이스에서 조회하고 여러 개의 필터를 적용해야 한다. OutSystems에서 이 데이터베이스 쿼리를 어디에 정의해야 하는가?",
+        "stem": "상품(Product) 관리 애플리케이션에서, 고객(Customer)의 기준에 일치하는 상품을 데이터베이스에서 조회하고 여러 개의 필터를 적용해야 한다. OutSystems에서 이 데이터베이스 쿼리를 어디에 정의해야 하는가?",
         "options": [
           {
             "key": "A",
-            "text": "실시간 필터링 업데이트가 가능하도록 Product 목록 화면의 Client Action 내에 정의한다."
+            "text": "실시간 필터링 업데이트가 가능하도록 상품 목록 Screen의 Client Action 내에 정의한다."
           },
           {
             "key": "B",
@@ -117,7 +117,7 @@
           },
           {
             "key": "C",
-            "text": "Aggregate는 애플리케이션 어디에서나 사용할 수 있으므로, 화면의 Aggregate에 정의한다."
+            "text": "Aggregate는 애플리케이션 어디에서나 사용할 수 있으므로, Screen의 Aggregate에 정의한다."
           },
           {
             "key": "D",
@@ -169,15 +169,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Invoice 생성 화면에 대한 폼 검증을 구현하고 있다. Invoice Amount는 양수여야 하며, Invoice Date는 미래일 수 없다. 다음 중 이러한 검증을 구현하는 방법을 올바르게 설명한 것은?",
+        "stem": "청구서(Invoice) 생성 Screen에 대한 Form 검증을 구현하고 있다. Invoice Amount는 양수여야 하며, Invoice Date는 미래일 수 없다. 다음 중 이러한 검증을 구현하는 방법을 올바르게 설명한 것은?",
         "options": [
           {
             "key": "A",
-            "text": "OutSystems가 모든 비즈니스 로직을 자동으로 적용하므로, input 위젯의 빌트인 유효성 검사(Built-in Validations)만 사용한다."
+            "text": "OutSystems가 모든 비즈니스 로직을 자동으로 적용하므로, Input Widget의 빌트인 유효성 검사(Built-in Validations)만 사용한다."
           },
           {
             "key": "B",
-            "text": "커스텀 검증 로직에서 input 위젯의 Valid 속성을 False로, ValidationMessage 값을 설정한 후, 액션 플로우에서 Form.Valid를 확인한다."
+            "text": "커스텀 검증 로직에서 Input Widget의 Valid 속성을 False로, ValidationMessage 값을 설정한 후, 액션 플로우에서 Form.Valid를 확인한다."
           },
           {
             "key": "C",
@@ -232,7 +232,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Customer 오더를 처리하기 위한 Server Action을 생성했다. 이 Server Action은 내부적으로 인벤토리 수준을 검증한 다음 오더를 데이터베이스에 커밋해야 한다. 이 Server Action이 직접 호출할 수 있는 액션은 무엇인가?",
+        "stem": "고객(Customer) 주문(Order)을 처리하기 위한 Server Action을 생성했다. 이 Server Action은 내부적으로 재고(Inventory) 수준을 검증한 다음 주문을 데이터베이스에 커밋해야 한다. 이 Server Action이 직접 호출할 수 있는 액션은 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -296,7 +296,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Cart 관리 화면은 프로덕트 수량을 업데이트하기 위해 Client Action을 사용한다. 사용자가 수량을 변경하면 UI에 새로운 장바구니 총액이 즉시 반영되어야 한다. Client Action의 어떤 특성이 이러한 동작을 가능하게 하는가?",
+        "stem": "장바구니(Cart) 관리 화면은 상품(Product) 수량을 업데이트하기 위해 Client Action을 사용한다. 사용자가 수량을 변경하면 UI에 새로운 장바구니 총액이 즉시 반영되어야 한다. Client Action의 어떤 특성이 이러한 동작을 가능하게 하는가?",
         "options": [
           {
             "key": "A",
@@ -312,7 +312,7 @@
           },
           {
             "key": "D",
-            "text": "Client Action은 폼 검증을 우회하여 화면에서 더 빠른 데이터 업데이트를 가능하게 한다."
+            "text": "Client Action은 Form 검증을 우회하여 화면에서 더 빠른 데이터 업데이트를 가능하게 한다."
           }
         ]
       }
@@ -361,7 +361,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "다음 요구사항을 가진 Employee 급여 제출 폼을 구현하고 있다: (1) 급여가 음수가 아닌지 검증, (2) 급여가 직원의 역할(데이터베이스에서 조회)에 따른 회사 최대값을 초과하지 않는지 검증, (3) 저장 전 Form.Valid 확인. 다음 중 이를 올바르게 구현하는 방법은?",
+        "stem": "다음 요구사항을 가진 직원(Employee) 급여 제출 Form을 구현하고 있다: (1) 급여가 음수가 아닌지 검증, (2) 급여가 직원의 역할(데이터베이스에서 조회)에 따른 회사 최대값을 초과하지 않는지 검증, (3) 저장 전 Form.Valid 확인. 다음 중 이를 올바르게 구현하는 방법은?",
         "options": [
           {
             "key": "A",
@@ -373,7 +373,7 @@
           },
           {
             "key": "C",
-            "text": "모든 검증을 하나의 Server Action에서 구현한 후, 폼의 유효 여부를 나타내는 boolean을 반환한다."
+            "text": "모든 검증을 하나의 Server Action에서 구현한 후, Form의 유효 여부를 나타내는 boolean을 반환한다."
           },
           {
             "key": "D",
@@ -420,7 +420,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Client Action이 장바구니의 총 금액을 계산한 뒤 Server Action을 호출해 주문을 데이터베이스에 저장합니다. 이 패턴이 보안상 위험한 이유는 무엇입니까?",
+        "stem": "Client Action이 장바구니(Cart)의 총 금액을 계산한 뒤 Server Action을 호출해 주문(Order)을 데이터베이스에 저장합니다. 이 패턴이 보안상 위험한 이유는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -700,7 +700,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "고객 등록 폼의 'Save' Client Action이 'CreateOrUpdateCustomer' Server Action을 호출합니다. 서버가 처리하는 동안 사용자가 Save를 두 번 클릭하지 못하게 하려면 가장 좋은 방법은 무엇입니까?",
+        "stem": "고객(Customer) 등록 Form의 'Save' Client Action이 'CreateOrUpdateCustomer' Server Action을 호출합니다. 서버가 처리하는 동안 사용자가 Save를 두 번 클릭하지 못하게 하려면 가장 좋은 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -806,7 +806,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Client Action이 Task 목록을 반복하며 레코드마다 'ArchiveTask' Server Action을 한 번씩 호출하는 'Bulk Archive' 기능을 구현했습니다. 이것이 나쁜 방식으로 여겨지는 이유는 무엇입니까?",
+        "stem": "Client Action이 태스크(Task) 목록을 반복하며 레코드마다 'ArchiveTask' Server Action을 한 번씩 호출하는 'Bulk Archive' 기능을 구현했습니다. 이것이 나쁜 방식으로 여겨지는 이유는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -859,7 +859,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Reactive Web App에서 100개의 Order 레코드 상태를 한 번에 업데이트해야 합니다. 성능상 가장 효율적인 방법은 무엇입니까?",
+        "stem": "Reactive Web App에서 100개의 주문(Order) 레코드 상태를 한 번에 업데이트해야 합니다. 성능상 가장 효율적인 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -867,7 +867,7 @@
           },
           {
             "key": "B",
-            "text": "Order ID 목록을 하나의 Server Action으로 보내 서버 측에서 반복 처리한다."
+            "text": "주문(Order) ID 목록을 하나의 Server Action으로 보내 서버 측에서 반복 처리한다."
           },
           {
             "key": "C",
@@ -1018,7 +1018,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "한 개발자가 Order 목록을 반환하는 Service Action을 노출했습니다. 데이터베이스가 갱신된 뒤에도 이 Service Action이 몇 초 동안 계속 오래된 데이터를 반환합니다. 가장 가능성 높은 원인은 무엇입니까?",
+        "stem": "한 개발자가 주문(Order) 목록을 반환하는 Service Action을 노출했습니다. 데이터베이스가 갱신된 뒤에도 이 Service Action이 몇 초 동안 계속 오래된 데이터를 반환합니다. 가장 가능성 높은 원인은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1071,7 +1071,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Server Action' 안에서, Invoice 레코드를 생성하는 'Service Action'을 10회 반복 Loop 안에서 호출합니다. 5번째 호출이 예외를 발생시키면 데이터베이스에 커밋되는 레코드는 몇 개입니까?",
+        "stem": "'Server Action' 안에서, 청구서(Invoice) 레코드를 생성하는 'Service Action'을 10회 반복 Loop 안에서 호출합니다. 5번째 호출이 예외를 발생시키면 데이터베이스에 커밋되는 레코드는 몇 개입니까?",
         "options": [
           {
             "key": "A",
@@ -1230,7 +1230,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "민감한 business logic을 포함하며 여러 화면에서 재사용해야 하는 계산이 있습니다. 이 로직을 어디에 구현해야 합니까?",
+        "stem": "민감한 비즈니스 로직을 포함하며 여러 화면에서 재사용해야 하는 계산이 있습니다. 이 로직을 어디에 구현해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -1397,7 +1397,7 @@
           },
           {
             "key": "B",
-            "text": "아니다 — Client Action은 브라우저에서 실행되므로 그 logic과 variable을 사용자가 확인하거나 조작할 수 있다."
+            "text": "아니다 — Client Action은 브라우저에서 실행되므로 그 로직과 변수를 사용자가 확인하거나 조작할 수 있다."
           },
           {
             "key": "C",
@@ -1548,19 +1548,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Client Action이 Entity Record를 입력 파라미터로 받는 Server Action을 호출합니다. 런타임에 이 record는 어떤 형태로 서버에 전송됩니까?",
+        "stem": "Client Action이 Entity Record를 Input Parameter로 받는 Server Action을 호출합니다. 런타임에 이 Record는 어떤 형태로 서버에 전송됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "record의 바이너리 표현으로 전송된다."
+            "text": "Record의 바이너리 표현으로 전송된다."
           },
           {
             "key": "B",
-            "text": "record를 나타내는 JSON 문자열로 전송된다."
+            "text": "Record를 나타내는 JSON 문자열로 전송된다."
           },
           {
             "key": "C",
-            "text": "record의 Id만 전송된다."
+            "text": "Record의 Id만 전송된다."
           },
           {
             "key": "D",
@@ -1601,7 +1601,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "주문 관리 화면의 'Save' Client Action은 저장 전에 Form1.Valid를 확인합니다. 악의적인 사용자가 브라우저를 우회하여 REST/API 도구로 하위 Server Action을 직접 호출해 잘못된 데이터를 보냅니다. 데이터 무결성을 지키는 마지막 방어선은 무엇입니까?",
+        "stem": "주문(Order) 관리 화면의 'Save' Client Action은 저장 전에 Form1.Valid를 확인합니다. 악의적인 사용자가 브라우저를 우회하여 REST/API 도구로 하위 Server Action을 직접 호출해 잘못된 데이터를 보냅니다. 데이터 무결성을 지키는 마지막 방어선은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1707,7 +1707,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Client Action이 Order를 저장하기 위해 Server Action을 synchronous(동기)로 호출할 때, 서버가 요청을 처리하는 동안 Client Action flow는 어떻게 되나요?",
+        "stem": "Client Action이 주문(Order)을 저장하기 위해 Server Action을 synchronous(동기)로 호출할 때, 서버가 요청을 처리하는 동안 Client Action flow는 어떻게 되나요?",
         "options": [
           {
             "key": "A",
@@ -1760,7 +1760,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "주문 화면에서 사용자가 'Quantity'를 입력하는 즉시 'Total'을 로컬에서 계산하되, 'Submit'을 클릭할 때만 'Total'을 데이터베이스에 저장하려고 합니다. 가장 적절한 방법은 무엇인가요?",
+        "stem": "주문(Order) 화면에서 사용자가 'Quantity'를 입력하는 즉시 'Total'을 로컬에서 계산하되, 'Submit'을 클릭할 때만 'Total'을 데이터베이스에 저장하려고 합니다. 가장 적절한 방법은 무엇인가요?",
         "options": [
           {
             "key": "A",
@@ -2078,11 +2078,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee 엔티티의 민감한 'InternalNotes' 필드가 client 브라우저로 절대 전송되지 않도록 하려고 합니다. 가장 안전한 방법은 무엇입니까?",
+        "stem": "Employee Entity의 민감한 'InternalNotes' 필드가 클라이언트 브라우저로 절대 전송되지 않도록 하려고 합니다. 가장 안전한 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "'On After Fetch' 이벤트에서 JavaScript로 리스트에서 'InternalNotes' 속성을 삭제한다."
+            "text": "'On After Fetch' 이벤트에서 JavaScript로 List에서 'InternalNotes' 속성을 삭제한다."
           },
           {
             "key": "B",
@@ -2090,7 +2090,7 @@
           },
           {
             "key": "C",
-            "text": "Aggregate로 전체 record를 가져온 뒤 'InternalNotes'를 보여주는 위젯의 'Visible' 속성을 'False'로 설정한다."
+            "text": "Aggregate로 전체 record를 가져온 뒤 'InternalNotes'를 보여주는 Widget의 'Visible' 속성을 'False'로 설정한다."
           },
           {
             "key": "D",
@@ -2343,7 +2343,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "multi-tenant Reactive 애플리케이션에서 어떤 화면이 다른 module에 있는 Public Server Action을 호출해 Order 레코드를 읽습니다. 플랫폼은 이 액션이 올바른 tenant의 데이터를 읽도록 어떻게 보장합니까?",
+        "stem": "multi-tenant Reactive 애플리케이션에서 어떤 화면이 다른 module에 있는 Public Server Action을 호출해 주문(Order) 레코드를 읽습니다. 플랫폼은 이 액션이 올바른 tenant의 데이터를 읽도록 어떻게 보장합니까?",
         "options": [
           {
             "key": "A",

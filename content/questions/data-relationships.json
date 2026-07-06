@@ -40,7 +40,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "다음 중 OutSystems 11에서 reference 속성의 기본값을 설정하기 위한 올바른 함수는?",
+        "stem": "다음 중 OutSystems 11에서 reference Attribute의 기본값을 설정하기 위한 올바른 함수는?",
         "options": [
           {
             "key": "A",
@@ -103,7 +103,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "귀하는 e-커머스 시스템의 데이터베이스를 설계하고 있다. 한 명의 Employee는 여러 개의 Order를 관리할 수 있으나, Employee 레코드를 삭제하면 관련된 모든 Order도 자동으로 삭제되어야 한다. OrderEmployeeId reference 속성에 어떤 Delete Rule을 설정해야 하는가?",
+        "stem": "귀하는 e-커머스 시스템의 데이터베이스를 설계하고 있다. 한 명의 직원(Employee)은 여러 개의 주문(Order)을 관리할 수 있으나, 직원 레코드를 삭제하면 관련된 모든 주문도 자동으로 삭제되어야 한다. OrderEmployeeId reference 속성에 어떤 Delete Rule을 설정해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -166,7 +166,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "하나의 Product는 여러 Order에 속할 수 있고, 각 Order는 여러 Product를 포함할 수 있다. 여기에 더해 각 Order 내 Product의 Quantity도 추적하는 관계를 생성해야 한다. 어떤 유형의 관계 구조가 필요하며, linking entity는 어떤 추가 속성을 가져야 하는가?",
+        "stem": "하나의 상품(Product)은 여러 주문(Order)에 속할 수 있고, 각 주문은 여러 상품을 포함할 수 있다. 여기에 더해 각 주문 내 상품의 Quantity도 추적하는 관계를 생성해야 한다. 어떤 유형의 관계 구조가 필요하며, linking entity는 어떤 추가 속성을 가져야 하는가?",
         "options": [
           {
             "key": "A",
@@ -355,19 +355,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "귀하는 Customer Invoice 시스템을 구축하고 있다. 한 명의 Customer는 여러 개의 Invoice를 가질 수 있고, 각 Invoice는 여러 Product를 포함한다. CustomerId reference 속성을 가진 Invoice entity와 InvoiceProduct linking entity를 생성한 후, 특정 invoice의 모든 product를 조회하는 Aggregate가 예상보다 많은 행을 반환하는 것을 발견했다. 해당 invoice에는 3개의 product가 있으나 Aggregate 결과에는 6개의 행이 표시된다. 가장 유력한 원인은?",
+        "stem": "귀하는 고객(Customer) 청구서(Invoice) 시스템을 구축하고 있다. 한 명의 고객은 여러 개의 청구서를 가질 수 있고, 각 청구서는 여러 상품(Product)을 포함한다. CustomerId reference 속성을 가진 Invoice entity와 InvoiceProduct linking entity를 생성한 후, 특정 청구서의 모든 상품을 조회하는 Aggregate가 예상보다 많은 행을 반환하는 것을 발견했다. 해당 청구서에는 3개의 상품이 있으나 Aggregate 결과에는 6개의 행이 표시된다. 가장 유력한 원인은?",
         "options": [
           {
             "key": "A",
-            "text": "join 유형이 'Only With'가 아닌 'With'로 설정되어 있어, 관련 없는 invoice에서 중복 행이 발생한다"
+            "text": "join 유형이 'Only With'가 아닌 'With'로 설정되어 있어, 관련 없는 청구서(Invoice)에서 중복 행이 발생한다"
           },
           {
             "key": "B",
-            "text": "Aggregate에 표시 대상인 특정 invoice와 일치시키기 위한 InvoiceId 필터 조건이 누락되어 있다"
+            "text": "Aggregate에 표시 대상인 특정 청구서와 일치시키기 위한 InvoiceId 필터 조건이 누락되어 있다"
           },
           {
             "key": "C",
-            "text": "InvoiceProduct entity에 각 product 레코드가 데이터베이스에 여러 개 복제되어 있다"
+            "text": "InvoiceProduct entity에 각 상품(Product) 레코드가 데이터베이스에 여러 개 복제되어 있다"
           },
           {
             "key": "D",
@@ -414,23 +414,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee의 CompanyId 외래 키의 Delete Rule이 Protect로 설정되어 있습니다. Company 'TechCorp'에는 5명의 Employee가 배정되어 있습니다. Server Action이 'TechCorp'를 삭제하려고 하면 어떻게 됩니까?",
+        "stem": "직원(Employee)의 CompanyId 외래 키의 Delete Rule이 Protect로 설정되어 있습니다. 회사(Company) 'TechCorp'에는 5명의 직원이 배정되어 있습니다. Server Action이 'TechCorp'를 삭제하려고 하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "'TechCorp'가 삭제되고, 5명의 Employee도 자동으로 삭제된다."
+            "text": "'TechCorp'가 삭제되고, 5명의 직원(Employee)도 자동으로 삭제된다."
           },
           {
             "key": "B",
-            "text": "'TechCorp'가 삭제되고, 5명의 CompanyId가 NullIdentifier가 된다."
+            "text": "'TechCorp'가 삭제되고, 그 5명의 직원의 CompanyId가 NullIdentifier가 된다."
           },
           {
             "key": "C",
-            "text": "연결된 Employee가 있어 예외가 발생하고 삭제가 차단된다."
+            "text": "연결된 직원이 있어 예외가 발생하고 삭제가 차단된다."
           },
           {
             "key": "D",
-            "text": "Employee를 먼저 삭제한 뒤 Company를 삭제한다."
+            "text": "직원을 먼저 삭제한 뒤 회사(Company)를 삭제한다."
           }
         ]
       }
@@ -473,7 +473,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "하나의 Project는 여러 Employee를 가질 수 있고, 한 Employee는 여러 Project에 배정될 수 있습니다. 이 다대다 관계를 OutSystems에서 어떻게 구현해야 합니까?",
+        "stem": "하나의 프로젝트(Project)는 여러 직원(Employee)을 가질 수 있고, 한 직원은 여러 프로젝트에 배정될 수 있습니다. 이 다대다 관계를 OutSystems에서 어떻게 구현해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -532,23 +532,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order(부모)와 OrderItem(자식)이 연결되어 있고, 각 OrderItem은 하나의 Order에 속합니다. OrderItem의 OrderId attribute의 Delete Rule이 Delete로 설정되어 있습니다. 그 결과는 무엇입니까?",
+        "stem": "주문(Order, 부모)과 OrderItem(자식)이 연결되어 있고, 각 OrderItem은 하나의 주문에 속합니다. OrderItem의 OrderId attribute의 Delete Rule이 Delete로 설정되어 있습니다. 그 결과는 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "Order를 삭제하면 연결된 모든 OrderItem이 자동으로 삭제된다."
+            "text": "주문(Order)을 삭제하면 연결된 모든 OrderItem이 자동으로 삭제된다."
           },
           {
             "key": "B",
-            "text": "OrderItem이 연결되어 있는 한 Order를 삭제할 수 없다."
+            "text": "OrderItem이 연결되어 있는 한 주문을 삭제할 수 없다."
           },
           {
             "key": "C",
-            "text": "Order를 삭제하면 OrderItem의 OrderId가 Null로 설정된다."
+            "text": "주문을 삭제하면 OrderItem의 OrderId가 Null로 설정된다."
           },
           {
             "key": "D",
-            "text": "OrderItem을 삭제하면 부모 Order도 함께 삭제된다."
+            "text": "OrderItem을 삭제하면 부모 주문도 함께 삭제된다."
           }
         ]
       }
@@ -591,23 +591,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "세 Entity: Country, City, Citizen. City.CountryId의 Delete Rule = Delete, Citizen.CityId의 Delete Rule = Protect. 여러 City를 가진 Country를 삭제하려 하고, 그 중 한 City에는 Citizen이 10명 있습니다. 어떻게 됩니까?",
+        "stem": "세 Entity: Country, City, Citizen. City.CountryId의 Delete Rule = Delete, Citizen.CityId의 Delete Rule = Protect. 여러 도시(City)를 가진 국가(Country)를 삭제하려 하고, 그 중 한 도시에는 시민(Citizen)이 10명 있습니다. 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Country와 모든 City가 삭제되지만 Citizen은 CityId가 Null인 채로 DB에 남는다."
+            "text": "국가(Country)와 모든 도시(City)가 삭제되지만 시민(Citizen)은 CityId가 Null인 채로 DB에 남는다."
           },
           {
             "key": "B",
-            "text": "Country는 정상 삭제되지만 Citizen 테이블에 이르러 Database Exception으로 crash한다."
+            "text": "국가는 정상 삭제되지만 시민 테이블에 이르러 Database Exception으로 crash한다."
           },
           {
             "key": "C",
-            "text": "전체 작업이 실패하고 아무것도 삭제되지 않는다. Citizen의 Protect가 City 삭제를 막고, 이것이 다시 Country 삭제를 막기 때문이다."
+            "text": "전체 작업이 실패하고 아무것도 삭제되지 않는다. 시민의 Protect가 도시 삭제를 막고, 이것이 다시 국가 삭제를 막기 때문이다."
           },
           {
             "key": "D",
-            "text": "Country만 삭제된다. Delete Rule은 한 단계만 적용되므로 City와 Citizen은 그대로 남는다."
+            "text": "국가만 삭제된다. Delete Rule은 한 단계만 적용되므로 도시와 시민은 그대로 남는다."
           }
         ]
       }
@@ -643,23 +643,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "junction 엔티티 'BookAuthor'를 사용해 'Book'과 'Author' 간 Many-to-Many 관계를 모델링했습니다. 'BookAuthor'에서 'BookId'의 Delete Rule은 'Delete', 'AuthorId'의 Delete Rule은 'Protect'로 설정되어 있습니다. 여러 권의 Book을 쓴 Author를 삭제하려고 하면 어떤 일이 발생합니까?",
+        "stem": "junction 엔티티 'BookAuthor'를 사용해 'Book'과 'Author' 간 Many-to-Many 관계를 모델링했습니다. 'BookAuthor'에서 'BookId'의 Delete Rule은 'Delete', 'AuthorId'의 Delete Rule은 'Protect'로 설정되어 있습니다. 여러 권의 도서(Book)를 쓴 저자(Author)를 삭제하려고 하면 어떤 일이 발생합니까?",
         "options": [
           {
             "key": "A",
-            "text": "junction 레코드만 삭제되고 Author와 Book은 그대로 남는다."
+            "text": "junction 레코드만 삭제되고 저자(Author)와 도서(Book)는 그대로 남는다."
           },
           {
             "key": "B",
-            "text": "Author, junction 레코드, Book이 모두 삭제된다."
+            "text": "저자, junction 레코드, 도서가 모두 삭제된다."
           },
           {
             "key": "C",
-            "text": "시스템이 에러를 발생시키고 Author 삭제를 막는다."
+            "text": "시스템이 에러를 발생시키고 저자 삭제를 막는다."
           },
           {
             "key": "D",
-            "text": "Author가 삭제되고 그 'BookAuthor' 레코드도 삭제되지만 'Book' 레코드는 남는다."
+            "text": "저자가 삭제되고 그 'BookAuthor' 레코드도 삭제되지만 'Book' 레코드는 남는다."
           }
         ]
       }
@@ -696,7 +696,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'City' Entity의 'CountryId' 외래 키의 Delete Rule이 'Protect'로 설정되어 있습니다. 한 Country에 관련된 City가 3개 있습니다. 이 Country를 삭제하려고 하면 어떻게 됩니까?",
+        "stem": "'City' Entity의 'CountryId' Foreign Key의 Delete Rule이 'Protect'로 설정되어 있습니다. 한 국가(Country)에 관련된 도시(City)가 3개 있습니다. 이 국가를 삭제하려고 하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -704,15 +704,15 @@
           },
           {
             "key": "B",
-            "text": "Country와 3개의 City가 모두 삭제된다."
+            "text": "국가와 3개의 도시가 모두 삭제된다."
           },
           {
             "key": "C",
-            "text": "Country는 삭제되고 3개 City의 CountryId가 null이 된다."
+            "text": "국가는 삭제되고 3개 도시의 CountryId가 null이 된다."
           },
           {
             "key": "D",
-            "text": "Country는 삭제되지만 3개의 City는 그대로 남는다."
+            "text": "국가는 삭제되지만 3개의 도시는 그대로 남는다."
           }
         ]
       }
@@ -749,23 +749,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Project' Entity와 'Task' Entity가 있습니다. 'Task' Entity의 'ProjectId'는 Delete Rule이 'Protect'로 설정되어 있습니다. 아직 'Task'가 할당된 'Project'를 삭제하려고 하면 어떤 일이 발생합니까?",
+        "stem": "'Project' Entity와 'Task' Entity가 있습니다. 'Task' Entity의 'ProjectId'는 Delete Rule이 'Protect'로 설정되어 있습니다. 아직 태스크(Task)가 할당된 프로젝트(Project)를 삭제하려고 하면 어떤 일이 발생합니까?",
         "options": [
           {
             "key": "A",
-            "text": "예외가 발생하고 Project는 삭제되지 않는다."
+            "text": "예외가 발생하고 프로젝트는 삭제되지 않는다."
           },
           {
             "key": "B",
-            "text": "Project가 삭제되고 Task의 'ProjectId'가 Null로 설정된다."
+            "text": "프로젝트가 삭제되고 태스크의 'ProjectId'가 Null로 설정된다."
           },
           {
             "key": "C",
-            "text": "사용자에게 Task를 다른 Project로 옮기라는 안내가 표시된다."
+            "text": "사용자에게 태스크를 다른 프로젝트로 옮기라는 안내가 표시된다."
           },
           {
             "key": "D",
-            "text": "Project가 삭제되고 그 Task들도 함께 삭제된다."
+            "text": "프로젝트가 삭제되고 그 태스크들도 함께 삭제된다."
           }
         ]
       }
@@ -802,23 +802,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "세 개의 Entity가 있습니다: Blog, Post(Blog의 자식), Comment(Post의 자식). Post의 BlogId는 Delete Rule이 'Delete'이고, Comment의 PostId는 Delete Rule이 'Protect'입니다. Post들을 가진 Blog를 삭제하고, 그 Post들에는 Comment들이 있습니다. 어떻게 됩니까?",
+        "stem": "세 개의 Entity가 있습니다: Blog, Post(Blog의 자식), Comment(Post의 자식). Post의 BlogId는 Delete Rule이 'Delete'이고, Comment의 PostId는 Delete Rule이 'Protect'입니다. 게시물(Post)을 가진 블로그(Blog)를 삭제하고, 그 게시물에는 댓글(Comment)이 있습니다. 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Blog와 Post는 삭제되지만 Comment는 orphan으로 데이터베이스에 남는다."
+            "text": "블로그와 게시물은 삭제되지만 댓글은 orphan으로 데이터베이스에 남는다."
           },
           {
             "key": "B",
-            "text": "Comment만 보호되고 Blog와 Post는 그대로 삭제된다."
+            "text": "댓글만 보호되고 블로그와 게시물은 그대로 삭제된다."
           },
           {
             "key": "C",
-            "text": "Blog 삭제가 데이터베이스 예외로 차단된다."
+            "text": "블로그 삭제가 데이터베이스 예외로 차단된다."
           },
           {
             "key": "D",
-            "text": "Blog가 삭제되고 그 Post와 Comment도 모두 삭제된다."
+            "text": "블로그가 삭제되고 그 게시물과 댓글도 모두 삭제된다."
           }
         ]
       }
@@ -871,7 +871,7 @@
           },
           {
             "key": "D",
-            "text": "Mandatory 속성은 'With or Without' join에 사용할 수 없다."
+            "text": "Mandatory attribute는 'With or Without' join에 사용할 수 없다."
           }
         ]
       }
@@ -908,11 +908,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Student <-> Enrollment <-> Course 형태의 다대다 관계에서, junction 엔티티인 Enrollment에 동일한 (StudentId, CourseId) 조합이 절대 두 번 나타나지 않도록 보장하려면 무엇을 해야 합니까?",
+        "stem": "Student <-> Enrollment <-> Course 형태의 다대다 관계에서, junction Entity인 Enrollment에 동일한 (StudentId, CourseId) 조합이 절대 두 번 나타나지 않도록 보장하려면 무엇을 해야 합니까?",
         "options": [
           {
             "key": "A",
-            "text": "junction 엔티티의 Primary Key를 Auto-number로 설정한다."
+            "text": "junction Entity의 Primary Key를 Auto-number로 설정한다."
           },
           {
             "key": "B",
@@ -924,7 +924,7 @@
           },
           {
             "key": "D",
-            "text": "두 Foreign Key 속성으로 구성된 하나의 Unique Index를 만든다."
+            "text": "두 Foreign Key attribute로 구성된 하나의 Unique Index를 만든다."
           }
         ]
       }
@@ -961,15 +961,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Ticket' Entity에는 Static Entity 'Priority'(Low, Medium, High)를 가리키는 필수 'PriorityId'가 있습니다. 한 Screen은 'Ticket'과 'Priority'를 'Only With'로 join하는 Aggregate로 모든 Ticket을 나열합니다. 개발자가 SQL 스크립트로 데이터베이스에서 'Priority' 레코드 하나를 직접 삭제했습니다. 사용자가 Screen을 열면 Aggregate는 무엇을 반환합니까?",
+        "stem": "'Ticket' Entity에는 Static Entity 'Priority'(Low, Medium, High)를 가리키는 필수 'PriorityId'가 있습니다. 한 Screen은 'Ticket'과 'Priority'를 'Only With'로 join하는 Aggregate로 모든 티켓(Ticket)을 나열합니다. 개발자가 SQL 스크립트로 데이터베이스에서 'Priority' 레코드 하나를 직접 삭제했습니다. 사용자가 Screen을 열면 Aggregate는 무엇을 반환합니까?",
         "options": [
           {
             "key": "A",
-            "text": "Ticket 레코드는 반환하지만 Priority attribute는 기본값으로 채워진다."
+            "text": "티켓 레코드는 반환하지만 Priority attribute는 기본값으로 채워진다."
           },
           {
             "key": "B",
-            "text": "삭제된 Priority 레코드와 연결되어 있던 Ticket 레코드는 결과에서 제외된다."
+            "text": "삭제된 Priority 레코드와 연결되어 있던 티켓 레코드는 결과에서 제외된다."
           },
           {
             "key": "C",
@@ -1014,23 +1014,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Project'는 여러 'Task'를 가집니다('Task'의 'ProjectId'는 Delete Rule 'Delete'). 'Task'는 여러 'TaskComment'를 가집니다('TaskComment'의 'TaskId'는 Delete Rule 'Protect'). 이미 TaskComment가 있는 Task를 포함하는 Project를 삭제하려고 하면 어떻게 됩니까?",
+        "stem": "프로젝트(Project)는 여러 태스크(Task)를 가집니다(태스크의 'ProjectId'는 Delete Rule 'Delete'). 태스크는 여러 'TaskComment'를 가집니다('TaskComment'의 'TaskId'는 Delete Rule 'Protect'). 이미 TaskComment가 있는 태스크를 포함하는 프로젝트를 삭제하려고 하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Project와 모든 Task가 삭제되지만 TaskComment는 orphan 상태로 남는다."
+            "text": "프로젝트와 모든 태스크가 삭제되지만 TaskComment는 orphan 상태로 남는다."
           },
           {
             "key": "B",
-            "text": "Project 삭제는 실패하지만, 오류가 발생하기 전에 Task는 먼저 삭제된다."
+            "text": "프로젝트 삭제는 실패하지만, 오류가 발생하기 전에 태스크는 먼저 삭제된다."
           },
           {
             "key": "C",
-            "text": "Comment가 없는 Task만 삭제되고, Project와 Comment가 있는 Task는 남는다."
+            "text": "TaskComment가 없는 태스크만 삭제되고, 프로젝트와 TaskComment가 있는 태스크는 남는다."
           },
           {
             "key": "D",
-            "text": "예외가 발생하고 Project, Task, Comment 어느 것도 삭제되지 않는다."
+            "text": "예외가 발생하고 프로젝트, 태스크, TaskComment 어느 것도 삭제되지 않는다."
           }
         ]
       }
@@ -1067,7 +1067,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "일부 Employee에 Department가 할당되어 있지 않기 때문에, Aggregate가 'With or Without'로 'Employee'와 'Department'를 fetch합니다. 매칭이 없을 때 'No Department'를 표시하도록 계산 attribute 'DepartmentDisplay'를 추가합니다. 가장 견고한 표현식은 무엇입니까?",
+        "stem": "일부 직원(Employee)에게 부서(Department)가 할당되어 있지 않기 때문에, Aggregate가 'With or Without'로 'Employee'와 'Department'를 fetch합니다. 매칭이 없을 때 'No Department'를 표시하도록 계산 attribute 'DepartmentDisplay'를 추가합니다. 가장 견고한 표현식은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1124,19 +1124,19 @@
         "options": [
           {
             "key": "A",
-            "text": "Coupon 존재 여부와 상관없이 VIP Client의 Invoice만 반환된다."
+            "text": "쿠폰(Coupon) 존재 여부와 상관없이 VIP 고객(Client)의 청구서(Invoice)만 반환된다."
           },
           {
             "key": "B",
-            "text": "VIP Client의 모든 Invoice를 반환하지만, Coupon이 없는 Invoice는 Client 정보도 함께 숨겨진다."
+            "text": "VIP 고객의 모든 청구서를 반환하지만, 쿠폰이 없는 청구서는 고객 정보도 함께 숨겨진다."
           },
           {
             "key": "C",
-            "text": "VIP Client의 Invoice 중 Coupon도 있는 것만 반환된다."
+            "text": "VIP 고객의 청구서 중 쿠폰도 있는 것만 반환된다."
           },
           {
             "key": "D",
-            "text": "모든 Invoice를 반환하지만, Client가 VIP가 아니면 Client와 Coupon 필드가 비어 있다."
+            "text": "모든 청구서를 반환하지만, 고객이 VIP가 아니면 고객과 쿠폰 필드가 비어 있다."
           }
         ]
       }
@@ -1173,7 +1173,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Employee' 엔티티에 선택적(optional) 'ManagerId' self-reference가 있다. 모든 Employee를 그들의 Manager 이름과 함께 나열하되, Manager가 없는 Employee도 이름을 'N/A'로 하여 목록에 나와야 한다. 올바른 구성은?",
+        "stem": "'Employee' Entity에 선택적(optional) 'ManagerId' self-reference가 있다. 모든 직원(Employee)을 그들의 관리자(Manager) 이름과 함께 나열하되, 관리자가 없는 직원도 이름을 'N/A'로 하여 목록에 나와야 한다. 올바른 구성은?",
         "options": [
           {
             "key": "A",
@@ -1181,7 +1181,7 @@
           },
           {
             "key": "B",
-            "text": "Employee와 Employee를 (With or Without)로 join하고 계산 속성 If(Employee2.Name = \"\", \"N/A\", Employee2.Name) 사용."
+            "text": "Employee와 Employee를 (With or Without)로 join하고 계산 attribute If(Employee2.Name = \"\", \"N/A\", Employee2.Name) 사용."
           },
           {
             "key": "C",
@@ -1189,7 +1189,7 @@
           },
           {
             "key": "D",
-            "text": "모든 Employee를 가져온 뒤 중첩 For Each로 각 manager를 DB에서 찾는 Data Action 사용."
+            "text": "모든 직원을 가져온 뒤 중첩 For Each로 각 관리자를 DB에서 찾는 Data Action 사용."
           }
         ]
       }
@@ -1226,23 +1226,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Student'와 'Course'가 'Enrollment'를 통해 Many-to-Many로 연결되어 있다. 특정 'CourseId'에 등록되지 '않은' 모든 Student를 찾아야 한다. 올바른 Aggregate 전략은?",
+        "stem": "'학생(Student)'과 '과정(Course)'이 'Enrollment'를 통해 Many-to-Many로 연결되어 있다. 특정 'CourseId'에 등록되지 '않은' 모든 학생을 찾아야 한다. 올바른 Aggregate 전략은?",
         "options": [
           {
             "key": "A",
-            "text": "Student와 Enrollment를 (With or Without)로 join하되 join 조건을 Enrollment.CourseId = CourseId로 하고, Filter로 Enrollment.Id = NullIdentifier()를 건다."
+            "text": "학생과 Enrollment를 (With or Without)로 join하되 join 조건을 Enrollment.CourseId = CourseId로 하고, Filter로 Enrollment.Id = NullIdentifier()를 건다."
           },
           {
             "key": "B",
-            "text": "Student와 Enrollment를 (Only With)로 join하고 Filter로 Enrollment.CourseId <> CourseId를 건다."
+            "text": "학생과 Enrollment를 (Only With)로 join하고 Filter로 Enrollment.CourseId <> CourseId를 건다."
           },
           {
             "key": "C",
-            "text": "Student와 Enrollment를 (With or Without)로 join하고 Filter로 Enrollment.CourseId <> CourseId를 건다."
+            "text": "학생과 Enrollment를 (With or Without)로 join하고 Filter로 Enrollment.CourseId <> CourseId를 건다."
           },
           {
             "key": "D",
-            "text": "Student.Id <> Enrollment.StudentId 로 Student 레코드를 필터링한다."
+            "text": "Student.Id <> Enrollment.StudentId 로 학생 레코드를 필터링한다."
           }
         ]
       }
@@ -1279,7 +1279,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Order' Entity에는 필수(mandatory) 'CustomerId' 속성이 있어 'Customer'를 참조하며, 이 관계의 Delete Rule은 'Protect'로 설정되어 있습니다. Server Action에서 현재 3개의 'Order'가 연결된 'Customer'를 삭제하려고 하면 어떻게 됩니까?",
+        "stem": "'Order' Entity에는 필수(mandatory) 'CustomerId' 속성이 있어 고객(Customer)을 참조하며, 이 관계의 Delete Rule은 'Protect'로 설정되어 있습니다. Server Action에서 현재 3개의 주문(Order)이 연결된 고객을 삭제하려고 하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -1287,11 +1287,11 @@
           },
           {
             "key": "B",
-            "text": "Customer와 연결된 3개의 Order가 모두 자동으로 삭제된다."
+            "text": "고객과 연결된 3개의 주문이 모두 자동으로 삭제된다."
           },
           {
             "key": "C",
-            "text": "Customer는 삭제되고, 3개 Order의 'CustomerId'는 Null로 설정된다."
+            "text": "고객은 삭제되고, 3개 주문의 'CustomerId'는 Null로 설정된다."
           },
           {
             "key": "D",
@@ -1332,15 +1332,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Project'와 'Employee' 사이에 다대다(many-to-many) 관계가 필요하며, 각 직원이 프로젝트에 배정된 날짜도 기록하려고 합니다. OutSystems에서의 모범 사례 구현은 무엇입니까?",
+        "stem": "프로젝트(Project)와 직원(Employee) 사이에 다대다(many-to-many) 관계가 필요하며, 각 직원이 프로젝트에 배정된 날짜도 기록하려고 합니다. OutSystems에서의 모범 사례 구현은 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "Project Id와 Employee Id를 매핑하는 Static Entity를 사용한다."
+            "text": "프로젝트 Id와 직원 Id를 매핑하는 Static Entity를 사용한다."
           },
           {
             "key": "B",
-            "text": "'Project' Entity 안에 Employee 식별자 List를 속성으로 추가한다."
+            "text": "'Project' Entity 안에 직원 식별자 List를 속성으로 추가한다."
           },
           {
             "key": "C",
@@ -1385,19 +1385,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Product'에는 Delete Rule이 'Delete'인 'SupplierId'가 있습니다. 'Supplier'에는 Delete Rule이 'Protect'인 'CountryId'가 있습니다. 'Product'를 가진 'Supplier'가 연결된 'Country'를 삭제하려고 하면 어떻게 됩니까?",
+        "stem": "'상품(Product)'에는 Delete Rule이 'Delete'인 'SupplierId'가 있습니다. '공급업체(Supplier)'에는 Delete Rule이 'Protect'인 'CountryId'가 있습니다. 상품을 가진 공급업체가 연결된 '국가(Country)'를 삭제하려고 하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Country는 삭제되지만 Supplier와 그 Product는 그대로 남는다."
+            "text": "국가는 삭제되지만 공급업체와 그 상품은 그대로 남는다."
           },
           {
             "key": "B",
-            "text": "기존 Supplier가 보호(Protect)하고 있으므로 Country 삭제가 실패한다."
+            "text": "기존 공급업체가 보호(Protect)하고 있으므로 국가 삭제가 실패한다."
           },
           {
             "key": "C",
-            "text": "Product가 먼저 삭제되고, 그다음 Supplier, 마지막으로 Country가 삭제된다."
+            "text": "상품이 먼저 삭제되고, 그다음 공급업체, 마지막으로 국가가 삭제된다."
           },
           {
             "key": "D",
@@ -1597,7 +1597,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "순환 관계가 있습니다. 'Department'는 필수 'ManagerId'(Employee 참조)를, 'Employee'는 필수 'DepartmentId'(Department 참조)를 가지며, 두 외래 키 모두 'Protect' delete rule을 사용합니다. 표준 Server Action으로 하나의 Department와 그 소속 Employee를 모두 삭제하려면 어떻게 해야 합니까?",
+        "stem": "순환 관계가 있습니다. 부서(Department)는 필수 'ManagerId'(직원(Employee) 참조)를, 직원은 필수 'DepartmentId'(부서 참조)를 가지며, 두 외래 키 모두 'Protect' delete rule을 사용합니다. 표준 Server Action으로 하나의 부서와 그 소속 직원을 모두 삭제하려면 어떻게 해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -1650,11 +1650,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "다음 계층 구조를 생각해 봅시다. Region -> Store (Delete: Cascade) -> Employee (Delete: Protect). Store가 하나 있는 'Region'을 삭제하는데, 그 Store에는 Employee가 한 명 있습니다. 결과는 어떻게 됩니까?",
+        "stem": "다음 계층 구조를 생각해 봅시다. 지역(Region) -> 매장(Store) (Delete: Cascade) -> 직원(Employee) (Delete: Protect). 매장이 하나 있는 지역을 삭제하는데, 그 매장에는 직원이 한 명 있습니다. 결과는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "플랫폼이 Employee를 먼저, 그다음 Store, 그다음 Region을 삭제한다."
+            "text": "플랫폼이 직원을 먼저, 그다음 매장, 그다음 지역을 삭제한다."
           },
           {
             "key": "B",
@@ -1662,11 +1662,11 @@
           },
           {
             "key": "C",
-            "text": "Region만 삭제되고, Employee의 Protect를 지키기 위해 Store의 Cascade 규칙은 건너뛴다."
+            "text": "지역만 삭제되고, 직원의 Protect를 지키기 위해 매장의 Cascade 규칙은 건너뛴다."
           },
           {
             "key": "D",
-            "text": "Region과 Store는 삭제되고 Employee는 orphan으로 남는다."
+            "text": "지역과 매장은 삭제되고 직원은 orphan으로 남는다."
           }
         ]
       }
@@ -1707,15 +1707,15 @@
         "options": [
           {
             "key": "A",
-            "text": "플랫폼이 그 Priority를 참조하는 모든 Ticket 레코드를 자동으로 삭제합니다."
+            "text": "플랫폼이 그 Priority를 참조하는 모든 티켓(Ticket) 레코드를 자동으로 삭제합니다."
           },
           {
             "key": "B",
-            "text": "영향을 받은 Ticket 레코드의 'PriorityId'가 Static Entity의 기본 레코드로 재설정됩니다."
+            "text": "영향을 받은 티켓 레코드의 'PriorityId'가 Static Entity의 기본 레코드로 재설정됩니다."
           },
           {
             "key": "C",
-            "text": "Delete Rule은 런타임의 Delete 액션에서만 적용되므로, 디자인 타임에 Static 레코드를 삭제해도 Ticket 레코드로 cascade되지 않습니다."
+            "text": "Delete Rule은 런타임의 Delete 액션에서만 적용되므로, 디자인 타임에 Static 레코드를 삭제해도 티켓 레코드로 cascade되지 않습니다."
           },
           {
             "key": "D",
@@ -1756,7 +1756,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'User'와 'UserPreferences' 사이에 1-to-1 관계가 있고, 'User'를 삭제하면 해당 사용자의 'UserPreferences'도 함께 삭제되도록 하려고 합니다. 어떤 구성이 필요합니까?",
+        "stem": "'User'와 'UserPreferences' 사이에 1-to-1 관계가 있고, 'User'를 삭제하면 해당 User의 'UserPreferences'도 함께 삭제되도록 하려고 합니다. 어떤 구성이 필요합니까?",
         "options": [
           {
             "key": "A",
@@ -1772,7 +1772,7 @@
           },
           {
             "key": "D",
-            "text": "User 엔티티에 'BeforeDelete' 이벤트를 만들어 preferences를 수동으로 삭제해야 합니다."
+            "text": "User 엔티티에 'BeforeDelete' 이벤트를 만들어 UserPreferences를 수동으로 삭제해야 합니다."
           }
         ]
       }
@@ -1862,23 +1862,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "자기 참조 Entity 'Category'에 'Category'를 참조하는 'ParentCategoryId' 속성이 있고 Delete Rule이 'Protect'로 설정되어 있습니다. 하위 카테고리가 3개 있는 root Category를 삭제하려고 하면 어떤 동작이 발생합니까?",
+        "stem": "자기 참조 Entity 'Category'에 'Category'를 참조하는 'ParentCategoryId' 속성이 있고 Delete Rule이 'Protect'로 설정되어 있습니다. 하위 Category가 3개 있는 root Category를 삭제하려고 하면 어떤 동작이 발생합니까?",
         "options": [
           {
             "key": "A",
-            "text": "root 레코드가 자신의 하위 카테고리들에 의해 보호되므로 Database Exception과 함께 삭제가 실패한다."
+            "text": "root 레코드가 자신의 하위 Category들에 의해 보호되므로 Database Exception과 함께 삭제가 실패한다."
           },
           {
             "key": "B",
-            "text": "카테고리 트리 전체가 자동으로 cascade 삭제된다."
+            "text": "Category 트리 전체가 자동으로 cascade 삭제된다."
           },
           {
             "key": "C",
-            "text": "root는 삭제되고 3개의 하위 카테고리는 참조가 깨진 orphan으로 남는다."
+            "text": "root는 삭제되고 3개의 하위 Category는 참조가 깨진 orphan으로 남는다."
           },
           {
             "key": "D",
-            "text": "root는 삭제되고 각 하위 카테고리의 'ParentCategoryId'가 NullIdentifier()로 설정된다."
+            "text": "root는 삭제되고 각 하위 Category의 'ParentCategoryId'가 NullIdentifier()로 설정된다."
           }
         ]
       }
@@ -1915,11 +1915,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Employee' 엔터티에 자기 자신을 참조하는 'ManagerId' 속성이 있어 다시 'Employee'를 가리킵니다. 'ManagerId'의 Delete Rule이 'Ignore'로 설정되어 있고 어떤 매니저를 삭제하면, 그 매니저의 부하 직원 레코드는 어떻게 됩니까?",
+        "stem": "'Employee' Entity에 자기 자신을 참조하는 'ManagerId' 속성이 있어 다시 'Employee'를 가리킵니다. 'ManagerId'의 Delete Rule이 'Ignore'로 설정되어 있고 어떤 Manager를 삭제하면, 그 Manager의 부하 직원 record는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "부하 직원 레코드도 함께 삭제된다."
+            "text": "부하 직원 record도 함께 삭제된다."
           },
           {
             "key": "B",
@@ -1927,11 +1927,11 @@
           },
           {
             "key": "C",
-            "text": "레코드는 데이터베이스에 남지만, 'ManagerId'가 더 이상 존재하지 않는 ID를 가리키게 된다."
+            "text": "record는 데이터베이스에 남지만, 'ManagerId'가 더 이상 존재하지 않는 ID를 가리키게 된다."
           },
           {
             "key": "D",
-            "text": "삭제된 매니저의 상위 매니저에게 자동으로 재배정된다."
+            "text": "삭제된 Manager의 상위 Manager에게 자동으로 재배정된다."
           }
         ]
       }
@@ -1968,11 +1968,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'ProductDetail'이 'Product'를 필수로 참조하는 1-to-1 관계가 있고, 그 참조의 Delete Rule이 'Protect'로 설정되어 있습니다. 대응하는 'ProductDetail' 레코드가 있는 'Product'를 삭제하려고 하면 어떻게 됩니까?",
+        "stem": "'ProductDetail'이 'Product'를 필수로 참조하는 1-to-1 관계가 있고, 그 참조의 Delete Rule이 'Protect'로 설정되어 있습니다. 대응하는 'ProductDetail' record가 있는 'Product'를 삭제하려고 하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "ProductDetail 레코드가 먼저 삭제되고 그 다음 Product가 삭제된다."
+            "text": "ProductDetail record가 먼저 삭제되고 그 다음 Product가 삭제된다."
           },
           {
             "key": "B",
@@ -1984,7 +1984,7 @@
           },
           {
             "key": "D",
-            "text": "대응하는 ProductDetail 레코드가 존재하는 한 Product를 삭제할 수 없다."
+            "text": "대응하는 ProductDetail record가 존재하는 한 Product를 삭제할 수 없다."
           }
         ]
       }
@@ -2021,7 +2021,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Employee' 엔티티에 필수(mandatory) 외래 키 'ManagerId'가 있습니다. 이 속성의 Delete Rule을 'Protect'에서 'Ignore'로 변경하고 publish하면 가장 큰 위험은 무엇입니까?",
+        "stem": "'Employee' Entity에 필수(mandatory) 외래 키 'ManagerId'가 있습니다. 이 속성의 Delete Rule을 'Protect'에서 'Ignore'로 변경하고 publish하면 가장 큰 위험은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2074,7 +2074,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Ticket' 엔티티에 대한 모든 변경을 기록하는 'TicketHistory' 엔티티를 만들려고 합니다. 두 엔티티를 연결하는 가장 좋은 방법은 무엇입니까?",
+        "stem": "'Ticket' Entity에 대한 모든 변경을 기록하는 'TicketHistory' Entity를 만들려고 합니다. 두 Entity를 연결하는 가장 좋은 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2090,7 +2090,7 @@
           },
           {
             "key": "D",
-            "text": "'TicketChanges'라는 junction 엔티티를 사용해 many-to-many 관계로 만든다."
+            "text": "'TicketChanges'라는 junction Entity를 사용해 many-to-many 관계로 만든다."
           }
         ]
       }
@@ -2237,7 +2237,7 @@
         "options": [
           {
             "key": "A",
-            "text": "유효한 프로젝트 목록을 Static Entity로 관리한다."
+            "text": "유효한 Project 목록을 Static Entity로 관리한다."
           },
           {
             "key": "B",
@@ -2286,7 +2286,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Invoice' Entity와 'InvoiceLine' Entity가 있습니다. 부모 Invoice가 삭제될 때 InvoiceLine 레코드가 자동으로 삭제되도록 하려면, InvoiceLine의 'InvoiceId' 참조에 어떤 Delete Rule을 설정해야 합니까?",
+        "stem": "청구서(Invoice) Entity와 'InvoiceLine' Entity가 있습니다. 부모 청구서가 삭제될 때 InvoiceLine 레코드가 자동으로 삭제되도록 하려면, InvoiceLine의 'InvoiceId' 참조에 어떤 Delete Rule을 설정해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -2339,7 +2339,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Department'는 필수 'ManagerId'(Employee 참조)를, 'Employee'는 필수 'DepartmentId'(Department 참조)를 가지고 있습니다. 표준 Entity Action만 사용해 최초의 Department와 그 Manager를 생성하는 유일한 방법은 무엇입니까?",
+        "stem": "부서(Department)는 필수 'ManagerId'(직원(Employee) 참조)를, 직원은 필수 'DepartmentId'(부서 참조)를 가지고 있습니다. 표준 Entity Action만 사용해 최초의 부서와 그 매니저(Manager)를 생성하는 유일한 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2347,7 +2347,7 @@
           },
           {
             "key": "B",
-            "text": "외래 키 중 하나를 일시적으로 'Mandatory = No'로 바꿔 2단계로 레코드를 생성한다."
+            "text": "Foreign Key 중 하나를 일시적으로 'Mandatory = No'로 바꿔 2단계로 레코드를 생성한다."
           },
           {
             "key": "C",
@@ -2392,11 +2392,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "1대1 관계로 'Employee' Entity의 추가 데이터를 담기 위해 'EmployeeDetail' Entity를 만들고 있습니다. 'EmployeeDetail'의 Primary Key에 'Autonumber'를 사용하면 안 되는 이유는 무엇입니까?",
+        "stem": "1대1 관계로 직원(Employee) Entity의 추가 데이터를 담기 위해 'EmployeeDetail' Entity를 만들고 있습니다. 'EmployeeDetail'의 Primary Key에 'Autonumber'를 사용하면 안 되는 이유는 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "확장 Entity는 'Text' primary key만 지원한다."
+            "text": "확장 Entity는 'Text' Primary Key만 지원한다."
           },
           {
             "key": "B",
@@ -2408,7 +2408,7 @@
           },
           {
             "key": "D",
-            "text": "1:1 연결을 유지하려면 Primary Key에 확장 대상인 'Employee'의 ID를 수동으로 지정해야 한다."
+            "text": "1:1 연결을 유지하려면 Primary Key에 확장 대상인 직원의 ID를 수동으로 지정해야 한다."
           }
         ]
       }
@@ -2551,15 +2551,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "다음 Delete Rule 체인을 봅시다: Region이 Country를 참조(Cascade), City가 Region을 참조(Protect), Office가 City를 참조(Cascade). Region과 City가 있고 그중 한 City에 Office가 배정된 country에 대해 'DeleteCountry'를 실행하면 어떻게 됩니까?",
+        "stem": "다음 Delete Rule 체인을 봅시다: 지역(Region)이 국가(Country)를 참조(Cascade), 도시(City)가 지역을 참조(Protect), 사무실(Office)이 도시를 참조(Cascade). 지역과 도시가 있고 그중 한 도시에 사무실이 배정된 국가에 대해 'DeleteCountry'를 실행하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Office가 먼저 삭제되고, 그 덕분에 City, Region, Country가 차례로 삭제된다."
+            "text": "사무실이 먼저 삭제되고, 그 덕분에 도시, 지역, 국가가 차례로 삭제된다."
           },
           {
             "key": "B",
-            "text": "Country와 Region은 삭제되지만 City와 Office는 남는다."
+            "text": "국가와 지역은 삭제되지만 도시와 사무실은 남는다."
           },
           {
             "key": "C",
@@ -2567,7 +2567,7 @@
           },
           {
             "key": "D",
-            "text": "City가 없는 Region만 삭제된다."
+            "text": "도시가 없는 지역만 삭제된다."
           }
         ]
       }
@@ -2604,7 +2604,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "User와 UserExtraInfo 사이에 1-to-1 관계가 있습니다(UserExtraInfo.UserId가 User를 참조). User는 UserExtraInfo 레코드가 없을 때만 삭제할 수 있게 하려고 합니다. UserExtraInfo.UserId의 Delete Rule을 무엇으로 설정해야 합니까?",
+        "stem": "사용자(User)와 UserExtraInfo 사이에 1-to-1 관계가 있습니다(UserExtraInfo.UserId가 사용자를 참조). 사용자는 UserExtraInfo 레코드가 없을 때만 삭제할 수 있게 하려고 합니다. UserExtraInfo.UserId의 Delete Rule을 무엇으로 설정해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -2657,23 +2657,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate에서 'Order'와 'Status'(값이 'Pending', 'Shipped'인 Static Entity)를 'Only With' join으로 연결했습니다. 어떤 Order 레코드의 StatusId에 NullIdentifier()가 저장되어 있다면, 그 Order는 Aggregate 결과에서 어떻게 되나요?",
+        "stem": "Aggregate에서 주문(Order)과 'Status'(값이 'Pending', 'Shipped'인 Static Entity)를 'Only With' join으로 연결했습니다. 어떤 주문 레코드의 StatusId에 NullIdentifier()가 저장되어 있다면, 그 주문은 Aggregate 결과에서 어떻게 되나요?",
         "options": [
           {
             "key": "A",
-            "text": "해당 Order가 반환되며 Static Entity의 첫 번째 레코드에 자동으로 배정된다."
+            "text": "해당 주문이 반환되며 Static Entity의 첫 번째 레코드에 자동으로 배정된다."
           },
           {
             "key": "B",
-            "text": "해당 Order가 반환되며 'Status.Label'이 빈 문자열로 설정된다."
+            "text": "해당 주문이 반환되며 'Status.Label'이 빈 문자열로 설정된다."
           },
           {
             "key": "C",
-            "text": "Aggregate가 foreign key 위반 오류로 실패한다."
+            "text": "Aggregate가 Foreign Key 위반 오류로 실패한다."
           },
           {
             "key": "D",
-            "text": "해당 Order 레코드는 Aggregate 결과에서 제외된다."
+            "text": "해당 주문 레코드는 Aggregate 결과에서 제외된다."
           }
         ]
       }
@@ -2710,23 +2710,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Department'와 'Employee' 두 entity가 있습니다. 한 Department가 여러 Employee를 가지는 1-to-Many 관계를 모델링하려면 Foreign Key를 어디에 두어야 합니까?",
+        "stem": "부서(Department)와 직원(Employee) 두 Entity가 있습니다. 한 부서가 여러 직원을 가지는 1-to-Many 관계를 모델링하려면 Foreign Key를 어디에 두어야 합니까?",
         "options": [
           {
             "key": "A",
-            "text": "'Employee' entity 안에 'DepartmentId' attribute로 둔다."
+            "text": "직원 Entity 안에 'DepartmentId' Attribute로 둔다."
           },
           {
             "key": "B",
-            "text": "둘을 연결하기 위해 만든 세 번째 entity에 둔다."
+            "text": "둘을 연결하기 위해 만든 세 번째 Entity에 둔다."
           },
           {
             "key": "C",
-            "text": "'Department' entity 안에 'EmployeeId' attribute로 둔다."
+            "text": "부서 Entity 안에 'EmployeeId' Attribute로 둔다."
           },
           {
             "key": "D",
-            "text": "양방향 연결을 위해 두 entity 모두에 둔다."
+            "text": "양방향 연결을 위해 두 Entity 모두에 둔다."
           }
         ]
       }
@@ -2763,23 +2763,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Ticket' entity의 'CustomerId' foreign key의 Delete Rule이 'Protect'로 설정되어 있습니다. 관련 Ticket이 아직 있는 Customer를 삭제하려고 하면 어떻게 됩니까?",
+        "stem": "티켓(Ticket) Entity의 'CustomerId' Foreign Key의 Delete Rule이 'Protect'로 설정되어 있습니다. 관련 티켓이 아직 있는 고객(Customer)을 삭제하려고 하면 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "Customer가 삭제되고 관련 Ticket도 모두 자동으로 삭제된다."
+            "text": "고객이 삭제되고 관련 티켓도 모두 자동으로 삭제된다."
           },
           {
             "key": "B",
-            "text": "database exception이 발생하고 Customer는 삭제되지 않는다."
+            "text": "database exception이 발생하고 고객은 삭제되지 않는다."
           },
           {
             "key": "C",
-            "text": "Customer가 삭제되고 Ticket의 'CustomerId'가 Null로 설정된다."
+            "text": "고객이 삭제되고 티켓의 'CustomerId'가 Null로 설정된다."
           },
           {
             "key": "D",
-            "text": "관련 Ticket이 자동으로 시스템 'Archive' entity로 이동한다."
+            "text": "관련 티켓이 자동으로 시스템 'Archive' Entity로 이동한다."
           }
         ]
       }
@@ -2816,19 +2816,19 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Company와 Office 두 엔티티가 있습니다. Office는 항상 정확히 하나의 Company에 속하고, Company는 여러 개의 Office를 가질 수 있습니다. 이 관계의 유형과 Foreign Key의 위치는 무엇입니까?",
+        "stem": "회사(Company)와 사무실(Office) 두 엔티티가 있습니다. 사무실은 항상 정확히 하나의 회사에 속하고, 회사는 여러 개의 사무실을 가질 수 있습니다. 이 관계의 유형과 Foreign Key의 위치는 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "1-to-Many; Foreign Key CompanyId가 Office 엔티티에 있다."
+            "text": "1-to-Many; Foreign Key CompanyId가 사무실(Office) 엔티티에 있다."
           },
           {
             "key": "B",
-            "text": "1-to-Many; Foreign Key OfficeId가 Company 엔티티에 있다."
+            "text": "1-to-Many; Foreign Key OfficeId가 회사(Company) 엔티티에 있다."
           },
           {
             "key": "C",
-            "text": "1-to-1; Foreign Key CompanyId가 Office 엔티티에 있다."
+            "text": "1-to-1; Foreign Key CompanyId가 사무실(Office) 엔티티에 있다."
           },
           {
             "key": "D",
@@ -2869,7 +2869,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee와 EmployeeDetail 간 1-to-1 관계에서 EmployeeDetail 엔티티의 Id 속성이 'Employee Identifier' 데이터 타입으로 설정되어 있습니다. 이 설계가 의미하는 것은 무엇입니까?",
+        "stem": "직원(Employee)과 EmployeeDetail 간 1-to-1 관계에서 EmployeeDetail 엔티티의 Id 속성이 'Employee Identifier' 데이터 타입으로 설정되어 있습니다. 이 설계가 의미하는 것은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2877,7 +2877,7 @@
           },
           {
             "key": "B",
-            "text": "EmployeeDetail의 Id가 자신의 Primary Key인 동시에 Employee를 가리키는 Foreign Key 역할을 한다."
+            "text": "EmployeeDetail의 Id가 자신의 Primary Key인 동시에 직원(Employee)을 가리키는 Foreign Key 역할을 한다."
           },
           {
             "key": "C",
@@ -2885,7 +2885,7 @@
           },
           {
             "key": "D",
-            "text": "하나의 EmployeeDetail 레코드가 여러 Employee에 연결될 수 있다."
+            "text": "하나의 EmployeeDetail 레코드가 여러 직원(Employee)에 연결될 수 있다."
           }
         ]
       }
@@ -2922,11 +2922,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Job entity에는 Mandatory Foreign Key인 DepartmentId가 있고, 이 관계의 Delete Rule은 \"Protect\"로 설정되어 있다. 현재 연결된 Job이 하나도 없는 Department를 삭제하는 Server Action을 실행하면 어떻게 되는가?",
+        "stem": "직무(Job) 엔티티에는 Mandatory Foreign Key인 DepartmentId가 있고, 이 관계의 Delete Rule은 \"Protect\"로 설정되어 있다. 현재 연결된 직무가 하나도 없는 부서(Department)를 삭제하는 Server Action을 실행하면 어떻게 되는가?",
         "options": [
           {
             "key": "A",
-            "text": "Department가 정상적으로 삭제된다."
+            "text": "부서(Department)가 정상적으로 삭제된다."
           },
           {
             "key": "B",
@@ -2934,7 +2934,7 @@
           },
           {
             "key": "C",
-            "text": "Department가 삭제되지 않고 \"Inactive\"로 표시된다."
+            "text": "부서(Department)가 삭제되지 않고 \"Inactive\"로 표시된다."
           },
           {
             "key": "D",
@@ -2975,7 +2975,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee entity와 EmployeeBadge entity가 1대1 관계이다. EmployeeBadge의 Primary Key는 \"Employee Identifier\" 타입이다. 개발자가 Employee에 존재하지 않는 ID로 EmployeeBadge 레코드를 생성하려 하면 어떻게 되는가?",
+        "stem": "직원(Employee) 엔티티와 EmployeeBadge 엔티티가 1-to-1 관계이다. EmployeeBadge의 Primary Key는 \"Employee Identifier\" 타입이다. 개발자가 직원에 존재하지 않는 ID로 EmployeeBadge 레코드를 생성하려 하면 어떻게 되는가?",
         "options": [
           {
             "key": "A",
@@ -2983,11 +2983,11 @@
           },
           {
             "key": "B",
-            "text": "EmployeeBadge 레코드가 생성되고, 대응하는 Employee 레코드가 자동으로 생성된다."
+            "text": "EmployeeBadge 레코드가 생성되고, 대응하는 직원(Employee) 레코드가 자동으로 생성된다."
           },
           {
             "key": "C",
-            "text": "EmployeeBadge 레코드가 Employee에 대한 Null 참조로 생성된다."
+            "text": "EmployeeBadge 레코드가 직원(Employee)에 대한 Null 참조로 생성된다."
           },
           {
             "key": "D",
@@ -3028,7 +3028,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Student entity와 Course entity가 있다. 한 학생은 여러 강좌에 등록할 수 있고, 한 강좌에는 여러 학생이 있을 수 있다. 이를 모델링하기 위해 Registration entity를 만든다. Registration의 Primary Key와 Foreign Key는 무엇인가?",
+        "stem": "학생(Student) 엔티티와 강좌(Course) 엔티티가 있다. 한 학생은 여러 강좌에 등록할 수 있고, 한 강좌에는 여러 학생이 있을 수 있다. 이를 모델링하기 위해 등록(Registration) 엔티티를 만든다. 등록의 Primary Key와 Foreign Key는 무엇인가?",
         "options": [
           {
             "key": "A",

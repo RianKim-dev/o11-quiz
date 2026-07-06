@@ -40,7 +40,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "당신은 e-커머스 플랫폼을 위한 ProductRating Block을 설계하고 있다. 이 Block은 제품의 별점(star rating)을 표시한다. 다음 중 Block 아키텍처에 대한 설명으로 올바른 것은?",
+        "stem": "당신은 e-커머스 플랫폼을 위한 ProductRating Block을 설계하고 있다. 이 Block은 상품(Product)의 별점(star rating)을 표시한다. 다음 중 Block 아키텍처에 대한 설명으로 올바른 것은?",
         "options": [
           {
             "key": "A",
@@ -103,7 +103,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "OrderSummary Block에서, 고객이 'Cancel Order' 버튼을 클릭할 때 상위 Screen에 이를 알려야 한다. 상위 Screen은 이에 대응하여 자체 로직을 실행해야 한다. Block과 상위 항목(parent) 간의 통신은 어떻게 구현해야 하는가?",
+        "stem": "OrderSummary Block에서, 고객(Customer)이 'Cancel Order' 버튼을 클릭할 때 상위 Screen에 이를 알려야 한다. 상위 Screen은 이에 대응하여 자체 로직을 실행해야 한다. Block과 상위 항목(parent) 간의 통신은 어떻게 구현해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -355,7 +355,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "당신은 고객 주소 정보를 표시하는 CustomerAddress Block을 설계하고 있다. 이 Block은 여러 Screen(CustomerList, CustomerDetail, OrderCheckout)에서 재사용될 것이다. 동일한 UI 디자인을 각 Screen에 복사하는 대신 Block을 사용하는 것의 주요(PRIMARY) 장점은 무엇인가?",
+        "stem": "당신은 고객(Customer) 주소 정보를 표시하는 CustomerAddress Block을 설계하고 있다. 이 Block은 여러 Screen(CustomerList, CustomerDetail, OrderCheckout)에서 재사용될 것이다. 동일한 UI 디자인을 각 Screen에 복사하는 대신 Block을 사용하는 것의 주요(PRIMARY) 장점은 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -418,7 +418,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "당신의 MovieDetail Screen에서, StarDisplay Block은 사용자 평점(클릭으로 수정 가능)과 평균 평점(읽기 전용)을 표시한다. 등록된 사용자가 사용자 평점 Block에서 별을 클릭하면:\n\n1. 선택한 별 번호와 함께 StarClicked 이벤트가 트리거된다\n2. 상위 Screen의 이벤트 핸들러가 SelectedStar 파라미터를 받는다\n3. 평점이 데이터베이스에 저장된다\n4. 별 표시를 새로고침하기 위해 StarDisplay Block의 On Parameters Changed 이벤트가 트리거되어야 한다\n\n별이 Screen에서 즉시 업데이트되기 위해 필요한(NECESSARY) 단계는 무엇인가?",
+        "stem": "당신의 MovieDetail Screen에서, StarDisplay Block은 사용자(User) 평점(클릭으로 수정 가능)과 평균 평점(읽기 전용)을 표시한다. 등록된 사용자가 사용자 평점 Block에서 별을 클릭하면:\n\n1. 선택한 별 번호와 함께 StarClicked 이벤트가 트리거된다\n2. 상위 Screen의 이벤트 핸들러가 SelectedStar 파라미터를 받는다\n3. 평점이 데이터베이스에 저장된다\n4. 별 표시를 새로고침하기 위해 StarDisplay Block의 On Parameters Changed 이벤트가 트리거되어야 한다\n\n별이 Screen에서 즉시 업데이트되기 위해 필요한(NECESSARY) 단계는 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -482,7 +482,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "당신은 제품 재고 수준을 표시하는 InventoryStatus Block을 가지고 있다. 이 Block은 Quantity라는 Input Parameter를 가진다. Block 내부에서, CurrentStock이라는 로컬 변수를 수정하는 여러 작업을 수행한다. 이후, 상위 Screen이 Block의 Quantity Input Parameter를 업데이트한다. 다음을 분석하시오:\n\n1. On Initialize 이벤트는 Block이 처음 로드될 때 실행된다.\n2. On Parameters Changed 이벤트는 상위 항목이 Quantity Input을 업데이트할 때 실행된다.\n3. Block의 로직 내에서 CurrentStock을 수정하면, On Parameters Changed 이벤트가 실행된다.\n4. 단일 Block 인스턴스는 On Initialize와 On Parameters Changed 이벤트를 동시에 모두 활성화할 수 있다.",
+        "stem": "당신은 제품(Product) 재고 수준을 표시하는 InventoryStatus Block을 가지고 있다. 이 Block은 Quantity라는 Input Parameter를 가진다. Block 내부에서, CurrentStock이라는 로컬 변수를 수정하는 여러 작업을 수행한다. 이후, 상위 Screen이 Block의 Quantity Input Parameter를 업데이트한다. 다음을 분석하시오:\n\n1. On Initialize 이벤트는 Block이 처음 로드될 때 실행된다.\n2. On Parameters Changed 이벤트는 상위 항목이 Quantity Input을 업데이트할 때 실행된다.\n3. Block의 로직 내에서 CurrentStock을 수정하면, On Parameters Changed 이벤트가 실행된다.\n4. 단일 Block 인스턴스는 On Initialize와 On Parameters Changed 이벤트를 동시에 모두 활성화할 수 있다.",
         "options": [
           {
             "key": "A",
@@ -545,7 +545,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "당신은 고객이 할인 코드를 입력하고 검증할 수 있는 DiscountCode Block을 구현하고 있다. 이 Block은 검증 결과(유효/무효)와 할인 금액을 상위 Invoice Screen에 다시 전달해야 한다. 이 통신을 구현하는 올바른(CORRECT) 방법은 무엇인가?",
+        "stem": "당신은 고객(Customer)이 할인 코드를 입력하고 검증할 수 있는 DiscountCode Block을 구현하고 있다. 이 Block은 검증 결과(유효/무효)와 할인 금액을 상위 Invoice Screen에 다시 전달해야 한다. 이 통신을 구현하는 올바른(CORRECT) 방법은 무엇인가?",
         "options": [
           {
             "key": "A",
@@ -604,23 +604,23 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Web Block에 Input Parameter CustomerId가 있고, 블록 내부 Aggregate가 이 CustomerId로 필터링합니다. 부모 화면이 CustomerId 값을 변경합니다. 블록의 Aggregate가 새 데이터를 표시하게 하려면 개발자는 무엇을 해야 합니까?",
+        "stem": "Web Block에 Input Parameter CustomerId가 있고, Block 내부의 Aggregate가 이 CustomerId로 필터링한다. 상위 Screen이 CustomerId 값을 변경한다. Block의 Aggregate가 새 데이터를 표시하게 하려면 개발자는 무엇을 해야 하는가?",
         "options": [
           {
             "key": "A",
-            "text": "아무것도 안 해도 됩니다 — 입력이 바뀌면 플랫폼이 블록 내 모든 Aggregate를 자동으로 다시 실행합니다."
+            "text": "아무것도 하지 않아도 된다 — Input이 변경되면 플랫폼이 Block 내 모든 Aggregate를 자동으로 다시 실행한다."
           },
           {
             "key": "B",
-            "text": "블록의 On Parameters Changed 이벤트 핸들러 안에서 해당 Aggregate에 Refresh Data를 호출해야 합니다."
+            "text": "Block의 On Parameters Changed 이벤트 핸들러 안에서 해당 Aggregate에 Refresh Data를 호출해야 한다."
           },
           {
             "key": "C",
-            "text": "화면에서 Refresh Data를 호출하면 블록으로 전파됩니다."
+            "text": "Screen에서 Refresh Data를 호출하면 Block으로 전파된다."
           },
           {
             "key": "D",
-            "text": "블록 내부의 Aggregate는 블록이 로드된 후에는 새로고침할 수 없습니다."
+            "text": "Block 내부의 Aggregate는 Block이 로드된 후에는 새로고침할 수 없다."
           }
         ]
       }
@@ -868,7 +868,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "product 카드를 그리는 재사용 Block이 5개의 product를 도는 'For Each' 안에 배치되어 있습니다. 각 Block 인스턴스에는 'On Initialize' 이벤트가 있습니다. Screen이 로드될 때 이 'On Initialize' 로직은 총 몇 번 실행됩니까?",
+        "stem": "상품(Product) 카드를 그리는 재사용 Block이 5개의 상품을 도는 'For Each' 안에 배치되어 있습니다. 각 Block 인스턴스에는 'On Initialize' 이벤트가 있습니다. Screen이 로드될 때 이 'On Initialize' 로직은 총 몇 번 실행됩니까?",
         "options": [
           {
             "key": "A",
@@ -974,7 +974,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "개발자가 부모 Screen에서 재사용 Block으로 Input Parameter를 통해 큰 'List of Products'를 전달하려 합니다. 가장 중요하게 기억해야 할 제약은 무엇입니까?",
+        "stem": "개발자가 부모 Screen에서 재사용 Block으로 Input Parameter를 통해 큰 상품(Product) List를 전달하려 합니다. 가장 중요하게 기억해야 할 제약은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -982,7 +982,7 @@
           },
           {
             "key": "B",
-            "text": "Block이 그 리스트를 만든 Aggregate를 자동으로 공유·재사용한다."
+            "text": "Block이 그 List를 만든 Aggregate를 자동으로 공유·재사용한다."
           },
           {
             "key": "C",
@@ -990,7 +990,7 @@
           },
           {
             "key": "D",
-            "text": "Block이 List 파라미터를 받으려면 반드시 'List' 위젯 안에 배치되어야 한다."
+            "text": "Block이 List Parameter를 받으려면 반드시 'List' Widget 안에 배치되어야 한다."
           }
         ]
       }
@@ -1292,7 +1292,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'AddressForm' Block이 한 화면에 여러 번(청구지, 배송지) 배치되어 있습니다. 그중 한 인스턴스에 'Validation' 오류가 있습니다. 이것이 동일한 Block의 다른 인스턴스에 어떤 영향을 줍니까?",
+        "stem": "'AddressForm' Block이 하나의 Screen에 여러 번(청구지, 배송지) 배치되어 있습니다. 그중 한 인스턴스에 'Validation' 오류가 있습니다. 이것이 동일한 Block의 다른 인스턴스에 어떤 영향을 줍니까?",
         "options": [
           {
             "key": "A",
@@ -1398,7 +1398,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Block에 'On Parameters Changed' 이벤트가 있습니다. 부모 Screen의 Client Action이 하나의 action flow 안에서 Block의 서로 다른 Input Parameter에 바인딩된 세 개의 local variable을 변경합니다. 'On Parameters Changed' 이벤트는 몇 번 실행됩니까?",
+        "stem": "Block에 'On Parameters Changed' 이벤트가 있습니다. Parent Screen의 Client Action이 하나의 action flow 안에서 Block의 서로 다른 Input Parameter에 바인딩된 세 개의 Local Variable을 변경합니다. 'On Parameters Changed' 이벤트는 몇 번 실행됩니까?",
         "options": [
           {
             "key": "A",
@@ -1410,7 +1410,7 @@
           },
           {
             "key": "C",
-            "text": "정확히 한 번, 부모의 Client Action이 변경을 모두 적용한 후."
+            "text": "정확히 한 번, Parent Screen의 Client Action이 변경을 모두 적용한 후."
           },
           {
             "key": "D",
@@ -1451,7 +1451,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Input Parameter 'ImageURL'을 가진 Block 'UserAvatar'가 'GetUsers.List'에 바인딩된 List 안에 놓여 있습니다. Reactive Web 앱에서 각 사용자의 프로필 사진에 'ImageURL'을 바인딩하려면 어떻게 해야 합니까?",
+        "stem": "Input Parameter 'ImageURL'을 가진 Block 'UserAvatar'가 'GetUsers.List'에 바인딩된 List 안에 놓여 있습니다. Reactive Web 앱에서 각 사용자(User)의 프로필 사진에 'ImageURL'을 바인딩하려면 어떻게 해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -1508,11 +1508,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Aggregate가 가져온 마지막 Task의 Title."
+            "text": "Aggregate가 가져온 마지막 태스크(Task)의 Title."
           },
           {
             "key": "B",
-            "text": "클릭한 행과 무관하게, 데이터베이스의 첫 번째 Task의 Title."
+            "text": "클릭한 행과 무관하게, 데이터베이스의 첫 번째 태스크의 Title."
           },
           {
             "key": "C",
@@ -1520,7 +1520,7 @@
           },
           {
             "key": "D",
-            "text": "Link를 클릭한 바로 그 행에 있는 Task의 Title."
+            "text": "Link를 클릭한 바로 그 행에 있는 태스크의 Title."
           }
         ]
       }
@@ -1610,7 +1610,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "input parameter CustomerId를 가진 Block이 List 안에 배치되어 있다. 화면이 10개 행의 List를 처음 로드할 때 Block의 On Parameters Changed 이벤트는 총 몇 번 실행되는가?",
+        "stem": "Input Parameter CustomerId를 가진 Block이 List 안에 배치되어 있다. Screen이 10개 행의 List를 처음 로드할 때 Block의 On Parameters Changed 이벤트는 총 몇 번 실행되는가?",
         "options": [
           {
             "key": "A",
@@ -1769,7 +1769,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "개발자가 앱의 모든 화면에서 동일하게 보이고 동작하는 내비게이션 메뉴를 만들려고 합니다. 이를 위한 가장 적합한 UI 컴포넌트는 무엇입니까?",
+        "stem": "개발자가 앱의 모든 Screen에서 동일하게 보이고 동작하는 내비게이션 메뉴를 만들려고 합니다. 이를 위한 가장 적합한 UI 컴포넌트는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1826,7 +1826,7 @@
         "options": [
           {
             "key": "A",
-            "text": "애플리케이션 내 어떤 화면이든 처리할 수 있다"
+            "text": "애플리케이션 내 어떤 Screen이든 처리할 수 있다"
           },
           {
             "key": "B",
@@ -1875,7 +1875,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "개발자가 List 안에 Block을 배치했습니다. Block에는 Input Parameter Price가 있고 List는 상품 리스트에 바인딩됩니다. Client Action이 소스 리스트에서 한 상품의 가격을 변경하면 그 행의 Block 인스턴스는 어떻게 됩니까?",
+        "stem": "개발자가 List 안에 Block을 배치했습니다. Block에는 Input Parameter Price가 있고 List는 상품(Product) 리스트에 바인딩됩니다. Client Action이 소스 리스트에서 한 상품의 가격을 변경하면 그 행의 Block 인스턴스는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -2091,7 +2091,7 @@
         "options": [
           {
             "key": "A",
-            "text": "부모 화면이나 부모 block이 그 Block의 Input Parameter 중 하나로 전달되는 값을 바꿀 때마다 실행된다."
+            "text": "부모 Screen이나 부모 Block이 그 Block의 Input Parameter 중 하나로 전달되는 값을 바꿀 때마다 실행된다."
           },
           {
             "key": "B",

@@ -95,11 +95,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "전자상거래 오더 관리 모듈을 구축하고 있다. 다음 중 Client Variable의 사용 사례로 적절하지 않은 것은?",
+        "stem": "전자상거래 주문(Order) 관리 모듈을 구축하고 있다. 다음 중 Client Variable의 사용 사례로 적절하지 않은 것은?",
         "options": [
           {
             "key": "A",
-            "text": "페이지당 표시할 오더 항목 수에 대한 고객의 선호 설정을 저장한다."
+            "text": "페이지당 표시할 주문(Order) 항목 수에 대한 고객(Customer)의 선호 설정을 저장한다."
           },
           {
             "key": "B",
@@ -107,7 +107,7 @@
           },
           {
             "key": "C",
-            "text": "고객이 선택한 오더 필터(예: 전체 오더, 대기 중 오더, 완료된 오더)를 저장한다."
+            "text": "고객이 선택한 주문 필터(예: 전체 주문, 대기 중 주문, 완료된 주문)를 저장한다."
           },
           {
             "key": "D",
@@ -154,7 +154,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "영화 검색 실습에서 장르에 대한 Aggregate 필터 조건은 다음과 같다: 'Client.MovieGenreId = NullIdentifier() or Movie.GenreId = Client.MovieGenreId'. 이 표현식에서 NullIdentifier() 체크가 필요한 이유는?",
+        "stem": "영화(Movie) 검색 실습에서 장르(Genre)에 대한 Aggregate 필터 조건은 다음과 같다: 'Client.MovieGenreId = NullIdentifier() or Movie.GenreId = Client.MovieGenreId'. 이 표현식에서 NullIdentifier() 체크가 필요한 이유는?",
         "options": [
           {
             "key": "A",
@@ -162,7 +162,7 @@
           },
           {
             "key": "B",
-            "text": "사용자가 장르를 선택하지 않은 경우(Client.MovieGenreId가 NullIdentifier()일 때) 결과가 없는 대신 모든 영화가 표시되도록 한다."
+            "text": "사용자가 장르(Genre)를 선택하지 않은 경우(Client.MovieGenreId가 NullIdentifier()일 때) 결과가 없는 대신 모든 영화(Movie)가 표시되도록 한다."
           },
           {
             "key": "C",
@@ -213,11 +213,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "직원 교육 포털에서는 각 직원이 한 번에 보고자 하는 교육 과정 수를 기억하기 위해 'ItemsPerPage' Client Variable을 저장한다. 한 직원이 로그아웃하고 다른 직원이 동일한 브라우저에서 로그인할 때, 'ItemsPerPage' Client Variable은 어떻게 되는가?",
+        "stem": "직원(Employee) 교육 포털에서는 각 직원이 한 번에 보고자 하는 교육 과정(Course) 수를 기억하기 위해 'ItemsPerPage' Client Variable을 저장한다. 한 직원이 로그아웃하고 다른 직원이 동일한 브라우저에서 로그인할 때, 'ItemsPerPage' Client Variable은 어떻게 되는가?",
         "options": [
           {
             "key": "A",
-            "text": "두 번째 직원이 수동으로 변경할 때까지 이전 직원의 설정이 유지된다."
+            "text": "두 번째 직원(Employee)이 수동으로 변경할 때까지 이전 직원의 설정이 유지된다."
           },
           {
             "key": "B",
@@ -390,7 +390,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "영화 검색 구현에서 필터 표현식은 와일드카드를 포함한 LIKE 조건에서 'Client.MovieSearchText'를 사용합니다: Movie.Title like \"%\" + Client.MovieSearchText + \"%\". 사용자가 입력 필드를 지우면 필터의 동작은?",
+        "stem": "영화(Movie) 검색 구현에서 필터 표현식은 와일드카드를 포함한 LIKE 조건에서 'Client.MovieSearchText'를 사용합니다: Movie.Title like \"%\" + Client.MovieSearchText + \"%\". 사용자가 입력 필드를 지우면 필터의 동작은?",
         "options": [
           {
             "key": "A",
@@ -398,7 +398,7 @@
           },
           {
             "key": "B",
-            "text": "패턴이 모든 제목이나 빈 텍스트를 포함하는 모든 제목과 일치하므로 필터가 모든 영화를 표시합니다."
+            "text": "패턴이 모든 제목이나 빈 텍스트를 포함하는 모든 제목과 일치하므로 필터가 모든 영화(Movie)를 표시합니다."
           },
           {
             "key": "C",
@@ -509,15 +509,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "e-러닝 플랫폼에서는 Client Variable 'SelectedCourseId'를 사용하여 학생이 보고 있는 코스를 추적합니다. 학생이 코스 A를 보고 있다가 등급을 확인하기 위해 다른 화면으로 이동했다가 코스 화면으로 돌아올 때, 'SelectedCourseId' Client Variable의 상태는?",
+        "stem": "e-러닝 플랫폼에서는 Client Variable 'SelectedCourseId'를 사용하여 학생(Student)이 보고 있는 코스(Course)를 추적합니다. 학생이 코스 A를 보고 있다가 등급을 확인하기 위해 다른 화면으로 이동했다가 코스 화면으로 돌아올 때, 'SelectedCourseId' Client Variable의 상태는?",
         "options": [
           {
             "key": "A",
-            "text": "화면 간 탐색 시 Client Variable이 유지되므로 코스 A의 값을 유지합니다."
+            "text": "화면 간 탐색 시 Client Variable이 유지되므로 코스(Course) A의 값을 유지합니다."
           },
           {
             "key": "B",
-            "text": "학생이 코스 화면을 떠났으므로 기본값으로 초기화됩니다."
+            "text": "학생(Student)이 코스 화면을 떠났으므로 기본값으로 초기화됩니다."
           },
           {
             "key": "C",
@@ -732,7 +732,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Client Action에서 개발자가 LastSearch라는 Client Variable을 새 문자열로 업데이트한 뒤, 곧바로 같은 Environment에서 실행되는 다른 애플리케이션으로 navigate합니다. 두 번째 애플리케이션에서 LastSearch를 읽으면 그 값은 어떤 상태입니까?",
+        "stem": "Client Action에서 개발자가 LastSearch라는 Client Variable을 새 문자열로 업데이트한 뒤, 곧바로 같은 Environment에서 실행되는 다른 애플리케이션으로 이동합니다. 두 번째 애플리케이션에서 LastSearch를 읽으면 그 값은 어떤 상태입니까?",
         "options": [
           {
             "key": "A",

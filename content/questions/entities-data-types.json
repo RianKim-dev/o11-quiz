@@ -292,7 +292,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order Entity가 있으며, 각 Order가 정확히 하나의 Customer를 참조하는 관계를 생성해야 한다. Order의 참조 속성(reference attribute)은 어떤 데이터 타입이어야 하는가?",
+        "stem": "Order Entity가 있으며, 각 주문(Order)이 정확히 하나의 고객(Customer)을 참조하는 관계를 생성해야 한다. 주문의 참조 속성(reference attribute)은 어떤 데이터 타입이어야 하는가?",
         "options": [
           {
             "key": "A",
@@ -355,15 +355,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order Entity에 Delete Rule이 'Protect'로 설정되어 Customer Entity를 참조하는 CustomerId 속성이 있다. 한 고객이 자신의 계정을 삭제하려고 하지만 시스템이 삭제를 막는다. 그 이유는 무엇인가?",
+        "stem": "Order Entity에 Delete Rule이 'Protect'로 설정되어 Customer Entity를 참조하는 CustomerId 속성이 있다. 한 고객(Customer)이 자신의 계정을 삭제하려고 하지만 시스템이 삭제를 막는다. 그 이유는 무엇인가?",
         "options": [
           {
             "key": "A",
-            "text": "해당 고객에게 계정을 삭제할 수 있는 필요한 권한이 없다."
+            "text": "해당 고객(Customer)에게 계정을 삭제할 수 있는 필요한 권한이 없다."
           },
           {
             "key": "B",
-            "text": "해당 고객의 CustomerId와 연결된 Order 레코드가 하나 이상 존재하며, Delete Rule이 고아(orphaned) Order가 생기는 것을 방지한다."
+            "text": "해당 고객(Customer)의 CustomerId와 연결된 주문(Order) 레코드가 하나 이상 존재하며, Delete Rule이 고아(orphaned) 주문이 생기는 것을 방지한다."
           },
           {
             "key": "C",
@@ -481,7 +481,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order 데이터 모델을 설계하고 있다. 하나의 Order는 여러 Product를 포함할 수 있고, 하나의 Product는 여러 Order에 속할 수 있다. 이 다대다(many-to-many) 관계를 구현하려면 어떤 Entity 구조가 필요한가?",
+        "stem": "주문(Order) 데이터 모델을 설계하고 있다. 하나의 주문은 여러 상품(Product)을 포함할 수 있고, 하나의 상품은 여러 주문에 속할 수 있다. 이 다대다(many-to-many) 관계를 구현하려면 어떤 Entity 구조가 필요한가?",
         "options": [
           {
             "key": "A",
@@ -544,7 +544,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Order Entity를 확장하기 위해 Invoice Entity를 생성할 때(1대1 관계), Invoice가 정확히 하나의 Order에 연결되도록 보장하려면 무엇을 해야 하는가?",
+        "stem": "Order Entity를 확장하기 위해 Invoice Entity를 생성할 때(1대1 관계), 청구서(Invoice)가 정확히 하나의 주문(Order)에 연결되도록 보장하려면 무엇을 해야 하는가?",
         "options": [
           {
             "key": "A",
@@ -607,11 +607,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate에서 직원 이름과 함께 'FirstName LastName (DepartmentName)' 형식으로 표시되는 계산 필드를 함께 표시하려고 한다. 이 계산 필드를 어디에 정의해야 하는가?",
+        "stem": "Aggregate에서 직원(Employee) 이름과 함께 'FirstName LastName (DepartmentName)' 형식으로 표시되는 계산 필드를 함께 표시하려고 한다. 이 계산 필드를 어디에 정의해야 하는가?",
         "options": [
           {
             "key": "A",
-            "text": "Employee Entity에 새로운 속성으로 정의한다."
+            "text": "Employee Entity에 새로운 Attribute로 정의한다."
           },
           {
             "key": "B",
@@ -623,7 +623,7 @@
           },
           {
             "key": "D",
-            "text": "사용자 인터페이스 화면에서 바인딩 Expression을 가진 Text 위젯을 사용하여 정의한다."
+            "text": "사용자 인터페이스 화면에서 바인딩 Expression을 가진 Text Widget을 사용하여 정의한다."
           }
         ]
       }
@@ -725,7 +725,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee entity에서 두 직원이 같은 Email을 가질 수 없도록 보장해야 합니다. OutSystems에서 가장 효율적이고 표준적인 방법은?",
+        "stem": "Employee entity에서 두 직원(Employee)이 같은 Email을 가질 수 없도록 보장해야 합니다. OutSystems에서 가장 효율적이고 표준적인 방법은?",
         "options": [
           {
             "key": "A",
@@ -733,7 +733,7 @@
           },
           {
             "key": "B",
-            "text": "SaveEmployee Server Action에서 매번 CreateOrUpdate 전에 Aggregate로 이메일 존재 여부를 확인한다."
+            "text": "SaveEmployee Server Action에서 매번 CreateOrUpdate 전에 Aggregate로 Email 존재 여부를 확인한다."
           },
           {
             "key": "C",
@@ -741,7 +741,7 @@
           },
           {
             "key": "D",
-            "text": "OutSystems가 Email 데이터 타입 attribute에 대해 중복 값을 자동으로 막아준다."
+            "text": "OutSystems가 Email Data Type attribute에 대해 중복 값을 자동으로 막아준다."
           }
         ]
       }
@@ -843,15 +843,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Employee 엔터티에 프로필 사진 기능을 추가하려 합니다. 모든 직원의 이름과 전화번호를 나열하는 Aggregate의 성능을 좋게 유지하려면 이미지를 어떻게 저장해야 합니까?",
+        "stem": "Employee Entity에 프로필 사진 기능을 추가하려 합니다. 모든 직원(Employee)의 이름과 전화번호를 나열하는 Aggregate의 성능을 좋게 유지하려면 이미지를 어떻게 저장해야 합니까?",
         "options": [
           {
             "key": "A",
-            "text": "Employee 엔터티에 Picture(Binary Data) 특성을 직접 추가합니다."
+            "text": "Employee Entity에 Picture(Binary Data) Attribute를 직접 추가합니다."
           },
           {
             "key": "B",
-            "text": "Binary Data 특성과 EmployeeId를 Primary Key로 갖는 별도의 EmployeePicture 엔터티(1대1 관계)를 만듭니다."
+            "text": "Binary Data Attribute와 EmployeeId를 Primary Key로 갖는 별도의 EmployeePicture Entity(1대1 관계)를 만듭니다."
           },
           {
             "key": "C",
@@ -950,7 +950,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Entity 'Order'에서 어떤 두 주문도 동일한 'TrackingNumber'(Text 속성)를 갖지 않도록 보장해야 합니다. 이를 구현하는 가장 견고한 방법은 무엇입니까?",
+        "stem": "Entity 'Order'에서 어떤 두 주문(Order)도 동일한 'TrackingNumber'(Text Attribute)를 갖지 않도록 보장해야 합니다. 이를 구현하는 가장 견고한 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -966,7 +966,7 @@
           },
           {
             "key": "D",
-            "text": "'Order' 엔티티의 'TrackingNumber' 속성에 Unique Index를 생성한다."
+            "text": "'Order' Entity의 'TrackingNumber' Attribute에 Unique Index를 생성한다."
           }
         ]
       }
@@ -1015,7 +1015,7 @@
           },
           {
             "key": "C",
-            "text": "'CreateProduct' 액션을 호출하기 전에 Client Action으로 해당 코드를 먼저 검색한다."
+            "text": "'CreateProduct' Action을 호출하기 전에 Client Action으로 해당 코드를 먼저 검색한다."
           },
           {
             "key": "D",
@@ -1056,11 +1056,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Customer' Entity의 모든 행에서 'Email' 속성이 유일하도록 보장하려면, 가장 좋은 방법은 무엇입니까?",
+        "stem": "'Customer' Entity의 모든 행에서 'Email' Attribute가 유일하도록 보장하려면, 가장 좋은 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "모든 이메일을 Static Entity에 저장한다."
+            "text": "모든 Email을 Static Entity에 저장한다."
           },
           {
             "key": "B",
@@ -1068,11 +1068,11 @@
           },
           {
             "key": "C",
-            "text": "'Email' 속성을 Mandatory로 설정한다."
+            "text": "'Email' Attribute를 Mandatory로 설정한다."
           },
           {
             "key": "D",
-            "text": "'Email' 속성에 Unique Index를 만든다."
+            "text": "'Email' Attribute에 Unique Index를 만든다."
           }
         ]
       }
@@ -1109,7 +1109,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity 'Priority'가 'Ticket' 엔티티의 필수 foreign key로 사용되며 애플리케이션 로직에서도 참조되고 있습니다. Service Studio에서 이 'Priority' 레코드 하나를 삭제하려 하면 플랫폼이 이를 막습니다. 이유는 무엇입니까?",
+        "stem": "Static Entity 'Priority'가 'Ticket' Entity의 필수 foreign key로 사용되며 애플리케이션 로직에서도 참조되고 있습니다. Service Studio에서 이 'Priority' 레코드 하나를 삭제하려 하면 플랫폼이 이를 막습니다. 이유는 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1280,7 +1280,7 @@
           },
           {
             "key": "C",
-            "text": "'TenantId'는 자동으로 관리되어 인덱스에 포함될 수 없으므로 insert가 실패한다."
+            "text": "'TenantId'는 자동으로 관리되어 Index에 포함될 수 없으므로 insert가 실패한다."
           },
           {
             "key": "D",
@@ -1321,7 +1321,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Invoice' 엔티티가 있고, 모든 레코드의 'InvoiceNumber'가 고정된 패턴(예: 'INV-123')을 따르도록 보장해야 하며, 이 규칙은 데이터 import로 레코드가 생성될 때에도 지켜져야 합니다. 어디에서 강제하는 것이 가장 좋습니까?",
+        "stem": "'Invoice' Entity가 있고, 모든 레코드의 'InvoiceNumber'가 고정된 패턴(예: 'INV-123')을 따르도록 보장해야 하며, 이 규칙은 데이터 import로 레코드가 생성될 때에도 지켜져야 합니다. 어디에서 강제하는 것이 가장 좋습니까?",
         "options": [
           {
             "key": "A",
@@ -1333,7 +1333,7 @@
           },
           {
             "key": "C",
-            "text": "화면 Input 위젯의 On Change 이벤트에서 처리한다."
+            "text": "Screen에 있는 Input Widget의 On Change 이벤트에서 처리한다."
           },
           {
             "key": "D",
@@ -1374,7 +1374,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity 'Severity'에 Integer 타입 속성 'Weight'가 있습니다. 'Incident' 엔티티에는 이 severity들을 참조하는 레코드가 100개 있습니다. Service Studio에서 'High' 레코드의 'Weight'를 10에서 20으로 바꾸고 publish합니다. Incident 레코드의 상태는 어떻게 됩니까?",
+        "stem": "Static Entity 'Severity'에 Integer 타입 속성 'Weight'가 있습니다. 'Incident' Entity에는 이 Severity들을 참조하는 레코드가 100개 있습니다. Service Studio에서 'High' 레코드의 'Weight'를 10에서 20으로 바꾸고 publish합니다. Incident 레코드의 상태는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -1382,7 +1382,7 @@
           },
           {
             "key": "B",
-            "text": "Incident 레코드는 그대로지만, Severity.Weight를 읽는 모든 로직은 'High' incident에 대해 즉시 새 값 20을 사용한다."
+            "text": "Incident 레코드는 그대로지만, Severity.Weight를 읽는 모든 로직은 'High' Incident에 대해 즉시 새 값 20을 사용한다."
           },
           {
             "key": "C",
@@ -1431,7 +1431,7 @@
         "options": [
           {
             "key": "A",
-            "text": "불가능하다. multi-tenant 엔티티는 테넌트별 유일성만 강제할 수 있다."
+            "text": "불가능하다. multi-tenant Entity는 Tenant별 유일성만 강제할 수 있다."
           },
           {
             "key": "B",
@@ -1439,11 +1439,11 @@
           },
           {
             "key": "C",
-            "text": "엔티티를 Public = Yes, Expose Process Events = No로 설정한다."
+            "text": "Entity를 Public = Yes, Expose Process Events = No로 설정한다."
           },
           {
             "key": "D",
-            "text": "모든 account number를 별도의 'Singleton' 엔티티에 저장한다."
+            "text": "모든 account number를 별도의 'Singleton' Entity에 저장한다."
           }
         ]
       }
@@ -1480,15 +1480,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Product' 엔티티에 Binary Data 타입의 'Image' 속성이 있습니다. 주 엔티티의 Aggregate 성능을 높이기 위해 'Image'를 별도의 'ProductImage' 엔티티로 옮깁니다. 이것이 성능을 개선하는 주된 이유는 무엇입니까?",
+        "stem": "'Product' Entity에 Binary Data 타입의 'Image' 속성이 있습니다. 주 Entity의 Aggregate 성능을 높이기 위해 'Image'를 별도의 'ProductImage' Entity로 옮깁니다. 이것이 성능을 개선하는 주된 이유는 무엇입니까?",
         "options": [
           {
             "key": "A",
-            "text": "주 엔티티의 행 크기가 줄어들어, 스캔 시 데이터베이스가 메모리 페이지(Buffer Pool)에 더 많은 행을 담을 수 있다."
+            "text": "주 Entity의 행 크기가 줄어들어, 스캔 시 데이터베이스가 메모리 페이지(Buffer Pool)에 더 많은 행을 담을 수 있다."
           },
           {
             "key": "B",
-            "text": "Binary Data 속성은 인덱스를 걸 수 없어 Aggregate의 모든 필터를 느리게 만든다."
+            "text": "Binary Data 속성은 Index를 걸 수 없어 Aggregate의 모든 필터를 느리게 만든다."
           },
           {
             "key": "C",
@@ -1496,7 +1496,7 @@
           },
           {
             "key": "D",
-            "text": "Binary Data는 extension 엔티티에서만 지원된다."
+            "text": "Binary Data는 extension Entity에서만 지원된다."
           }
         ]
       }
@@ -1541,7 +1541,7 @@
           },
           {
             "key": "B",
-            "text": "컬럼은 NULLable로 남고, 값 존재 여부는 플랫폼의 CRUD 액션만 검사한다."
+            "text": "컬럼은 NULLable로 남고, 값 존재 여부는 플랫폼의 CRUD Action만 검사한다."
           },
           {
             "key": "C",
@@ -1549,7 +1549,7 @@
           },
           {
             "key": "D",
-            "text": "Mandatory는 UI 위젯에서만 강제되고 데이터베이스에서는 전혀 강제되지 않는다."
+            "text": "Mandatory는 UI Widget에서만 강제되고 데이터베이스에서는 전혀 강제되지 않는다."
           }
         ]
       }
@@ -1586,7 +1586,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Order' 엔티티의 'TotalAmount'를 Decimal 속성을 사용해 통화 값으로 저장하려고 합니다. 가장 적절한 구성은 무엇입니까?",
+        "stem": "'Order' Entity의 'TotalAmount'를 Decimal 속성을 사용해 통화 값으로 저장하려고 합니다. 가장 적절한 구성은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1639,7 +1639,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "동일한 속성을 가진 'Order' 엔티티와 'OrderArchive' 엔티티가 있고, 오래된 주문을 아카이브로 옮기면서 각 주문의 원본 'Id'를 그대로 유지하려고 합니다. 아카이브에서 원본 'Id'를 유지하는 가장 효율적인 방법은 무엇입니까?",
+        "stem": "동일한 속성을 가진 'Order' Entity와 'OrderArchive' Entity가 있고, 오래된 주문(Order)을 아카이브로 옮기면서 각 주문의 원본 'Id'를 그대로 유지하려고 합니다. 아카이브에서 원본 'Id'를 유지하는 가장 효율적인 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -1745,7 +1745,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Employee' 엔티티의 'Email' 속성에 Unique Index가 있습니다. Server Action에서 'CreateOrUpdateEmployee'를 호출해 이미 존재하는 Email을 가진 새 레코드를 저장합니다. 어떤 일이 발생합니까?",
+        "stem": "'Employee' Entity의 'Email' 속성에 Unique Index가 있습니다. Server Action에서 'CreateOrUpdateEmployee'를 호출해 이미 존재하는 Email을 가진 새 레코드를 저장합니다. 어떤 일이 발생합니까?",
         "options": [
           {
             "key": "A",
@@ -1798,7 +1798,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Invoice' 엔티티와 Static Entity 'InvoiceStatus'(Draft, Sent, Paid)가 있고, 특정 시점에 'Customer'당 'Draft' 상태의 인보이스가 최대 하나만 존재하도록 보장하려고 합니다. 이를 데이터베이스 수준에서 어떻게 강제할 수 있습니까?",
+        "stem": "'Invoice' 엔티티와 Static Entity 'InvoiceStatus'(Draft, Sent, Paid)가 있고, 특정 시점에 각 'Customer'당 'Draft' 상태의 Invoice가 최대 하나만 존재하도록 보장하려고 합니다. 이를 데이터베이스 수준에서 어떻게 강제할 수 있습니까?",
         "options": [
           {
             "key": "A",
@@ -1851,7 +1851,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Service Studio에서 'Product' 엔티티 속성의 'Default Value'를 'CurrDate()'로 설정하면 어떤 결과가 발생합니까?",
+        "stem": "Service Studio에서 'Product' Entity 속성의 'Default Value'를 'CurrDate()'로 설정하면 어떤 결과가 발생합니까?",
         "options": [
           {
             "key": "A",
@@ -1904,7 +1904,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "멀티테넌트 엔티티 'Product'가 있고, 특정 'Product' 레코드를 Tenant A에서 Tenant B로 옮기려고 합니다. 가장 신뢰할 수 있는 방법은 무엇입니까?",
+        "stem": "Multi-tenant Entity 'Product'가 있고, 특정 'Product' 레코드를 Tenant A에서 Tenant B로 옮기려고 합니다. 가장 신뢰할 수 있는 방법은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -2026,7 +2026,7 @@
           },
           {
             "key": "D",
-            "text": "Aggregate에서 필터링해 '폐기된' 옵션이 드롭다운에 더 이상 나타나지 않게 하면서도 과거 레코드는 그대로 유지하려고."
+            "text": "Aggregate에서 필터링해 '폐기된' 옵션이 Dropdown에 더 이상 나타나지 않게 하면서도 과거 레코드는 그대로 유지하려고."
           }
         ]
       }
@@ -2275,11 +2275,11 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Customer' 엔터티에 별도의 Unique Index를 두 개 만듭니다. 하나는 'Email'에, 다른 하나는 'Username'에 만들 때, 무엇이 보장됩니까?",
+        "stem": "'Customer' Entity에 별도의 Unique Index를 두 개 만듭니다. 하나는 'Email'에, 다른 하나는 'Username'에 만들 때, 무엇이 보장됩니까?",
         "options": [
           {
             "key": "A",
-            "text": "엔터티는 Unique Index를 하나만 가질 수 있으므로 publish가 실패한다."
+            "text": "Entity는 Unique Index를 하나만 가질 수 있으므로 publish가 실패한다."
           },
           {
             "key": "B",
@@ -2328,7 +2328,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Ticket 엔터티의 'Description' Text 속성의 'Max Length'를 50에서 500으로 바꾸고 publish합니다. 데이터 손실 위험이 있습니까?",
+        "stem": "Ticket Entity의 'Description' Text 속성의 'Max Length'를 50에서 500으로 바꾸고 publish합니다. 데이터 손실 위험이 있습니까?",
         "options": [
           {
             "key": "A",
@@ -2487,7 +2487,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Contract' 엔터티에 'EffectiveDate'와 'ExpiryDate'(둘 다 Date), 그리고 'ClientId'가 있습니다. 같은 고객의 두 계약이 기간이 겹치지 않도록 데이터베이스 수준에서 보장하려고 합니다. Service Studio의 Unique Index 기능만으로 이것을 강제할 수 있습니까?",
+        "stem": "'Contract' 엔터티에 'EffectiveDate'와 'ExpiryDate'(둘 다 Date), 그리고 'ClientId'가 있습니다. 같은 고객(Client)의 두 계약(Contract)이 기간이 겹치지 않도록 데이터베이스 수준에서 보장하려고 합니다. Service Studio의 Unique Index 기능만으로 이것을 강제할 수 있습니까?",
         "options": [
           {
             "key": "A",
@@ -2544,7 +2544,7 @@
         "options": [
           {
             "key": "A",
-            "text": "publish 이후 생성되는 신규 주문에 대해서만 적용되고, 기존 주문은 보호된다."
+            "text": "publish 이후 생성되는 신규 주문(Order)에 대해서만 적용되고, 기존 주문은 보호된다."
           },
           {
             "key": "B",
@@ -2646,7 +2646,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "'Product' 엔티티에 'SKU'에 대한 Unique Index가 있습니다. 서로 다른 두 Server Action이 정확히 동시에 실행되어 각각 SKU 'A100'인 Product를 생성하려고 합니다. 어떻게 됩니까?",
+        "stem": "'Product' 엔터티에 'SKU'에 대한 Unique Index가 있습니다. 서로 다른 두 Server Action이 정확히 동시에 실행되어 각각 SKU 'A100'인 상품(Product)를 생성하려고 합니다. 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -2752,15 +2752,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "multi-tenant 엔티티 'Customer'는 서로 다른 tenant에서는 같은 'TaxNumber'가 존재할 수 있어야 하지만, 같은 tenant 내에서는 'TaxNumber'가 유일해야 합니다. Unique Index를 어떻게 구성해야 합니까?",
+        "stem": "multi-tenant Entity 'Customer'는 서로 다른 tenant에서는 같은 'TaxNumber'가 존재할 수 있어야 하지만, 같은 tenant 내에서는 'TaxNumber'가 유일해야 합니다. Unique Index를 어떻게 구성해야 합니까?",
         "options": [
           {
             "key": "A",
-            "text": "'TaxNumber'에만 Unique Index를 만든다 - multi-tenant 엔티티는 Unique Index를 자동으로 tenant 범위로 적용한다."
+            "text": "'TaxNumber'에만 Unique Index를 만든다 - multi-tenant Entity는 Unique Index를 자동으로 tenant 범위로 적용한다."
           },
           {
             "key": "B",
-            "text": "'Before Save' 액션에서 중복을 수동으로 조회한다."
+            "text": "'Before Save' Action에서 중복을 수동으로 조회한다."
           },
           {
             "key": "C",
@@ -2858,7 +2858,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "각 tenant의 사용자가 자신만의 Custom Category를 정의하고, 그 데이터가 tenant별로 격리되어야 하는 멀티테넌트 애플리케이션을 만들고 있습니다. 'Category' Entity를 어떻게 구성해야 합니까?",
+        "stem": "각 tenant의 사용자가 자신만의 Custom Category를 정의하고, 그 데이터가 tenant별로 격리되어야 하는 multi-tenant 애플리케이션을 만들고 있습니다. 'Category' Entity를 어떻게 구성해야 합니까?",
         "options": [
           {
             "key": "A",
@@ -2874,7 +2874,7 @@
           },
           {
             "key": "D",
-            "text": "Entity를 'Public'으로 설정하되 멀티테넌트로는 두지 않는다."
+            "text": "Entity를 'Public'으로 설정하되 multi-tenant로는 두지 않는다."
           }
         ]
       }
@@ -2911,7 +2911,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Static Entity 'Priority'에 'High' 레코드가 있습니다. 'High'의 Label을 'Urgent'로 변경하고 publish하면, 이 priority를 참조하는 기존 'Ticket' 레코드는 어떻게 됩니까?",
+        "stem": "Static Entity 'Priority'에 'High' 레코드가 있습니다. 'High'의 Label을 'Urgent'로 변경하고 publish하면, 이 Priority를 참조하는 기존 'Ticket' 레코드는 어떻게 됩니까?",
         "options": [
           {
             "key": "A",
@@ -3017,7 +3017,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Product 엔티티에 'Description' 속성(Text, Max Length 50)이 있습니다. 개발자가 Max Length를 2000으로 늘려 publish한 뒤 긴 설명을 저장하고, 나중에 다시 50으로 되돌려 publish합니다. 두 번째 publish의 주요 위험은 무엇입니까?",
+        "stem": "Product Entity에 'Description' 속성(Text, Max Length 50)이 있습니다. 개발자가 Max Length를 2000으로 늘려 publish한 뒤 긴 설명을 저장하고, 나중에 다시 50으로 되돌려 publish합니다. 두 번째 publish의 주요 위험은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3282,7 +3282,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Server Action에서 Order 엔티티에 대해 'CreateOrUpdate' 엔티티 액션을 사용합니다. record가 Create될지 Update될지는 무엇으로 결정됩니까?",
+        "stem": "Server Action에서 Order Entity에 대해 'CreateOrUpdate' Entity Action을 사용합니다. record가 Create될지 Update될지는 무엇으로 결정됩니까?",
         "options": [
           {
             "key": "A",
@@ -3335,15 +3335,15 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "모든 'Employee' record의 Salary가 항상 0보다 크도록 최대한의 데이터 무결성으로 보장하려고 합니다. 이 규칙을 적용하기에 가장 좋은 위치는 어디입니까?",
+        "stem": "모든 직원(Employee) record의 Salary가 항상 0보다 크도록 최대한의 데이터 무결성으로 보장하려고 합니다. 이 규칙을 적용하기에 가장 좋은 위치는 어디입니까?",
         "options": [
           {
             "key": "A",
-            "text": "화면에 있는 Salary Input 위젯의 'On Change' 이벤트."
+            "text": "화면에 있는 Salary Input Widget의 'On Change' 이벤트."
           },
           {
             "key": "B",
-            "text": "Employee 엔티티 속성에 'Min Value' 속성을 설정한다."
+            "text": "Employee Entity attribute에 'Min Value' 속성을 설정한다."
           },
           {
             "key": "C",
@@ -3351,7 +3351,7 @@
           },
           {
             "key": "D",
-            "text": "엔티티의 Create/Update를 감싸고 저장 전에 검증하는 Server Action(CRUD wrapper)."
+            "text": "Entity의 Create/Update를 감싸고 저장 전에 검증하는 Server Action(CRUD wrapper)."
           }
         ]
       }
@@ -3388,7 +3388,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "엔티티 속성 'TotalAmount'의 Data Type이 'Currency'로 설정되어 있습니다. 값을 할당하지 않으면 플랫폼이 사용하는 기본값은 무엇입니까?",
+        "stem": "Entity 속성 'TotalAmount'의 Data Type이 'Currency'로 설정되어 있습니다. 값을 할당하지 않으면 플랫폼이 사용하는 기본값은 무엇입니까?",
         "options": [
           {
             "key": "A",
@@ -3828,7 +3828,7 @@
           },
           {
             "key": "D",
-            "text": "데이터베이스의 첫 번째 product의 'Name'."
+            "text": "데이터베이스의 첫 번째 상품(Product)의 'Name'."
           }
         ]
       }
