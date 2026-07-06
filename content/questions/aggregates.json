@@ -6621,5 +6621,161 @@
         ]
       }
     }
+  },
+  {
+    "id": "AGG-122",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'OrderType' has a Boolean attribute 'IsDigital'. A regular Entity 'Order' references 'OrderType'. You need to fetch all Orders that are NOT digital. What is the best practice?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Hardcode the IDs of the non-digital types in the Aggregate filter, e.g. 'Order.OrderTypeId <> 1'."
+      },
+      {
+        "key": "B",
+        "text": "Fetch all Orders and then remove the digital ones with a ListFilter action in the logic."
+      },
+      {
+        "key": "C",
+        "text": "Join 'Order' with 'OrderType' in an Aggregate and filter by 'OrderType.IsDigital = False'."
+      },
+      {
+        "key": "D",
+        "text": "Use an Advanced SQL query with a subquery against the OrderType table."
+      }
+    ],
+    "answer": "C",
+    "explanation": "가장 권장되는 방법은 Aggregate에서 Order와 OrderType를 join한 뒤 'OrderType.IsDigital = False' 조건으로 필터링하는 것입니다. 이렇게 하면 의미가 명확하고 유지보수가 쉬우며 DB에서 효율적으로 걸러집니다. ID를 하드코딩하면(A) 데이터가 바뀔 때 깨지고, 전체를 가져와 로직에서 거르는 방식(B)은 비효율적이며, 단순 Boolean 필터에 Advanced SQL(D)까지 쓸 필요는 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'OrderType'에 Boolean 속성 'IsDigital'이 있습니다. 일반 Entity 'Order'는 'OrderType'을 참조합니다. 디지털이 아닌 모든 Order를 조회하려고 합니다. 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate 필터에 비디지털 타입의 ID를 하드코딩한다(예: 'Order.OrderTypeId <> 1')."
+          },
+          {
+            "key": "B",
+            "text": "모든 Order를 가져온 뒤 로직에서 ListFilter 액션으로 디지털 항목을 제거한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate에서 'Order'와 'OrderType'을 join하고 'OrderType.IsDigital = False'로 필터링한다."
+          },
+          {
+            "key": "D",
+            "text": "OrderType 테이블을 확인하는 서브쿼리가 포함된 Advanced SQL을 사용한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-123",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An 'Order' entity has an 'OrderDate' attribute, and an Aggregate must return the 10 most recent orders. Why does adding an index on 'OrderDate' help this Aggregate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It lets the database do an index scan/seek to retrieve records already sorted, avoiding a full table sort."
+      },
+      {
+        "key": "B",
+        "text": "Aggregates can only filter on attributes that have an index."
+      },
+      {
+        "key": "C",
+        "text": "Indexes automatically cache the results of the 10 most recent queries."
+      },
+      {
+        "key": "D",
+        "text": "It prevents OrderDate from being modified by other users during the query."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OrderDate에 Index를 만들면 데이터베이스가 이미 정렬된 인덱스를 scan/seek하여 상위 10건을 가져올 수 있어 전체 테이블 정렬 비용을 피할 수 있습니다(A). Aggregate는 Index가 없는 속성으로도 필터/정렬이 가능하므로 B는 틀리고, Index는 쿼리 결과를 캐싱(C)하거나 레코드 수정을 잠그는(D) 기능이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Order' Entity에 'OrderDate' 속성이 있고, Aggregate가 가장 최근 주문 10건을 반환해야 합니다. 'OrderDate'에 Index를 추가하는 것이 이 Aggregate에 도움이 되는 이유는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스가 index scan/seek로 이미 정렬된 레코드를 가져와 전체 테이블 정렬을 피할 수 있게 해준다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate는 Index가 있는 속성으로만 필터링할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Index는 가장 최근 10개 쿼리의 결과를 자동으로 캐싱한다."
+          },
+          {
+            "key": "D",
+            "text": "쿼리 도중 다른 사용자가 OrderDate를 수정하지 못하게 막아준다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-124",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate you join Customer with Order using 'Only With' (Order references Customer). If a particular Customer has zero Orders, what happens to that Customer's row in the result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Customer row is shown with Null Order attributes."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate throws an error because the join finds no matching Order."
+      },
+      {
+        "key": "C",
+        "text": "The Customer row is shown once for safety, marked as unmatched."
+      },
+      {
+        "key": "D",
+        "text": "The Customer row is excluded from the Aggregate results."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Aggregate에서 'Only With' 조인은 inner join과 같아서 양쪽에 매칭되는 레코드가 있는 행만 반환합니다. 따라서 Order가 하나도 없는 Customer는 결과에서 제외됩니다(D). 모든 왼쪽 행을 유지하고 매칭이 없을 때 오른쪽을 Null로 채우려면 'With or Without'(left join)을 써야 하므로 A는 틀립니다. 매칭이 없다고 에러가 나지 않으므로 B도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 Customer와 Order를 'Only With'로 조인합니다(Order가 Customer를 참조). 특정 Customer에게 Order가 하나도 없다면 결과에서 그 Customer 행은 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Customer 행이 Order 속성이 Null인 채로 표시된다."
+          },
+          {
+            "key": "B",
+            "text": "매칭되는 Order가 없어 Aggregate가 에러를 던진다."
+          },
+          {
+            "key": "C",
+            "text": "안전을 위해 Customer 행이 매칭되지 않음으로 표시되어 한 번 나타난다."
+          },
+          {
+            "key": "D",
+            "text": "Customer 행이 Aggregate 결과에서 제외된다."
+          }
+        ]
+      }
+    }
   }
 ]

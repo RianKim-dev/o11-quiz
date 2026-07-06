@@ -1,9 +1,9 @@
 {
-  "total": 371,
+  "total": 443,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
-      "count": 121
+      "count": 124
     },
     "Blocks and Events": {
       "category": "UI Design",
@@ -19,7 +19,7 @@
     },
     "Data Relationships": {
       "category": "Data Modeling",
-      "count": 22
+      "count": 49
     },
     "Debugging and Monitoring": {
       "category": "Reactive Apps in OutSystems",
@@ -27,7 +27,7 @@
     },
     "Entities & Data Types": {
       "category": "Data Modeling",
-      "count": 19
+      "count": 58
     },
     "Fetching Data on Screens": {
       "category": "Fetching Data",
@@ -39,7 +39,7 @@
     },
     "Logic Flows & Exception Handling": {
       "category": "Logic",
-      "count": 32
+      "count": 35
     },
     "Modular Dependencies": {
       "category": "Architecture & Security",

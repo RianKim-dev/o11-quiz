@@ -1127,5 +1127,2033 @@
         ]
       }
     }
+  },
+  {
+    "id": "ENT-020",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Which of the following is a genuine, strict limitation of a 'Static Entity' in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You cannot use a Static Entity in an Aggregate Join."
+      },
+      {
+        "key": "B",
+        "text": "You cannot use a Static Entity Identifier as a Foreign Key in a regular Entity."
+      },
+      {
+        "key": "C",
+        "text": "You cannot add, delete, or modify its records through logic at runtime."
+      },
+      {
+        "key": "D",
+        "text": "You cannot define more than one attribute in a Static Entity."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Static Entity의 레코드는 개발 시점(design time)에 정의되어 애플리케이션에 함께 배포되므로, 런타임 로직으로 레코드를 추가/삭제/수정할 수 없습니다. A는 틀렸는데 Static Entity도 Aggregate에서 Join으로 사용할 수 있고, B도 틀렸는데 Static Entity Identifier는 일반 Entity의 Foreign Key로 흔히 사용되며, D처럼 Label/Order 외에 여러 사용자 정의 속성을 추가하는 것도 얼마든지 가능합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다음 중 OutSystems에서 'Static Entity'의 실제로 엄격한 제약(limitation)은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate Join에서 Static Entity를 사용할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "일반 Entity의 Foreign Key로 Static Entity Identifier를 사용할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "런타임에 로직으로 레코드를 추가/삭제/수정할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "Static Entity에는 속성을 두 개 이상 정의할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-021",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Entity you change an attribute's Data Type from 'Text' to 'Integer' and publish to an environment that already contains data. What is the main risk?",
+    "options": [
+      {
+        "key": "A",
+        "text": "There is no risk; OutSystems stores all attribute values internally as variants."
+      },
+      {
+        "key": "B",
+        "text": "The publish is blocked because changing a data type is forbidden after the first publish."
+      },
+      {
+        "key": "C",
+        "text": "The platform automatically converts text like '123' to integers and sets all non-numeric text to 0."
+      },
+      {
+        "key": "D",
+        "text": "Data loss can occur because existing text values that are not valid numbers cannot be cast to integers."
+      }
+    ],
+    "answer": "D",
+    "explanation": "이미 저장된 Text 값 중 숫자로 변환할 수 없는 값(예: 'ABC', 빈 문자열)은 Integer로 캐스팅할 수 없어 데이터 손실(data loss) 위험이 발생합니다. A는 틀렸는데 OutSystems는 각 속성을 실제 DB 컬럼 타입으로 저장하며, B처럼 타입 변경 자체가 금지되는 것은 아니고(경고와 함께 허용됨), C처럼 플랫폼이 안전하게 자동 변환해 준다고 보장하지도 않습니다. 그래서 정답은 데이터 손실 위험을 지적하는 D입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity에서 어떤 속성의 Data Type을 'Text'에서 'Integer'로 변경한 뒤, 이미 데이터가 존재하는 환경에 게시(publish)합니다. 주된 위험은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "위험 없음; OutSystems는 모든 속성 값을 내부적으로 variant로 저장한다."
+          },
+          {
+            "key": "B",
+            "text": "최초 게시 이후에는 데이터 타입 변경이 금지되어 있어 게시가 차단된다."
+          },
+          {
+            "key": "C",
+            "text": "플랫폼이 '123' 같은 텍스트를 자동으로 정수로 변환하고, 숫자가 아닌 텍스트는 모두 0으로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "숫자로 유효하지 않은 기존 텍스트 값을 정수로 캐스팅할 수 없어 데이터 손실이 발생할 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-022",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Entity has a single composite Unique Index spanning two attributes: 'Email' and 'TenantId'. What happens when you insert a record whose email already exists but under a different 'TenantId'?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The insert fails because 'Email' must be unique across the entire table."
+      },
+      {
+        "key": "B",
+        "text": "The insert succeeds because the combination of 'Email' and 'TenantId' is still unique."
+      },
+      {
+        "key": "C",
+        "text": "The insert fails because 'TenantId' is managed automatically and cannot be part of an index."
+      },
+      {
+        "key": "D",
+        "text": "The platform appends a number to the email automatically to keep it unique."
+      }
+    ],
+    "answer": "B",
+    "explanation": "복합(composite) Unique Index는 개별 속성이 아니라 '속성 조합'의 유일성을 보장합니다. 이메일이 같아도 TenantId가 다르면 (Email, TenantId) 조합은 여전히 유일하므로 insert가 성공합니다. A는 단일 속성 Unique Index의 동작이라 이 복합 인덱스에는 적용되지 않고, C처럼 TenantId를 인덱스에 포함할 수 없다는 제약은 없으며, D처럼 플랫폼이 이메일에 숫자를 자동으로 붙여 유일하게 만들어 주는 기능도 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Entity에 'Email'과 'TenantId' 두 속성에 걸친 단일 복합(composite) Unique Index가 있습니다. 이미 존재하는 이메일이지만 다른 'TenantId'로 레코드를 insert하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Email'이 테이블 전체에서 유일해야 하므로 insert가 실패한다."
+          },
+          {
+            "key": "B",
+            "text": "'Email'과 'TenantId'의 조합이 여전히 유일하므로 insert가 성공한다."
+          },
+          {
+            "key": "C",
+            "text": "'TenantId'는 자동으로 관리되어 인덱스에 포함될 수 없으므로 insert가 실패한다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 유일성을 유지하기 위해 이메일에 자동으로 숫자를 덧붙인다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-023",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have an 'Invoice' entity and must guarantee every record's 'InvoiceNumber' follows a fixed pattern (e.g., 'INV-123'), and the rule must hold even when records are created by a data import. Where should you enforce it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a 'Regex' constraint directly in the Entity attribute's properties."
+      },
+      {
+        "key": "B",
+        "text": "Set the 'InvoiceNumber' attribute's Validation property to 'Mandatory'."
+      },
+      {
+        "key": "C",
+        "text": "In the On Change event of the Input widget on the Screen."
+      },
+      {
+        "key": "D",
+        "text": "In a wrapper Server Action (e.g., Invoice_Create) that validates the format before saving."
+      }
+    ],
+    "answer": "D",
+    "explanation": "OutSystems Entity 속성에는 'Regex 제약'이라는 기능이 없으므로 A는 존재하지 않는 기능입니다. Mandatory(B)는 값이 있는지만 확인할 뿐 패턴은 검사하지 않고, Input의 On Change(C)는 화면에서 입력할 때만 실행되어 data import에는 적용되지 않습니다. 모든 생성 경로가 반드시 거치도록 Server Action wrapper에서 저장 전에 형식을 검증(D)하면 import를 포함해 규칙을 일관되게 강제할 수 있습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Invoice' 엔티티가 있고, 모든 레코드의 'InvoiceNumber'가 고정된 패턴(예: 'INV-123')을 따르도록 보장해야 하며, 이 규칙은 데이터 import로 레코드가 생성될 때에도 지켜져야 합니다. 어디에서 강제하는 것이 가장 좋습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Entity 속성 창에서 'Regex' 제약을 직접 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "'InvoiceNumber' 속성의 Validation 속성을 'Mandatory'로 설정한다."
+          },
+          {
+            "key": "C",
+            "text": "화면 Input 위젯의 On Change 이벤트에서 처리한다."
+          },
+          {
+            "key": "D",
+            "text": "저장 전에 형식을 검증하는 wrapper Server Action(예: Invoice_Create)에서 처리한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-024",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'Severity' has an Integer attribute 'Weight'. An 'Incident' entity has 100 records referencing these severities. In Service Studio you change the 'Weight' of the 'High' record from 10 to 20 and publish. What is the state of the Incident records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The new Weight applies only to Incidents created after the publish."
+      },
+      {
+        "key": "B",
+        "text": "The Incident records are unchanged, but any logic reading Severity.Weight immediately uses the new value 20 for 'High' incidents."
+      },
+      {
+        "key": "C",
+        "text": "The Incident records must be updated by a Timer to reflect the new weight."
+      },
+      {
+        "key": "D",
+        "text": "The publish fails because you cannot change a Static record's attribute value once it is referenced."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Incident은 Severity를 Id로 참조할 뿐 Weight 값을 복사해 저장하지 않습니다. Static Entity의 Weight는 한 곳에만 저장되므로 값을 20으로 바꾸면 그 Severity를 참조·조회하는 모든 로직이 즉시 20을 보게 됩니다(B). 기존 레코드를 다시 만들 필요도(A), Timer로 갱신할 필요도(C) 없고, 참조 중이라도 Static 값은 자유롭게 변경하고 publish할 수 있습니다(D는 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'Severity'에 Integer 타입 속성 'Weight'가 있습니다. 'Incident' 엔티티에는 이 severity들을 참조하는 레코드가 100개 있습니다. Service Studio에서 'High' 레코드의 'Weight'를 10에서 20으로 바꾸고 publish합니다. Incident 레코드의 상태는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "새 Weight 값은 publish 이후에 생성된 Incident에만 적용된다."
+          },
+          {
+            "key": "B",
+            "text": "Incident 레코드는 그대로지만, Severity.Weight를 읽는 모든 로직은 'High' incident에 대해 즉시 새 값 20을 사용한다."
+          },
+          {
+            "key": "C",
+            "text": "Incident 레코드는 Timer로 갱신해야 새 weight 값이 반영된다."
+          },
+          {
+            "key": "D",
+            "text": "이미 참조된 Static 레코드의 속성 값은 바꿀 수 없으므로 publish가 실패한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-025",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "You have a multi-tenant Entity 'Account'. You must guarantee that 'AccountNumber' is unique across the entire database, regardless of which Tenant a record belongs to. How do you achieve this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is impossible; multi-tenant entities can only enforce uniqueness per tenant."
+      },
+      {
+        "key": "B",
+        "text": "Create a Unique Index on 'AccountNumber' without including 'TenantId' in the index."
+      },
+      {
+        "key": "C",
+        "text": "Set the entity to Public = Yes and Expose Process Events = No."
+      },
+      {
+        "key": "D",
+        "text": "Store all account numbers in a separate 'Singleton' entity."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Multi-tenant Entity라도 Unique Index를 구성하는 속성은 직접 정의합니다. TenantId를 포함하면 테넌트별 유일성이 되고, TenantId를 빼고 AccountNumber만으로 Unique Index를 만들면 전체 데이터베이스에서 전역 유일성이 강제됩니다(B). 테넌트별로만 가능하다는 A는 틀렸고, Public/Expose Process Events 설정(C)이나 별도 Singleton 엔티티(D)는 유일성 강제와 아무 관련이 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "multi-tenant Entity 'Account'가 있습니다. 레코드가 어느 Tenant에 속하든 상관없이 'AccountNumber'가 데이터베이스 전체에서 유일하도록 보장해야 합니다. 어떻게 구현합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "불가능하다. multi-tenant 엔티티는 테넌트별 유일성만 강제할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "'AccountNumber'에 대해 'TenantId'를 포함하지 않은 Unique Index를 만든다."
+          },
+          {
+            "key": "C",
+            "text": "엔티티를 Public = Yes, Expose Process Events = No로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "모든 account number를 별도의 'Singleton' 엔티티에 저장한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-026",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A 'Product' entity has an 'Image' attribute of type Binary Data. To speed up Aggregates over the main entity, you move 'Image' into a separate 'ProductImage' entity. What is the primary reason this improves performance?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It shrinks the main entity's row size, so the database fits more rows per memory page (Buffer Pool) during scans."
+      },
+      {
+        "key": "B",
+        "text": "Binary Data attributes cannot be indexed, so they slow every filter in an Aggregate."
+      },
+      {
+        "key": "C",
+        "text": "Aggregates cannot fetch Binary Data when the row size exceeds 2KB."
+      },
+      {
+        "key": "D",
+        "text": "Binary Data is only supported inside extension entities."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate는 보통 여러 행을 스캔하는데, Binary Data처럼 큰 컬럼이 같은 테이블에 있으면 행 하나가 커져 메모리 페이지(Buffer Pool)에 담기는 행 수가 줄어 스캔 성능이 떨어집니다. 큰 Binary 속성을 별도 Entity로 분리하면 주 Entity의 행 크기가 작아져 스캔 효율이 좋아집니다(A). Binary가 인덱스 불가라 모든 필터가 느려진다(B), 행 크기가 2KB를 넘으면 못 가져온다(C), extension에서만 지원된다(D)는 모두 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Product' 엔티티에 Binary Data 타입의 'Image' 속성이 있습니다. 주 엔티티의 Aggregate 성능을 높이기 위해 'Image'를 별도의 'ProductImage' 엔티티로 옮깁니다. 이것이 성능을 개선하는 주된 이유는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "주 엔티티의 행 크기가 줄어들어, 스캔 시 데이터베이스가 메모리 페이지(Buffer Pool)에 더 많은 행을 담을 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "Binary Data 속성은 인덱스를 걸 수 없어 Aggregate의 모든 필터를 느리게 만든다."
+          },
+          {
+            "key": "C",
+            "text": "행 크기가 2KB를 넘으면 Aggregate가 Binary Data를 가져올 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "Binary Data는 extension 엔티티에서만 지원된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-027",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "When you define a Text Entity attribute as 'Mandatory = Yes', what is the behavior at the database level?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The database adds a CHECK constraint ensuring the text length is greater than zero."
+      },
+      {
+        "key": "B",
+        "text": "The column stays NULLable and only the platform's CRUD actions check for a value."
+      },
+      {
+        "key": "C",
+        "text": "The database column is NOT NULL, and OutSystems sends an empty string (\"\") when no value is provided."
+      },
+      {
+        "key": "D",
+        "text": "Mandatory is enforced only by UI widgets, never at the database."
+      }
+    ],
+    "answer": "C",
+    "explanation": "OutSystems는 속성 컬럼을 데이터베이스에서 NOT NULL로 만들고 NULL 대신 기본값(Text는 빈 문자열 \"\")을 사용합니다. 값이 없으면 빈 문자열을 저장하므로 컬럼은 NOT NULL 상태를 유지합니다(C). CHECK 제약으로 길이를 검사하지도(A), 컬럼을 NULLable로 두지도(B) 않으며, Mandatory 검증이 UI에만 있는 것도(D) 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Text 타입 Entity 속성을 'Mandatory = Yes'로 정의하면 데이터베이스 수준에서의 동작은 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스가 텍스트 길이가 0보다 크도록 보장하는 CHECK 제약을 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "컬럼은 NULLable로 남고, 값 존재 여부는 플랫폼의 CRUD 액션만 검사한다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스 컬럼이 NOT NULL이 되며, 값이 없으면 OutSystems가 빈 문자열(\"\")을 전송한다."
+          },
+          {
+            "key": "D",
+            "text": "Mandatory는 UI 위젯에서만 강제되고 데이터베이스에서는 전혀 강제되지 않는다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-028",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "You need to store an 'Order' entity's 'TotalAmount' as a currency value using a Decimal attribute. Which configuration is most appropriate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the Decimals property to 2 and make the length large enough (e.g., 20)."
+      },
+      {
+        "key": "B",
+        "text": "Use the Text type so no precision is lost during database transfers."
+      },
+      {
+        "key": "C",
+        "text": "Use Integer and multiply every value by 100."
+      },
+      {
+        "key": "D",
+        "text": "Use Long Integer to allow very large prices."
+      }
+    ],
+    "answer": "A",
+    "explanation": "통화 값은 소수점 둘째 자리까지 정확히 표현해야 하므로 Decimal 타입에서 Decimals를 2로 설정하고 자릿수(length)를 충분히(예: 20) 확보하는 것이 적절합니다(A). Text(B)는 계산이 불편하고 실수를 유발하며, Integer에 100을 곱하거나(C) Long Integer(D)를 사용하는 방식은 정밀도와 가독성 면에서 통화 저장에 부적합합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Order' 엔티티의 'TotalAmount'를 Decimal 속성을 사용해 통화 값으로 저장하려고 합니다. 가장 적절한 구성은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Decimals 속성을 2로 설정하고 자릿수(length)를 충분히(예: 20) 확보한다."
+          },
+          {
+            "key": "B",
+            "text": "데이터베이스 전송 중 정밀도 손실이 없도록 Text 타입을 사용한다."
+          },
+          {
+            "key": "C",
+            "text": "Integer를 사용하고 모든 값에 100을 곱한다."
+          },
+          {
+            "key": "D",
+            "text": "매우 큰 가격을 허용하기 위해 Long Integer 타입을 사용한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-029",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have an 'Order' entity and an 'OrderArchive' entity with the exact same attributes, and you want to move old orders into the archive while preserving each order's original 'Id'. What is the most efficient way to keep the original 'Id' in the archive?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is impossible; Autonumber is mandatory for every primary key in OutSystems."
+      },
+      {
+        "key": "B",
+        "text": "Make the 'Id' of 'OrderArchive' a plain (non-Autonumber) Integer identifier and assign the original Id manually during the move."
+      },
+      {
+        "key": "C",
+        "text": "Use an Advanced SQL query such as 'INSERT INTO OrderArchive SELECT * FROM Order'."
+      },
+      {
+        "key": "D",
+        "text": "Keep 'Autonumber' on and store the original key in a separate 'OriginalId' attribute."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Autonumber를 켜두면 새 레코드마다 플랫폼이 새 Id를 자동 생성하므로 원본 Id를 그대로 유지할 수 없습니다. OrderArchive의 Id를 Autonumber가 아닌 일반 Integer 식별자로 두면 이동 시 원본 Id 값을 직접 Assign할 수 있어 가장 효율적입니다. A는 Id를 Autonumber가 아닌 값으로 만들 수 있으므로 틀렸고, D는 별도 OriginalId를 두면 원본 Id 자체를 PK로 유지하는 것이 아니라 중복 관리가 필요해 비효율적입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "동일한 속성을 가진 'Order' 엔티티와 'OrderArchive' 엔티티가 있고, 오래된 주문을 아카이브로 옮기면서 각 주문의 원본 'Id'를 그대로 유지하려고 합니다. 아카이브에서 원본 'Id'를 유지하는 가장 효율적인 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "불가능합니다. OutSystems에서는 모든 기본 키에 Autonumber가 필수입니다."
+          },
+          {
+            "key": "B",
+            "text": "'OrderArchive'의 'Id'를 Autonumber가 아닌 일반 Integer 식별자로 만들고, 이동 시 원본 Id를 수동으로 할당합니다."
+          },
+          {
+            "key": "C",
+            "text": "'INSERT INTO OrderArchive SELECT * FROM Order' 같은 Advanced SQL 쿼리를 사용합니다."
+          },
+          {
+            "key": "D",
+            "text": "'Autonumber'를 켜둔 채 원본 키를 별도의 'OriginalId' 속성에 저장합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-030",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An 'Appointment' entity has a 'DateTime' attribute. The server runs in UTC, but users are in various time zones. How does OutSystems store this data in the database?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is stored exactly as sent to the database; the platform does not perform automatic time zone conversion at the database level."
+      },
+      {
+        "key": "B",
+        "text": "DateTime attributes are stored as 'Unix Timestamps' to ensure global compatibility."
+      },
+      {
+        "key": "C",
+        "text": "The database automatically converts all incoming dates to UTC based on the user's browser settings."
+      },
+      {
+        "key": "D",
+        "text": "The platform stores the DateTime together with a hidden 'Offset' column."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems는 DateTime을 데이터베이스에 전달된 값 그대로 저장하며, 데이터베이스 수준에서 자동으로 time zone 변환을 하지 않습니다. 시간대 변환이 필요하면 개발자가 로직에서 직접 처리해야 합니다. B(Unix Timestamp로 저장)와 D(숨겨진 Offset 컬럼)는 실제 저장 방식이 아니며, C(브라우저 기준 자동 UTC 변환)도 플랫폼이 수행하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Appointment' 엔티티에 'DateTime' 속성이 있습니다. 서버는 UTC로 동작하지만 사용자는 여러 시간대에 있습니다. OutSystems는 이 데이터를 데이터베이스에 어떻게 저장합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스에 전달된 값 그대로 저장되며, 플랫폼은 데이터베이스 수준에서 자동 time zone 변환을 하지 않습니다."
+          },
+          {
+            "key": "B",
+            "text": "글로벌 호환성을 위해 DateTime 속성은 'Unix Timestamp'로 저장됩니다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스가 사용자의 브라우저 설정을 기준으로 모든 입력 날짜를 자동으로 UTC로 변환합니다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 DateTime과 함께 숨겨진 'Offset' 컬럼을 저장합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-031",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An 'Employee' entity has a Unique Index on its 'Email' attribute. In a Server Action you call 'CreateOrUpdateEmployee' to save a NEW record whose Email already exists. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "'CreateOrUpdateEmployee' returns a boolean 'False' instead of throwing an error."
+      },
+      {
+        "key": "B",
+        "text": "A Database Exception is thrown and the transaction is rolled back unless it is caught by an Exception Handler."
+      },
+      {
+        "key": "C",
+        "text": "The existing record with that Email is automatically updated with the new values."
+      },
+      {
+        "key": "D",
+        "text": "The platform ignores the duplicate and creates a new record with a modified Email."
+      }
+    ],
+    "answer": "B",
+    "explanation": "CreateOrUpdate는 Id를 기준으로 생성/수정을 결정할 뿐, Email 같은 다른 속성의 Unique Index를 검사해 매칭하지 않습니다. 따라서 Id가 지정되지 않은 새 레코드를 중복 Email로 삽입하면 Unique Index 위반으로 Database Exception이 발생하고, Exception Handler로 잡지 않으면 트랜잭션이 rollback됩니다. C는 중복 Email을 기준으로 자동 수정된다는 오해이며(수정 기준은 Id임), A와 D 같은 동작은 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Employee' 엔티티의 'Email' 속성에 Unique Index가 있습니다. Server Action에서 'CreateOrUpdateEmployee'를 호출해 이미 존재하는 Email을 가진 새 레코드를 저장합니다. 어떤 일이 발생합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'CreateOrUpdateEmployee'가 오류를 던지는 대신 boolean 'False'를 반환합니다."
+          },
+          {
+            "key": "B",
+            "text": "Database Exception이 발생하고, Exception Handler로 잡지 않으면 트랜잭션이 rollback됩니다."
+          },
+          {
+            "key": "C",
+            "text": "해당 Email을 가진 기존 레코드가 새 값으로 자동 업데이트됩니다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 중복을 무시하고 Email을 수정하여 새 레코드를 생성합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-032",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have an 'Invoice' entity and a Static Entity 'InvoiceStatus' (Draft, Sent, Paid), and you want to guarantee that at most one 'Draft' invoice can exist per 'Customer' at any time. How can you enforce this at the database level?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the 'Draft' record of 'InvoiceStatus' to 'Unique = True'."
+      },
+      {
+        "key": "B",
+        "text": "Add a 'Draft' attribute to the Customer entity and link it to the Invoice."
+      },
+      {
+        "key": "C",
+        "text": "Create a Unique Index on 'CustomerId' and 'InvoiceStatusId'."
+      },
+      {
+        "key": "D",
+        "text": "A standard Unique Index in Service Studio cannot enforce conditional uniqueness (unique only when the status is 'Draft')."
+      }
+    ],
+    "answer": "D",
+    "explanation": "표준 Unique Index는 지정한 컬럼 조합 전체에 대해 유일성을 강제할 뿐, 'Status가 Draft일 때만'과 같은 조건부(부분) 유일성은 Service Studio에서 만들 수 없습니다. C처럼 CustomerId+InvoiceStatusId에 Unique Index를 걸면 고객당 Sent, Paid도 각각 하나로 제한되어 요구사항과 맞지 않습니다. A(Static 레코드에 Unique=True)와 B(Customer에 Draft 속성 추가)는 존재하지 않거나 조건부 유일성을 보장하지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Invoice' 엔티티와 Static Entity 'InvoiceStatus'(Draft, Sent, Paid)가 있고, 특정 시점에 'Customer'당 'Draft' 상태의 인보이스가 최대 하나만 존재하도록 보장하려고 합니다. 이를 데이터베이스 수준에서 어떻게 강제할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'InvoiceStatus'의 'Draft' 레코드를 'Unique = True'로 설정합니다."
+          },
+          {
+            "key": "B",
+            "text": "Customer 엔티티에 'Draft' 속성을 추가하고 Invoice와 연결합니다."
+          },
+          {
+            "key": "C",
+            "text": "'CustomerId'와 'InvoiceStatusId'에 Unique Index를 생성합니다."
+          },
+          {
+            "key": "D",
+            "text": "Service Studio의 표준 Unique Index로는 조건부 유일성(상태가 'Draft'일 때만 유일)을 강제할 수 없습니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-033",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "What is the result of setting a 'Product' entity attribute's 'Default Value' to 'CurrDate()' in Service Studio?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The default value is applied by the OutSystems platform when a new record is initialized in logic, not as a database-level DEFAULT constraint."
+      },
+      {
+        "key": "B",
+        "text": "The attribute becomes read-only because its value is managed by the system."
+      },
+      {
+        "key": "C",
+        "text": "Every time a record is updated, the date is automatically changed to the current date."
+      },
+      {
+        "key": "D",
+        "text": "The database engine uses its internal clock to set the date if the value is missing in the INSERT statement."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Service Studio의 Default Value는 로직에서 해당 엔티티의 새 레코드 변수가 초기화될 때 플랫폼이 채워 주는 값이며, 데이터베이스의 DEFAULT 제약으로 생성되지 않습니다. 그래서 D(INSERT 시 DB 엔진이 자동 설정)는 틀립니다. C(업데이트할 때마다 현재 날짜로 변경)도 아니고, B(속성이 읽기 전용이 됨)도 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Service Studio에서 'Product' 엔티티 속성의 'Default Value'를 'CurrDate()'로 설정하면 어떤 결과가 발생합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "기본값은 데이터베이스 수준의 DEFAULT 제약이 아니라, 로직에서 새 레코드가 초기화될 때 OutSystems 플랫폼이 적용합니다."
+          },
+          {
+            "key": "B",
+            "text": "값이 시스템에 의해 관리되므로 해당 속성은 읽기 전용이 됩니다."
+          },
+          {
+            "key": "C",
+            "text": "레코드가 업데이트될 때마다 날짜가 자동으로 현재 날짜로 변경됩니다."
+          },
+          {
+            "key": "D",
+            "text": "INSERT 문에 값이 없으면 데이터베이스 엔진이 내부 시계를 사용해 날짜를 설정합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-034",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "You have a Multi-tenant entity 'Product' and want to move a specific 'Product' record from Tenant A to Tenant B. What is the most reliable way to do this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use an Assign: 'Product.TenantId = TenantBId' followed by 'UpdateProduct'."
+      },
+      {
+        "key": "B",
+        "text": "Toggle the 'Is_Active' flag off in Tenant A and it will automatically appear in Tenant B."
+      },
+      {
+        "key": "C",
+        "text": "In Tenant B's context, create a new record with the same data, then delete the record in Tenant A."
+      },
+      {
+        "key": "D",
+        "text": "Run an Advanced SQL 'UPDATE {Product} SET [Tenant_Id] = @NewTenant WHERE [Id] = @Id'."
+      }
+    ],
+    "answer": "C",
+    "explanation": "멀티테넌트 엔티티의 Tenant_Id는 플랫폼이 관리하는 숨은 컬럼이라 일반 Update 액션의 속성처럼 직접 Assign할 수 없습니다(A 오답). 가장 안전한 방법은 Tenant B의 컨텍스트에서 동일 데이터를 새 레코드로 생성하고 Tenant A의 원본을 삭제하는 것입니다. D처럼 Advanced SQL로 Tenant_Id를 직접 변경하는 것은 플랫폼이 권장하지 않는 위험한 방식이며, B(Is_Active 토글로 테넌트 이동)는 존재하지 않는 동작입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "멀티테넌트 엔티티 'Product'가 있고, 특정 'Product' 레코드를 Tenant A에서 Tenant B로 옮기려고 합니다. 가장 신뢰할 수 있는 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Assign으로 'Product.TenantId = TenantBId'를 설정한 뒤 'UpdateProduct'를 실행합니다."
+          },
+          {
+            "key": "B",
+            "text": "Tenant A에서 'Is_Active' 플래그를 끄면 자동으로 Tenant B에 나타납니다."
+          },
+          {
+            "key": "C",
+            "text": "Tenant B의 컨텍스트에서 동일한 데이터로 새 레코드를 생성한 뒤, Tenant A의 레코드를 삭제합니다."
+          },
+          {
+            "key": "D",
+            "text": "Advanced SQL 'UPDATE {Product} SET [Tenant_Id] = @NewTenant WHERE [Id] = @Id'를 실행합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-035",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Which of the following scenarios would most benefit from using a 'Long Integer' rather than an 'Integer' for an entity attribute?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Storing a global tracking number that is expected to exceed 2.1 billion values."
+      },
+      {
+        "key": "B",
+        "text": "Storing a phone number so that no leading zeros are lost."
+      },
+      {
+        "key": "C",
+        "text": "Storing the primary key of a Static Entity with 50 records."
+      },
+      {
+        "key": "D",
+        "text": "Storing currency values that require high precision."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Integer는 약 21억(2,147,483,647)까지만 표현할 수 있으므로, 그 범위를 넘어설 수 있는 글로벌 추적 번호에는 Long Integer가 적합합니다. B(전화번호의 선행 0 유지)는 Text로 저장해야 하고, C(레코드 50개인 Static Entity PK)는 값이 작아 Integer로 충분하며, D(고정밀 통화)는 Decimal/Currency 타입을 써야 하므로 Long Integer의 장점과는 무관합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "엔티티 속성에 'Integer' 대신 'Long Integer'를 사용하는 것이 가장 유리한 시나리오는 다음 중 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "21억 개를 초과할 것으로 예상되는 글로벌 추적 번호를 저장하는 경우."
+          },
+          {
+            "key": "B",
+            "text": "선행 0이 손실되지 않도록 전화번호를 저장하는 경우."
+          },
+          {
+            "key": "C",
+            "text": "레코드가 50개인 Static Entity의 기본 키를 저장하는 경우."
+          },
+          {
+            "key": "D",
+            "text": "높은 정밀도가 필요한 통화 값을 저장하는 경우."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-036",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Static Entity, developers often add an 'Is_Active' Boolean attribute. What is its typical purpose?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To allow the Static Entity records to be edited by end-users at runtime."
+      },
+      {
+        "key": "B",
+        "text": "It is a mandatory system attribute that every Static Entity must have."
+      },
+      {
+        "key": "C",
+        "text": "To automatically delete all records that reference this value when it is set to False."
+      },
+      {
+        "key": "D",
+        "text": "To let Aggregates filter it out so 'retired' options no longer appear in dropdowns, while keeping historical records intact."
+      }
+    ],
+    "answer": "D",
+    "explanation": "'Is_Active'는 시스템이 강제하는 속성이 아니라 개발자가 직접 추가하는 관례적인 속성입니다. 값을 False로 두면 Aggregate 필터로 해당 옵션을 걸러내 UI 드롭다운에서 숨길 수 있고, 실제 레코드는 삭제하지 않으므로 과거 데이터의 참조 무결성이 유지됩니다. Static Entity는 런타임 편집 대상이 아니며(A), 필수 시스템 속성도 아니고(B), 참조 레코드를 자동 삭제하지도 않습니다(C).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity에 개발자들이 자주 'Is_Active' Boolean 속성을 추가합니다. 그 일반적인 목적은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "런타임에 최종 사용자가 Static Entity 레코드를 편집할 수 있게 하려고."
+          },
+          {
+            "key": "B",
+            "text": "모든 Static Entity에 반드시 있어야 하는 필수 시스템 속성이므로."
+          },
+          {
+            "key": "C",
+            "text": "값을 False로 설정하면 이 값을 참조하는 모든 레코드가 자동 삭제되게 하려고."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate에서 필터링해 '폐기된' 옵션이 드롭다운에 더 이상 나타나지 않게 하면서도 과거 레코드는 그대로 유지하려고."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-037",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You are changing an Entity attribute from 'Mandatory = No' to 'Mandatory = Yes'. What is the most critical step to take before publishing?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the 'Mandatory' property to True on every Screen Input that uses this attribute."
+      },
+      {
+        "key": "B",
+        "text": "Nothing; OutSystems automatically fills existing NULL values with the default during publish, so no data issue can occur."
+      },
+      {
+        "key": "C",
+        "text": "Change the attribute's data type to 'Text' so it can hold any value."
+      },
+      {
+        "key": "D",
+        "text": "Ensure all existing records already have a value for that attribute, to avoid a database migration error."
+      }
+    ],
+    "answer": "D",
+    "explanation": "속성을 Mandatory로 바꾸면 그 컬럼에 NULL이 허용되지 않게 되므로, 이미 NULL 값을 가진 기존 레코드가 있으면 게시(publish) 시 데이터베이스 마이그레이션 오류가 날 수 있습니다. 따라서 게시 전에 기존 레코드가 모두 값을 갖도록 정리하는 것이 가장 중요한 단계입니다. Screen Input의 Mandatory는 UI 검증일 뿐 DB 문제와 무관하고(A), 데이터 타입을 Text로 바꾸는 것은 문제 해결이 아니며(C), 플랫폼이 알아서 안전하게 채워준다고 가정하는 것은 위험합니다(B).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity 속성을 'Mandatory = No'에서 'Mandatory = Yes'로 변경하려고 합니다. 게시(publish) 전에 취해야 할 가장 중요한 단계는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "이 속성을 사용하는 모든 Screen Input의 'Mandatory' 속성을 True로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "아무것도 필요 없다. OutSystems가 게시 중에 기존 NULL을 기본값으로 자동으로 채워 데이터 문제가 생길 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "어떤 값이든 담을 수 있도록 속성의 데이터 타입을 'Text'로 변경한다."
+          },
+          {
+            "key": "D",
+            "text": "데이터베이스 마이그레이션 오류를 피하기 위해 기존 모든 레코드가 해당 속성에 값을 갖고 있도록 보장한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-038",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "You extend the 'System.User' entity with a new 'UserExtraInfo' entity whose Primary Key is of type 'User Identifier'. Can you set this Primary Key to 'Autonumber = Yes'?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, the platform automatically synchronizes the Autonumbers between the two entities."
+      },
+      {
+        "key": "B",
+        "text": "No, because the Primary Key must be manually assigned the value of the User ID it is extending."
+      },
+      {
+        "key": "C",
+        "text": "No, because 'User Identifier' is a restricted type that never supports Autonumber under any circumstance."
+      },
+      {
+        "key": "D",
+        "text": "Yes, but only if the 'User' entity itself is also set to Autonumber."
+      }
+    ],
+    "answer": "B",
+    "explanation": "확장(extension) 엔티티인 UserExtraInfo의 Primary Key가 User의 식별자(User Identifier) 타입이라면, 그 값은 확장하려는 User 레코드의 ID와 반드시 같아야 합니다. 즉 새 번호를 자동 생성(Autonumber)하는 것이 아니라, 대상 User의 ID를 직접 대입해 저장해야 하므로 Autonumber를 쓸 수 없습니다. 플랫폼이 두 엔티티의 번호를 자동 동기화하지 않으며(A), User가 Autonumber라고 해서 확장 PK가 Autonumber가 될 수 있는 것도 아닙니다(D).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'System.User' 엔티티를 확장하기 위해 Primary Key 타입이 'User Identifier'인 새 'UserExtraInfo' 엔티티를 만듭니다. 이 Primary Key를 'Autonumber = Yes'로 설정할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예, 플랫폼이 두 엔티티 사이의 Autonumber를 자동으로 동기화한다."
+          },
+          {
+            "key": "B",
+            "text": "아니오, Primary Key에는 확장 대상인 User의 ID 값을 직접 수동으로 대입해야 하기 때문이다."
+          },
+          {
+            "key": "C",
+            "text": "아니오, 'User Identifier'는 어떤 경우에도 Autonumber를 지원하지 않는 제한된 타입이기 때문이다."
+          },
+          {
+            "key": "D",
+            "text": "예, 단 'User' 엔티티 자체도 Autonumber로 설정되어 있는 경우에만 가능하다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-039",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Entity has a Unique Index on 'SSN'. Inside one Server Action you delete the record with SSN '123' and then, immediately afterward in the same action, create a new record with SSN '123'. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It fails, because the deleted record is not physically removed until the transaction commits."
+      },
+      {
+        "key": "B",
+        "text": "The platform 'soft-deletes' the old record and renames its SSN to '123_old' automatically."
+      },
+      {
+        "key": "C",
+        "text": "It fails, because Unique Indexes are checked against the database state as it was at the start of the action."
+      },
+      {
+        "key": "D",
+        "text": "It succeeds, because the delete and the create run sequentially within the same transaction, so the delete takes effect before the create."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Server Action 안의 데이터베이스 작업은 같은 트랜잭션에서 순차적으로 실행됩니다. Delete 문이 먼저 DB에 적용된 뒤 Create 문이 실행되므로, Create 시점에는 SSN '123' 레코드가 이미 없어 Unique Index 위반이 발생하지 않고 정상 생성됩니다. Unique Index는 액션 시작 시점이 아니라 각 작업이 실행되는 순간의 상태로 검사되므로 C는 틀리고, '123_old'로 자동 rename 하는 동작(B)은 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Entity에 'SSN'에 대한 Unique Index가 있습니다. 하나의 Server Action 안에서 SSN이 '123'인 레코드를 삭제한 뒤, 바로 이어서 같은 액션에서 SSN '123'인 새 레코드를 생성합니다. 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "삭제된 레코드는 트랜잭션이 커밋될 때까지 물리적으로 제거되지 않으므로 실패한다."
+          },
+          {
+            "key": "B",
+            "text": "플랫폼이 기존 레코드를 'soft-delete' 하고 SSN을 '123_old'로 자동 변경한다."
+          },
+          {
+            "key": "C",
+            "text": "Unique Index는 액션 시작 시점의 데이터베이스 상태를 기준으로 검사되므로 실패한다."
+          },
+          {
+            "key": "D",
+            "text": "delete와 create가 같은 트랜잭션 안에서 순차적으로 실행되어 delete가 먼저 반영되므로 성공한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-040",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a multi-tenant application you have a Static Entity 'Status'. You want to add a new 'Status' value that is visible ONLY to Tenant A. How can you achieve this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the 'Is_MultiTenant' property of the Static Entity to 'Yes'."
+      },
+      {
+        "key": "B",
+        "text": "Add a 'TenantId' attribute to the Static Entity and filter records by it."
+      },
+      {
+        "key": "C",
+        "text": "Create the record at runtime for Tenant A using a 'CreateStatus' action."
+      },
+      {
+        "key": "D",
+        "text": "You cannot; Static Entity records are always shared across all Tenants in the environment."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Static Entity의 레코드는 디자인 타임에 정의되는 공용 데이터로, 환경 내 모든 Tenant가 동일하게 공유합니다. 따라서 특정 Tenant에게만 보이는 Static Entity 값을 만들 수는 없습니다. Static Entity는 multi-tenant로 설정할 수 없어 A가 틀리고, 런타임에 레코드를 생성하는 대상이 아니므로(C) 무리이며, TenantId 속성을 붙이는 방식(B)은 Static Entity의 공유 특성상 올바른 접근이 아닙니다. Tenant별로 달라야 하는 상태값은 일반(multi-tenant) Entity로 만들어야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "멀티테넌트(multi-tenant) 애플리케이션에 Static Entity 'Status'가 있습니다. Tenant A에게만 보이는 새 'Status' 값을 추가하려고 합니다. 어떻게 할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Static Entity의 'Is_MultiTenant' 속성을 'Yes'로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "Static Entity에 'TenantId' 속성을 추가하고 그 값으로 필터링한다."
+          },
+          {
+            "key": "C",
+            "text": "'CreateStatus' 액션을 사용해 런타임에 Tenant A용 레코드를 생성한다."
+          },
+          {
+            "key": "D",
+            "text": "불가능하다. Static Entity 레코드는 환경 내 모든 Tenant가 항상 공유한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-041",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "On a 'Customer' entity you create two separate Unique Indexes: one on 'Email' and another on 'Username'. What does this enforce?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The publish fails because an Entity can only have one Unique Index."
+      },
+      {
+        "key": "B",
+        "text": "The database ensures the combination of Email + Username together is unique."
+      },
+      {
+        "key": "C",
+        "text": "The platform merges them into a single composite index during publish."
+      },
+      {
+        "key": "D",
+        "text": "The database ensures that every record has a unique Email AND, independently, a unique Username."
+      }
+    ],
+    "answer": "D",
+    "explanation": "각 단일 컬럼에 대한 Unique Index는 서로 독립적으로 동작하므로 Email도 유일해야 하고 Username도 각각 유일해야 합니다. 엔터티는 여러 개의 Unique Index를 가질 수 있으므로 A는 틀립니다. 두 컬럼의 '조합'이 유일해지는 것(B)은 하나의 composite(복합) unique index를 만들었을 때이며, 플랫폼이 자동으로 두 인덱스를 합치지는 않으므로 C도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Customer' 엔터티에 별도의 Unique Index를 두 개 만듭니다. 하나는 'Email'에, 다른 하나는 'Username'에 만들 때, 무엇이 보장됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "엔터티는 Unique Index를 하나만 가질 수 있으므로 publish가 실패한다."
+          },
+          {
+            "key": "B",
+            "text": "데이터베이스가 Email + Username 조합이 유일하도록 보장한다."
+          },
+          {
+            "key": "C",
+            "text": "publish 시 플랫폼이 둘을 하나의 composite index로 병합한다."
+          },
+          {
+            "key": "D",
+            "text": "데이터베이스가 모든 레코드에 대해 Email이 유일하고, 또한 독립적으로 Username도 유일하도록 보장한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-042",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "You change a Ticket 'Description' Text attribute's 'Max Length' from 50 to 500 and publish. Is there any risk of data loss?",
+    "options": [
+      {
+        "key": "A",
+        "text": "No, because OutSystems Text attributes always have a fixed database size of 2000."
+      },
+      {
+        "key": "B",
+        "text": "Yes, because the database must recreate the whole table to change the column."
+      },
+      {
+        "key": "C",
+        "text": "No, increasing the length of a Text attribute is a safe operation that simply expands the database column."
+      },
+      {
+        "key": "D",
+        "text": "Yes, all existing data in that column is truncated to 50 characters during the change."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Text 속성의 Max Length를 늘리는 것은 데이터베이스 컬럼 크기를 넓히는 안전한(non-destructive) 작업이라 기존 데이터가 손실되지 않습니다. Text 속성 크기는 지정한 Max Length를 따르며 항상 2000으로 고정되지 않으므로 A는 틀립니다. 길이를 늘릴 때 테이블을 통째로 재생성하지 않으며(B), 데이터를 잘라내는 것은 오히려 Max Length를 '줄일' 때 생길 수 있는 위험이므로 D도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Ticket 엔터티의 'Description' Text 속성의 'Max Length'를 50에서 500으로 바꾸고 publish합니다. 데이터 손실 위험이 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아니요, OutSystems Text 속성은 데이터베이스에서 항상 2000 크기로 고정되어 있기 때문이다."
+          },
+          {
+            "key": "B",
+            "text": "예, 컬럼 속성을 바꾸려면 데이터베이스가 테이블 전체를 재생성해야 하기 때문이다."
+          },
+          {
+            "key": "C",
+            "text": "아니요, Text 속성의 길이를 늘리는 것은 데이터베이스 컬럼을 확장하는 안전한 작업이다."
+          },
+          {
+            "key": "D",
+            "text": "예, 변경 과정에서 해당 컬럼의 기존 데이터가 모두 50자로 잘린다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-043",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An 'AuditLog' entity grows by millions of records each month, and you frequently filter queries by both 'UserId' and 'Timestamp' together. What is the most performant indexing strategy in Service Studio?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create two separate indexes: one on 'UserId' and one on 'Timestamp'."
+      },
+      {
+        "key": "B",
+        "text": "Set the entity's 'Public' property to 'No' to improve internal indexing speed."
+      },
+      {
+        "key": "C",
+        "text": "Create a single composite index containing both 'UserId' and 'Timestamp'."
+      },
+      {
+        "key": "D",
+        "text": "Rely only on the Primary Key, since OutSystems automatically optimizes all filters."
+      }
+    ],
+    "answer": "C",
+    "explanation": "두 컬럼(UserId와 Timestamp)을 항상 함께 필터링한다면 두 컬럼을 묶은 하나의 composite index가 가장 효율적으로 조회를 지원합니다. 별도 인덱스 두 개(A)는 두 조건을 동시에 거는 쿼리에서 composite index만큼 효과적이지 않습니다. 'Public' 속성(B)은 다른 모듈에서의 참조 가능 여부를 정하는 것이지 인덱싱 성능과 무관하고, Primary Key만으로 모든 필터가 자동 최적화되지도 않으므로(D) 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'AuditLog' 엔터티가 매달 수백만 건씩 증가하고, 쿼리에서 'UserId'와 'Timestamp'를 자주 함께 필터링합니다. Service Studio에서 가장 성능이 좋은 인덱싱 전략은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'UserId'용 인덱스 하나, 'Timestamp'용 인덱스 하나로 별도의 인덱스 두 개를 만든다."
+          },
+          {
+            "key": "B",
+            "text": "엔터티의 'Public' 속성을 'No'로 설정해 내부 인덱싱 속도를 높인다."
+          },
+          {
+            "key": "C",
+            "text": "'UserId'와 'Timestamp'를 모두 포함하는 하나의 composite index를 만든다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems가 모든 필터를 자동 최적화하므로 Primary Key에만 의존한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-044",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a multi-tenant application, you have configuration settings where some values are global (shared across all tenants) and some are tenant-specific. What is the recommended way to model this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create two entities: a non-multi-tenant 'GlobalConfiguration' and a multi-tenant 'TenantConfiguration'."
+      },
+      {
+        "key": "B",
+        "text": "Use one multi-tenant entity and set 'TenantId' to Null for the global records."
+      },
+      {
+        "key": "C",
+        "text": "Set the entity's multi-tenant property to 'Yes' only at runtime when tenant data is present."
+      },
+      {
+        "key": "D",
+        "text": "Store all global and tenant configurations in a single Static Entity."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems 멀티테넌시에서 TenantId는 플랫폼이 자동으로 관리하며, 개발자가 임의로 Null로 설정해 '전역' 레코드를 만들거나 모든 테넌트에서 조회하게 만들 수 없으므로 B는 권장 방식이 아닙니다. 권장 패턴은 전역(공유) 데이터는 non-multi-tenant 엔터티에, 테넌트별 데이터는 multi-tenant 엔터티에 나누어 두는 것입니다(A). 멀티테넌트 여부는 런타임에 조건부로 바뀌는 속성이 아니므로 C가 틀리고, 런타임에 변경되는 설정값을 Static Entity에 담는 것은 부적절하므로 D도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "멀티테넌트 애플리케이션에서 어떤 설정 값은 전역(모든 테넌트가 공유)이고 어떤 값은 테넌트별로 다릅니다. 이를 모델링하는 권장 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "non-multi-tenant인 'GlobalConfiguration'과 multi-tenant인 'TenantConfiguration', 두 개의 엔터티를 만든다."
+          },
+          {
+            "key": "B",
+            "text": "하나의 multi-tenant 엔터티를 쓰고 전역 레코드는 'TenantId'를 Null로 설정한다."
+          },
+          {
+            "key": "C",
+            "text": "테넌트 데이터가 있을 때만 런타임에 엔터티의 multi-tenant 속성을 'Yes'로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "전역 설정과 테넌트 설정을 모두 하나의 Static Entity에 저장한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-045",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A 'Contract' entity has 'EffectiveDate' and 'ExpiryDate' (both Date) plus a 'ClientId'. You want the database to guarantee that no two contracts for the same client have overlapping date ranges. Can this be enforced purely with Service Studio's Unique Index feature?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, by creating a Unique Index on 'ClientId', 'EffectiveDate', and 'ExpiryDate' together."
+      },
+      {
+        "key": "B",
+        "text": "No, a standard Unique Index cannot enforce logic-based constraints such as date-range overlaps."
+      },
+      {
+        "key": "C",
+        "text": "No, because the Date type does not support indexing in OutSystems."
+      },
+      {
+        "key": "D",
+        "text": "Yes, by setting the Dates' 'Validation' property to 'Prevent Overlap'."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Unique Index는 지정한 컬럼들의 '값 조합이 정확히 중복되는 것'만 막을 수 있습니다. ClientId + EffectiveDate + ExpiryDate에 Unique Index를 걸어도(A) 시작·종료일이 서로 다르지만 기간이 '겹치는' 두 계약은 값 조합이 달라서 막히지 않습니다. 즉 날짜 범위 겹침 같은 논리 기반 제약은 표준 Unique Index로 표현할 수 없으므로 B가 정답입니다. Date 타입도 인덱싱이 가능하므로 C는 틀리고, 'Prevent Overlap' 같은 Validation 속성은 OutSystems에 존재하지 않으므로 D도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Contract' 엔터티에 'EffectiveDate'와 'ExpiryDate'(둘 다 Date), 그리고 'ClientId'가 있습니다. 같은 고객의 두 계약이 기간이 겹치지 않도록 데이터베이스 수준에서 보장하려고 합니다. Service Studio의 Unique Index 기능만으로 이것을 강제할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예, 'ClientId', 'EffectiveDate', 'ExpiryDate'를 함께 묶은 Unique Index를 만들면 된다."
+          },
+          {
+            "key": "B",
+            "text": "아니요, 표준 Unique Index는 날짜 범위 겹침 같은 논리 기반 제약을 강제할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "아니요, OutSystems에서는 Date 타입이 인덱싱을 지원하지 않기 때문이다."
+          },
+          {
+            "key": "D",
+            "text": "예, 두 Date의 'Validation' 속성을 'Prevent Overlap'으로 설정하면 된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-046",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Static Entity 'Tier' with a 'DiscountPercentage' (Decimal) attribute, some logic computes 'Price * (1 - Tier.DiscountPercentage)'. You change a record's discount from 0.1 to 0.15 and publish. When does the calculation start using the new value?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only for new orders created after the publish; existing orders are protected."
+      },
+      {
+        "key": "B",
+        "text": "Only after the module cache is manually cleared in Service Center."
+      },
+      {
+        "key": "C",
+        "text": "Immediately after a successful publish, since the logic reads the current value from the Static Entity data."
+      },
+      {
+        "key": "D",
+        "text": "You must manually run a 'Refresh Data' action on the Static Entity for the change to be seen."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Static Entity의 속성 값(여기서는 DiscountPercentage)은 데이터베이스에 저장되고 로직이 실행될 때 읽어오므로, publish가 성공하면 새 값 0.15가 즉시 반영됩니다. 계산이 실행 시점 값을 사용하므로 기존 주문/신규 주문을 구분하지 않아 A는 틀립니다. 별도의 Service Center 캐시 삭제(B)나 'Refresh Data'(D) 같은 수동 조치는 필요 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'DiscountPercentage'(Decimal) 속성이 있는 Static Entity 'Tier'가 있고, 어떤 로직이 'Price * (1 - Tier.DiscountPercentage)'를 계산합니다. 한 레코드의 할인율을 0.1에서 0.15로 바꾸고 publish하면, 계산은 언제부터 새 값을 사용합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "publish 이후 생성되는 신규 주문에 대해서만 적용되고, 기존 주문은 보호된다."
+          },
+          {
+            "key": "B",
+            "text": "Service Center에서 해당 모듈 캐시를 수동으로 지운 후에만 적용된다."
+          },
+          {
+            "key": "C",
+            "text": "publish가 성공한 즉시. 로직이 Static Entity 데이터에서 현재 값을 읽기 때문이다."
+          },
+          {
+            "key": "D",
+            "text": "변경이 반영되려면 Static Entity에 대해 'Refresh Data' 액션을 수동으로 실행해야 한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-047",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An 'Attachment' entity has a 'FileContent' (Binary Data) attribute and a 'FileSize' (Integer) attribute. You must reject any file larger than 5MB before it is stored. Where is the most appropriate place to enforce this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "By adding the 'FileSize' attribute to a Unique Index."
+      },
+      {
+        "key": "B",
+        "text": "In a database trigger created through a raw SQL script."
+      },
+      {
+        "key": "C",
+        "text": "By setting the 'Max Length' of the 'FileContent' Binary attribute to 5000000."
+      },
+      {
+        "key": "D",
+        "text": "In the Server Action logic, checking 'FileSize' before calling the 'CreateAttachment' entity action."
+      }
+    ],
+    "answer": "D",
+    "explanation": "파일 크기 제한 같은 비즈니스 규칙 검증은 데이터를 저장하기 전에 Server Action 로직 안에서 FileSize를 확인하고 초과 시 예외를 던지는 것이 가장 적절하고 관리하기 쉽습니다. Unique Index(A)는 값의 유일성만 보장할 뿐 크기 제한과 무관하고, Binary Data 속성에는 크기를 제한하는 Max Length 개념이 그렇게 동작하지 않습니다(C). 로직을 Service Studio가 아닌 raw SQL 데이터베이스 트리거(B)에 두는 것은 OutSystems 권장 방식이 아니며 유지보수도 어렵습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Attachment' 엔터티에 'FileContent'(Binary Data) 속성과 'FileSize'(Integer) 속성이 있습니다. 5MB보다 큰 파일은 저장되기 전에 거부해야 합니다. 이를 적용하기에 가장 적절한 위치는 어디입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'FileSize' 속성을 Unique Index에 추가하여 검사한다."
+          },
+          {
+            "key": "B",
+            "text": "raw SQL 스크립트로 만든 데이터베이스 트리거에서 검사한다."
+          },
+          {
+            "key": "C",
+            "text": "'FileContent' Binary 속성의 'Max Length'를 5000000으로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "'CreateAttachment' 엔터티 액션을 호출하기 전에 Server Action 로직에서 'FileSize'를 검사한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-048",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An entity 'Product' has a Unique Index on 'SKU'. Two different Server Actions run at the exact same time, each trying to create a Product with SKU 'A100'. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The platform automatically queues the second action to run after the first one finishes."
+      },
+      {
+        "key": "B",
+        "text": "The database merges the two records into one."
+      },
+      {
+        "key": "C",
+        "text": "One action succeeds, and the other fails with a Database Exception when it tries to commit."
+      },
+      {
+        "key": "D",
+        "text": "Both actions succeed, leaving two records with SKU 'A100'."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Unique Index는 데이터베이스 레벨에서 강제되므로, 동시에 같은 SKU 'A100'을 insert하려 하면 하나만 commit에 성공하고 나머지 하나는 Database Exception으로 실패합니다. A처럼 플랫폼이 자동으로 동시 요청을 큐에 넣어 직렬화해 주지 않으며, B의 자동 병합이나 D의 중복 저장은 Unique Index가 정확히 막아 주는 시나리오라 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Product' 엔티티에 'SKU'에 대한 Unique Index가 있습니다. 서로 다른 두 Server Action이 정확히 동시에 실행되어 각각 SKU 'A100'인 Product를 생성하려고 합니다. 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "플랫폼이 두 번째 액션을 첫 번째가 끝난 뒤 실행하도록 자동으로 큐에 넣습니다."
+          },
+          {
+            "key": "B",
+            "text": "데이터베이스가 두 레코드를 하나로 병합합니다."
+          },
+          {
+            "key": "C",
+            "text": "한 액션은 성공하고, 다른 액션은 commit 시점에 Database Exception으로 실패합니다."
+          },
+          {
+            "key": "D",
+            "text": "두 액션 모두 성공하여 SKU 'A100' 레코드가 두 개 저장됩니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-049",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have a Static Entity 'Priority' with records 'Low', 'Medium', and 'High', and you add a 'Color' attribute to it. Where is the color value for each record stored?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In a column of the same database table that holds the 'Priority' records."
+      },
+      {
+        "key": "B",
+        "text": "In a separate metadata table managed by the OutSystems platform."
+      },
+      {
+        "key": "C",
+        "text": "In the application's CSS files generated during publish."
+      },
+      {
+        "key": "D",
+        "text": "Only in Service Studio; it is never sent to the database."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Static Entity도 일반 Entity처럼 실제 데이터베이스 테이블에 저장되며, 각 레코드와 그 값이 테이블 행으로 존재합니다. 추가한 'Color' 속성은 그 동일 테이블의 새 컬럼이 되어 각 레코드의 색상 값이 거기에 저장됩니다. B의 별도 메타테이블, C의 CSS 파일, D의 Service Studio 전용 저장은 모두 사실과 다릅니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Low', 'Medium', 'High' 레코드를 가진 Static Entity 'Priority'에 'Color' 속성을 추가했습니다. 각 레코드의 color 값은 어디에 저장됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Priority' 레코드가 저장된 동일한 데이터베이스 테이블의 컬럼에 저장됩니다."
+          },
+          {
+            "key": "B",
+            "text": "OutSystems 플랫폼이 관리하는 별도의 메타데이터 테이블에 저장됩니다."
+          },
+          {
+            "key": "C",
+            "text": "publish 시 생성되는 애플리케이션 CSS 파일에 저장됩니다."
+          },
+          {
+            "key": "D",
+            "text": "Service Studio에만 저장되고 데이터베이스로는 전송되지 않습니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-050",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A multi-tenant Entity 'Customer' should allow the same 'TaxNumber' to exist in different tenants, but 'TaxNumber' must be unique within each tenant. How should you configure the Unique Index?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a Unique Index on 'TaxNumber' only - multi-tenant entities scope unique indexes per tenant automatically."
+      },
+      {
+        "key": "B",
+        "text": "Use a 'Before Save' action to manually query for duplicates."
+      },
+      {
+        "key": "C",
+        "text": "Manually include both 'TaxNumber' and 'TenantId' in the Unique Index."
+      },
+      {
+        "key": "D",
+        "text": "Set the Index's 'Is Multi-tenant' property to 'Yes'."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Multi-tenant Entity는 플랫폼이 tenant 식별자로 데이터를 자동 격리하며, Unique Index도 자동으로 tenant 범위 안에서만 적용됩니다. 따라서 'TaxNumber'에만 Unique Index를 만들어도 서로 다른 tenant는 같은 값을 가질 수 있고 같은 tenant 내에서는 유일성이 보장됩니다. C처럼 tenant 식별자는 시스템이 관리해 인덱스에 수동으로 넣을 수 없고, D의 Index 'Is Multi-tenant' 속성은 존재하지 않으며, B의 수동 중복 조회는 동시성에 취약해 견고하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "multi-tenant 엔티티 'Customer'는 서로 다른 tenant에서는 같은 'TaxNumber'가 존재할 수 있어야 하지만, 같은 tenant 내에서는 'TaxNumber'가 유일해야 합니다. Unique Index를 어떻게 구성해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'TaxNumber'에만 Unique Index를 만든다 - multi-tenant 엔티티는 Unique Index를 자동으로 tenant 범위로 적용한다."
+          },
+          {
+            "key": "B",
+            "text": "'Before Save' 액션에서 중복을 수동으로 조회한다."
+          },
+          {
+            "key": "C",
+            "text": "Unique Index에 'TaxNumber'와 'TenantId'를 모두 수동으로 포함한다."
+          },
+          {
+            "key": "D",
+            "text": "Index의 'Is Multi-tenant' 속성을 'Yes'로 설정한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-051",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "You set an attribute's 'Default Value' to 'NullIdentifier()' in Service Studio. What is the result in the physical database column?",
+    "options": [
+      {
+        "key": "A",
+        "text": "No database-level DEFAULT constraint is created; the platform fills the null value when the record is created."
+      },
+      {
+        "key": "B",
+        "text": "The database throws an error because 'NullIdentifier' is not a valid SQL keyword."
+      },
+      {
+        "key": "C",
+        "text": "The column is created as 'AUTOINCREMENT'."
+      },
+      {
+        "key": "D",
+        "text": "The column is created with a 'DEFAULT 0' constraint."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems에서 지정한 속성의 Default Value는 물리 데이터베이스의 DEFAULT 제약으로 변환되지 않고, 레코드를 만드는 Create 로직에서 플랫폼이 그 값을 채워 넣습니다. NullIdentifier()는 Service Studio 표현식이지 SQL 키워드가 아니므로 DB에 그대로 들어가 오류를 내는 것(B)이 아닙니다. C(AUTOINCREMENT)나 D('DEFAULT 0' 제약 생성)처럼 DB 컬럼 정의가 바뀌지도 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Service Studio에서 어떤 속성의 'Default Value'를 'NullIdentifier()'로 설정했습니다. 물리 데이터베이스 컬럼에는 어떤 결과가 나타납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스 레벨의 DEFAULT 제약은 생성되지 않으며, 레코드 생성 시 플랫폼이 null 값을 채웁니다."
+          },
+          {
+            "key": "B",
+            "text": "'NullIdentifier'는 유효한 SQL 키워드가 아니므로 데이터베이스가 오류를 발생시킵니다."
+          },
+          {
+            "key": "C",
+            "text": "컬럼이 'AUTOINCREMENT'로 생성됩니다."
+          },
+          {
+            "key": "D",
+            "text": "컬럼이 'DEFAULT 0' 제약과 함께 생성됩니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-052",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You are building a multi-tenant application where each tenant's users define their own Custom Categories, and the category data must be isolated per tenant. How should the 'Category' entity be configured?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create it as a Static Entity with a 'TenantId' attribute."
+      },
+      {
+        "key": "B",
+        "text": "Use a regular Entity, manually add a 'TenantId' attribute, and filter it in every Aggregate."
+      },
+      {
+        "key": "C",
+        "text": "Set the entity's 'Is Multi-tenant' property to 'Yes'."
+      },
+      {
+        "key": "D",
+        "text": "Set the entity to 'Public' but leave it non-multi-tenant."
+      }
+    ],
+    "answer": "C",
+    "explanation": "멀티테넌트 앱에서 각 tenant별로 데이터를 자동 격리하려면 Entity의 'Is Multi-tenant' 속성을 'Yes'로 설정하면 됩니다(C). 이렇게 하면 플랫폼이 tenant 식별자를 내부적으로 관리하여 Aggregate가 자동으로 현재 tenant의 데이터만 조회합니다. B처럼 직접 TenantId를 만들어 매 Aggregate마다 필터링하는 것은 누락과 보안 위험이 크고, Static Entity(A)는 사용자가 런타임에 값을 추가할 수 없으므로 부적절합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "각 tenant의 사용자가 자신만의 Custom Category를 정의하고, 그 데이터가 tenant별로 격리되어야 하는 멀티테넌트 애플리케이션을 만들고 있습니다. 'Category' Entity를 어떻게 구성해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'TenantId' 속성을 가진 Static Entity로 생성한다."
+          },
+          {
+            "key": "B",
+            "text": "일반 Entity를 사용하고 'TenantId' 속성을 직접 추가한 뒤 모든 Aggregate에서 필터링한다."
+          },
+          {
+            "key": "C",
+            "text": "Entity의 'Is Multi-tenant' 속성을 'Yes'로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "Entity를 'Public'으로 설정하되 멀티테넌트로는 두지 않는다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-053",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'Priority' has a record 'High'. You change the Label of 'High' to 'Urgent' and publish. What happens to existing 'Ticket' records that reference this priority?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They still reference the same record ID; only the label displayed in the UI changes."
+      },
+      {
+        "key": "B",
+        "text": "The Ticket records are updated to point to a new 'Urgent' ID."
+      },
+      {
+        "key": "C",
+        "text": "Existing Ticket records become orphaned and point to a NullIdentifier."
+      },
+      {
+        "key": "D",
+        "text": "The publish fails because changing a Static Entity label is a breaking change."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Static Entity의 각 레코드는 고유한 Identifier(ID)를 가지며, 다른 Entity는 이 ID로 참조합니다. Label 속성 값을 바꿔도 ID는 그대로이므로 참조하는 Ticket 레코드는 동일한 레코드를 가리키고 화면에 표시되는 텍스트만 바뀝니다(A). 따라서 새로운 ID로 옮겨가거나(B), orphan/NullIdentifier가 되거나(C), publish가 실패(D)하는 일은 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'Priority'에 'High' 레코드가 있습니다. 'High'의 Label을 'Urgent'로 변경하고 publish하면, 이 priority를 참조하는 기존 'Ticket' 레코드는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "여전히 같은 레코드 ID를 참조하며, UI에 표시되는 label만 바뀐다."
+          },
+          {
+            "key": "B",
+            "text": "Ticket 레코드가 새 'Urgent' ID를 가리키도록 업데이트된다."
+          },
+          {
+            "key": "C",
+            "text": "기존 Ticket 레코드가 orphan이 되어 NullIdentifier를 가리킨다."
+          },
+          {
+            "key": "D",
+            "text": "Static Entity의 label 변경은 breaking change이므로 publish가 실패한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-054",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'TaxBracket' has a 'Rate' (Decimal) attribute, and your 'Invoice' entity stores a calculated 'TaxAmount'. You change the Rate of 'Tier 1' from 0.1 to 0.15 in Service Studio and publish. What happens to Invoices already saved in the database?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Static Entity attribute values are baked into each Invoice at save time and can never change."
+      },
+      {
+        "key": "B",
+        "text": "The existing Invoices become 'inconsistent' because they reference a modified metadata record."
+      },
+      {
+        "key": "C",
+        "text": "Their already-stored TaxAmount values stay the same, but any logic that recalculates using 'Tier 1' now uses 0.15."
+      },
+      {
+        "key": "D",
+        "text": "The platform automatically updates all existing Invoice records to reflect the new rate."
+      }
+    ],
+    "answer": "C",
+    "explanation": "이미 저장된 Invoice의 TaxAmount는 계산 당시의 값이 컬럼에 저장된 것이므로, Static Entity의 Rate를 0.15로 바꿔도 기존에 저장된 값은 변하지 않습니다. 다만 이후 'Tier 1' Rate를 다시 읽어 계산하는 로직은 새 값 0.15를 사용합니다(C). 플랫폼이 기존 레코드를 자동으로 갱신하지도(D) 않고, 기존 Invoice가 inconsistent 상태가 되지도(B) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'TaxBracket'에 'Rate'(Decimal) 속성이 있고, 'Invoice' Entity는 계산된 'TaxAmount'를 저장합니다. Service Studio에서 'Tier 1'의 Rate를 0.1에서 0.15로 바꾸고 publish하면, 이미 데이터베이스에 저장된 Invoice는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Static Entity 속성 값은 저장 시점에 각 Invoice에 고정되어 절대 바뀌지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "기존 Invoice가 수정된 metadata 레코드를 참조하므로 'inconsistent' 상태가 된다."
+          },
+          {
+            "key": "C",
+            "text": "이미 저장된 TaxAmount 값은 그대로지만, 'Tier 1'로 재계산하는 로직은 이제 0.15를 사용한다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 기존 모든 Invoice 레코드를 새 rate로 자동 갱신한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-055",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Product entity has an attribute 'Description' (Text, Max Length 50). A developer increases the Max Length to 2000 and publishes, later stores long descriptions, then changes it back to 50 and publishes again. What is the main risk of the second publish?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only new records will be limited to 50 characters; existing records keep their full length."
+      },
+      {
+        "key": "B",
+        "text": "The publish fails because shrinking a column length is a restricted operation."
+      },
+      {
+        "key": "C",
+        "text": "The data is automatically moved to a 'System_Overflow' table."
+      },
+      {
+        "key": "D",
+        "text": "Any data in the 'Description' column longer than 50 characters is truncated, causing data loss."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Text 속성의 Max Length를 줄이면 컬럼 크기가 실제로 축소되므로, 기존에 저장된 50자를 초과하는 데이터는 잘려서(truncate) 영구적으로 손실됩니다. Service Studio는 이때 데이터 손실 경고를 보여주지만 publish 자체는 성공하므로 B(실패)는 틀립니다. A처럼 기존 데이터가 원래 길이를 유지하지 않으며, C의 'System_Overflow' 테이블은 존재하지 않는 개념입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product 엔티티에 'Description' 속성(Text, Max Length 50)이 있습니다. 개발자가 Max Length를 2000으로 늘려 publish한 뒤 긴 설명을 저장하고, 나중에 다시 50으로 되돌려 publish합니다. 두 번째 publish의 주요 위험은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "새 레코드만 50자로 제한되고 기존 레코드는 원래 길이를 그대로 유지한다."
+          },
+          {
+            "key": "B",
+            "text": "컬럼 길이를 줄이는 것은 제한된 작업이므로 publish가 실패한다."
+          },
+          {
+            "key": "C",
+            "text": "데이터가 자동으로 'System_Overflow' 테이블로 이동된다."
+          },
+          {
+            "key": "D",
+            "text": "'Description' 컬럼에서 50자를 초과하는 데이터가 잘려(truncate) 데이터 손실이 발생한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-056",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Entity attribute 'CreatedOn' has a Default Value of CurrDateTime(). A developer inserts a record using an Advanced SQL (SQL Tool) statement that does NOT include the 'CreatedOn' column. What ends up in that column?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A NULL or a database-level default (e.g. 1900-01-01) depending on the schema, because platform default values are not SQL constraints."
+      },
+      {
+        "key": "B",
+        "text": "The database engine executes CurrDateTime() and fills in the current timestamp."
+      },
+      {
+        "key": "C",
+        "text": "The insert fails because 'CreatedOn' is mandatory."
+      },
+      {
+        "key": "D",
+        "text": "OutSystems intercepts the SQL Tool and injects the default value before execution."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Entity 속성의 Default Value(CurrDateTime() 등)는 데이터베이스 제약이 아니라 플랫폼이 CreateXxx 같은 Entity 액션을 실행할 때만 적용됩니다. Advanced SQL로 직접 INSERT하면 이 플랫폼 기본값 로직을 우회하므로, 해당 컬럼에는 스키마에 따라 NULL 또는 데이터베이스 기본값(예: DateTime의 1900-01-01)이 들어갑니다(A). 따라서 데이터베이스가 CurrDateTime()을 실행한다는 B나 플랫폼이 SQL을 가로채 값을 주입한다는 D는 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity 속성 'CreatedOn'의 Default Value가 CurrDateTime()으로 설정되어 있습니다. 개발자가 Advanced SQL(SQL Tool)로 'CreatedOn' 컬럼을 포함하지 않은 INSERT 문을 실행해 레코드를 삽입합니다. 이 컬럼에는 무엇이 들어갑니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "플랫폼의 Default Value는 SQL 제약이 아니므로, 스키마에 따라 NULL 또는 데이터베이스 기본값(예: 1900-01-01)이 들어간다."
+          },
+          {
+            "key": "B",
+            "text": "데이터베이스 엔진이 CurrDateTime()을 실행하여 현재 시각을 채운다."
+          },
+          {
+            "key": "C",
+            "text": "'CreatedOn'이 필수(mandatory)이므로 INSERT가 실패한다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems가 SQL Tool을 가로채 실행 전에 기본값을 주입한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-057",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Static Entity 'OrderStatus' has a record 'Cancelled' (Id: 1). You delete the 'Cancelled' record in Service Studio and publish. What happens to the physical database table?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The publish fails if any regular Entity record still references the deleted record."
+      },
+      {
+        "key": "B",
+        "text": "The row remains in the physical table but is no longer available through the OutSystems metadata or Service Studio."
+      },
+      {
+        "key": "C",
+        "text": "An 'Is_Active' flag for that row is set to False in the database."
+      },
+      {
+        "key": "D",
+        "text": "The row is physically deleted and every referencing Foreign Key is set to 0."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Static Entity 레코드를 Service Studio에서 삭제하고 publish하면, 참조 무결성을 깨지 않기 위해 실제 데이터베이스 행은 물리적으로 삭제되지 않고 남습니다. 다만 OutSystems 메타데이터와 Service Studio에서는 더 이상 보이지 않게 됩니다(B). publish는 런타임 데이터를 검사하지 않으므로 실패하지 않고(A), 표준 Static Entity에 자동 'Is_Active' 플래그가 있는 것도 아니며(C), FK를 0으로 바꾸거나 물리 삭제하지도(D) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'OrderStatus'에 'Cancelled' 레코드(Id: 1)가 있습니다. Service Studio에서 'Cancelled' 레코드를 삭제하고 publish합니다. 물리 데이터베이스 테이블에는 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "일반 Entity 레코드가 삭제된 레코드를 아직 참조하고 있으면 publish가 실패한다."
+          },
+          {
+            "key": "B",
+            "text": "행은 물리 테이블에 남아 있지만, OutSystems 메타데이터와 Service Studio에서는 더 이상 사용할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스에서 해당 행의 'Is_Active' 플래그가 False로 설정된다."
+          },
+          {
+            "key": "D",
+            "text": "행이 물리적으로 삭제되고, 이를 참조하던 모든 Foreign Key가 0으로 설정된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-058",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "What happens to the physical database when you rename an Entity attribute in Service Studio and publish?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OutSystems creates a new column with the new name and leaves the old column (and its data) untouched in the database."
+      },
+      {
+        "key": "B",
+        "text": "The data is automatically migrated to the new column and the old column is dropped."
+      },
+      {
+        "key": "C",
+        "text": "The database engine performs an 'ALTER TABLE RENAME COLUMN' command."
+      },
+      {
+        "key": "D",
+        "text": "The publish fails if the attribute already contains data."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Service Studio에서 속성 이름을 바꾸면 플랫폼은 이를 '새 속성 추가 + 기존 속성 유지'로 처리합니다. 즉 데이터베이스에 새 이름의 컬럼이 새로 만들어지고, 기존 컬럼과 그 안의 데이터는 그대로 남아 있어 데이터가 자동으로 옮겨지지 않습니다. 따라서 이름 변경 시 데이터가 사라진 것처럼 보이며, 필요하면 수동으로 마이그레이션해야 합니다. B(자동 이전), C(RENAME COLUMN 실행), D(publish 실패)는 실제 동작과 다릅니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Service Studio에서 Entity 속성의 이름을 바꾸고 publish하면 물리적 데이터베이스에는 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OutSystems가 새 이름의 컬럼을 새로 만들고, 기존 컬럼과 그 데이터는 데이터베이스에 그대로 남긴다."
+          },
+          {
+            "key": "B",
+            "text": "데이터가 자동으로 새 컬럼으로 이전되고 기존 컬럼은 삭제된다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스 엔진이 'ALTER TABLE RENAME COLUMN' 명령을 수행한다."
+          },
+          {
+            "key": "D",
+            "text": "속성에 기존 데이터가 있으면 publish가 실패한다."
+          }
+        ]
+      }
+    }
   }
 ]
