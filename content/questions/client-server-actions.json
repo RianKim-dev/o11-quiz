@@ -877,5 +877,317 @@
         ]
       }
     }
+  },
+  {
+    "id": "CSA-016",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "What is the primary architectural difference between a Server Action and a Service Action in OutSystems 11?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Server Actions work only in Web Apps, while Service Actions are only for Mobile Apps."
+      },
+      {
+        "key": "B",
+        "text": "A Server Action is a direct (tightly coupled) dependency, while a Service Action is a loosely coupled, REST-based call that runs in its own separate transaction."
+      },
+      {
+        "key": "C",
+        "text": "Only Server Actions can access the database; Service Actions can only call external APIs."
+      },
+      {
+        "key": "D",
+        "text": "Service Actions are faster because they never require a network call."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Server Action은 같은 모듈이나 직접 참조로 호출되는 강한 결합(tight coupling) 의존성이며 호출한 액션과 같은 트랜잭션에서 실행됩니다. 반면 Service Action은 Service 모듈이 노출하는 느슨한 결합(loose coupling)의 REST 기반 호출로, 별도의 독립 트랜잭션에서 실행됩니다(B 정답). Service Action도 DB에 접근할 수 있고(C 오답), 네트워크 호출을 수반하므로 더 빠르다고 볼 수 없습니다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11에서 Server Action과 Service Action의 근본적인 아키텍처 차이는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Server Action은 Web App에서만, Service Action은 Mobile App에서만 사용할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "Server Action은 직접(강한 결합) 의존성이고, Service Action은 느슨한 결합의 REST 기반 호출로 별도의 독립 트랜잭션에서 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "Server Action만 데이터베이스에 접근할 수 있고, Service Action은 외부 API 호출만 가능하다."
+          },
+          {
+            "key": "D",
+            "text": "Service Action은 네트워크 연결이 필요 없어 더 빠르다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-017",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Inside a Server Action you call a Service Action to write an error log. The Server Action's main transaction then fails and rolls back. What happens to the log written by the Service Action?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The log is rolled back because all actions in one request share a single global transaction."
+      },
+      {
+        "key": "B",
+        "text": "The log is kept only if the Service Action was called with a 'Wait for Completion' flag."
+      },
+      {
+        "key": "C",
+        "text": "The log remains in the database because the Service Action ran in its own independent transaction."
+      },
+      {
+        "key": "D",
+        "text": "The platform raises an 'Inconsistent Transaction' error and the request crashes."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Service Action은 호출한 액션과 분리된 자체 독립 트랜잭션에서 실행됩니다. 그래서 메인 Server Action의 트랜잭션이 실패해 롤백되어도, Service Action이 이미 커밋한 에러 로그는 DB에 그대로 남습니다(C 정답). 하나의 요청이 전역 트랜잭션을 공유한다는 A는 Server Action끼리에만 해당하고 Service Action에는 적용되지 않습니다. 'Wait for Completion' 플래그(B)나 'Inconsistent Transaction' 오류(D)는 이 상황과 무관한 설명입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Server Action 안에서 에러 로그를 기록하기 위해 Service Action을 호출합니다. 이후 Server Action의 메인 트랜잭션이 실패하여 롤백됩니다. Service Action이 기록한 로그는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "하나의 요청에 속한 모든 액션이 단일 전역 트랜잭션을 공유하므로 로그도 함께 롤백된다."
+          },
+          {
+            "key": "B",
+            "text": "Service Action을 'Wait for Completion' 플래그로 호출한 경우에만 로그가 유지된다."
+          },
+          {
+            "key": "C",
+            "text": "Service Action은 자체 독립 트랜잭션에서 실행되었으므로 로그는 DB에 그대로 남는다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 'Inconsistent Transaction' 오류를 발생시키고 요청이 중단된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-018",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer exposes a Service Action that returns a list of Orders. After the database is updated, the Service Action keeps returning stale data for several seconds. What is the most likely cause?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The 'CommitTransaction' action must be called in the Screen's OnInitialize."
+      },
+      {
+        "key": "B",
+        "text": "Service Actions are served through a Content Delivery Network (CDN) by default."
+      },
+      {
+        "key": "C",
+        "text": "Service Actions always run at 'Read Uncommitted' isolation, which updates slowly."
+      },
+      {
+        "key": "D",
+        "text": "The Service Action's 'Cache in Minutes' property is set to a non-zero value."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Service Action에도 'Cache in Minutes' 속성이 있어서 값이 0보다 크면 지정한 시간 동안 이전 결과를 캐시로 재사용합니다. 그래서 DB가 바뀌어도 캐시가 만료되기 전까지는 옛 데이터가 계속 반환됩니다. CommitTransaction, CDN, Read Uncommitted 격리수준은 이 현상과 관련이 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 개발자가 Order 목록을 반환하는 Service Action을 노출했습니다. 데이터베이스가 갱신된 뒤에도 이 Service Action이 몇 초 동안 계속 오래된 데이터를 반환합니다. 가장 가능성 높은 원인은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Screen의 OnInitialize에서 'CommitTransaction' 액션을 호출해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "Service Action은 기본적으로 CDN(Content Delivery Network)을 통해 제공된다."
+          },
+          {
+            "key": "C",
+            "text": "Service Action은 항상 'Read Uncommitted' 격리수준으로 실행되어 갱신이 느리다."
+          },
+          {
+            "key": "D",
+            "text": "Service Action의 'Cache in Minutes' 속성이 0이 아닌 값으로 설정되어 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-019",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "Inside a 'Server Action', a 'Service Action' that creates an Invoice record is called within a Loop of 10 iterations. If the 5th call raises an exception, how many records are committed to the database?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Five."
+      },
+      {
+        "key": "B",
+        "text": "Zero."
+      },
+      {
+        "key": "C",
+        "text": "Ten."
+      },
+      {
+        "key": "D",
+        "text": "Four."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Service Action은 호출자와 분리된 자체 트랜잭션에서 실행되어, 각 호출이 성공하면 그 즉시 개별적으로 commit됩니다. 따라서 1~4번째 호출은 각각 커밋되어 4개 레코드가 저장되고, 5번째 호출은 실패해 자체 트랜잭션이 rollback되며 예외가 상위로 전파되어 Loop가 중단됩니다(6~10번째는 실행 안 됨). 일반 Server Action은 요청 전체가 하나의 트랜잭션이라 실패 시 전부 rollback되지만, Service Action은 독립 트랜잭션이라는 점이 핵심입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Server Action' 안에서, Invoice 레코드를 생성하는 'Service Action'을 10회 반복 Loop 안에서 호출합니다. 5번째 호출이 예외를 발생시키면 데이터베이스에 커밋되는 레코드는 몇 개입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "다섯 개."
+          },
+          {
+            "key": "B",
+            "text": "영(0)개."
+          },
+          {
+            "key": "C",
+            "text": "열 개."
+          },
+          {
+            "key": "D",
+            "text": "네 개."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-020",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Updating 5,000 records in an Entity inside a single 'Server Action' triggered by a button causes a 'Timeout' error. What is the best-practice architectural solution?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Increase the 'Server Timeout' property in Service Center for the entire environment."
+      },
+      {
+        "key": "B",
+        "text": "Move the logic to a 'Timer' or a 'BPT' (Business Process Technology) to process it in the background."
+      },
+      {
+        "key": "C",
+        "text": "Use a 'Service Action' to update the records instead of a 'Server Action'."
+      },
+      {
+        "key": "D",
+        "text": "Wrap the update loop in a 'JavaScript' node so it runs on the client side."
+      }
+    ],
+    "answer": "B",
+    "explanation": "5,000건 대량 업데이트를 화면 버튼의 동기 Server Action에서 처리하면 요청이 timeout됩니다. Timer나 BPT를 사용해 백그라운드에서 비동기로 처리하는 것이 표준 아키텍처 해법입니다. 환경 전체의 timeout을 늘리는 것(A)은 근본 해결이 아니고 위험하며, Service Action(C)도 결국 동일한 요청 흐름에서 동기로 실행되고, 클라이언트 JavaScript(D)는 데이터베이스 대량 업데이트를 수행할 수 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "버튼으로 실행되는 단일 'Server Action' 안에서 Entity의 5,000개 레코드를 업데이트하면 'Timeout' 오류가 발생합니다. 가장 좋은 아키텍처 해법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Service Center에서 환경 전체의 'Server Timeout' 속성을 늘린다."
+          },
+          {
+            "key": "B",
+            "text": "로직을 'Timer'나 'BPT'(Business Process Technology)로 옮겨 백그라운드에서 처리한다."
+          },
+          {
+            "key": "C",
+            "text": "'Server Action' 대신 'Service Action'으로 레코드를 업데이트한다."
+          },
+          {
+            "key": "D",
+            "text": "업데이트 Loop를 'JavaScript' 노드로 감싸 클라이언트 측에서 실행한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-021",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Web App, a button's Client Action calls a Server Action 'CheckStock'. The network is slow and the user clicks the button 3 times in quick succession. By default, what happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Three separate requests are sent to the server and all three execute independently."
+      },
+      {
+        "key": "B",
+        "text": "The browser throws a 'Too many concurrent requests' exception."
+      },
+      {
+        "key": "C",
+        "text": "The platform cancels the first two requests and only completes the last one."
+      },
+      {
+        "key": "D",
+        "text": "The browser blocks the requests so they run strictly one after another."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems Reactive는 기본적으로 버튼 중복 클릭을 막지 않습니다. 세 번의 클릭은 각각 별도의 Screen Action을 실행해 서버로 세 개의 독립된 요청을 보내고 모두 실행되므로 A가 정답입니다. 중복 요청을 막으려면 개발자가 직접 버튼 비활성화나 플래그 처리를 구현해야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web App에서 버튼의 Client Action이 Server Action 'CheckStock'을 호출합니다. 네트워크가 느린 상태에서 사용자가 버튼을 빠르게 3번 클릭합니다. 기본 동작은 무엇인가요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "세 개의 별도 요청이 서버로 전송되어 셋 다 독립적으로 실행된다."
+          },
+          {
+            "key": "B",
+            "text": "브라우저에서 '동시 요청이 너무 많음' 예외가 발생한다."
+          },
+          {
+            "key": "C",
+            "text": "플랫폼이 앞의 두 요청을 취소하고 마지막 요청만 완료한다."
+          },
+          {
+            "key": "D",
+            "text": "브라우저 큐가 요청을 막아 순차적으로 하나씩 실행된다."
+          }
+        ]
+      }
+    }
   }
 ]

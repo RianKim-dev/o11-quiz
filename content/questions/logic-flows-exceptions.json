@@ -1801,5 +1801,161 @@
         ]
       }
     }
+  },
+  {
+    "id": "LFE-031",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Screen, a Client Action calls a Server Action 'ValidateOrder' that throws a User Exception when validation fails. The Client Action has no Exception Handler. What does the user experience?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Server Action retries automatically three times before failing."
+      },
+      {
+        "key": "B",
+        "text": "The Screen goes blank and the user must reload the browser."
+      },
+      {
+        "key": "C",
+        "text": "An error message is shown in a feedback message (toast) and the logic flow stops."
+      },
+      {
+        "key": "D",
+        "text": "The platform ignores the exception and continues to the next node in the Client Action."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Reactive에서 처리되지 않은 User Exception이 발생하면 화면 상단에 feedback message(토스트) 형태로 오류 메시지가 표시되고 해당 로직 흐름은 그 지점에서 중단됩니다. 자동 재시도(A)나 예외를 무시하고 다음 노드로 진행(D)하는 동작은 없으며, 화면이 완전히 비워져 새로고침이 필요한 것도 아닙니다(B).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Screen에서 Client Action이 검증 실패 시 User Exception을 던지는 Server Action 'ValidateOrder'를 호출합니다. 이 Client Action에는 Exception Handler가 없습니다. 사용자는 무엇을 경험합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Server Action이 실패하기 전에 자동으로 세 번 재시도한다."
+          },
+          {
+            "key": "B",
+            "text": "화면이 비어지고 사용자가 브라우저를 새로고침해야 한다."
+          },
+          {
+            "key": "C",
+            "text": "feedback message(토스트)로 오류 메시지가 표시되고 로직 흐름이 중단된다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 예외를 무시하고 Client Action의 다음 노드로 계속 진행한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-032",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Server Action 'SaveOrder' performs several 'Create' and 'Update' operations. If the third operation fails on a database constraint and the Server Action has no Exception Handler, what happens to the data from the first two operations?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The first two operations are committed to the database and only the third one is ignored."
+      },
+      {
+        "key": "B",
+        "text": "The data is saved, but the record IDs of the first two operations are returned as NullIdentifier."
+      },
+      {
+        "key": "C",
+        "text": "The platform retries the failed operation three times before rolling back the previous ones."
+      },
+      {
+        "key": "D",
+        "text": "The entire transaction is rolled back, and the changes from the first two operations are not saved to the database."
+      }
+    ],
+    "answer": "D",
+    "explanation": "OutSystems는 하나의 요청(request)을 단일 데이터베이스 transaction으로 처리하므로, 처리되지 않은(unhandled) Exception이 발생하면 그 요청 안의 모든 DB 변경이 rollback됩니다. 따라서 앞선 두 작업도 저장되지 않습니다. 정답 D. 부분 commit이 되지 않으므로 A는 틀리고, ID가 NullIdentifier로 저장되는 개념(B)이나 자동 재시도(C)는 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Server Action 'SaveOrder'가 여러 'Create'와 'Update' 작업을 수행한다. 세 번째 작업이 데이터베이스 제약 조건으로 실패하고 이 Server Action에 Exception Handler가 없다면, 앞의 두 작업의 데이터는 어떻게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "앞의 두 작업은 DB에 commit되고 세 번째만 무시된다."
+          },
+          {
+            "key": "B",
+            "text": "데이터는 저장되지만 앞 두 작업의 레코드 ID가 NullIdentifier로 반환된다."
+          },
+          {
+            "key": "C",
+            "text": "플랫폼이 실패한 작업을 세 번 재시도한 뒤 이전 작업들을 rollback한다."
+          },
+          {
+            "key": "D",
+            "text": "전체 transaction이 rollback되어 앞의 두 작업 변경도 DB에 저장되지 않는다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-033",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Server Action, two 'Create' nodes are followed by a 'Raise Exception' (User Exception) node. The exception is triggered and there is no Exception Handler in that Server Action. What is the state of the database afterwards?",
+    "options": [
+      {
+        "key": "A",
+        "text": "No records are created; the transaction is rolled back completely."
+      },
+      {
+        "key": "B",
+        "text": "Two records are created because the exception happened after the create nodes."
+      },
+      {
+        "key": "C",
+        "text": "The records are created but flagged as 'Invalid'."
+      },
+      {
+        "key": "D",
+        "text": "Only the first record is kept because the second was still 'in flight'."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems는 요청 처리 전체를 하나의 database transaction으로 감쌉니다. 처리되지 않은 exception이 Server Action 밖으로 전파되면 그 transaction 전체가 rollback되어, exception 이전에 실행된 두 Create 모두 취소됩니다. 그래서 B처럼 두 건이 남거나 D처럼 한 건만 남지 않고, 아무 레코드도 커밋되지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Server Action에 두 개의 'Create' 노드가 있고 그 뒤에 'Raise Exception'(User Exception) 노드가 있습니다. 이 exception이 발생했고 해당 Server Action에는 Exception Handler가 없습니다. 이후 데이터베이스 상태는 어떻습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "어떤 레코드도 생성되지 않으며 transaction이 완전히 rollback된다."
+          },
+          {
+            "key": "B",
+            "text": "exception이 create 노드 뒤에서 발생했으므로 두 레코드가 생성된다."
+          },
+          {
+            "key": "C",
+            "text": "레코드는 생성되지만 'Invalid'로 표시된다."
+          },
+          {
+            "key": "D",
+            "text": "두 번째 레코드는 처리 중이었으므로 첫 번째 레코드만 남는다."
+          }
+        ]
+      }
+    }
   }
 ]

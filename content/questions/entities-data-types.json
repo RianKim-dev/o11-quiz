@@ -1075,5 +1075,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "ENT-019",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'Priority' is used as a mandatory foreign key on the 'Ticket' entity and is also referenced in application logic. When you try to delete one of the 'Priority' records inside Service Studio, the platform blocks it. Why?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Static Entities are read-only, so no record can be changed once the module is published."
+      },
+      {
+        "key": "B",
+        "text": "You must first set the record's 'Is Active' attribute to False before it can be deleted."
+      },
+      {
+        "key": "C",
+        "text": "A Static Entity record cannot be deleted while it is referenced in logic, used as a default value, or targeted by a foreign key."
+      },
+      {
+        "key": "D",
+        "text": "Static Entity records can only be removed through a database script, never in Service Studio."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Static Entity의 레코드는 컴파일 시점에 존재하며, 다른 로직에서 참조되거나 default value로 쓰이거나 foreign key로 연결되어 있으면 삭제 시 참조가 깨지므로 Service Studio가 이를 막습니다. Static Entity가 읽기 전용이라 수정 자체가 불가한 것은 아니며(A 오답), Is Active로 바꿔야만 삭제되는 규칙도 없습니다(B 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'Priority'가 'Ticket' 엔티티의 필수 foreign key로 사용되며 애플리케이션 로직에서도 참조되고 있습니다. Service Studio에서 이 'Priority' 레코드 하나를 삭제하려 하면 플랫폼이 이를 막습니다. 이유는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Static Entity는 읽기 전용이라 모듈 게시 후에는 어떤 레코드도 변경할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "삭제하기 전에 먼저 레코드의 'Is Active' 속성을 False로 바꿔야 한다."
+          },
+          {
+            "key": "C",
+            "text": "Static Entity 레코드는 로직에서 참조되거나 default value로 쓰이거나 foreign key로 연결되어 있는 동안에는 삭제할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "Static Entity 레코드는 Service Studio가 아니라 데이터베이스 스크립트로만 삭제할 수 있다."
+          }
+        ]
+      }
+    }
   }
 ]

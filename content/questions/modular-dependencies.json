@@ -692,5 +692,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "MOD-012",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Service Action in Module A is consumed by Module B. Module A is changed by adding a new mandatory input parameter and is republished, but Module B is NOT republished. What happens when the logic in Module B runs?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing; Service Actions keep multiple versions, so Module B keeps calling the old one."
+      },
+      {
+        "key": "B",
+        "text": "The platform blocks republishing Module A until Module B is also updated."
+      },
+      {
+        "key": "C",
+        "text": "A runtime error occurs because the deployed Service Action signature no longer matches Module B's call."
+      },
+      {
+        "key": "D",
+        "text": "Module B automatically supplies a default value for the new mandatory parameter."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Service Action은 컴파일 시점의 결합을 느슨하게 해주지만, 환경에는 한 가지 버전만 배포됩니다. 필수 입력 파라미터를 새로 추가하는 것은 breaking change라, 아직 갱신되지 않은 Module B는 이전 시그니처로 호출하여 런타임에 시그니처 불일치 오류가 발생하므로 C가 정답입니다. 옛 버전을 계속 호출한다(A)거나 필수 파라미터에 자동 기본값이 채워진다(D)는 설명은 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Module A의 Service Action을 Module B가 사용합니다. Module A에 새 필수 입력 파라미터를 추가하고 재게시했지만, Module B는 재게시하지 않았습니다. Module B의 로직이 실행되면 어떻게 되나요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무 일도 없다; Service Action은 여러 버전을 유지하므로 Module B는 계속 이전 버전을 호출한다."
+          },
+          {
+            "key": "B",
+            "text": "Module B도 갱신될 때까지 플랫폼이 Module A의 재게시를 막는다."
+          },
+          {
+            "key": "C",
+            "text": "배포된 Service Action 시그니처가 Module B의 호출과 더 이상 일치하지 않아 런타임 오류가 발생한다."
+          },
+          {
+            "key": "D",
+            "text": "Module B가 새 필수 파라미터에 자동으로 기본값을 채워 넣는다."
+          }
+        ]
+      }
+    }
   }
 ]

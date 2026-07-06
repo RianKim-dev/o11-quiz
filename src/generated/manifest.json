@@ -1,9 +1,9 @@
 {
-  "total": 263,
+  "total": 321,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
-      "count": 55
+      "count": 74
     },
     "Blocks and Events": {
       "category": "UI Design",
@@ -11,7 +11,7 @@
     },
     "Client and Server Actions": {
       "category": "Logic",
-      "count": 15
+      "count": 21
     },
     "Client Variables": {
       "category": "Reactive Apps in OutSystems",
@@ -19,7 +19,7 @@
     },
     "Data Relationships": {
       "category": "Data Modeling",
-      "count": 16
+      "count": 22
     },
     "Debugging and Monitoring": {
       "category": "Reactive Apps in OutSystems",
@@ -27,11 +27,11 @@
     },
     "Entities & Data Types": {
       "category": "Data Modeling",
-      "count": 18
+      "count": 19
     },
     "Fetching Data on Screens": {
       "category": "Fetching Data",
-      "count": 23
+      "count": 41
     },
     "Form Validations": {
       "category": "Logic",
@@ -39,11 +39,11 @@
     },
     "Logic Flows & Exception Handling": {
       "category": "Logic",
-      "count": 29
+      "count": 32
     },
     "Modular Dependencies": {
       "category": "Architecture & Security",
-      "count": 11
+      "count": 12
     },
     "Role-based Security": {
       "category": "Architecture & Security",
@@ -51,7 +51,7 @@
     },
     "Screen Lifecycle": {
       "category": "Reactive Apps in OutSystems",
-      "count": 19
+      "count": 23
     },
     "Screen Widgets": {
       "category": "UI Design",

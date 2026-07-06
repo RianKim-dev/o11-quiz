@@ -924,5 +924,317 @@
         ]
       }
     }
+  },
+  {
+    "id": "REL-017",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Entity 'Ticket' has a mandatory 'PriorityId' pointing to the Static Entity 'Priority' (Low, Medium, High). A Screen lists all Tickets using an Aggregate that joins 'Ticket' with 'Priority' using 'Only With'. A developer deletes one 'Priority' record directly in the database with a SQL script. What does the Aggregate return when a user opens the Screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It returns the Ticket records, but the Priority attributes are filled with default values."
+      },
+      {
+        "key": "B",
+        "text": "It omits any Ticket records that were linked to the deleted Priority record."
+      },
+      {
+        "key": "C",
+        "text": "The platform blocks the Screen from loading because it detects the missing Static Entity record."
+      },
+      {
+        "key": "D",
+        "text": "The Screen crashes with a 'Database Integrity' exception when the Aggregate fetches the missing ID."
+      }
+    ],
+    "answer": "B",
+    "explanation": "'Only With'는 inner join이므로 오른쪽(Priority)에 매칭되는 레코드가 없으면 해당 Ticket 행 자체가 결과에서 제외됩니다. 따라서 삭제된 Priority를 참조하던 Ticket은 목록에 나타나지 않습니다. inner join은 매칭 없는 행을 조용히 걸러낼 뿐 예외를 던지지 않으므로 화면이 중단(D)되거나 로딩이 차단(C)되지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Ticket' Entity에는 Static Entity 'Priority'(Low, Medium, High)를 가리키는 필수 'PriorityId'가 있습니다. 한 Screen은 'Ticket'과 'Priority'를 'Only With'로 join하는 Aggregate로 모든 Ticket을 나열합니다. 개발자가 SQL 스크립트로 데이터베이스에서 'Priority' 레코드 하나를 직접 삭제했습니다. 사용자가 Screen을 열면 Aggregate는 무엇을 반환합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Ticket 레코드는 반환하지만 Priority attribute는 기본값으로 채워진다."
+          },
+          {
+            "key": "B",
+            "text": "삭제된 Priority 레코드와 연결되어 있던 Ticket 레코드는 결과에서 제외된다."
+          },
+          {
+            "key": "C",
+            "text": "플랫폼이 누락된 Static Entity 레코드를 감지해 Screen 로딩을 막는다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate가 누락된 ID를 fetch할 때 'Database Integrity' 예외로 화면이 중단된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-018",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A 'Project' has many 'Tasks' (the 'ProjectId' in 'Task' uses Delete Rule 'Delete'). A 'Task' has many 'TaskComments' (the 'TaskId' in 'TaskComment' uses Delete Rule 'Protect'). You try to delete a Project whose Tasks include some that already have TaskComments. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Project and all its Tasks are deleted, but the TaskComments are left orphaned."
+      },
+      {
+        "key": "B",
+        "text": "The Project deletion fails, yet the Tasks are deleted first before the error is raised."
+      },
+      {
+        "key": "C",
+        "text": "Only the Tasks without Comments are deleted; the Project and the Tasks that have Comments remain."
+      },
+      {
+        "key": "D",
+        "text": "An exception is thrown and nothing is deleted — not the Project, the Tasks, nor the Comments."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Project 삭제는 ProjectId의 Delete rule에 따라 Task로 cascade되지만, Comment가 있는 Task를 지우려는 순간 TaskId의 Protect rule이 삭제를 차단하고 예외를 던집니다. 삭제는 하나의 트랜잭션으로 처리되므로 예외 발생 시 전체가 rollback되어 Project, Task, Comment 어느 것도 삭제되지 않습니다. 따라서 부분 삭제(A, B, C)는 발생하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Project'는 여러 'Task'를 가집니다('Task'의 'ProjectId'는 Delete Rule 'Delete'). 'Task'는 여러 'TaskComment'를 가집니다('TaskComment'의 'TaskId'는 Delete Rule 'Protect'). 이미 TaskComment가 있는 Task를 포함하는 Project를 삭제하려고 하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Project와 모든 Task가 삭제되지만 TaskComment는 orphan 상태로 남는다."
+          },
+          {
+            "key": "B",
+            "text": "Project 삭제는 실패하지만, 오류가 발생하기 전에 Task는 먼저 삭제된다."
+          },
+          {
+            "key": "C",
+            "text": "Comment가 없는 Task만 삭제되고, Project와 Comment가 있는 Task는 남는다."
+          },
+          {
+            "key": "D",
+            "text": "예외가 발생하고 Project, Task, Comment 어느 것도 삭제되지 않는다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-019",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate fetches 'Employees' with their 'Department' using 'With or Without', because some Employees have no Department assigned. You add a calculated attribute 'DepartmentDisplay' that should show 'No Department' when there is no match. Which expression is the most robust?",
+    "options": [
+      {
+        "key": "A",
+        "text": "If(Department.Name = \"\", \"No Department\", Department.Name)"
+      },
+      {
+        "key": "B",
+        "text": "If(Employee.DepartmentId = NullIdentifier(), \"No Department\", Department.Name)"
+      },
+      {
+        "key": "C",
+        "text": "Department.Name"
+      },
+      {
+        "key": "D",
+        "text": "If(Department.Id = NullIdentifier(), \"No Department\", Department.Name)"
+      }
+    ],
+    "answer": "D",
+    "explanation": "'With or Without'(left join)에서 매칭되는 Department가 없으면 Department의 모든 attribute가 비어 Department.Id가 NullIdentifier()가 됩니다. D는 매칭이 없는 경우를 정확히 판별합니다. B(Employee.DepartmentId 확인)는 FK가 이미 삭제된 Department를 가리키는 orphan 상황을 놓칠 수 있고, A(Name이 빈 문자열)는 실제 이름이 비어 있는 Department와 구분하지 못해 덜 견고합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "일부 Employee에 Department가 할당되어 있지 않기 때문에, Aggregate가 'With or Without'로 'Employee'와 'Department'를 fetch합니다. 매칭이 없을 때 'No Department'를 표시하도록 계산 attribute 'DepartmentDisplay'를 추가합니다. 가장 견고한 표현식은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "If(Department.Name = \"\", \"No Department\", Department.Name)"
+          },
+          {
+            "key": "B",
+            "text": "If(Employee.DepartmentId = NullIdentifier(), \"No Department\", Department.Name)"
+          },
+          {
+            "key": "C",
+            "text": "Department.Name"
+          },
+          {
+            "key": "D",
+            "text": "If(Department.Id = NullIdentifier(), \"No Department\", Department.Name)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-020",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has two joins: 'Invoice' (Only With) 'Client' AND 'Invoice' (With or Without) 'Coupon'. There is a Filter: 'Client.IsVIP = True'. Which records are returned?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only Invoices from VIP Clients, regardless of whether a Coupon exists."
+      },
+      {
+        "key": "B",
+        "text": "All Invoices from VIP Clients, but if an Invoice has no Coupon the Client information is hidden too."
+      },
+      {
+        "key": "C",
+        "text": "Only Invoices from VIP Clients that also have a Coupon."
+      },
+      {
+        "key": "D",
+        "text": "All Invoices, but the Client and Coupon fields are blank when the Client is not VIP."
+      }
+    ],
+    "answer": "A",
+    "explanation": "'Only With'는 inner join이라 Client가 있는 Invoice만 남고, Client.IsVIP = True 필터로 VIP 고객의 Invoice만 걸러집니다. Coupon은 'With or Without'(left join)이므로 Coupon이 없어도 Invoice는 유지되고 Coupon 컬럼만 비어 나옵니다. 따라서 정답은 A. C는 Coupon을 강제(inner join)로 만들어 틀리고, B와 D는 join 방향과 필터 동작을 잘못 설명합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate에 두 개의 join이 있다: 'Invoice' (Only With) 'Client' 그리고 'Invoice' (With or Without) 'Coupon'. Filter는 'Client.IsVIP = True'이다. 어떤 레코드가 반환되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Coupon 존재 여부와 상관없이 VIP Client의 Invoice만 반환된다."
+          },
+          {
+            "key": "B",
+            "text": "VIP Client의 모든 Invoice를 반환하지만, Coupon이 없는 Invoice는 Client 정보도 함께 숨겨진다."
+          },
+          {
+            "key": "C",
+            "text": "VIP Client의 Invoice 중 Coupon도 있는 것만 반환된다."
+          },
+          {
+            "key": "D",
+            "text": "모든 Invoice를 반환하지만, Client가 VIP가 아니면 Client와 Coupon 필드가 비어 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-021",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An 'Employee' Entity has an optional 'ManagerId' self-reference. You must list every Employee with their Manager's name beside them; Employees without a manager must still appear with 'N/A' as the name. Which configuration is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Aggregate joining Employee with Employee (With or Without) plus a Filter: Employee2.Id <> NullIdentifier()."
+      },
+      {
+        "key": "B",
+        "text": "Aggregate joining Employee with Employee (With or Without) plus a calculated attribute: If(Employee2.Name = \"\", \"N/A\", Employee2.Name)."
+      },
+      {
+        "key": "C",
+        "text": "Aggregate joining Employee with Employee (Only With) plus a Filter: Employee.ManagerId = NullIdentifier()."
+      },
+      {
+        "key": "D",
+        "text": "A Data Action that fetches all Employees then uses a nested For Each to look up each manager in the database."
+      }
+    ],
+    "answer": "B",
+    "explanation": "매니저가 없는 직원도 목록에 나와야 하므로 self-join은 'With or Without'(left join)이어야 합니다. 매니저가 없으면 두 번째 Employee의 컬럼이 비어(null/\"\") 나오므로 계산식 If(Employee2.Name = \"\", \"N/A\", Employee2.Name)로 'N/A'를 표시합니다. 정답 B. A는 필터 Employee2.Id <> NullIdentifier()가 매니저 없는 직원을 다시 제외해 left join을 무의미하게 만들고, C는 inner join에 반대 필터라 틀리며, D는 DB를 반복 조회하는 비효율적 방식입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Employee' 엔티티에 선택적(optional) 'ManagerId' self-reference가 있다. 모든 Employee를 그들의 Manager 이름과 함께 나열하되, Manager가 없는 Employee도 이름을 'N/A'로 하여 목록에 나와야 한다. 올바른 구성은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Employee와 Employee를 (With or Without)로 join하고 Filter로 Employee2.Id <> NullIdentifier() 사용."
+          },
+          {
+            "key": "B",
+            "text": "Employee와 Employee를 (With or Without)로 join하고 계산 속성 If(Employee2.Name = \"\", \"N/A\", Employee2.Name) 사용."
+          },
+          {
+            "key": "C",
+            "text": "Employee와 Employee를 (Only With)로 join하고 Filter로 Employee.ManagerId = NullIdentifier() 사용."
+          },
+          {
+            "key": "D",
+            "text": "모든 Employee를 가져온 뒤 중첩 For Each로 각 manager를 DB에서 찾는 Data Action 사용."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-022",
+    "subtopic": "Data Relationships",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Many-to-Many relationship links 'Student' and 'Course' through 'Enrollment'. You must list all Students who are NOT enrolled in a specific 'CourseId'. What is the correct Aggregate strategy?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Join Student with Enrollment (With or Without) using the join condition Enrollment.CourseId = CourseId, then Filter for Enrollment.Id = NullIdentifier()."
+      },
+      {
+        "key": "B",
+        "text": "Join Student with Enrollment (Only With) and Filter for Enrollment.CourseId <> CourseId."
+      },
+      {
+        "key": "C",
+        "text": "Join Student with Enrollment (With or Without) and Filter for Enrollment.CourseId <> CourseId."
+      },
+      {
+        "key": "D",
+        "text": "Filter Student records using Student.Id <> Enrollment.StudentId."
+      }
+    ],
+    "answer": "A",
+    "explanation": "특정 Course에 '등록되지 않은' 학생을 찾으려면 left join(With or Without)의 join 조건에 Enrollment.CourseId = CourseId를 넣어 해당 과목의 등록만 매칭시키고, 매칭이 없는 행을 Filter Enrollment.Id = NullIdentifier()로 걸러야 합니다. 정답 A. C는 필터를 쓰므로 다른 과목 등록 행 때문에 해당 과목에 등록한 학생도 함께 나오고, 등록이 아예 없는 학생은 null 비교로 제외되어 틀립니다. B는 inner join이라 등록 없는 학생이 빠지고, D는 두 엔티티를 임의로 비교하는 잘못된 표현입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Student'와 'Course'가 'Enrollment'를 통해 Many-to-Many로 연결되어 있다. 특정 'CourseId'에 등록되지 '않은' 모든 Student를 찾아야 한다. 올바른 Aggregate 전략은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Student와 Enrollment를 (With or Without)로 join하되 join 조건을 Enrollment.CourseId = CourseId로 하고, Filter로 Enrollment.Id = NullIdentifier()를 건다."
+          },
+          {
+            "key": "B",
+            "text": "Student와 Enrollment를 (Only With)로 join하고 Filter로 Enrollment.CourseId <> CourseId를 건다."
+          },
+          {
+            "key": "C",
+            "text": "Student와 Enrollment를 (With or Without)로 join하고 Filter로 Enrollment.CourseId <> CourseId를 건다."
+          },
+          {
+            "key": "D",
+            "text": "Student.Id <> Enrollment.StudentId 로 Student 레코드를 필터링한다."
+          }
+        ]
+      }
+    }
   }
 ]

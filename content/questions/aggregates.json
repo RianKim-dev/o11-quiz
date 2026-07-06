@@ -3189,5 +3189,993 @@
         ]
       }
     }
+  },
+  {
+    "id": "AGG-056",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You need a Screen that lists each 'Supplier' together with the number of 'Products' it provides (a Product belongs to one Supplier). Which single Aggregate is the most efficient way to get this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fetch all Products, Group By SupplierId, then join with Supplier in a second Aggregate."
+      },
+      {
+        "key": "B",
+        "text": "Use one Aggregate for Suppliers and, inside the List, add a separate Aggregate per row to count Products."
+      },
+      {
+        "key": "C",
+        "text": "Join Supplier with Product using 'With or Without', Group By all Supplier attributes, and Count Product.Id."
+      },
+      {
+        "key": "D",
+        "text": "Fetch all Suppliers in one Aggregate and count Products with a ListFilter in an Expression."
+      }
+    ],
+    "answer": "C",
+    "explanation": "하나의 Aggregate에서 Supplier와 Product를 'With or Without'로 join하고 Supplier의 모든 attribute로 Group By한 뒤 Count(Product.Id)를 사용하면 Product가 없는 Supplier도 0으로 포함되어 단 한 번의 쿼리로 효율적으로 집계됩니다. 행마다 별도 Aggregate를 두는 방식(B)은 N+1 쿼리가 발생해 매우 비효율적입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "각 'Supplier'와 그 Supplier가 공급하는 'Product'의 개수를 함께 나열하는 Screen이 필요합니다(Product는 하나의 Supplier에 속함). 이를 얻는 가장 효율적인 단일 Aggregate 구성은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "모든 Product를 fetch해 SupplierId로 Group By한 뒤, 두 번째 Aggregate에서 Supplier와 join한다."
+          },
+          {
+            "key": "B",
+            "text": "Supplier용 Aggregate 하나를 두고, List 안에서 행마다 별도 Aggregate로 Product를 센다."
+          },
+          {
+            "key": "C",
+            "text": "Supplier와 Product를 'With or Without'로 join하고, Supplier의 모든 attribute로 Group By한 뒤 Count(Product.Id)를 사용한다."
+          },
+          {
+            "key": "D",
+            "text": "모든 Supplier를 한 Aggregate로 fetch하고 Expression에서 ListFilter로 Product를 센다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-057",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate groups 'Sales' by 'Region' and calculates the 'Sum' of 'Amount'. You add a Filter to show only Regions whose total sum exceeds 10,000. How does the platform handle this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The platform sends all Regions and sums to the browser, then hides the small ones with a client-side filter."
+      },
+      {
+        "key": "B",
+        "text": "The platform translates it into a SQL 'HAVING' clause, filtering after the grouping and summation are complete."
+      },
+      {
+        "key": "C",
+        "text": "Aggregates cannot filter on calculated sums; you must use a Data Action with a loop."
+      },
+      {
+        "key": "D",
+        "text": "The Filter excludes individual Sales below 10,000 before they are summed up."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate에서 그룹핑 후 집계값(Sum)에 조건을 걸면 OutSystems는 이를 SQL의 HAVING 절로 변환해, 그룹핑과 합계 계산이 끝난 뒤 결과를 필터링합니다. 정답 B. 필터가 서버(DB)에서 처리되므로 A(브라우저 필터)는 틀리고, 집계값 필터링을 지원하므로 C도 틀리며, HAVING은 합계 이후에 적용되므로 개별 레코드를 합산 전에 거르는 D도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Sales'를 'Region'별로 그룹핑하고 'Amount'의 'Sum'을 계산한다. 합계가 10,000을 초과하는 Region만 보이도록 Filter를 추가한다. 플랫폼은 이를 어떻게 처리하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "플랫폼이 모든 Region과 합계를 브라우저로 보낸 뒤 client-side 필터로 작은 것을 숨긴다."
+          },
+          {
+            "key": "B",
+            "text": "플랫폼이 이를 SQL 'HAVING' 절로 변환해 그룹핑과 합계 계산이 끝난 뒤 결과를 필터링한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate는 계산된 합계로 필터링할 수 없으므로 루프가 있는 Data Action을 써야 한다."
+          },
+          {
+            "key": "D",
+            "text": "Filter가 합산 전에 10,000 미만의 개별 Sales를 제외한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-058",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'RequestStatus' has records 'Draft', 'Submitted', 'Approved'. Entity 'Request' has a 'StatusId'. In an Aggregate you want all Requests that are either 'Draft' or 'Submitted'. What is the most maintainable Filter?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Request.StatusId = 1 or Request.StatusId = 2"
+      },
+      {
+        "key": "B",
+        "text": "Request.StatusLabel = \"Draft\" or Request.StatusLabel = \"Submitted\""
+      },
+      {
+        "key": "C",
+        "text": "Request.StatusId <> Entities.RequestStatus.Approved"
+      },
+      {
+        "key": "D",
+        "text": "Request.StatusId = Entities.RequestStatus.Draft or Request.StatusId = Entities.RequestStatus.Submitted"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Static Entity의 레코드는 Entities.RequestStatus.Draft 처럼 이름으로 참조할 수 있어, 하드코딩된 숫자 ID보다 가독성과 유지보수성이 높습니다. 정답 D. A는 1, 2 같은 magic number라 DB 순서가 바뀌면 깨지고, B의 Request.StatusLabel은 Request 엔티티에 없는 속성이며, C(<> Approved)는 앞으로 상태값이 추가되면 의도치 않은 레코드까지 포함되어 부정확합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'RequestStatus'에 'Draft', 'Submitted', 'Approved' 레코드가 있다. 'Request' 엔티티에는 'StatusId'가 있다. Aggregate에서 상태가 'Draft' 또는 'Submitted'인 모든 Request를 찾으려 한다. 가장 유지보수하기 좋은 Filter는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Request.StatusId = 1 or Request.StatusId = 2"
+          },
+          {
+            "key": "B",
+            "text": "Request.StatusLabel = \"Draft\" or Request.StatusLabel = \"Submitted\""
+          },
+          {
+            "key": "C",
+            "text": "Request.StatusId <> Entities.RequestStatus.Approved"
+          },
+          {
+            "key": "D",
+            "text": "Request.StatusId = Entities.RequestStatus.Draft or Request.StatusId = Entities.RequestStatus.Submitted"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-059",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You need to find all 'Customers' who have NEVER placed an order (no matching row in the 'Order' Entity). Which Aggregate setup is the standard anti-join approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Join Customer with Order using 'With or Without' and add a Filter: Order.Id = NullIdentifier()."
+      },
+      {
+        "key": "B",
+        "text": "Use a Data Action to fetch all Customers, then loop and call a Server Action to check each one for orders."
+      },
+      {
+        "key": "C",
+        "text": "Join Customer with Order using 'Only With' and add a Filter: Order.Id = NullIdentifier()."
+      },
+      {
+        "key": "D",
+        "text": "Join Customer with Order using 'With or Without' and Group By Customer.Id with a Count of Order.Id = 0."
+      }
+    ],
+    "answer": "A",
+    "explanation": "주문 기록이 전혀 없는 행을 찾는 anti-join은 'With or Without'(left join)으로 조인해 매칭이 없으면 오른쪽 컬럼이 null이 되게 한 뒤, Order.Id = NullIdentifier() 필터로 매칭 없는 행만 남기는 방식이 표준입니다(A 정답). 'Only With'(inner join)는 매칭되는 행만 남기므로 결과가 항상 0건이 되어 틀립니다(C 오답). 반복문+Server Action(B)은 매우 비효율적이고, Group By/Count 방식(D)은 동작할 수는 있으나 간결한 표준 anti-join 패턴이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 번도 주문한 적이 없는(‘Order' Entity에 매칭 레코드가 없는) 모든 'Customer'를 찾으려고 합니다. 표준 anti-join 방식의 Aggregate 구성은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Customer와 Order를 'With or Without'로 조인하고 Filter로 Order.Id = NullIdentifier()를 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "Data Action으로 모든 Customer를 가져온 뒤, 반복문으로 각 Customer마다 Server Action을 호출해 주문 여부를 확인한다."
+          },
+          {
+            "key": "C",
+            "text": "Customer와 Order를 'Only With'로 조인하고 Filter로 Order.Id = NullIdentifier()를 추가한다."
+          },
+          {
+            "key": "D",
+            "text": "Customer와 Order를 'With or Without'로 조인하고 Customer.Id로 Group By 한 뒤 Count of Order.Id = 0으로 거른다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-060",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "On a search Screen, an Aggregate has the Filter: Employee.Name like \"%\" + SearchKeyword + \"%\". If 'SearchKeyword' is an empty string, what is the result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate returns all Employee records."
+      },
+      {
+        "key": "B",
+        "text": "The platform automatically disables the filter to optimize the query."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate throws a 'SQL Syntax' error because of the empty string."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate returns zero records."
+      }
+    ],
+    "answer": "A",
+    "explanation": "SearchKeyword가 빈 문자열이면 필터는 like \"%%\"가 되고, \"%%\"는 모든 문자열과 매칭되므로 사실상 필터가 없는 것과 같아 모든 Employee 레코드가 반환됩니다(A 정답). 플랫폼이 필터를 자동으로 비활성화하거나(B), 문법 오류를 내거나(C), 0건을 반환하는(D) 것이 아닙니다. 그래서 검색 화면에서는 보통 SearchKeyword가 비었을 때의 동작을 별도로 처리합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "검색 Screen의 Aggregate에 Filter: Employee.Name like \"%\" + SearchKeyword + \"%\" 가 있습니다. 'SearchKeyword'가 빈 문자열이면 결과는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate가 모든 Employee 레코드를 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "플랫폼이 쿼리 최적화를 위해 필터를 자동으로 비활성화한다."
+          },
+          {
+            "key": "C",
+            "text": "빈 문자열 때문에 Aggregate가 'SQL Syntax' 오류를 던진다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate가 0건을 반환한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-061",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A 'Project' Entity has a 'Name' attribute. On a Screen you must display the Name, but show 'Untitled Project' whenever the Name is empty, for a list of 1,000 projects. What is the most efficient approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a calculated attribute in the Aggregate: If(Project.Name = \"\", \"Untitled Project\", Project.Name)."
+      },
+      {
+        "key": "B",
+        "text": "Change the 'Default Value' of the Entity's Name attribute to 'Untitled Project'."
+      },
+      {
+        "key": "C",
+        "text": "In the 'OnAfterFetch' event, loop through the list and update each empty Name."
+      },
+      {
+        "key": "D",
+        "text": "Use an Expression in the List widget: If(GetProjects.List.Current.Project.Name = \"\", \"Untitled Project\", Project.Name)."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate에 calculated attribute를 추가하면 값이 데이터 조회 시 한 번 계산되어 그대로 리스트에 사용되므로 가장 효율적입니다(A 정답). 'Default Value'(B)는 새 레코드를 만들 때만 적용되고 이미 빈 값인 기존 데이터에는 영향을 주지 못합니다. OnAfterFetch에서 1,000건을 순회하는 방식(C)은 불필요한 반복으로 비효율적이며, List widget의 Expression(D)도 동작은 하지만 렌더링되는 행마다 반복 계산되어 Aggregate의 calculated attribute만큼 깔끔하고 효율적이지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Project' Entity에 'Name' 속성이 있습니다. 화면에 Name을 표시하되 Name이 비어 있으면 'Untitled Project'를 보여줘야 하며, 대상은 1,000건의 프로젝트 리스트입니다. 가장 효율적인 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate에 calculated attribute를 추가한다: If(Project.Name = \"\", \"Untitled Project\", Project.Name)."
+          },
+          {
+            "key": "B",
+            "text": "Entity의 Name 속성 'Default Value'를 'Untitled Project'로 바꾼다."
+          },
+          {
+            "key": "C",
+            "text": "'OnAfterFetch' 이벤트에서 리스트를 순회하며 비어 있는 Name을 각각 갱신한다."
+          },
+          {
+            "key": "D",
+            "text": "List widget에서 Expression을 사용한다: If(GetProjects.List.Current.Project.Name = \"\", \"Untitled Project\", Project.Name)."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-062",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins Employee 'With or Without' Department and applies the filter 'Department.Name = \"Sales\"'. What is the effective result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "All Employees are shown, but the Department name only appears for those in Sales."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate fails because you cannot filter on an optional (left) join attribute."
+      },
+      {
+        "key": "C",
+        "text": "It shows Sales Employees plus all Employees who have no Department at all."
+      },
+      {
+        "key": "D",
+        "text": "It behaves like an 'Only With' join, returning only Employees in the Sales department."
+      }
+    ],
+    "answer": "D",
+    "explanation": "With or Without는 left join이지만, 조인된 Department 쪽 속성(Department.Name)에 등호 필터를 걸면 Department가 없는(null) 행은 조건을 만족하지 못해 제외됩니다. 결과적으로 Sales 부서 직원만 남아 Only With(inner join)처럼 동작하므로 D가 정답입니다. null FK 행이 함께 남는다(C)거나 필터가 불가능해 오류가 난다(B)는 설명은 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 Employee를 Department와 'With or Without'로 조인하고 'Department.Name = \"Sales\"' 필터를 적용합니다. 실질적인 결과는 무엇인가요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "모든 Employee가 표시되지만, Department 이름은 Sales 소속인 경우에만 보인다."
+          },
+          {
+            "key": "B",
+            "text": "optional(left) 조인 속성으로는 필터할 수 없어 Aggregate가 실패한다."
+          },
+          {
+            "key": "C",
+            "text": "Sales 소속 Employee에 더해, Department가 아예 없는 모든 Employee도 함께 표시된다."
+          },
+          {
+            "key": "D",
+            "text": "'Only With' 조인처럼 동작하여 Sales 부서 Employee만 반환한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-063",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "To find inactive Customers, a developer builds an Aggregate 'Customer (With or Without) Order' and adds the filter 'Order.Date > AddYears(CurrDate(), -1)'. What does this Aggregate actually return?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only the Customers with no orders at all."
+      },
+      {
+        "key": "B",
+        "text": "A SQL execution error, because you cannot compare dates on an optional join."
+      },
+      {
+        "key": "C",
+        "text": "Only Customers who have placed an order within the last year."
+      },
+      {
+        "key": "D",
+        "text": "All Customers, with Order details null for those who haven't ordered recently."
+      }
+    ],
+    "answer": "C",
+    "explanation": "With or Without(left join)에 조인된 Order 쪽 속성으로 필터(Order.Date > ...)를 걸면, 주문이 없는 고객은 Order.Date가 null이라 조건을 만족하지 못해 제외되고, 오래된 주문만 있는 고객도 제외됩니다. 결국 최근 1년 이내 주문한 고객만 남으므로 C가 정답이며, 원래 의도했던 '비활성 고객'과는 정반대 결과입니다. 비활성 고객을 찾으려면 Order.Id = NullIdentifier() 같은 anti-join 필터를 써야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "비활성 Customer를 찾기 위해 개발자가 'Customer (With or Without) Order' Aggregate를 만들고 'Order.Date > AddYears(CurrDate(), -1)' 필터를 추가했습니다. 이 Aggregate가 실제로 반환하는 결과는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "주문이 전혀 없는 Customer만 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "optional 조인에서 날짜를 비교할 수 없어 SQL 실행 오류가 난다."
+          },
+          {
+            "key": "C",
+            "text": "최근 1년 이내에 주문한 Customer만 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "모든 Customer를 반환하되, 최근 주문이 없는 경우 Order 정보가 null이다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-064",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "There is a Many-to-Many relationship between Doctor and Patient through an 'Enrollment' entity. You need an Aggregate listing Doctors who have NO Patients assigned. How do you configure it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Doctor (With or Without) Enrollment, Filter: Count(Enrollment.Id) = 0."
+      },
+      {
+        "key": "B",
+        "text": "Doctor (Only With) Enrollment, Group By Doctor.Id, Filter: Count(Enrollment.Id) = 0."
+      },
+      {
+        "key": "C",
+        "text": "Doctor (Only With) Enrollment, Filter: Enrollment.PatientId = NullIdentifier()."
+      },
+      {
+        "key": "D",
+        "text": "Doctor (With or Without) Enrollment, Filter: Enrollment.Id = NullIdentifier()."
+      }
+    ],
+    "answer": "D",
+    "explanation": "배정된 환자가 없는 의사를 찾는 것은 anti-join 패턴입니다. Doctor를 Enrollment와 With or Without(left join)로 연결하면 매칭되는 Enrollment가 없는 의사는 Enrollment.Id가 null이 되므로, 필터 Enrollment.Id = NullIdentifier()로 그들만 남길 수 있어 D가 정답입니다. Only With(inner join)는 Enrollment가 없는 의사를 아예 제외해(B, C) 조건을 만족할 수 없고, Count 필터는 Group By 없이 A처럼은 동작하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Doctor와 Patient가 'Enrollment' 엔티티를 통해 Many-to-Many 관계입니다. 배정된 Patient가 전혀 없는 Doctor 목록을 보여주는 Aggregate가 필요합니다. 어떻게 구성하나요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Doctor (With or Without) Enrollment, 필터: Count(Enrollment.Id) = 0."
+          },
+          {
+            "key": "B",
+            "text": "Doctor (Only With) Enrollment, Group By Doctor.Id, 필터: Count(Enrollment.Id) = 0."
+          },
+          {
+            "key": "C",
+            "text": "Doctor (Only With) Enrollment, 필터: Enrollment.PatientId = NullIdentifier()."
+          },
+          {
+            "key": "D",
+            "text": "Doctor (With or Without) Enrollment, 필터: Enrollment.Id = NullIdentifier()."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-065",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A List on a Screen is bound to an Aggregate that uses Group By to produce a 'TotalAmount' Sum column. You want the list sorted by this calculated TotalAmount. How do you do it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Right-click the original 'Amount' attribute and choose 'Sort by Sum'."
+      },
+      {
+        "key": "B",
+        "text": "Calculated attributes can't be sorted; sort the list in memory with a Data Action instead."
+      },
+      {
+        "key": "C",
+        "text": "In the Aggregate's Sort settings, add the calculated Sum attribute (TotalAmount) as a sort attribute."
+      },
+      {
+        "key": "D",
+        "text": "You must write a Custom SQL query because Aggregates can't sort on Sum columns."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate는 Group By로 만든 계산된(Sum) 속성으로도 정렬할 수 있습니다. Aggregate의 Sort(정렬) 설정에서 계산된 TotalAmount 속성을 정렬 기준으로 추가하면 되므로 C가 정답입니다. 'Sort by Sum'이라는 우클릭 메뉴는 없고(A), 계산된 속성을 정렬할 수 없다거나(B) 반드시 Custom SQL이 필요하다(D)는 설명은 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면의 List가 Group By로 'TotalAmount' Sum 컬럼을 만드는 Aggregate에 바인딩되어 있습니다. 이 계산된 TotalAmount로 리스트를 정렬하려면 어떻게 하나요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "원본 'Amount' 속성을 우클릭하고 'Sort by Sum'을 선택한다."
+          },
+          {
+            "key": "B",
+            "text": "계산된 속성은 정렬할 수 없으므로 Data Action으로 메모리에서 정렬한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate의 Sort 설정에서 계산된 Sum 속성(TotalAmount)을 정렬 기준으로 추가한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate는 Sum 컬럼 정렬을 지원하지 않으므로 Custom SQL을 작성해야 한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-066",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You need to list 'Departments' that currently have zero 'Employees'. Your Aggregate is Department (With or Without) Employee. Which filter most accurately returns only the empty departments?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Count(Employee.Id) = 0"
+      },
+      {
+        "key": "B",
+        "text": "Department.Id = NullIdentifier()"
+      },
+      {
+        "key": "C",
+        "text": "Employee.DepartmentId = NullIdentifier()"
+      },
+      {
+        "key": "D",
+        "text": "Employee.Id = NullIdentifier()"
+      }
+    ],
+    "answer": "D",
+    "explanation": "'With or Without'는 left join이라 직원이 없는 Department도 결과에 남고, 이때 Employee 쪽 컬럼은 모두 Null이 됩니다. 따라서 Employee.Id = NullIdentifier()로 필터하면 매칭되는 직원이 하나도 없는 부서만 걸러집니다. Count(...)=0은 Group By 없이는 이렇게 쓸 수 없고, Department.Id나 Employee.DepartmentId 조건은 '빈 부서' 판별과 맞지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "현재 'Employee'가 한 명도 없는 'Department'를 나열하려고 합니다. Aggregate는 Department (With or Without) Employee 입니다. 빈 부서만 정확히 반환하는 필터는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Count(Employee.Id) = 0"
+          },
+          {
+            "key": "B",
+            "text": "Department.Id = NullIdentifier()"
+          },
+          {
+            "key": "C",
+            "text": "Employee.DepartmentId = NullIdentifier()"
+          },
+          {
+            "key": "D",
+            "text": "Employee.Id = NullIdentifier()"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-067",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate groups by 'Category' and computes a 'Sum' of 'Amount'. You want users to click a column header to sort by that total. How do you drive this using dynamic sorting?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You must switch to an 'Advanced SQL' query to sort by an aggregated sum."
+      },
+      {
+        "key": "B",
+        "text": "Dynamic sorting works only on source Entity attributes, never on calculated Sums."
+      },
+      {
+        "key": "C",
+        "text": "Set the Aggregate's 'Sort' property at design time and hardcode the Sum attribute there."
+      },
+      {
+        "key": "D",
+        "text": "Pass the name of the Sum output attribute (e.g., \"Sum_Amount\") as the string for the dynamic Sort."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Aggregate의 Sort는 런타임에 문자열로 지정할 수 있고, Group By로 만들어진 Sum 같은 계산 컬럼도 그 출력 이름(예: \"Sum_Amount\")을 넘겨서 정렬할 수 있습니다. 계산 컬럼이라 정렬이 아예 불가능한 것이 아니며(B 오답), 이 정도 정렬에 반드시 Advanced SQL이 필요한 것도 아닙니다(A 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Category'로 Group By하고 'Amount'의 'Sum'을 계산합니다. 사용자가 컬럼 헤더를 클릭하면 그 합계 기준으로 정렬되게 하고 싶습니다. 동적 정렬(dynamic sort)로 이를 어떻게 구현합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "집계된 합계로 정렬하려면 'Advanced SQL' 쿼리로 전환해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "동적 정렬은 원본 Entity 속성에만 되고 계산된 Sum에는 절대 안 된다."
+          },
+          {
+            "key": "C",
+            "text": "디자인 타임에 Aggregate의 'Sort' 속성을 설정하고 Sum 속성을 하드코딩해야 한다."
+          },
+          {
+            "key": "D",
+            "text": "Sum 출력 속성의 이름(예: \"Sum_Amount\")을 문자열로 동적 Sort에 넘긴다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-068",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins 'Order' (Only With) 'Customer' and adds the filter 'Customer.IsActive = True'. An Order exists whose Customer is Inactive. What does the Aggregate return for that Order?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Order is returned, but all Customer fields are empty."
+      },
+      {
+        "key": "B",
+        "text": "The Order record is completely omitted from the results."
+      },
+      {
+        "key": "C",
+        "text": "The Order is returned with the Customer data, but a warning is logged."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate returns all orders and ignores the filter because it is on a joined entity."
+      }
+    ],
+    "answer": "B",
+    "explanation": "'Only With'는 inner join이라 조인된 Customer가 조건을 만족하지 않으면 그 Order 행 자체가 결과에서 제외됩니다. 'Customer.IsActive = True' 필터가 비활성 Customer를 걸러내므로, 해당 Customer에 연결된 Order도 함께 사라집니다. A(빈 Customer 필드)는 'With or Without'(left join)일 때의 동작이고, D처럼 조인 엔티티라고 필터가 무시되지는 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Order' (Only With) 'Customer'를 조인하고 'Customer.IsActive = True' 필터를 추가했습니다. Customer가 비활성(Inactive)인 Order가 존재할 때, 그 Order에 대해 Aggregate는 무엇을 반환합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Order는 반환되지만 모든 Customer 필드가 비어 있다."
+          },
+          {
+            "key": "B",
+            "text": "해당 Order 레코드가 결과에서 완전히 제외된다."
+          },
+          {
+            "key": "C",
+            "text": "Order와 Customer 데이터가 반환되지만 경고 로그가 남는다."
+          },
+          {
+            "key": "D",
+            "text": "필터가 조인된 엔티티에 걸려 있으므로 Aggregate가 필터를 무시하고 모든 order를 반환한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-069",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate returns 'Student' (With or Without) 'ClubMembership'. To show students in no club, you filter 'ClubMembership.Id = NullIdentifier()'. You then ADD a second filter 'ClubMembership.JoinDate > #2020-01-01#'. What is the result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate still returns students with no club."
+      },
+      {
+        "key": "B",
+        "text": "The platform automatically changes the join to 'Only With'."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate now returns zero records."
+      },
+      {
+        "key": "D",
+        "text": "The second filter is ignored whenever the first filter is true."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate의 여러 filter는 서로 AND로 결합됩니다. 클럽이 없는 학생은 ClubMembership.JoinDate가 null이라 두 번째 filter(JoinDate > 날짜)를 통과하지 못하고, 클럽이 있는 학생은 첫 번째 filter(Id = NullIdentifier())를 통과하지 못합니다. 두 조건을 동시에 만족하는 행이 없으므로 결과는 0건이 됩니다. filter는 서로를 무시(D)하거나 조인 방식을 바꾸지(B) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Student' (With or Without) 'ClubMembership'를 반환합니다. 클럽이 없는 학생을 보여주기 위해 'ClubMembership.Id = NullIdentifier()'로 필터링합니다. 이후 두 번째 필터 'ClubMembership.JoinDate > #2020-01-01#'를 추가합니다. 결과는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate가 여전히 클럽 없는 학생들을 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "플랫폼이 조인을 자동으로 'Only With'로 바꾼다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate가 이제 0건을 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "첫 번째 필터가 참이면 두 번째 필터는 무시된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-070",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins 'Employee' (With or Without) 'Vehicle'. You want Employees who either have NO vehicle OR have a vehicle with 'Status' = 'Maintenance'. Which Filter condition is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Vehicle.Id = NullIdentifier() or Vehicle.Status = Entities.VehicleStatus.Maintenance"
+      },
+      {
+        "key": "B",
+        "text": "Vehicle.Status = Entities.VehicleStatus.Maintenance"
+      },
+      {
+        "key": "C",
+        "text": "Employee.VehicleId = NullIdentifier() and Vehicle.Status = Entities.VehicleStatus.Maintenance"
+      },
+      {
+        "key": "D",
+        "text": "Vehicle.Id <> NullIdentifier() or Vehicle.Status = Entities.VehicleStatus.Maintenance"
+      }
+    ],
+    "answer": "A",
+    "explanation": "'With or Without'(left join)에서 차량이 없는 Employee는 조인된 Vehicle.Id가 null이므로 'Vehicle.Id = NullIdentifier()'로 잡고, 정비중 차량을 가진 Employee는 'Vehicle.Status = Maintenance'로 잡습니다. '또는' 조건이므로 두 조건을 OR로 결합한 A가 정답입니다. B는 차량 없는 직원을 놓치고, C는 AND라서 둘 다 만족해야 하며(불가능), D는 Id <> null이라 오히려 '차량 있는' 직원을 뜻해 반대입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Employee' (With or Without) 'Vehicle'를 조인합니다. 차량이 아예 없거나(NO vehicle) 또는 'Status'가 'Maintenance'인 차량을 가진 Employee를 찾으려 합니다. 올바른 Filter 조건은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Vehicle.Id = NullIdentifier() or Vehicle.Status = Entities.VehicleStatus.Maintenance"
+          },
+          {
+            "key": "B",
+            "text": "Vehicle.Status = Entities.VehicleStatus.Maintenance"
+          },
+          {
+            "key": "C",
+            "text": "Employee.VehicleId = NullIdentifier() and Vehicle.Status = Entities.VehicleStatus.Maintenance"
+          },
+          {
+            "key": "D",
+            "text": "Vehicle.Id <> NullIdentifier() or Vehicle.Status = Entities.VehicleStatus.Maintenance"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-071",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a multi-tenant application you use an 'Advanced SQL' node to DELETE records from a multi-tenant Entity. What critical security concern must you handle manually that Aggregates handle automatically?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You must manually add a Tenant ID condition to the WHERE clause to avoid deleting data belonging to other tenants."
+      },
+      {
+        "key": "B",
+        "text": "Advanced SQL requires a 'DB Connection' string to be passed as a parameter for every query."
+      },
+      {
+        "key": "C",
+        "text": "The SQL node automatically crashes if the entity's 'Is Multi-tenant' property is True."
+      },
+      {
+        "key": "D",
+        "text": "Advanced SQL cannot perform delete operations; it is read-only."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate는 multi-tenant 엔티티에 대해 현재 tenant로 자동으로 데이터를 필터링해 주지만, Advanced SQL은 개발자가 작성한 쿼리를 그대로 실행하므로 이 자동 tenant 필터가 적용되지 않습니다. 따라서 WHERE절에 Tenant ID 조건을 직접 넣지 않으면 다른 tenant의 데이터까지 삭제되는 심각한 보안 문제가 생깁니다. Advanced SQL은 삭제도 가능하고(D 오답), 멀티테넌트 엔티티에서 무조건 crash하지도(C) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "multi-tenant 애플리케이션에서 'Advanced SQL' 노드를 사용해 multi-tenant 엔티티의 레코드를 DELETE합니다. Aggregate는 자동으로 처리하지만 여기서는 직접 관리해야 하는 핵심 보안 문제는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "다른 tenant의 데이터를 삭제하지 않도록 WHERE절에 Tenant ID 조건을 직접 추가해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "Advanced SQL은 모든 쿼리마다 'DB Connection' 문자열을 파라미터로 전달해야 한다."
+          },
+          {
+            "key": "C",
+            "text": "엔티티의 'Is Multi-tenant' 속성이 True이면 SQL 노드가 자동으로 crash한다."
+          },
+          {
+            "key": "D",
+            "text": "Advanced SQL은 삭제를 수행할 수 없고 읽기 전용이다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-072",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has 'Max Records' set to 50 and uses an 'Only With' join between 'Orders' and 'OrderItems'. If one Order has 100 items and the Aggregate is grouped by 'Order.Id', how many records does it return for that Order?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fifty records."
+      },
+      {
+        "key": "B",
+        "text": "Zero records, as it exceeds the Max Records threshold."
+      },
+      {
+        "key": "C",
+        "text": "One hundred records."
+      },
+      {
+        "key": "D",
+        "text": "One record."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Group By Order.Id로 그룹화하면 한 Order당 한 행으로 집계되므로, 100개의 OrderItem이 조인되더라도 최종 결과는 1개 그룹(1 record)입니다. Max Records 50은 반환 레코드 수의 상한일 뿐이며, 1개 그룹은 그 아래이므로 영향을 주지 않습니다. Only With join은 inner join이라 매칭되는 item이 있어야 하지만, 그룹화 때문에 최종 행 수는 order 단위로 줄어듭니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate의 'Max Records'가 50으로 설정되어 있고 'Orders'와 'OrderItems' 사이에 'Only With' join을 사용합니다. 한 Order에 item이 100개 있고 Aggregate를 'Order.Id'로 그룹화하면, 해당 Order에 대해 몇 개의 레코드를 반환합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "50개 레코드."
+          },
+          {
+            "key": "B",
+            "text": "Max Records 임계값을 초과하므로 0개 레코드."
+          },
+          {
+            "key": "C",
+            "text": "100개 레코드."
+          },
+          {
+            "key": "D",
+            "text": "1개 레코드."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-073",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Entity 'Document' has a 'Content' attribute of type 'Binary Data'. You want to show a table of document names only. What is the most important performance optimization for the Aggregate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a filter 'Document.Content <> NullBinary()'."
+      },
+      {
+        "key": "B",
+        "text": "Set the Aggregate's 'Fetch' property to 'Only on Demand'."
+      },
+      {
+        "key": "C",
+        "text": "Ensure the 'Content' attribute is NOT selected or used in the Aggregate."
+      },
+      {
+        "key": "D",
+        "text": "Change the 'Binary Data' type to 'Text' (Base64)."
+      }
+    ],
+    "answer": "C",
+    "explanation": "OutSystems Aggregate는 화면이나 로직에서 실제로 사용되는 attribute만 DB에서 가져오도록 최적화합니다. 따라서 문서 이름 목록만 필요하다면 Binary Data 타입인 Content attribute를 선택하거나 사용하지 않는 것이 가장 중요한 성능 최적화입니다. Content를 필터에 쓰면(A) 오히려 대용량 binary를 읽게 되어 역효과이고, Fetch를 Only on Demand로 바꾸면(B) 목록 자체가 표시되지 않으며, 타입 변경(D)은 데이터 크기를 오히려 키웁니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity 'Document'에 'Binary Data' 타입의 'Content' attribute가 있습니다. 문서 이름만 테이블로 표시하려고 합니다. 이 Aggregate에서 가장 중요한 성능 최적화는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Document.Content <> NullBinary()' 필터를 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate의 'Fetch' 속성을 'Only on Demand'로 설정한다."
+          },
+          {
+            "key": "C",
+            "text": "'Content' attribute를 Aggregate에서 선택하거나 사용하지 않도록 한다."
+          },
+          {
+            "key": "D",
+            "text": "'Binary Data' 타입을 'Text'(Base64)로 변경한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-074",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins 'Employee' with 'Manager' using 'Only With', where 'Manager' is a self-reference back to 'Employee'. For an employee whose ManagerId is Null (no manager assigned), what happens to that row in the result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The employee row is excluded from the results."
+      },
+      {
+        "key": "B",
+        "text": "The employee is automatically shown as their own manager to keep the row."
+      },
+      {
+        "key": "C",
+        "text": "The employee row is kept, but every attribute from the 'Manager' side is empty."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate raises a 'Circular Reference' runtime error."
+      }
+    ],
+    "answer": "A",
+    "explanation": "'Only With'는 inner join이라서 오른쪽(Manager) 쪽에 매칭되는 레코드가 없으면 그 행 자체가 결과에서 제외됩니다. ManagerId가 Null인 직원은 연결될 Manager가 없으므로 결과에서 빠집니다. 행은 남기고 Manager 컬럼만 비우는 것은 'With or Without'(left join)의 동작이므로 C는 틀린 설명입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Employee'와 'Manager'를 'Only With'로 조인하는데, 'Manager'는 'Employee'로 되돌아가는 self-reference입니다. ManagerId가 Null인(매니저가 지정되지 않은) 직원의 경우, 결과에서 그 행은 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "그 직원 행은 결과에서 제외된다."
+          },
+          {
+            "key": "B",
+            "text": "행을 유지하기 위해 그 직원이 자기 자신의 매니저로 자동 표시된다."
+          },
+          {
+            "key": "C",
+            "text": "그 직원 행은 유지되지만 'Manager' 쪽의 모든 속성은 비어 있게 된다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate가 'Circular Reference' 런타임 오류를 발생시킨다."
+          }
+        ]
+      }
+    }
   }
 ]
