@@ -5887,8 +5887,8 @@
         "text": "The whole screen reloads to update the data."
       }
     ],
-    "answer": "A",
-    "explanation": "Aggregate와 Data Action은 자신의 Input Parameter가 바뀌면 dependency tracking에 의해 자동으로 다시 fetch합니다. 따라서 'ProductCategoryId'에 연결된 변수를 client action에서 바꾸면 별도 조치 없이 재조회됩니다. B의 'OnParametersChanged'는 OutSystems에 존재하지 않는 이벤트이며, C의 Refresh Data는 input parameter가 아닌 일반 filter 변수를 바꿨을 때 필요한 방법입니다.",
+    "answer": "C",
+    "explanation": "Reactive에서 **Aggregate는 filter나 input에 쓰인 변수 값이 바뀌어도 저절로 다시 조회하지 않습니다.** 자동으로 되는 건 이미 가져온 데이터를 화면에 표시(렌더링)하는 것뿐이고, DB에서 다시 가져오려면 **Refresh Data**를 직접 호출해야 해요. 그래서 ProductCategoryId 변수를 바꿔도 Refresh Data를 부르기 전까지는 목록이 그대로입니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — '입력이 바뀌면 자동 재조회된다'는 가장 흔한 오해입니다 (실제로는 자동이 아님)\n- **B** — On Parameters Changed는 Screen이 아니라 **Block 전용** 이벤트라 이 상황과 무관합니다\n- **D** — 변수 하나 바뀐다고 화면 전체가 리로드되지는 않습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

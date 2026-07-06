@@ -1203,8 +1203,8 @@
         "text": "It only re-fetches if the Data Action is set to 'Fetch: At Start'."
       }
     ],
-    "answer": "B",
-    "explanation": "Data Action(과 Aggregate)은 입력 파라미터에 대한 의존성(dependency)을 추적하기 때문에, 입력에 바인딩된 변수 값이 바뀌면 자동으로 다시 실행된다. 따라서 수동으로 Refresh Data를 호출할 필요가 없고(A 오답), 데이터가 어긋나 크래시가 나지도 않으며(C 오답), 이 자동 재실행은 'At Start' 설정 여부와 무관하게 동작한다(D 오답).",
+    "answer": "A",
+    "explanation": "**Data Action도 Aggregate와 똑같습니다** — 입력 파라미터에 연결된 변수가 바뀌어도 자동으로 다시 실행되지 않아요. 새 값으로 다시 조회하려면 **Refresh Data**를 직접 호출해야 합니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — '입력이 바뀌면 자동 재조회'는 오해입니다 (Data Action도 수동 Refresh Data가 필요)\n- **C** — 동기화가 안 됐다고 화면이 크래시되지는 않습니다 (그냥 예전 데이터가 남아 있을 뿐)\n- **D** — Fetch: At Start는 '화면이 처음 열릴 때 1회 조회'하는 설정일 뿐, 변수 변경 시 재조회와는 무관합니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2104,8 +2104,8 @@
         "text": "The platform automatically re-runs 'GetLogs' because its dependency (GetTickets.List.Current) has changed."
       }
     ],
-    "answer": "D",
-    "explanation": "Reactive 화면은 dependency tracking을 통해, 어떤 Aggregate의 input(여기서는 GetLogs의 filter가 참조하는 GetTickets.List.Current.Ticket.Id)이 바뀌면 그 Aggregate를 자동으로 다시 실행합니다. GetTickets가 데이터를 채우면 Current 값이 빈 값에서 실제 값으로 바뀌므로 GetLogs가 자동 재조회됩니다. 그래서 초기 빈 값으로 끝나버리거나(C) 수동 새로고침이 필요한(A) 것이 아닙니다.",
+    "answer": "C",
+    "explanation": "GetLogs는 GetTickets의 값(`...List.Current`)을 filter로 쓰지만, **의존하는 값이 나중에 바뀌어도 Aggregate는 자동으로 다시 실행되지 않습니다.** GetLogs는 처음의 빈 값으로 조회를 끝내버리고, Refresh Data를 명시적으로 부르지 않는 한 다시 돌지 않아요. (그래서 이런 '연쇄 조회'는 보통 GetTickets의 On After Fetch에서 GetLogs에 Refresh Data를 걸어 직접 엮어줍니다.) **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — 자동으로 취소되는 게 아니라, 빈 값으로 그냥 완료됩니다\n- **B** — 병렬 요청은 정상 동작이며 Communication Exception이 발생하지 않습니다\n- **D** — '의존 값이 바뀌면 자동 재실행된다'는 오해입니다 (자동이 아님)",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4065,8 +4065,8 @@
         "text": "The Block must be wrapped in an If widget to force the internal data to refresh."
       }
     ],
-    "answer": "A",
-    "explanation": "Aggregate의 filter가 Block의 Input Parameter에 의존할 때, 부모가 그 Input Parameter 값을 바꾸면 dependency tracking에 의해 GetEmployees가 자동으로 다시 fetch된다. 이는 Local Variable 변경과 달리 Input Parameter 변경이기 때문이다. 따라서 On Parameters Changed에서 수동 Refresh Data를 반드시 호출할 필요는 없어 B는 틀리고, Only On Demand여야 갱신된다는 C, If 위젯으로 감싸야 한다는 D도 모두 틀리다.",
+    "answer": "B",
+    "explanation": "Block의 **Input Parameter가 바뀌면** Block의 **On Parameters Changed** 이벤트가 발생하지만, 그것만으로 내부 Aggregate가 다시 조회되지는 않습니다. 그 이벤트 안에서 **Refresh Data**를 직접 호출해야 새 DepartmentId 값으로 데이터가 갱신돼요. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 'Block 입력이 바뀌면 자동 갱신된다'는 오해입니다 (Refresh Data가 필요)\n- **C** — Only On Demand 여부와 무관합니다 (At Start여도 변수 변경으로는 자동 재조회 안 됨)\n- **D** — Block을 If 위젯으로 감싸는 것과 내부 데이터 재조회는 관계가 없습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
