@@ -2264,5 +2264,161 @@
         ]
       }
     }
+  },
+  {
+    "id": "FDS-042",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Reactive screen has an Aggregate filtered by a Local Variable 'SearchText'. Both a 'Search' button and a 'Clear' button assign 'SearchText' and then call 'Refresh Data'. If the user clicks both buttons in quick succession, what happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The platform automatically cancels the first request as soon as the second 'Refresh Data' runs."
+      },
+      {
+        "key": "B",
+        "text": "The requests are queued on the server and always applied in the exact order they were sent."
+      },
+      {
+        "key": "C",
+        "text": "The second 'Refresh Data' fails because the first refresh is still in the 'Loading' state."
+      },
+      {
+        "key": "D",
+        "text": "Two separate asynchronous server requests are sent, and whichever returns last updates the screen — a possible race condition."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Reactive에서 Refresh Data는 서버로 비동기 요청을 보냅니다. 버튼을 빠르게 두 번 누르면 두 개의 요청이 각각 나가고, 나중에 도착하는 응답이 화면을 덮어써서 race condition이 생길 수 있으므로 D가 정답입니다. 플랫폼이 이전 요청을 자동 취소(A)하거나, 순서를 보장(B)하거나, 로딩 중이라는 이유로 실패(C)시키지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Reactive 화면의 Aggregate가 Local Variable 'SearchText'로 필터링됩니다. 'Search' 버튼과 'Clear' 버튼 모두 'SearchText'를 할당한 뒤 'Refresh Data'를 호출합니다. 사용자가 두 버튼을 빠르게 연달아 누르면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "두 번째 'Refresh Data'가 실행되는 순간 플랫폼이 첫 번째 요청을 자동으로 취소한다."
+          },
+          {
+            "key": "B",
+            "text": "요청들이 서버에 큐로 쌓여 보낸 순서대로 항상 적용된다."
+          },
+          {
+            "key": "C",
+            "text": "첫 번째 refresh가 아직 'Loading' 상태이므로 두 번째 'Refresh Data'가 실패한다."
+          },
+          {
+            "key": "D",
+            "text": "두 개의 비동기 서버 요청이 각각 전송되고, 마지막에 도착한 응답이 화면을 갱신하여 race condition이 생길 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-043",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "On a Screen, an Aggregate's 'Start Index' is bound to a Local Variable 'CurrentOffset'. When the user clicks 'Next', your flow increments 'CurrentOffset' by 10. What must you do next for the new page to load?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing - the 'Next' button refreshes the data automatically when it is part of a Pagination pattern."
+      },
+      {
+        "key": "B",
+        "text": "Call a 'Refresh Data' node for that Aggregate."
+      },
+      {
+        "key": "C",
+        "text": "Set the 'Max Records' property to 'CurrentOffset + 10'."
+      },
+      {
+        "key": "D",
+        "text": "Assign the Aggregate's 'List.Current' to a Local Variable."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Start Index에 바인딩된 것은 일반 Local Variable이라 흐름 도중 값이 바뀌어도 Aggregate가 자동으로 재조회되지 않습니다. 새 페이지를 불러오려면 명시적으로 'Refresh Data' 노드를 실행해야 합니다. Pagination 패턴이 알아서 새로고침하지 않으며(A), Max Records를 바꾸는 것(C)이나 List.Current 할당(D)은 페이지 이동과 무관합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen에서 Aggregate의 'Start Index'가 Local Variable 'CurrentOffset'에 바인딩되어 있습니다. 사용자가 'Next'를 클릭하면 흐름에서 'CurrentOffset'을 10 증가시킵니다. 새 페이지가 로드되려면 그다음에 무엇을 해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무것도 필요 없다 - 'Next' 버튼이 Pagination 패턴에 속해 있으면 자동으로 데이터를 새로고침한다."
+          },
+          {
+            "key": "B",
+            "text": "해당 Aggregate에 대해 'Refresh Data' 노드를 호출한다."
+          },
+          {
+            "key": "C",
+            "text": "'Max Records' 속성을 'CurrentOffset + 10'으로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate의 'List.Current'를 Local Variable에 할당한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-044",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Screen has a Data Action that fetches 'SpecialPromotions' by running an Aggregate and then applying complex loops to filter the results. Compared with a plain Screen Aggregate, which statement about performance is most accurate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "There is no difference, since both use the same database connection."
+      },
+      {
+        "key": "B",
+        "text": "The Data Action is faster because the loops run in the browser's memory."
+      },
+      {
+        "key": "C",
+        "text": "The Data Action is generally slower because it cannot benefit from the same automatic UI-to-database optimization (fetching only the attributes actually used on the screen) that a Screen Aggregate gets."
+      },
+      {
+        "key": "D",
+        "text": "The Data Action is faster because it bypasses the OutSystems permission layer."
+      }
+    ],
+    "answer": "C",
+    "explanation": "화면에 직접 붙은 Screen Aggregate는 화면에서 실제로 쓰는 attribute만 조회하도록 자동 최적화(attribute selection)됩니다. 반면 Aggregate를 Data Action으로 감싸고 loop로 후처리하면 이 최적화를 받지 못해 보통 더 느립니다. B의 loop는 브라우저가 아니라 서버에서 실행되며, D처럼 권한 계층을 우회하지도 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 화면에 Aggregate를 실행한 뒤 복잡한 loop로 결과를 필터링해 'SpecialPromotions'를 가져오는 Data Action이 있습니다. 일반 Screen Aggregate와 비교할 때 성능에 대해 가장 정확한 설명은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "둘 다 동일한 데이터베이스 연결을 쓰므로 성능 차이는 없다."
+          },
+          {
+            "key": "B",
+            "text": "loop가 브라우저 메모리에서 실행되므로 Data Action이 더 빠르다."
+          },
+          {
+            "key": "C",
+            "text": "Screen Aggregate가 받는 자동 UI-대-DB 최적화(화면에서 실제 사용하는 attribute만 조회)를 Data Action은 받을 수 없어 일반적으로 더 느리다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems 권한 계층을 우회하므로 Data Action이 더 빠르다."
+          }
+        ]
+      }
+    }
   }
 ]

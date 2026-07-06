@@ -4177,5 +4177,2449 @@
         ]
       }
     }
+  },
+  {
+    "id": "AGG-075",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have an Aggregate with a 'With or Without' join between 'Customer' and 'Order'. You intend to find Customers who have no orders OR whose orders are all 'Completed'. You add the filter 'Order.Status = Entities.OrderStatus.Completed'. What is the actual result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It returns Customers with no orders AND Customers with 'Completed' orders, as intended."
+      },
+      {
+        "key": "B",
+        "text": "It returns all Customers, but the Order information is blank for those without 'Completed' orders."
+      },
+      {
+        "key": "C",
+        "text": "It returns only Customers who have at least one 'Completed' order, effectively behaving like an 'Only With' (inner) join."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate throws a runtime exception due to a type mismatch on the Null record."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'With or Without' join은 left join이라 주문이 없는 Customer는 Order 컬럼이 NULL로 채워집니다. 그런데 Filter에 'Order.Status = Completed'를 걸면 이 조건이 WHERE 절로 동작해, Order.Status가 NULL인 주문 없는 Customer는 조건을 만족하지 못해 제외됩니다. 결과적으로 'Completed' 주문이 있는 Customer만 남아 Only With(inner join)처럼 동작합니다. A는 사용자가 의도한 결과일 뿐 실제 동작이 아니므로 오답입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Customer'와 'Order' 사이에 'With or Without' join을 가진 Aggregate가 있습니다. 주문이 없는 Customer 또는 모든 주문이 'Completed'인 Customer를 찾으려 합니다. 여기에 'Order.Status = Entities.OrderStatus.Completed' Filter를 추가했습니다. 실제 결과는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "의도대로 주문이 없는 Customer와 'Completed' 주문이 있는 Customer를 모두 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "모든 Customer를 반환하되, 'Completed' 주문이 없는 Customer는 Order 정보가 비어 있다."
+          },
+          {
+            "key": "C",
+            "text": "'Completed' 주문이 하나 이상 있는 Customer만 반환하여 사실상 'Only With'(inner join)처럼 동작한다."
+          },
+          {
+            "key": "D",
+            "text": "Null 레코드에 대한 타입 불일치로 런타임 예외가 발생한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-076",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate groups 'Transaction' by 'Category' and computes the 'Sum' of 'Amount'. You need to show only Categories whose total sum exceeds 1000. Relative to the grouping, where is this filter logic executed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "On the OutSystems application server, after the database returns the raw transaction rows."
+      },
+      {
+        "key": "B",
+        "text": "On the database server, as a HAVING clause applied after the grouping is performed."
+      },
+      {
+        "key": "C",
+        "text": "On the database server, as a WHERE clause applied before the grouping starts."
+      },
+      {
+        "key": "D",
+        "text": "In the browser (client-side), after the server returns all categories."
+      }
+    ],
+    "answer": "B",
+    "explanation": "그룹화 결과인 집계 함수(Sum) 값을 기준으로 거르는 Filter는 데이터베이스에서 HAVING 절로 변환되어 그룹화가 끝난 뒤 실행됩니다. WHERE 절(C)은 그룹화 이전에 개별 행을 거르는 것이라 합계 조건에는 쓸 수 없습니다. Aggregate의 Filter는 가능한 한 DB에서 처리되므로 애플리케이션 서버(A)나 브라우저(D)에서 실행된다는 설명도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Transaction'을 'Category'로 group by 하고 'Amount'의 'Sum'을 계산합니다. 합계가 1000을 초과하는 Category만 보여줘야 합니다. 그룹화를 기준으로 이 Filter 로직은 어디에서 실행됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스가 원시 트랜잭션 행을 반환한 뒤 OutSystems 애플리케이션 서버에서 실행된다."
+          },
+          {
+            "key": "B",
+            "text": "데이터베이스 서버에서 그룹화가 수행된 후 HAVING 절로 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스 서버에서 그룹화가 시작되기 전에 WHERE 절로 실행된다."
+          },
+          {
+            "key": "D",
+            "text": "서버가 모든 Category를 반환한 뒤 브라우저(클라이언트)에서 실행된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-077",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have an Aggregate with a 'With or Without' join: Employee (With or Without) Profile. You want to keep Employees whose Profile is active, but ALSO Employees who don't have a Profile yet. Which single filter expression is both correct and most efficient?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Profile.IsActive <> False"
+      },
+      {
+        "key": "B",
+        "text": "If(Profile.Id = NullIdentifier(), True, Profile.IsActive = True)"
+      },
+      {
+        "key": "C",
+        "text": "Profile.Id = NullIdentifier() or Profile.IsActive = True"
+      },
+      {
+        "key": "D",
+        "text": "Employee.Id <> NullIdentifier()"
+      }
+    ],
+    "answer": "C",
+    "explanation": "'With or Without' join에서 Profile이 없는 Employee는 Profile.Id가 NullIdentifier()가 됩니다. 따라서 'Profile.Id = NullIdentifier() or Profile.IsActive = True'로 걸어야 Profile 없는 직원과 활성 Profile 직원을 모두 포함하며, 이 OR 조건은 그대로 SQL로 변환되어 효율적입니다. A는 NULL을 True로 취급해 원치 않는 행을 남기고, D는 IsActive 조건을 전혀 반영하지 못합니다. B는 논리적으로 맞지만 If() 함수라 순수 OR 조건보다 덜 직관적/비효율적이라 '가장 효율적'인 답은 C입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee (With or Without) Profile join을 가진 Aggregate가 있습니다. Profile이 활성인 Employee는 물론, 아직 Profile이 없는 Employee도 포함하고자 합니다. 정확하면서 가장 효율적인 단일 Filter 표현식은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Profile.IsActive <> False"
+          },
+          {
+            "key": "B",
+            "text": "If(Profile.Id = NullIdentifier(), True, Profile.IsActive = True)"
+          },
+          {
+            "key": "C",
+            "text": "Profile.Id = NullIdentifier() or Profile.IsActive = True"
+          },
+          {
+            "key": "D",
+            "text": "Employee.Id <> NullIdentifier()"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-078",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Web App, a Screen Aggregate is set to 'Fetch: At Start' and uses 'Add Dynamic Sort' driven by a local variable 'SortExpression'. If a Client Action changes the value of 'SortExpression', what must you do for the new sort order to take effect?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing; the Aggregate automatically re-fetches the moment the local variable changes."
+      },
+      {
+        "key": "B",
+        "text": "Use the Screen's 'OnParametersChanged' event to refresh the data."
+      },
+      {
+        "key": "C",
+        "text": "Re-initialize the Screen by navigating with a 'Destination' node back to the same screen."
+      },
+      {
+        "key": "D",
+        "text": "Explicitly call the 'Refresh Data' node for that Aggregate."
+      }
+    ],
+    "answer": "D",
+    "explanation": "'At Start' Aggregate는 화면 초기화 시 한 번 실행되며, Filter나 Dynamic Sort에 쓰인 일반 Local Variable을 바꿔도 자동으로 다시 조회되지 않습니다(입력 파라미터 변경이 아니기 때문). 따라서 새 정렬을 반영하려면 Client Action에서 명시적으로 Refresh Data 노드를 호출해야 합니다. A는 자동 갱신을 주장해 틀리고, OnParametersChanged(B)는 Screen이 아닌 Block의 이벤트라 맞지 않으며, 화면 재이동(C)은 불필요하고 과합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web App에서 Screen Aggregate가 'Fetch: At Start'로 설정되어 있고, Local Variable 'SortExpression'을 사용하는 'Add Dynamic Sort'가 적용되어 있습니다. Client Action에서 'SortExpression' 값을 변경하면 새 정렬을 반영하기 위해 무엇을 해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무것도 필요 없다. Local Variable이 바뀌는 즉시 Aggregate가 자동으로 다시 조회된다."
+          },
+          {
+            "key": "B",
+            "text": "Screen의 'OnParametersChanged' 이벤트를 사용해 데이터를 갱신한다."
+          },
+          {
+            "key": "C",
+            "text": "'Destination' 노드로 같은 화면으로 다시 이동해 Screen을 재초기화한다."
+          },
+          {
+            "key": "D",
+            "text": "해당 Aggregate에 대해 'Refresh Data' 노드를 명시적으로 호출한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-079",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have an Aggregate joining 'Product' (Only With) 'Category'. You Group By 'Category.Name' AND 'Product.IsActive', and apply 'Count' on 'Product.Id'. What does each resulting count represent?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The total number of products in each Category, regardless of their Active status."
+      },
+      {
+        "key": "B",
+        "text": "The number of products within each unique combination of Category and Active status."
+      },
+      {
+        "key": "C",
+        "text": "A flat list of all Product IDs grouped only by their Category name."
+      },
+      {
+        "key": "D",
+        "text": "The total number of Categories that have at least one product."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Group By에 'Category.Name'과 'Product.IsActive' 두 속성을 넣으면 이 둘의 고유 조합마다 하나의 그룹이 만들어집니다. 그 상태에서 Count(Product.Id)는 각 (Category, IsActive) 조합에 속한 제품 수를 세게 됩니다. A는 IsActive를 무시한 카테고리별 합계라 틀리고, IsActive까지 그룹 기준에 포함되므로 활성/비활성이 분리되어 집계됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Product' (Only With) 'Category' join을 가진 Aggregate가 있습니다. 'Category.Name'과 'Product.IsActive'로 Group By 하고 'Product.Id'에 'Count'를 적용했습니다. 각 결과 count는 무엇을 의미합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Active 상태와 무관하게 각 Category의 총 제품 수."
+          },
+          {
+            "key": "B",
+            "text": "Category와 Active 상태의 고유 조합별 제품 수."
+          },
+          {
+            "key": "C",
+            "text": "Category 이름으로만 묶인 모든 Product ID의 단순 목록."
+          },
+          {
+            "key": "D",
+            "text": "제품이 하나 이상 있는 Category의 총 개수."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-080",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate retrieves 10,000 Order records, but you only display the first 20 in a List widget. You leave the 'Max. Records' property empty. What is the performance impact?",
+    "options": [
+      {
+        "key": "A",
+        "text": "All 10,000 records are fetched from the database and transferred to the client, causing significant performance degradation."
+      },
+      {
+        "key": "B",
+        "text": "The platform automatically optimizes the query to fetch only enough records to fill the widget (plus a buffer) when 'Max. Records' is empty."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate throws an error because it exceeds a default 2,000-record limit."
+      },
+      {
+        "key": "D",
+        "text": "The database returns all 10,000 rows, but the server forwards only the 20 displayed rows to the browser."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate의 'Max. Records'를 비워두면 조건에 맞는 모든 레코드(여기서는 10,000건)를 그대로 조회해 클라이언트로 전송합니다. 화면에 20건만 보여도 나머지까지 모두 브라우저 메모리로 넘어오므로 성능이 크게 나빠집니다. 그래서 실무에서는 반드시 Max. Records를 지정하라고 권고합니다. B처럼 '위젯을 채울 만큼만 자동 조회'하는 최적화는 OutSystems에 존재하지 않으며(원래 정답 키의 오류), 2,000건 제한으로 에러(C)가 나거나 서버가 20건만 전달(D)하지도 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 10,000건의 Order 레코드를 조회하지만 List 위젯에는 처음 20건만 표시합니다. 'Max. Records' 속성은 비워 두었습니다. 성능에 어떤 영향이 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "10,000건 전부가 데이터베이스에서 조회되어 클라이언트로 전송되므로 성능이 크게 저하된다."
+          },
+          {
+            "key": "B",
+            "text": "'Max. Records'가 비어 있으면 플랫폼이 위젯을 채울 만큼(약간의 버퍼 포함)만 조회하도록 쿼리를 자동 최적화한다."
+          },
+          {
+            "key": "C",
+            "text": "기본 2,000건 제한을 초과하므로 Aggregate가 오류를 던진다."
+          },
+          {
+            "key": "D",
+            "text": "데이터베이스는 10,000행을 반환하지만 서버는 표시되는 20행만 브라우저로 전달한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-081",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have a self-referencing 'Employee' entity with a 'ManagerId'. To list all Employees together with their Manager's name (if any), you join 'Employee' (With or Without) 'Employee'. You now want to keep only Employees in the 'Sales' department. Which 'Department' attribute should the filter use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The attribute from the second 'Employee' entity (the right side of the join)."
+      },
+      {
+        "key": "B",
+        "text": "It doesn't matter, since both refer to the same physical database table."
+      },
+      {
+        "key": "C",
+        "text": "The attribute from the source 'Employee' entity (the left side of the join)."
+      },
+      {
+        "key": "D",
+        "text": "Both attributes combined with an 'OR' condition."
+      }
+    ],
+    "answer": "C",
+    "explanation": "self-join에서 왼쪽(source) Employee는 '직원 본인'이고, 오른쪽 두 번째 Employee는 그 직원의 '관리자'를 나타냅니다. 따라서 'Sales 부서 직원'을 걸러내려면 source(왼쪽) Employee의 Department 속성에 Filter를 적용해야 합니다. 오른쪽(A)에 걸면 관리자의 부서를 기준으로 걸러 의도와 달라지고, 같은 테이블이라도 join의 두 별칭은 서로 다른 행을 가리키므로 B는 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'ManagerId'를 가진 self-referencing 'Employee' 엔티티가 있습니다. 모든 Employee와 (있다면) 그 관리자의 이름을 함께 조회하기 위해 'Employee' (With or Without) 'Employee' join을 만들었습니다. 이제 'Sales' 부서 소속 Employee만 남기려고 합니다. Filter는 어느 'Department' 속성을 사용해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "두 번째 'Employee' 엔티티(join의 오른쪽)의 속성."
+          },
+          {
+            "key": "B",
+            "text": "둘 다 같은 물리 테이블을 참조하므로 어느 쪽이든 상관없다."
+          },
+          {
+            "key": "C",
+            "text": "source 'Employee' 엔티티(join의 왼쪽)의 속성."
+          },
+          {
+            "key": "D",
+            "text": "두 속성을 'OR' 조건으로 결합한 것."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-082",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate computes the 'Average' price of Products. You want to exclude products priced at 0 from that average. Where should this exclusion be placed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "As a standard Aggregate Filter, e.g. 'Product.Price > 0'."
+      },
+      {
+        "key": "B",
+        "text": "In the 'OnAfterFetch' event, using a ListFilter action on the result."
+      },
+      {
+        "key": "C",
+        "text": "Nowhere; Aggregates automatically exclude 0 and NULL from Average calculations."
+      },
+      {
+        "key": "D",
+        "text": "As a filter placed directly on the 'Average' calculated attribute."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate의 일반 Filter인 'Product.Price > 0'은 WHERE 절로 동작해 가격이 0인 제품을 집계 이전에 제외하므로, Average는 남은 행들만으로 계산됩니다. 이것이 가장 단순하고 올바른 방법입니다. Average 같은 계산 속성 자체에는 별도 Filter를 걸 수 없어 D는 불가능하고, Aggregate가 0을 자동으로 빼주지도 않으므로 C도 틀립니다. OnAfterFetch에서 거르는 B는 이미 계산이 끝난 뒤라 평균값을 바로잡지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 Product 가격의 'Average'를 계산합니다. 가격이 0인 제품을 이 평균에서 제외하려고 합니다. 이 제외 조건은 어디에 두어야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "일반 Aggregate Filter로, 예를 들어 'Product.Price > 0'."
+          },
+          {
+            "key": "B",
+            "text": "'OnAfterFetch' 이벤트에서 결과에 ListFilter 액션을 적용해서."
+          },
+          {
+            "key": "C",
+            "text": "둘 필요 없다. Aggregate는 Average 계산에서 0과 NULL을 자동으로 제외한다."
+          },
+          {
+            "key": "D",
+            "text": "'Average' 계산 속성에 직접 Filter를 걸어서."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-083",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Aggregate has two Filters: 'Product.Name like \"%\" + SearchVar + \"%\"' and 'Product.IsActive = True'. When 'SearchVar' is empty, and there are 10 active Products and 5 inactive Products, how many records are returned?",
+    "options": [
+      {
+        "key": "A",
+        "text": "10 records."
+      },
+      {
+        "key": "B",
+        "text": "15 records."
+      },
+      {
+        "key": "C",
+        "text": "5 records."
+      },
+      {
+        "key": "D",
+        "text": "0 records."
+      }
+    ],
+    "answer": "A",
+    "explanation": "SearchVar가 비어 있으면 조건이 'Name like \"%%\"'가 되어 모든 이름이 일치하므로 이 Filter는 아무 행도 걸러내지 않습니다. 남은 조건은 'IsActive = True' 하나뿐이라 활성 제품 10건만 반환됩니다. 두 Filter는 AND로 결합되므로 비활성 5건은 제외되어 15건(B)이 아니며, 빈 검색어가 결과를 0으로 만들지도 않습니다(D).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate에 두 개의 Filter가 있습니다: 'Product.Name like \"%\" + SearchVar + \"%\"'와 'Product.IsActive = True'. 'SearchVar'가 비어 있고 활성 Product가 10개, 비활성 Product가 5개일 때 몇 건이 반환됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "10건."
+          },
+          {
+            "key": "B",
+            "text": "15건."
+          },
+          {
+            "key": "C",
+            "text": "5건."
+          },
+          {
+            "key": "D",
+            "text": "0건."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-084",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You build an Aggregate 'Invoice (Only With) Client'. The 'Client' entity is a 'Cold' entity stored in a different database catalog (a separate external data source). What is the most significant restriction this imposes on the Aggregate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate will still work but run significantly slower."
+      },
+      {
+        "key": "B",
+        "text": "You cannot use 'Group By' on attributes from the 'Client' entity."
+      },
+      {
+        "key": "C",
+        "text": "You cannot perform this join in a single Aggregate because the two entities live in different database catalogs."
+      },
+      {
+        "key": "D",
+        "text": "The join must be changed to 'With or Without'."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate는 같은 데이터 소스(같은 database catalog) 안에 있는 Entity들만 조인할 수 있습니다. Client가 다른 catalog(외부 데이터 소스)에 있으면 하나의 Aggregate에서 Invoice와 조인하는 것 자체가 불가능하므로 C가 정답입니다. A(느려짐), B(Group By 제한), D(조인 종류 변경)는 근본 제약이 아니며, 애초에 조인이 성립하지 않는 것이 핵심입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Invoice (Only With) Client' Aggregate를 만듭니다. 'Client' Entity는 다른 database catalog(별도의 외부 데이터 소스)에 저장된 'Cold' Entity입니다. 이때 Aggregate에 가해지는 가장 중요한 제약은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate는 동작하지만 속도가 크게 느려진다."
+          },
+          {
+            "key": "B",
+            "text": "'Client' Entity의 속성에는 'Group By'를 사용할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "두 Entity가 서로 다른 database catalog에 있으므로 하나의 Aggregate에서 이 조인을 수행할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "조인을 'With or Without'로 바꿔야만 한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-085",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate joining 'Ticket' (With or Without) 'Agent', you add a Calculated Attribute that shows the agent's name, or the text 'Unassigned' when a ticket has no assigned agent. Which expression is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "If(Agent.Id = NullIdentifier(), \"Unassigned\", Agent.Name)"
+      },
+      {
+        "key": "B",
+        "text": "If(Agent.Name = NullIdentifier(), \"Unassigned\", Agent.Name)"
+      },
+      {
+        "key": "C",
+        "text": "If(Agent.Name = \"\", Agent.Name, \"Unassigned\")"
+      },
+      {
+        "key": "D",
+        "text": "Agent.Name — the platform automatically substitutes 'Unassigned' for unmatched rows."
+      }
+    ],
+    "answer": "A",
+    "explanation": "With or Without(left join)에서 매칭되는 Agent가 없는 행은 Agent.Id가 NullIdentifier() 값이 됩니다. 따라서 If(Agent.Id = NullIdentifier(), ...)로 미배정 여부를 정확히 판별할 수 있어 A가 정답입니다. B는 Identifier가 아닌 Text 속성(Name)을 NullIdentifier()와 비교해서 잘못됐고, C는 조건이 반대이며, D처럼 플랫폼이 자동으로 'Unassigned'를 채워주지는 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Ticket' (With or Without) 'Agent'를 조인하는 Aggregate에서, Agent 이름을 보여주되 담당 Agent가 없는 Ticket에는 'Unassigned' 텍스트를 표시하는 Calculated Attribute를 추가합니다. 올바른 식은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "If(Agent.Id = NullIdentifier(), \"Unassigned\", Agent.Name)"
+          },
+          {
+            "key": "B",
+            "text": "If(Agent.Name = NullIdentifier(), \"Unassigned\", Agent.Name)"
+          },
+          {
+            "key": "C",
+            "text": "If(Agent.Name = \"\", Agent.Name, \"Unassigned\")"
+          },
+          {
+            "key": "D",
+            "text": "Agent.Name — 매칭되지 않는 행에는 플랫폼이 자동으로 'Unassigned'를 넣어준다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-086",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has 'Max Records' set to 50 and a 'Group By' on 'Category.Id'. The underlying Product table holds 1,000 products spread across 5 categories. How many records must the database scan to produce the grouped result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only 5 records — one per category."
+      },
+      {
+        "key": "B",
+        "text": "Only 50 records — the Max Records limit."
+      },
+      {
+        "key": "C",
+        "text": "All 1,000 records."
+      },
+      {
+        "key": "D",
+        "text": "'Max Records' makes the database ignore grouping entirely."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Group By로 5개 그룹을 만들려면 데이터베이스는 각 제품이 어느 Category에 속하는지 알아야 하므로 1,000개 행을 모두 읽어(scan) 집계해야 합니다. Max Records는 스캔 후 '반환'되는 행 수만 제한할 뿐 스캔량을 줄이지 않으므로 C(1,000개 전부)가 정답입니다. A(5개)는 결과 그룹 수일 뿐이고, B(50)는 반환 제한값일 뿐입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Max Records'를 50으로, 'Category.Id'에 'Group By'를 설정했습니다. 대상 Product 테이블에는 5개 Category에 걸쳐 1,000개의 제품이 있습니다. 그룹화된 결과를 만들기 위해 데이터베이스가 스캔해야 하는 레코드는 몇 개입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "5개 — Category당 1개."
+          },
+          {
+            "key": "B",
+            "text": "50개 — Max Records 제한값."
+          },
+          {
+            "key": "C",
+            "text": "1,000개 전부."
+          },
+          {
+            "key": "D",
+            "text": "'Max Records'가 있으면 데이터베이스가 그룹화를 아예 무시한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-087",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate uses 'Group By' on 'Order.Date' and a 'Descending' sort on 'Order.Date' so recent dates appear first. Several orders share the same date. What is the outcome?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A runtime error occurs because you cannot sort by a grouped attribute."
+      },
+      {
+        "key": "B",
+        "text": "The grouped rows are sorted by date; the order of individual orders within a date is irrelevant because same-date orders collapse into a single row."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate silently adds a secondary sort by Id to guarantee a stable order of the underlying orders."
+      },
+      {
+        "key": "D",
+        "text": "The Sort is ignored because 'Group By' always takes precedence over Sort."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Order.Date로 Group By하면 같은 날짜의 주문들은 한 개의 그룹(한 행)으로 합쳐집니다. 따라서 그룹 안의 개별 주문 순서는 의미가 없고, 결과는 날짜 기준으로 정렬되므로 B가 정답입니다. 그룹화된 속성으로 정렬하는 것은 정상이라 A(에러)는 틀리고, 플랫폼이 Id 보조 정렬을 자동 추가하지도(C) 않으며, Sort가 무시되지도(D) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Order.Date'에 'Group By'를 적용하고, 최신 날짜가 위에 오도록 'Order.Date'에 'Descending' 정렬을 겁니다. 여러 주문이 같은 날짜를 가질 때 결과는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "그룹화된 속성으로는 정렬할 수 없어 런타임 오류가 발생한다."
+          },
+          {
+            "key": "B",
+            "text": "그룹 행은 날짜순으로 정렬되며, 같은 날짜의 주문들은 한 행으로 합쳐지므로 그룹 내 개별 주문의 순서는 의미가 없다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate가 안정적인 순서를 위해 Id 기준 보조 정렬을 자동으로 추가한다."
+          },
+          {
+            "key": "D",
+            "text": "'Group By'가 Sort보다 항상 우선하므로 Sort가 무시된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-088",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate has a 'With or Without' join between 'Employee' and 'Badge'. Using ONLY a 'Group By' and a 'Count' (no Filter), how can you determine how many employees have NO badge?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Count 'Employee.Id' after adding a Filter 'Badge.Id = NullIdentifier()'."
+      },
+      {
+        "key": "B",
+        "text": "Group By 'Employee.Id' and Count 'Badge.Id'."
+      },
+      {
+        "key": "C",
+        "text": "Group By 'Badge.Id'; the row where 'Badge.Id' is NullIdentifier() holds the count of all badge-less employees."
+      },
+      {
+        "key": "D",
+        "text": "It is impossible — 'Count' only counts rows that match on both sides of a join."
+      }
+    ],
+    "answer": "C",
+    "explanation": "With or Without(left join)에서 배지가 없는 직원 행은 Badge.Id가 NullIdentifier()가 됩니다. Badge.Id로 Group By하면 배지 없는 직원들이 모두 NullIdentifier() 그룹 하나로 모이고, 그 그룹의 Count가 곧 배지 없는 직원 수이므로 C가 정답입니다. A도 개수 자체는 맞지만 문제는 'Filter 없이 Group By와 Count만' 쓰라고 했으므로 제외되고, D는 left join이라 한쪽만 있는 행도 세므로 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Employee'와 'Badge' 사이에 'With or Without' 조인이 있는 Aggregate가 있습니다. Filter 없이 'Group By'와 'Count'만 사용해서, 배지가 '없는' 직원 수를 어떻게 구할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Filter 'Badge.Id = NullIdentifier()'를 추가한 뒤 'Employee.Id'를 Count한다."
+          },
+          {
+            "key": "B",
+            "text": "'Employee.Id'로 Group By하고 'Badge.Id'를 Count한다."
+          },
+          {
+            "key": "C",
+            "text": "'Badge.Id'로 Group By하면, 'Badge.Id'가 NullIdentifier()인 행이 배지 없는 전체 직원 수를 담고 있다."
+          },
+          {
+            "key": "D",
+            "text": "불가능하다 — 'Count'는 조인 양쪽에 모두 매칭되는 행만 센다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-089",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has an 'Only With' join between 'Student' and 'Enrollment'. You add the Filter 'Enrollment.CourseId = CourseVar'. 'CourseId' is a mandatory foreign key. What happens when 'CourseVar' holds a NullIdentifier value?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate returns all Students, ignoring the enrollment condition."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate returns only Students who are not enrolled in any course."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate returns zero records, because a mandatory 'CourseId' can never equal NullIdentifier()."
+      },
+      {
+        "key": "D",
+        "text": "The platform throws a database exception because NullIdentifier() is not allowed in a Filter."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Only With는 inner join이라 Enrollment가 있는 Student만 남습니다. CourseId는 필수(mandatory) 외래키라서 어떤 Enrollment도 CourseId가 NullIdentifier()일 수 없습니다. 따라서 'Enrollment.CourseId = NullIdentifier()' 조건에 맞는 행이 하나도 없어 결과가 0건이 되므로 C가 정답입니다. NullIdentifier()는 Filter에서 정상적으로 쓸 수 있으므로 D(예외)는 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Student'와 'Enrollment' 사이에 'Only With' 조인이 있는 Aggregate가 있습니다. Filter 'Enrollment.CourseId = CourseVar'를 추가합니다. 'CourseId'는 필수(mandatory) 외래키입니다. 'CourseVar'가 NullIdentifier 값일 때 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "enrollment 조건을 무시하고 모든 Student를 반환한다."
+          },
+          {
+            "key": "B",
+            "text": "어떤 course에도 등록되지 않은 Student만 반환한다."
+          },
+          {
+            "key": "C",
+            "text": "필수인 'CourseId'는 절대 NullIdentifier()와 같을 수 없으므로 0건을 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "Filter에서 NullIdentifier()를 쓸 수 없어 데이터베이스 예외가 발생한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-090",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate you use 'Add Dynamic Sort' with the string '\"Product.Name ASC\"'. Now you want to sort by a Calculated Attribute named 'TotalPrice'. What string should you pass?",
+    "options": [
+      {
+        "key": "A",
+        "text": "\"Product.TotalPrice ASC\""
+      },
+      {
+        "key": "B",
+        "text": "\"TotalPrice ASC\""
+      },
+      {
+        "key": "C",
+        "text": "\"Product.TotalPrice\""
+      },
+      {
+        "key": "D",
+        "text": "Calculated Attributes cannot be used in a Dynamic Sort."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Dynamic Sort에서 Entity 속성은 'Entity.Attribute'로 지정하지만, Calculated Attribute는 특정 Entity에 속하지 않고 Aggregate 자체의 산출 속성이므로 이름만('TotalPrice ASC') 사용합니다. 그래서 B가 정답입니다. A/C처럼 'Product.' 접두어를 붙이면 안 되고, Calculated Attribute도 Dynamic Sort에 쓸 수 있으므로 D는 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 'Add Dynamic Sort'에 '\"Product.Name ASC\"' 문자열을 사용합니다. 이제 'TotalPrice'라는 Calculated Attribute로 정렬하려고 합니다. 어떤 문자열을 전달해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "\"Product.TotalPrice ASC\""
+          },
+          {
+            "key": "B",
+            "text": "\"TotalPrice ASC\""
+          },
+          {
+            "key": "C",
+            "text": "\"Product.TotalPrice\""
+          },
+          {
+            "key": "D",
+            "text": "Calculated Attribute는 Dynamic Sort에 사용할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-091",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has a Filter 'Customer.Name like SearchVar + \"%\"'. Which index on the 'Customer' table is the database most likely to use to optimize this query?",
+    "options": [
+      {
+        "key": "A",
+        "text": "An index on the 'Id' attribute."
+      },
+      {
+        "key": "B",
+        "text": "No index can help, because 'like' always forces a full table scan."
+      },
+      {
+        "key": "C",
+        "text": "A Full-Text Search index, regardless of the pattern."
+      },
+      {
+        "key": "D",
+        "text": "An index on the 'Name' attribute."
+      }
+    ],
+    "answer": "D",
+    "explanation": "'SearchVar + \"%\"'는 와일드카드가 뒤에만 붙는 접두어(prefix) 검색입니다. 이런 패턴은 Name 컬럼의 일반 인덱스(B-tree)를 사용해 범위 탐색을 할 수 있으므로 D가 정답입니다. 앞에 '%'가 오는 경우와 달리 접두어 검색은 인덱스를 탈 수 있어 B(항상 풀 스캔)는 틀리고, Id 인덱스(A)는 Name 검색과 무관합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate에 Filter 'Customer.Name like SearchVar + \"%\"'가 있습니다. 이 쿼리를 최적화하기 위해 데이터베이스가 'Customer' 테이블에서 사용할 가능성이 가장 높은 인덱스는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Id' 속성에 대한 인덱스."
+          },
+          {
+            "key": "B",
+            "text": "'like'는 항상 풀 테이블 스캔을 유발하므로 어떤 인덱스도 도움이 되지 않는다."
+          },
+          {
+            "key": "C",
+            "text": "패턴과 무관하게 Full-Text Search 인덱스."
+          },
+          {
+            "key": "D",
+            "text": "'Name' 속성에 대한 인덱스."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-092",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate you have a 'With or Without' join between 'Product' and 'Review', and you add the filter 'Review.Rating > 3'. You notice that Products with NO reviews have disappeared from the results. What is the most efficient way to bring them back?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Remove the filter and apply a 'ListFilter' in a Client Action instead."
+      },
+      {
+        "key": "B",
+        "text": "Change the join type to 'Only With'."
+      },
+      {
+        "key": "C",
+        "text": "Create a second Aggregate for Products without reviews and merge the two lists."
+      },
+      {
+        "key": "D",
+        "text": "Change the filter to: Review.Id = NullIdentifier() or Review.Rating > 3"
+      }
+    ],
+    "answer": "D",
+    "explanation": "With or Without join은 left join이므로 리뷰가 없는 Product는 Review 속성이 모두 NULL입니다. 'Review.Rating > 3' 필터는 NULL 행을 만족시키지 못해 제외합니다. OR로 'Review.Id = NullIdentifier()' 조건을 함께 주면 매칭 레코드가 없는 행까지 다시 포함됩니다. B의 'Only With'는 inner join이라 오히려 리뷰 없는 Product가 전부 사라지고, C처럼 Aggregate를 두 개 만들 필요도 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 'Product'와 'Review' 사이에 'With or Without' join이 있고, 'Review.Rating > 3' 필터를 추가했습니다. 그런데 리뷰가 하나도 없는 Product들이 결과에서 사라졌습니다. 이들을 다시 포함시키는 가장 효율적인 방법은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "필터를 제거하고 대신 Client Action에서 'ListFilter'를 사용한다."
+          },
+          {
+            "key": "B",
+            "text": "join 유형을 'Only With'로 변경한다."
+          },
+          {
+            "key": "C",
+            "text": "리뷰가 없는 Product용 Aggregate를 하나 더 만들어 두 리스트를 병합한다."
+          },
+          {
+            "key": "D",
+            "text": "필터를 다음으로 변경한다: Review.Id = NullIdentifier() or Review.Rating > 3"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-093",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate groups Products by 'Category', which naturally produces 10 groups. If you set the Aggregate's 'Max Records' property to 1, what is returned?",
+    "options": [
+      {
+        "key": "A",
+        "text": "10 rows, because 'Group By' overrides 'Max Records'."
+      },
+      {
+        "key": "B",
+        "text": "A single row that sums up all 10 categories into one."
+      },
+      {
+        "key": "C",
+        "text": "Exactly one row, representing the first group according to the query's sort order."
+      },
+      {
+        "key": "D",
+        "text": "Nothing changes, because 'Max Records' is disabled while grouping is active."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'Max Records'는 최종적으로 반환되는 행 수를 제한(SQL의 TOP/LIMIT)합니다. Group By로 10개 그룹이 만들어져도 Max Records=1이면 정렬 순서상 첫 번째 그룹 한 개만 반환됩니다. Group By가 Max Records를 무시하거나(A) 값을 합산하는(B) 것이 아니며, 그룹핑 시 Max Records가 비활성화되지도 않습니다(D).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 Product를 'Category'로 그룹핑하여 자연스럽게 10개의 그룹이 생깁니다. 이 Aggregate의 'Max Records' 속성을 1로 설정하면 무엇이 반환됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Group By'가 'Max Records'를 무시하므로 10개 행이 반환된다."
+          },
+          {
+            "key": "B",
+            "text": "10개 카테고리를 하나로 합산한 단일 행이 반환된다."
+          },
+          {
+            "key": "C",
+            "text": "쿼리 정렬 순서상 첫 번째 그룹을 나타내는 정확히 한 개의 행이 반환된다."
+          },
+          {
+            "key": "D",
+            "text": "그룹핑이 활성화되면 'Max Records'가 비활성화되므로 아무 변화가 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-094",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You want an Aggregate to return only the Customers whose Id is contained in a dynamic list of Ids you built at runtime. What is the relevant limitation of Aggregates here?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Aggregate filters do not support the SQL 'IN' operator against a dynamic list of values."
+      },
+      {
+        "key": "B",
+        "text": "The 'IN' operator works only when the list has fewer than 10 items."
+      },
+      {
+        "key": "C",
+        "text": "Aggregates can compare an Id only one at a time using the '=' operator."
+      },
+      {
+        "key": "D",
+        "text": "The 'IN' operator is available only when the Entity is set to 'Expose Read Only'."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate의 필터 편집기는 동적으로 만든 값 리스트에 대한 SQL 'IN' 연산을 직접 지원하지 않습니다. 이 경우 보통 Advanced Query(SQL)를 쓰거나 리스트를 소스로 추가해 join합니다. 리스트 크기 제한(B)이나 'Expose Read Only' 설정(D) 때문이 아니며, '='로 한 번에 하나만 비교해야 한다는 설명(C)도 정확하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "런타임에 만든 동적 Id 리스트에 포함된 Customer만 Aggregate가 반환하도록 하려고 합니다. 이와 관련된 Aggregate의 제약은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate 필터는 동적 값 리스트에 대한 SQL 'IN' 연산자를 지원하지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "'IN' 연산자는 리스트 항목이 10개 미만일 때만 동작한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate는 '=' 연산자로 한 번에 하나의 Id만 비교할 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "'IN' 연산자는 Entity가 'Expose Read Only'로 설정된 경우에만 사용할 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-095",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate sums 'Invoice.Amount' grouped by 'Customer.Name', and you add the filter 'Invoice.Date > #2023-01-01#'. In what order does the database process this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The filter is applied to the raw records first, then the surviving records are grouped and summed."
+      },
+      {
+        "key": "B",
+        "text": "All grouped results are fetched to the server, then the date filter is applied in memory."
+      },
+      {
+        "key": "C",
+        "text": "The records are grouped and summed first, then the filter is applied to the summarized results."
+      },
+      {
+        "key": "D",
+        "text": "Grouping and filtering happen at the same time with no defined order."
+      }
+    ],
+    "answer": "A",
+    "explanation": "'Invoice.Date'는 집계 함수가 아닌 원본 속성이므로 이 필터는 SQL의 WHERE 절이 되어 그룹핑 이전에 원본 레코드에 먼저 적용됩니다. 그 후 남은 레코드가 그룹핑·합산됩니다. 집계 결과에 적용되는 것(C)은 HAVING 절의 경우이며, 데이터를 서버 메모리로 가져와 필터링하는 것(B)도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Invoice.Amount'를 합산하고 'Customer.Name'으로 그룹핑하며, 'Invoice.Date > #2023-01-01#' 필터를 추가했습니다. 데이터베이스는 이를 어떤 순서로 처리합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "먼저 원본 레코드에 필터가 적용되고, 남은 레코드가 그룹핑 및 합산된다."
+          },
+          {
+            "key": "B",
+            "text": "그룹핑된 결과를 모두 서버로 가져온 뒤 메모리에서 날짜 필터를 적용한다."
+          },
+          {
+            "key": "C",
+            "text": "먼저 레코드를 그룹핑·합산한 뒤 요약 결과에 필터를 적용한다."
+          },
+          {
+            "key": "D",
+            "text": "그룹핑과 필터링이 정해진 순서 없이 동시에 일어난다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-096",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate that joins 5 large Entities is running slowly. Which single change gives the most significant query performance boost?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the Aggregate's 'Fetch' property to 'On Demand' so it loads later (this only changes when it runs, not how fast the query is)."
+      },
+      {
+        "key": "B",
+        "text": "Make sure database indexes exist on the attributes used in the join conditions."
+      },
+      {
+        "key": "C",
+        "text": "Convert all 'With or Without' joins into 'Only With' joins."
+      },
+      {
+        "key": "D",
+        "text": "Fetch only the attributes shown on the Screen (which the platform already does automatically)."
+      }
+    ],
+    "answer": "B",
+    "explanation": "여러 개의 큰 테이블을 join할 때 가장 큰 병목은 join 연산이며, join에 쓰이는 컬럼에 데이터베이스 index가 있으면 성능이 크게 향상됩니다. D(화면에 쓰는 속성만 조회)는 OutSystems가 이미 자동으로 수행하는 최적화라 추가 효과가 없고, Fetch On Demand(A)는 조회 '시점'만 바꿀 뿐 쿼리를 빠르게 하지 않으며, join 유형 변경(C)은 결과 집합 자체를 바꿔 정확성 문제를 일으킵니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "5개의 큰 Entity를 join하는 Aggregate가 느리게 실행됩니다. 쿼리 성능을 가장 크게 향상시키는 단일 변경은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "나중에 로드되도록 Aggregate의 'Fetch' 속성을 'On Demand'로 설정한다(이는 실행 시점만 바꿀 뿐 쿼리 속도를 높이지 않는다)."
+          },
+          {
+            "key": "B",
+            "text": "join 조건에 사용되는 속성에 데이터베이스 index가 존재하도록 한다."
+          },
+          {
+            "key": "C",
+            "text": "모든 'With or Without' join을 'Only With' join으로 변경한다."
+          },
+          {
+            "key": "D",
+            "text": "화면에 표시되는 속성만 조회한다(플랫폼이 이미 자동으로 수행함)."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-097",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate counts 'Order.Id' and groups by 'Customer.Country'. To show only countries with more than 50 orders, you add the filter 'Count(Order.Id) > 50'. Is this supported?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes - OutSystems allows filtering on aggregated values, translating it into a SQL HAVING clause."
+      },
+      {
+        "key": "B",
+        "text": "No - you must use a Data Action plus a 'ListFilter' to do this."
+      },
+      {
+        "key": "C",
+        "text": "Yes, but only if you also sort by the Count."
+      },
+      {
+        "key": "D",
+        "text": "No - Aggregate filters can reference only raw Entity attributes."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems Aggregate는 Count 같은 집계 함수 결과에 대한 필터를 허용하며, 이는 SQL의 HAVING 절로 변환되어 그룹핑 이후에 적용됩니다. 따라서 'Count(Order.Id) > 50' 필터로 주문 50건 초과 국가만 조회할 수 있습니다. Data Action과 ListFilter가 반드시 필요한 것(B)도, 원본 속성만 필터링 가능한 것(D)도 아니며, 정렬(C)과도 무관합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Order.Id'를 세고(Count) 'Customer.Country'로 그룹핑합니다. 주문이 50건을 초과하는 국가만 보이도록 'Count(Order.Id) > 50' 필터를 추가합니다. 이것이 지원됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예 - OutSystems는 집계 값에 대한 필터링을 허용하며, SQL HAVING 절로 변환됩니다."
+          },
+          {
+            "key": "B",
+            "text": "아니오 - Data Action과 'ListFilter'를 사용해야 합니다."
+          },
+          {
+            "key": "C",
+            "text": "예, 단 Count 기준으로 정렬도 해야 합니다."
+          },
+          {
+            "key": "D",
+            "text": "아니오 - Aggregate 필터는 원본 Entity 속성만 참조할 수 있습니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-098",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "In an Aggregate for an Order-management screen you manually add 10 separate 'Filter' lines. How does the OutSystems platform combine these filters?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They are combined using the 'OR' operator."
+      },
+      {
+        "key": "B",
+        "text": "The platform prioritizes filters based on the order in which they were added."
+      },
+      {
+        "key": "C",
+        "text": "It depends on whether the Entity is 'Public' or 'Private'."
+      },
+      {
+        "key": "D",
+        "text": "They are all combined using the 'AND' operator."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Aggregate에서 여러 개의 Filter 줄을 추가하면 플랫폼은 이들을 항상 'AND'로 연결합니다. 즉 모든 조건을 동시에 만족하는 레코드만 결과에 남습니다. 'OR' 조건이 필요하면 하나의 Filter 줄 안에서 or 연산자를 직접 써야 합니다. 추가 순서나 Entity의 Public/Private 여부는 결합 방식과 아무 관련이 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order 관리 화면의 Aggregate에 'Filter' 줄 10개를 각각 따로 추가했습니다. OutSystems 플랫폼은 이 필터들을 어떻게 결합합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'OR' 연산자로 결합한다."
+          },
+          {
+            "key": "B",
+            "text": "필터가 추가된 순서에 따라 우선순위를 정한다."
+          },
+          {
+            "key": "C",
+            "text": "Entity가 'Public'인지 'Private'인지에 따라 달라진다."
+          },
+          {
+            "key": "D",
+            "text": "모두 'AND' 연산자로 결합한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-099",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen Aggregate reads from an External Entity that was integrated through Integration Studio. Compared to a normal (platform) Entity, what is a key difference in how 'Filters' may behave?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Some advanced functions (such as regex or complex string manipulation) may not be supported if the external database engine differs from the platform's native database."
+      },
+      {
+        "key": "B",
+        "text": "External entities cannot be filtered inside an Aggregate at all."
+      },
+      {
+        "key": "C",
+        "text": "Filters on external entities always run on the OutSystems server and never on the database."
+      },
+      {
+        "key": "D",
+        "text": "You can only filter external entities by their Primary Key."
+      }
+    ],
+    "answer": "A",
+    "explanation": "External Entity에 대한 Aggregate 필터는 가능한 한 외부 데이터베이스로 내려보내(push down) 실행됩니다. 그래서 외부 DB 엔진이 플랫폼 기본 엔진과 다르면 regex나 특정 문자열 함수 같은 고급 기능이 지원되지 않을 수 있습니다(정답 A). 필터가 항상 OutSystems 서버에서만 실행된다는 C는 반대로 잘못된 설명이며, External Entity도 일반 Entity처럼 여러 속성으로 필터링할 수 있으므로 B와 D도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Integration Studio로 연동한 External Entity에서 데이터를 읽는 Screen Aggregate가 있습니다. 일반(플랫폼) Entity와 비교할 때 'Filter' 동작의 주요 차이는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "외부 데이터베이스 엔진이 플랫폼 기본 엔진과 다르면 regex나 복잡한 문자열 조작 같은 고급 함수가 지원되지 않을 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "External Entity는 Aggregate 안에서 전혀 필터링할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "External Entity의 필터는 항상 OutSystems 서버에서 실행되며 데이터베이스에서는 절대 실행되지 않는다."
+          },
+          {
+            "key": "D",
+            "text": "External Entity는 Primary Key로만 필터링할 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-100",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Aggregate joins 'Customer' and 'CustomerProfile' using an 'Only With' join. A Customer record exists but its matching 'CustomerProfile' record is missing. What happens to that Customer in the Aggregate result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The platform automatically creates a blank 'CustomerProfile' record to keep the row."
+      },
+      {
+        "key": "B",
+        "text": "The 'Customer' data is returned, but the 'CustomerProfile' attributes are empty."
+      },
+      {
+        "key": "C",
+        "text": "The entire row is excluded from the result."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate returns a 'Foreign Key not found' error."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'Only With' 조인은 inner join이므로 양쪽 Entity에 모두 매칭되는 레코드가 있어야 결과에 나타납니다. CustomerProfile이 없는 Customer는 조건을 만족하지 못해 행 전체가 제외됩니다(정답 C). 매칭이 없어도 왼쪽 행을 살리고 오른쪽 속성을 비워 두는 것은 'With or Without'(left join)의 동작이므로 B는 틀리고, 빈 레코드 자동 생성(A)이나 에러 발생(D)은 일어나지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Customer'와 'CustomerProfile'을 'Only With' 조인으로 연결합니다. Customer 레코드는 있지만 대응하는 'CustomerProfile' 레코드가 없다면, Aggregate 결과에서 해당 Customer 데이터는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "플랫폼이 빈 'CustomerProfile' 레코드를 자동 생성해 행을 유지한다."
+          },
+          {
+            "key": "B",
+            "text": "'Customer' 데이터는 반환되고 'CustomerProfile' 속성은 비어 있다."
+          },
+          {
+            "key": "C",
+            "text": "해당 행 전체가 결과에서 제외된다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate가 'Foreign Key not found' 에러를 반환한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-101",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate has a 'Group By' on 'Product.Category' and a 'Sum' on 'Product.Stock'. You want the category with the highest total stock to appear first, using a dynamic Sort (a text expression). Which value should you pass?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Pass the string \"Sum(Product.Stock) DESC\" to the dynamic Sort."
+      },
+      {
+        "key": "B",
+        "text": "Pass the string \"Product.Stock DESC\" to the dynamic Sort."
+      },
+      {
+        "key": "C",
+        "text": "Apply the sort to 'Product.Stock' before adding the 'Sum' function."
+      },
+      {
+        "key": "D",
+        "text": "Dynamic Sorts cannot sort by aggregated columns such as Sum or Count."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Group By와 Sum이 있는 Aggregate에서 '총합' 기준으로 정렬하려면 dynamic Sort 문자열이 집계 결과 컬럼을 가리켜야 합니다. 따라서 \"Sum(Product.Stock) DESC\"처럼 집계 함수를 그대로 지정합니다(정답 A). \"Product.Stock DESC\"는 그룹화 전 개별 행의 원본 값이라 카테고리별 총합 정렬로는 의미가 없어 B는 틀리고, 집계 컬럼 정렬 자체가 불가능하다는 D도 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에 'Product.Category'로 'Group By'를 걸고 'Product.Stock'에 'Sum'을 적용했습니다. 총 재고가 가장 많은 카테고리가 맨 위에 오도록 dynamic Sort(텍스트 표현식)로 정렬하려면 어떤 값을 전달해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "dynamic Sort에 \"Sum(Product.Stock) DESC\" 문자열을 전달한다."
+          },
+          {
+            "key": "B",
+            "text": "dynamic Sort에 \"Product.Stock DESC\" 문자열을 전달한다."
+          },
+          {
+            "key": "C",
+            "text": "'Sum' 함수를 추가하기 전에 'Product.Stock' 속성에 정렬을 적용한다."
+          },
+          {
+            "key": "D",
+            "text": "dynamic Sort는 Sum이나 Count 같은 집계 컬럼으로는 정렬할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-102",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins 'Order' ('Only With') 'Customer'. You want orders whose 'ShippedDate' falls within the last 30 days. For a large table, which filter is the most performant?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Order.ShippedDate > CurrDate() - 30"
+      },
+      {
+        "key": "B",
+        "text": "DiffDays(Order.ShippedDate, CurrDate()) <= 30"
+      },
+      {
+        "key": "C",
+        "text": "It doesn't matter; the optimizer converts every date filter into identical SQL."
+      },
+      {
+        "key": "D",
+        "text": "Order.ShippedDate >= AddDays(CurrDate(), -30)"
+      }
+    ],
+    "answer": "D",
+    "explanation": "성능의 핵심은 필터 대상 속성(ShippedDate)을 함수로 감싸지 않고 그대로 두어 데이터베이스 인덱스를 사용할 수 있게 하는 것(sargable)입니다. \"Order.ShippedDate >= AddDays(CurrDate(), -30)\"은 계산이 상수 쪽에서 일어나므로 인덱스를 탈 수 있어 가장 빠릅니다(정답 D). 반면 DiffDays(Order.ShippedDate, ...)처럼 속성을 함수로 감싸면 모든 행을 계산해야 해 인덱스를 못 쓰므로 B는 느리고, 옵티마이저가 다 똑같이 처리한다는 C도 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Order'를 'Customer'와 'Only With' 조인합니다. 'ShippedDate'가 최근 30일 이내인 주문을 찾으려 합니다. 대용량 테이블에서 가장 성능이 좋은 필터는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Order.ShippedDate > CurrDate() - 30"
+          },
+          {
+            "key": "B",
+            "text": "DiffDays(Order.ShippedDate, CurrDate()) <= 30"
+          },
+          {
+            "key": "C",
+            "text": "상관없다. OutSystems 옵티마이저가 모든 날짜 필터를 동일한 SQL로 변환한다."
+          },
+          {
+            "key": "D",
+            "text": "Order.ShippedDate >= AddDays(CurrDate(), -30)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-103",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A screen must display data from two different Aggregates combined into a single Table widget. What is the recommended architectural approach in Reactive Web?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is impossible to show data from two Aggregates in one Table widget."
+      },
+      {
+        "key": "B",
+        "text": "Place both Aggregates on the screen and call 'ListAppendAll' in the 'On After Fetch' of the first Aggregate."
+      },
+      {
+        "key": "C",
+        "text": "Use an Advanced SQL tool and perform a 'UNION' between the two entities."
+      },
+      {
+        "key": "D",
+        "text": "Use a Data Action that runs both Aggregates and merges the results into a single list."
+      }
+    ],
+    "answer": "D",
+    "explanation": "권장되는 방식은 서버 측 Data Action 안에서 두 Aggregate를 실행하고 ListAppendAll 등으로 하나의 List로 합쳐 반환한 뒤, Table을 그 List에 바인딩하는 것입니다(정답 D). 이렇게 하면 Aggregate의 최적화와 유지보수성을 그대로 살릴 수 있습니다. Advanced SQL의 UNION(C)도 동작은 하지만 low-code 유지보수 관점에서 권장 방식이 아니며, On After Fetch에서 병합하는 B는 Refresh 타이밍상 부적절하고, 두 Aggregate를 한 Table에 못 쓴다는 A는 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 화면에서 서로 다른 두 Aggregate의 데이터를 하나의 Table widget에 합쳐 표시해야 합니다. Reactive Web에서 권장되는 아키텍처 접근 방식은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "두 Aggregate의 데이터를 하나의 Table widget에 표시하는 것은 불가능하다."
+          },
+          {
+            "key": "B",
+            "text": "두 Aggregate를 화면에 두고 첫 번째 Aggregate의 'On After Fetch'에서 'ListAppendAll'을 호출한다."
+          },
+          {
+            "key": "C",
+            "text": "Advanced SQL 도구를 사용해 두 Entity 사이에 'UNION'을 수행한다."
+          },
+          {
+            "key": "D",
+            "text": "두 Aggregate를 실행해 결과를 하나의 List로 병합하는 Data Action을 사용한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-104",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate joins 'Ticket' ('With or Without') 'Agent'. You add a filter 'Agent.IsActive = True', but you notice it drops Tickets that have no Agent assigned. You want to keep unassigned Tickets AND Tickets whose Agent is active. Which filter expression achieves this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Agent.IsActive = True"
+      },
+      {
+        "key": "B",
+        "text": "Agent.IsActive <> False"
+      },
+      {
+        "key": "C",
+        "text": "Agent.Id = NullIdentifier() or Agent.IsActive = True"
+      },
+      {
+        "key": "D",
+        "text": "Agent.IsActive = True or True"
+      }
+    ],
+    "answer": "C",
+    "explanation": "'With or Without'(left join)에서 Agent가 없는 Ticket은 Agent.Id가 NullIdentifier()로 오고 Agent.IsActive = True 조건에 걸리지 않아 제외됩니다. 이를 살리려면 'Agent가 없거나(Agent.Id = NullIdentifier()) 또는 활성 Agent인' 경우를 모두 통과시키는 C가 정답입니다. A와 B는 결국 활성 Agent만 남겨 미배정 Ticket을 제외하므로 틀리고, 'or True'가 붙은 D는 항상 참이 되어 필터가 전혀 작동하지 않으므로 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Ticket'을 'Agent'와 'With or Without'로 조인합니다. 'Agent.IsActive = True' 필터를 걸었더니 Agent가 배정되지 않은 Ticket이 사라졌습니다. 미배정 Ticket과 활성 Agent인 Ticket을 모두 남기려면 어떤 필터 표현식을 써야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Agent.IsActive = True"
+          },
+          {
+            "key": "B",
+            "text": "Agent.IsActive <> False"
+          },
+          {
+            "key": "C",
+            "text": "Agent.Id = NullIdentifier() or Agent.IsActive = True"
+          },
+          {
+            "key": "D",
+            "text": "Agent.IsActive = True or True"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-105",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has 'Max Records' set to 1 and a Sort on 'CreatedOn DESC'. What does it return?",
+    "options": [
+      {
+        "key": "A",
+        "text": "All records that share the most recent creation date."
+      },
+      {
+        "key": "B",
+        "text": "The first record ever created in the database."
+      },
+      {
+        "key": "C",
+        "text": "A random record, because Max Records is applied before the Sort."
+      },
+      {
+        "key": "D",
+        "text": "The single most recently created record that matches the filters."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Aggregate는 SQL로 변환될 때 정렬(ORDER BY)을 먼저 적용한 뒤 Max Records(행 수 제한)를 적용합니다. 따라서 CreatedOn DESC로 정렬한 상태에서 1건만 가져오면 필터 조건을 만족하는 레코드 중 가장 최근에 생성된 단 하나가 반환됩니다(정답 D). Max Records가 Sort보다 먼저 적용된다고 본 C는 순서를 반대로 오해한 것이라 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate의 'Max Records'가 1로 설정되어 있고 'CreatedOn DESC'로 정렬합니다. 결과는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "가장 최근 생성 날짜를 가진 모든 레코드."
+          },
+          {
+            "key": "B",
+            "text": "데이터베이스에서 가장 처음 생성된 레코드."
+          },
+          {
+            "key": "C",
+            "text": "Max Records가 Sort보다 먼저 적용되므로 임의의 레코드."
+          },
+          {
+            "key": "D",
+            "text": "필터를 만족하는 레코드 중 가장 최근에 생성된 단 하나의 레코드."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-106",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Web app you have an Aggregate whose Fetch property is 'At Start' and that takes an input parameter 'ProductCategoryId'. If a client action assigns a new value to the variable feeding 'ProductCategoryId', what happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate automatically re-fetches from the server because its input parameter changed."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate re-fetches only if an 'OnParametersChanged' event is explicitly defined."
+      },
+      {
+        "key": "C",
+        "text": "Nothing happens until you explicitly call 'Refresh Data'."
+      },
+      {
+        "key": "D",
+        "text": "The whole screen reloads to update the data."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate와 Data Action은 자신의 Input Parameter가 바뀌면 dependency tracking에 의해 자동으로 다시 fetch합니다. 따라서 'ProductCategoryId'에 연결된 변수를 client action에서 바꾸면 별도 조치 없이 재조회됩니다. B의 'OnParametersChanged'는 OutSystems에 존재하지 않는 이벤트이며, C의 Refresh Data는 input parameter가 아닌 일반 filter 변수를 바꿨을 때 필요한 방법입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web 앱에서 Fetch 속성이 'At Start'이고 Input Parameter 'ProductCategoryId'를 받는 Aggregate가 있습니다. client action에서 'ProductCategoryId'에 연결된 변수에 새 값을 할당하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Input Parameter가 바뀌었으므로 Aggregate가 서버에서 자동으로 다시 fetch한다."
+          },
+          {
+            "key": "B",
+            "text": "'OnParametersChanged' 이벤트를 명시적으로 정의한 경우에만 다시 fetch한다."
+          },
+          {
+            "key": "C",
+            "text": "'Refresh Data'를 명시적으로 호출하기 전까지는 아무 일도 일어나지 않는다."
+          },
+          {
+            "key": "D",
+            "text": "데이터를 갱신하기 위해 화면 전체가 다시 로드된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-107",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Aggregate returns a 'Count' of 'Ticket.Id'. On the screen you want to show 'No Tickets' when the count is 0, otherwise show the number. Where is the best place for this logic?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Aggregate's 'On After Fetch', assigning the text to a variable."
+      },
+      {
+        "key": "B",
+        "text": "In a Calculated Attribute inside the Aggregate."
+      },
+      {
+        "key": "C",
+        "text": "In a Screen Expression over the Aggregate result: If(GetTickets.List.Current.Count = 0, \"No Tickets\", GetTickets.List.Current.Count)"
+      },
+      {
+        "key": "D",
+        "text": "By adding a Filter to the Aggregate: Count > 0."
+      }
+    ],
+    "answer": "C",
+    "explanation": "화면에 값을 어떻게 보여줄지 결정하는 순수한 표시(display) 로직은 Screen Expression에서 If()로 처리하는 것이 가장 간단하고 자연스럽습니다. On After Fetch나 Calculated Attribute를 쓰면 표시 목적의 로직을 데이터 계층에 불필요하게 넣는 것이며, D의 Filter는 count가 0인 경우 아예 행을 제외해 'No Tickets'를 표시할 기회 자체를 없애버립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Ticket.Id'의 'Count'를 반환합니다. 화면에서 count가 0이면 'No Tickets'를, 그렇지 않으면 숫자를 보여주려 합니다. 이 로직을 두기에 가장 좋은 곳은 어디입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate의 'On After Fetch'에서 텍스트를 변수에 할당한다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate 안의 Calculated Attribute에서 처리한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate 결과를 사용하는 Screen Expression에서 처리한다: If(GetTickets.List.Current.Count = 0, \"No Tickets\", GetTickets.List.Current.Count)"
+          },
+          {
+            "key": "D",
+            "text": "Aggregate에 Filter를 추가한다: Count > 0."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-108",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate's 'Count' reports 100, but the List widget bound to it only shows 50 rows on screen. What is the most likely reason?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The database is mid-transaction and has not committed all rows."
+      },
+      {
+        "key": "B",
+        "text": "Aggregates return only the 'Top 50' results by default when no sort is provided."
+      },
+      {
+        "key": "C",
+        "text": "A 'Max Records' limit on the Aggregate (or the widget) is capping the number of displayed rows."
+      },
+      {
+        "key": "D",
+        "text": "A 'With or Without' join hides half of the records by default."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Count는 조건에 맞는 전체 행 수를 반영하지만, Aggregate의 Max Records 속성은 실제로 가져와 화면에 표시되는 행 수를 제한합니다. 그래서 Count=100인데 목록에는 50개만 보일 수 있습니다. B처럼 Aggregate가 기본으로 Top 50만 주는 규칙은 없고, D의 'With or Without'(left join)는 행을 숨기지 않으며, A의 트랜잭션 미커밋도 이 현상의 원인이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate의 'Count'는 100인데, 이 Aggregate에 연결된 List widget에는 화면에 50개 행만 표시됩니다. 가장 유력한 이유는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스가 트랜잭션 도중이라 모든 행을 아직 커밋하지 않았다."
+          },
+          {
+            "key": "B",
+            "text": "정렬이 없으면 Aggregate는 기본으로 'Top 50'만 반환한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate(또는 위젯)의 'Max Records' 제한이 표시되는 행 수를 제한하고 있다."
+          },
+          {
+            "key": "D",
+            "text": "'With or Without' 조인이 기본적으로 절반의 레코드를 숨긴다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-109",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You are joining 'Customer' and 'Order' and want a list of all Customers with the date of their most recent order, in a single Aggregate. How do you do it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Join Customer (Only With) Order and set Max Records to 1."
+      },
+      {
+        "key": "B",
+        "text": "Group By 'Customer.Id' and sort by 'Order.OrderDate' Descending."
+      },
+      {
+        "key": "C",
+        "text": "Group By 'Customer.Id' (plus its display attributes) and apply the 'Max' function to 'Order.OrderDate'."
+      },
+      {
+        "key": "D",
+        "text": "This is impossible in an Aggregate; it requires a SQL subquery per customer."
+      }
+    ],
+    "answer": "C",
+    "explanation": "고객별 '가장 최근 주문일'은 Customer.Id로 Group By한 뒤 Order.OrderDate에 Max 집계 함수를 적용하면 각 고객당 한 행씩 최신 날짜가 나옵니다. B처럼 Group By만 하고 정렬만 하면 그룹 안에서 어떤 한 날짜만 보장되지 않으며 올바른 '최댓값'을 표현하지 못합니다. D는 틀렸는데, 이런 그룹별 집계는 Aggregate에서 충분히 가능합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Customer'와 'Order'를 조인하여, 단일 Aggregate로 모든 고객과 그들의 가장 최근 주문 날짜 목록을 보여주려 합니다. 어떻게 해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Customer (Only With) Order로 조인하고 Max Records를 1로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "'Customer.Id'로 Group By하고 'Order.OrderDate' 내림차순으로 정렬한다."
+          },
+          {
+            "key": "C",
+            "text": "'Customer.Id'(및 표시용 속성)로 Group By하고 'Order.OrderDate'에 'Max' 함수를 적용한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate로는 불가능하며 고객별 서브쿼리가 있는 SQL이 필요하다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-110",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "You want Customers who placed more than 3 Orders in the last month. You join Customer (Only With) Order, Group By Customer.Id, and Count Order.Id. For maximum efficiency, where should the row condition 'Order.Date > AddMonths(CurrDate(), -1)' be placed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Inside a Calculated Attribute using an If() statement."
+      },
+      {
+        "key": "B",
+        "text": "As a condition on the aggregated result (e.g., Count > 3 and Date > ...)."
+      },
+      {
+        "key": "C",
+        "text": "As a standard filter in the Aggregate."
+      },
+      {
+        "key": "D",
+        "text": "In the Aggregate's 'On After Fetch'."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Order.Date 조건은 행 단위 조건이므로 Aggregate의 일반 filter(그룹화 이전, DB의 WHERE에 해당)에 두어야 집계 전에 데이터를 줄여 가장 효율적입니다. Count > 3처럼 집계 결과에 대한 조건만 그룹화 이후 filter에 들어갑니다. Calculated Attribute나 On After Fetch로 처리하면 DB에서 걸러지지 않아 불필요한 데이터를 다 가져오게 됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "지난 한 달 동안 3건보다 많은 Order를 낸 Customer를 찾으려 합니다. Customer (Only With) Order로 조인하고 Customer.Id로 Group By, Order.Id를 Count합니다. 최대 효율을 위해 'Order.Date > AddMonths(CurrDate(), -1)' 조건은 어디에 두어야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "If() 문을 사용하는 Calculated Attribute 안에 둔다."
+          },
+          {
+            "key": "B",
+            "text": "집계 결과에 대한 조건으로 둔다 (예: Count > 3 and Date > ...)."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate의 일반 filter로 둔다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate의 'On After Fetch'에 둔다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-111",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate uses Category (With or Without) Product so that all categories appear, including those with no products. You then add the filter 'Product.Price > 100'. What happens to categories that have no products?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They remain in the results, but the Price shows as 0."
+      },
+      {
+        "key": "B",
+        "text": "They disappear, because 'Product.Price' is Null for those rows and Null is not greater than 100."
+      },
+      {
+        "key": "C",
+        "text": "They remain, because it is a 'With or Without' join."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate throws an error because it cannot compare a Null value to 100."
+      }
+    ],
+    "answer": "B",
+    "explanation": "'With or Without'(left join)는 제품이 없는 Category도 남기지만, 그 행의 Product.Price는 Null(빈 값)입니다. filter 'Product.Price > 100'을 걸면 Null 값은 100보다 크지 않아 조건을 통과하지 못하므로 제품 없는 Category가 결과에서 사라집니다. 즉 오른쪽 테이블 속성에 filter를 걸면 left join이 사실상 inner join처럼 동작합니다. 이 비교는 에러가 아니라 단순히 false로 처리됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Aggregate가 Category (With or Without) Product 조인을 사용해 제품이 없는 Category까지 모두 나오도록 했습니다. 여기에 filter 'Product.Price > 100'을 추가하면, 제품이 없는 Category는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "결과에 남지만 Price가 0으로 표시된다."
+          },
+          {
+            "key": "B",
+            "text": "해당 행의 'Product.Price'가 Null이고 Null은 100보다 크지 않으므로 결과에서 사라진다."
+          },
+          {
+            "key": "C",
+            "text": "'With or Without' 조인이므로 결과에 남는다."
+          },
+          {
+            "key": "D",
+            "text": "Null 값을 100과 비교할 수 없어 Aggregate가 에러를 던진다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-112",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "On a Reactive Screen you display a list from an Aggregate and also need to show the 'Sum' of the 'Amount' column. What is the most Reactive and efficient approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a second Aggregate that groups and sums the 'Amount' column at the database level."
+      },
+      {
+        "key": "B",
+        "text": "Use an 'On After Fetch' client action to loop the list and add up the values into a Local Variable."
+      },
+      {
+        "key": "C",
+        "text": "Create a Calculated Attribute in the same Aggregate that adds each value into a global running total."
+      },
+      {
+        "key": "D",
+        "text": "Add a JavaScript node that calculates the sum by reading the DOM."
+      }
+    ],
+    "answer": "A",
+    "explanation": "합계를 데이터베이스에서 Sum 집계 함수로 계산하는 별도 Aggregate를 쓰는 것이 가장 효율적이며, 이 Aggregate는 데이터가 바뀌면 자동으로 다시 계산되어 가장 'Reactive'합니다. B처럼 loop로 직접 더하면 Max Records에 걸린 부분만 더해질 수 있고 자동 갱신 이점도 약합니다. C의 'global running total'은 Aggregate에서 지원하지 않는 방식이고, D의 DOM 읽기는 취약하고 권장되지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive 화면에서 Aggregate로 목록을 표시하면서 'Amount' 컬럼의 'Sum'(합계)도 보여줘야 합니다. 가장 Reactive하고 효율적인 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Amount' 컬럼을 데이터베이스 수준에서 group하고 sum하는 두 번째 Aggregate를 사용한다."
+          },
+          {
+            "key": "B",
+            "text": "'On After Fetch' client action에서 목록을 loop 돌며 값을 Local Variable에 합산한다."
+          },
+          {
+            "key": "C",
+            "text": "같은 Aggregate 안에 값을 global 누적 합계에 더하는 Calculated Attribute를 만든다."
+          },
+          {
+            "key": "D",
+            "text": "DOM을 읽어 합계를 계산하는 JavaScript 노드를 추가한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-113",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has 'Max Records' set to 50. You add a 'Group By' on 'Supplier.Region'. There are 200 suppliers spread across 10 regions. How many rows does the Aggregate return?",
+    "options": [
+      {
+        "key": "A",
+        "text": "10 rows."
+      },
+      {
+        "key": "B",
+        "text": "50 rows."
+      },
+      {
+        "key": "C",
+        "text": "200 rows."
+      },
+      {
+        "key": "D",
+        "text": "0 rows, because 50 is not a multiple of 10."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Group By는 결과를 그룹 단위로 접기 때문에 200개의 supplier가 10개 region 그룹으로 줄어듭니다. Max Records=50은 반환 행 수의 상한일 뿐인데, 그룹화 후 행이 10개(50보다 작음)이므로 10개 행이 모두 반환됩니다. Max Records는 그룹 결과 행에 적용되며, 200개의 원본 행이 그대로 나오지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Max Records'가 50으로 설정된 Aggregate가 있습니다. 여기에 'Supplier.Region'으로 'Group By'를 추가합니다. 10개 region에 걸쳐 200명의 supplier가 있습니다. 이 Aggregate는 몇 개의 행을 반환합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "10개 행."
+          },
+          {
+            "key": "B",
+            "text": "50개 행."
+          },
+          {
+            "key": "C",
+            "text": "200개 행."
+          },
+          {
+            "key": "D",
+            "text": "50이 10의 배수가 아니므로 0개 행."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-114",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate filter you use the 'like' operator for a product search (e.g., Product.Name like \"%\" + SearchTerm + \"%\"). What is the main performance risk?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Using 'like' automatically disables all other filters in the Aggregate."
+      },
+      {
+        "key": "B",
+        "text": "Aggregates cannot translate 'like' into SQL and must filter in memory on the server."
+      },
+      {
+        "key": "C",
+        "text": "The 'like' operator only evaluates the first 100 characters of the string."
+      },
+      {
+        "key": "D",
+        "text": "A leading wildcard (%) prevents the database from using standard indexes, potentially forcing a full table scan."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Aggregate 필터의 like 조건은 정상적으로 SQL로 변환되지만, 검색어 앞에 와일드카드(%)가 붙으면 데이터베이스가 인덱스를 활용할 수 없어 테이블 전체를 훑는 full table scan이 발생할 수 있습니다. 그래서 데이터가 많을수록 느려지는 것이 핵심 위험입니다. B는 흔히 오해하는 내용이지만 틀렸습니다 — Aggregate는 like를 서버 메모리가 아니라 DB의 SQL로 처리합니다. A와 C는 존재하지 않는 동작입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate 필터에서 상품 검색을 위해 'like' 연산자를 사용합니다(예: Product.Name like \"%\" + SearchTerm + \"%\"). 주요 성능 위험은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'like'를 사용하면 Aggregate의 다른 모든 필터가 자동으로 비활성화된다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate는 'like'를 SQL로 변환하지 못해 서버 메모리에서 필터링해야 한다."
+          },
+          {
+            "key": "C",
+            "text": "'like' 연산자는 문자열의 처음 100자만 평가한다."
+          },
+          {
+            "key": "D",
+            "text": "앞쪽 와일드카드(%)는 데이터베이스가 표준 인덱스를 사용하지 못하게 하여 full table scan을 유발할 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-115",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins 'Ticket' 'With or Without' 'Comment'. You want to show only Tickets that have NO comments. What filter condition is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Comment.Id <> NullIdentifier()"
+      },
+      {
+        "key": "B",
+        "text": "Count(Comment.Id) = 0"
+      },
+      {
+        "key": "C",
+        "text": "Comment.Id = NullIdentifier()"
+      },
+      {
+        "key": "D",
+        "text": "Comment.TicketId = 0"
+      }
+    ],
+    "answer": "C",
+    "explanation": "'With or Without' join은 left join이라 매칭되는 Comment가 없는 Ticket도 결과에 포함되며, 이때 Comment 쪽 컬럼은 모두 null이 됩니다. 따라서 Comment.Id = NullIdentifier() 조건으로 댓글이 없는 Ticket만 골라낼 수 있습니다. A는 반대로 댓글이 있는 것만 남기고, B의 Count는 이런 단순 필터가 아니라 Group By 상황에서 쓰며, D의 '= 0'은 Id 타입 비교로 올바른 null 판별 방식이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Ticket'을 'With or Without'으로 'Comment'와 조인합니다. 댓글이 하나도 없는 Ticket만 표시하려면 올바른 필터는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Comment.Id <> NullIdentifier()"
+          },
+          {
+            "key": "B",
+            "text": "Count(Comment.Id) = 0"
+          },
+          {
+            "key": "C",
+            "text": "Comment.Id = NullIdentifier()"
+          },
+          {
+            "key": "D",
+            "text": "Comment.TicketId = 0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-116",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins two entities with a 'With or Without' join. Even though 'Max Records' is set to 10, the database execution time is very high. Why?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A null 'Dynamic Sort' forces the database to wait before returning rows."
+      },
+      {
+        "key": "B",
+        "text": "The database must still evaluate the join and apply all filters across the data before it can determine which 10 rows to return."
+      },
+      {
+        "key": "C",
+        "text": "Max Records is only applied after 100% of the data has been sent to the OutSystems server."
+      },
+      {
+        "key": "D",
+        "text": "A 'With or Without' join is inherently slower than a SQL 'UNION'."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Max Records는 최종적으로 반환하는 행 수만 10개로 제한할 뿐, 데이터베이스는 어떤 10개를 줄지 결정하기 위해 먼저 조인과 모든 필터, 정렬을 전체 데이터에 대해 수행해야 합니다. 그래서 데이터가 많으면 Max Records를 작게 잡아도 DB 실행 시간은 길어질 수 있습니다. C는 틀렸습니다 — 제한은 서버가 아니라 DB에서 적용됩니다. D의 UNION 비교와 A의 Dynamic Sort 설명은 근거 없는 내용입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 두 엔티티를 'With or Without' 조인합니다. 'Max Records'를 10으로 설정했는데도 데이터베이스 실행 시간이 매우 깁니다. 이유는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "null인 'Dynamic Sort' 때문에 데이터베이스가 행 반환을 대기하게 된다."
+          },
+          {
+            "key": "B",
+            "text": "어떤 10개 행을 반환할지 결정하려면 데이터베이스가 먼저 조인과 모든 필터를 전체 데이터에 적용해야 한다."
+          },
+          {
+            "key": "C",
+            "text": "Max Records는 모든 데이터의 100%가 OutSystems 서버로 전송된 후에만 적용된다."
+          },
+          {
+            "key": "D",
+            "text": "'With or Without' 조인은 본질적으로 SQL 'UNION'보다 느리다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-117",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "On an order search screen, to avoid firing a server call on every keystroke you want to wait until the user stops typing for 500ms before refreshing the Aggregate ('debouncing'). Where is this logic implemented?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Aggregate's 'Fetch' property by setting it to 'Delayed'."
+      },
+      {
+        "key": "B",
+        "text": "In a Client Action driven by the input's OnChange, using a Search local variable and delay logic before the Refresh Data."
+      },
+      {
+        "key": "C",
+        "text": "In the database using a 'WAITFOR' command inside an SQL element."
+      },
+      {
+        "key": "D",
+        "text": "Inside the Aggregate's 'OnAfterFetch' event."
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems에는 디바운스를 위한 'Delayed' Fetch 속성이나 OnAfterFetch 기반 지연 기능이 없습니다. 디바운싱은 입력 위젯의 OnChange에서 호출되는 Client Action 안에서 Search 로컬 변수와 지연 로직을 조합해 직접 구현하며, 사용자가 타이핑을 멈춘 뒤에 Refresh Data를 실행합니다. A와 D는 존재하지 않는 속성/동작이고, C의 SQL WAITFOR는 서버 DB를 붙잡아 두는 것이라 클라이언트 측 디바운스 목적과 전혀 맞지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "주문 검색 화면에서 키 입력마다 서버를 호출하지 않도록, 사용자가 타이핑을 500ms 동안 멈춘 뒤에 Aggregate를 새로고침하려 합니다('디바운싱'). 이 로직은 어디에 구현합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate의 'Fetch' 속성을 'Delayed'로 설정하여 구현한다."
+          },
+          {
+            "key": "B",
+            "text": "입력 위젯의 OnChange에서 호출되는 Client Action에서 Search 로컬 변수와 지연 로직을 사용한 뒤 Refresh Data를 실행한다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스에서 SQL 요소 안에 'WAITFOR' 명령을 사용해 구현한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate의 'OnAfterFetch' 이벤트 안에 구현한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-118",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In an Aggregate you create a calculated attribute 'Age' with the formula DiffYears(Employee.Birthday, CurrDate()), then add a filter 'Age > 18'. What is a potential performance drawback?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Calculated attributes can be used for sorting but never for filtering."
+      },
+      {
+        "key": "B",
+        "text": "Because 'Age' is a calculated value, the filter is applied as a HAVING clause or subquery rather than on a raw indexed column, which can be slower."
+      },
+      {
+        "key": "C",
+        "text": "The 'DiffYears' function only works when the Birthday is in the 21st century."
+      },
+      {
+        "key": "D",
+        "text": "OutSystems cannot use 'CurrDate()' inside an Aggregate filter."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Age는 원본 컬럼이 아니라 DiffYears로 계산된 값이라, 이 값에 대한 필터는 인덱스가 걸린 원본 컬럼에 직접 적용되지 못하고 HAVING 절이나 서브쿼리 형태로 처리됩니다. 그래서 일반 컬럼 필터보다 느려질 수 있는 것이 성능상의 약점입니다. A는 틀렸습니다 — 계산된 속성도 필터에 사용할 수 있습니다. C와 D는 존재하지 않는 제약으로, DiffYears와 CurrDate()는 Aggregate에서 정상적으로 동작합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 DiffYears(Employee.Birthday, CurrDate()) 공식으로 계산된 속성 'Age'를 만든 뒤 'Age > 18' 필터를 추가합니다. 발생할 수 있는 성능상의 단점은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "계산된 속성은 정렬에만 사용할 수 있고 필터에는 사용할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "'Age'가 계산된 값이므로 필터가 인덱스된 원본 컬럼이 아니라 HAVING 절이나 서브쿼리로 적용되어 더 느릴 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "'DiffYears' 함수는 Birthday가 21세기일 때만 동작한다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems는 Aggregate 필터 안에서 'CurrDate()'를 사용할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-119",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate uses a 'With or Without' join between 'Department' and 'Employee' and calculates the Average of 'Employee.Salary', grouped by Department. For a Department that has no employees, what value does the Average show?",
+    "options": [
+      {
+        "key": "A",
+        "text": "That Department is omitted from the results entirely."
+      },
+      {
+        "key": "B",
+        "text": "0."
+      },
+      {
+        "key": "C",
+        "text": "A runtime 'Divide by Zero' exception."
+      },
+      {
+        "key": "D",
+        "text": "Null, which you must handle with an 'If' in the UI."
+      }
+    ],
+    "answer": "B",
+    "explanation": "직원이 없는 Department는 left join으로 Salary가 NULL인 행 하나가 되고, 그 그룹의 Average는 SQL상 NULL이 됩니다. 하지만 OutSystems의 Decimal은 nullable이 아니어서 DB의 NULL을 기본값 0으로 읽어 화면에는 0으로 표시됩니다. With or Without join이므로 Department가 제외되지도(A) 않고, Divide by Zero 예외도 발생하지 않으며(C), Null을 If로 처리할 필요도 없습니다(D).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Department'와 'Employee' 사이에 'With or Without' join을 사용하고 'Employee.Salary'의 평균(Average)을 Department별로 계산합니다. 직원이 한 명도 없는 Department의 경우 Average 값은 무엇으로 표시됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "해당 Department는 결과에서 완전히 제외된다."
+          },
+          {
+            "key": "B",
+            "text": "0."
+          },
+          {
+            "key": "C",
+            "text": "런타임에 'Divide by Zero' 예외가 발생한다."
+          },
+          {
+            "key": "D",
+            "text": "Null이 반환되어 UI에서 'If'로 처리해야 한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-120",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate has a calculated attribute 'TotalPrice = Price * (1 - Discount)'. 'Discount' is a Decimal attribute coming from a 'With or Without' joined Entity, and for a given row there is no matching record. What is 'TotalPrice' for that row?",
+    "options": [
+      {
+        "key": "A",
+        "text": "0, because any calculation involving a Null becomes 0."
+      },
+      {
+        "key": "B",
+        "text": "The row is skipped by the Aggregate."
+      },
+      {
+        "key": "C",
+        "text": "Null, because the calculation cannot be completed."
+      },
+      {
+        "key": "D",
+        "text": "Price, because the missing Discount is read as 0."
+      }
+    ],
+    "answer": "D",
+    "explanation": "OutSystems의 Decimal은 nullable이 아니어서 매칭 레코드가 없어 DB에서 NULL로 온 Discount를 기본값 0으로 읽습니다. 따라서 (1 - 0) = 1이 되어 TotalPrice는 Price와 같아집니다. 다른 언어처럼 NULL이 전파되어 결과가 Null이 되거나(C) 0이 되지 않으며(A), 행이 건너뛰어지지도(B) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate에 계산 속성 'TotalPrice = Price * (1 - Discount)'가 있습니다. 'Discount'는 'With or Without'로 join된 Entity의 Decimal 속성이며, 특정 행에는 매칭되는 레코드가 없습니다. 그 행의 'TotalPrice' 값은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "0 (Null이 포함된 계산은 모두 0이 되므로)."
+          },
+          {
+            "key": "B",
+            "text": "해당 행은 Aggregate가 건너뛴다."
+          },
+          {
+            "key": "C",
+            "text": "Null (계산을 수행할 수 없으므로)."
+          },
+          {
+            "key": "D",
+            "text": "Price (없는 Discount가 0으로 읽히므로)."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-121",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate joins 'Employee' with 'Department' using 'With or Without'. For the department column you add a calculated attribute If(Department.Name = \"\", \"Floating\", Department.Name) so employees with no department show 'Floating'. A colleague claims this will fail. What is actually true?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In a 'With or Without' join a missing Text attribute is returned as an empty string, so 'Department.Name = \"\"' is True and it works correctly."
+      },
+      {
+        "key": "B",
+        "text": "The 'If' function can only be used in Screen Expressions, not in Aggregate calculated attributes."
+      },
+      {
+        "key": "C",
+        "text": "You must wrap it in 'Trim()' to correctly handle database nulls."
+      },
+      {
+        "key": "D",
+        "text": "Text attributes in Aggregates return 'Null' when the record is missing, so the comparison never matches."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems의 기본 데이터 타입은 nullable이 아니므로, 'With or Without'(left join)에서 매칭되는 Department가 없을 때 Text 속성 Department.Name은 Null이 아니라 빈 문자열(\"\")로 반환됩니다. 따라서 Department.Name = \"\" 조건이 True가 되어 'Floating'이 정상적으로 표시됩니다(정답 A). 'Null로 반환된다'는 D는 흔한 함정이지만 틀린 설명이고, If 함수는 Aggregate의 calculated attribute에서도 사용할 수 있으므로 B도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Employee'와 'Department'를 'With or Without'로 조인합니다. 부서가 없는 직원은 'Floating'으로 보이도록 calculated attribute로 If(Department.Name = \"\", \"Floating\", Department.Name)를 추가했습니다. 동료는 이게 실패할 것이라고 합니다. 실제로 맞는 설명은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'With or Without' 조인에서 누락된 Text 속성은 빈 문자열로 반환되므로 'Department.Name = \"\"'가 True가 되어 정상 동작한다."
+          },
+          {
+            "key": "B",
+            "text": "'If' 함수는 Screen Expression에서만 쓸 수 있고 Aggregate calculated attribute에서는 쓸 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스 null을 올바로 처리하려면 'Trim()'으로 감싸야 한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate의 Text 속성은 레코드가 없으면 'Null'로 반환되므로 비교가 절대 일치하지 않는다."
+          }
+        ]
+      }
+    }
   }
 ]

@@ -1,9 +1,9 @@
 {
-  "total": 321,
+  "total": 371,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
-      "count": 74
+      "count": 121
     },
     "Blocks and Events": {
       "category": "UI Design",
@@ -31,7 +31,7 @@
     },
     "Fetching Data on Screens": {
       "category": "Fetching Data",
-      "count": 41
+      "count": 44
     },
     "Form Validations": {
       "category": "Logic",
