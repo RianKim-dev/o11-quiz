@@ -556,5 +556,213 @@
         ]
       }
     }
+  },
+  {
+    "id": "DBG-010",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "While debugging a Reactive Web App, a developer sets a breakpoint inside a Server Action. When execution reaches that breakpoint, where does the debugger stop?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Service Studio Debugger, showing the server-side action flow."
+      },
+      {
+        "key": "B",
+        "text": "In the browser's Developer Tools (F12) Sources tab."
+      },
+      {
+        "key": "C",
+        "text": "The debugger cannot stop in Server Actions during a Reactive App session."
+      },
+      {
+        "key": "D",
+        "text": "In the Service Center monitoring logs."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Server Action은 서버에서 실행되므로 중단점(breakpoint)은 Service Studio의 Debugger에서 멈추며 서버 측 액션 흐름을 단계별로 확인할 수 있습니다. 브라우저 F12 개발자 도구는 클라이언트 측 JavaScript나 Client Action 디버깅용이고, Service Center 로그는 실행 후 기록을 보는 도구라 실시간 중단점 디버깅에는 사용하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web App을 디버깅하던 개발자가 Server Action 안에 중단점(breakpoint)을 설정했습니다. 실행이 그 중단점에 도달하면 디버거는 어디에서 멈춥니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Service Studio Debugger에서 멈추며 서버 측 액션 흐름을 보여준다."
+          },
+          {
+            "key": "B",
+            "text": "브라우저 개발자 도구(F12)의 Sources 탭에서 멈춘다."
+          },
+          {
+            "key": "C",
+            "text": "Reactive App 세션 중에는 Server Action에서 디버거가 멈출 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "Service Center 모니터링 로그에서 멈춘다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "DBG-011",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In Service Center a developer sees a Slow SQL warning. Which of these is the most appropriate place to investigate the specific query and how long it took to run?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Debugger in Service Studio."
+      },
+      {
+        "key": "B",
+        "text": "The Errors log in Service Center."
+      },
+      {
+        "key": "C",
+        "text": "The General log in Service Center."
+      },
+      {
+        "key": "D",
+        "text": "The Extension log in Service Center."
+      }
+    ],
+    "answer": "C",
+    "explanation": "느린 쿼리(Slow SQL) 경고와 실행 시간 같은 성능 관련 메시지는 Service Center의 General 로그에 기록되므로 여기서 어떤 쿼리가 얼마나 걸렸는지 확인합니다. Errors 로그는 실제 예외/오류만 담고, Debugger는 실행 시간을 측정하는 도구가 아니며, Extension 로그는 확장(Extension) 관련 기록용이라 적절하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Service Center에서 개발자가 Slow SQL 경고를 발견했습니다. 해당 쿼리와 실행에 걸린 시간을 조사하기에 가장 적절한 곳은 다음 중 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Service Studio의 Debugger"
+          },
+          {
+            "key": "B",
+            "text": "Service Center의 Errors 로그"
+          },
+          {
+            "key": "C",
+            "text": "Service Center의 General 로그"
+          },
+          {
+            "key": "D",
+            "text": "Service Center의 Extension 로그"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "DBG-012",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "During user testing of a mobile order-tracking app, the team enables the OutSystems App Feedback tool. What is its purpose?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To let developers write inline comments inside the app's code."
+      },
+      {
+        "key": "B",
+        "text": "To let end users send screenshots and written comments directly from the running app to the development team."
+      },
+      {
+        "key": "C",
+        "text": "To monitor the server's CPU and memory usage in real time."
+      },
+      {
+        "key": "D",
+        "text": "To run automated unit tests against the application."
+      }
+    ],
+    "answer": "B",
+    "explanation": "App Feedback은 앱을 사용하는 최종 사용자(테스터)가 실행 중인 앱에서 스크린샷과 코멘트를 바로 개발팀에 보낼 수 있게 해 주는 내장 피드백 도구입니다. A(코드 주석)나 D(자동 단위 테스트)는 전혀 다른 개념이고, C(서버 CPU 모니터링)는 Service Center/LifeTime 같은 운영 모니터링 도구의 역할입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "모바일 주문 추적 앱의 사용자 테스트 중에 팀이 OutSystems App Feedback 도구를 활성화합니다. 이 도구의 목적은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "개발자가 앱 코드 안에 인라인 주석을 작성하게 한다."
+          },
+          {
+            "key": "B",
+            "text": "최종 사용자가 실행 중인 앱에서 스크린샷과 코멘트를 개발팀에 바로 보낼 수 있게 한다."
+          },
+          {
+            "key": "C",
+            "text": "서버의 CPU와 메모리 사용량을 실시간으로 모니터링한다."
+          },
+          {
+            "key": "D",
+            "text": "애플리케이션에 대해 자동화된 단위 테스트를 실행한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "DBG-013",
+    "subtopic": "Debugging and Monitoring",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "While debugging a Server Action (invoked by a Client Action), a developer notices that one Local Variable never shows its value in the debugger, even though the flow keeps executing normally. What is the most likely cause?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The variable is never read later in the flow, so the compiler optimized it away."
+      },
+      {
+        "key": "B",
+        "text": "Local Variables inside Server Actions are never visible in the Service Studio debugger."
+      },
+      {
+        "key": "C",
+        "text": "The debugger only shows variables when the \"Break on All Errors\" option is enabled."
+      },
+      {
+        "key": "D",
+        "text": "The developer is debugging the Public version of the module instead of the Personal Area."
+      }
+    ],
+    "answer": "A",
+    "explanation": "이후 흐름에서 읽히지 않는(사용되지 않는) Local Variable은 컴파일러 최적화로 제거되기 때문에 debugger에서 값이 표시되지 않는다. Server Action의 Local Variable도 원래는 debugger에 정상적으로 표시되므로 B는 틀리고, \"Break on All Errors\"(C)나 Public/Personal Area 구분(D)은 변수 표시 여부와 관계없는 조건이라 오답이다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action이 호출하는 Server Action을 디버깅하던 중, 흐름은 정상적으로 계속 실행되는데도 어떤 Local Variable의 값이 debugger에 전혀 표시되지 않는다. 가장 가능성 높은 원인은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "해당 변수가 이후 흐름에서 사용(읽기)되지 않아 컴파일러가 최적화로 제거했다."
+          },
+          {
+            "key": "B",
+            "text": "Server Action의 Local Variable은 Service Studio debugger에 절대 표시되지 않는다."
+          },
+          {
+            "key": "C",
+            "text": "\"Break on All Errors\" 옵션이 켜져 있을 때만 debugger가 변수를 표시한다."
+          },
+          {
+            "key": "D",
+            "text": "개발자가 Personal Area가 아니라 모듈의 Public 버전을 디버깅하고 있다."
+          }
+        ]
+      }
+    }
   }
 ]

@@ -2744,5 +2744,265 @@
         ]
       }
     }
+  },
+  {
+    "id": "REL-052",
+    "subtopic": "Data Relationships",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "You have two entities, Company and Office. An Office always belongs to exactly one Company, and a Company can have many Offices. What is the relationship type and where does the Foreign Key go?",
+    "options": [
+      {
+        "key": "A",
+        "text": "1-to-Many; Foreign Key CompanyId is in the Office entity."
+      },
+      {
+        "key": "B",
+        "text": "1-to-Many; Foreign Key OfficeId is in the Company entity."
+      },
+      {
+        "key": "C",
+        "text": "1-to-1; Foreign Key CompanyId is in the Office entity."
+      },
+      {
+        "key": "D",
+        "text": "Many-to-Many; a junction entity is required."
+      }
+    ],
+    "answer": "A",
+    "explanation": "하나의 Office가 정확히 하나의 Company에 속하고 하나의 Company는 여러 Office를 가지므로 이는 1-to-Many 관계입니다. Foreign Key는 항상 'Many' 쪽 엔티티에 위치하므로 Office 엔티티에 CompanyId로 존재합니다. Many-to-Many가 아니므로 junction 엔티티는 필요하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Company와 Office 두 엔티티가 있습니다. Office는 항상 정확히 하나의 Company에 속하고, Company는 여러 개의 Office를 가질 수 있습니다. 이 관계의 유형과 Foreign Key의 위치는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "1-to-Many; Foreign Key CompanyId가 Office 엔티티에 있다."
+          },
+          {
+            "key": "B",
+            "text": "1-to-Many; Foreign Key OfficeId가 Company 엔티티에 있다."
+          },
+          {
+            "key": "C",
+            "text": "1-to-1; Foreign Key CompanyId가 Office 엔티티에 있다."
+          },
+          {
+            "key": "D",
+            "text": "Many-to-Many; 별도의 junction 엔티티가 필요하다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-053",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a 1-to-1 relationship between Employee and EmployeeDetail, the EmployeeDetail entity's Id attribute is set to the data type 'Employee Identifier'. What does this design imply?",
+    "options": [
+      {
+        "key": "A",
+        "text": "EmployeeDetail can never hold unique records of its own."
+      },
+      {
+        "key": "B",
+        "text": "The Id of EmployeeDetail acts as both its Primary Key and the Foreign Key to Employee."
+      },
+      {
+        "key": "C",
+        "text": "The developer must additionally create a separate EmployeeId attribute for the link."
+      },
+      {
+        "key": "D",
+        "text": "A single EmployeeDetail record can be linked to many Employees."
+      }
+    ],
+    "answer": "B",
+    "explanation": "1-to-1 관계를 만들 때 자식 엔티티(EmployeeDetail)의 Id를 부모의 Identifier 타입으로 지정하면, 그 Id 하나가 자신의 Primary Key이면서 동시에 부모(Employee)를 가리키는 Foreign Key 역할을 합니다. 따라서 별도의 EmployeeId 속성을 추가로 만들 필요가 없습니다(C 오답). Id는 유일하므로 한 EmployeeDetail이 여러 Employee에 연결될 수 없어(D 오답) 정확히 1:1 관계가 강제됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee와 EmployeeDetail 간 1-to-1 관계에서 EmployeeDetail 엔티티의 Id 속성이 'Employee Identifier' 데이터 타입으로 설정되어 있습니다. 이 설계가 의미하는 것은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "EmployeeDetail은 자신만의 고유 레코드를 가질 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "EmployeeDetail의 Id가 자신의 Primary Key인 동시에 Employee를 가리키는 Foreign Key 역할을 한다."
+          },
+          {
+            "key": "C",
+            "text": "개발자가 연결을 위해 별도의 EmployeeId 속성을 추가로 만들어야 한다."
+          },
+          {
+            "key": "D",
+            "text": "하나의 EmployeeDetail 레코드가 여러 Employee에 연결될 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-054",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "The Job entity has a Mandatory Foreign Key DepartmentId, and the Delete Rule for this relationship is set to \"Protect\". A developer runs a Server Action that deletes a Department which currently has zero Jobs associated with it. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Department is deleted successfully."
+      },
+      {
+        "key": "B",
+        "text": "A Database Exception is thrown because the Delete Rule is \"Protect\"."
+      },
+      {
+        "key": "C",
+        "text": "The Department is not deleted but flagged as \"Inactive\"."
+      },
+      {
+        "key": "D",
+        "text": "The delete fails because \"Protect\" requires at least one child to exist before deletion."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Protect Delete Rule은 자식(child) 레코드가 존재할 때만 부모 삭제를 막고 예외를 던진다. 연결된 Job이 0개이므로 막을 대상이 없어 Department는 정상적으로 삭제된다. 따라서 예외가 난다는 B, Inactive 처리 같은 개념(C), 자식이 있어야 삭제된다는 D는 모두 Protect의 동작을 잘못 설명한 것이다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Job entity에는 Mandatory Foreign Key인 DepartmentId가 있고, 이 관계의 Delete Rule은 \"Protect\"로 설정되어 있다. 현재 연결된 Job이 하나도 없는 Department를 삭제하는 Server Action을 실행하면 어떻게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Department가 정상적으로 삭제된다."
+          },
+          {
+            "key": "B",
+            "text": "Delete Rule이 \"Protect\"이므로 Database Exception이 발생한다."
+          },
+          {
+            "key": "C",
+            "text": "Department가 삭제되지 않고 \"Inactive\"로 표시된다."
+          },
+          {
+            "key": "D",
+            "text": "\"Protect\"는 삭제 전에 자식이 최소 하나 있어야 하므로 삭제가 실패한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-055",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Employee and EmployeeBadge have a 1-to-1 relationship. EmployeeBadge's Primary Key is of type \"Employee Identifier\". A developer tries to create an EmployeeBadge record using an ID that does not exist in Employee. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A Foreign Key constraint violation occurs."
+      },
+      {
+        "key": "B",
+        "text": "The EmployeeBadge record is created, and a matching Employee record is created automatically."
+      },
+      {
+        "key": "C",
+        "text": "The EmployeeBadge record is created with a Null reference to Employee."
+      },
+      {
+        "key": "D",
+        "text": "EmployeeBadge's Primary Key auto-increments to the next available ID."
+      }
+    ],
+    "answer": "A",
+    "explanation": "EmployeeBadge의 Primary Key가 \"Employee Identifier\" 타입이라는 것은 그 값이 Employee를 가리키는 Foreign Key이기도 하다는 뜻이다. 존재하지 않는 Employee id로 레코드를 만들면 참조 무결성이 깨지므로 Foreign Key constraint 위반이 발생한다. 부모가 자동 생성되거나(B), Null로 저장되거나(C), PK가 자동 증가한다(D)는 것은 이 구조에서 일어나지 않는다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee entity와 EmployeeBadge entity가 1대1 관계이다. EmployeeBadge의 Primary Key는 \"Employee Identifier\" 타입이다. 개발자가 Employee에 존재하지 않는 ID로 EmployeeBadge 레코드를 생성하려 하면 어떻게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Foreign Key constraint 위반이 발생한다."
+          },
+          {
+            "key": "B",
+            "text": "EmployeeBadge 레코드가 생성되고, 대응하는 Employee 레코드가 자동으로 생성된다."
+          },
+          {
+            "key": "C",
+            "text": "EmployeeBadge 레코드가 Employee에 대한 Null 참조로 생성된다."
+          },
+          {
+            "key": "D",
+            "text": "EmployeeBadge의 Primary Key가 다음 사용 가능한 ID로 자동 증가한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-056",
+    "subtopic": "Data Relationships",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You have a Student entity and a Course entity. A student can enroll in many courses, and a course can have many students. To model this, a Registration entity is created. What are the Primary and Foreign Keys of Registration?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Its own auto-number Id as the Primary Key, plus two Foreign Keys: StudentId and CourseId."
+      },
+      {
+        "key": "B",
+        "text": "A Composite Primary Key made of StudentId and CourseId."
+      },
+      {
+        "key": "C",
+        "text": "Only a StudentId, which also acts as the Primary Key."
+      },
+      {
+        "key": "D",
+        "text": "Only a CourseId, which also acts as the Primary Key."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems entity는 생성 시 항상 자동으로 auto-number Id를 Primary Key로 가지며 composite(복합) Primary Key를 지원하지 않는다. 따라서 다대다(many-to-many)를 풀어주는 Registration entity는 자체 Id를 PK로 두고 StudentId, CourseId 두 개의 Foreign Key를 갖는다. 복합 키(B)는 OutSystems에서 불가능하고, 한쪽 키만으로는(C, D) 다대다 관계를 표현할 수 없다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Student entity와 Course entity가 있다. 한 학생은 여러 강좌에 등록할 수 있고, 한 강좌에는 여러 학생이 있을 수 있다. 이를 모델링하기 위해 Registration entity를 만든다. Registration의 Primary Key와 Foreign Key는 무엇인가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "자체 auto-number Id를 Primary Key로 갖고, StudentId와 CourseId 두 개의 Foreign Key를 갖는다."
+          },
+          {
+            "key": "B",
+            "text": "StudentId와 CourseId로 구성된 Composite Key를 사용한다."
+          },
+          {
+            "key": "C",
+            "text": "StudentId만 있으면 되고, 이것이 Primary Key 역할도 한다."
+          },
+          {
+            "key": "D",
+            "text": "CourseId만 있으면 되고, 이것이 Primary Key 역할도 한다."
+          }
+        ]
+      }
+    }
   }
 ]

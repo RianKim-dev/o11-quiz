@@ -2113,5 +2113,577 @@
         ]
       }
     }
+  },
+  {
+    "id": "LFE-037",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Client Action calls a Server Action. Inside the Server Action, an 'All Exceptions' handler catches an error, logs it, and the handler flow ends with a normal End node (no Raise). What does the calling Client Action receive?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The original exception is re-thrown to the client."
+      },
+      {
+        "key": "B",
+        "text": "A successful result, because the exception was handled and the flow ended normally on the server."
+      },
+      {
+        "key": "C",
+        "text": "A generic Communication Exception on the client."
+      },
+      {
+        "key": "D",
+        "text": "The Client Action's own exception handler is triggered."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Server Action의 Exception Handler가 오류를 잡아 로그를 남기고 Raise 없이 End로 정상 종료하면 그 예외는 '처리됨'으로 간주되어, Client에는 오류가 전달되지 않고 정상 성공 응답으로 보입니다(B). 따라서 A(재전파), C(Communication Exception), D(클라이언트 핸들러 실행)는 발생하지 않습니다. 오류를 클라이언트로 전달하려면 핸들러에서 Raise Exception을 다시 호출해야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action이 Server Action을 호출합니다. Server Action 안에서 'All Exceptions' 핸들러가 오류를 잡아 로그를 남기고, 핸들러 flow는 Raise 없이 일반 End 노드로 끝납니다. 호출한 Client Action은 무엇을 받습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "원래 예외가 클라이언트로 다시 던져진다."
+          },
+          {
+            "key": "B",
+            "text": "예외가 서버에서 처리되고 flow가 정상 종료되었으므로 성공 결과를 받는다."
+          },
+          {
+            "key": "C",
+            "text": "클라이언트에서 일반적인 Communication Exception이 발생한다."
+          },
+          {
+            "key": "D",
+            "text": "Client Action 자체의 Exception Handler가 트리거된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-038",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In OutSystems logic, how do a User Exception and a Database Exception differ?",
+    "options": [
+      {
+        "key": "A",
+        "text": "User Exceptions are raised by custom application logic, while Database Exceptions are raised by the platform (e.g., a Unique Index violation)."
+      },
+      {
+        "key": "B",
+        "text": "User Exceptions work only on the Client and Database Exceptions only on the Server."
+      },
+      {
+        "key": "C",
+        "text": "There is no difference; both are only catchable by an 'All Exceptions' handler."
+      },
+      {
+        "key": "D",
+        "text": "Database Exceptions stop execution, while User Exceptions never stop execution."
+      }
+    ],
+    "answer": "A",
+    "explanation": "User Exception은 개발자가 정의한 로직에서 명시적으로 Raise하는 예외이고, Database Exception은 Unique Index 위반처럼 플랫폼이 데이터베이스 수준에서 발생시키는 예외입니다(A). B는 잘못된 구분이고, C는 각각 전용 Exception Handler로도 잡을 수 있어 틀리며, D처럼 User Exception도 처리하지 않으면 실행을 중단시키므로 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 로직에서 User Exception과 Database Exception은 어떻게 다릅니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "User Exception은 사용자 정의 애플리케이션 로직에서 발생하고, Database Exception은 플랫폼이 발생시킨다(예: Unique Index 위반)."
+          },
+          {
+            "key": "B",
+            "text": "User Exception은 Client에서만, Database Exception은 Server에서만 동작한다."
+          },
+          {
+            "key": "C",
+            "text": "차이가 없으며, 둘 다 'All Exceptions' 핸들러로만 잡을 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "Database Exception은 실행을 중단시키지만 User Exception은 결코 중단시키지 않는다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-039",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an OutSystems For Each loop, how do you skip the rest of the current iteration and proceed to the next record?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a dedicated 'Break' node."
+      },
+      {
+        "key": "B",
+        "text": "Use a dedicated 'Continue' node."
+      },
+      {
+        "key": "C",
+        "text": "Connect the flow back to the For Each node, which advances to the next record."
+      },
+      {
+        "key": "D",
+        "text": "Connect the flow to an End node."
+      }
+    ],
+    "answer": "C",
+    "explanation": "OutSystems flow에는 전통적 코딩의 Break나 Continue 노드가 없습니다. 현재 반복의 나머지를 건너뛰고 다음 레코드로 넘어가려면 flow를 다시 For Each 노드로 연결하면 되고, 그러면 For Each가 자동으로 다음 항목으로 진행합니다(C). A·B는 존재하지 않는 노드이고, D의 End 노드는 반복만 끝내는 것이 아니라 Action flow 전체를 종료시키므로 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems의 For Each 루프에서 현재 반복의 나머지를 건너뛰고 다음 레코드로 진행하려면 어떻게 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "전용 'Break' 노드를 사용한다."
+          },
+          {
+            "key": "B",
+            "text": "전용 'Continue' 노드를 사용한다."
+          },
+          {
+            "key": "C",
+            "text": "flow를 다시 For Each 노드로 연결하면 다음 레코드로 진행된다."
+          },
+          {
+            "key": "D",
+            "text": "flow를 End 노드로 연결한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-040",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "When a Switch node in a Client Action flow is reached and none of its condition paths evaluate to True, which path does the flow follow?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The flow stops with a runtime error."
+      },
+      {
+        "key": "B",
+        "text": "The flow follows the 'Otherwise' path."
+      },
+      {
+        "key": "C",
+        "text": "The flow follows the first defined path by default."
+      },
+      {
+        "key": "D",
+        "text": "The browser freezes."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Switch 노드는 위에서부터 각 조건을 평가하며, 어떤 path의 조건도 True가 아니면 반드시 'Otherwise' path로 흐른다. Otherwise는 Switch의 기본 fallback 경로이므로 런타임 오류(A)나 첫 번째 path 자동 선택(C), 브라우저 멈춤(D)은 발생하지 않는다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action flow에서 Switch 노드에 도달했을 때 어떤 조건(path)도 True가 아니면 flow는 어느 path를 따르는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "flow가 런타임 오류로 중단된다."
+          },
+          {
+            "key": "B",
+            "text": "flow는 'Otherwise' path를 따른다."
+          },
+          {
+            "key": "C",
+            "text": "flow는 기본적으로 첫 번째 path를 따른다."
+          },
+          {
+            "key": "D",
+            "text": "브라우저가 멈춘다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-041",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Client Action's flow includes a specific handler for the Communication Exception. If the user's network connection drops during a server call, what happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The browser shows a generic 404 page."
+      },
+      {
+        "key": "B",
+        "text": "The flow enters the Communication Exception handler."
+      },
+      {
+        "key": "C",
+        "text": "The app automatically keeps retrying the request forever."
+      },
+      {
+        "key": "D",
+        "text": "The All Exceptions handler runs instead of the Communication Exception handler."
+      }
+    ],
+    "answer": "B",
+    "explanation": "네트워크 단절로 서버 호출이 실패하면 Communication Exception이 발생하고, 이를 처리하는 전용 handler가 있으면 flow가 그 handler로 진입한다(B). 예외 처리는 더 구체적인 handler가 우선하므로 더 일반적인 All Exceptions(D)가 아니라 Communication Exception handler가 먼저 잡는다. 자동 404 페이지(A)나 무한 재시도(C)는 일어나지 않는다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action flow에 Communication Exception 전용 handler가 있다. 서버 호출 중 사용자의 네트워크 연결이 끊기면 어떻게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "브라우저에 일반적인 404 페이지가 표시된다."
+          },
+          {
+            "key": "B",
+            "text": "flow가 Communication Exception handler로 진입한다."
+          },
+          {
+            "key": "C",
+            "text": "앱이 요청을 무한히 자동 재시도한다."
+          },
+          {
+            "key": "D",
+            "text": "Communication Exception handler 대신 All Exceptions handler가 실행된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-042",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Client Action calls a Server Action that performs a database Create. The Server Action hits a Database Exception (Unique Index violation) and has no Exception Handler of its own. What happens back in the Client Action?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The flow simply continues to the node after the Server Action call."
+      },
+      {
+        "key": "B",
+        "text": "The exception propagates to the Client Action, triggering its All Exceptions handler or the screen/global exception handler."
+      },
+      {
+        "key": "C",
+        "text": "The Server Action automatically retries the operation."
+      },
+      {
+        "key": "D",
+        "text": "The Client Action receives a Null output and no error is raised."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Server Action 내부에 Exception Handler가 없으면 예외는 이를 호출한 Client Action으로 그대로 전파되고, Client Action의 All Exceptions 핸들러(또는 Screen/Global Exception Handler)가 이를 잡습니다. 자동 재시도(C), 조용히 다음 노드로 진행(A), 오류 없이 Null 반환(D)은 일어나지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action이 데이터베이스 Create를 수행하는 Server Action을 호출합니다. 이 Server Action은 자체 Exception Handler가 없는 상태에서 Database Exception(Unique Index 위반)을 만납니다. Client Action에서는 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Server Action 호출 다음 노드로 흐름이 그냥 계속된다."
+          },
+          {
+            "key": "B",
+            "text": "예외가 Client Action으로 전파되어 All Exceptions 핸들러 또는 Screen/Global Exception Handler가 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "Server Action이 자동으로 작업을 재시도한다."
+          },
+          {
+            "key": "D",
+            "text": "Client Action이 오류 없이 Null 출력을 받는다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-043",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a Client Action, several Assigns update Screen (Local) Variables, and then a Raise Exception node fires. What happens to those earlier variable assignments?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They are automatically rolled back."
+      },
+      {
+        "key": "B",
+        "text": "They persist in the browser's memory."
+      },
+      {
+        "key": "C",
+        "text": "They are rolled back only if it is a Database Exception."
+      },
+      {
+        "key": "D",
+        "text": "They are reset to their default values."
+      }
+    ],
+    "answer": "B",
+    "explanation": "클라이언트 측 변수 할당에는 트랜잭션 롤백 개념이 없습니다. Raise Exception이 발생해도 이미 수행된 Screen/Local Variable 할당은 브라우저 메모리에 그대로 남습니다. 롤백은 Server Action 내부의 데이터베이스 트랜잭션에만 적용되며, 클라이언트 변수는 자동으로 되돌려지거나 기본값으로 초기화되지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action에서 여러 Assign이 Screen(Local) Variable을 갱신한 뒤 Raise Exception 노드가 실행됩니다. 앞서 수행된 변수 할당은 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "자동으로 롤백된다."
+          },
+          {
+            "key": "B",
+            "text": "브라우저 메모리에 그대로 유지된다."
+          },
+          {
+            "key": "C",
+            "text": "Database Exception일 때만 롤백된다."
+          },
+          {
+            "key": "D",
+            "text": "기본값으로 초기화된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-044",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer defines a custom User Exception called \"InvalidInput\". A Server Action raises it with a specific message. The calling Screen has an exception handler for All Exceptions. What will ExceptionMessage contain in that handler?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A generic \"An error occurred on the server.\" text."
+      },
+      {
+        "key": "B",
+        "text": "The specific message provided when the InvalidInput exception was raised."
+      },
+      {
+        "key": "C",
+        "text": "The literal text \"User Exception\"."
+      },
+      {
+        "key": "D",
+        "text": "An empty string."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Raise Exception 노드에서 지정한 메시지가 예외와 함께 전파되어, 호출한 Screen의 All Exceptions 핸들러의 ExceptionMessage에 그대로 담깁니다. 일반 서버 오류 문구(A)나 \"User Exception\" 같은 고정 문자열(C), 빈 값(D)이 아니라 개발자가 직접 넣은 메시지가 전달됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 \"InvalidInput\"이라는 커스텀 User Exception을 정의합니다. Server Action에서 특정 메시지와 함께 이 예외를 raise합니다. 이 Action을 호출하는 Screen에는 All Exceptions 핸들러가 있습니다. 그 핸들러의 ExceptionMessage에는 무엇이 담깁니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "\"An error occurred on the server.\" 같은 일반 문구."
+          },
+          {
+            "key": "B",
+            "text": "InvalidInput 예외를 raise할 때 지정한 특정 메시지."
+          },
+          {
+            "key": "C",
+            "text": "\"User Exception\"이라는 고정 문자열."
+          },
+          {
+            "key": "D",
+            "text": "빈 문자열."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-045",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A Switch node has three branches evaluated top to bottom - Branch 1: x > 10, Branch 2: x > 5, Branch 3: Otherwise. If x equals 15, which branch is executed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Branch 1."
+      },
+      {
+        "key": "B",
+        "text": "Branch 2."
+      },
+      {
+        "key": "C",
+        "text": "Both Branch 1 and Branch 2."
+      },
+      {
+        "key": "D",
+        "text": "Branch 3."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Switch 노드는 조건을 위에서 아래로 평가하여 처음으로 True가 되는 분기 하나만 실행합니다. x=15는 x>10이 True이므로 Branch 1이 실행되고, 그 아래 조건들은 평가되지 않습니다. 여러 분기가 동시에 실행되는 일(C)은 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Switch 노드에 위에서 아래로 평가되는 세 개의 분기가 있습니다 - Branch 1: x > 10, Branch 2: x > 5, Branch 3: Otherwise. x가 15이면 어느 분기가 실행됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Branch 1."
+          },
+          {
+            "key": "B",
+            "text": "Branch 2."
+          },
+          {
+            "key": "C",
+            "text": "Branch 1과 Branch 2 둘 다."
+          },
+          {
+            "key": "D",
+            "text": "Branch 3."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-046",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Client Action, a developer needs to merge two Record Lists of the same type into a single list. Which tool is the most appropriate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A \"For Each\" loop that calls ListAppend for every item."
+      },
+      {
+        "key": "B",
+        "text": "The ListAppendAll action."
+      },
+      {
+        "key": "C",
+        "text": "An \"Assign\" node that sets List1 = List2."
+      },
+      {
+        "key": "D",
+        "text": "A SQL query using UNION."
+      }
+    ],
+    "answer": "B",
+    "explanation": "ListAppendAll은 같은 타입의 한 리스트 전체를 다른 리스트 뒤에 한 번에 붙여주는 전용 액션이라 두 리스트 병합에 가장 적합합니다. A는 For Each와 ListAppend로도 가능하지만 불필요하게 복잡하고 비효율적이며, C의 Assign(List1 = List2)은 병합이 아니라 첫 리스트를 두 번째 리스트 참조로 덮어써 기존 항목이 사라집니다. D의 SQL UNION은 데이터베이스 조회용이지 이미 메모리에 있는 Record List를 합치는 도구가 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action에서 개발자가 같은 타입의 두 Record List를 하나로 병합하려 합니다. 가장 적합한 도구는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "각 항목마다 ListAppend를 호출하는 \"For Each\" 루프."
+          },
+          {
+            "key": "B",
+            "text": "ListAppendAll 액션."
+          },
+          {
+            "key": "C",
+            "text": "List1 = List2로 설정하는 \"Assign\" 노드."
+          },
+          {
+            "key": "D",
+            "text": "UNION을 사용하는 SQL 쿼리."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-047",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Inside a For Each loop, an If node checks whether an Order is already cancelled. When the condition is True, the flow should skip the remaining logic of the current iteration and move on to the next item. How is this modeled in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a Break node after the If."
+      },
+      {
+        "key": "B",
+        "text": "Connect the True branch of the If node back to the For Each node."
+      },
+      {
+        "key": "C",
+        "text": "Connect the True branch of the If node to a Continue node."
+      },
+      {
+        "key": "D",
+        "text": "Place an End node inside the loop."
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems에는 Break나 Continue 같은 노드가 없습니다. 현재 반복의 남은 로직을 건너뛰고 다음 항목으로 넘어가려면 If의 True 분기를 다시 For Each 노드로 연결하면 됩니다. End 노드(D)는 전체 Action 흐름을 종료하므로 루프 안에 두면 반복 자체가 멈춰 버립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "For Each 루프 안에서 If 노드가 Order가 이미 취소되었는지 확인합니다. 조건이 True이면 현재 반복의 남은 로직을 건너뛰고 다음 항목으로 넘어가야 합니다. OutSystems에서 이를 어떻게 모델링합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "If 뒤에 Break 노드를 추가한다."
+          },
+          {
+            "key": "B",
+            "text": "If 노드의 True 분기를 다시 For Each 노드로 연결한다."
+          },
+          {
+            "key": "C",
+            "text": "If 노드의 True 분기를 Continue 노드로 연결한다."
+          },
+          {
+            "key": "D",
+            "text": "루프 안에 End 노드를 둔다."
+          }
+        ]
+      }
+    }
   }
 ]

@@ -1293,5 +1293,265 @@
         ]
       }
     }
+  },
+  {
+    "id": "CSA-024",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You want reusable logic that computes a tax amount and returns it, with no database access, so it can be called inside Expressions. What is the correct approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a Server Action and set its 'Function' property to Yes."
+      },
+      {
+        "key": "B",
+        "text": "It is impossible; Functions are not supported in Reactive Web."
+      },
+      {
+        "key": "C",
+        "text": "It only works if the logic is placed inside a Client Action."
+      },
+      {
+        "key": "D",
+        "text": "Functions can be used in Expressions but cannot contain a logic flow."
+      }
+    ],
+    "answer": "A",
+    "explanation": "계산 결과를 반환하고 Expression 안에서 재사용하려면 Server Action을 만들고 'Function' 속성을 Yes로 설정하면 됩니다(A). 그러면 Expression에서 함수처럼 호출할 수 있습니다. B는 사실이 아니고, C처럼 반드시 Client Action이어야 하는 것도 아니며, D는 Function도 내부에 logic flow를 가질 수 있으므로 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "세금 금액을 계산해 반환하는, 데이터베이스 접근이 필요 없는 재사용 로직을 만들어 Expression 안에서 호출하려고 합니다. 올바른 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Server Action을 만들고 'Function' 속성을 Yes로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "불가능하다. Reactive Web에서는 Function이 지원되지 않는다."
+          },
+          {
+            "key": "C",
+            "text": "로직을 Client Action 안에 두는 경우에만 가능하다."
+          },
+          {
+            "key": "D",
+            "text": "Function은 Expression에서 사용할 수 있지만 logic flow를 포함할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-025",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer wants to perform a sensitive pricing calculation that users must not be able to tamper with. Is a Client Action the right place for this logic?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, Client Actions are fully secure."
+      },
+      {
+        "key": "B",
+        "text": "No — Client Actions run in the browser, so their logic and variables can be inspected or manipulated by the user."
+      },
+      {
+        "key": "C",
+        "text": "Yes, as long as the Client Action is not Public."
+      },
+      {
+        "key": "D",
+        "text": "Yes, but only if it is called from a Button."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Client Action은 사용자의 브라우저(클라이언트)에서 실행되므로 개발자 도구 등으로 logic과 variable 값을 확인하거나 조작할 수 있어 보안이 필요한 계산에 부적합하다(B). 민감한 가격 계산은 서버에서 실행되는 Server Action에 두어야 안전하다. Public 여부(C)나 호출 위치(D)는 보안과 아무 상관이 없다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "사용자가 조작할 수 없어야 하는 민감한 가격 계산 로직을 구현하려 한다. 이 로직을 Client Action에 두는 것이 맞는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "그렇다, Client Action은 완전히 안전하다."
+          },
+          {
+            "key": "B",
+            "text": "아니다 — Client Action은 브라우저에서 실행되므로 그 logic과 variable을 사용자가 확인하거나 조작할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "그렇다, Client Action이 Public이 아니기만 하면 된다."
+          },
+          {
+            "key": "D",
+            "text": "그렇다, 단 Button에서 호출될 때만."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-026",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Can a Server Action directly call a Client Action?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, as long as both are in the same module."
+      },
+      {
+        "key": "B",
+        "text": "No — server-side code cannot trigger code that runs in the user's browser."
+      },
+      {
+        "key": "C",
+        "text": "Yes, but only during the On Render event."
+      },
+      {
+        "key": "D",
+        "text": "Yes, but only if the Client Action is Public."
+      }
+    ],
+    "answer": "B",
+    "explanation": "서버는 특정 사용자의 브라우저 세션에 접근할 수 없으므로 Server Action이 Client Action을 호출하는 것은 불가능하다(B). 호출 방향은 항상 Client에서 Server로만 가능하다. 같은 모듈 여부(A)나 Public 여부(D), 특정 이벤트(C)와 관계없이 서버→클라이언트 호출은 금지된다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Server Action이 Client Action을 직접 호출할 수 있는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "그렇다, 둘이 같은 모듈에 있기만 하면 된다."
+          },
+          {
+            "key": "B",
+            "text": "아니다 — 서버 측 코드는 사용자의 브라우저에서 실행되는 코드를 트리거할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "그렇다, 단 On Render 이벤트 동안에만."
+          },
+          {
+            "key": "D",
+            "text": "그렇다, 단 Client Action이 Public일 때만."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-027",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a Reactive Web App, a Server Action has its Function property set to Yes. Which of the following statements is true?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It can be used directly inside an Expression on a Screen."
+      },
+      {
+        "key": "B",
+        "text": "It is allowed to have multiple Output Parameters."
+      },
+      {
+        "key": "C",
+        "text": "It can be called from a Client Action."
+      },
+      {
+        "key": "D",
+        "text": "It can contain a Refresh Data node."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Reactive에서 Expression은 클라이언트에서 동기적으로 실행되므로, 서버 왕복이 필요한 Server Action은 Function=Yes여도 Screen Expression에서 호출할 수 없습니다(A 오답). Function으로 지정하려면 Output Parameter가 정확히 1개여야 하므로 다중 출력은 불가능하고(B 오답), Refresh Data는 클라이언트/화면 전용 노드라 Server Action에는 넣을 수 없습니다(D 오답). Server Action은 Function 여부와 상관없이 Client Action에서 호출할 수 있으므로 C가 참입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web App에서 어떤 Server Action의 Function 속성이 Yes로 설정되어 있습니다. 다음 중 참인 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Screen의 Expression 안에서 직접 사용할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "여러 개의 Output Parameter를 가질 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Client Action에서 호출할 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "Refresh Data 노드를 포함할 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-028",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Client Action calls a Server Action that takes an Entity Record as an input parameter. At runtime, how is that record transmitted to the server?",
+    "options": [
+      {
+        "key": "A",
+        "text": "As a binary representation of the record."
+      },
+      {
+        "key": "B",
+        "text": "As a JSON string representing the record."
+      },
+      {
+        "key": "C",
+        "text": "As only the record's Id."
+      },
+      {
+        "key": "D",
+        "text": "As a pointer to the server's memory address."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Reactive Web App에서 클라이언트와 서버는 HTTP 위에서 JSON으로 데이터를 주고받습니다. 따라서 Record 입력 파라미터는 JSON 문자열로 직렬화되어 서버로 전송됩니다. 바이너리 전송(A), Id만 전송(C), 메모리 포인터 전달(D)은 Reactive의 통신 방식이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action이 Entity Record를 입력 파라미터로 받는 Server Action을 호출합니다. 런타임에 이 record는 어떤 형태로 서버에 전송됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "record의 바이너리 표현으로 전송된다."
+          },
+          {
+            "key": "B",
+            "text": "record를 나타내는 JSON 문자열로 전송된다."
+          },
+          {
+            "key": "C",
+            "text": "record의 Id만 전송된다."
+          },
+          {
+            "key": "D",
+            "text": "서버 메모리 주소를 가리키는 포인터로 전송된다."
+          }
+        ]
+      }
+    }
   }
 ]

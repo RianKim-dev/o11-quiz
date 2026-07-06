@@ -744,5 +744,161 @@
         ]
       }
     }
+  },
+  {
+    "id": "MOD-013",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "The module 'OrderManagement' references and uses a Public Entity that is exposed by the module 'CustomerCore'. In this dependency relationship, 'OrderManagement' is the...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Producer"
+      },
+      {
+        "key": "B",
+        "text": "Consumer"
+      },
+      {
+        "key": "C",
+        "text": "Root Module"
+      },
+      {
+        "key": "D",
+        "text": "Service Module"
+      }
+    ],
+    "answer": "B",
+    "explanation": "다른 모듈이 공개(Public)한 기능(여기서는 Entity)을 가져다 쓰는 모듈이 Consumer입니다. 반대로 기능을 노출하는 CustomerCore가 Producer입니다. \"Root Module\"이나 \"Service Module\"은 이 Producer/Consumer 관계를 설명하는 용어가 아니므로 오답입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'OrderManagement' 모듈이 'CustomerCore' 모듈이 노출한 Public Entity를 참조하여 사용합니다. 이 의존 관계에서 'OrderManagement'는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Producer"
+          },
+          {
+            "key": "B",
+            "text": "Consumer"
+          },
+          {
+            "key": "C",
+            "text": "Root Module"
+          },
+          {
+            "key": "D",
+            "text": "Service Module"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "MOD-014",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "Module A consumes a Service Action from Module B. Module B's internal logic is updated and republished, with no change to the Service Action's parameters. Must Module A be republished to use the updated logic?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, all consumers must be republished when a dependency changes."
+      },
+      {
+        "key": "B",
+        "text": "No; Service Actions are loosely coupled, so the change takes effect immediately."
+      },
+      {
+        "key": "C",
+        "text": "Only if the internal database entities of Module B changed."
+      },
+      {
+        "key": "D",
+        "text": "Service Actions cannot be consumed across different modules."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Service Action은 느슨하게 결합(weak dependency)되어 있어, Producer(Module B)의 내부 로직이 바뀌어도 인터페이스(파라미터)가 그대로라면 Consumer(Module A)를 재발행하지 않고 변경이 즉시 반영됩니다(B). 이것이 강한 결합(strong dependency)이라 refresh/republish가 필요한 일반 Server Action과의 핵심 차이입니다. 모든 의존성이 재발행을 요구한다는 A는 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Module A가 Module B의 Service Action을 소비합니다. Module B의 내부 로직이 수정되어 재발행되었고 Service Action의 파라미터는 변경되지 않았습니다. Module A가 변경된 로직을 사용하려면 재발행해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예, 의존성이 바뀌면 모든 소비자를 재발행해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "아니오; Service Action은 느슨하게 결합되어 변경이 즉시 반영된다."
+          },
+          {
+            "key": "C",
+            "text": "Module B의 내부 데이터베이스 Entity가 바뀐 경우에만."
+          },
+          {
+            "key": "D",
+            "text": "Service Action은 다른 모듈에서 소비할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "MOD-015",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Module A exposes a Public Entity named Product to Module B. Module B must be able to read the records through Aggregates but must NOT be able to Create or Update them using the entity's generated actions. How should the Entity in Module A be configured?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Public = Yes; Expose Process Events = No."
+      },
+      {
+        "key": "B",
+        "text": "Public = Yes; Expose Read Only = Yes."
+      },
+      {
+        "key": "C",
+        "text": "Public = Yes; Only Read = True."
+      },
+      {
+        "key": "D",
+        "text": "It is not possible; Public entities always allow full CRUD to consumers."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Entity를 Public = Yes로 설정하면 다른 모듈에서 참조할 수 있고, 여기에 'Expose Read Only = Yes'를 추가로 켜면 소비(consumer) 모듈은 Aggregate로 데이터를 읽을 수만 있고 자동 생성되는 CreateOrUpdate, Delete 같은 Entity Action은 사용할 수 없습니다. 따라서 정답은 B입니다. A의 'Expose Process Events'와 C의 'Only Read'는 OutSystems에 존재하지 않는 속성명이라 오답이고, D는 Read Only 옵션으로 쓰기를 막을 수 있으므로 잘못된 전제입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Module A가 Product라는 Public Entity를 Module B에 노출합니다. Module B는 Aggregate로 레코드를 읽을 수는 있어야 하지만, 해당 Entity의 자동 생성 Action을 사용해 Create나 Update는 할 수 없어야 합니다. Module A의 Entity는 어떻게 구성해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Public = Yes; Expose Process Events = No."
+          },
+          {
+            "key": "B",
+            "text": "Public = Yes; Expose Read Only = Yes."
+          },
+          {
+            "key": "C",
+            "text": "Public = Yes; Only Read = True."
+          },
+          {
+            "key": "D",
+            "text": "불가능합니다; Public Entity는 항상 consumer에게 전체 CRUD를 허용합니다."
+          }
+        ]
+      }
+    }
   }
 ]

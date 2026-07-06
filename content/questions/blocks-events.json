@@ -1561,5 +1561,473 @@
         ]
       }
     }
+  },
+  {
+    "id": "BE-029",
+    "subtopic": "Blocks and Events",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Block with an input parameter CustomerId is placed inside a List. When the screen first loads a List of 10 rows, how many times does the Block's On Parameters Changed event run in total?",
+    "options": [
+      {
+        "key": "A",
+        "text": "10 times — once for each Block instance during initial rendering."
+      },
+      {
+        "key": "B",
+        "text": "0 times — On Parameters Changed never runs on the first load."
+      },
+      {
+        "key": "C",
+        "text": "1 time — only for the first row."
+      },
+      {
+        "key": "D",
+        "text": "11 times — once per row plus once for the List itself."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Reactive Web에서 Block의 On Parameters Changed 이벤트는 input parameter가 바뀔 때뿐 아니라 최초 로드 시에도 On Initialize 직후에 한 번 실행된다. List 안의 Block이 각 행마다 별도 인스턴스로 렌더링되므로 10개 행이면 인스턴스마다 이벤트가 한 번씩 발생해 총 10번 실행된다(A). 따라서 '최초 로드 시 실행되지 않는다'는 key(B)는 틀리다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "input parameter CustomerId를 가진 Block이 List 안에 배치되어 있다. 화면이 10개 행의 List를 처음 로드할 때 Block의 On Parameters Changed 이벤트는 총 몇 번 실행되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "10번 — 최초 렌더링 시 각 Block 인스턴스마다 한 번씩."
+          },
+          {
+            "key": "B",
+            "text": "0번 — On Parameters Changed는 최초 로드 시 절대 실행되지 않는다."
+          },
+          {
+            "key": "C",
+            "text": "1번 — 첫 번째 행에 대해서만."
+          },
+          {
+            "key": "D",
+            "text": "11번 — 각 행마다 한 번씩에 List 자체에 대해 한 번 추가."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-030",
+    "subtopic": "Blocks and Events",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "To pass data from a Child Block back up to its Parent Screen, which mechanism should be used?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Input Parameters"
+      },
+      {
+        "key": "B",
+        "text": "Client Variables"
+      },
+      {
+        "key": "C",
+        "text": "Events"
+      },
+      {
+        "key": "D",
+        "text": "Global Actions"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Block에서 Parent Screen으로 데이터를 올려보낼 때는 Events를 사용합니다. Block이 Event를 정의하고 트리거하면 부모가 그 Event Handler에서 Output Parameter를 받아 처리합니다. Input Parameters는 반대 방향(부모에서 자식으로 내려보내는) 통로이고, Client Variables는 화면 간 공유 값이며, Global Actions 같은 것은 존재하지 않는 개념이라 모두 정답이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Child Block에서 Parent Screen으로 데이터를 되돌려 전달할 때 사용해야 하는 메커니즘은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Input Parameters"
+          },
+          {
+            "key": "B",
+            "text": "Client Variables"
+          },
+          {
+            "key": "C",
+            "text": "Events"
+          },
+          {
+            "key": "D",
+            "text": "Global Actions"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-031",
+    "subtopic": "Blocks and Events",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Block has a Local Variable named InternalCounter. The Parent Screen has a button that updates a Screen Variable which is bound to one of the Block's Input Parameters. When that Input Parameter changes, what happens to InternalCounter?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is reset to its default value"
+      },
+      {
+        "key": "B",
+        "text": "It keeps its current value"
+      },
+      {
+        "key": "C",
+        "text": "It is deleted and must be re-declared"
+      },
+      {
+        "key": "D",
+        "text": "It is incremented automatically"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Block의 Input Parameter가 바뀌어도 Block 내부의 Local Variable은 초기화되지 않고 현재 값을 그대로 유지합니다. Input 변경은 값 전달일 뿐 Block을 새로 생성하는 것이 아니기 때문입니다. 따라서 기본값으로 리셋되거나(A) 삭제되거나(C) 자동 증가(D)한다는 설명은 모두 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Block에 InternalCounter라는 Local Variable이 있습니다. Parent Screen의 버튼이 Block의 Input Parameter에 연결된 Screen Variable을 업데이트합니다. 그 Input Parameter가 변경될 때 InternalCounter는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "기본값으로 초기화된다"
+          },
+          {
+            "key": "B",
+            "text": "현재 값을 그대로 유지한다"
+          },
+          {
+            "key": "C",
+            "text": "삭제되어 다시 선언해야 한다"
+          },
+          {
+            "key": "D",
+            "text": "자동으로 증가한다"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-032",
+    "subtopic": "Blocks and Events",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A developer wants a navigation menu that looks and behaves the same on every screen of the app. Which is the best UI component to build it with?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A Screen Template"
+      },
+      {
+        "key": "B",
+        "text": "A Block"
+      },
+      {
+        "key": "C",
+        "text": "A Popup"
+      },
+      {
+        "key": "D",
+        "text": "A Placeholder"
+      }
+    ],
+    "answer": "B",
+    "explanation": "모든 화면에서 동일하게 재사용되는 메뉴 같은 UI 조각은 Block으로 만드는 것이 표준입니다. Block은 한 번 만들어 여러 화면에 끼워 넣는 재사용 UI 컴포넌트이기 때문입니다. Screen Template는 새 화면을 만들 때 참고하는 시작 틀일 뿐 재사용 컴포넌트가 아니고, Popup은 팝업 표시용, Placeholder는 부모가 자식 콘텐츠를 꽂도록 비워 둔 자리일 뿐이라 적합하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 앱의 모든 화면에서 동일하게 보이고 동작하는 내비게이션 메뉴를 만들려고 합니다. 이를 위한 가장 적합한 UI 컴포넌트는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Screen Template"
+          },
+          {
+            "key": "B",
+            "text": "Block"
+          },
+          {
+            "key": "C",
+            "text": "Popup"
+          },
+          {
+            "key": "D",
+            "text": "Placeholder"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-033",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "When an Event is triggered by a Block, who is able to handle it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Any Screen anywhere in the application"
+      },
+      {
+        "key": "B",
+        "text": "Only the immediate parent (Screen or Block) that directly contains the Block"
+      },
+      {
+        "key": "C",
+        "text": "Only the Block itself"
+      },
+      {
+        "key": "D",
+        "text": "Only Server Actions"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Block이 발생시킨 Event는 그 Block을 직접 담고 있는 바로 위 부모(Screen 또는 Block)만 Handler로 받아 처리할 수 있습니다. 앱 어디서나 아무 화면이 받을 수 있는 것이 아니며(A), Block 자신이 처리하는 것도 아니고(C), Server Action이 직접 Event를 받는 구조도 아니라서(D) 모두 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Block이 Event를 트리거하면 누가 이를 처리할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "애플리케이션 내 어떤 화면이든 처리할 수 있다"
+          },
+          {
+            "key": "B",
+            "text": "그 Block을 직접 담고 있는 바로 위 부모(Screen 또는 Block)만 처리할 수 있다"
+          },
+          {
+            "key": "C",
+            "text": "Block 자신만 처리할 수 있다"
+          },
+          {
+            "key": "D",
+            "text": "Server Action만 처리할 수 있다"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-034",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer places a Block inside a List. The Block has an Input Parameter Price, and the List is bound to a list of products. If a Client Action updates the price of one product in the source list, what happens to the Block instance in that row?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing; a Block never reacts to changes in its parent's data."
+      },
+      {
+        "key": "B",
+        "text": "That specific Block instance's \"On Parameters Changed\" event is triggered."
+      },
+      {
+        "key": "C",
+        "text": "The entire List re-renders, destroying and recreating every Block instance."
+      },
+      {
+        "key": "D",
+        "text": "The Block must be refreshed manually with a \"Refresh Data\" node."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Block은 Input Parameter 값이 바뀌면 해당 인스턴스의 \"On Parameters Changed\" 이벤트가 자동으로 실행됩니다. 소스 리스트에서 특정 상품의 Price가 변경되면 그 행의 Block 인스턴스만 새 값을 전달받아 이 이벤트가 발생합니다. A는 Block이 부모 데이터 변화에 반응하지 않는다는 잘못된 전제이고, C처럼 전체 List가 파괴/재생성되지 않으며, D의 Refresh Data는 데이터 조회용 노드로 Block 입력값 반영과 무관합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 List 안에 Block을 배치했습니다. Block에는 Input Parameter Price가 있고 List는 상품 리스트에 바인딩됩니다. Client Action이 소스 리스트에서 한 상품의 가격을 변경하면 그 행의 Block 인스턴스는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무 일도 없다; Block은 부모의 데이터 변화에 절대 반응하지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "그 특정 Block 인스턴스의 \"On Parameters Changed\" 이벤트가 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "List 전체가 다시 렌더링되어 모든 Block 인스턴스가 파괴 후 재생성된다."
+          },
+          {
+            "key": "D",
+            "text": "\"Refresh Data\" 노드로 Block을 수동으로 새로고침해야 한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-035",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Block defines an Event named UserSelected with an Input Parameter UserId. A Screen consumes this Block and handles the event. How does the Screen's handler access the value of UserId?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Through a Screen Variable that happens to share the same name."
+      },
+      {
+        "key": "B",
+        "text": "Through the Event's Input Parameter, which is available in the handler's scope."
+      },
+      {
+        "key": "C",
+        "text": "By calling a built-in \"GetEventData\" client action."
+      },
+      {
+        "key": "D",
+        "text": "It is impossible; events cannot pass data back to their parent."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Block이 정의한 Event의 Input Parameter는 부모 Screen의 이벤트 핸들러 안에서 그대로 사용할 수 있는 값으로 노출됩니다. 따라서 핸들러 scope에서 UserId를 직접 참조하면 됩니다. A처럼 같은 이름의 Screen Variable을 통하는 것이 아니고, C의 GetEventData 같은 액션은 존재하지 않으며, D는 이벤트가 데이터를 부모로 전달하지 못한다는 잘못된 주장입니다. 이벤트는 Block에서 부모로 데이터를 넘기는 표준 방법입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Block이 Input Parameter UserId를 가진 UserSelected라는 Event를 정의합니다. 한 Screen이 이 Block을 사용하며 해당 이벤트를 처리합니다. Screen의 핸들러는 UserId 값에 어떻게 접근합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "우연히 같은 이름을 가진 Screen Variable을 통해 접근한다."
+          },
+          {
+            "key": "B",
+            "text": "핸들러 scope에서 사용 가능한 Event의 Input Parameter를 통해 접근한다."
+          },
+          {
+            "key": "C",
+            "text": "내장 \"GetEventData\" client action을 호출하여 접근한다."
+          },
+          {
+            "key": "D",
+            "text": "불가능하다; 이벤트는 데이터를 부모로 전달할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-036",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Block is placed twice on the same Screen. If the first instance changes its own internal Local Variable, what happens to the second instance?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Its Local Variable is also updated to keep the two instances consistent."
+      },
+      {
+        "key": "B",
+        "text": "Nothing; each Block instance is independent and has its own state."
+      },
+      {
+        "key": "C",
+        "text": "The Screen reloads both Block instances."
+      },
+      {
+        "key": "D",
+        "text": "An exception is thrown because of a state conflict."
+      }
+    ],
+    "answer": "B",
+    "explanation": "같은 Block을 두 번 배치해도 각 instance는 독립적인 자체 state(Local Variable, Input 등)를 별도의 메모리로 가집니다. 따라서 첫 번째 instance의 Local Variable을 바꿔도 두 번째 instance는 아무 영향이 없습니다(B). Block이 재사용 컴포넌트라 해도 인스턴스별 상태는 분리되어 있어 자동 동기화나 상태 충돌은 발생하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "같은 Screen에 동일한 Block이 두 번 배치되어 있습니다. 첫 번째 instance가 자신의 내부 Local Variable을 변경하면 두 번째 instance는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "두 instance의 일관성 유지를 위해 두 번째의 Local Variable도 함께 업데이트된다."
+          },
+          {
+            "key": "B",
+            "text": "아무 일도 없다; 각 Block instance는 독립적이며 자체 상태를 가진다."
+          },
+          {
+            "key": "C",
+            "text": "Screen이 두 Block instance를 모두 다시 로드한다."
+          },
+          {
+            "key": "D",
+            "text": "상태 충돌로 인해 예외가 발생한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "BE-037",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer wants a Block to trigger an action that runs on its Parent Screen. What is the correct mechanism?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Block defines an Event, the Block triggers the Event, and the Screen handles it with a Client Action."
+      },
+      {
+        "key": "B",
+        "text": "The Screen defines an Event and the Block handles it."
+      },
+      {
+        "key": "C",
+        "text": "The Block calls one of the Screen's Client Actions directly."
+      },
+      {
+        "key": "D",
+        "text": "The Parent and Block share a Client Variable to trigger the logic."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Block이 부모 Screen의 로직을 실행하려면 Event를 사용합니다. Block이 Event를 정의하고 내부 로직에서 이를 트리거하면, Block을 배치한 Screen이 그 Event에 Handler(Client Action)를 연결해 반응합니다(A). Block은 캡슐화되어 부모의 Client Action을 직접 호출할 수 없으므로(C 오답), 아래에서 위로의 통신은 반드시 Event를 통해 이뤄집니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 Block에서 Parent Screen의 액션을 실행시키고자 합니다. 올바른 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Block이 Event를 정의하고, Block이 그 Event를 트리거하며, Screen이 Client Action으로 처리한다."
+          },
+          {
+            "key": "B",
+            "text": "Screen이 Event를 정의하고 Block이 그것을 처리한다."
+          },
+          {
+            "key": "C",
+            "text": "Block이 Screen의 Client Action을 직접 호출한다."
+          },
+          {
+            "key": "D",
+            "text": "Parent와 Block이 Client Variable을 공유하여 로직을 트리거한다."
+          }
+        ]
+      }
+    }
   }
 ]

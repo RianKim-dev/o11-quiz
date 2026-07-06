@@ -6881,5 +6881,629 @@
         ]
       }
     }
+  },
+  {
+    "id": "AGG-127",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Aggregate fetches records from the Product entity. The developer adds the filter Product.IsActive = True. How is this filter executed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is translated into a WHERE clause in the SQL query sent to the database."
+      },
+      {
+        "key": "B",
+        "text": "All products are fetched first and then filtered in the browser's memory."
+      },
+      {
+        "key": "C",
+        "text": "The filter only takes effect if a Refresh Data node is added to the flow."
+      },
+      {
+        "key": "D",
+        "text": "The platform creates a permanent database View for the filter."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate에 추가한 필터(filter)는 플랫폼이 데이터베이스로 보내는 SQL 쿼리의 WHERE 절로 변환됩니다. 덕분에 조건에 맞는 행만 DB에서 걸러져 넘어와 효율적입니다. 모든 데이터를 가져온 뒤 브라우저 메모리에서 거르는 방식이 아니며(B 오답), 필터 자체는 Refresh Data 없이도 쿼리에 적용됩니다(C 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 Product 엔티티에서 레코드를 가져옵니다. 개발자가 Product.IsActive = True 필터를 추가했습니다. 이 필터는 어떻게 실행됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스로 전송되는 SQL 쿼리의 WHERE 절로 변환된다."
+          },
+          {
+            "key": "B",
+            "text": "모든 product를 먼저 가져온 뒤 브라우저 메모리에서 걸러진다."
+          },
+          {
+            "key": "C",
+            "text": "플로우에 Refresh Data 노드를 추가해야만 필터가 적용된다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 필터를 위한 영구적인 데이터베이스 View를 생성한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-128",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate, a developer joins Customer and Order. Some Customers have not placed any Orders yet, but the list must still show every Customer. Which Join type should be used?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only With (Inner Join)"
+      },
+      {
+        "key": "B",
+        "text": "With or Without, treated as a Left Anti Join"
+      },
+      {
+        "key": "C",
+        "text": "With or Without (Left Outer Join)"
+      },
+      {
+        "key": "D",
+        "text": "Full Outer Join"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate에서 'With or Without' 조인은 Left Outer Join으로 동작하여, 왼쪽 엔티티(Customer)의 모든 행을 유지하고 매칭되는 Order가 없으면 Order 컬럼을 Null로 채웁니다. 반면 'Only With'는 Inner Join이라 Order가 없는 Customer는 결과에서 빠집니다(A 오답). Aggregate는 Full Outer Join을 지원하지 않으며(D 오답), 'Left Anti Join'은 존재하지 않는 잘못된 명칭입니다(B 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate에서 개발자가 Customer와 Order를 조인합니다. 일부 Customer는 아직 Order가 하나도 없지만, 목록에는 모든 Customer가 반드시 표시되어야 합니다. 어떤 Join 타입을 사용해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Only With (Inner Join)"
+          },
+          {
+            "key": "B",
+            "text": "With or Without, Left Anti Join으로 처리"
+          },
+          {
+            "key": "C",
+            "text": "With or Without (Left Outer Join)"
+          },
+          {
+            "key": "D",
+            "text": "Full Outer Join"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-129",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "Which of the following operations is NOT possible inside a standard OutSystems Aggregate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Calculating the average (Avg) of a decimal attribute."
+      },
+      {
+        "key": "B",
+        "text": "Grouping records by a Text attribute."
+      },
+      {
+        "key": "C",
+        "text": "Performing a UNION of the rows of two different Entities into one result set."
+      },
+      {
+        "key": "D",
+        "text": "Filtering on a calculated attribute defined within the same Aggregate."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Aggregate는 Join, Filter, Sort, Group By, 집계 함수(Avg/Sum/Count 등), 계산 속성 등을 지원하지만 두 엔티티의 행을 세로로 합치는 UNION은 지원하지 않습니다. UNION이 필요하면 Advanced Query(SQL 도구)를 사용해야 합니다. 나머지 A(평균 계산), B(Text로 Group By), D(같은 Aggregate 내 계산 속성으로 필터)는 모두 Aggregate에서 정상적으로 가능합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "다음 중 표준 OutSystems Aggregate 내부에서 수행할 수 없는 작업은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "decimal 속성의 평균(Avg) 계산."
+          },
+          {
+            "key": "B",
+            "text": "Text 속성으로 레코드 Group By."
+          },
+          {
+            "key": "C",
+            "text": "서로 다른 두 Entity의 행을 하나의 결과 집합으로 UNION 하기."
+          },
+          {
+            "key": "D",
+            "text": "같은 Aggregate 안에서 정의한 계산 속성으로 필터링."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-130",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate GetEmployees populates a Table. The developer wants users to sort the Table by Employee.Name. What is the most performant way to implement this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fetch the full list, then reorder it in memory with a ListSort action after each click."
+      },
+      {
+        "key": "B",
+        "text": "Configure a Dynamic Sort on the Aggregate and Refresh Data when the column header is clicked."
+      },
+      {
+        "key": "C",
+        "text": "Build four separate Aggregates, one per possible sort direction, and swap between them."
+      },
+      {
+        "key": "D",
+        "text": "Use a JavaScript node to reorder the rendered DOM table rows."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate의 Dynamic Sort를 사용하면 정렬 기준을 변수로 지정하고, 사용자가 컬럼 헤더를 클릭할 때 Refresh Data로 재조회하여 정렬을 데이터베이스(SQL ORDER BY)에서 처리합니다. 이는 DB가 인덱스를 활용해 정렬하므로 가장 효율적입니다. 메모리에서 ListSort로 정렬(A)하거나 DOM을 JavaScript로 조작(D)하면 이미 가져온 데이터에만 적용되어 비효율적이고, 정렬 순서마다 Aggregate를 따로 만드는 것(C)은 불필요한 중복입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate GetEmployees가 Table을 채웁니다. 개발자는 사용자가 Table을 Employee.Name 기준으로 정렬할 수 있게 하려고 합니다. 성능상 가장 좋은 구현 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "전체 목록을 가져온 뒤, 클릭할 때마다 ListSort 액션으로 메모리에서 재정렬한다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate에 Dynamic Sort를 구성하고, 컬럼 헤더 클릭 시 Refresh Data를 실행한다."
+          },
+          {
+            "key": "C",
+            "text": "정렬 방향마다 하나씩 총 네 개의 Aggregate를 만들어 전환한다."
+          },
+          {
+            "key": "D",
+            "text": "JavaScript 노드로 렌더링된 DOM 테이블 행을 재정렬한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-131",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer needs the total number of records matching an Aggregate GetTickets' filters, independent of how many rows were actually fetched. Which property gives this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "GetTickets.List.Length"
+      },
+      {
+        "key": "B",
+        "text": "GetTickets.Count"
+      },
+      {
+        "key": "C",
+        "text": "GetTickets.List.Current.Id"
+      },
+      {
+        "key": "D",
+        "text": "An Aggregate cannot return a total count; a separate SQL query is required."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate의 .Count 속성은 필터 조건에 맞는 전체 레코드 수를 SQL의 COUNT로 계산해 돌려주며, Max Records로 가져온 행 수와 무관하게 총 개수를 알려줍니다. 반면 .List.Length는 실제로 fetch된(Max Records로 제한된) 목록의 길이만 세므로 전체 개수와 다를 수 있습니다(A 오답). Aggregate만으로 총 개수를 얻을 수 있으므로 별도의 SQL이 반드시 필요한 것은 아닙니다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 Aggregate GetTickets의 필터 조건에 맞는 전체 레코드 수를, 실제로 가져온 행 수와 무관하게 알아내려 합니다. 어떤 속성을 사용해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "GetTickets.List.Length"
+          },
+          {
+            "key": "B",
+            "text": "GetTickets.Count"
+          },
+          {
+            "key": "C",
+            "text": "GetTickets.List.Current.Id"
+          },
+          {
+            "key": "D",
+            "text": "Aggregate로는 총 개수를 얻을 수 없고 별도의 SQL 쿼리가 필요하다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-132",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate that fetches Products, you set the 'Max Records' property to 1. What does GetProducts.List.Current represent?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The single record returned by the query."
+      },
+      {
+        "key": "B",
+        "text": "The first record of the entire Product table, ignoring any filters or sorting."
+      },
+      {
+        "key": "C",
+        "text": "An empty record, because a list needs at least 2 records to have a Current."
+      },
+      {
+        "key": "D",
+        "text": "A randomly selected record from all matching results."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Max Records = 1이면 Aggregate는 필터와 Sort 조건에 맞는 레코드 중 딱 한 건만 반환하며, List.Current는 그 유일한 레코드를 가리킵니다. B는 필터를 무시한다는 점에서 틀렸고, C는 List가 1건만으로도 Current를 가질 수 있으므로 틀리며, D처럼 무작위가 아니라 Sort 순서상 첫 레코드입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product를 조회하는 Aggregate에서 'Max Records' 속성을 1로 설정했습니다. GetProducts.List.Current는 무엇을 나타냅니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "쿼리가 반환한 유일한 레코드."
+          },
+          {
+            "key": "B",
+            "text": "필터나 정렬을 무시한 Product 테이블 전체의 첫 레코드."
+          },
+          {
+            "key": "C",
+            "text": "1건으로는 Current를 가질 수 없으므로 빈 레코드."
+          },
+          {
+            "key": "D",
+            "text": "매칭된 결과 중 무작위로 선택된 레코드."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-133",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins Customer and Profile using \"With or Without\". A filter is applied: Profile.Bio <> \"\". What does the Aggregate return?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only Customers who have a Profile with a non-empty Bio."
+      },
+      {
+        "key": "B",
+        "text": "All Customers, including those without a Profile."
+      },
+      {
+        "key": "C",
+        "text": "Only Customers who do not have a Profile."
+      },
+      {
+        "key": "D",
+        "text": "All Customers, but Bio is empty for those who don't match."
+      }
+    ],
+    "answer": "A",
+    "explanation": "With or Without은 left join이라 원래 모든 Customer를 반환하지만, right table인 Profile의 attribute에 필터(Bio <> \"\")를 걸면 Profile이 없는 Customer는 Bio가 NULL이어서 조건을 통과하지 못해 제외된다. 결국 Profile이 있고 Bio가 비어 있지 않은 Customer만 남으므로, 사실상 inner join처럼 좁혀진다. 따라서 모든 Customer가 남는다는 B/D, Profile 없는 Customer만 남는다는 C는 틀리다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 Customer와 Profile을 \"With or Without\"으로 join한다. 필터 Profile.Bio <> \"\" 가 적용되어 있다. 이 Aggregate의 결과는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Profile이 있고 Bio가 비어 있지 않은 Customer만 반환된다."
+          },
+          {
+            "key": "B",
+            "text": "Profile이 없는 Customer를 포함해 모든 Customer가 반환된다."
+          },
+          {
+            "key": "C",
+            "text": "Profile이 없는 Customer만 반환된다."
+          },
+          {
+            "key": "D",
+            "text": "모든 Customer가 반환되지만 매칭되지 않는 경우 Bio는 비어 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-134",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate you apply a Group By on the Product.Category attribute and also want a column showing the Name of a product in each category. How must the Aggregate handle a non-grouped attribute like Name?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Simply add Name to the output; the Aggregate automatically returns the first product found in each category."
+      },
+      {
+        "key": "B",
+        "text": "It cannot be shown as-is; a non-grouped attribute must be added to the Group By or wrapped in an aggregate function such as Max or Min."
+      },
+      {
+        "key": "C",
+        "text": "Apply a Count function to Name so that its text value is displayed per group."
+      },
+      {
+        "key": "D",
+        "text": "Name is displayed but its value is blank (NULL) for every group."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Group By를 적용하면 그룹화하지 않은 attribute는 그대로 출력할 수 없습니다. Group By에 추가하거나 Max, Min 같은 aggregate function을 적용해야 합니다. Aggregate에는 '첫 번째 product'라는 개념이 없으므로 자동으로 나오지 않고(A 오답), Count는 개수를 세는 숫자 함수라 Name 텍스트를 표시하지 못합니다(C 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 Product.Category attribute에 Group By를 적용했고, 각 category마다 제품의 Name을 보여주는 컬럼도 원합니다. Name처럼 그룹화하지 않은 attribute를 Aggregate는 어떻게 처리해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Name을 그냥 추가하면 Aggregate가 각 category의 첫 번째 제품을 자동으로 보여준다."
+          },
+          {
+            "key": "B",
+            "text": "그대로는 표시할 수 없다. 그룹화하지 않은 attribute는 Group By에 추가하거나 Max, Min 같은 aggregate function으로 감싸야 한다."
+          },
+          {
+            "key": "C",
+            "text": "Name에 Count 함수를 적용하면 그룹별로 그 텍스트 값이 표시된다."
+          },
+          {
+            "key": "D",
+            "text": "Name은 표시되지만 모든 그룹에서 값이 비어(NULL) 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-135",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Aggregate GetTickets has a filter Ticket.Priority = Priorities.High. At runtime no records meet this criteria. What is the behavior of the flow immediately after the Aggregate executes?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A \"No Data Found\" exception is raised."
+      },
+      {
+        "key": "B",
+        "text": "The flow continues normally; GetTickets.List is empty and GetTickets.Count is 0."
+      },
+      {
+        "key": "C",
+        "text": "The flow jumps to an Exception Handler for Database Exceptions."
+      },
+      {
+        "key": "D",
+        "text": "The Screen displays a platform runtime error message."
+      }
+    ],
+    "answer": "B",
+    "explanation": "필터 결과가 없어도 Aggregate는 정상적으로 실행을 마칩니다. 단지 List가 비어 있고(empty) Count가 0일 뿐이며, 예외(exception)는 발생하지 않습니다. OutSystems Aggregate에는 'No Data Found' 같은 예외가 존재하지 않으므로 나머지 보기는 모두 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate GetTickets에 Ticket.Priority = Priorities.High 필터가 있습니다. 런타임에 이 조건을 만족하는 레코드가 하나도 없습니다. Aggregate 실행 직후 flow의 동작은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "\"No Data Found\" 예외가 발생한다."
+          },
+          {
+            "key": "B",
+            "text": "flow는 정상적으로 계속 진행되며, GetTickets.List는 비어 있고 GetTickets.Count는 0이다."
+          },
+          {
+            "key": "C",
+            "text": "flow가 Database Exception용 Exception Handler로 이동한다."
+          },
+          {
+            "key": "D",
+            "text": "Screen에 플랫폼 런타임 오류 메시지가 표시된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-136",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "For a Screen Aggregate GetEmployees with Max Records = 20, what is the difference between GetEmployees.List.Length and GetEmployees.Count?",
+    "options": [
+      {
+        "key": "A",
+        "text": "List.Length is the number of records actually fetched in the current request (limited by Max Records); Count is the total number of records matching the filters in the database."
+      },
+      {
+        "key": "B",
+        "text": "List.Length works only for Static Entities; Count works only for Entities."
+      },
+      {
+        "key": "C",
+        "text": "List.Length is available only on the Client; Count is available only on the Server."
+      },
+      {
+        "key": "D",
+        "text": "There is no difference; they always return the same value."
+      }
+    ],
+    "answer": "A",
+    "explanation": "List.Length는 이번 요청에서 실제로 가져온 레코드 수로 Max Records 제한을 받습니다. 반면 Count는 필터 조건에 맞는 전체 레코드 수(DB 기준)로 Max Records보다 클 수 있습니다. 예를 들어 조건에 맞는 레코드가 500개여도 Max Records가 20이면 Length는 20, Count는 500입니다. 따라서 둘은 항상 같지 않습니다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Max Records = 20으로 설정된 Screen Aggregate GetEmployees에서 GetEmployees.List.Length와 GetEmployees.Count의 차이는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "List.Length는 이번 요청에서 실제로 가져온 레코드 수(Max Records 제한을 받음)이고, Count는 필터에 맞는 DB 전체 레코드 수이다."
+          },
+          {
+            "key": "B",
+            "text": "List.Length는 Static Entity에서만, Count는 Entity에서만 동작한다."
+          },
+          {
+            "key": "C",
+            "text": "List.Length는 Client에서만, Count는 Server에서만 사용할 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "차이가 없다. 둘은 항상 같은 값을 반환한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-137",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate loaded 100 Order records into GetOrders.List (Max Records = 100). A For Each iterates the list and, for each item, calls a Server Action that deletes GetOrders.List.Current from the database. After the loop, what is true about the in-memory list?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The deleted records are automatically removed from the in-memory list."
+      },
+      {
+        "key": "B",
+        "text": "The in-memory list is unchanged and still contains 100 items."
+      },
+      {
+        "key": "C",
+        "text": "The For Each throws an exception because its source was modified."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate automatically re-fetches fresh data from the database."
+      }
+    ],
+    "answer": "B",
+    "explanation": "DB에서 레코드를 삭제해도 이미 메모리에 로드된 List는 변하지 않습니다. List는 fetch 시점의 스냅샷이므로 반복이 끝난 뒤에도 여전히 100개를 유지합니다(B 정답). Aggregate는 자동으로 재조회하지 않으며(D 오답), source가 바뀌었다고 예외가 발생하지도 않습니다(C 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 Order 레코드 100개를 GetOrders.List에 로드했습니다(Max Records = 100). For Each가 이 리스트를 순회하며 각 항목마다 GetOrders.List.Current를 DB에서 삭제하는 Server Action을 호출합니다. 반복이 끝난 후 메모리상의 리스트에 대해 참인 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "삭제된 레코드가 메모리 리스트에서 자동으로 제거된다."
+          },
+          {
+            "key": "B",
+            "text": "메모리 리스트는 변하지 않고 여전히 100개 항목을 담고 있다."
+          },
+          {
+            "key": "C",
+            "text": "source가 수정되었기 때문에 For Each가 예외를 던진다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate가 DB에서 최신 데이터를 자동으로 다시 가져온다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-138",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Which statement about OutSystems Aggregate attribute optimization is TRUE?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The platform only queries the attributes that are actually used in the Screen or in the logic."
+      },
+      {
+        "key": "B",
+        "text": "The platform queries all attributes but only sends the used ones to the Client."
+      },
+      {
+        "key": "C",
+        "text": "Aggregates always fetch every attribute of the record to guarantee data consistency."
+      },
+      {
+        "key": "D",
+        "text": "This optimization occurs only when the Aggregate is defined inside a Server Action."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems는 Aggregate를 최적화하여 Screen이나 logic에서 실제로 사용하는 attribute만 쿼리합니다. 사용하지 않는 컬럼은 생성되는 SQL에서 제외되어 성능이 향상됩니다. 모든 attribute를 항상 가져오지 않으며(B, C 오답), 이 최적화는 Server Action 정의 여부와 무관하게 적용됩니다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems Aggregate의 attribute 최적화에 대한 설명 중 참인 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "플랫폼은 Screen이나 logic에서 실제로 사용되는 attribute만 쿼리한다."
+          },
+          {
+            "key": "B",
+            "text": "플랫폼은 모든 attribute를 쿼리하되 사용된 것만 Client로 보낸다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate는 데이터 일관성을 위해 항상 레코드의 모든 attribute를 가져온다."
+          },
+          {
+            "key": "D",
+            "text": "이 최적화는 Aggregate가 Server Action 안에 정의된 경우에만 발생한다."
+          }
+        ]
+      }
+    }
   }
 ]

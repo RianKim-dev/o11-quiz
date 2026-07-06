@@ -883,5 +883,265 @@
         ]
       }
     }
+  },
+  {
+    "id": "SEC-016",
+    "subtopic": "Role-based Security",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A developer must restrict an \"Employee Backoffice\" Screen so that only users holding the \"Admin\" role can open it. Where is this configured?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Screen's properties, by enabling the \"Admin\" role in the Screen's Roles section."
+      },
+      {
+        "key": "B",
+        "text": "In a Client Action, using an If node to hide the Screen."
+      },
+      {
+        "key": "C",
+        "text": "In Service Center's user management area."
+      },
+      {
+        "key": "D",
+        "text": "Roles can only be verified inside Server Actions, not on Screens."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Screen 접근 제한은 Screen 속성의 Roles 섹션에서 해당 Role을 체크하여 설정합니다. 이렇게 하면 그 Role이 없는 사용자는 화면에 접근할 수 없습니다. B/D처럼 Client/Server Action의 If만으로 하는 것은 표준 방식이 아니며, 로직에서 Role을 Check할 수는 있어도 화면 접근 제어 자체는 Screen 속성으로 선언적으로 지정합니다. C의 Service Center는 배포·모니터링 도구로 화면 Role을 설정하는 곳이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 \"Employee Backoffice\" Screen을 \"Admin\" Role을 가진 사용자만 열 수 있도록 제한해야 합니다. 이 설정은 어디에서 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Screen 속성의 Roles 섹션에서 \"Admin\" Role을 활성화한다."
+          },
+          {
+            "key": "B",
+            "text": "Client Action에서 If 노드로 Screen을 숨긴다."
+          },
+          {
+            "key": "C",
+            "text": "Service Center의 사용자 관리 영역에서 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "Role은 Server Action 안에서만 확인할 수 있고 Screen에서는 할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-017",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer must guarantee that the \"CreateEmployee\" logic runs only when the current user has the Admin role. Where is the most secure place to enforce this check?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Hide the Save button by using CheckAdminRole() in its Visible property."
+      },
+      {
+        "key": "B",
+        "text": "Check the role in the button's On Click Client Action."
+      },
+      {
+        "key": "C",
+        "text": "Check the role at the start of the Server Action that performs the database Create."
+      },
+      {
+        "key": "D",
+        "text": "Check the role in the Screen's On Initialize event."
+      }
+    ],
+    "answer": "C",
+    "explanation": "버튼 숨김(A), On Click(B), On Initialize(D) 같은 클라이언트 측 검사는 브라우저에서 우회될 수 있어 보안상 신뢰할 수 없습니다. 실제 데이터베이스 Create를 수행하는 Server Action의 시작 부분에서 역할을 확인하면 서버에서 강제되므로 가장 안전합니다. UI 숨김은 사용성을 위한 것일 뿐 보안 장치가 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자는 \"CreateEmployee\" 로직이 현재 사용자가 Admin 역할일 때만 실행되도록 보장해야 합니다. 이 검사를 강제하기에 가장 안전한 위치는 어디입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Visible 속성에서 CheckAdminRole() 함수로 Save 버튼을 숨긴다."
+          },
+          {
+            "key": "B",
+            "text": "버튼의 On Click Client Action에서 역할을 확인한다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스 Create를 수행하는 Server Action의 시작 부분에서 역할을 확인한다."
+          },
+          {
+            "key": "D",
+            "text": "Screen의 On Initialize 이벤트에서 역할을 확인한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-018",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer creates a Role named \"Accountant\" and wants only Accountants to see a \"Payroll\" menu item, wrapped in an If widget. What should the If condition be?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CheckAccountantRole(GetUserId())"
+      },
+      {
+        "key": "B",
+        "text": "Roles.Accountant"
+      },
+      {
+        "key": "C",
+        "text": "User.Role = \"Accountant\""
+      },
+      {
+        "key": "D",
+        "text": "CheckRole(Accountant)"
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems에서 Role을 만들면 플랫폼이 자동으로 Check<RoleName>Role() 함수를 생성하며, 이 함수는 대상 사용자가 해당 Role을 가졌는지 Boolean으로 반환합니다. 따라서 If 조건에는 CheckAccountantRole(GetUserId())를 사용합니다(A). Roles.Accountant, User.Role=\"Accountant\", CheckRole(Accountant) 같은 문법은 OutSystems에 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 \"Accountant\"라는 Role을 만들고, Accountant만 If widget으로 감싼 \"Payroll\" 메뉴 항목을 볼 수 있게 하려고 합니다. If 조건은 무엇이어야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "CheckAccountantRole(GetUserId())"
+          },
+          {
+            "key": "B",
+            "text": "Roles.Accountant"
+          },
+          {
+            "key": "C",
+            "text": "User.Role = \"Accountant\""
+          },
+          {
+            "key": "D",
+            "text": "CheckRole(Accountant)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-019",
+    "subtopic": "Role-based Security",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Screen has \"Anonymous\" access. It has a button that calls a Server Action, and the Server Action contains no internal role checks. Who can execute this Server Action?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only Registered users."
+      },
+      {
+        "key": "B",
+        "text": "Anyone who can reach the screen, including Anonymous users."
+      },
+      {
+        "key": "C",
+        "text": "Only users with the \"Administrator\" role."
+      },
+      {
+        "key": "D",
+        "text": "No one; Server Actions require \"Registered\" access by default."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Server Action은 Screen이나 REST와 달리 자체 접근 권한(Role check)을 갖지 않고, 호출한 Screen의 컨텍스트 안에서 실행됩니다. 따라서 Screen이 Anonymous 접근이면 Anonymous 사용자를 포함해 그 화면에 도달할 수 있는 누구나 Server Action을 실행할 수 있습니다(B). 보안이 필요하면 Server Action 내부에서 명시적으로 Role을 확인해야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Screen이 \"Anonymous\" 접근 권한을 가집니다. 이 화면에는 Server Action을 호출하는 버튼이 있고, 그 Server Action에는 내부 role 검사가 없습니다. 누가 이 Server Action을 실행할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Registered 사용자만."
+          },
+          {
+            "key": "B",
+            "text": "Anonymous 사용자를 포함해 그 화면에 접근할 수 있는 누구나."
+          },
+          {
+            "key": "C",
+            "text": "\"Administrator\" role을 가진 사용자만."
+          },
+          {
+            "key": "D",
+            "text": "아무도; Server Action은 기본적으로 \"Registered\" 접근이 필요하다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-020",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A user is currently logged into an application. An administrator revokes that user's \"Manager\" role using the Users application. When does this change affect the user's CURRENT session?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Immediately, on the user's very next request."
+      },
+      {
+        "key": "B",
+        "text": "Only after the user logs out and logs back in, because the session's roles are established at login."
+      },
+      {
+        "key": "C",
+        "text": "Automatically after 24 hours."
+      },
+      {
+        "key": "D",
+        "text": "Only after the module is republished."
+      }
+    ],
+    "answer": "B",
+    "explanation": "사용자의 Role 정보는 로그인 시점에 세션(보안 토큰)에 확정되어 실려 있으므로, 이미 로그인해 있는 현재 세션에는 Role 취소가 바로 반영되지 않습니다. 사용자가 로그아웃 후 다시 로그인해야 새 Role 상태가 적용됩니다. 그래서 A(즉시)는 틀리고, C(24시간)·D(모듈 재배포)는 Role 반영과 무관한 조건입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 사용자가 애플리케이션에 로그인해 있는 상태입니다. 관리자가 Users 애플리케이션에서 그 사용자의 \"Manager\" Role을 취소합니다. 이 변경은 사용자의 현재 세션에 언제 적용됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "즉시, 사용자의 바로 다음 요청부터 적용된다."
+          },
+          {
+            "key": "B",
+            "text": "세션의 Role은 로그인 시점에 확정되므로, 사용자가 로그아웃 후 다시 로그인해야 적용된다."
+          },
+          {
+            "key": "C",
+            "text": "24시간 후 자동으로 적용된다."
+          },
+          {
+            "key": "D",
+            "text": "모듈이 재배포된 후에만 적용된다."
+          }
+        ]
+      }
+    }
   }
 ]

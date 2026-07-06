@@ -1515,5 +1515,265 @@
         ]
       }
     }
+  },
+  {
+    "id": "SL-028",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has an Aggregate set to fetch At Start. In the On Initialize event the developer adds a JavaScript node that tries to manipulate the DOM elements of a Table bound to that Aggregate. What will happen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The JavaScript successfully styles the Table rows before they become visible."
+      },
+      {
+        "key": "B",
+        "text": "The JavaScript will likely fail or find nothing because the DOM is not yet rendered."
+      },
+      {
+        "key": "C",
+        "text": "The Screen waits for the JavaScript to finish before fetching the Aggregate."
+      },
+      {
+        "key": "D",
+        "text": "The platform automatically moves the JavaScript to the On Ready event."
+      }
+    ],
+    "answer": "B",
+    "explanation": "On Initialize는 화면의 DOM이 렌더링되기 전에 실행되는 이벤트입니다. 따라서 이 시점의 JavaScript는 아직 존재하지 않는 Table 요소를 찾지 못해 실패하거나 아무 효과가 없습니다. DOM 조작은 렌더링이 끝난 뒤 실행되는 On Ready 이벤트에서 수행해야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Screen에 At Start로 데이터를 가져오는 Aggregate가 있습니다. 개발자가 On Initialize 이벤트에 JavaScript 노드를 추가하여 그 Aggregate에 바인딩된 Table의 DOM 요소를 조작하려고 합니다. 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "JavaScript가 Table 행이 보이기 전에 스타일을 성공적으로 적용한다."
+          },
+          {
+            "key": "B",
+            "text": "DOM이 아직 렌더링되지 않았기 때문에 JavaScript가 실패하거나 아무것도 찾지 못할 가능성이 높다."
+          },
+          {
+            "key": "C",
+            "text": "Screen이 JavaScript가 끝날 때까지 기다린 후 Aggregate를 가져온다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 JavaScript를 자동으로 On Ready 이벤트로 옮긴다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-029",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a reusable Block, a developer uses the On Render event to check whether a 'TotalAmount' variable is negative, and if so assigns it a value of 0. 'TotalAmount' is displayed in the Block's UI. What is a significant risk of this implementation?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The 'TotalAmount' variable becomes read-only."
+      },
+      {
+        "key": "B",
+        "text": "The Block fails to load because On Render does not allow Assign nodes."
+      },
+      {
+        "key": "C",
+        "text": "It can cause an infinite loop of re-renders, hurting performance or freezing the browser."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate feeding the data is forced to refresh every second."
+      }
+    ],
+    "answer": "C",
+    "explanation": "On Render는 Block이 다시 렌더링될 때마다 실행됩니다. 그 안에서 UI에 바인딩된 변수(TotalAmount)를 변경하면 상태가 바뀌어 또 렌더링이 트리거되고, 그러면 On Render가 다시 실행되어 무한 렌더링 루프에 빠질 수 있습니다. On Render에서 Assign 노드 자체는 허용되므로 B는 틀리며, 변수가 read-only가 되거나 Aggregate가 매초 새로고침되는 일도 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "재사용 가능한 Block에서 개발자가 On Render 이벤트를 사용해 'TotalAmount' 변수가 음수인지 확인하고, 음수이면 값을 0으로 할당합니다. 'TotalAmount'는 Block UI에 표시됩니다. 이 구현의 중대한 위험은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'TotalAmount' 변수가 read-only가 된다."
+          },
+          {
+            "key": "B",
+            "text": "On Render는 Assign 노드를 허용하지 않으므로 Block이 로드되지 않는다."
+          },
+          {
+            "key": "C",
+            "text": "무한 렌더링 루프가 발생해 성능을 떨어뜨리거나 브라우저를 멈추게 할 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "데이터를 공급하는 Aggregate가 매초 강제로 새로고침된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-030",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "When a user navigates from Screen A to Screen B, which lifecycle event of Screen B executes first?",
+    "options": [
+      {
+        "key": "A",
+        "text": "On Ready"
+      },
+      {
+        "key": "B",
+        "text": "On After Fetch"
+      },
+      {
+        "key": "C",
+        "text": "On Initialize"
+      },
+      {
+        "key": "D",
+        "text": "On Parameters Changed"
+      }
+    ],
+    "answer": "C",
+    "explanation": "화면 전환 시 대상 화면(Screen B)에서 가장 먼저 실행되는 이벤트는 On Initialize입니다. On After Fetch는 데이터를 가져온 뒤에, On Ready는 화면이 렌더링된 뒤에 실행되므로 순서상 뒤에 옵니다. On Parameters Changed는 이미 열려 있는 화면의 입력 파라미터가 바뀔 때 실행됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "사용자가 Screen A에서 Screen B로 이동할 때, Screen B의 라이프사이클 이벤트 중 가장 먼저 실행되는 것은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "On Ready"
+          },
+          {
+            "key": "B",
+            "text": "On After Fetch"
+          },
+          {
+            "key": "C",
+            "text": "On Initialize"
+          },
+          {
+            "key": "D",
+            "text": "On Parameters Changed"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-031",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer puts a JavaScript node in the Screen's On Render event to set focus on an Input widget. That Input is inside the \"True\" branch of an If widget, whose condition is False when the Screen first loads. What happens on that initial load?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The JavaScript runs and successfully focuses the currently hidden Input."
+      },
+      {
+        "key": "B",
+        "text": "The JavaScript runs but does nothing (or errors), because the Input is not rendered in the DOM while the If condition is False."
+      },
+      {
+        "key": "C",
+        "text": "The platform automatically postpones the JavaScript until the If condition becomes True."
+      },
+      {
+        "key": "D",
+        "text": "The On Render event is blocked until every If condition on the Screen evaluates to True."
+      }
+    ],
+    "answer": "B",
+    "explanation": "If 위젯의 조건이 False이면 그 True 분기 안의 Input은 DOM에 렌더링되지 않습니다. JavaScript는 실제 DOM 요소를 찾아 focus를 주는데, 대상 요소가 없으므로 아무 동작도 하지 않거나 오류가 납니다. 플랫폼이 조건이 True가 될 때까지 JS를 미뤄 주지도(C), On Render 이벤트가 If 조건 때문에 차단되지도(D) 않습니다. 그래서 정답은 B입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 Screen의 On Render 이벤트에 JavaScript 노드를 넣어 Input 위젯에 focus를 줍니다. 그 Input은 If 위젯의 \"True\" 분기 안에 있으며, 화면이 처음 로드될 때 If 조건은 False입니다. 최초 로드 시 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "JavaScript가 실행되어 현재 숨겨진 Input에 성공적으로 focus를 준다."
+          },
+          {
+            "key": "B",
+            "text": "If 조건이 False라 Input이 DOM에 렌더링되지 않으므로, JavaScript는 실행되지만 아무 동작도 하지 않거나 오류가 난다."
+          },
+          {
+            "key": "C",
+            "text": "플랫폼이 If 조건이 True가 될 때까지 JavaScript 실행을 자동으로 미룬다."
+          },
+          {
+            "key": "D",
+            "text": "화면의 모든 If 조건이 True가 될 때까지 On Render 이벤트가 차단된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-032",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In the Screen's On Render event, a developer calculates the sum of two Screen Variables and assigns the result to a third Screen Variable, which is displayed in an Expression on the Screen. What is the runtime consequence?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Expression updates correctly and the lifecycle completes normally."
+      },
+      {
+        "key": "B",
+        "text": "It creates an infinite loop: the assignment forces a re-render, which fires On Render again, and so on, freezing the browser."
+      },
+      {
+        "key": "C",
+        "text": "The Expression stays empty because On Render is not allowed to change UI-bound variables."
+      },
+      {
+        "key": "D",
+        "text": "The calculation runs only once, when the Screen is first navigated to."
+      }
+    ],
+    "answer": "B",
+    "explanation": "On Render는 화면이 렌더링될 때마다 실행됩니다. 여기서 화면에 표시되는 변수(third Screen Variable)에 값을 할당하면 UI가 다시 렌더링되고, 그 재렌더링이 다시 On Render를 호출하는 무한 루프가 발생해 브라우저가 멈춥니다. 그래서 정답은 B이며, On Render에서는 화면에 바인딩된 변수를 이렇게 갱신하면 안 됩니다. On Render가 변수 변경을 막지도(C), 최초 1회만 실행되지도(D) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 Screen의 On Render 이벤트에서 두 Screen Variable의 합을 계산해 세 번째 Screen Variable에 할당하고, 이 세 번째 변수는 화면의 Expression에 표시됩니다. 런타임에서 어떤 결과가 발생합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Expression이 올바르게 갱신되고 라이프사이클이 정상적으로 완료된다."
+          },
+          {
+            "key": "B",
+            "text": "무한 루프가 발생한다: 할당이 재렌더링을 유발하고, 그것이 다시 On Render를 실행시키며, 이 과정이 반복되어 브라우저가 멈춘다."
+          },
+          {
+            "key": "C",
+            "text": "On Render는 UI에 바인딩된 변수를 변경할 수 없어 Expression이 비어 있는 채로 남는다."
+          },
+          {
+            "key": "D",
+            "text": "계산은 화면에 처음 진입할 때 한 번만 실행된다."
+          }
+        ]
+      }
+    }
   }
 ]

@@ -648,5 +648,109 @@
         ]
       }
     }
+  },
+  {
+    "id": "CV-012",
+    "subtopic": "Client Variables",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer needs to store a user's Theme Preference (Dark or Light) so that the choice persists across sessions and as the user moves between screens. What is the best way to store this value?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A Local Variable on the layout Block."
+      },
+      {
+        "key": "B",
+        "text": "A Client Variable."
+      },
+      {
+        "key": "C",
+        "text": "An Input Parameter on the Screen."
+      },
+      {
+        "key": "D",
+        "text": "A Site Property."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Client Variable는 브라우저 로컬 저장소에 사용자별로 저장되어 세션이 유지되는 동안 화면을 이동해도 값이 보존되므로 개인 테마 설정에 적합합니다. Local Variable과 Input Parameter는 화면 단위로만 존재해 화면을 벗어나면 사라집니다. Site Property는 서버 측 전역 설정값이라 모든 사용자가 같은 값을 공유하므로 사용자별 개인 설정 저장에는 부적합합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 사용자의 Theme Preference(Dark 또는 Light)를 저장하여, 세션이 유지되는 동안 화면을 이동해도 선택이 보존되도록 하려고 합니다. 이 값을 저장하는 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "레이아웃 Block의 Local Variable"
+          },
+          {
+            "key": "B",
+            "text": "Client Variable"
+          },
+          {
+            "key": "C",
+            "text": "Screen의 Input Parameter"
+          },
+          {
+            "key": "D",
+            "text": "Site Property"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CV-013",
+    "subtopic": "Client Variables",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a Client Action, a developer updates a Client Variable named LastSearch with a new string, then immediately navigates to a DIFFERENT application running in the SAME environment. What is the state of LastSearch when read in the second application?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is empty, because Client Variables are isolated to the application that set them."
+      },
+      {
+        "key": "B",
+        "text": "It holds the updated string, because Client Variables persist in the browser's local storage per user agent and are shared across apps in the same environment."
+      },
+      {
+        "key": "C",
+        "text": "It is empty, because navigating between applications clears the browser's local storage."
+      },
+      {
+        "key": "D",
+        "text": "The second application fails to load due to a security conflict."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Client Variable는 브라우저(디바이스)의 local storage에 저장되며, 같은 Environment 안에서는 사용자 에이전트(브라우저) 단위로 공유됩니다. 따라서 다른 애플리케이션으로 이동해도 값이 그대로 유지되며, 오히려 이름 충돌에 주의하라는 경고가 있을 정도입니다. A(앱 단위 격리)와 C(앱 이동 시 local storage 초기화)는 저장 메커니즘을 잘못 설명한 것이고, D의 보안 충돌은 발생하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action에서 개발자가 LastSearch라는 Client Variable을 새 문자열로 업데이트한 뒤, 곧바로 같은 Environment에서 실행되는 다른 애플리케이션으로 navigate합니다. 두 번째 애플리케이션에서 LastSearch를 읽으면 그 값은 어떤 상태입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "비어 있다. Client Variable은 값을 설정한 애플리케이션 내부로 격리되기 때문이다."
+          },
+          {
+            "key": "B",
+            "text": "업데이트된 문자열을 담고 있다. Client Variable은 브라우저 local storage에 사용자 에이전트 단위로 저장되어 같은 Environment의 앱들 간에 공유되기 때문이다."
+          },
+          {
+            "key": "C",
+            "text": "비어 있다. 애플리케이션 간 이동 시 브라우저의 local storage가 초기화되기 때문이다."
+          },
+          {
+            "key": "D",
+            "text": "보안 충돌로 인해 두 번째 애플리케이션이 로드에 실패한다."
+          }
+        ]
+      }
+    }
   }
 ]

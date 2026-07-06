@@ -3363,5 +3363,369 @@
         ]
       }
     }
+  },
+  {
+    "id": "ENT-063",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Entity 'Customer' has an attribute 'Email'. The developer wants to guarantee that no two customers can have the same email address. What is the correct approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the 'Email' attribute as the Primary Key."
+      },
+      {
+        "key": "B",
+        "text": "Create a Unique Index on the 'Email' attribute."
+      },
+      {
+        "key": "C",
+        "text": "Use a Server Action to query the database before every CreateCustomer call."
+      },
+      {
+        "key": "D",
+        "text": "Set the Mandatory property of the 'Email' attribute to True."
+      }
+    ],
+    "answer": "B",
+    "explanation": "중복 값을 막는 표준 방법은 해당 attribute에 Unique Index를 생성하여 데이터베이스 수준에서 유일성을 강제하는 것입니다. Email을 Primary Key로 지정하는 것은 부적절하고, 매번 Server Action으로 조회하는 방식은 동시 요청에서 중복을 완전히 막지 못합니다. Mandatory는 빈 값만 막을 뿐 중복은 막지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity 'Customer'에 'Email' attribute가 있습니다. 개발자는 두 고객이 같은 이메일 주소를 가질 수 없도록 보장하려 합니다. 올바른 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Email' attribute를 Primary Key로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "'Email' attribute에 Unique Index를 생성한다."
+          },
+          {
+            "key": "C",
+            "text": "매 CreateCustomer 호출 전에 Server Action으로 데이터베이스를 조회한다."
+          },
+          {
+            "key": "D",
+            "text": "'Email' attribute의 Mandatory 속성을 True로 설정한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-064",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer changes an Entity attribute's Data Type from Text to Integer while the table already contains data. What happens when the module is published?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The platform correctly converts every text value into a meaningful integer."
+      },
+      {
+        "key": "B",
+        "text": "The publish fails because data type changes are not allowed on existing attributes."
+      },
+      {
+        "key": "C",
+        "text": "The publish succeeds, but existing text values that are not valid numbers are converted to 0 (the default), risking data loss."
+      },
+      {
+        "key": "D",
+        "text": "The attribute is deleted and a brand-new empty one is created automatically."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Text를 Integer로 바꾼 뒤 publish하면 게시 자체는 성공하며 기존 데이터도 유지되지만, 숫자로 변환할 수 없는 text 값은 기본값인 0으로 변환되어 데이터 손실 위험이 있습니다. 따라서 '모든 값을 올바르게 변환한다'는 A는 비숫자 값 때문에 틀리고, 데이터 타입 변경은 허용되므로 B도 틀리며, 기존 attribute가 삭제·재생성되는 것도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "테이블에 이미 데이터가 있는 상태에서 개발자가 Entity attribute의 Data Type을 Text에서 Integer로 변경합니다. 모듈을 publish하면 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "플랫폼이 모든 text 값을 의미 있는 정수로 정확히 변환한다."
+          },
+          {
+            "key": "B",
+            "text": "기존 attribute의 데이터 타입 변경은 허용되지 않으므로 publish가 실패한다."
+          },
+          {
+            "key": "C",
+            "text": "publish는 성공하지만, 유효한 숫자가 아닌 기존 text 값은 기본값인 0으로 변환되어 데이터 손실 위험이 있다."
+          },
+          {
+            "key": "D",
+            "text": "해당 attribute가 삭제되고 완전히 빈 새 attribute가 자동으로 생성된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-065",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "In OutSystems 11, what is the default value assigned to an Entity attribute of type Date when no explicit default is set?",
+    "options": [
+      {
+        "key": "A",
+        "text": "1900-01-01"
+      },
+      {
+        "key": "B",
+        "text": "The current date at record creation"
+      },
+      {
+        "key": "C",
+        "text": "Null (empty)"
+      },
+      {
+        "key": "D",
+        "text": "0000-00-00"
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems에서 Date 데이터 타입의 기본값(default value)은 1900-01-01입니다. Date는 Null을 허용하지 않는 값 타입이므로 'Null'이나 'Current Date'가 아니라 고정된 최소 날짜값이 채워집니다. 현재 날짜가 필요하면 CurrDate() 함수를 명시적으로 default에 지정해야 하며, 0000-00-00은 OutSystems에 존재하지 않는 형식입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11에서 Date 타입의 Entity 속성(attribute)에 별도의 기본값을 지정하지 않았을 때 할당되는 기본값은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "1900-01-01"
+          },
+          {
+            "key": "B",
+            "text": "레코드 생성 시점의 현재 날짜"
+          },
+          {
+            "key": "C",
+            "text": "Null(빈 값)"
+          },
+          {
+            "key": "D",
+            "text": "0000-00-00"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-066",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity named OrderStatus already contains four records (New, Packed, Shipped, Delivered) in production. A developer adds a fifth record 'Returned' in Service Studio and publishes the module. What happens to the data in the database?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The table is wiped and re-created with only the 5 records, losing any references."
+      },
+      {
+        "key": "B",
+        "text": "The fifth record is inserted into the table while the existing four are preserved."
+      },
+      {
+        "key": "C",
+        "text": "Publishing fails, because Static Entities are locked after their first publish."
+      },
+      {
+        "key": "D",
+        "text": "The new record lives only in Service Studio and is never written to the database."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Static Entity의 레코드들은 실제 데이터베이스 테이블에 저장되며, publish 시점에 Service Studio에 정의된 내용과 자동으로 동기화(synchronize)됩니다. 새 레코드 'Returned'를 추가하면 기존 네 개는 그대로 유지되고 다섯 번째가 추가로 삽입됩니다. 테이블 전체가 지워지지 않으며(A 오답), Static Entity는 최초 publish 이후에도 얼마든지 수정·추가할 수 있습니다(C 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "운영 환경에서 OrderStatus라는 Static Entity에 이미 네 개의 레코드(New, Packed, Shipped, Delivered)가 있습니다. 개발자가 Service Studio에서 다섯 번째 레코드 'Returned'를 추가하고 모듈을 publish합니다. 데이터베이스의 데이터는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "테이블이 초기화되고 5개 레코드만으로 다시 생성되어 참조가 사라진다."
+          },
+          {
+            "key": "B",
+            "text": "다섯 번째 레코드가 테이블에 추가되고 기존 네 개는 그대로 보존된다."
+          },
+          {
+            "key": "C",
+            "text": "Static Entity는 최초 publish 이후 잠기므로 publish가 실패한다."
+          },
+          {
+            "key": "D",
+            "text": "새 레코드는 Service Studio에만 존재하고 데이터베이스에는 기록되지 않는다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-067",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer renames a Static Entity attribute from \"Is_Active\" to \"Enabled\" in Service Studio and publishes. What is the effect on the underlying database table?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The attribute is renamed and its existing data is preserved (no new column is created and no data is lost)."
+      },
+      {
+        "key": "B",
+        "text": "A new column \"Enabled\" is created while \"Is_Active\" stays in the table as a deprecated column."
+      },
+      {
+        "key": "C",
+        "text": "The publish fails because Static Entity schema changes are prohibited."
+      },
+      {
+        "key": "D",
+        "text": "The table is dropped and recreated, losing all data."
+      }
+    ],
+    "answer": "A",
+    "explanation": "attribute 이름을 바꾸는 것은 삭제 후 새로 만드는 것이 아니라 rename이므로, 플랫폼이 기존 데이터를 그대로 보존하며 새 컬럼을 만들거나 데이터를 잃지 않는다. 따라서 새 컬럼이 생기고 옛 컬럼이 deprecated로 남는다는 B, publish가 실패한다는 C, 테이블을 재생성해 데이터가 사라진다는 D는 모두 rename의 실제 동작과 다르다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 Static Entity attribute의 이름을 Service Studio에서 \"Is_Active\"에서 \"Enabled\"로 바꾸고 publish한다. 데이터베이스 테이블에 미치는 영향은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "attribute가 rename되고 기존 데이터는 그대로 보존된다(새 컬럼 생성이나 데이터 손실 없음)."
+          },
+          {
+            "key": "B",
+            "text": "\"Enabled\" 컬럼이 새로 생성되고 \"Is_Active\"는 deprecated 컬럼으로 테이블에 남는다."
+          },
+          {
+            "key": "C",
+            "text": "Static Entity 스키마 변경은 금지되어 publish가 실패한다."
+          },
+          {
+            "key": "D",
+            "text": "테이블이 drop 후 재생성되어 모든 데이터가 사라진다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-068",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A developer creates an Entity attribute of type \"Currency\" and does not set a default value. In a Server Action, they create a record without providing a value for this attribute. What is stored in the database?",
+    "options": [
+      {
+        "key": "A",
+        "text": "0.0"
+      },
+      {
+        "key": "B",
+        "text": "NULL"
+      },
+      {
+        "key": "C",
+        "text": "1.0"
+      },
+      {
+        "key": "D",
+        "text": "An empty string"
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems의 entity attribute는 기본적으로 mandatory이며, Currency는 내부적으로 Decimal 타입이라 값을 주지 않으면 기본값 0.0이 저장된다. 숫자 타입은 NULL로 저장되지 않으므로 B는 틀리고, 1.0(C)이나 빈 문자열(D)도 숫자 타입의 기본값이 아니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 \"Currency\" 타입의 Entity attribute를 만들면서 기본값(default value)을 지정하지 않는다. Server Action에서 이 attribute에 값을 주지 않고 레코드를 생성하면 데이터베이스에 무엇이 저장되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "0.0"
+          },
+          {
+            "key": "B",
+            "text": "NULL"
+          },
+          {
+            "key": "C",
+            "text": "1.0"
+          },
+          {
+            "key": "D",
+            "text": "빈 문자열"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-069",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer sets a Ticket entity's Subject attribute \"Length\" property to 50. At runtime a user types a 100-character string into the bound Input widget and clicks Save, and the Save action calls the standard Create Entity Action. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The text is silently truncated to 50 characters and the record is saved."
+      },
+      {
+        "key": "B",
+        "text": "A Database Exception occurs because the value exceeds the column size."
+      },
+      {
+        "key": "C",
+        "text": "The platform automatically enlarges the database column to 100."
+      },
+      {
+        "key": "D",
+        "text": "The record is saved but only the first 50 characters are indexed."
+      }
+    ],
+    "answer": "A",
+    "explanation": "표준 Create Entity Action은 attribute의 Length를 초과하는 text를 데이터베이스에 쓰기 전에 자동으로 잘라(truncate) 저장하므로 예외가 발생하지 않는다. 따라서 Database Exception이 난다는 B는 틀리며, 컬럼 크기를 자동 확장하거나(C) 앞부분만 인덱싱한다(D)는 것도 실제 동작이 아니다. 이 때문에 데이터가 조용히 잘려나가는 것이 오히려 주의해야 할 gotcha다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 Ticket entity의 Subject attribute \"Length\" 속성을 50으로 설정한다. 런타임에 사용자가 바인딩된 Input widget에 100자 문자열을 입력하고 Save를 누르며, Save 액션은 표준 Create Entity Action을 호출한다. 어떻게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "문자열이 50자로 자동으로 잘려(truncate) 레코드가 저장된다."
+          },
+          {
+            "key": "B",
+            "text": "값이 컬럼 크기를 초과하므로 Database Exception이 발생한다."
+          },
+          {
+            "key": "C",
+            "text": "플랫폼이 데이터베이스 컬럼 크기를 자동으로 100으로 확장한다."
+          },
+          {
+            "key": "D",
+            "text": "레코드는 저장되지만 앞의 50자만 인덱싱된다."
+          }
+        ]
+      }
+    }
   }
 ]

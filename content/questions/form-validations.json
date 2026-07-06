@@ -731,5 +731,213 @@
         ]
       }
     }
+  },
+  {
+    "id": "FV-014",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "On a registration Screen, the 'Email' input has Mandatory = True. When the user taps Submit, what should the Client Action check first before running any business logic?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Whether Email is empty using a manual If node."
+      },
+      {
+        "key": "B",
+        "text": "The RegistrationForm.Valid property (after triggering validation)."
+      },
+      {
+        "key": "C",
+        "text": "Whether the email already exists in the database."
+      },
+      {
+        "key": "D",
+        "text": "The length of the password field."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Form 제출 시 가장 먼저 Form.Valid 속성을 확인해 Mandatory 여부와 데이터 타입 등 내장 검증이 통과했는지 봐야 합니다(B). A처럼 각 필드를 수동 If로 검사하는 것은 비효율적이며 내장 검증을 활용하지 못하고, C(DB 존재 확인)와 D(비밀번호 길이)는 기본 검증을 통과한 뒤 수행할 비즈니스 로직입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "가입 Screen에서 'Email' 입력의 Mandatory = True로 설정되어 있습니다. 사용자가 Submit을 눌렀을 때, Client Action은 비즈니스 로직을 실행하기 전에 무엇을 가장 먼저 확인해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "If 노드로 Email이 비어 있는지 수동으로 확인."
+          },
+          {
+            "key": "B",
+            "text": "(검증 트리거 후) RegistrationForm.Valid 속성."
+          },
+          {
+            "key": "C",
+            "text": "이메일이 이미 데이터베이스에 존재하는지 여부."
+          },
+          {
+            "key": "D",
+            "text": "비밀번호 필드의 길이."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FV-015",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Form, a developer sets Input_Email.ValidationMessage = \"Invalid email address\" during validation. What else must be set so the Form is treated as invalid?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Input_Email.Valid = False"
+      },
+      {
+        "key": "B",
+        "text": "Form.Valid = False"
+      },
+      {
+        "key": "C",
+        "text": "Nothing — setting the validation message is enough."
+      },
+      {
+        "key": "D",
+        "text": "Input_Email.Mandatory = True"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Reactive의 Input 위젯은 True/False 값을 갖는 Valid 속성이 있는데, ValidationMessage만 설정하면 표시할 메시지만 준비될 뿐 위젯과 Form은 여전히 valid로 간주된다. Form을 invalid로 만들려면 해당 Input의 Valid를 False로 설정해야 한다(A). Form.Valid(B)는 각 Input의 상태로부터 계산되며 직접 설정하는 값이 아니고, Mandatory(D)는 필수 입력 여부일 뿐 커스텀 검증과 무관하다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Form에서 개발자가 검증 중 Input_Email.ValidationMessage = \"Invalid email address\"를 설정했다. Form이 invalid로 처리되게 하려면 추가로 무엇을 설정해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Input_Email.Valid = False"
+          },
+          {
+            "key": "B",
+            "text": "Form.Valid = False"
+          },
+          {
+            "key": "C",
+            "text": "아무것도 필요 없다 — validation message 설정만으로 충분하다."
+          },
+          {
+            "key": "D",
+            "text": "Input_Email.Mandatory = True"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FV-016",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Form, a developer writes a custom validation to ensure the \"Delivery Date\" is in the future. When the validation fails, which property must be set to False so the platform blocks the data submission?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Form1.Valid"
+      },
+      {
+        "key": "B",
+        "text": "Input_DeliveryDate.Valid"
+      },
+      {
+        "key": "C",
+        "text": "DeliveryDate.IsInvalid"
+      },
+      {
+        "key": "D",
+        "text": "Screen.Validation"
+      }
+    ],
+    "answer": "B",
+    "explanation": "개별 Input 위젯의 Valid 속성을 False로 설정하고 ValidationMessage를 채우면 플랫폼이 제출을 막습니다. Form.Valid(A)는 모든 Input의 Valid를 종합한 읽기 전용 값이라 직접 설정하지 않으며, IsInvalid(C)나 Screen.Validation(D)은 존재하지 않는 속성입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Form에서 개발자가 \"Delivery Date\"가 미래 날짜인지 확인하는 커스텀 검증을 작성합니다. 검증이 실패했을 때 플랫폼이 데이터 제출을 막도록 하려면 어떤 속성을 False로 설정해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Form1.Valid"
+          },
+          {
+            "key": "B",
+            "text": "Input_DeliveryDate.Valid"
+          },
+          {
+            "key": "C",
+            "text": "DeliveryDate.IsInvalid"
+          },
+          {
+            "key": "D",
+            "text": "Screen.Validation"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FV-017",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Button on a customer registration Screen has its Validation property set to \"Client & Server\". If the user leaves a Mandatory Input empty and clicks the button, what happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Client Action runs, and the developer must manually check Form.Valid inside it."
+      },
+      {
+        "key": "B",
+        "text": "The Client Action does not run; the platform automatically displays the validation messages."
+      },
+      {
+        "key": "C",
+        "text": "The Server Action is called and returns a validation error to the client."
+      },
+      {
+        "key": "D",
+        "text": "The Screen reloads and clears every field in the form."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Button의 Validation 속성을 Client & Server로 설정하면 플랫폼이 액션 실행 전에 먼저 내장 검증을 수행합니다. Mandatory Input이 비어 있으면 검증이 실패하여 연결된 Client Action이 실행되지 않고, 해당 필드에 validation 메시지가 자동으로 표시됩니다. A는 Validation을 None으로 두었을 때처럼 Form.Valid를 수동 확인하는 경우라 틀렸고, C는 검증 실패 시 Server Action까지 호출되지 않으므로 틀렸으며, D처럼 화면이 리로드되지도 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "고객 등록 Screen의 Button이 Validation 속성을 \"Client & Server\"로 설정했습니다. 사용자가 Mandatory Input을 비운 채 버튼을 클릭하면 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Action이 실행되고, 개발자가 그 안에서 Form.Valid를 직접 확인해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "Client Action이 실행되지 않고, 플랫폼이 자동으로 validation 메시지를 표시한다."
+          },
+          {
+            "key": "C",
+            "text": "Server Action이 호출되어 클라이언트로 validation 오류를 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "Screen이 리로드되면서 폼의 모든 필드가 초기화된다."
+          }
+        ]
+      }
+    }
   }
 ]
