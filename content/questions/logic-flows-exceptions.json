@@ -1385,5 +1385,325 @@
         ]
       }
     }
+  },
+  {
+    "id": "LFE-023",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Inside an OutSystems 'For Each' loop, what does the 'Current' property of the iterated list represent?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It lets you skip the next record in the loop."
+      },
+      {
+        "key": "B",
+        "text": "It stores the total number of records in the list."
+      },
+      {
+        "key": "C",
+        "text": "It points to the specific record currently being processed in the iteration."
+      },
+      {
+        "key": "D",
+        "text": "It always refers to the first record of the original list."
+      }
+    ],
+    "answer": "C",
+    "explanation": "For Each 루프에서 'Current'는 지금 처리 중인 반복 회차에 해당하는 그 레코드를 가리킨다. 다음 레코드를 건너뛰게 하는 기능이 아니고(A 오답), 리스트의 전체 개수를 저장하는 것도 아니며(B 오답), 항상 원본 리스트의 첫 번째 레코드를 가리키는 것도 아니다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems의 'For Each' 루프에서, 반복 대상 리스트의 'Current' 속성은 무엇을 나타냅니까?",
+        "options": [
+          "루프에서 다음 레코드를 건너뛰게 해 준다.",
+          "리스트의 전체 레코드 개수를 저장한다.",
+          "현재 반복 회차에서 처리 중인 특정 레코드를 가리킨다.",
+          "항상 원본 리스트의 첫 번째 레코드를 가리킨다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-024",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has an Aggregate 'GetOrders' that returns a list of orders. You need to calculate the total of the 'Amount' attribute across all orders using your own loop logic instead of a built-in aggregate function. Where should you place the 'For Each' loop?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Inside an Expression widget placed directly on the Screen."
+      },
+      {
+        "key": "B",
+        "text": "In a Client Action triggered by the Screen's 'OnReady' event."
+      },
+      {
+        "key": "C",
+        "text": "In the Screen's 'OnInitialize' event."
+      },
+      {
+        "key": "D",
+        "text": "In the 'On After Fetch' event of the 'GetOrders' Aggregate."
+      }
+    ],
+    "answer": "D",
+    "explanation": "On After Fetch는 Aggregate가 데이터를 모두 가져온 직후에 실행되므로 이 시점에는 리스트가 채워져 있어 For Each 루프로 안전하게 합계를 계산할 수 있습니다. OnInitialize는 At Start Aggregate들이 병렬로 실행되기 전/도중에 동작해 데이터가 아직 준비되지 않았을 수 있고, Expression은 동기식 값만 표시할 뿐 루프를 담을 수 없어 오답입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Screen에 주문 목록을 반환하는 Aggregate 'GetOrders'가 있습니다. 내장 집계 함수 대신 직접 만든 루프 로직으로 모든 주문의 'Amount' 속성 합계를 계산하려고 합니다. 'For Each' 루프는 어디에 두어야 합니까?",
+        "options": [
+          "Screen에 직접 배치한 Expression 위젯 안에.",
+          "Screen의 'OnReady' 이벤트로 실행되는 Client Action 안에.",
+          "Screen의 'OnInitialize' 이벤트 안에.",
+          "'GetOrders' Aggregate의 'On After Fetch' 이벤트 안에."
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-025",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Inside a 'For Each' loop you have found the record you were looking for and want to stop iterating early. How do you achieve this in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You cannot stop a 'For Each' early; it must always process every record."
+      },
+      {
+        "key": "B",
+        "text": "By setting the list's 'Length' property to zero."
+      },
+      {
+        "key": "C",
+        "text": "By routing the loop's logic (for example, from an If branch) to an End node or a node placed outside the loop once the record is found."
+      },
+      {
+        "key": "D",
+        "text": "By adding a dedicated 'Break' node, which OutSystems requires for every loop."
+      }
+    ],
+    "answer": "C",
+    "explanation": "OutSystems에는 별도의 Break 노드가 없기 때문에, 루프 안에서 If로 원하는 레코드를 찾았을 때 흐름을 End 노드나 루프 밖의 노드로 연결해 반복을 조기 종료합니다. For Each는 언제든 중단할 수 있으므로 A는 틀리고, List.Length를 0으로 만드는 것(B)이나 'Break' 노드(D)는 존재하지 않는 방식이라 오답입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'For Each' 루프 안에서 찾던 레코드를 발견하여 반복을 조기에 멈추고 싶습니다. OutSystems에서는 어떻게 합니까?",
+        "options": [
+          "'For Each'는 조기에 멈출 수 없으며 반드시 모든 레코드를 처리해야 한다.",
+          "리스트의 'Length' 속성을 0으로 설정하여 멈춘다.",
+          "원하는 레코드를 찾은 시점에 (예: If 분기에서) 루프 로직을 End 노드나 루프 밖의 노드로 연결한다.",
+          "모든 루프에 필수인 전용 'Break' 노드를 추가하여 멈춘다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-026",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Inside a 'For Each' loop you assign a new value to an attribute of 'List.Current'. What happens to that value?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The value is updated in the in-memory list only; it is not persisted to the database."
+      },
+      {
+        "key": "B",
+        "text": "The change is only visible to the next record in the loop."
+      },
+      {
+        "key": "C",
+        "text": "The loop crashes because lists are read-only while iterating."
+      },
+      {
+        "key": "D",
+        "text": "The change is automatically saved to the database."
+      }
+    ],
+    "answer": "A",
+    "explanation": "List.Current의 속성에 값을 대입하면 메모리에 로드된 리스트의 해당 레코드만 바뀌며, 데이터베이스에는 아무 영향도 주지 않습니다. DB에 반영하려면 CreateOrUpdate 같은 Entity Action을 별도로 호출해야 하므로 D는 틀리고, 리스트는 반복 중에도 수정 가능하므로 crash가 난다는 C도 오답입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'For Each' 루프 안에서 'List.Current'의 한 속성에 새 값을 대입합니다. 그 값은 어떻게 됩니까?",
+        "options": [
+          "메모리에 있는 리스트에서만 값이 바뀌며, 데이터베이스에는 저장되지 않는다.",
+          "그 변경은 루프의 다음 레코드에만 보인다.",
+          "반복 중 리스트는 읽기 전용이므로 루프가 즉시 오류로 중단된다.",
+          "변경 내용이 자동으로 데이터베이스에 저장된다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-027",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "In a Client Action you have a 'For Each' loop. After every record has been processed, what does the flow do?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It jumps to the Aggregate's 'On After Fetch' event."
+      },
+      {
+        "key": "B",
+        "text": "The flow automatically continues from the 'For Each' node's output connector to the next node in the action."
+      },
+      {
+        "key": "C",
+        "text": "It loops back to the 'Start' node of the action."
+      },
+      {
+        "key": "D",
+        "text": "It stops immediately without executing any node placed after the loop."
+      }
+    ],
+    "answer": "B",
+    "explanation": "For Each가 모든 레코드를 처리하고 나면, 루프 본문으로 가는 Cycle 경로가 아니라 For Each 노드의 출력 커넥터를 따라 그 다음 노드로 흐름이 자동으로 이어집니다. On After Fetch는 Aggregate의 이벤트라 무관하고(A), Start로 되돌아가거나(C) 아무 것도 실행하지 않고 끝난다(D)는 설명은 실제 동작과 다릅니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action에 'For Each' 루프가 있습니다. 모든 레코드를 처리한 후 흐름은 어떻게 됩니까?",
+        "options": [
+          "Aggregate의 'On After Fetch' 이벤트로 넘어간다.",
+          "'For Each' 노드의 출력 커넥터를 따라 Action의 다음 노드로 흐름이 자동으로 이어진다.",
+          "Action의 'Start' 노드로 다시 돌아간다.",
+          "루프 뒤에 배치된 노드를 실행하지 않고 즉시 종료된다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-028",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Before saving, you must confirm that a list of customer 'Emails' held in memory contains no duplicate values. What is the most common logic pattern to detect the duplicates?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Send the list to the server and rely on a Unique Index to throw an error."
+      },
+      {
+        "key": "B",
+        "text": "Use a nested loop (a 'For Each' inside another 'For Each') to compare each email against every other email."
+      },
+      {
+        "key": "C",
+        "text": "Use the 'ListFilter' action to check whether the count of a specific email is greater than 1."
+      },
+      {
+        "key": "D",
+        "text": "Turn on the built-in 'CheckDuplicates' property of the 'For Each' node."
+      }
+    ],
+    "answer": "B",
+    "explanation": "메모리에 있는 리스트에서 중복을 직접 찾는 가장 일반적인 방법은 For Each 안에 또 다른 For Each를 넣어 각 이메일을 나머지 모든 이메일과 비교하는 중첩 루프입니다. For Each에는 'CheckDuplicates' 같은 속성이 없어 D는 존재하지 않는 기능이고, Unique Index로 서버에서 예외를 던지는 방식(A)은 저장 전 클라이언트 검증 패턴이 아니며, 'ListFilter'(C)는 표준 제공 액션이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "저장하기 전에, 메모리에 담긴 고객 'Email' 리스트에 중복 값이 없는지 확인해야 합니다. 중복을 찾는 가장 일반적인 로직 패턴은 무엇입니까?",
+        "options": [
+          "리스트를 서버로 보내 Unique Index가 오류를 던지도록 한다.",
+          "중첩 루프('For Each' 안에 또 다른 'For Each')를 사용해 각 이메일을 다른 모든 이메일과 비교한다.",
+          "'ListFilter' 액션으로 특정 이메일의 개수가 1보다 큰지 확인한다.",
+          "'For Each' 노드에 내장된 'CheckDuplicates' 속성을 켠다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-029",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Data Action returns a list of 'Employees'. You want to increase the 'Salary' by 10% for everyone in the 'Sales' department before the list is displayed. Where is the best place to modify the list values?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In an Expression widget inside the List, showing 'Salary * 1.1'."
+      },
+      {
+        "key": "B",
+        "text": "By adding a calculated column 'Salary * 1.1' to the underlying query for every row."
+      },
+      {
+        "key": "C",
+        "text": "In the Data Action's 'On After Fetch', looping through the results and updating the 'Salary' attribute for Sales employees."
+      },
+      {
+        "key": "D",
+        "text": "In the Screen's 'OnInitialize' event."
+      }
+    ],
+    "answer": "C",
+    "explanation": "가져온 리스트 값을 조건에 따라 실제로 바꾸려면 Data Action의 On After Fetch에서 결과를 루프로 돌며 Sales 부서 직원의 Salary만 갱신하는 것이 가장 적절합니다. Expression(A)은 화면에 표시만 할 뿐 데이터를 바꾸지 않고, 계산 컬럼(B)은 부서 조건별로 다르게 적용하기 어렵고 원본 값도 대체하지 못하며, OnInitialize(D)는 데이터가 아직 준비되지 않는 시점이라 부적절합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Data Action이 'Employees' 리스트를 반환합니다. 리스트가 표시되기 전에 'Sales' 부서에 속한 모든 직원의 'Salary'를 10% 인상하려고 합니다. 리스트 값을 수정하기에 가장 좋은 위치는 어디입니까?",
+        "options": [
+          "List 안의 Expression 위젯에서 'Salary * 1.1'로 표시한다.",
+          "기반 쿼리에 모든 행에 대해 계산 컬럼 'Salary * 1.1'을 추가한다.",
+          "Data Action의 'On After Fetch'에서 결과를 루프로 돌며 Sales 직원의 'Salary' 속성을 갱신한다.",
+          "Screen의 'OnInitialize' 이벤트에서 수정한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "LFE-030",
+    "subtopic": "Logic Flows & Exception Handling",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A 'For Each' loop runs 1,000 times, and inside it you placed a 'Message' node to display the current index each iteration. What is the likely result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only the first and last messages are shown."
+      },
+      {
+        "key": "B",
+        "text": "The browser becomes slow or freezes while trying to render 1,000 feedback messages."
+      },
+      {
+        "key": "C",
+        "text": "The loop runs faster because the 'Message' node runs as a background process."
+      },
+      {
+        "key": "D",
+        "text": "OutSystems automatically merges the 1,000 messages into a single notification."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Message 노드는 화면에 피드백 메시지(toast)를 띄우는 UI 동작이므로, 루프에서 1,000번 호출하면 브라우저가 그 많은 메시지를 렌더링하느라 느려지거나 멈출 수 있습니다. OutSystems는 메시지를 자동으로 합치거나(D) 첫/마지막만 보여주지 않으며(A), Message 노드가 백그라운드로 돌아 루프를 빠르게 한다(C)는 것도 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'For Each' 루프가 1,000번 실행되고, 그 안에 매 반복마다 현재 인덱스를 표시하는 'Message' 노드를 넣었습니다. 어떤 결과가 예상됩니까?",
+        "options": [
+          "첫 번째와 마지막 메시지만 표시된다.",
+          "브라우저가 1,000개의 피드백 메시지를 렌더링하려다 느려지거나 멈춘다.",
+          "'Message' 노드가 백그라운드 프로세스로 동작해 루프가 더 빨라진다.",
+          "OutSystems가 1,000개의 메시지를 하나의 알림으로 자동으로 합친다."
+        ]
+      }
+    }
   }
 ]

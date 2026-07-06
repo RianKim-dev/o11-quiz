@@ -860,5 +860,365 @@
         ]
       }
     }
+  },
+  {
+    "id": "FDS-015",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Web App, a Data Action fetches a List of 'Student' records with their 'Grades'. You want to display the 'Top Student' name in a separate Expression widget outside the List. Where is the most efficient place to calculate the Top Student?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Screen's 'OnRender' event."
+      },
+      {
+        "key": "B",
+        "text": "Inside the Aggregate using a Group By with a Max function."
+      },
+      {
+        "key": "C",
+        "text": "Directly in the Expression widget by calling a ListFilter client action."
+      },
+      {
+        "key": "D",
+        "text": "In the 'OnAfterFetch' event of the Data Action."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Expression은 반드시 동기적이어야 하므로 ListFilter 같은 Client Action을 호출할 수 없어 C는 불가능합니다. OnRender는 화면이 다시 그려질 때마다 실행되어 계산을 반복하므로 비효율적입니다. Data Action의 OnAfterFetch는 데이터를 가져온 직후 서버에서 한 번만 실행되어 결과를 output/변수에 담기에 가장 적합한 위치입니다(정답 D). B의 Group By/Max는 최고 점수는 구해도 '학생 이름'을 깔끔하게 뽑아내지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web App에서 Data Action이 'Student' 레코드 목록과 그들의 'Grades'를 가져옵니다. List 바깥의 별도 Expression widget에 'Top Student' 이름을 표시하려고 합니다. Top Student를 계산하기에 가장 효율적인 위치는 어디입니까?",
+        "options": [
+          "Screen의 'OnRender' 이벤트.",
+          "Aggregate 안에서 Group By와 Max 함수를 사용.",
+          "Expression widget에서 직접 ListFilter client action을 호출.",
+          "Data Action의 'OnAfterFetch' 이벤트."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-016",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has a 'GetProducts' Aggregate configured with 'Fetch: Only on demand'. In the Screen's 'OnReady' event, a Client Action calls 'Refresh Data (GetProducts)'. How many times does the Aggregate fetch data when the screen opens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It depends on whether the data changed since the last screen visit."
+      },
+      {
+        "key": "B",
+        "text": "2 times."
+      },
+      {
+        "key": "C",
+        "text": "0 times."
+      },
+      {
+        "key": "D",
+        "text": "1 time."
+      }
+    ],
+    "answer": "D",
+    "explanation": "'Only on demand'는 화면이 열릴 때 자동으로 데이터를 가져오지 않습니다. 이후 OnReady 이벤트에서 Refresh Data(GetProducts)를 호출하면 그때 한 번 fetch가 실행됩니다. 따라서 총 1번 조회됩니다(정답 D). 자동 fetch가 없으므로 2번(B)이 아니고, Refresh Data를 명시적으로 호출했으니 0번(C)도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen에 'Fetch: Only on demand'로 설정된 'GetProducts' Aggregate가 있습니다. 이 Screen의 'OnReady' 이벤트에서 Client Action이 'Refresh Data (GetProducts)'를 호출합니다. 화면이 열릴 때 Aggregate는 몇 번 데이터를 가져옵니까?",
+        "options": [
+          "지난 방문 이후 데이터가 변경되었는지에 따라 달라진다.",
+          "2번.",
+          "0번.",
+          "1번."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-017",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A Screen Aggregate 'GetEmployees' has its 'Fetch' property set to 'Only on demand'. What happens when the Screen is opened?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate does not run until a 'Refresh Data' node for 'GetEmployees' is explicitly executed in a Client Action."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate runs once during the screen transition."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate runs, but the results stay hidden until requested."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate runs only if the user has the required permissions."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Fetch를 'Only on demand'로 두면 화면 진입 시 Aggregate가 자동 실행되지 않고, Client Action에서 해당 Aggregate에 대한 'Refresh Data' 노드를 명시적으로 호출할 때 비로소 실행됩니다. 권한과는 무관하며, 자동으로 한 번 실행되거나 결과만 숨겨지는 것도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면 Aggregate 'GetEmployees'의 'Fetch' 속성이 'Only on demand'로 설정되어 있습니다. 화면을 열면 어떤 동작이 일어납니까?",
+        "options": [
+          "Client Action에서 'GetEmployees'에 대한 'Refresh Data' 노드를 명시적으로 실행하기 전까지 Aggregate는 실행되지 않는다.",
+          "화면 전환 중에 Aggregate가 한 번 실행된다.",
+          "Aggregate는 실행되지만 요청 전까지 결과가 숨겨진다.",
+          "사용자가 필요한 권한을 가진 경우에만 Aggregate가 실행된다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-018",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You are building a search feature where a user types into an Input and a List of Products updates as they type. Which approach gives the smoothest user experience?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fetch all 10,000 Product records at start and filter them locally with JavaScript."
+      },
+      {
+        "key": "B",
+        "text": "Handle the Input's OnChange event with a short debounce (delay) before refreshing the data."
+      },
+      {
+        "key": "C",
+        "text": "Bind a Refresh Data node directly to the Input's OnChange with no delay."
+      },
+      {
+        "key": "D",
+        "text": "Require the user to click a Search button to refresh the data."
+      }
+    ],
+    "answer": "B",
+    "explanation": "정답은 B입니다. Debounce(디바운스)는 사용자가 타이핑을 잠시 멈춘 뒤 짧은 지연 후에만 Refresh Data를 실행하므로, 매 글자마다 서버를 호출하는 낭비를 줄여 가장 부드러운 UX를 제공합니다. A는 10,000건을 한꺼번에 가져와 초기 로딩이 느리고 비효율적입니다. C는 지연 없이 글자마다 Refresh Data를 호출해 서버 부하와 화면 깜빡임이 심합니다. D는 버튼 클릭이 필요해 '입력하는 대로 갱신'이라는 요구를 만족하지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "사용자가 Input에 입력하면 Product List가 입력하는 대로 갱신되는 검색 기능을 만들고 있습니다. 가장 부드러운 사용자 경험을 제공하는 방법은 무엇입니까?",
+        "options": [
+          "시작 시 10,000개의 Product 레코드를 모두 가져와 JavaScript로 로컬에서 필터링한다.",
+          "Input의 OnChange 이벤트를 짧은 debounce(지연)와 함께 처리한 뒤 데이터를 refresh한다.",
+          "지연 없이 Input의 OnChange에 Refresh Data 노드를 직접 연결한다.",
+          "사용자가 Search 버튼을 클릭해야 데이터가 refresh되도록 한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-019",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Reactive Screen lists Employees. The Aggregate's source exposes 20 attributes, but the List only uses 3 of them on screen. How does OutSystems handle the columns that are fetched?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The developer must manually deselect the unused attributes on the Aggregate's 'Columns' tab."
+      },
+      {
+        "key": "B",
+        "text": "The platform automatically optimizes the SQL to fetch only the attributes actually used."
+      },
+      {
+        "key": "C",
+        "text": "It fetches all 20 columns from the database but sends only the 3 used ones to the browser."
+      },
+      {
+        "key": "D",
+        "text": "It always fetches all 20 columns because an Aggregate must retrieve the full record."
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems는 Aggregate가 실제로 화면이나 로직에서 사용되는 속성만 파악해 그 컬럼만 조회하도록 SQL을 자동으로 최적화합니다(B). 즉 20개 속성 중 화면에서 쓰는 3개만 데이터베이스에서 가져옵니다. C처럼 20개를 모두 DB에서 가져온 뒤 브라우저 전송만 줄이는 것이 아니고, D처럼 항상 전체 레코드를 가져오는 것도 아니며, A처럼 개발자가 수동으로 컬럼을 끌 필요도 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Screen이 Employee 목록을 표시합니다. Aggregate 소스는 20개 속성을 노출하지만 List는 화면에서 그중 3개만 사용합니다. OutSystems는 실제로 가져오는 컬럼을 어떻게 처리합니까?",
+        "options": [
+          "개발자가 Aggregate의 'Columns' 탭에서 사용하지 않는 속성을 직접 해제해야 한다.",
+          "플랫폼이 실제로 사용된 속성만 가져오도록 SQL을 자동으로 최적화한다.",
+          "20개 컬럼을 모두 DB에서 가져오되 사용된 3개만 브라우저로 보낸다.",
+          "Aggregate는 항상 전체 레코드를 가져오므로 20개 컬럼을 모두 가져온다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-020",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "When building a paginated List in a Reactive Web App, why is it better to use the Aggregate's 'Count' property for the total record count instead of 'List.Length'?",
+    "options": [
+      {
+        "key": "A",
+        "text": "List.Length throws an error when the list is empty."
+      },
+      {
+        "key": "B",
+        "text": "List.Length only counts the records currently loaded in the browser (e.g., the current page), not the full result."
+      },
+      {
+        "key": "C",
+        "text": "Aggregate.Count lets you bypass the Aggregate's filters."
+      },
+      {
+        "key": "D",
+        "text": "Aggregate.Count is faster because it is a cached client variable."
+      }
+    ],
+    "answer": "B",
+    "explanation": "페이지네이션에서 List.Length는 현재 브라우저에 로드된 레코드(예: 지금 페이지의 행)만 세므로 전체 건수를 나타내지 못합니다(B). 반면 Aggregate의 'Count' 속성은 Max Records 같은 페이지 제한과 무관하게 필터에 맞는 전체 레코드 수를 돌려주므로 총 페이지 계산에 적합합니다. C는 Count가 필터를 무시한다는 잘못된 설명이고, D는 캐시된 client variable이라 빠르다는 근거 없는 주장이며, A처럼 빈 목록에서 List.Length가 오류를 내지도 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web App에서 페이지네이션 List를 만들 때, 전체 레코드 수로 'List.Length' 대신 Aggregate의 'Count' 속성을 쓰는 것이 더 나은 이유는 무엇입니까?",
+        "options": [
+          "목록이 비어 있으면 List.Length가 오류를 발생시킨다.",
+          "List.Length는 현재 브라우저에 로드된 레코드(예: 현재 페이지)만 세며 전체 결과를 세지 않는다.",
+          "Aggregate.Count는 Aggregate의 필터를 우회할 수 있게 해준다.",
+          "Aggregate.Count는 캐시된 client variable이라 더 빠르다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-021",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Data Action 'GetSalesSummary' returns a Total and a List, and its input parameter is bound to a Local Variable 'SelectedYear'. What happens when you change the value of 'SelectedYear'?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You must manually call 'Refresh Data' on the Data Action."
+      },
+      {
+        "key": "B",
+        "text": "The Data Action re-fetches automatically because its input changed."
+      },
+      {
+        "key": "C",
+        "text": "The screen crashes because the Data Action is now out of sync."
+      },
+      {
+        "key": "D",
+        "text": "It only re-fetches if the Data Action is set to 'Fetch: At Start'."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Data Action(과 Aggregate)은 입력 파라미터에 대한 의존성(dependency)을 추적하기 때문에, 입력에 바인딩된 변수 값이 바뀌면 자동으로 다시 실행된다. 따라서 수동으로 Refresh Data를 호출할 필요가 없고(A 오답), 데이터가 어긋나 크래시가 나지도 않으며(C 오답), 이 자동 재실행은 'At Start' 설정 여부와 무관하게 동작한다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Data Action 'GetSalesSummary'는 Total과 List를 반환하며, 그 입력 파라미터는 Local Variable 'SelectedYear'에 바인딩되어 있습니다. 'SelectedYear' 값을 변경하면 어떻게 됩니까?",
+        "options": [
+          "Data Action에 대해 'Refresh Data'를 수동으로 호출해야 한다.",
+          "입력이 바뀌었으므로 Data Action이 자동으로 다시 조회한다.",
+          "Data Action이 동기화되지 않아 화면이 크래시된다.",
+          "Data Action이 'Fetch: At Start'로 설정된 경우에만 다시 조회한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-022",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A screen shows a List of Product records fetched by an Aggregate, and each row has a Delete button that calls a Server Action to delete the product. After the delete succeeds, what is the recommended way to update the displayed List?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use 'ListRemove' to drop the item directly from the Aggregate's result set."
+      },
+      {
+        "key": "B",
+        "text": "Do nothing; Reactive Aggregates automatically detect database changes."
+      },
+      {
+        "key": "C",
+        "text": "Navigate to the same screen again to force a full reload."
+      },
+      {
+        "key": "D",
+        "text": "Call 'Refresh Data' on the Aggregate that fetches the products."
+      }
+    ],
+    "answer": "D",
+    "explanation": "삭제 후 화면의 목록을 실제 DB 상태와 일치시키려면 해당 Aggregate에 Refresh Data를 호출해 다시 조회하는 것이 권장 방식이다. Aggregate는 DB 변경을 자동으로 감지하지 않으므로 아무것도 하지 않으면 갱신되지 않고(B 오답), 같은 화면으로 다시 이동해 전체를 리로드하는 것은 비효율적이며(C 오답), Aggregate의 결과 집합은 ListRemove로 직접 조작할 수 없다(A 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면에 Aggregate로 조회한 Product 레코드 목록이 있고, 각 행에는 해당 제품을 삭제하는 Server Action을 호출하는 Delete 버튼이 있습니다. 삭제가 성공한 후 표시된 목록을 갱신하는 권장 방법은 무엇입니까?",
+        "options": [
+          "'ListRemove'로 Aggregate의 결과 집합에서 해당 항목을 직접 제거한다.",
+          "아무것도 하지 않는다. Reactive Aggregate가 데이터베이스 변경을 자동으로 감지한다.",
+          "같은 화면으로 다시 이동해 전체를 강제로 리로드한다.",
+          "제품을 조회하는 Aggregate에 'Refresh Data'를 호출한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-023",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A Reactive Screen has an Aggregate with 'Fetch: At Start' and a Data Action, both providing data for the same table. Which statement about their execution is true?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They run sequentially to avoid database locking."
+      },
+      {
+        "key": "B",
+        "text": "The Data Action always finishes first because it runs on the server."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate and the Data Action run in parallel."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate must finish before the Data Action can start."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'Fetch: At Start'로 설정된 Aggregate와 Data Action은 화면 초기화 시 서로 기다리지 않고 병렬로 동시에 실행된다. 데이터베이스 잠금 때문에 순차 실행되는 것이 아니며(A 오답), 한쪽이 먼저 끝나야 다른 쪽이 시작되는 것도 아니고(D 오답), 서버에서 실행된다고 해서 Data Action이 항상 먼저 끝나는 것도 아니다(B 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Screen에 'Fetch: At Start'로 설정된 Aggregate와 Data Action이 있고, 둘 다 같은 테이블에 데이터를 제공합니다. 이들의 실행에 대해 옳은 설명은 무엇입니까?",
+        "options": [
+          "데이터베이스 잠금을 막기 위해 순차적으로 실행된다.",
+          "Data Action은 서버에서 실행되므로 항상 먼저 끝난다.",
+          "Aggregate와 Data Action은 병렬로 실행된다.",
+          "Aggregate가 끝나야 Data Action이 시작될 수 있다."
+        ]
+      }
+    }
   }
 ]

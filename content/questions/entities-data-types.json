@@ -919,5 +919,125 @@
         ]
       }
     }
+  },
+  {
+    "id": "ENT-016",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "In Entity 'Order' you must guarantee that no two orders share the same 'TrackingNumber' (a Text attribute). What is the most robust way to implement this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a Client Action that checks whether the TrackingNumber already exists before saving."
+      },
+      {
+        "key": "B",
+        "text": "Set the 'Mandatory' property of TrackingNumber to Yes."
+      },
+      {
+        "key": "C",
+        "text": "In the Server Action, run a 'GetOrder' Aggregate filtered on TrackingNumber with an If node before creating."
+      },
+      {
+        "key": "D",
+        "text": "Create a Unique Index on the 'TrackingNumber' attribute of the 'Order' entity."
+      }
+    ],
+    "answer": "D",
+    "explanation": "중복을 가장 견고하게 막는 방법은 데이터베이스 레벨에서 보장되는 Unique Index입니다(정답 D). Client/Server Action으로 조회 후 검사하는 방식(A, C)은 두 요청이 동시에 실행되는 동시성 상황에서 검사와 삽입 사이에 중복이 끼어들 수 있어 안전하지 않습니다. Mandatory(B)는 값이 비어 있지 않게 할 뿐 중복은 막지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity 'Order'에서 어떤 두 주문도 동일한 'TrackingNumber'(Text 속성)를 갖지 않도록 보장해야 합니다. 이를 구현하는 가장 견고한 방법은 무엇입니까?",
+        "options": [
+          "저장 전에 TrackingNumber가 이미 존재하는지 확인하는 Client Action을 추가한다.",
+          "TrackingNumber의 'Mandatory' 속성을 Yes로 설정한다.",
+          "Server Action에서 TrackingNumber로 필터링한 'GetOrder' Aggregate와 If 노드를 생성 전에 실행한다.",
+          "'Order' 엔티티의 'TrackingNumber' 속성에 Unique Index를 생성한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-017",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "To guarantee that the 'ProductCode' attribute in the 'Product' Entity is never duplicated across records, which approach is the most reliable?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Show a 'Validation' message on the screen when the user types a code that already exists."
+      },
+      {
+        "key": "B",
+        "text": "Create an Index on 'ProductCode' and set its 'Unique' property to Yes."
+      },
+      {
+        "key": "C",
+        "text": "Use a Client Action to search for the code before calling the 'CreateProduct' action."
+      },
+      {
+        "key": "D",
+        "text": "Set the 'ProductCode' attribute to Mandatory."
+      }
+    ],
+    "answer": "B",
+    "explanation": "ProductCode 값이 중복되지 않도록 가장 확실하게 보장하는 방법은 해당 attribute에 Unique 속성이 Yes인 Index를 만드는 것입니다. Unique Index를 켜면 데이터베이스 레벨에서 중복 입력 자체를 막아 주기 때문에 어떤 경로로 데이터가 들어와도 무결성이 유지됩니다. 화면 Validation(A)이나 Client Action 검색(C)은 우회되거나 동시성 문제로 중복이 새어들 수 있고, Mandatory(D)는 값을 비워두지 못하게 할 뿐 중복은 전혀 막지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Product' Entity의 'ProductCode' attribute가 여러 레코드에서 절대 중복되지 않도록 보장하려면 가장 확실한 방법은 무엇입니까?",
+        "options": [
+          "사용자가 이미 존재하는 코드를 입력하면 화면에 'Validation' 메시지를 표시한다.",
+          "'ProductCode'에 Index를 만들고 'Unique' 속성을 Yes로 설정한다.",
+          "'CreateProduct' 액션을 호출하기 전에 Client Action으로 해당 코드를 먼저 검색한다.",
+          "'ProductCode' attribute를 Mandatory로 설정한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-018",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "To guarantee that the 'Email' attribute is unique across every row of the 'Customer' Entity, what is the best practice?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Store all emails in a Static Entity."
+      },
+      {
+        "key": "B",
+        "text": "Check for duplicates in an OnBeforeSave Client Action."
+      },
+      {
+        "key": "C",
+        "text": "Set the 'Email' attribute to Mandatory."
+      },
+      {
+        "key": "D",
+        "text": "Create a Unique Index on the 'Email' attribute."
+      }
+    ],
+    "answer": "D",
+    "explanation": "정답은 D입니다. Unique Index는 데이터베이스 수준에서 중복을 막아 어떤 경로로 저장되든 유일성을 보장하는 가장 견고한 방법입니다. B처럼 코드로만 검사하면 동시 저장(race condition)이나 다른 화면/로직을 통한 삽입을 놓칠 수 있습니다. C의 Mandatory는 값이 반드시 입력되게 할 뿐 중복은 막지 못합니다. A의 Static Entity는 고정된 값 목록을 저장하는 용도로 사용자 데이터의 유일성 보장과는 무관합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Customer' Entity의 모든 행에서 'Email' 속성이 유일하도록 보장하려면, 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          "모든 이메일을 Static Entity에 저장한다.",
+          "OnBeforeSave Client Action에서 중복을 검사한다.",
+          "'Email' 속성을 Mandatory로 설정한다.",
+          "'Email' 속성에 Unique Index를 만든다."
+        ]
+      }
+    }
   }
 ]

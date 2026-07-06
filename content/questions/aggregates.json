@@ -1993,5 +1993,925 @@
         ]
       }
     }
+  },
+  {
+    "id": "AGG-033",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate uses a 'With or Without' join between 'Project' and 'Task'. You then add the filter 'Task.IsActive = True'. How does this affect the output?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate returns an error because you cannot filter on optionally joined entities."
+      },
+      {
+        "key": "B",
+        "text": "It returns all Projects and all Tasks, ignoring the filter for the 'Without' rows."
+      },
+      {
+        "key": "C",
+        "text": "It returns only Projects that have at least one active Task."
+      },
+      {
+        "key": "D",
+        "text": "It returns all Projects, but Task attributes are empty for inactive tasks."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'With or Without'는 left join이라 원래는 Task가 없는 Project도 포함됩니다. 하지만 오른쪽 엔티티 속성인 Task.IsActive에 필터를 걸면, Task가 없는 행은 IsActive가 null이라 True 조건을 만족하지 못해 제외됩니다. 결과적으로 활성 Task가 하나 이상 있는 Project만 남으므로(정답 C), 사실상 inner join처럼 동작합니다. 모든 Project가 그대로 남는다는 B, D는 필터가 null 행을 걸러낸다는 점을 놓친 것입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Project'와 'Task' 사이에 'With or Without' 조인을 사용합니다. 여기에 'Task.IsActive = True' 필터를 추가합니다. 출력에 어떤 영향을 줍니까?",
+        "options": [
+          "선택적으로 조인된 엔티티에는 필터를 걸 수 없으므로 Aggregate가 오류를 반환한다.",
+          "모든 Project와 모든 Task를 반환하며 'Without' 행에 대해서는 필터를 무시한다.",
+          "활성 Task를 하나 이상 가진 Project만 반환한다.",
+          "모든 Project를 반환하되 비활성 Task의 Task 속성은 비어 있게 표시한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-034",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'Priority' has the records Low, Medium, and High. Entity 'Ticket' has a 'PriorityId' attribute. In an Aggregate joining 'Ticket' with 'Priority' (Only With), what is the result for a Ticket whose 'PriorityId' equals NullIdentifier()?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Ticket is included and its Priority attributes default to 'Low'."
+      },
+      {
+        "key": "B",
+        "text": "The Ticket is included with empty Priority attributes."
+      },
+      {
+        "key": "C",
+        "text": "The Ticket is excluded from the Aggregate results."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate crashes with a foreign key violation error."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'Only With'는 inner join이므로 조인 조건이 맞는 행만 남습니다. PriorityId가 NullIdentifier()인 Ticket은 매칭되는 Priority 레코드가 없으므로 결과에서 제외됩니다(정답 C). Static Entity라도 null FK에 대응하는 레코드는 존재하지 않으므로 기본값 'Low'로 채워지거나(A) 빈 값으로 포함되지(B) 않으며, 단순히 매칭이 없을 뿐 FK 위반 오류(D)가 발생하는 것도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'Priority'에 Low, Medium, High 레코드가 있습니다. Entity 'Ticket'에는 'PriorityId' 속성이 있습니다. 'Ticket'과 'Priority'를 조인(Only With)하는 Aggregate에서, 'PriorityId'가 NullIdentifier()인 Ticket의 결과는 어떻게 됩니까?",
+        "options": [
+          "Ticket이 포함되고 Priority 속성은 기본값 'Low'로 표시된다.",
+          "Ticket이 포함되고 Priority 속성은 비어 있게 표시된다.",
+          "Ticket이 Aggregate 결과에서 제외된다.",
+          "Aggregate가 foreign key 위반 오류로 중단된다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-035",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You want to list 'Orders' and, for each order, the total count of its 'OrderItems'. You build an Aggregate with a 'Group By' on Order.Id and a 'Count' on OrderItem.Id. What happens to the other Order attributes, such as OrderDate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They are automatically available in the Aggregate output."
+      },
+      {
+        "key": "B",
+        "text": "You must also apply a 'Group By' to OrderDate for it to appear in the output."
+      },
+      {
+        "key": "C",
+        "text": "They can be accessed via the 'Order.List.Current' property on the Screen."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate automatically applies a 'Max' function to all non-grouped attributes."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate에 Group By를 적용하면 그룹 기준으로 삼은 속성과 집계 함수(Count, Max 등) 결과만 출력에 나타납니다. 따라서 OrderDate처럼 그룹에 포함되지 않은 속성을 보려면 그것도 Group By에 추가해야 합니다(정답 B). 자동으로 출력되지 않고(A), 비그룹 속성에 Max가 자동 적용되지도 않습니다(D).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Orders' 목록과 각 주문의 'OrderItems' 총 개수를 표시하려고 합니다. Order.Id에 'Group By', OrderItem.Id에 'Count'를 사용하는 Aggregate를 만듭니다. OrderDate 같은 다른 Order 속성은 어떻게 됩니까?",
+        "options": [
+          "Aggregate 출력에서 자동으로 사용할 수 있다.",
+          "출력에 나타나게 하려면 OrderDate에도 'Group By'를 적용해야 한다.",
+          "Screen에서 'Order.List.Current' 속성으로 접근할 수 있다.",
+          "Aggregate가 그룹화되지 않은 모든 속성에 'Max' 함수를 자동 적용한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-036",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate 'GetEmployees' joins 'Employee' with 'ProfilePicture' using a 'With or Without' join. Inside a List, you want an Expression to show a default image URL when the ProfilePicture is missing. Which logic is best for the Image URL?",
+    "options": [
+      {
+        "key": "A",
+        "text": "If(GetEmployees.List.Current.ProfilePicture.Id = NullIdentifier(), DefaultImageURL, GetEmployees.List.Current.ProfilePicture.URL)"
+      },
+      {
+        "key": "B",
+        "text": "You should instead add a Filter in the Aggregate to exclude employees without pictures."
+      },
+      {
+        "key": "C",
+        "text": "If(GetEmployees.List.Current.ProfilePicture = Null, DefaultImageURL, GetEmployees.List.Current.ProfilePicture.URL)"
+      },
+      {
+        "key": "D",
+        "text": "If(GetEmployees.List.Current.Employee.ProfilePictureId = NullIdentifier(), GetEmployees.List.Current.ProfilePicture.URL, DefaultImageURL)"
+      }
+    ],
+    "answer": "A",
+    "explanation": "'With or Without'는 left join이라 매칭되는 ProfilePicture가 없으면 조인된 레코드의 Id가 NullIdentifier가 됩니다. 따라서 ProfilePicture.Id = NullIdentifier()로 확인해 기본 이미지를 보여주는 A가 정확합니다. C의 '= Null'은 OutSystems에서 Id 비교에 사용하는 유효한 방식이 아니며, B는 사진 없는 직원을 아예 제외해 요구사항과 맞지 않고, D는 If의 true/false 분기가 뒤바뀌어 있어 로직이 반대로 동작합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate 'GetEmployees'가 'Employee'와 'ProfilePicture'를 'With or Without' 조인으로 가져옵니다. List 안에서 ProfilePicture가 없을 때 기본 이미지 URL을 표시하는 Expression을 만들려고 합니다. Image URL에 가장 적합한 로직은 무엇입니까?",
+        "options": [
+          "If(GetEmployees.List.Current.ProfilePicture.Id = NullIdentifier(), DefaultImageURL, GetEmployees.List.Current.ProfilePicture.URL)",
+          "대신 Aggregate에 Filter를 추가해 사진이 없는 직원을 제외해야 한다.",
+          "If(GetEmployees.List.Current.ProfilePicture = Null, DefaultImageURL, GetEmployees.List.Current.ProfilePicture.URL)",
+          "If(GetEmployees.List.Current.Employee.ProfilePictureId = NullIdentifier(), GetEmployees.List.Current.ProfilePicture.URL, DefaultImageURL)"
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-037",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen shows Tickets via an Aggregate and you want to filter by 'Priority' (a Static Entity). A Dropdown is bound to a Local Variable 'SelectedPriorityId'. To show ALL Tickets when the Dropdown is empty, which Filter expression is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "If(SelectedPriorityId = NullIdentifier(), True, Ticket.PriorityId = SelectedPriorityId)"
+      },
+      {
+        "key": "B",
+        "text": "Ticket.PriorityId = SelectedPriorityId"
+      },
+      {
+        "key": "C",
+        "text": "Ticket.PriorityId = SelectedPriorityId and SelectedPriorityId <> NullIdentifier()"
+      },
+      {
+        "key": "D",
+        "text": "Ticket.PriorityId <> SelectedPriorityId"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Dropdown이 비어 있으면 Local Variable 값은 NullIdentifier()가 됩니다. If(SelectedPriorityId = NullIdentifier(), True, ...)는 비어 있을 때 조건을 True로 만들어 모든 Ticket을 보여주고, 값이 선택되면 그 Priority로만 필터합니다. B와 C는 비어 있을 때 PriorityId = NullIdentifier()인 행(사실상 없음)만 찾으므로 전체가 안 보이고, D는 논리가 반대입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면에서 Aggregate로 Ticket을 조회하고, 'Priority'(Static Entity)로 필터하려고 합니다. Dropdown을 Local Variable 'SelectedPriorityId'에 바인딩했습니다. Dropdown이 비어 있을 때 모든 Ticket을 보여주려면 올바른 Filter 식은 무엇입니까?",
+        "options": [
+          "If(SelectedPriorityId = NullIdentifier(), True, Ticket.PriorityId = SelectedPriorityId)",
+          "Ticket.PriorityId = SelectedPriorityId",
+          "Ticket.PriorityId = SelectedPriorityId and SelectedPriorityId <> NullIdentifier()",
+          "Ticket.PriorityId <> SelectedPriorityId"
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-038",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate uses a 'With or Without' join from 'Product' to 'Supplier'. You then add the Filter 'Supplier.Id <> NullIdentifier()'. What is the result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It behaves like an 'Only With' join, returning only Products that have a matching Supplier."
+      },
+      {
+        "key": "B",
+        "text": "It returns all Products, showing empty Supplier values where no match exists."
+      },
+      {
+        "key": "C",
+        "text": "It returns only the Products that do NOT have a matching Supplier."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate ignores the filter because it contradicts the join type."
+      }
+    ],
+    "answer": "A",
+    "explanation": "'With or Without' join은 left join이라 Supplier에 매칭이 없는 Product도 포함하고 Supplier 컬럼은 null이 됩니다. 여기에 Supplier.Id <> NullIdentifier() 필터를 걸면 null인 행이 제거되어 결국 Supplier가 있는 Product만 남고, 이는 'Only With'(inner join)와 같은 결과가 됩니다. 필터가 무시되거나 매칭 없는 행만 남는 것이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Product'에서 'Supplier'로 'With or Without' join을 사용합니다. 여기에 Filter 'Supplier.Id <> NullIdentifier()'를 추가하면 결과는 어떻게 됩니까?",
+        "options": [
+          "'Only With' join처럼 동작하여, 매칭되는 Supplier가 있는 Product만 반환한다.",
+          "모든 Product를 반환하되 매칭이 없는 곳은 Supplier 값이 비어 있게 표시된다.",
+          "매칭되는 Supplier가 없는 Product만 반환한다.",
+          "join 타입과 모순되므로 Aggregate가 이 필터를 무시한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-039",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins 'Order' with 'Customer' using 'Only With'. One Order has a CustomerId that no longer exists in Customer (deleted directly in the database). What happens when the Aggregate runs?",
+    "options": [
+      {
+        "key": "A",
+        "text": "That Order record is excluded from the result set."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate fails with a 'Reference Integrity' error."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate returns the Order with empty Customer data."
+      },
+      {
+        "key": "D",
+        "text": "The platform automatically switches to a 'With or Without' join to avoid data loss."
+      }
+    ],
+    "answer": "A",
+    "explanation": "'Only With'는 inner join이므로 매칭되는 Customer가 없는 Order 행은 결과에서 제외됩니다. 수동 삭제로 CustomerId가 존재하지 않으면 그 Order는 그냥 빠집니다. Reference Integrity 오류가 나거나 자동으로 left join으로 바뀌지 않으며, 빈 Customer 데이터로 표시되는 것은 'With or Without' 동작이라 여기서는 해당하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate가 'Only With'로 'Order'와 'Customer'를 join합니다. 어떤 Order의 CustomerId가 (DB에서 직접 삭제되어) Customer에 더 이상 존재하지 않습니다. Aggregate가 실행되면 어떻게 됩니까?",
+        "options": [
+          "해당 Order 레코드가 결과에서 제외된다.",
+          "Aggregate가 'Reference Integrity' 오류로 실패한다.",
+          "Aggregate가 그 Order를 빈 Customer 데이터와 함께 반환한다.",
+          "데이터 손실을 막기 위해 플랫폼이 자동으로 'With or Without' join으로 바꾼다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-040",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You implement a search over Products with an Aggregate. When the search box is empty, all Products must be shown. Which single Filter is the simplest and correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Product.Name like \"%\" + SearchVar + \"%\""
+      },
+      {
+        "key": "B",
+        "text": "Product.Name = SearchVar"
+      },
+      {
+        "key": "C",
+        "text": "Product.Name like SearchVar"
+      },
+      {
+        "key": "D",
+        "text": "Product.Name like \"%\" + SearchVar + \"%\" and SearchVar <> \"\""
+      }
+    ],
+    "answer": "A",
+    "explanation": "검색어가 비어 있을 때 Product.Name like \"%\" + SearchVar + \"%\" 는 \"%%\" 가 되어 모든 Product를 반환하므로 별도 조건 없이 가장 간단하고 효율적입니다. B(=)와 C(wildcard 없는 like)는 정확히 일치하는 것만 찾아 빈 검색에서 아무것도 안 나오고, D는 SearchVar <> \"\" 조건 때문에 빈 검색에서 오히려 전부 제외됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate로 Product 검색을 구현합니다. 검색창이 비어 있으면 모든 Product가 보여야 합니다. 가장 간단하고 올바른 단일 Filter는 무엇입니까?",
+        "options": [
+          "Product.Name like \"%\" + SearchVar + \"%\"",
+          "Product.Name = SearchVar",
+          "Product.Name like SearchVar",
+          "Product.Name like \"%\" + SearchVar + \"%\" and SearchVar <> \"\""
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-041",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate you use 'Group By' Region to compute total sales per Region, and you also want to display each Region's 'ManagerName'. How must 'ManagerName' be handled?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It must also be in 'Group By', or use an aggregation function such as Max or Min."
+      },
+      {
+        "key": "B",
+        "text": "It is grouped automatically by the platform because it belongs to the Region Entity."
+      },
+      {
+        "key": "C",
+        "text": "It can be shown normally as long as Region is one of the Aggregate sources."
+      },
+      {
+        "key": "D",
+        "text": "It cannot be shown in a grouped Aggregate; a separate fetch is required."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Group By를 쓰면 그룹 기준이 아닌 attribute는 그대로 표시할 수 없습니다. ManagerName을 보여주려면 그것도 Group By에 추가하거나 Max/Min 같은 aggregation function을 적용해야 합니다. 플랫폼이 자동으로 그룹핑해 주지 않으며, 표시가 불가능한 것도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 'Group By' Region으로 Region별 총 매출을 계산하면서, 각 Region의 'ManagerName'도 표시하려고 합니다. 'ManagerName'은 어떻게 처리해야 합니까?",
+        "options": [
+          "'Group By'에 함께 넣거나, Max나 Min 같은 aggregation function을 적용해야 한다.",
+          "Region Entity에 속하므로 플랫폼이 자동으로 그룹핑해 준다.",
+          "Region이 Aggregate source에 있기만 하면 그냥 표시할 수 있다.",
+          "그룹된 Aggregate에서는 표시할 수 없으며, 별도 fetch가 필요하다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-042",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate you create a calculated attribute 'FinalPrice' as 'Price * (1 - Discount)'. You want the result list sorted by 'FinalPrice'. How is this achieved?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a separate Index for the formula in the database."
+      },
+      {
+        "key": "B",
+        "text": "Add a Sort to the Aggregate and select the 'FinalPrice' attribute."
+      },
+      {
+        "key": "C",
+        "text": "Use the ListSort client action on the result after the fetch completes."
+      },
+      {
+        "key": "D",
+        "text": "Calculated attributes cannot be used for sorting in an Aggregate."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate에서 만든 계산 attribute(FinalPrice)도 Sort를 추가해 정렬 기준으로 선택할 수 있습니다. Aggregate의 Sorts 영역에서 계산된 컬럼을 지정하면 데이터베이스 쿼리 수준에서 정렬됩니다. 별도 Index(A)는 계산식 정렬과 무관하고, fetch 후 ListSort(C)는 가능은 하나 불필요하게 비효율적이며, 계산 attribute도 당연히 정렬 가능하므로 D는 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate에서 'Price * (1 - Discount)'로 계산된 attribute 'FinalPrice'를 만들었습니다. 결과 목록을 이 'FinalPrice' 기준으로 정렬하려면 어떻게 해야 합니까?",
+        "options": [
+          "데이터베이스에 그 계산식에 대한 별도 Index를 만든다.",
+          "Aggregate에 Sort를 추가하고 'FinalPrice' attribute를 선택한다.",
+          "fetch가 끝난 후 결과에 ListSort client action을 사용한다.",
+          "계산된 attribute는 Aggregate에서 정렬 기준으로 사용할 수 없다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-043",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "You have an Aggregate with a 'With or Without' join between 'Employee' and 'Profile'. You add a Filter 'Profile.IsActive = True'. How does this affect the records returned?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It returns an error because 'With or Without' joins cannot be filtered."
+      },
+      {
+        "key": "B",
+        "text": "It returns only Employees that have an active Profile."
+      },
+      {
+        "key": "C",
+        "text": "It returns all Employees and all Profiles, regardless of the filter."
+      },
+      {
+        "key": "D",
+        "text": "It returns all Employees; if they have no active profile, the profile columns are null."
+      }
+    ],
+    "answer": "B",
+    "explanation": "'With or Without'는 left join이라 원래는 Profile이 없는 Employee도 모두 나오지만, Filter에 Profile.IsActive = True를 추가하면 Profile이 없는(=IsActive가 null인) 행은 조건을 만족하지 못해 제외됩니다. 결과적으로 활성 Profile을 가진 Employee만 남아 사실상 inner join처럼 동작합니다. 그래서 정답은 B이고, 모든 Employee가 유지된다는 D는 outer join의 오른쪽 attribute에 필터를 걸었을 때의 실제 동작을 잘못 설명한 것입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Employee'와 'Profile' 사이에 'With or Without' join이 있는 Aggregate가 있습니다. 여기에 'Profile.IsActive = True' Filter를 추가하면 반환되는 레코드에 어떤 영향을 줍니까?",
+        "options": [
+          "'With or Without' join은 필터링할 수 없으므로 오류가 발생한다.",
+          "활성 Profile을 가진 Employee만 반환된다.",
+          "필터와 상관없이 모든 Employee와 모든 Profile을 반환한다.",
+          "모든 Employee를 반환하며, 활성 Profile이 없으면 profile 컬럼이 null이 된다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-044",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You are building a Dashboard. You need to fetch a list of 'Sales' and calculate 'Total Revenue' (Sum) and 'Average Sale' (Avg) for the current month. Where is the most efficient place to perform these two calculations?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Aggregate itself, using the 'Sum' and 'Average' aggregate functions."
+      },
+      {
+        "key": "B",
+        "text": "In the 'OnAfterFetch' event of the Aggregate using a JavaScript node."
+      },
+      {
+        "key": "C",
+        "text": "In the 'OnReady' event using a 'For Each' loop over the Sales list."
+      },
+      {
+        "key": "D",
+        "text": "In an Expression widget on the screen using the 'ListFilter' action."
+      }
+    ],
+    "answer": "A",
+    "explanation": "합계(Total Revenue)와 평균(Average Sale)은 Aggregate 자체에서 Sum, Average 같은 집계 함수를 사용해 데이터베이스에서 계산하는 것이 가장 효율적입니다. 이렇게 하면 전체 레코드를 클라이언트로 가져와 반복 처리할 필요 없이 DB가 계산한 값만 돌려받습니다. OnAfterFetch의 JavaScript(B)나 For Each 루프(C)는 클라이언트 부하가 크고, Expression의 ListFilter(D)는 집계 계산 용도가 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Dashboard를 만들고 있습니다. 'Sales' 목록을 가져오고 이번 달의 'Total Revenue'(Sum)와 'Average Sale'(Avg)을 계산해야 합니다. 이 두 계산을 수행하기에 가장 효율적인 위치는 어디입니까?",
+        "options": [
+          "Aggregate 자체에서 'Sum'과 'Average' 집계 함수를 사용한다.",
+          "Aggregate의 'OnAfterFetch' 이벤트에서 JavaScript 노드를 사용한다.",
+          "'OnReady' 이벤트에서 Sales 목록에 대해 'For Each' 루프를 사용한다.",
+          "화면의 Expression 위젯에서 'ListFilter' 액션을 사용한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-045",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A 'Ticket' Entity has a 'PriorityId' (referencing a Static Entity 'Priority'). If a Ticket record holds 'NullIdentifier()' in its 'PriorityId', what happens in an Aggregate that joins 'Ticket' with 'Priority' using 'Only With'?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Ticket is completely excluded from the result set."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate execution stops and throws a Foreign Key exception."
+      },
+      {
+        "key": "C",
+        "text": "The Ticket is shown with the 'Low' priority by default."
+      },
+      {
+        "key": "D",
+        "text": "The Ticket is shown, but the Priority Label is an empty string."
+      }
+    ],
+    "answer": "A",
+    "explanation": "'Only With'는 inner join이므로 join 조건에 맞는 짝이 있는 행만 반환합니다. PriorityId가 NullIdentifier()(0)인 Ticket은 Priority Static Entity에 대응되는 레코드가 없어 결과에서 완전히 제외됩니다. 예외가 발생하지도(B), 기본값 Low가 채워지지도(C), 빈 라벨로 표시되지도(D) 않고 그냥 사라집니다. 이런 Ticket도 보여주려면 'With or Without'(left join)를 써야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Ticket' Entity에 Static Entity 'Priority'를 참조하는 'PriorityId'가 있습니다. 어떤 Ticket 레코드의 'PriorityId'가 'NullIdentifier()'인 경우, 'Ticket'을 'Priority'와 'Only With'로 join하는 Aggregate에서 어떤 일이 발생합니까?",
+        "options": [
+          "해당 Ticket은 결과 집합에서 완전히 제외된다.",
+          "Aggregate 실행이 멈추고 Foreign Key 예외가 발생한다.",
+          "해당 Ticket은 기본값인 'Low' priority로 표시된다.",
+          "해당 Ticket은 표시되지만 Priority 라벨이 빈 문자열이 된다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-046",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has an Aggregate that fetches 5,000 'Product' records for a list. You also want to display a 'Total Stock' sum in the Header. For the best user experience, where should this total be calculated?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the 'OnAfterFetch' event of the 'GetProducts' Aggregate, looping over the results."
+      },
+      {
+        "key": "B",
+        "text": "Directly in a Screen Expression using 'GetProducts.List.Length'."
+      },
+      {
+        "key": "C",
+        "text": "In a separate Aggregate that only performs a 'Sum' on the Stock attribute."
+      },
+      {
+        "key": "D",
+        "text": "In the 'OnRender' event of the Screen."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Header의 Total Stock 합계는 Stock에 대한 Sum만 수행하는 별도의 Aggregate로 계산하는 것이 가장 좋습니다. 이 Aggregate는 데이터베이스에서 합계 한 값만 계산해 빠르게 반환하고, 5,000건 목록 조회와 병렬로 실행되어 Header가 즉시 채워지므로 사용자 경험이 좋습니다. OnAfterFetch(A)는 5,000건 조회가 끝날 때까지 기다렸다가 클라이언트에서 반복 계산하므로 더 느리고, GetProducts.List.Length(B)는 재고 합계가 아니라 개수일 뿐이며, OnRender(D)는 렌더링마다 실행되어 부적절합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면에 목록용으로 5,000개의 'Product' 레코드를 가져오는 Aggregate가 있습니다. Header에 'Total Stock' 합계도 표시하려고 합니다. 최고의 사용자 경험을 위해 이 합계를 계산하기에 가장 좋은 위치는 어디입니까?",
+        "options": [
+          "'GetProducts' Aggregate의 'OnAfterFetch' 이벤트에서 결과를 반복하며 계산한다.",
+          "'GetProducts.List.Length'를 사용해 화면 Expression에서 직접 계산한다.",
+          "Stock attribute에 대해 'Sum'만 수행하는 별도의 Aggregate에서 계산한다.",
+          "화면의 'OnRender' 이벤트에서 계산한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-047",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate uses a 'With or Without' join between 'Customer' and 'Invoice'. You want to return only Customers who have NEVER received an invoice. What filter achieves this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Customer.Id = Invoice.CustomerId"
+      },
+      {
+        "key": "B",
+        "text": "Invoice.Id = NullIdentifier()"
+      },
+      {
+        "key": "C",
+        "text": "Invoice.Amount = 0"
+      },
+      {
+        "key": "D",
+        "text": "Invoice.Id <> NullIdentifier()"
+      }
+    ],
+    "answer": "B",
+    "explanation": "정답은 B입니다. 'With or Without' join은 left join이라 Invoice가 없는 Customer도 결과에 남고, 이때 Invoice 쪽 컬럼은 모두 null이 됩니다. 따라서 Invoice.Id = NullIdentifier()로 필터링하면 인보이스를 한 번도 받은 적 없는 고객만 남습니다. D는 반대로 인보이스가 있는 고객을 반환합니다. A는 join 조건이지 필터가 아니며, C는 금액이 0인 인보이스가 존재하는 경우라 요구와 다릅니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Aggregate가 'Customer'와 'Invoice' 사이에 'With or Without' join을 사용합니다. 인보이스를 한 번도 받은 적 없는 Customer만 반환하려고 합니다. 이를 달성하는 필터는 무엇입니까?",
+        "options": [
+          "Customer.Id = Invoice.CustomerId",
+          "Invoice.Id = NullIdentifier()",
+          "Invoice.Amount = 0",
+          "Invoice.Id <> NullIdentifier()"
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-048",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate groups 'Tickets' by 'Priority' and counts them. You want to display only the priorities that have more than 5 tickets. Where do you implement this logic?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the OnAfterFetch event using a For Each and a ListRemove."
+      },
+      {
+        "key": "B",
+        "text": "By adding a filter 'Count(Ticket.Id) > 5' in the Aggregate's Filters tab."
+      },
+      {
+        "key": "C",
+        "text": "By using a ListFilter on the Screen after the Aggregate finishes."
+      },
+      {
+        "key": "D",
+        "text": "It is impossible to filter by a count in an Aggregate; you must use an Advanced SQL query."
+      }
+    ],
+    "answer": "B",
+    "explanation": "정답은 B입니다. OutSystems Aggregate는 Group By와 함께 집계 함수를 필터에 사용할 수 있어 SQL의 HAVING처럼 동작합니다. Count(Ticket.Id) > 5를 Filters 탭에 추가하면 티켓 수가 5개를 초과하는 Priority만 남습니다. A와 C처럼 데이터를 다 가져온 뒤 코드로 제거하는 방식은 불필요하게 비효율적이고, D는 잘못된 설명으로 Aggregate만으로 충분히 가능합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Aggregate가 'Tickets'를 'Priority'로 group by 하고 개수를 셉니다. 티켓이 5개를 초과하는 Priority만 표시하려고 합니다. 이 로직을 어디에 구현합니까?",
+        "options": [
+          "OnAfterFetch 이벤트에서 For Each와 ListRemove를 사용한다.",
+          "Aggregate의 Filters 탭에 'Count(Ticket.Id) > 5' 필터를 추가한다.",
+          "Aggregate가 끝난 뒤 화면에서 ListFilter를 사용한다.",
+          "Aggregate에서는 count로 필터링할 수 없으므로 Advanced SQL을 사용해야 한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-049",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity 'MembershipTier' has records Bronze, Silver, and Gold. A 'Member' Entity has a 'TierId'. To build an Aggregate showing all Members who are NOT 'Gold', which is the most robust filter?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Member.TierId = Entities.MembershipTier.Bronze or Member.TierId = Entities.MembershipTier.Silver"
+      },
+      {
+        "key": "B",
+        "text": "Member.TierId <> 3"
+      },
+      {
+        "key": "C",
+        "text": "Not(Member.TierId = \"Gold\")"
+      },
+      {
+        "key": "D",
+        "text": "Member.TierId <> Entities.MembershipTier.Gold"
+      }
+    ],
+    "answer": "D",
+    "explanation": "정답은 D입니다. Static Entity의 레코드는 Entities.MembershipTier.Gold 같은 식별자로 참조하는 것이 가장 견고합니다. B의 하드코딩된 숫자 3은 레코드 순서나 값이 바뀌면 깨집니다. C의 \"Gold\" 문자열 비교는 TierId가 식별자(Identifier) 타입이라 타입이 맞지 않습니다. A는 동작은 하지만 새 등급이 추가되면 필터를 매번 수정해야 해 유지보수에 취약합니다. D는 명확하고 안전하며 등급이 늘어도 그대로 동작합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity 'MembershipTier'에 Bronze, Silver, Gold 레코드가 있습니다. 'Member' Entity에는 'TierId'가 있습니다. 'Gold'가 아닌 모든 Member를 보여주는 Aggregate를 만들려면, 가장 견고한 필터는 무엇입니까?",
+        "options": [
+          "Member.TierId = Entities.MembershipTier.Bronze or Member.TierId = Entities.MembershipTier.Silver",
+          "Member.TierId <> 3",
+          "Not(Member.TierId = \"Gold\")",
+          "Member.TierId <> Entities.MembershipTier.Gold"
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-050",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Reactive Screen shows a Product catalog using an Aggregate whose 'Max Records' is set to 50, while the table holds 1,000 Products. You also need to display the 'Grand Total Price' of ALL 1,000 Products in a header widget. What is the correct approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Raise the list Aggregate's 'Max Records' to 1000 so its Sum covers every Product."
+      },
+      {
+        "key": "B",
+        "text": "Reuse the existing Aggregate as-is; an Aggregate's Sum always spans the entire database table regardless of Max Records."
+      },
+      {
+        "key": "C",
+        "text": "Create a second Aggregate dedicated to the Sum, with no 'Max Records' limit."
+      },
+      {
+        "key": "D",
+        "text": "Add a JavaScript node that fetches the remaining 950 records in the browser after the screen loads."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'Max Records'는 Aggregate가 가져오는 결과 행 수 자체를 제한하므로, 그 Aggregate에서 Sum을 계산해도 최대 50건까지만 합산됩니다. 따라서 전체 1,000건의 합계가 필요하면 'Max Records' 제한이 없는 별도의 Aggregate를 하나 더 만들어 Sum을 계산하는 것이 맞습니다(C). A처럼 1000으로 올리면 목록에 불필요한 데이터를 모두 브라우저로 보내 성능이 나빠지고, B는 Max Records가 합계에 영향을 주지 않는다는 잘못된 전제이며, D의 JavaScript로 재조회하는 방식은 OutSystems의 표준이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Screen에서 'Max Records'가 50으로 설정된 Aggregate로 Product 카탈로그를 보여주고 있으며, 테이블에는 1,000건의 Product가 있습니다. 동시에 헤더 위젯에 전체 1,000건의 'Grand Total Price'(총액)를 표시해야 합니다. 올바른 방법은 무엇입니까?",
+        "options": [
+          "목록 Aggregate의 'Max Records'를 1000으로 올려 그 Sum이 모든 Product를 포함하도록 한다.",
+          "기존 Aggregate를 그대로 재사용한다. Aggregate의 Sum은 Max Records와 무관하게 항상 전체 테이블을 합산한다.",
+          "'Max Records' 제한이 없는, Sum 전용의 두 번째 Aggregate를 만든다.",
+          "화면 로드 후 남은 950건을 브라우저에서 가져오는 JavaScript 노드를 추가한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-051",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Entity 'Order' has a Date attribute 'ShipDate'. In a Reactive Aggregate you want to keep only Orders whose 'ShipDate' is in the future. Which filter expression is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Order.ShipDate > CurrDate()"
+      },
+      {
+        "key": "B",
+        "text": "Order.ShipDate > Today()"
+      },
+      {
+        "key": "C",
+        "text": "Order.ShipDate - CurrDate() > 0"
+      },
+      {
+        "key": "D",
+        "text": "Order.ShipDate > Date()"
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems에서 현재 서버 날짜를 돌려주는 내장 함수는 CurrDate()이므로, 미래 배송일을 걸러내려면 'Order.ShipDate > CurrDate()'가 정확합니다(A). B의 Today()와 D의 Date()는 OutSystems에 존재하지 않는 함수이고, C처럼 Date 값끼리 빼서 비교하는 방식은 Aggregate 필터 표현식으로 유효하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity 'Order'에 Date 타입의 'ShipDate' 속성이 있습니다. Reactive Aggregate에서 'ShipDate'가 미래인 Order만 남기고 싶습니다. 올바른 필터 표현식은 무엇입니까?",
+        "options": [
+          "Order.ShipDate > CurrDate()",
+          "Order.ShipDate > Today()",
+          "Order.ShipDate - CurrDate() > 0",
+          "Order.ShipDate > Date()"
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-052",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate over 'Product' you apply a 'Group By' on 'Category'. You want the highest price within each Category. Which action produces this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Apply the 'Max' aggregate function to the 'Product.Price' attribute."
+      },
+      {
+        "key": "B",
+        "text": "Sort the Aggregate by 'Price' descending."
+      },
+      {
+        "key": "C",
+        "text": "Set the Aggregate's 'Max Records' property to 1."
+      },
+      {
+        "key": "D",
+        "text": "Add a filter 'Product.Price = Max(Product.Price)'."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Group By로 'Category'를 묶으면 그룹에 속하지 않은 속성은 aggregate 함수를 지정해야 결과에 나올 수 있고, 각 그룹의 최고가를 얻으려면 Price에 'Max' 함수를 적용합니다(A). B의 내림차순 정렬은 전체 정렬일 뿐 카테고리별 최댓값을 뽑아주지 않고, C의 Max Records=1은 전체에서 1건만 남기며, D처럼 필터에 Max()를 직접 쓰는 문법은 Aggregate에서 지원되지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Product'에 대한 Aggregate에서 'Category'로 'Group By'를 적용했습니다. 각 Category 내에서 가장 높은 가격을 구하고 싶습니다. 어떤 작업이 이를 만들어냅니까?",
+        "options": [
+          "'Product.Price' 속성에 'Max' aggregate 함수를 적용한다.",
+          "Aggregate를 'Price' 내림차순으로 정렬한다.",
+          "Aggregate의 'Max Records' 속성을 1로 설정한다.",
+          "필터에 'Product.Price = Max(Product.Price)'를 추가한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-053",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You implement a 'Soft Delete' on the 'Ticket' Entity by adding an 'IsDeleted' Boolean so records are hidden rather than physically removed. What is the most important step to make this behave consistently across the whole application?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add an 'IsDeleted = False' condition to every Aggregate (and query) that reads Tickets."
+      },
+      {
+        "key": "B",
+        "text": "Create a database trigger that moves deleted records into a history table."
+      },
+      {
+        "key": "C",
+        "text": "Set the Entity's 'Delete Rule' to 'Ignore'."
+      },
+      {
+        "key": "D",
+        "text": "Change the Entity's 'Expose Read Only' property to 'Yes'."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Soft Delete는 실제로 행을 지우지 않고 'IsDeleted' 플래그로 숨기는 방식이므로, 앱 전체에서 일관되게 동작하려면 Ticket을 읽는 모든 Aggregate/쿼리에 'IsDeleted = False' 필터를 넣어 삭제 표시된 행을 제외해야 합니다(A). B의 데이터베이스 트리거는 OutSystems 권장 방식이 아니고, C의 Delete Rule 'Ignore'는 참조 관계 삭제 동작일 뿐 조회 필터링과 무관하며, D의 'Expose Read Only'는 다른 모듈의 쓰기 권한을 제어하는 속성으로 이 문제와 관련이 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Ticket' Entity에 'IsDeleted' Boolean을 추가해, 레코드를 물리적으로 삭제하지 않고 숨기는 'Soft Delete'를 구현합니다. 이것이 애플리케이션 전체에서 일관되게 동작하도록 하기 위한 가장 중요한 단계는 무엇입니까?",
+        "options": [
+          "Ticket을 읽는 모든 Aggregate(및 쿼리)에 'IsDeleted = False' 조건을 추가한다.",
+          "삭제된 레코드를 history 테이블로 옮기는 데이터베이스 트리거를 만든다.",
+          "Entity의 'Delete Rule'을 'Ignore'로 설정한다.",
+          "Entity의 'Expose Read Only' 속성을 'Yes'로 변경한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-054",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Why is using an Aggregate's 'Sum' function generally better than fetching all records and looping to add up a total?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Loops are not allowed inside Server Actions."
+      },
+      {
+        "key": "B",
+        "text": "The 'Sum' function automatically formats the result as currency."
+      },
+      {
+        "key": "C",
+        "text": "Aggregates can only process up to 10 records at a time."
+      },
+      {
+        "key": "D",
+        "text": "The database performs the calculation and returns a single value, which is much faster and sends far less data over the network."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Aggregate의 Sum은 데이터베이스에서 합계를 직접 계산해 결과값 하나만 돌려주므로, 모든 레코드를 앱으로 가져와 루프로 더하는 방식보다 훨씬 빠르고 네트워크 부담도 적습니다. Server Action에서 루프는 당연히 허용되고(A 오답), Sum은 통화 서식을 붙이지 않으며(B 오답), Aggregate가 10건만 처리한다는 것(C)도 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "모든 레코드를 가져와 루프로 합계를 더하는 대신 Aggregate의 'Sum' 함수를 쓰는 것이 일반적으로 더 나은 이유는 무엇입니까?",
+        "options": [
+          "Server Action 안에서는 루프가 허용되지 않기 때문이다.",
+          "'Sum' 함수가 결과를 자동으로 통화 형식으로 표시해 주기 때문이다.",
+          "Aggregate는 한 번에 최대 10건만 처리할 수 있기 때문이다.",
+          "데이터베이스가 계산을 수행해 값 하나만 반환하므로 훨씬 빠르고 네트워크로 전송되는 데이터가 훨씬 적기 때문이다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-055",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate groups 'Sales' by 'Region' and calculates the 'AverageAmount'. You also want the output to include the 'RegionName'. How do you include it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add 'RegionName' to the Group By as well."
+      },
+      {
+        "key": "B",
+        "text": "It appears automatically because it belongs to the grouped Region Entity."
+      },
+      {
+        "key": "C",
+        "text": "Calculated attributes cannot be displayed next to grouped attributes."
+      },
+      {
+        "key": "D",
+        "text": "Apply the 'Max' function to 'RegionName' because it is a Text field."
+      }
+    ],
+    "answer": "A",
+    "explanation": "정답은 A입니다. Aggregate에서 Group By를 사용하면 출력에 표시되는 모든 속성은 Group By에 포함되거나 집계 함수(Count, Average 등)로 계산되어야 합니다. 따라서 RegionName을 보여주려면 그것도 Group By에 추가해야 합니다. B처럼 같은 Entity에 속한다고 자동으로 나오지 않습니다. C는 틀렸으며 계산된 속성과 그룹 속성은 함께 표시할 수 있습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Aggregate가 'Sales'를 'Region'으로 group by 하고 'AverageAmount'를 계산합니다. 출력에 'RegionName'도 포함하려고 합니다. 어떻게 포함합니까?",
+        "options": [
+          "'RegionName'도 Group By에 추가한다.",
+          "grouped Region Entity에 속하므로 자동으로 표시된다.",
+          "계산된 속성은 group된 속성과 함께 표시할 수 없다.",
+          "'RegionName'이 Text 필드이므로 'Max' 함수를 적용한다."
+        ]
+      }
+    }
   }
 ]

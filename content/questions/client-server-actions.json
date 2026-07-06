@@ -669,5 +669,165 @@
         ]
       }
     }
+  },
+  {
+    "id": "CSA-012",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A 'Save' Client Action on a Customer registration form calls a 'CreateOrUpdateCustomer' Server Action. To stop users from clicking Save twice while the server is still processing, what is the best approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set a Local Variable 'IsSaving' to True at the start of the action and bind the button's Enabled property to the negation of it."
+      },
+      {
+        "key": "B",
+        "text": "The platform automatically disables all buttons whenever a Server Action is running."
+      },
+      {
+        "key": "C",
+        "text": "Wrap the save logic in a Try-Catch block."
+      },
+      {
+        "key": "D",
+        "text": "Add a 'Wait' node inside the Client Action."
+      }
+    ],
+    "answer": "A",
+    "explanation": "IsSaving라는 Local Variable를 액션 시작 시 True로 바꾸고 버튼의 Enabled 속성을 이 값의 반대로 바인딩하면, 서버 처리 중에는 버튼이 비활성화되어 중복 제출을 막을 수 있다. 플랫폼이 자동으로 버튼을 비활성화해 주지는 않으며(B 오답), Try-Catch는 예외 처리 용도(C 오답)이고, Reactive Client Action에는 'Wait' 노드 자체가 없다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "고객 등록 폼의 'Save' Client Action이 'CreateOrUpdateCustomer' Server Action을 호출합니다. 서버가 처리하는 동안 사용자가 Save를 두 번 클릭하지 못하게 하려면 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          "액션 시작 시 Local Variable 'IsSaving'를 True로 설정하고 버튼의 Enabled 속성을 그 값의 반대로 바인딩한다.",
+          "Server Action이 실행 중이면 플랫폼이 모든 버튼을 자동으로 비활성화한다.",
+          "저장 로직을 Try-Catch 블록으로 감싼다.",
+          "Client Action 안에 'Wait' 노드를 추가한다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-013",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "What happens if you try to reference a Server Action inside an Expression widget on a Reactive Screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The screen flickers each time the server returns a value."
+      },
+      {
+        "key": "B",
+        "text": "The Server Action runs on every screen render."
+      },
+      {
+        "key": "C",
+        "text": "It is not allowed; an Expression can only call Functions, never a Server Action."
+      },
+      {
+        "key": "D",
+        "text": "It works, but it slows the app down with constant network calls."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Expression은 렌더링 중 동기적으로 즉시 값을 반환해야 하므로, 네트워크 왕복이 필요한 Server Action은 호출할 수 없다. Expression에서는 Function으로 표시된 액션(client-side function 등)만 사용할 수 있다. 따라서 애초에 불가능한 것이며(C 정답), 실제로 실행되어 깜빡이거나 매번 서버를 호출해 느려지는 상황(A, B, D)은 발생하지 않는다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Screen의 Expression 위젯 안에서 Server Action을 참조하려고 하면 어떻게 됩니까?",
+        "options": [
+          "서버가 값을 반환할 때마다 화면이 깜빡인다.",
+          "화면이 렌더링될 때마다 Server Action이 실행된다.",
+          "불가능하다. Expression은 Function만 호출할 수 있고 Server Action은 호출할 수 없다.",
+          "동작은 하지만 지속적인 네트워크 호출로 앱이 느려진다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-014",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You implement a 'Bulk Archive' feature where a Client Action loops through a List of Tasks and calls an 'ArchiveTask' Server Action once per record. Why is this considered poor practice?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Server Actions cannot be called inside a loop."
+      },
+      {
+        "key": "B",
+        "text": "Each iteration triggers a separate network request, significantly slowing the app."
+      },
+      {
+        "key": "C",
+        "text": "A List becomes read-only once the screen has finished loading."
+      },
+      {
+        "key": "D",
+        "text": "Client Actions are not allowed to contain loops."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Client Action에서 반복문으로 레코드마다 Server Action을 호출하면 반복 횟수만큼 개별 네트워크 요청(왕복)이 발생해 성능이 크게 저하된다. Server Action을 루프 안에서 호출하는 것 자체는 가능하고(A 오답), List가 로딩 후 읽기 전용이 되지도 않으며(C 오답), Client Action에 루프를 넣을 수 있다(D 오답). 권장 방식은 전체 목록을 서버로 한 번에 보내 서버 측에서 반복 처리하는 것이다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action이 Task 목록을 반복하며 레코드마다 'ArchiveTask' Server Action을 한 번씩 호출하는 'Bulk Archive' 기능을 구현했습니다. 이것이 나쁜 방식으로 여겨지는 이유는 무엇입니까?",
+        "options": [
+          "Server Action은 루프 안에서 호출할 수 없다.",
+          "반복할 때마다 개별 네트워크 요청이 발생해 앱이 크게 느려진다.",
+          "화면 로딩이 끝나면 List는 읽기 전용이 된다.",
+          "Client Action에는 루프를 넣을 수 없다."
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-015",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You need to update the status of 100 Order records at once in a Reactive Web App. Which approach is the most performance-efficient?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Refresh the Aggregate and update each record inside its 'On After Fetch' event using a For Each."
+      },
+      {
+        "key": "B",
+        "text": "Send the list of Order IDs to a single Server Action and loop through them on the server side."
+      },
+      {
+        "key": "C",
+        "text": "Use a For Each loop in a Client Action that calls an 'UpdateOrder' Server Action for each record."
+      },
+      {
+        "key": "D",
+        "text": "Use a JavaScript loop to update the database records directly from the browser."
+      }
+    ],
+    "answer": "B",
+    "explanation": "100건의 업데이트를 Order ID 목록과 함께 단일 Server Action으로 보내 서버 측에서 반복 처리하면 네트워크 왕복이 한 번뿐이라 가장 효율적이다. Client Action에서 레코드마다 Server Action을 호출하면 요청이 100번 발생해 매우 느리고(C 오답), 데이터 조회용 이벤트인 On After Fetch에서 업데이트를 수행하는 것은 부적절하며(A 오답), 브라우저 JavaScript로 데이터베이스를 직접 수정할 수는 없다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web App에서 100개의 Order 레코드 상태를 한 번에 업데이트해야 합니다. 성능상 가장 효율적인 방법은 무엇입니까?",
+        "options": [
+          "Aggregate를 Refresh하고 그 'On After Fetch' 이벤트에서 For Each로 각 레코드를 업데이트한다.",
+          "Order ID 목록을 하나의 Server Action으로 보내 서버 측에서 반복 처리한다.",
+          "Client Action의 For Each 루프에서 레코드마다 'UpdateOrder' Server Action을 호출한다.",
+          "브라우저에서 JavaScript 루프로 데이터베이스 레코드를 직접 업데이트한다."
+        ]
+      }
+    }
   }
 ]

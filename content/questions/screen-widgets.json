@@ -1262,5 +1262,45 @@
         ]
       }
     }
+  },
+  {
+    "id": "SW-021",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "On a 'Customer Profile' screen you have a mandatory 'CountryId' and an optional 'StateId' that only applies to some countries. What is the best way to control the visibility of the 'State' dropdown?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Bind the Dropdown's 'Visible' property to a condition such as 'SelectedCountryHasStates'."
+      },
+      {
+        "key": "B",
+        "text": "Always render the dropdown but disable it when the country has no states."
+      },
+      {
+        "key": "C",
+        "text": "Use a JavaScript node to hide the underlying HTML element with CSS."
+      },
+      {
+        "key": "D",
+        "text": "Build two separate screens: one for countries with states and one for those without."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Reactive에서는 위젯의 노출 여부를 위젯의 'Visible' 속성에 Boolean 조건(예: 'SelectedCountryHasStates')을 연결해 선언적으로 제어하는 것이 표준이자 가장 깔끔한 방법입니다(A). B는 숨기지 않고 비활성만 하므로 요구사항과 다르고, C의 JavaScript/CSS 강제 숨김은 플랫폼 렌더링과 어긋나는 안티패턴이며, D처럼 화면을 두 개로 나누는 것은 과도하고 유지보수가 어렵습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Customer Profile' 화면에 필수 'CountryId'와, 일부 국가에만 해당하는 선택 'StateId'가 있습니다. 'State' 드롭다운의 표시 여부를 제어하는 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          "드롭다운의 'Visible' 속성을 'SelectedCountryHasStates' 같은 조건에 연결한다.",
+          "드롭다운을 항상 표시하되 해당 국가에 주(state)가 없으면 비활성화한다.",
+          "JavaScript 노드로 해당 HTML 요소를 CSS로 숨긴다.",
+          "주가 있는 국가용과 없는 국가용으로 화면을 두 개 따로 만든다."
+        ]
+      }
+    }
   }
 ]
