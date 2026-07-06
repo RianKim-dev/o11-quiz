@@ -1,5 +1,5 @@
 {
-  "total": 682,
+  "total": 711,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
@@ -31,7 +31,7 @@
     },
     "Fetching Data on Screens": {
       "category": "Fetching Data",
-      "count": 70
+      "count": 96
     },
     "Form Validations": {
       "category": "Logic",
@@ -51,7 +51,7 @@
     },
     "Screen Lifecycle": {
       "category": "Reactive Apps in OutSystems",
-      "count": 34
+      "count": 37
     },
     "Screen Widgets": {
       "category": "UI Design",
