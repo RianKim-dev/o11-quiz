@@ -318,7 +318,7 @@
       "join-types",
       "with"
     ],
-    "stem": "Which statement about the **With** join type in an Aggregate is correct?",
+    "stem": "Which statement about the **With or Without** join type in an Aggregate is correct?",
     "options": [
       {
         "key": "A",
@@ -337,8 +337,8 @@
         "text": "It automatically removes duplicate rows from the result."
       }
     ],
-    "answer": "C",
-    "explanation": "Aggregate가 지원하는 3가지 조인 중 **With**는 **두 Entity의 모든 행을 반환**합니다.",
+    "answer": "B",
+    "explanation": "OutSystems Aggregate의 조인은 두 종류예요 — **Only With**(양쪽에 짝이 다 있는 행만 반환, inner join)와 **With or Without**(왼쪽은 전부 두고, 오른쪽 짝이 없으면 그 칸은 빈 값으로 채움, left outer join). 문제의 **With or Without**는 후자라, 오른쪽에 매칭이 없어도 **왼쪽 Entity의 모든 행을 반환**합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 양쪽에 짝이 있는 것만 반환하는 건 **Only With**(inner join)의 동작입니다\n- **C** — 양쪽 전체를 다 반환하는 full outer join은 OutSystems Aggregate가 **지원하지 않습니다**\n- **D** — 중복 제거는 조인 종류가 하는 일이 아닙니다",
     "distractors": {
       "A": "이건 Only With(일치하는 레코드만)의 동작입니다.",
       "B": "이건 With or Without(왼쪽 전체 유지)의 동작입니다.",
@@ -349,7 +349,7 @@
     "verifyNote": "",
     "i18n": {
       "ko": {
-        "stem": "Aggregate의 **With** Join 종류에 대한 설명 중 올바른 것은?",
+        "stem": "Aggregate의 **With or Without** Join 종류에 대한 설명 중 올바른 것은?",
         "options": [
           {
             "key": "A",

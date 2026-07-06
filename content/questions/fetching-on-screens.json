@@ -3376,8 +3376,8 @@
         "text": "The change is ignored until the user manually refreshes the screen."
       }
     ],
-    "answer": "C",
-    "explanation": "On After Fetch에서 실행한 Client Action이 Aggregate의 filter에 쓰이는 변수를 바꾸면, 의존성 추적(dependency tracking)에 의해 Aggregate가 다시 fetch되고 그러면 On After Fetch가 또 실행되어 무한 루프에 빠지기 쉽습니다(정답 C). 플랫폼이 한 번만 새로고침하고 멈추거나(B), 변경을 무시하거나(D), 컴파일 오류(A)를 내는 안전장치는 없습니다.",
+    "answer": "D",
+    "explanation": "화면(Screen)의 Aggregate는 **filter에 쓰인 로컬 변수 값이 바뀌어도 저절로 다시 조회되지 않습니다** — 다시 조회하려면 **Refresh Data**를 직접 호출해야 해요. 그래서 On After Fetch 안의 Client Action이 그 변수를 바꿔도 재조회가 일어나지 않고, On After Fetch도 다시 돌지 않으니 **무한 루프는 생기지 않습니다**. 바뀐 값은 저장되지만, 다음 Refresh Data가 실행되기 전까지 목록에는 반영되지 않습니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — On After Fetch에서 변수를 바꾸는 건 문법상 허용되며 컴파일 오류가 아닙니다\n- **B** — '한 번만 새로고침하고 멈추는' 안전장치는 없습니다(애초에 자동 재조회 자체가 없음)\n- **C** — 자동 재조회가 없으니 무한 루프도 없습니다 (흔한 오해)",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

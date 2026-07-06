@@ -1,5 +1,5 @@
 {
-  "total": 711,
+  "total": 710,
   "subtopics": {
     "Aggregates": {
       "category": "Fetching Data",
@@ -27,7 +27,7 @@
     },
     "Entities & Data Types": {
       "category": "Data Modeling",
-      "count": 71
+      "count": 70
     },
     "Fetching Data on Screens": {
       "category": "Fetching Data",
