@@ -637,5 +637,60 @@
         ]
       }
     }
+  },
+  {
+    "id": "MOD-011",
+    "category": "Architecture & Security",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Core Service (CS) module defines an Entity exposed as Public = Yes and Read Only = Yes. An End-User (EU) module consumes it. The CS developer changes a Text attribute's length from 50 to 100 and re-publishes. What must happen for the EU module to reflect this change?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing — because it is a database schema change, the EU module sees it instantly at runtime."
+      },
+      {
+        "key": "B",
+        "text": "The dependency becomes outdated in the EU module; the developer must refresh the dependency (Manage Dependencies) and re-publish the EU module to pick up the new metadata."
+      },
+      {
+        "key": "C",
+        "text": "The developer must first set the Entity to Read Only = No, or the change will never propagate."
+      },
+      {
+        "key": "D",
+        "text": "The EU module must delete and re-add the dependency; refreshing it is not enough."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Producer(CS)의 Entity 메타데이터(예: Text 길이 50→100)가 바뀌면, 이를 참조하는 Consumer(EU)의 의존성이 'outdated(오래됨)' 상태가 됩니다. EU 모듈에서 Manage Dependencies로 의존성을 Refresh한 뒤 다시 Publish해야 새 메타데이터가 반영됩니다. 런타임에 자동으로 반영되지 않습니다(A 오답: Consumer에 컴파일된 참조가 여전히 옛 길이를 가짐). Read Only 여부는 이 전파와 무관합니다(C 오답). Refresh + 재게시로 충분하며 의존성을 삭제/재추가할 필요는 없습니다(D 오답). 함정: 스키마만 바뀌면 소비 모듈이 즉시 반영될 것 같지만, Consumer는 의존성 갱신과 재게시가 필요합니다.",
+    "distractors": "A: 컴파일된 참조 때문에 자동 반영되지 않음. C: Read Only는 전파와 무관. D: Refresh로 충분, 삭제/재추가 불필요.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Core Service(CS) 모듈이 Public = Yes, Read Only = Yes로 노출한 Entity를 정의합니다. End-User(EU) 모듈이 이를 소비합니다. CS 개발자가 이 Entity의 Text attribute 길이를 50에서 100으로 바꾸고 재게시했습니다. EU 모듈이 이 변경을 반영하려면 무엇이 필요합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무것도 필요 없다 — DB 스키마 변경이므로 EU 모듈이 런타임에 즉시 반영한다."
+          },
+          {
+            "key": "B",
+            "text": "EU 모듈에서 의존성이 outdated 상태가 되므로, Manage Dependencies로 의존성을 Refresh한 뒤 EU 모듈을 재게시해야 새 메타데이터가 반영된다."
+          },
+          {
+            "key": "C",
+            "text": "개발자가 먼저 Entity를 Read Only = No로 바꿔야 하며, 그렇지 않으면 변경이 전파되지 않는다."
+          },
+          {
+            "key": "D",
+            "text": "EU 모듈이 의존성을 삭제 후 다시 추가해야 한다 — Refresh만으로는 부족하다."
+          }
+        ]
+      }
+    }
   }
 ]

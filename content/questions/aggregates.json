@@ -1521,5 +1521,477 @@
         "diagram": "**Aggregate `GetProductSales`** — Source: `Product`, `OrderItem`\n\n| # | 왼쪽 | Join | 오른쪽 | 조건 |\n|---|---|---|---|---|\n| 1 | Product | Only With | OrderItem | Product.Id = OrderItem.ProductId |\n\n**Group By:** `Product.Id`, **Sum:** `OrderItem.Quantity`\n\n**컬럼(편집기에서 보이는 것):**\nProduct.Id, Product.Name, Product.Price, Sum(OrderItem.Quantity)\n\n**미리보기(편집기 표시):**\n\n| Product.Id | Product.Name | Product.Price | Sum(Qty) |\n|---|---|---|---|\n| 1 | Widget A | 10 | 25 |\n| 2 | Widget B | 20 | 15 |\n| 3 | Widget C | 15 | 30 |"
       }
     }
+  },
+  {
+    "id": "AGG-025",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Static Entity Priority has an extra attribute Color (Text) with records Low/Medium/High. A Task entity has a PriorityId foreign key. On a Screen you want to list Tasks showing the priority Label and use Color to style the text. How should you fetch this in an Aggregate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add the Task entity and filter by Task.PriorityId; the Priority attributes (Label, Color) are automatically available without joining the Static Entity."
+      },
+      {
+        "key": "B",
+        "text": "Add the Task entity and Join it with the Priority Static Entity."
+      },
+      {
+        "key": "C",
+        "text": "Use the GetPriority() built-in action for each row in the list."
+      },
+      {
+        "key": "D",
+        "text": "It is not possible to access the Color attribute inside an Aggregate; you must use a Data Action."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate에서 Static Entity(Priority)의 추가 attribute(Color, Label)를 사용하려면 소스 Entity인 Task를 추가한 뒤 Priority Static Entity를 Join해야 합니다. Task에 PriorityId(FK)가 있어도 참조 Entity의 attribute가 자동으로 결과에 포함되지는 않습니다. GetPriority() 같은 built-in action은 존재하지 않으며, Aggregate만으로 충분하므로 Data Action도 필요 없습니다. 함정: FK가 있으면 관련 attribute가 자동으로 딸려온다고 착각하는 것.",
+    "distractors": {
+      "A": "FK만으로는 참조 Entity의 attribute가 자동 노출되지 않습니다. Join이 필요합니다.",
+      "C": "GetPriority() 같은 built-in action은 없습니다.",
+      "D": "Aggregate에서 Static Entity를 Join하면 충분히 접근 가능합니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Static Entity Priority에는 추가 attribute Color(Text)가 있고 Low/Medium/High 레코드가 있습니다. Task Entity에는 PriorityId 외래 키가 있습니다. Screen에서 Task 목록을 표시하며 priority의 Label을 보여주고 Color로 텍스트 색을 지정하려고 합니다. 이 데이터를 Aggregate에서 어떻게 가져와야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Task Entity를 추가하고 Task.PriorityId로 필터한다. Priority attribute(Label, Color)는 Static Entity를 Join하지 않아도 자동으로 사용할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "Task Entity를 추가하고 Priority Static Entity와 Join한다."
+          },
+          {
+            "key": "C",
+            "text": "목록의 각 행에 대해 GetPriority() built-in action을 사용한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate 안에서는 Color attribute에 접근할 수 없다; Data Action을 사용해야 한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-026",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate joins TravelRequest and ExpenseReport with the join set to 'Only With' (TravelRequest with ExpenseReport). Of 10 TravelRequests, 5 have an associated ExpenseReport and 5 do not. A Filter TravelRequest.StatusId = Entities.TravelStatus.Open is added. Among Open requests, 3 have an expense report and 2 do not. How many records does the Aggregate return?",
+    "options": [
+      {
+        "key": "A",
+        "text": "10 records"
+      },
+      {
+        "key": "B",
+        "text": "5 records"
+      },
+      {
+        "key": "C",
+        "text": "3 records"
+      },
+      {
+        "key": "D",
+        "text": "2 records"
+      }
+    ],
+    "answer": "C",
+    "explanation": "'Only With' join은 inner join으로, 두 Entity 간에 일치하는 항목이 있는 레코드만 반환합니다. 따라서 ExpenseReport가 있는 5건만 남습니다. 여기에 StatusId = Open 필터를 적용하면, Open이면서 expense report가 있는 3건만 최종적으로 반환됩니다. 함정: Open 요청 총 5건(2건은 report 없음)을 세면 안 됩니다. inner join이 먼저 report 없는 행을 제거하기 때문입니다.",
+    "distractors": {
+      "A": "Only With는 inner join이라 report 없는 5건이 제외됩니다.",
+      "B": "필터 적용 전 inner join 결과가 5건이며, Open 필터로 더 줄어듭니다.",
+      "D": "report 없이 Open인 2건은 inner join에서 이미 제외됩니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 TravelRequest와 ExpenseReport를 join하며 join이 'Only With'(TravelRequest with ExpenseReport)로 설정되어 있습니다. TravelRequest 10건 중 5건은 연결된 ExpenseReport가 있고 5건은 없습니다. 필터 TravelRequest.StatusId = Entities.TravelStatus.Open을 추가합니다. Open 요청 중 3건은 expense report가 있고 2건은 없습니다. Aggregate는 몇 건을 반환합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "10건"
+          },
+          {
+            "key": "B",
+            "text": "5건"
+          },
+          {
+            "key": "C",
+            "text": "3건"
+          },
+          {
+            "key": "D",
+            "text": "2건"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-027",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Entity Invoice has a TotalAmount (Decimal) attribute. You want to display the total sum of all invoices in the 'Paid' status. What is the best way using an Aggregate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fetch all invoices, then use a For Each loop on the Screen to add them up into a variable."
+      },
+      {
+        "key": "B",
+        "text": "Use Sum on TotalAmount (right-click the attribute -> Sum) and Filter by StatusId."
+      },
+      {
+        "key": "C",
+        "text": "Create a Data Action and write a complex SQL query manually."
+      },
+      {
+        "key": "D",
+        "text": "Aggregates cannot perform calculations like Sum or Average; they only fetch lists."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate는 숫자 attribute에 대해 집계 함수(Sum, Average, Count 등)를 지원합니다. TotalAmount를 우클릭하여 Sum을 적용하고 StatusId = Paid 필터를 걸면 됩니다. 함정: A(For Each로 수동 합산)나 C(수동 SQL)는 불필요하게 복잡하며 best practice가 아닙니다. D는 사실과 다릅니다 — Aggregate는 집계 계산을 할 수 있습니다.",
+    "distractors": {
+      "A": "Aggregate가 직접 Sum을 지원하므로 수동 루프는 불필요합니다.",
+      "C": "간단한 합계에 수동 SQL은 과한 방법입니다.",
+      "D": "Aggregate는 Sum/Average/Count 등 집계를 수행할 수 있습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity Invoice에는 TotalAmount(Decimal) attribute가 있습니다. 'Paid' 상태인 모든 invoice의 총합을 표시하려고 합니다. Aggregate를 사용하는 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "모든 invoice를 가져온 뒤 Screen에서 For Each 루프로 변수에 더한다."
+          },
+          {
+            "key": "B",
+            "text": "TotalAmount에 Sum을 적용하고(attribute 우클릭 -> Sum) StatusId로 필터한다."
+          },
+          {
+            "key": "C",
+            "text": "Data Action을 만들고 복잡한 SQL 쿼리를 직접 작성한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate는 Sum이나 Average 같은 계산을 할 수 없다; 목록만 가져온다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-028",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate joins Product with Category. You right-click Product.Id and select Count, then right-click Category.Label and select Group by. Which statement about the Aggregate's output is TRUE?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You can still access Product.Name directly from the output list to display it on the screen."
+      },
+      {
+        "key": "B",
+        "text": "The output is a list where each record contains ONLY Category.Label and the Count of Product IDs."
+      },
+      {
+        "key": "C",
+        "text": "List.Current still contains all the original Product attributes, but they are empty."
+      },
+      {
+        "key": "D",
+        "text": "You must add a second Aggregate to fetch Category.Label because grouping hides the original entity structure."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Group by를 적용하면 Aggregate output에는 grouping한 attribute(Category.Label)와 집계 함수(Count) 결과인 파란색(aggregated) column만 포함됩니다. Product.Name 같은 나머지 원본 attribute에는 더 이상 접근할 수 없습니다. 함정: 원본 attribute가 '빈 값으로 남아 있다'(C)거나 '그대로 접근 가능하다'(A)고 착각하기 쉽습니다. 별도 Aggregate도 필요 없습니다(D).",
+    "distractors": {
+      "A": "Group by 이후에는 grouping/집계 column만 남으므로 Product.Name에 접근 불가.",
+      "C": "원본 attribute가 빈 값으로 남는 게 아니라 output 구조에서 아예 제거됩니다.",
+      "D": "grouping한 Category.Label은 output에 포함되므로 두 번째 Aggregate가 필요 없습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 Product와 Category를 join합니다. Product.Id를 우클릭해 Count를 선택하고, Category.Label을 우클릭해 Group by를 선택했습니다. 이 Aggregate의 output에 대해 옳은 설명은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "여전히 output list에서 Product.Name에 직접 접근하여 화면에 표시할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "output은 각 레코드가 Category.Label과 Product Id의 Count만 담는 list가 된다."
+          },
+          {
+            "key": "C",
+            "text": "List.Current에는 원본 Product attribute가 모두 남아 있지만 값이 비어 있다."
+          },
+          {
+            "key": "D",
+            "text": "grouping이 원본 entity 구조를 숨기므로 Category.Label을 가져올 두 번째 Aggregate가 필요하다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-029",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In an Aggregate fetching Product you add a calculated New Attribute DiscountedPrice = Product.Price * 0.9, then add a Filter DiscountedPrice > 100. Which statement is TRUE?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It causes a compilation error, because you cannot use a calculated attribute in the filter of the same Aggregate."
+      },
+      {
+        "key": "B",
+        "text": "DiscountedPrice will have the data type Decimal, even if Product.Price was an Integer."
+      },
+      {
+        "key": "C",
+        "text": "You must use a Data Action instead, because Aggregates cannot perform multiplication in formulas."
+      },
+      {
+        "key": "D",
+        "text": "To use DiscountedPrice in a filter you must first create a SQL Tool and write the query manually."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Calculated Attribute의 데이터 타입은 표현식 결과에서 추론됩니다. Integer에 Decimal 리터럴 0.9를 곱하면 결과 타입은 Decimal이 되므로 DiscountedPrice는 Decimal입니다. 또한 Calculated Attribute는 같은 Aggregate의 Filter에서 사용할 수 있으므로 컴파일 에러(A)가 나지 않습니다. Aggregate는 곱셈 등 계산식을 지원하므로 Data Action(C)이나 SQL Tool(D)이 필요 없습니다.",
+    "distractors": {
+      "A": "같은 Aggregate 내 Calculated Attribute를 Filter에서 참조할 수 있습니다.",
+      "C": "Aggregate의 Calculated Attribute는 곱셈 등 산술식을 지원합니다.",
+      "D": "SQL Tool 없이 Aggregate만으로 필터링 가능합니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product를 가져오는 Aggregate에 계산 New Attribute DiscountedPrice = Product.Price * 0.9 를 추가한 뒤 Filter DiscountedPrice > 100 을 추가했습니다. 옳은 설명은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "같은 Aggregate의 filter에서 calculated attribute를 쓸 수 없어 compilation error가 난다."
+          },
+          {
+            "key": "B",
+            "text": "Product.Price가 Integer였더라도 DiscountedPrice의 데이터 타입은 Decimal이 된다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate는 수식에서 곱셈을 못 하므로 Data Action을 대신 써야 한다."
+          },
+          {
+            "key": "D",
+            "text": "DiscountedPrice를 filter에 쓰려면 먼저 SQL Tool을 만들어 쿼리를 직접 작성해야 한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-030",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen lists Orders. The Aggregate could return 10,000 Orders, but a Pagination widget shows 10 at a time (Max Records = 10). How does OutSystems optimize this Aggregate's execution?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate fetches all 10,000 records into server memory first, then sends only 10 to the browser."
+      },
+      {
+        "key": "B",
+        "text": "The platform automatically appends a TOP 10 (or equivalent) to the SQL, so only 10 records are fetched from the database."
+      },
+      {
+        "key": "C",
+        "text": "You must manually set the Aggregate's Fetch property to \"Only 10\" to avoid performance issues."
+      },
+      {
+        "key": "D",
+        "text": "Optimization only happens with a SQL Tool; Aggregates always fetch the full list by default."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate는 Max Records/Pagination 설정을 SQL의 TOP(또는 동등 구문)으로 변환하여 데이터베이스에서 필요한 만큼만 가져옵니다. 1만 건 전체를 서버 메모리로 올린 뒤 잘라내지 않습니다. 이것이 Aggregate의 자동 최적화입니다. 함정: 전체를 먼저 가져온다(A)거나, 최적화하려면 별도 설정/ SQL Tool이 필요하다(C, D)고 오해하기 쉽습니다.",
+    "distractors": {
+      "A": "전체 로드 후 잘라내는 방식이 아니라 DB 쿼리 단계에서 제한됩니다.",
+      "C": "'Only 10' 같은 수동 설정 없이 Max Records가 자동 반영됩니다.",
+      "D": "SQL Tool 없이도 Aggregate가 자동 최적화합니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 화면이 Order 목록을 보여줍니다. Aggregate는 최대 10,000건을 반환할 수 있지만 Pagination 위젯이 한 번에 10건만 표시합니다(Max Records = 10). OutSystems는 이 Aggregate 실행을 어떻게 최적화합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "먼저 10,000건 전체를 서버 메모리로 가져온 뒤 10건만 브라우저로 보낸다."
+          },
+          {
+            "key": "B",
+            "text": "플랫폼이 SQL에 TOP 10(또는 동등 구문)을 자동으로 붙여 DB에서 10건만 가져온다."
+          },
+          {
+            "key": "C",
+            "text": "성능 문제를 피하려면 Aggregate의 Fetch 속성을 'Only 10'으로 직접 설정해야 한다."
+          },
+          {
+            "key": "D",
+            "text": "최적화는 SQL Tool을 쓸 때만 일어나며 Aggregate는 기본적으로 전체 목록을 가져온다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-031",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "An Aggregate fetching Product has a Filter: Product.Price > GetMinimumPrice(), where GetMinimumPrice() is a Server Action (function) that queries a config table. What is the performance implication of this filter?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is highly efficient because the database executes the function internally."
+      },
+      {
+        "key": "B",
+        "text": "The platform warns that it cannot translate GetMinimumPrice() into SQL; it fetches all products and filters them in the web server's memory."
+      },
+      {
+        "key": "C",
+        "text": "It causes a compilation error, because you cannot call any function inside an Aggregate filter."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate only executes if Product.Price is a Mandatory attribute."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate Filter가 Server Action(GetMinimumPrice())을 호출하면 Platform은 이를 SQL로 변환할 수 없어 경고를 표시하고, 모든 Product를 DB에서 가져온 뒤 애플리케이션 서버 메모리에서 필터링합니다. 즉 필터가 DB가 아니라 서버에서 실행되어 성능에 불리합니다. 함정: DB 내부에서 함수가 실행되어 효율적(A)이라고 오해하거나, 아예 컴파일 에러(C)라고 생각하기 쉽습니다. Mandatory 여부(D)는 실행과 무관합니다.",
+    "distractors": {
+      "A": "SQL로 변환되지 않으므로 DB 내부 실행이 아니라 서버 메모리 필터링입니다.",
+      "C": "함수 호출 자체는 허용되며 경고만 표시됩니다(에러 아님).",
+      "D": "Mandatory 여부는 Aggregate 실행 조건과 무관합니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product를 가져오는 Aggregate에 Filter: Product.Price > GetMinimumPrice() 가 있습니다. GetMinimumPrice()는 설정 테이블을 조회해 값을 반환하는 Server Action(function)입니다. 이 필터의 성능상 함의는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "데이터베이스가 함수를 내부에서 실행하므로 매우 효율적이다."
+          },
+          {
+            "key": "B",
+            "text": "플랫폼이 GetMinimumPrice()를 SQL로 변환할 수 없다고 경고하며, 모든 product를 가져온 뒤 웹 서버 메모리에서 필터링한다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate 필터 안에서는 어떤 함수도 호출할 수 없어 compilation error가 난다."
+          },
+          {
+            "key": "D",
+            "text": "Product.Price가 Mandatory attribute일 때만 Aggregate가 실행된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-032",
+    "category": "Fetching Data",
+    "subtopic": "Aggregates",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An Aggregate has two separate filters: Employee.IsActive = True, and Employee.DepartmentId = Entities.Department.HR. How does OutSystems combine these two filters?",
+    "options": [
+      {
+        "key": "A",
+        "text": "With OR — shows active employees OR anyone in HR."
+      },
+      {
+        "key": "B",
+        "text": "With AND — shows only people who are both active AND in HR."
+      },
+      {
+        "key": "C",
+        "text": "You cannot have two filters; they must be written in one line."
+      },
+      {
+        "key": "D",
+        "text": "It depends on which filter was written first."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Aggregate에서 필터를 여러 개 추가하면 항상 AND로 결합됩니다. 즉 모든 필터 조건을 동시에 만족하는 레코드만 반환됩니다. 예시에서는 IsActive = True 이면서 DepartmentId = HR인 직원만 나옵니다. OR가 필요하면 한 필터 안에서 or 연산자를 직접 써야 합니다. 함정: 두 필터를 OR로 착각하기 쉽지만, 별도 필터 줄은 항상 AND입니다.",
+    "distractors": {
+      "A": "별도의 필터 줄은 OR가 아니라 AND로 결합됩니다.",
+      "C": "필터는 여러 개 추가할 수 있습니다.",
+      "D": "작성 순서와 무관하게 항상 AND입니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate에 두 개의 별도 필터가 있습니다: Employee.IsActive = True 와 Employee.DepartmentId = Entities.Department.HR. OutSystems는 이 두 필터를 어떻게 결합합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OR로 결합 — 활성 직원 또는 HR 소속 전원을 보여준다."
+          },
+          {
+            "key": "B",
+            "text": "AND로 결합 — 활성이면서 동시에 HR 소속인 사람만 보여준다."
+          },
+          {
+            "key": "C",
+            "text": "필터는 두 개를 둘 수 없고 한 줄에 작성해야 한다."
+          },
+          {
+            "key": "D",
+            "text": "먼저 작성한 필터가 무엇이냐에 따라 달라진다."
+          }
+        ]
+      }
+    }
   }
 ]

@@ -628,5 +628,296 @@
         ]
       }
     }
+  },
+  {
+    "id": "ENT-011",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Which statement about Static Entities in OutSystems 11 is TRUE?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You can use CreateOrUpdate<StaticEntity> to add new records at runtime."
+      },
+      {
+        "key": "B",
+        "text": "The Id attribute of a Static Entity can be of any Data Type, including Text."
+      },
+      {
+        "key": "C",
+        "text": "To filter an Aggregate by a specific Static Entity record you should always compare the Label (e.g., Status.Label = \"Active\")."
+      },
+      {
+        "key": "D",
+        "text": "You can only add or remove records during design time (in Service Studio)."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Static Entity 레코드는 설계·개발(디자인 타임)에만 정의되며 런타임에는 변경할 수 없습니다(enumeration처럼 동작). 따라서 D가 참입니다. A: 런타임에 레코드를 추가하는 CreateOrUpdate<StaticEntity>는 존재하지 않습니다. B: Static Entity의 Id는 정해진 식별자 타입이며 Text로 바꿀 수 없습니다. C: Label 문자열 비교는 오타·다국어에 취약하므로 best practice가 아니며, Record Identifier(Entities.Status.Active)로 비교해야 합니다.",
+    "distractors": {
+      "A": "Static Entity는 런타임에 레코드를 추가할 수 없습니다.",
+      "B": "Id는 임의 타입(Text)이 될 수 없습니다.",
+      "C": "Label 대신 Record Identifier로 필터하는 것이 권장됩니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11의 Static Entity에 대해 참인 설명은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "CreateOrUpdate<StaticEntity>를 사용해 런타임에 새 레코드를 추가할 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "Static Entity의 Id attribute는 Text를 포함해 어떤 Data Type이든 될 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "특정 Static Entity 레코드로 Aggregate를 필터하려면 항상 Label을 비교해야 한다(예: Status.Label = \"Active\")."
+          },
+          {
+            "key": "D",
+            "text": "레코드는 디자인 타임(Service Studio)에서만 추가하거나 제거할 수 있다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-012",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "You must ensure no two employees in the Employee entity can share the same Email. What is the most efficient and standard way to enforce this in OutSystems?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Employee entity, create a Unique Index on the Email attribute."
+      },
+      {
+        "key": "B",
+        "text": "In the SaveEmployee Server Action, use an Aggregate to check whether the email exists before every CreateOrUpdate."
+      },
+      {
+        "key": "C",
+        "text": "Set the Email attribute's Mandatory property to Yes."
+      },
+      {
+        "key": "D",
+        "text": "OutSystems automatically prevents duplicate values for any attribute of the Email data type."
+      }
+    ],
+    "answer": "A",
+    "explanation": "중복을 막는 표준·효율적 방법은 Email attribute에 Unique Index를 만드는 것입니다. 제약이 데이터베이스 레벨에서 강제되어 동시성(race condition) 문제도 없습니다. Aggregate로 매번 확인(B)하는 방식은 두 요청이 동시에 들어오면 중복을 허용할 수 있고 비효율적입니다. Mandatory(C)는 값의 필수 여부일 뿐 유일성과 무관합니다. Email 데이터 타입이라고 해서 중복이 자동으로 막히지 않습니다(D).",
+    "distractors": {
+      "B": "동시 요청 시 race condition으로 중복이 통과할 수 있고 매번 쿼리하여 비효율적.",
+      "C": "Mandatory는 빈 값 방지일 뿐 중복 방지와 무관.",
+      "D": "데이터 타입이 Email이어도 자동 유일성 보장은 없습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee entity에서 두 직원이 같은 Email을 가질 수 없도록 보장해야 합니다. OutSystems에서 가장 효율적이고 표준적인 방법은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Employee entity에서 Email attribute에 Unique Index를 만든다."
+          },
+          {
+            "key": "B",
+            "text": "SaveEmployee Server Action에서 매번 CreateOrUpdate 전에 Aggregate로 이메일 존재 여부를 확인한다."
+          },
+          {
+            "key": "C",
+            "text": "Email attribute의 Mandatory 속성을 Yes로 설정한다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems가 Email 데이터 타입 attribute에 대해 중복 값을 자동으로 막아준다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-013",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "Entity Profile has its Primary Key as UserId (type User Identifier) with Mandatory = No. In a Server Action you call CreateProfile but forget to assign a value to UserId. What happens when the logic executes?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A record is created with NullIdentifier() (0) as its Id."
+      },
+      {
+        "key": "B",
+        "text": "OutSystems throws a Database Exception, because a Primary Key can never be Null regardless of the Mandatory property."
+      },
+      {
+        "key": "C",
+        "text": "The system automatically generates a new, unique User Identifier for you."
+      },
+      {
+        "key": "D",
+        "text": "The record is created but becomes read-only and cannot be updated."
+      }
+    ],
+    "answer": "A",
+    "explanation": "참조 타입(User Identifier) Primary Key는 auto-number가 아니므로 플랫폼이 값을 자동 생성하지 않습니다(자동 채번은 기본 Long Integer Id에만 적용). 값을 지정하지 않으면 참조 attribute의 기본값 NullIdentifier() = 0 이 사용되어 Id가 0인 레코드가 만들어집니다. OutSystems는 SQL NULL 대신 0을 사용하므로 'PK가 null이라 예외 발생'(B)은 첫 삽입에서 일어나지 않고, 자동 채번(C)도 되지 않습니다. 함정: 참조형 식별자 PK는 반드시 명시적으로 값을 지정해야 하며, 하지 않으면 0으로 들어가고 이후 두 번째 생성 시 중복키 오류가 납니다.",
+    "distractors": {
+      "B": "0은 NULL이 아니므로 첫 레코드 삽입은 예외 없이 성공합니다.",
+      "C": "auto-number는 기본 Long Integer Id에만 적용되며 참조형 PK는 자동 생성되지 않습니다.",
+      "D": "OutSystems에 그런 자동 read-only 레코드 개념은 없습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Entity Profile의 Primary Key가 UserId(type User Identifier)이고 Mandatory = No 입니다. Server Action에서 CreateProfile을 호출하지만 UserId에 값을 지정하는 것을 잊었습니다. 로직 실행 시 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Id가 NullIdentifier()(0)인 레코드가 생성된다."
+          },
+          {
+            "key": "B",
+            "text": "Primary Key는 Mandatory 속성과 무관하게 절대 Null일 수 없으므로 OutSystems가 Database Exception을 던진다."
+          },
+          {
+            "key": "C",
+            "text": "시스템이 자동으로 새롭고 고유한 User Identifier를 생성해 준다."
+          },
+          {
+            "key": "D",
+            "text": "레코드는 생성되지만 read-only가 되어 수정할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-014",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You are adding a Profile Picture to the Employee entity. To keep an Aggregate that lists all employees' names and phone numbers fast, how should you store the image?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a Picture (Binary Data) attribute directly to the Employee entity."
+      },
+      {
+        "key": "B",
+        "text": "Create a separate EmployeePicture entity with a Binary Data attribute and EmployeeId as its Primary Key (1-to-1 relationship)."
+      },
+      {
+        "key": "C",
+        "text": "Store the images in a Static Entity."
+      },
+      {
+        "key": "D",
+        "text": "Binary data cannot be stored in the OutSystems database; you must use an external URL."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Binary Data(이미지)는 행을 무겁게 만듭니다. Picture가 Employee 엔티티에 있으면 Name·Phone만 필요한 Aggregate도 큰 바이너리 컬럼을 함께 끌고 와 성능이 나빠집니다. 베스트 프랙티스는 바이너리를 **1-to-1로 연결된 별도 엔티티**(EmployeeId를 PK/FK)로 분리해, 목록 조회는 가볍게 유지하고 이미지가 실제 필요할 때만 가져오는 것입니다. 함정: A는 동작하지만 바로 그 성능 문제를 유발, Static Entity는 소규모 고정 조회용(C), OutSystems는 Binary Data를 DB에 저장할 수 있습니다(D 거짓).",
+    "distractors": {
+      "A": "동작은 하지만 바로 그 성능 문제(무거운 컬럼 동반 조회)를 유발합니다.",
+      "C": "Static Entity는 소규모 고정 조회용 데이터에 사용합니다.",
+      "D": "틀림 — OutSystems는 Binary Data를 DB에 저장할 수 있습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee 엔터티에 프로필 사진 기능을 추가하려 합니다. 모든 직원의 이름과 전화번호를 나열하는 Aggregate의 성능을 좋게 유지하려면 이미지를 어떻게 저장해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Employee 엔터티에 Picture(Binary Data) 특성을 직접 추가합니다."
+          },
+          {
+            "key": "B",
+            "text": "Binary Data 특성과 EmployeeId를 Primary Key로 갖는 별도의 EmployeePicture 엔터티(1대1 관계)를 만듭니다."
+          },
+          {
+            "key": "C",
+            "text": "이미지를 Static Entity에 저장합니다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems 데이터베이스에는 Binary Data를 저장할 수 없으므로 외부 URL을 써야 합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-015",
+    "category": "Data Modeling",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate GetProducts returns a list. You assign GetProducts.List.Current to a Local Variable SelectedProduct of type Product (Record). You then apply a ListFilter on GetProducts.List that removes several records. What happens to the data inside SelectedProduct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It becomes empty because the list it was pointing to has changed."
+      },
+      {
+        "key": "B",
+        "text": "It stays unchanged because assigning a Record to a variable copies the data by value, not by reference."
+      },
+      {
+        "key": "C",
+        "text": "It now points to the Current record of the filtered list."
+      },
+      {
+        "key": "D",
+        "text": "A runtime exception occurs because the pointer is lost."
+      }
+    ],
+    "answer": "B",
+    "explanation": "OutSystems에서 Record(구조체)는 참조가 아니라 값(value) 타입입니다. GetProducts.List.Current를 Record 타입 Local Variable에 Assign하면 그 순간의 데이터가 복사됩니다. 따라서 이후 원본 List에 ListFilter를 적용해 항목을 제거해도 SelectedProduct는 그대로 유지됩니다. 함정은 다른 언어의 '포인터/참조' 개념을 그대로 가져와 List가 바뀌면 복사본도 바뀐다고 착각하는 것입니다. Record 할당은 스냅샷 복사라고 기억하세요.",
+    "distractors": "A/C는 참조 의미로 오해한 것이고, D의 런타임 예외는 발생하지 않습니다.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Aggregate GetProducts가 목록을 반환합니다. GetProducts.List.Current를 Product(Record) 타입의 Local Variable SelectedProduct에 Assign합니다. 그 후 GetProducts.List에 ListFilter를 적용해 여러 레코드를 제거합니다. SelectedProduct 안의 데이터는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "가리키던 List가 바뀌었으므로 비워진다."
+          },
+          {
+            "key": "B",
+            "text": "Record를 변수에 Assign하면 참조가 아니라 값으로 복사되므로 그대로 유지된다."
+          },
+          {
+            "key": "C",
+            "text": "이제 필터링된 List의 Current 레코드를 가리킨다."
+          },
+          {
+            "key": "D",
+            "text": "포인터를 잃어 런타임 예외가 발생한다."
+          }
+        ]
+      }
+    }
   }
 ]

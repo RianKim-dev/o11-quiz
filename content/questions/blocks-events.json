@@ -566,5 +566,64 @@
         ]
       }
     }
+  },
+  {
+    "id": "BE-010",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Web Block has an Input Parameter CustomerId and an Aggregate inside it filtered by CustomerId. The parent screen changes CustomerId. What must the developer do so the Block's Aggregate shows the new data?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing — the platform automatically re-runs all Aggregates inside the Block when the input changes."
+      },
+      {
+        "key": "B",
+        "text": "Call Refresh Data on the Aggregate inside the Block's On Parameters Changed event handler."
+      },
+      {
+        "key": "C",
+        "text": "Call Refresh Data on the screen, which flows down into the Block."
+      },
+      {
+        "key": "D",
+        "text": "Aggregates inside Blocks cannot be refreshed after the Block is loaded."
+      }
+    ],
+    "answer": "B",
+    "explanation": "부모가 Block의 Input Parameter를 바꾸면 Block의 **On Parameters Changed** 이벤트가 자동으로 발생하지만, 그 이벤트는 당신이 넣은 로직만 실행합니다. Aggregate가 저절로 재조회되지는 않으므로, On Parameters Changed 안에 그 Aggregate의 **Refresh Data**를 명시적으로 넣어야 합니다. 함정: A가 흔한 오해(이벤트는 자동 발생하지만 새로고침은 아님), 화면의 Refresh Data는 블록으로 전파되지 않으며(C), 블록 Aggregate도 새로고침 가능합니다(D).",
+    "distractors": {
+      "A": "이벤트는 자동 발생하지만 Aggregate 재조회는 자동이 아닙니다.",
+      "C": "화면의 Refresh Data는 블록 내부로 전파되지 않습니다.",
+      "D": "블록 내 Aggregate도 얼마든지 새로고침할 수 있습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Web Block에 Input Parameter CustomerId가 있고, 블록 내부 Aggregate가 이 CustomerId로 필터링합니다. 부모 화면이 CustomerId 값을 변경합니다. 블록의 Aggregate가 새 데이터를 표시하게 하려면 개발자는 무엇을 해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무것도 안 해도 됩니다 — 입력이 바뀌면 플랫폼이 블록 내 모든 Aggregate를 자동으로 다시 실행합니다."
+          },
+          {
+            "key": "B",
+            "text": "블록의 On Parameters Changed 이벤트 핸들러 안에서 해당 Aggregate에 Refresh Data를 호출해야 합니다."
+          },
+          {
+            "key": "C",
+            "text": "화면에서 Refresh Data를 호출하면 블록으로 전파됩니다."
+          },
+          {
+            "key": "D",
+            "text": "블록 내부의 Aggregate는 블록이 로드된 후에는 새로고침할 수 없습니다."
+          }
+        ]
+      }
+    }
   }
 ]

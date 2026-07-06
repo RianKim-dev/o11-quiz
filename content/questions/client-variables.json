@@ -589,5 +589,64 @@
         ]
       }
     }
+  },
+  {
+    "id": "CV-011",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Client Variables",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "You need to store a VAT rate (tax percentage) that is the same for all users and only changes once or twice a year. What is the best way to store it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Client Variable, because it is fast to access in the browser."
+      },
+      {
+        "key": "B",
+        "text": "Site Property, because it is a global value shared by all users and managed on the server."
+      },
+      {
+        "key": "C",
+        "text": "Static Entity, because the value might change at runtime."
+      },
+      {
+        "key": "D",
+        "text": "A Local Variable on every screen."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Site Property는 **앱 전체에서 공통인 단일 설정값**을 저장하고, 재배포 없이 Service Center에서 런타임에 바꿀 수 있어 VAT 세율 같은 값에 적합합니다. 함정: Client Variable은 사용자별·디바이스 저장(범위가 다르고 중앙관리 안 됨), Static Entity는 고정 레코드 집합용(단일 설정값 아님), Local Variable은 화면 한 인스턴스에서만 존재합니다.",
+    "distractors": {
+      "A": "Client Variable는 사용자별·디바이스 저장이라 전역 공유에 부적합합니다.",
+      "C": "Static Entity는 고정된 레코드 집합용이며 단일 설정값에는 부적합합니다.",
+      "D": "Local Variable는 화면 하나에만 존재합니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "모든 사용자에게 동일하고 1년에 한두 번만 바뀌는 VAT(부가세율) 값을 저장하려고 합니다. 가장 적절한 저장 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "브라우저에서 빠르게 접근할 수 있으므로 Client Variable."
+          },
+          {
+            "key": "B",
+            "text": "모든 사용자가 공유하고 서버에서 관리되는 전역 값이므로 Site Property."
+          },
+          {
+            "key": "C",
+            "text": "런타임에 값이 바뀔 수 있으므로 Static Entity."
+          },
+          {
+            "key": "D",
+            "text": "모든 화면마다 두는 Local Variable."
+          }
+        ]
+      }
+    }
   }
 ]

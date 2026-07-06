@@ -382,5 +382,292 @@
         ]
       }
     }
+  },
+  {
+    "id": "CSA-007",
+    "category": "Architecture & Security",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Client Action calculates the total price of a shopping cart and then calls a Server Action to save the order to the database. Why is this pattern considered insecure?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because Client Actions cannot call Server Actions."
+      },
+      {
+        "key": "B",
+        "text": "Because a malicious user can tamper with the Client Action and modify the calculated total before it is sent to the Server Action."
+      },
+      {
+        "key": "C",
+        "text": "Because Client Actions are slower than Server Actions."
+      },
+      {
+        "key": "D",
+        "text": "Because math operations can only be performed in Server Actions."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Client Action은 사용자 브라우저에서 실행되므로, 거기서 계산한 값(장바구니 합계 등)은 서버로 전달되기 전에 악의적 사용자가 조작할 수 있습니다. 가격·합계·검증·권한 같은 **보안에 민감한 로직은 서버에서 (재)계산**해야 조작을 막습니다. 함정: A는 거짓(Client Action은 Server Action 호출 가능), 연산이 서버 전용도 아니며(D), 속도(C)는 보안과 무관합니다.",
+    "distractors": {
+      "A": "틀림 — Client Action은 Server Action을 호출할 수 있습니다.",
+      "C": "속도는 보안 문제와 무관합니다.",
+      "D": "틀림 — 연산은 Client에서도 가능합니다. 문제는 신뢰(trust)입니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action이 장바구니의 총 금액을 계산한 뒤 Server Action을 호출해 주문을 데이터베이스에 저장합니다. 이 패턴이 보안상 위험한 이유는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Action은 Server Action을 호출할 수 없기 때문입니다."
+          },
+          {
+            "key": "B",
+            "text": "악의적인 사용자가 Client Action을 조작하여, 계산된 총 금액이 Server Action으로 전달되기 전에 값을 변경할 수 있기 때문입니다."
+          },
+          {
+            "key": "C",
+            "text": "Client Action이 Server Action보다 느리기 때문입니다."
+          },
+          {
+            "key": "D",
+            "text": "연산 작업은 Server Action에서만 수행할 수 있기 때문입니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-008",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You set the Function property of a Server Action named CalculateRisk to Yes so it can be used inside Expressions. Which restriction does the platform enforce on this action?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It cannot have any Input Parameters."
+      },
+      {
+        "key": "B",
+        "text": "It can only be called from a Client Action, not from another Server Action."
+      },
+      {
+        "key": "C",
+        "text": "It must have exactly one Output Parameter."
+      },
+      {
+        "key": "D",
+        "text": "It can no longer be used in an Expression on a Screen."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Function=Yes로 설정하면 해당 Action을 Expression 안에서 사용할 수 있게 됩니다. 플랫폼이 강제하는 유일한 제약은 '정확히 하나의 Output Parameter를 가져야 한다'는 것입니다. Input Parameter는 여러 개 가질 수 있습니다(A 오답). Function으로 만드는 목적 자체가 Expression에서 쓰기 위함이므로 D는 정반대입니다(오답). 함정: 'Function은 DB Write(Create/Update)를 못 한다'는 흔한 오해인데, 플랫폼이 이를 컴파일 단계에서 막지는 않습니다(권장되지 않을 뿐). 시험에서는 'Output Parameter 정확히 1개' 규칙을 기억하세요.",
+    "distractors": "A: Input Parameter 개수 제한 없음. B: 호출 규칙과 Function 속성은 무관. D: Function=Yes의 목적이 바로 Expression 사용 허용.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Server Action CalculateRisk의 Function 속성을 Yes로 설정하여 Expression 안에서 사용할 수 있게 했습니다. 이때 플랫폼이 강제하는 제약은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Input Parameter를 하나도 가질 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "다른 Server Action이 아니라 Client Action에서만 호출할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "정확히 하나의 Output Parameter를 가져야 한다."
+          },
+          {
+            "key": "D",
+            "text": "더 이상 Screen의 Expression에서 사용할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-009",
+    "category": "Architecture & Security",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You mark a Client Action as a Function (Yes). It computes a 'security token' using a secret algorithm. Why is placing this logic in a Client Action a serious security risk?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Functions can only return Integers, so the token value would be corrupted."
+      },
+      {
+        "key": "B",
+        "text": "Client-side code is downloaded to and visible in the browser (e.g. the Sources tab), so any user can inspect the secret algorithm and see how tokens are generated."
+      },
+      {
+        "key": "C",
+        "text": "Client Actions cannot be marked as Functions; only Server Actions can, so it would not compile."
+      },
+      {
+        "key": "D",
+        "text": "Client Functions execute only once, when the app is installed, so the token cannot be refreshed."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Client Action의 로직은 브라우저로 다운로드되어 클라이언트 측에서 실행됩니다. 즉 개발자 도구의 Sources 탭 등에서 코드를 볼 수 있으므로, 토큰 생성 같은 '비밀 알고리즘'을 클라이언트에 두면 누구나 열어 확인할 수 있습니다(정답 B). 민감한 보안 로직은 반드시 Server Action에 두어야 합니다. Function은 Text 등 어떤 데이터 타입도 반환할 수 있고(A 오답), Client Action도 Function으로 지정할 수 있습니다(C 오답). D는 사실이 아닙니다. 함정: 위험의 핵심은 'Function 여부'가 아니라 '클라이언트에서 실행 = 코드가 노출됨'이라는 점입니다.",
+    "distractors": "A: Function은 Text 등 어떤 타입도 반환 가능. C: Client Action도 Function 지정 가능. D: 설치 시 1회 실행이라는 개념은 존재하지 않음.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "어떤 Client Action을 Function(Yes)으로 지정했습니다. 이 Action은 비밀 알고리즘으로 '보안 토큰'을 계산합니다. 이 로직을 Client Action에 두는 것이 심각한 보안 위험인 이유는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Function은 Integer만 반환할 수 있어 토큰 값이 손상된다."
+          },
+          {
+            "key": "B",
+            "text": "Client 측 코드는 브라우저로 다운로드되어(예: Sources 탭) 보이므로, 누구나 비밀 알고리즘과 토큰 생성 방식을 확인할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Client Action은 Function으로 지정할 수 없고 Server Action만 가능하므로 컴파일되지 않는다."
+          },
+          {
+            "key": "D",
+            "text": "Client Function은 앱 설치 시 한 번만 실행되어 토큰을 갱신할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-010",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "On a slow connection a user clicks a Save button (which triggers a Server Action), sees no change, and clicks it again 1 second later. By default, how does OutSystems Reactive handle this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OutSystems detects the duplicate request and cancels the first one."
+      },
+      {
+        "key": "B",
+        "text": "Both requests are sent; two Server Actions run, potentially creating two duplicate records."
+      },
+      {
+        "key": "C",
+        "text": "The browser automatically disables the button after the first click until the action finishes."
+      },
+      {
+        "key": "D",
+        "text": "The second click is queued and only starts after the first one finishes."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Reactive 웹/모바일은 기본적으로 버튼을 자동으로 비활성화하거나 중복 요청을 제거해 주지 않습니다. 사용자가 빠르게 두 번 클릭하면 클라이언트 액션이 두 번 실행되고 서버 액션도 두 번 호출되어 중복 레코드가 생길 수 있습니다. 그래서 실무에서는 첫 클릭 즉시 버튼을 Disabled로 만들거나 로딩 상태로 막습니다. 함정: 플랫폼이 알아서 중복 클릭을 막아줄 것 같지만 기본 제공되지 않습니다.",
+    "distractors": {
+      "A": "플랫폼이 첫 요청을 취소하는 자동 중복 감지는 없습니다.",
+      "C": "버튼 자동 비활성화는 기본 동작이 아니며 개발자가 직접 구현해야 합니다.",
+      "D": "두 번째 클릭은 큐잉되지 않고 즉시 별도 요청으로 전송됩니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "느린 연결에서 사용자가 Save 버튼(Server Action 실행)을 클릭했는데 화면이 바뀌지 않자 1초 뒤 다시 클릭합니다. 기본적으로 OutSystems Reactive는 이를 어떻게 처리합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OutSystems가 중복 요청을 감지해 첫 번째를 취소한다."
+          },
+          {
+            "key": "B",
+            "text": "두 요청이 모두 전송되어 Server Action이 두 번 실행되고, 중복 레코드가 생길 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "브라우저가 첫 클릭 후 액션이 끝날 때까지 버튼을 자동으로 비활성화한다."
+          },
+          {
+            "key": "D",
+            "text": "두 번째 클릭은 큐에 들어가 첫 번째가 끝난 뒤에만 시작된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-011",
+    "category": "Logic",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Inside a Client Action, a JavaScript node receives a Local Variable MyNumber (Integer) as an Input. The script runs $parameters.MyNumber = 100;. After the node, a Message displays MyNumber. What does the Message show?",
+    "options": [
+      {
+        "key": "A",
+        "text": "100 — the JavaScript node has direct access to the variable."
+      },
+      {
+        "key": "B",
+        "text": "The original value of MyNumber — Input parameters to JavaScript nodes are passed by value (a copy), not by reference."
+      },
+      {
+        "key": "C",
+        "text": "An error — you cannot assign values to Input parameters in JavaScript."
+      },
+      {
+        "key": "D",
+        "text": "0 — JavaScript clears the variable for security reasons."
+      }
+    ],
+    "answer": "B",
+    "explanation": "JavaScript 노드의 Input 파라미터는 값(복사본)으로 전달됩니다. 스크립트 안에서 $parameters.MyNumber = 100을 해도 노드 내부의 복사본만 바뀔 뿐 원래 Local Variable에는 반영되지 않습니다. 값을 돌려주려면 Output 파라미터를 별도로 선언하고 거기에 대입해야 합니다. 따라서 이후 Message는 원래 값을 보여줍니다. 함정: JS에서 입력값에 대입하면 변수가 바뀔 것 같지만, Input은 참조가 아니라 복사이므로 반영되지 않습니다(오류도 아님).",
+    "distractors": {
+      "A": "JS 노드는 변수에 직접 접근하지 않고 복사본을 받습니다.",
+      "C": "Input에 대입해도 오류는 나지 않으며, 단지 밖으로 전파되지 않을 뿐입니다.",
+      "D": "보안상 변수를 0으로 지우는 동작은 없습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action 안의 JavaScript 노드가 Local Variable MyNumber(Integer)를 Input으로 받습니다. 스크립트에서 $parameters.MyNumber = 100; 을 실행합니다. 노드 뒤의 Message가 MyNumber를 표시할 때 무엇이 보입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "100 — JavaScript 노드가 변수에 직접 접근하기 때문이다."
+          },
+          {
+            "key": "B",
+            "text": "MyNumber의 원래 값 — JavaScript 노드의 Input 파라미터는 참조가 아니라 값(복사본)으로 전달되기 때문이다."
+          },
+          {
+            "key": "C",
+            "text": "오류 — JavaScript에서 Input 파라미터에 값을 대입할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "0 — JavaScript가 보안상 변수를 초기화하기 때문이다."
+          }
+        ]
+      }
+    }
   }
 ]

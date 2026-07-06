@@ -449,5 +449,343 @@
         ]
       }
     }
+  },
+  {
+    "id": "SL-008",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "GetWeather has Fetch = At Start; GetClothing has Fetch = Only on Demand. GetWeather's On After Fetch sets a filter for GetClothing and calls Refresh Data on GetClothing. Which sequence is correct when the screen opens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OnInitialize -> GetWeather starts -> GetClothing starts (parallel) -> GetWeather.OnAfterFetch runs."
+      },
+      {
+        "key": "B",
+        "text": "OnInitialize -> GetWeather starts -> GetWeather finishes -> GetWeather.OnAfterFetch runs -> GetClothing starts."
+      },
+      {
+        "key": "C",
+        "text": "GetWeather and GetClothing start together -> OnInitialize runs -> GetWeather.OnAfterFetch runs."
+      },
+      {
+        "key": "D",
+        "text": "OnReady runs -> GetWeather starts -> GetClothing starts -> GetWeather.OnAfterFetch runs after both finish."
+      }
+    ],
+    "answer": "B",
+    "explanation": "On Initialize가 가장 먼저 실행됩니다. 그다음 **At Start** Aggregate(GetWeather)만 자동으로 트리거됩니다. GetClothing은 Only on Demand라 초기화 때 시작하지 않고, 그것에 대한 Refresh Data가 호출될 때만 시작합니다. 그 호출은 GetWeather의 On After Fetch 안에 있으니 GetWeather가 끝난 뒤 실행됩니다 — 그래서 GetClothing이 **가장 마지막**에 시작됩니다. 함정: A/C/D는 GetClothing이 화면 로드 때 시작한다고 가정하지만 Only-on-Demand는 시작 시 조회하지 않으며, fetch보다 On Initialize가 먼저입니다(On Ready 아님).",
+    "distractors": {
+      "A": "GetClothing은 Only on Demand라 시작 시 자동 실행되지 않습니다.",
+      "C": "OnInitialize가 fetch보다 먼저 실행됩니다.",
+      "D": "On Ready가 아니라 On Initialize가 먼저이며, GetClothing은 자동 시작하지 않습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "GetWeather는 Fetch = At Start, GetClothing은 Fetch = Only on Demand입니다. GetWeather의 On After Fetch가 GetClothing용 필터를 설정하고 GetClothing에 Refresh Data를 호출합니다. 화면이 열릴 때 올바른 실행 순서는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OnInitialize -> GetWeather 시작 -> GetClothing 시작(병렬) -> GetWeather.OnAfterFetch 실행."
+          },
+          {
+            "key": "B",
+            "text": "OnInitialize -> GetWeather 시작 -> GetWeather 완료 -> GetWeather.OnAfterFetch 실행 -> GetClothing 시작."
+          },
+          {
+            "key": "C",
+            "text": "GetWeather와 GetClothing이 함께 시작 -> OnInitialize 실행 -> GetWeather.OnAfterFetch 실행."
+          },
+          {
+            "key": "D",
+            "text": "OnReady 실행 -> GetWeather 시작 -> GetClothing 시작 -> 둘 다 끝난 후 GetWeather.OnAfterFetch 실행."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-009",
+    "category": "Fetching Data",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has two Aggregates, DataA and DataB, both with Fetch: At Start. DataA completes in 2 seconds and DataB in 5 seconds. Each has an On After Fetch handler. Which statement is TRUE about the Screen's behavior?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Screen stays blank until second 5, when both finish together."
+      },
+      {
+        "key": "B",
+        "text": "DataA's On After Fetch runs at second 2, and the UI bound to DataA renders then, without waiting for DataB."
+      },
+      {
+        "key": "C",
+        "text": "DataB's On After Fetch re-triggers DataA's On After Fetch to keep the data consistent."
+      },
+      {
+        "key": "D",
+        "text": "Both On After Fetch handlers are queued and run together only after the Screen's On Ready event."
+      }
+    ],
+    "answer": "B",
+    "explanation": "화면의 Aggregate들은 서로 비동기(asynchronous)로 실행되며 완료 순서가 보장되지 않습니다. 각 Aggregate는 완료되는 즉시 자신의 On After Fetch가 실행되고, 그 데이터에 바인딩된 UI가 개별적으로 렌더링됩니다. 따라서 DataA(2초)는 DataB(5초)를 기다리지 않고 먼저 화면에 반영됩니다(정답 B). 화면 전체가 blank로 대기하지 않고 준비되는 부분부터 점진적으로 렌더링됩니다(A 오답). Aggregate 간 자동 재트리거는 없습니다(C 오답). On After Fetch는 On Ready와 묶여 함께 실행되는 것이 아니라 각 fetch 완료 시점에 개별 발생합니다(D 오답).",
+    "distractors": "A: 점진적 렌더링이므로 통째로 blank 대기하지 않음. C: Aggregate가 서로를 재트리거하지 않음. D: On After Fetch는 각 fetch 완료 시 개별 발생.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen에 Aggregate DataA, DataB가 있고 둘 다 Fetch: At Start입니다. DataA는 2초, DataB는 5초에 완료됩니다. 각각 On After Fetch 핸들러가 있습니다. Screen의 동작으로 옳은 것은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "둘이 함께 끝나는 5초까지 화면은 blank 상태로 유지된다."
+          },
+          {
+            "key": "B",
+            "text": "DataA의 On After Fetch가 2초에 실행되고, DataA에 바인딩된 UI가 그때 렌더링되며 DataB를 기다리지 않는다."
+          },
+          {
+            "key": "C",
+            "text": "DataB의 On After Fetch가 데이터 일관성을 위해 DataA의 On After Fetch를 다시 트리거한다."
+          },
+          {
+            "key": "D",
+            "text": "두 On After Fetch는 큐에 쌓였다가 Screen의 On Ready 이후에 함께 실행된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-010",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "To keep unauthenticated users out, you add a check in the Screen's On Initialize event and, if the user is not logged in, end the flow with a Destination node pointing to the Login screen. What is the resulting behavior?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The user never sees the Screen; the redirect happens before the Screen even starts to render."
+      },
+      {
+        "key": "B",
+        "text": "The Screen's Aggregates (Fetch: At Start) still complete in the background before the redirect can take effect."
+      },
+      {
+        "key": "C",
+        "text": "You cannot place a Destination node inside an On Initialize event."
+      },
+      {
+        "key": "D",
+        "text": "The redirect only takes effect after the On Ready event has completed."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Reactive 화면의 수명 주기는 On Initialize → 데이터 Fetch → On Ready 순서로 진행됩니다. On Initialize는 화면이 렌더링되기 전에 실행되므로, 여기서 조건을 검사해 Destination으로 리디렉션하면 사용자는 화면을 보기 전에 다른 화면(Login)으로 이동합니다(정답 A). Fetch(At Start)는 On Initialize 이후 단계이므로 Initialize에서 리디렉션되면 그 단계로 진행되지 않습니다(B 오답). On Initialize에서 Destination 사용은 가능합니다(C 오답). 리디렉션은 On Ready 이후가 아니라 그 이전에 발생합니다(D 오답). 실무에서 인증/권한에 따른 사전 리디렉션은 On Initialize에서 처리하는 대표 패턴입니다.",
+    "distractors": "B: Fetch는 Initialize 다음 단계라 리디렉션 시 도달하지 않음. C: On Initialize에서 Destination 사용 가능. D: 리디렉션은 On Ready 전에 발생.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "미인증 사용자를 막기 위해 Screen의 On Initialize 이벤트에서 로그인 여부를 검사하고, 로그인하지 않았다면 Destination 노드로 Login 화면으로 보내며 흐름을 종료합니다. 이때의 동작은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "사용자는 화면을 전혀 보지 못한다 — 화면이 렌더링을 시작하기도 전에 리디렉션된다."
+          },
+          {
+            "key": "B",
+            "text": "리디렉션이 적용되기 전에 화면의 Aggregate(Fetch: At Start)가 백그라운드에서 먼저 완료된다."
+          },
+          {
+            "key": "C",
+            "text": "On Initialize 이벤트 안에는 Destination 노드를 넣을 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "리디렉션은 On Ready 이벤트가 완료된 이후에만 적용된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-011",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has a Local Variable Counter (Integer, default 0). A button runs a Client Action that executes Counter = Counter + 1. The user then clicks a navigation Link that points to the same Screen (self-navigation). What is Counter's value after the screen reloads?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It stays at 1 because the user is still on the same screen."
+      },
+      {
+        "key": "B",
+        "text": "It resets to 0 because navigating to a screen creates a new screen instance and re-initializes its Local Variables to their defaults."
+      },
+      {
+        "key": "C",
+        "text": "It increments to 2 because OnInitialize runs again."
+      },
+      {
+        "key": "D",
+        "text": "An error occurs because you cannot navigate to the screen you are currently on."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Reactive Web에서 화면으로 Navigate하면(같은 화면으로의 self-navigation 포함) 새 화면 인스턴스가 생성되고 Screen Lifecycle이 처음부터 다시 시작됩니다. 이때 Input Parameter와 Local Variable은 기본값으로 초기화되므로 Counter는 default 0으로 돌아갑니다. 함정은 '같은 화면이니 상태가 유지되겠지'(A)라는 착각과, OnInitialize가 값을 증가시킨다는 오해(C)입니다. OnInitialize는 기본값을 설정할 뿐 +1을 하지 않습니다.",
+    "distractors": "A는 상태 유지 오해, C는 OnInitialize의 역할 오해, D는 self-navigation이 금지되지 않음.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면에 Local Variable Counter(Integer, 기본값 0)가 있습니다. 버튼이 실행하는 Client Action은 Counter = Counter + 1을 수행합니다. 그 후 사용자가 같은 화면을 가리키는 Navigation Link(self-navigation)를 클릭합니다. 화면이 다시 로드된 뒤 Counter의 값은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "같은 화면이므로 1로 유지된다."
+          },
+          {
+            "key": "B",
+            "text": "화면으로 Navigate하면 새 화면 인스턴스가 생성되어 Local Variable이 기본값으로 초기화되므로 0으로 리셋된다."
+          },
+          {
+            "key": "C",
+            "text": "OnInitialize가 다시 실행되어 2로 증가한다."
+          },
+          {
+            "key": "D",
+            "text": "현재 있는 화면으로는 이동할 수 없어 오류가 발생한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-012",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "You must set focus (via JavaScript) on an Input widget that is rendered inside a List populated by a screen Aggregate with Fetch = At Start. In which event should the JavaScript run so the Input actually exists in the DOM?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OnInitialize, because it is the first event that runs."
+      },
+      {
+        "key": "B",
+        "text": "OnReady, because it is specifically designed for DOM manipulation."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate's On After Fetch, because the List (and the Input inside it) only appears in the DOM after the data arrives."
+      },
+      {
+        "key": "D",
+        "text": "OnRender, because it runs every time anything changes on the screen."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Screen Aggregate는 비동기(asynchronously)로 실행됩니다. OnReady는 초기 HTML 구성이 끝난 시점에 발생하지만, 이때 Aggregate 데이터가 아직 도착하지 않아 List와 그 안의 Input이 DOM에 없을 수 있습니다. 데이터가 도착해 List가 렌더링된 뒤 실행되는 On After Fetch 이벤트에서 JS를 실행해야 Input이 DOM에 존재함을 보장할 수 있습니다. 함정은 'DOM 조작은 무조건 OnReady'(B)라는 일반론입니다. 데이터 의존적인 위젯은 fetch 완료 이후 시점(On After Fetch)이 필요합니다.",
+    "distractors": "A OnInitialize는 렌더링 전이라 DOM이 없음. B OnReady는 async fetch 완료를 보장하지 못함. D 화면 이벤트로서의 일반 'OnRender'는 이 문제의 정답 시점이 아님.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Fetch = At Start인 화면 Aggregate로 채워지는 List 안에 렌더링되는 Input 위젯에 (JavaScript로) 포커스를 설정해야 합니다. Input이 실제로 DOM에 존재하도록 하려면 어떤 이벤트에서 JavaScript를 실행해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "가장 먼저 실행되므로 OnInitialize."
+          },
+          {
+            "key": "B",
+            "text": "DOM 조작 전용 이벤트이므로 OnReady."
+          },
+          {
+            "key": "C",
+            "text": "데이터가 도착한 뒤에야 List(및 그 안의 Input)가 DOM에 나타나므로 해당 Aggregate의 On After Fetch."
+          },
+          {
+            "key": "D",
+            "text": "화면에서 무언가 바뀔 때마다 실행되므로 OnRender."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-013",
+    "category": "Reactive Apps in OutSystems",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Reactive Web screen has a Local Variable TotalCount (Integer) displayed in an Expression. In that screen's OnRender event, you add logic that increments TotalCount by 1 every time OnRender runs. What will most likely happen when the screen opens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "TotalCount will show 1 and then stop."
+      },
+      {
+        "key": "B",
+        "text": "The screen enters an infinite loop (browser freezes/crashes), because changing a rendered variable triggers a new render, which runs OnRender again."
+      },
+      {
+        "key": "C",
+        "text": "Service Studio shows a compilation error and blocks publishing."
+      },
+      {
+        "key": "D",
+        "text": "OnRender executes only once, so TotalCount stays at 1."
+      }
+    ],
+    "answer": "B",
+    "explanation": "OnRender는 화면/Block이 렌더링될 때마다 실행되며, 워크북에도 '여러 번 발생할 수 있다'고 명시되어 있습니다. OnRender 안에서 화면에 바인딩된 변수(TotalCount)를 변경하면 Reactive의 반응성 때문에 새로운 렌더링이 트리거되고, 그 렌더링이 다시 OnRender를 실행시켜 무한 루프가 발생합니다. 그래서 브라우저가 멈추거나 뻗을 수 있습니다. 함정은 D처럼 'OnRender는 한 번만 실행된다'고 착각하는 것 (실제로는 여러 번 실행됨). 규칙: OnRender 안에서는 UI에 표시되는 변수 값을 변경하지 마세요. 초기값 설정은 OnInitialize에서 하세요.",
+    "distractors": {
+      "A": "값이 렌더링에 사용되므로 1에서 멈추지 않고 계속 증가합니다.",
+      "C": "이것은 컴파일 오류가 아니라 런타임 동작 문제입니다. 발행은 됩니다.",
+      "D": "OnRender는 한 번만 실행되지 않습니다. 렌더링마다 실행됩니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web 화면에 Local Variable TotalCount(Integer)가 있고 Expression으로 화면에 표시됩니다. 이 화면의 OnRender 이벤트에서 OnRender가 실행될 때마다 TotalCount를 1씩 증가시키는 로직을 추가했습니다. 화면을 열면 가장 가능성 높은 결과는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "TotalCount가 1을 표시한 뒤 멈춘다."
+          },
+          {
+            "key": "B",
+            "text": "무한 루프에 빠져 브라우저가 멈추거나 뻗는다. 렌더링되는 변수를 변경하면 새 렌더링이 트리거되고, 그것이 다시 OnRender를 실행시키기 때문이다."
+          },
+          {
+            "key": "C",
+            "text": "Service Studio가 컴파일 오류를 표시하고 발행을 막는다."
+          },
+          {
+            "key": "D",
+            "text": "OnRender는 한 번만 실행되므로 TotalCount는 1로 유지된다."
+          }
+        ]
+      }
+    }
   }
 ]

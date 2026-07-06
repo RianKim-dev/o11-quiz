@@ -587,5 +587,301 @@
         ]
       }
     }
+  },
+  {
+    "id": "SEC-011",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Delete button's Visible property is set to CheckAdminRole(UserId: GetUserId()). User A is a Standard User (not Admin), so the button is hidden for them. The screen itself is accessible to standard users. Does hiding the button prevent User A from deleting a record?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes - if the button isn't visible, its Client Action can never be triggered."
+      },
+      {
+        "key": "B",
+        "text": "No - a tech-savvy user can use browser tools to reveal the button or invoke the Client Action directly, so you must also check the role inside the Server Action."
+      },
+      {
+        "key": "C",
+        "text": "Yes - OutSystems automatically secures the underlying logic when the UI element is hidden by a role check."
+      },
+      {
+        "key": "D",
+        "text": "No - CheckAdminRole only works in Server Actions, not on UI properties."
+      }
+    ],
+    "answer": "B",
+    "explanation": "UI 요소를 숨기는 것은 보안이 아니라 사용성/편의입니다. 화면 자체가 표준 사용자에게 열려 있으므로, 그 화면에서 호출되는 Client Action과 그 뒤의 Server Action은 여전히 실행 가능합니다. 사용자는 브라우저 개발자 도구로 Visible을 바꾸거나 네트워크 요청을 직접 재현해 Server Action을 호출할 수 있습니다. 따라서 진짜 보안은 Server Action 내부에서 Check<Role>Role()로 권한을 검증하고, 없으면 Exception을 Raise하는 것입니다(워크북 6의 PersonMovieRoleCreate 예시와 동일). 참고: CheckAdminRole 함수 자체는 UI 속성(Visible/Enabled)에서도 사용 가능하므로 D는 틀립니다. 주의: 만약 화면 전체에 Role이 걸려 있었다면 그 화면의 Data Action/Aggregate/Screen Action은 화면 Role로 자동 보호되지만, 여기서는 버튼만 숨겼을 뿐 화면은 열려 있는 것이 핵심 함정입니다.",
+    "distractors": {
+      "A": "Visible=False는 렌더링만 막을 뿐 액션 호출 자체를 막지 못합니다.",
+      "C": "UI를 숨긴다고 서버 로직이 자동 보호되지는 않습니다(화면 자체가 열려 있음).",
+      "D": "Check<Role>Role 함수는 UI 속성에서도 사용할 수 있습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Delete 버튼의 Visible 속성이 CheckAdminRole(UserId: GetUserId())로 설정되어 있습니다. User A는 표준 사용자(Admin 아님)라 버튼이 숨겨집니다. 화면 자체는 표준 사용자도 접근할 수 있습니다. 버튼을 숨기는 것만으로 User A의 레코드 삭제를 막을 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예 - 버튼이 보이지 않으면 연결된 Client Action은 절대 트리거될 수 없습니다."
+          },
+          {
+            "key": "B",
+            "text": "아니오 - 숙련된 사용자는 브라우저 도구로 버튼을 다시 보이게 하거나 Client Action을 직접 호출할 수 있으므로, Server Action 내부에서도 Role을 반드시 검증해야 합니다."
+          },
+          {
+            "key": "C",
+            "text": "예 - UI 요소가 Role 검사로 숨겨지면 OutSystems가 하위 로직을 자동으로 보호합니다."
+          },
+          {
+            "key": "D",
+            "text": "아니오 - CheckAdminRole은 Server Action에서만 동작하고 UI 속성에서는 동작하지 않습니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-012",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "On a screen you uncheck all your custom roles (e.g., Manager, Employee) but leave the built-in Registered role checked. Who can access this screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only users manually assigned a \"Registered\" role in Service Center."
+      },
+      {
+        "key": "B",
+        "text": "Any user who has logged in with valid credentials, regardless of their specific custom roles."
+      },
+      {
+        "key": "C",
+        "text": "Only the IT Administrator."
+      },
+      {
+        "key": "D",
+        "text": "Anyone on the internet (anonymous access)."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Registered는 OutSystems 내장 Role로, 로그인한 모든 최종 사용자에게 자동으로 부여됩니다(워크북 6: 'All logged-in end-users are automatically assigned the Registered role'). 따라서 화면에 Registered만 체크되어 있으면, 커스텀 Role(Manager/Employee 등)이 없더라도 유효한 자격 증명으로 로그인한 사용자라면 누구나 접근할 수 있습니다. 함정: Registered를 별도로 수동 부여해야 하는 것으로 착각(A)하거나, Anonymous(로그인 안 한 사용자)와 혼동(D)하는 것입니다. Anonymous는 로그인하지 않은 사용자를 위한 별개의 내장 Role입니다.",
+    "distractors": {
+      "A": "Registered는 수동 부여가 아니라 로그인 시 자동 부여됩니다.",
+      "C": "특정 관리자에 국한되지 않습니다.",
+      "D": "익명 접근은 Anonymous Role이며 Registered와 다릅니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면에서 직접 만든 커스텀 Role(예: Manager, Employee)을 모두 체크 해제하고, 내장 Registered Role만 체크된 상태로 둡니다. 이 화면에 접근할 수 있는 사람은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Service Center에서 \"Registered\" Role을 수동으로 부여받은 사용자만"
+          },
+          {
+            "key": "B",
+            "text": "유효한 자격 증명으로 로그인한 사용자라면, 커스텀 Role과 무관하게 누구나"
+          },
+          {
+            "key": "C",
+            "text": "IT 관리자만"
+          },
+          {
+            "key": "D",
+            "text": "인터넷상의 누구나 (익명 접근)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-013",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Client Variable IsManager (Boolean) is set to True in the OnAfterLogin flow if the user has the Manager role. Throughout the app this variable is used to show/hide sensitive management data. What is the main security flaw of this design?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Client Variables cannot store Boolean values."
+      },
+      {
+        "key": "B",
+        "text": "If the user's role is revoked in the database while they remain logged in, the IsManager Client Variable stays True until they refresh or log out."
+      },
+      {
+        "key": "C",
+        "text": "Client Variables are encrypted, making role checks too slow."
+      },
+      {
+        "key": "D",
+        "text": "Client Variables cannot be used in the OnAfterLogin flow."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Client Variable는 기기(클라이언트)에 저장되는 값이며, 로그인 시점(OnAfterLogin)에 한 번 Role을 평가해 캐싱해 두면 이후로는 서버의 실제 권한과 다시 대조되지 않습니다. 세션 도중 관리자가 DB에서 그 사용자의 Role을 회수해도 IsManager는 새로고침/재로그인 전까지 True로 남아, 민감한 관리 데이터가 계속 노출될 수 있습니다. 또한 클라이언트 값은 사용자가 조작할 수도 있습니다. 올바른 방식은 민감 데이터 접근 시점에 서버 측에서 Check<Role>Role()로 실시간 검증하는 것입니다. A/C/D는 모두 사실이 아닙니다(Boolean 저장 가능, 성능 문제 아님, OnAfterLogin에서 사용 가능).",
+    "distractors": {
+      "A": "Client Variable은 Boolean을 저장할 수 있습니다.",
+      "C": "성능이 아니라 권한 최신성(staleness)이 문제입니다.",
+      "D": "OnAfterLogin 플로우에서 Client Variable을 사용할 수 있습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Variable IsManager(Boolean)를 OnAfterLogin 플로우에서 사용자가 Manager Role을 가지면 True로 설정합니다. 앱 전반에서 이 변수로 민감한 관리 데이터를 표시/숨김 처리합니다. 이 설계의 주요 보안 결함은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Variable은 Boolean 값을 저장할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "사용자가 로그인 상태인 동안 DB에서 Role이 회수되어도, IsManager Client Variable은 새로고침 또는 로그아웃 전까지 True로 남는다."
+          },
+          {
+            "key": "C",
+            "text": "Client Variable은 암호화되어 있어 Role 검사가 너무 느려진다."
+          },
+          {
+            "key": "D",
+            "text": "OnAfterLogin 플로우에서는 Client Variable을 사용할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-014",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a Reactive Web app you use a Data Action on a screen to fetch sensitive salary data, and you set the screen's Role to HR_Manager only. Is the data returned by that Data Action secure from a user who is NOT an HR_Manager?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes - in Reactive Web, a screen's roles automatically protect that screen's Data Actions and Aggregates; the server checks the role before running the request."
+      },
+      {
+        "key": "B",
+        "text": "No - screen roles only prevent the page from loading; hitting the Data Action's endpoint directly returns the data unless there's an explicit role check inside it."
+      },
+      {
+        "key": "C",
+        "text": "Yes, but only if the Data Action's Fetch is set to \"At Start\"."
+      },
+      {
+        "key": "D",
+        "text": "No, because Data Actions run on the client side and cannot be secured."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems 공식 문서(‘Securing Your Reactive and Mobile Apps’, ‘Reactive web security best practices’)에 따르면, Reactive Web에서 화면에 설정한 Role은 그 화면에 속한 Aggregate와 Data Action, Screen Action을 자동으로 보호합니다. 각 데이터 요청은 서버의 REST 엔드포인트로 생성되지만, 그 화면 Role을 통과했는지 실행 전에 검사합니다. 따라서 HR_Manager가 아닌 사용자는 엔드포인트를 직접 호출해도 거부되어 데이터를 얻지 못합니다. 즉 이 경우 데이터는 보호됩니다(A). 함정: B는 그럴듯하지만 '화면 Role은 페이지 로딩만 막는다'는 전제가 Reactive에서는 사실이 아닙니다(이는 오래된 Traditional Web식 오해). 다만 실무 보강 포인트: '일부 사용자만 특정 행을 봐야 하는' 세밀한 제어가 필요하면 Aggregate 필터에 GetUserId()나 Check<Role>Role()을 추가해 서버단에서 한 번 더 방어하는 것이 권장됩니다. 또 화면에 Anonymous가 허용되면 그 엔드포인트도 공개되므로 주의해야 합니다. C(Fetch 설정과 무관), D(Data Action은 서버에서 실행됨)는 틀립니다.",
+    "distractors": {
+      "A": "정답. 화면 Role이 그 화면의 Data Action/Aggregate 엔드포인트를 자동 보호합니다.",
+      "B": "Reactive에서 화면 Role은 페이지 로딩뿐 아니라 그 화면의 서버 호출도 검사합니다. 전제가 틀렸습니다.",
+      "C": "보호 여부는 Fetch(At Start/On Demand) 설정과 무관합니다.",
+      "D": "Data Action은 서버 측에서 실행되며 보안 적용이 가능합니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web 앱에서 화면의 Data Action으로 민감한 급여 데이터를 가져오고, 화면의 Role을 HR_Manager로만 설정했습니다. 이 Data Action이 반환하는 데이터는 HR_Manager가 아닌 사용자로부터 안전하게 보호됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "예 - Reactive Web에서는 화면의 Role이 그 화면의 Data Action과 Aggregate를 자동으로 보호하며, 서버가 요청 실행 전에 Role을 검사합니다."
+          },
+          {
+            "key": "B",
+            "text": "아니오 - 화면 Role은 페이지 로딩만 막을 뿐, Data Action 엔드포인트를 직접 호출하면 내부에 명시적 Role 검사가 없는 한 서버가 데이터를 반환합니다."
+          },
+          {
+            "key": "C",
+            "text": "예, 단 Data Action의 Fetch가 \"At Start\"로 설정된 경우에만."
+          },
+          {
+            "key": "D",
+            "text": "아니오 - Data Action은 클라이언트 측에서 실행되므로 보안을 적용할 수 없습니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-015",
+    "category": "Architecture & Security",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A \"Public Survey\" screen has Anonymous access and a Form to submit feedback. Inside the Save client action you call CheckRegisteredRole(GetUserId()). What happens for a guest user who is not logged in?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CheckRegisteredRole throws an \"Invalid Permissions\" exception and crashes the app."
+      },
+      {
+        "key": "B",
+        "text": "CheckRegisteredRole returns False because GetUserId() returns NullIdentifier (0)."
+      },
+      {
+        "key": "C",
+        "text": "The logic works and GetUserId() returns the ID of a \"Guest\" system user."
+      },
+      {
+        "key": "D",
+        "text": "OutSystems blocks the use of CheckRegisteredRole on an Anonymous screen at design time."
+      }
+    ],
+    "answer": "B",
+    "explanation": "로그인하지 않은 사용자(익명)는 세션에 사용자가 없으므로 GetUserId()가 NullIdentifier(0)을 반환합니다. Registered 역할은 로그인한 최종 사용자에게만 자동 부여되므로, CheckRegisteredRole(0)은 예외 없이 False를 반환합니다. 함정: 익명 화면에서 역할 검사 함수를 써도 오류가 나거나 'Guest 사용자'가 생기는 것이 아니라 단순히 False가 반환됩니다.",
+    "distractors": {
+      "A": "역할 검사 함수는 권한 부족으로 예외를 던지지 않습니다. 단지 True/False를 반환합니다.",
+      "C": "OutSystems에는 자동으로 채워지는 'Guest' 시스템 사용자 ID가 없습니다. 익명은 UserId 0입니다.",
+      "D": "디자인 타임에 익명 화면에서 역할 함수 사용을 막지 않습니다."
+    },
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Anonymous 접근이 허용된 \"Public Survey\" 화면에 피드백 제출용 Form이 있습니다. Save Client Action 안에서 CheckRegisteredRole(GetUserId())를 호출합니다. 로그인하지 않은 게스트 사용자에게는 어떤 결과가 나타납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "CheckRegisteredRole이 \"Invalid Permissions\" 예외를 던지며 앱이 중단된다."
+          },
+          {
+            "key": "B",
+            "text": "GetUserId()가 NullIdentifier(0)을 반환하므로 CheckRegisteredRole이 False를 반환한다."
+          },
+          {
+            "key": "C",
+            "text": "로직이 동작하며 GetUserId()가 \"Guest\" 시스템 사용자 ID를 반환한다."
+          },
+          {
+            "key": "D",
+            "text": "OutSystems가 익명 화면에서 CheckRegisteredRole 사용을 디자인 타임에 막는다."
+          }
+        ]
+      }
+    }
   }
 ]

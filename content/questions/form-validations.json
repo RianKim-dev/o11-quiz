@@ -404,5 +404,280 @@
         ]
       }
     }
+  },
+  {
+    "id": "FV-008",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Form is bound to a local variable VarEmployee (Type: Employee). Inside the Form there is a Name Input whose Variable is bound to a separate local variable VarInputName (Type: Text), with Mandatory: Yes. The user leaves it empty and clicks Save. The Save Client Action first runs the Form's built-in validation. What is the value of Form.Valid?",
+    "options": [
+      {
+        "key": "A",
+        "text": "True — the Form only validates widgets bound to attributes of its main record (VarEmployee), and VarInputName is independent."
+      },
+      {
+        "key": "B",
+        "text": "False — the built-in validation checks every Input widget located inside the Form, regardless of which variable it is bound to."
+      },
+      {
+        "key": "C",
+        "text": "False — but only if VarInputName happens to be an attribute of the Employee Entity."
+      },
+      {
+        "key": "D",
+        "text": "Null — you cannot bind Inputs inside a Form to variables outside the Form's record."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Form의 Built-in Validation은 Form 위젯 '안에 물리적으로 위치한' 모든 Input 위젯을 검사합니다. 어떤 변수에 바인딩되어 있는지는 상관없습니다. Mandatory인 Name Input이 비어 있으면 해당 Input이 invalid가 되고, 하나라도 invalid이면 Form.Valid는 자동으로 False가 됩니다(정답 B). Form의 main record(VarEmployee) 소속 위젯만 검사한다는 A는 오답입니다. Input을 Form 외부 변수에 바인딩하는 것은 완전히 허용됩니다(D 오답). 함정: 바인딩 대상이 Form record가 아니면 검증에서 빠질 것 같지만, 검증 기준은 '변수 소속'이 아니라 'Form 안에 위치하는가'입니다.",
+    "distractors": "A: 검증 기준은 변수 소속이 아니라 위젯 위치. C: VarInputName이 Employee 속성인지와 무관하게 False. D: 외부 변수 바인딩은 허용되며 Form.Valid는 Null이 되지 않음.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Form이 로컬 변수 VarEmployee(Type: Employee)에 바인딩되어 있습니다. Form 안의 Name Input은 별개의 로컬 변수 VarInputName(Type: Text)에 바인딩되고 Mandatory: Yes입니다. 사용자가 비운 채 Save를 클릭하고, Save Client Action은 먼저 Form의 built-in validation을 실행합니다. Form.Valid 값은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "True — Form은 main record(VarEmployee)의 속성에 바인딩된 위젯만 검증하며, VarInputName은 독립적이다."
+          },
+          {
+            "key": "B",
+            "text": "False — built-in validation은 바인딩된 변수와 무관하게 Form 안에 위치한 모든 Input 위젯을 검사한다."
+          },
+          {
+            "key": "C",
+            "text": "False — 단, VarInputName이 Employee Entity의 속성일 때만 그렇다."
+          },
+          {
+            "key": "D",
+            "text": "Null — Form 안의 Input을 Form record 밖의 변수에 바인딩할 수 없다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FV-009",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "Inside a Form, a Button has Built-in Validation = Yes and a Link (styled as a button) has Built-in Validation = No. The Form currently has empty mandatory fields. What happens when the user clicks the LINK?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The screen shows validation errors and prevents the link's action from running."
+      },
+      {
+        "key": "B",
+        "text": "The link's action runs immediately, ignoring all empty mandatory fields."
+      },
+      {
+        "key": "C",
+        "text": "The link will not work because any widget inside a Form is forced to follow the Form's validation rules."
+      },
+      {
+        "key": "D",
+        "text": "Form.Valid automatically becomes False, but the link's action still executes."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Form 안의 Button/Link에는 Built-in Validations 속성이 있습니다. 이 값이 Yes일 때만 Mandatory·데이터 타입에 대한 자동 검증이 수행됩니다. Link의 Built-in Validation이 No이면 검증을 건너뛰고 곧바로 액션이 실행됩니다. 함정은 '위젯이 Form 안에 있으면 무조건 Form 규칙을 따른다'(C)는 오해입니다. 검증 수행 여부는 각 버튼/링크의 Built-in Validation 설정에 달려 있습니다.",
+    "distractors": "A/C는 Form 안이면 항상 검증된다는 오해, D는 검증을 건너뛰므로 Form.Valid가 자동으로 평가되지 않음.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Form 안에서 한 Button은 Built-in Validation = Yes, 버튼처럼 스타일링된 한 Link는 Built-in Validation = No입니다. 현재 Form의 필수(Mandatory) 필드가 비어 있습니다. 사용자가 LINK를 클릭하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "검증 오류가 표시되고 링크의 액션 실행이 막힌다."
+          },
+          {
+            "key": "B",
+            "text": "비어 있는 필수 필드를 무시하고 링크의 액션이 즉시 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "Form 안의 모든 위젯은 Form의 검증 규칙을 강제로 따르므로 링크가 동작하지 않는다."
+          },
+          {
+            "key": "D",
+            "text": "Form.Valid가 자동으로 False가 되지만 링크의 액션은 그래도 실행된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FV-010",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "In a 'Save' Client Action you perform custom validation: you check the email and, when it is invalid, set Input_Email.Valid = False and its ValidationMessage. The Save button has Built-in Validation = No. The user corrects the email and clicks Save again. At the very beginning of this second Save action, what is the state of Input_Email.Valid?",
+    "options": [
+      {
+        "key": "A",
+        "text": "True, because OutSystems automatically resets all Valid properties to True on every button click."
+      },
+      {
+        "key": "B",
+        "text": "False, because the value stays False until you manually set it back to True in your logic."
+      },
+      {
+        "key": "C",
+        "text": "True only if the button's Built-in Validation is set to Yes."
+      },
+      {
+        "key": "D",
+        "text": "False, because the Input widget detects the previous error state."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Custom Validation으로 직접 Input.Valid = False를 설정한 값은 자동으로 되돌아가지 않습니다. 버튼의 Built-in Validation이 No이면 자동 검증이 수행되지 않으므로, 두 번째 클릭 시점에도 Input_Email.Valid는 여전히 이전에 설정한 False 상태입니다. 그래서 Custom Validation 로직 시작 부분에서 Valid = True로 명시적으로 리셋하는 것이 정석입니다. 함정: OutSystems가 클릭마다 Valid를 자동으로 True로 리셋한다(A)는 오해. 참고로 Built-in Validation이 Yes였다면 Mandatory·타입 자동 검증이 다시 돌면서 값이 채워진 입력의 Valid를 True로 되돌릴 수 있어 답이 달라지므로, 문제에서 Built-in Validation = No로 못박았습니다.",
+    "distractors": "A 자동 리셋은 없음. C는 Built-in Validation = No로 고정했으므로 성립하지 않음. D는 '위젯이 이전 상태를 감지'라는 잘못된 근거(값이 persist될 뿐 위젯이 감지하는 것이 아님).",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Save' Client Action에서 Custom Validation을 수행합니다. 이메일을 검사해 잘못되면 Input_Email.Valid = False와 ValidationMessage를 설정합니다. Save 버튼의 Built-in Validation은 No입니다. 사용자가 이메일을 고치고 Save를 다시 클릭합니다. 이 두 번째 Save 액션의 맨 처음 시점에서 Input_Email.Valid의 상태는?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OutSystems가 버튼 클릭마다 모든 Valid를 자동으로 True로 리셋하므로 True다."
+          },
+          {
+            "key": "B",
+            "text": "직접 코드에서 True로 되돌리기 전까지 값이 False로 유지되므로 False다."
+          },
+          {
+            "key": "C",
+            "text": "버튼의 Built-in Validation이 Yes인 경우에만 True다."
+          },
+          {
+            "key": "D",
+            "text": "Input 위젯이 이전 오류 상태를 감지하므로 False다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FV-011",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Dropdown is bound to Employee.DepartmentId (Department Identifier), has Mandatory = Yes, and defines an Empty Text 'Select a Department'. The user leaves the Dropdown on 'Select a Department' and clicks a button with Built-in Validation = Yes. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Validation passes because the Empty Text counts as a selection."
+      },
+      {
+        "key": "B",
+        "text": "Validation fails because the selected value is a NullIdentifier, which is treated as empty for a mandatory check."
+      },
+      {
+        "key": "C",
+        "text": "Validation passes, but a database exception occurs later because the Id is 0."
+      },
+      {
+        "key": "D",
+        "text": "The Dropdown automatically selects the first Department to prevent an error."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Dropdown의 Empty Text 항목은 실제로 선택된 값이 없음을 의미하며, 이때 바인딩된 Identifier에는 NullIdentifier()(즉 0)가 담깁니다. Mandatory = Yes인 필드의 Built-in Validation은 NullIdentifier를 '비어 있음'으로 간주하므로 검증에 실패하고 액션 실행이 막힙니다. 함정은 Empty Text를 하나의 유효한 선택으로 오해(A)하거나, 검증을 통과시켜 나중에 DB에서 터진다(C)고 생각하는 것입니다. Mandatory 검증이 브라우저에서 먼저 막습니다.",
+    "distractors": "A Empty Text는 선택이 아님. C 검증 단계에서 이미 막히므로 DB까지 가지 않음. D 자동 선택 기능은 없음.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Dropdown이 Employee.DepartmentId(Department Identifier)에 바인딩되어 있고 Mandatory = Yes이며 Empty Text가 'Select a Department'로 정의되어 있습니다. 사용자가 'Select a Department' 상태로 두고 Built-in Validation = Yes인 버튼을 클릭하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Empty Text가 하나의 선택으로 간주되어 검증을 통과한다."
+          },
+          {
+            "key": "B",
+            "text": "선택 값이 NullIdentifier이고 이는 Mandatory 검증에서 '비어 있음'으로 취급되므로 검증에 실패한다."
+          },
+          {
+            "key": "C",
+            "text": "검증은 통과하지만 Id가 0이라 나중에 Database Exception이 발생한다."
+          },
+          {
+            "key": "D",
+            "text": "오류를 막기 위해 Dropdown이 목록의 첫 Department를 자동 선택한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FV-012",
+    "category": "Logic",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Form has a mandatory Input. The 'Save' button has Built-in Validation = No, and the Save Client Action does NOT check Form.Valid before calling the server-side Create action. The user leaves the mandatory field empty and clicks Save. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OutSystems automatically stops the Client Action and shows a red error message."
+      },
+      {
+        "key": "B",
+        "text": "The Client Action runs, and if the database allows it (e.g., the attribute is not mandatory in the DB), a record with an empty value is created."
+      },
+      {
+        "key": "C",
+        "text": "A runtime exception occurs immediately because OutSystems blocks null mandatory widgets at the browser level."
+      },
+      {
+        "key": "D",
+        "text": "Form.Valid automatically becomes False and freezes the screen."
+      }
+    ],
+    "answer": "B",
+    "explanation": "위젯의 Mandatory 속성은 UI 레벨의 자동 검증일 뿐이며, 실제 저장을 막는 것은 개발자가 Built-in Validation과 Form.Valid 확인으로 연결해야 합니다. Built-in Validation = No이고 Form.Valid도 검사하지 않으면 검증이 전혀 수행되지 않아 Client Action이 그대로 실행되고 Create가 호출됩니다. DB 제약이 이를 허용하면(예: 해당 속성이 DB에서 필수가 아님) 빈 값의 레코드가 생성됩니다. 함정은 'OutSystems가 알아서 막아준다'(A/C)는 과신입니다. 검증 결과를 로직에서 활용하는 것은 개발자의 책임입니다.",
+    "distractors": "A/C OutSystems가 자동으로 막지 않음(검증을 우회했기 때문). D 검증을 건너뛰었으므로 Form.Valid가 자동 평가되지 않음.",
+    "source": "동료 실전문제집 (검토·검증)",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Form에 Mandatory Input이 있습니다. 'Save' 버튼의 Built-in Validation은 No이고, Save Client Action은 서버측 Create 액션을 호출하기 전에 Form.Valid를 확인하지 않습니다. 사용자가 필수 필드를 비운 채 Save를 클릭하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "OutSystems가 Client Action을 자동으로 중단하고 빨간 오류 메시지를 표시한다."
+          },
+          {
+            "key": "B",
+            "text": "Client Action이 실행되고, DB가 허용하면(예: 해당 속성이 DB에서 필수가 아님) 빈 값의 레코드가 생성된다."
+          },
+          {
+            "key": "C",
+            "text": "브라우저 레벨에서 필수 위젯의 null을 막기 때문에 즉시 런타임 예외가 발생한다."
+          },
+          {
+            "key": "D",
+            "text": "Form.Valid가 자동으로 False가 되어 화면이 멈춘다."
+          }
+        ]
+      }
+    }
   }
 ]
