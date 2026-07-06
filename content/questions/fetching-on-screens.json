@@ -29,7 +29,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "화면 초기화 시 Fetch 속성이 'At Start'로 설정된 Aggregate는 자동으로 트리거되며 비동기적으로 실행됩니다.",
+    "explanation": "Aggregate는 화면에서 데이터베이스 데이터를 가져오는 시각적 쿼리(query)입니다. 이 쿼리의 Fetch 속성을 'At Start'로 두면 화면이 열리는 순간 자동으로 실행됩니다. 실행 방식은 비동기(asynchronous)라서, 화면이 데이터를 기다리며 멈춰 있는 게 아니라 화면은 먼저 뜨고 데이터가 준비되는 대로 채워집니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Aggregate는 Initialize가 끝나기를 기다리지 않고 초기화 과정에서 곧바로 시작됩니다.\n- **C** — 'At Start'이면 개발자가 Refresh Data로 직접 실행할 필요가 없습니다.\n- **D** — 기본적으로 비활성화되는 것이 아니라 'At Start'가 곧 자동 실행을 의미합니다.",
     "distractors": {
       "B": "Initialize 이벤트 완료 후 Ready 이벤트가 발생하지만, Aggregate는 Initialize 단계에서 자동으로 트리거됨",
       "C": "'Only on demand' Aggregate에만 해당; At Start는 자동 트리거",
@@ -92,7 +92,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "Aggregate는 소스, 필터, 정렬을 사용하여 데이터베이스 수준에서 시각적으로 쿼리를 정의해야 합니다. 화면 레벨에서 수동으로 필터링하면 불필요한 전체 데이터 조회가 발생하므로 비효율적입니다.",
+    "explanation": "이 문제는 '올바른 방법'이 아니라 '잘못된(비효율적) 방법'을 고르는 문제입니다. C처럼 필터 없이 전체 상품을 다 가져온 뒤 화면 액션(screen action)에서 손으로 걸러내면, 데이터베이스에서 필요 없는 데이터까지 몽땅 끌어오게 되어 비효율적입니다. 필터링은 Aggregate 안에서 데이터베이스 수준으로 하는 것이 원칙입니다.\n**→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — CartId를 Aggregate 필터로 넣어 데이터베이스에서 바로 걸러오는 정상적인 방법입니다.\n- **B** — CartId를 입력으로 받는 Data Action이 걸러진 목록을 돌려주는 것도 올바른 방법입니다.\n- **D** — Aggregate 결과를 Table 위젯의 Source에 바로 연결하는 것은 표준 사용법입니다.",
     "distractors": {
       "A": "권장되는 방식 - Aggregate에서 직접 필터 조건 정의",
       "B": "Data Action으로도 가능한 올바른 방식",
@@ -155,7 +155,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "각 Aggregate는 비동기적으로 실행되므로 화면 렌더링의 순서는 보장되지 않습니다. 그러나 데이터가 준비되면 화면이 자동으로 업데이트됩니다.",
+    "explanation": "한 화면에 여러 Aggregate가 있으면 각각 비동기(asynchronous)로 따로 실행되므로, 어느 것이 먼저 끝날지 순서는 보장되지 않습니다. 이건 문제가 아니라 정상 동작이며, 각 쿼리는 끝나는 대로 자기 위젯에 데이터가 연결(bind)됩니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 정의된 순서대로 차례차례 실행되는 것이 아니라, 비동기 동시 실행이 정상입니다.\n- **C** — 완료 순서가 달라도 충돌(race condition) 문제가 아니므로 'Only on demand'로 바꿀 필요가 없습니다.\n- **D** — On Ready 이벤트는 두 Aggregate가 다 끝나기를 기다렸다가 발생하는 것이 아닙니다.",
     "distractors": {
       "A": "Aggregate는 실제로 비동기적으로 실행되므로 순서가 보장되지 않음 - 이것이 예상되는 동작",
       "C": "순서 보장이 필요하지 않으면 두 Aggregate 모두 'At Start'로 유지 가능",
@@ -218,7 +218,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Aggregate는 하나 이상의 소스 Entity를 지원하며, Entity 관계를 통해 관련된 속성을 포함할 수 있습니다. 이것이 가장 효율적인 데이터 가져오기 방식입니다.",
+    "explanation": "하나의 Aggregate는 여러 Entity를 그 사이의 관계(relationship)로 엮어 한 번에 가져올 수 있습니다. 그래서 Invoice를 소스로 두고 InvoiceId로 필터한 뒤, 연결된 Customer의 속성까지 함께 포함시키면 한 번의 쿼리로 필요한 데이터를 모두 얻습니다. 가장 효율적입니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Invoice와 Customer를 별도 Aggregate 두 개로 나누면 쿼리를 불필요하게 두 번 실행하게 됩니다.\n- **C** — Data Action을 두 개 쓰는 것도 마찬가지로 과한 방식입니다.\n- **D** — InvoiceId는 Invoice의 속성이므로 Customer를 소스로 놓고 그것으로 필터하는 것은 관계상 맞지 않습니다.",
     "distractors": {
       "A": "가능하지만 두 개의 Aggregate는 불필요한 복잡성 추가",
       "C": "가능하지만 Aggregate로 더 효율적으로 처리 가능",
@@ -281,7 +281,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "데이터를 사용할 수 있게 되면 화면이 자동으로 렌더링되어 데이터를 표시합니다. 추가 작업이 필요 없습니다.",
+    "explanation": "Reactive 화면에서는 Aggregate 데이터가 준비되면 화면이 알아서 다시 그려져(re-render) 그 데이터를 보여줍니다. 개발자나 사용자가 따로 손댈 필요가 없습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 화면을 갱신하려고 JavaScript 함수를 직접 부를 필요가 없습니다.\n- **C** — 데이터를 로컬 DB에 저장해 두었다가 수동으로 그리는 방식이 아닙니다.\n- **D** — 사용자가 페이지를 수동으로 새로고침할 필요가 없습니다.",
     "distractors": {
       "A": "OutSystems는 선언적 UI 모델을 사용하므로 자동 업데이트 처리",
       "C": "Aggregate는 데이터베이스에서 직접 데이터를 가져옴",
@@ -344,7 +344,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "'Only on demand'로 설정된 Aggregate는 화면 초기화 시 실행되지 않으며, Refresh Data 노드를 사용하여 프로그래밍 방식으로 트리거해야 합니다.",
+    "explanation": "Aggregate의 Fetch 속성이 'Only on demand'이면 화면이 열릴 때 자동으로 실행되지 않습니다. 그래서 검색 버튼의 On Click 동작 안에 Refresh Data 노드를 넣어 직접 실행시켜 줘야 합니다. (참고: OutSystems 쿼리는 변수 값이 바뀌어도 스스로 다시 조회하지 않으며, 언제나 Refresh Data가 필요합니다.)\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 'Only on demand'라서 초기화 때 아예 실행되지 않으므로, 초기화 시점의 변수 값 유무가 원인이 아닙니다.\n- **C** — 'Only on demand'는 실행 시점만 바꿀 뿐, 로컬 변수 접근을 막지 않습니다.\n- **D** — Aggregate는 입력 파라미터뿐 아니라 로컬 변수 값으로도 필터할 수 있습니다.",
     "distractors": {
       "A": "'At Start'가 아니므로 초기화 시 실행되지 않으며, 이것이 문제가 아님",
       "C": "'Only on demand' Aggregate도 Local Variable 액세스 가능",
@@ -407,7 +407,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "반복 실행 시 Current 커서가 목록을 순회하며, 기본적으로 첫 번째 행을 가리킵니다.",
+    "explanation": "목록을 하나씩 훑는 반복(iterator) 구조에서 Current는 지금 가리키고 있는 한 개의 행을 뜻하는 커서(cursor)입니다. 처음에는 목록의 첫 번째 행을 가리킵니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 전체 레코드 개수는 Current가 아니라 .List.Length로 얻습니다.\n- **C** — 필터 조건의 값을 나타내는 것이 아닙니다.\n- **D** — 가장 최근에 수정된 행의 번호를 뜻하는 것도 아닙니다.",
     "distractors": {
       "A": "그것은 Count 속성의 역할",
       "C": "Current는 데이터 순회용 커서이지 필터 조건 참조가 아님",
@@ -470,7 +470,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Ready 이벤트는 Initialize 완료 후 HTML Document 구성이 완료된 시점에 발생합니다. If 위젯으로 GetProductById.Empty 속성을 확인하여 데이터 존재 여부를 판단할 수 있습니다.",
+    "explanation": "If 위젯은 조건이 참이냐 거짓이냐에 따라 서로 다른 화면 내용을 보여주는 '갈림길' 위젯입니다. Aggregate(화면이 데이터베이스에서 데이터를 가져오는 조회 도구)가 결과를 하나도 못 가져왔는지는 `.Empty` 속성(결과가 0건이면 True)으로 확인합니다. 이때 데이터와 화면(DOM)이 모두 준비되는 시점은 화면이 처음 그려진 직후인 On Ready 이벤트라서, 여기서 확인하는 것이 안전합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — On Initialize는 화면이 그려지기 전(DOM이 아직 없는) 단계라 데이터 존재 여부를 판단하는 시점으로 적절하지 않습니다.\n- **C** — On Render는 화면이 다시 그려질 때마다 반복 실행되고, 결과 개수도 `.Count`가 아니라 `.List.Length`로 확인해야 하므로 조건·시점 모두 맞지 않습니다.\n- **D** — Expression 위젯은 값을 화면에 그대로 출력할 뿐 조건에 따라 내용을 분기하지 못하며, `.Length`라는 숫자를 사용자에게 직접 보여주는 것도 목적에 맞지 않습니다.",
     "distractors": {
       "A": "Initialize 이벤트에서는 Aggregate 데이터가 아직 준비되지 않을 수 있음",
       "C": "Render 이벤트는 여러 번 발생하며 Early 위젯 조건 설정에 부적합",
@@ -533,7 +533,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Aggregate는 화면 초기화 시에만 자동으로 실행됩니다. Input parameter가 변경된 후에는 Aggregate가 자동으로 재실행되지 않으므로 새 CustomerId로 데이터를 다시 가져오지 못합니다. AfterFetch 이벤트나 OnParametersChanged와 같은 메커니즘을 사용하여 명시적으로 Aggregate를 재실행해야 합니다.",
+    "explanation": "Aggregate(화면이 데이터를 가져오는 조회 도구)는 화면이 처음 초기화될 때 딱 한 번 자동 실행됩니다. Input parameter(화면에 넘겨받는 입력값, 여기선 CustomerId)가 나중에 바뀌어도 스스로 다시 조회하지 않습니다. 그래서 같은 화면으로 다른 CustomerId를 들고 다시 들어오면, 화면이 재사용되면서 Aggregate가 자동 재실행되지 않아 예전 고객 데이터가 그대로 남습니다. 해결하려면 Refresh Data로 명시적으로 다시 조회해야 합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Fetch를 'Only on demand'로 바꿨다는 단서가 없고, 그랬다면 첫 방문 때도 데이터가 안 나왔어야 하므로 '처음엔 잘 나온다'는 상황과 맞지 않습니다.\n- **C** — If 위젯 조건이 문제라면 첫 방문 때부터 표시가 안 됐을 것이므로 원인으로 부적합합니다.\n- **D** — Table Source가 지역 변수에 잘못 연결됐다면 애초에 올바른 고객 데이터가 표시되지 않았을 것이라 이 증상과 맞지 않습니다.",
     "distractors": {
       "A": "'At Start'가 기본값이므로 이것이 원인이 될 가능성 낮음",
       "C": "If 위젯의 조건은 매 렌더링마다 재평가됨",
@@ -1363,7 +1363,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "At Start Aggregate는 초기화 시 병렬로 한 번 실행되고(1), OnInitialize에서 호출한 Server Action이 또 한 번(2), 그리고 Refresh Data가 Aggregate를 다시 실행합니다(3) → 총 3번의 서버 요청입니다. Refresh Data 이후 해당 Subscription이 Active가 되어 'IsActive = True' 필터를 통과하므로 화면에 Customer와 Active Subscription이 표시됩니다. Server Action과 Refresh Data는 별개의 요청이라 하나로 합쳐지지 않습니다(D는 오답).",
+    "explanation": "화면이 열릴 때 'At Start' Aggregate가 한 번 조회됩니다(요청 1). 이어서 OnInitialize 안의 Server Action(서버에서 도는 로직 한 조각)이 Subscription 하나를 Inactive→Active로 바꾸며 또 한 번(요청 2), 마지막으로 Refresh Data가 그 Aggregate를 다시 조회합니다(요청 3) → 총 3번입니다. 'With or Without' 조인은 짝이 없어도 Customer를 남기는 방식(left outer)이고, 다시 조회할 때 그 Subscription이 Active가 되어 'IsActive = True' 필터를 통과하므로 화면에는 Customer와 이제 Active가 된 Subscription이 함께 표시됩니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — 요청은 2번이 아니라 3번이고, Refresh Data는 Server Action이 끝난 뒤 실행되므로 Aggregate는 초기 조회 한 번으로 끝나지 않고 다시 실행됩니다.\n- **B** — 요청 수 3번은 맞지만, 마지막 Refresh Data가 새 데이터를 받아오므로 화면이 빈 채로 남지 않습니다.\n- **D** — Server Action(데이터 변경)과 Refresh Data(재조회)는 목적이 다른 별개의 서버 요청이라 하나로 합쳐지지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1469,7 +1469,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "On After Fetch는 그 이벤트가 속한 Data Action이 실제로 다시 실행될 때만 동작합니다. 버튼은 RecentSales Aggregate에만 Refresh Data를 했으므로 TotalSales Data Action은 재실행되지 않고 그 On After Fetch도 실행되지 않아 GrandTotal은 그대로 유지됩니다. 화면의 어떤 refresh든 모든 On After Fetch를 실행한다(C)는 잘못된 설명입니다.",
+    "explanation": "On After Fetch는 '그 데이터를 조회한 직후에 한 번 도는 로직'인데, 오직 자기 자신이 속한 Data Action이 실제로 다시 조회될 때만 실행됩니다. 버튼은 RecentSales Aggregate에만 Refresh Data를 했을 뿐 TotalSales Data Action은 건드리지 않았으므로, 그 On After Fetch는 돌지 않고 GrandTotal은 이전 값 그대로 남습니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Data Action이 재실행되지 않았을 뿐 값을 지우는 동작은 없으므로 GrandTotal이 Null이 되지 않습니다.\n- **B** — 다른 Aggregate를 refresh해도 GrandTotal을 계산하는 로직 자체가 돌지 않으므로 0으로 초기화되지 않습니다.\n- **C** — 화면의 아무 refresh나 모든 On After Fetch를 실행하는 것이 아니라, 실제로 다시 조회된 그 Data Action의 On After Fetch만 실행됩니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1522,7 +1522,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "'Cache in Minutes = 10'은 결과를 10분 동안 캐시에 보관하여 재사용합니다. Refresh Data는 이 활성 캐시를 무시하지 않으므로, 2분밖에 지나지 않은 시점에서는 쿼리를 다시 실행하지 않고 캐시된 데이터를 그대로 반환합니다. 최신 데이터를 강제로 가져오려면 캐시가 만료되거나 Cache in Minutes를 0으로 두어야 하므로, 서버에서 다시 실행되어 최신값을 준다(C)는 오답입니다.",
+    "explanation": "'Cache in Minutes = 10'은 조회 결과를 10분 동안 저장해 두고 재사용하는 설정입니다. Refresh Data를 눌러도 아직 살아 있는 캐시를 무시하지는 않기 때문에, 화면을 연 지 2분밖에 안 지난 지금은 서버에서 다시 조회하지 않고 저장해 둔 캐시 데이터를 그대로 돌려줍니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 캐시된 Data Action에 Refresh Data를 해도 오류가 나는 게 아니라 그냥 캐시된 값이 반환됩니다.\n- **B** — 캐시 유효 기간(10분) 안에서는 DB 테이블이 바뀌었는지와 상관없이 저장된 캐시 값을 그대로 씁니다.\n- **C** — 캐시가 아직 만료되지 않았으므로 서버에서 다시 실행되지 않고, 따라서 최신값을 새로 가져오지도 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1575,7 +1575,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "무한 스크롤은 List widget을 별도의 Screen(List) Variable에 바인딩하고, Data Action이 다음 페이지를 가져올 때 On After Fetch에서 ListAppendAll로 새 결과를 그 변수에 이어붙이는 방식으로 구현합니다. 정답 B. 'Append Only'라는 Fetch 속성은 존재하지 않으므로 A는 틀리고, Max Records만 늘려도 자동 반영되지 않으며(C), Refresh Data는 결과를 이어붙이지 않고 교체하므로 D도 틀립니다.",
+    "explanation": "무한 스크롤(Infinite Scroll)은 화면을 아래로 내릴 때마다 다음 페이지 데이터를 기존 목록 '뒤에 계속 이어붙이는' 기능입니다. 이렇게 하려면 List widget(목록을 화면에 그려주는 요소)을 Data Action(서버에서 데이터를 가져오는 로직)에 곧바로 묶지 않고, 별도의 화면 변수(List 타입 Screen Variable)에 바인딩(연결)합니다. 그리고 Data Action이 다음 페이지를 가져온 직후 실행되는 On After Fetch 이벤트에서 ListAppendAll(리스트 뒤에 여러 건을 한꺼번에 이어붙이는 기능)로 새 결과를 그 변수에 추가합니다. 그러면 기존 항목은 그대로 두고 새 페이지만 아래에 쌓입니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 'Append Only'라는 Fetch 속성은 OutSystems에 아예 존재하지 않습니다.\n- **C** — Max Records(가져올 최대 건수)만 늘려도 이미 그려진 목록에 새 항목이 자동으로 이어붙지 않습니다.\n- **D** — Refresh Data는 결과를 이어붙이는 게 아니라 이전 결과를 새 결과로 통째로 교체합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1734,7 +1734,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "'Cache in Minutes'가 설정된 Data Action은 입력 파라미터 값의 조합별로 캐시를 저장합니다. 따라서 입력 값을 바꾸면 그 조합이 아직 캐시에 없을 경우 다시 실행되고, 이미 캐시에 있으면 캐시된 결과를 반환합니다(A 정답). 캐시가 유효하다고 해서 무조건 실행을 막지 않으며(C 오답), 캐시 설정을 완전히 무시하고 매번 실행하는 것도 아닙니다(D 오답).",
+    "explanation": "'Cache in Minutes'는 Data Action(서버에서 데이터를 계산·조회하는 로직)의 결과를 일정 시간 저장해 두고 다시 쓰는 기능입니다. 이때 캐시는 '입력값 조합별로' 따로 보관됩니다. 즉 입력 변수를 바꾸면, 그 새 조합의 결과가 아직 저장돼 있지 않을 때만 로직을 다시 실행하고, 이미 저장돼 있으면 저장된 결과를 그대로 돌려줍니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 캐시가 걸린 Data Action도 동적 입력 파라미터를 정상적으로 받을 수 있어, 그런 경고는 나오지 않습니다.\n- **C** — 캐시 시간이 남아 있어도 '새로운 입력 조합'이면 다시 실행되므로, 60분이 안 지났다고 무조건 막히지 않습니다.\n- **D** — 같은 입력 조합이면 캐시를 재사용하므로 입력이 바뀔 때마다 매번 실행하는 것은 아닙니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1893,7 +1893,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Refresh Data는 그 노드에 도달한 '바로 그 순간'의 변수 값을 캡처해서 서버로 보냅니다. (2)번 Refresh Data 시점의 LocalVar 값은 'B'이므로 서버에는 'B'가 전송됩니다. 이후 (3)에서 'C'로 바꿔도 이미 보낸 요청에는 영향이 없고, 초기값 'A'도 아닙니다.",
+    "explanation": "Refresh Data(Aggregate를 서버에서 다시 조회하게 하는 노드)는 그 노드에 '도달한 바로 그 순간'의 변수 값을 복사해서 서버로 보냅니다. 로직이 (1) LocalVar='B' → (2) Refresh Data → (3) LocalVar='C' 순서로 흐르므로, (2)번이 실행되는 시점의 값인 'B'가 서버로 전송됩니다. 그 뒤 (3)에서 'C'로 바꿔도 이미 떠난 요청에는 영향을 주지 못합니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 'C'는 요청을 보낸 '뒤'에 설정되므로 이번 조회에는 반영되지 않습니다.\n- **B** — 초기값 'A'는 (1)에서 이미 'B'로 바뀌었으므로 사용되지 않습니다.\n- **C** — 변수를 바꿔가며 Refresh Data를 호출해도 '변수 충돌' 같은 런타임 오류는 발생하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1999,7 +1999,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Refresh Data 노드는 실행되는 그 순간의 최신 input 값(브라우저 메모리에 들어 있는 현재 변수 값)으로 Aggregate를 다시 조회합니다. 1초 전에 바뀐 값이 이미 메모리에 반영되어 있으므로 그 값이 사용됩니다. 별도의 'Submit'이 필요하지도(A), 초기 로드 값을 쓰지도(D) 않습니다.",
+    "explanation": "Refresh Data 노드는 실행되는 그 순간 브라우저 메모리에 들어 있는 '가장 최신' input 값으로 Aggregate(데이터를 조회하는 쿼리)를 다시 조회합니다. 1초 전에 바뀐 값은 이미 메모리에 반영돼 있으므로 그 최신 값이 사용됩니다. 변수를 바꿨다고 조회가 저절로 다시 일어나지는 않지만, Refresh Data를 직접 부르는 이 상황에서는 그 최신 값이 그대로 쓰입니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Aggregate의 input을 쓰기 위해 별도의 'Submit' 과정이 필요하지 않습니다.\n- **C** — Refresh Data 한 번은 조회를 한 번만 실행하며, 변경분과 새로고침으로 나뉘어 두 번 돌지 않습니다.\n- **D** — 화면 최초 로드 시점의 옛 값이 아니라 지금의 최신 값을 사용합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2158,7 +2158,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "'At Start' Data Action은 화면 초기화 시 병렬로 실행되므로 OnReady나 OnInitialize 시점에는 데이터가 준비되었다고 보장할 수 없습니다. Data Action의 OnAfterFetch 이벤트는 데이터 fetch가 완료된 직후에 실행되므로, 여기서 차트를 초기화하면 데이터가 확실히 존재하는 상태가 됩니다. Timer로 2초 대기하는 방식은 네트워크 속도에 따라 실패할 수 있는 신뢰할 수 없는 임시방편입니다.",
+    "explanation": "화면이 처음 뜰 때 'At Start' Data Action(화면 로드 시 자동으로 데이터를 가져오는 서버 조회)은 화면 초기화와 '동시에(병렬로)' 실행됩니다. 그래서 OnInitialize(화면이 그려지기 전 시점)나 OnReady(화면이 처음 그려진 직후 시점)가 실행되는 순간에는 데이터가 도착했다는 보장이 없어요. 반면 Data Action의 OnAfterFetch는 그 데이터 조회가 '끝난 직후'에만 실행되므로, 여기서 차트를 초기화하면 데이터가 확실히 준비된 상태입니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 2초 Timer는 네트워크가 느리면 데이터가 아직 안 온 상태에서 실행될 수 있는 불안정한 임시방편입니다.\n- **C** — OnInitialize는 화면이 그려지기도 전, 데이터가 오기 훨씬 이전 시점이라 데이터가 없습니다.\n- **D** — OnReady는 화면이 처음 그려진 직후일 뿐, 병렬로 도는 데이터 조회가 끝났다는 보장이 없습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2211,7 +2211,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "Data Action의 OnAfterFetch 안에서 같은 Data Action에 Refresh Data를 호출하면, 재조회 → OnAfterFetch 재실행 → 다시 Refresh Data로 이어지는 무한 루프가 발생합니다. OutSystems 런타임은 이런 상황을 자동으로 감지하거나 막아주는 안전장치를 제공하지 않으므로, 브라우저가 멈추거나 앱이 무한 반복에 빠집니다. 컴파일 에러(A)나 노드 자동 비활성화(B), 자동 루프 차단(D) 같은 보호는 존재하지 않습니다.",
+    "explanation": "Data Action의 OnAfterFetch(데이터 조회가 끝난 직후 실행되는 이벤트) 안에서 같은 Data Action에 Refresh Data(그 조회를 다시 실행하라는 명령)를 걸면, '재조회 → 다시 OnAfterFetch → 다시 Refresh Data'가 끝없이 반복되는 무한 루프가 생깁니다. OutSystems 런타임에는 이 상황을 막아주는 자동 안전장치가 없어서, 결국 브라우저가 멈추거나 앱이 무한 반복에 빠집니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — Service Studio가 이걸 컴파일 에러로 걸러주지 않습니다(문법상 유효한 배치라 감지 못 함).\n- **B** — OnAfterFetch에 놓였다고 Refresh Data 노드가 자동으로 비활성화되지 않습니다.\n- **D** — 플랫폼이 루프를 감지해 두 번째 새로고침을 멈춰주는 기능은 존재하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2264,7 +2264,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Reactive에서 Refresh Data는 비동기로 서버에서 데이터를 가져오며, 다음 노드는 데이터 도착을 기다리지 않고 즉시 실행됩니다. 따라서 바로 접근하면 아직 갱신되기 전의 이전 값(old value)을 읽게 되어 B가 정답입니다. 액션이 멈춰 기다린다(D)거나 새 값이 바로 들어온다(A)는 것은 Reactive의 비동기 동작과 맞지 않습니다.",
+    "explanation": "Reactive에서 Refresh Data는 '비동기'로 동작합니다. 즉 서버에 '데이터 다시 가져와줘'라고 요청만 보내고, 도착을 기다리지 않고 곧바로 다음 노드로 넘어갑니다. 그래서 바로 다음 노드에서 `GetProducts.List.Current`를 읽으면 아직 새 데이터가 안 온 상태라, 새로고침 전의 '이전 값'을 읽게 됩니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 요청이 끝나길 기다리지 않으므로 이 시점에 새 값은 아직 들어와 있지 않습니다.\n- **C** — 새로고침 중이라고 리스트가 Null로 비워지는 게 아니라, 기존 값이 그대로 남아 있습니다.\n- **D** — Refresh Data는 실행을 멈추고 대기하지 않고 즉시 다음 노드로 진행합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2317,7 +2317,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Reactive에서 Refresh Data는 서버로 비동기 요청을 보냅니다. 버튼을 빠르게 두 번 누르면 두 개의 요청이 각각 나가고, 나중에 도착하는 응답이 화면을 덮어써서 race condition이 생길 수 있으므로 D가 정답입니다. 플랫폼이 이전 요청을 자동 취소(A)하거나, 순서를 보장(B)하거나, 로딩 중이라는 이유로 실패(C)시키지 않습니다.",
+    "explanation": "Reactive에서 Refresh Data는 서버로 '비동기' 요청(응답을 기다리지 않고 보내는 요청)을 날립니다. 버튼을 빠르게 두 번 누르면 요청 두 개가 각각 따로 나가고, 둘 중 '나중에 도착한' 응답이 화면을 덮어씁니다. 그래서 먼저 누른 버튼의 결과가 화면에 남는 등, 순서가 뒤엉키는 race condition(누가 먼저 도착하느냐에 결과가 좌우되는 상황)이 생길 수 있습니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 두 번째 요청이 나갔다고 플랫폼이 첫 요청을 자동으로 취소해주지 않습니다.\n- **B** — 서버가 보낸 순서대로 처리·반영해준다는 보장은 없습니다.\n- **C** — 첫 새로고침이 'Loading' 중이라는 이유로 두 번째 요청이 실패하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2370,7 +2370,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Start Index에 바인딩된 것은 일반 Local Variable이라 흐름 도중 값이 바뀌어도 Aggregate가 자동으로 재조회되지 않습니다. 새 페이지를 불러오려면 명시적으로 'Refresh Data' 노드를 실행해야 합니다. Pagination 패턴이 알아서 새로고침하지 않으며(A), Max Records를 바꾸는 것(C)이나 List.Current 할당(D)은 페이지 이동과 무관합니다.",
+    "explanation": "Aggregate(화면에서 데이터를 가져오는 조회)의 Start Index에 연결된 것은 평범한 Local Variable(화면 안에서만 쓰는 변수)입니다. Aggregate는 이런 변수 값이 흐름 도중에 바뀌어도 스스로 다시 조회하지 않아요. 그래서 다음 페이지를 실제로 불러오려면 그 Aggregate에 대해 Refresh Data 노드를 직접 실행해줘야 합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 'Next' 버튼이나 Pagination 패턴이 알아서 데이터를 새로고침해주지 않습니다.\n- **C** — Max Records(가져올 최대 건수)를 바꾸는 것은 페이지 이동과 상관없는 설정입니다.\n- **D** — List.Current를 변수에 담는 것은 값을 복사할 뿐 새 페이지를 불러오지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2423,7 +2423,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "화면에 직접 붙은 Screen Aggregate는 화면에서 실제로 쓰는 attribute만 조회하도록 자동 최적화(attribute selection)됩니다. 반면 Aggregate를 Data Action으로 감싸고 loop로 후처리하면 이 최적화를 받지 못해 보통 더 느립니다. B의 loop는 브라우저가 아니라 서버에서 실행되며, D처럼 권한 계층을 우회하지도 않습니다.",
+    "explanation": "화면에 바로 붙은 Screen Aggregate는 OutSystems가 자동으로 최적화해서, 그 화면에서 '실제로 쓰는 컬럼(attribute)'만 데이터베이스에서 가져옵니다(attribute selection). 그런데 Aggregate를 Data Action으로 감싸고 그 안에서 loop로 후처리하면 이 자동 최적화를 받지 못해, 필요 이상으로 데이터를 가져오게 되어 보통 더 느립니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — 같은 DB를 쓰더라도 자동 최적화 적용 여부가 달라서 성능 차이가 생깁니다.\n- **B** — Data Action의 loop는 브라우저가 아니라 '서버'에서 실행되므로 그 이유로 빨라지지 않습니다.\n- **D** — Data Action이 권한 계층을 우회하지 않으며, 우회한다고 빨라지는 것도 아닙니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2476,7 +2476,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "'Max Records'는 데이터베이스 쿼리 자체에 적용되는 한도라서 값을 10으로 설정하면 SQL이 딱 10건만 가져옵니다. 나머지 990건은 애초에 조회되지 않아 네트워크/메모리 부담이 줄어들므로 C가 정답입니다. 데이터를 다 받아온 뒤 숨기는 것이 아니므로 B, 브라우저에 캐싱되는 것도 아니므로 D는 틀립니다. Max Records는 조회 건수 상한일 뿐 전체 건수와 일치할 필요가 없으므로 A도 틀립니다.",
+    "explanation": "'Max Records'는 데이터베이스에 보내는 조회 쿼리 자체에 적용되는 '가져올 최대 건수' 제한입니다. 10으로 설정하면 SQL이 딱 10건만 가져오고, 나머지 990건은 애초에 조회조차 하지 않아요. 불필요한 데이터를 안 받으니 네트워크와 메모리 부담이 줄어 성능에 좋습니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — Max Records는 '상한'일 뿐, 전체 건수와 같을 필요가 없어서 조회가 실패하지 않습니다.\n- **B** — 990건을 다 받아온 뒤 CSS로 숨기는 게 아니라, 처음부터 가져오지 않습니다.\n- **D** — 브라우저 메모리에 캐싱되는 것이 아니므로 페이지 전환이 그 때문에 즉시 되지도 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2529,7 +2529,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Refresh Data는 해당 Aggregate를 다시 실행하며, Aggregate가 실행될 때마다 On After Fetch가 다시 발생합니다. 따라서 버튼으로 Refresh Data를 하면 On After Fetch 안의 Message가 한 번 더 표시됩니다. 실행은 레코드 수 변화 여부와 무관하게 매번 일어나므로 A는 틀리고, 성능을 위해 이벤트를 건너뛰지 않으며(C) 최초 로드에서만 뜨는 것도 아니므로(D) 정답은 B입니다.",
+    "explanation": "On After Fetch는 그 Aggregate의 데이터 조회가 '완료될 때마다' 실행되는 이벤트입니다. Refresh Data(그 Aggregate를 다시 조회하라는 명령)를 실행하면 조회가 한 번 더 일어나므로, On After Fetch도 다시 실행되어 그 안의 Message가 두 번째로 표시됩니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 반환된 레코드 수가 바뀌었는지와 무관하게, 조회할 때마다 무조건 실행됩니다.\n- **C** — 성능을 위해 Refresh Data가 On After Fetch 이벤트를 건너뛰지 않습니다.\n- **D** — 최초 로드뿐 아니라 다시 조회할 때도 매번 실행됩니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2582,7 +2582,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "'At Start'로 설정된 Data Action을 원하는 시점에 다시 실행하려면, 이벤트 핸들러 흐름에 Refresh Data 노드를 추가하고 해당 Data Action을 선택하면 됩니다. Data Action은 흐름에서 Client Action처럼 직접 호출하는 방식이 아니고(B), 'At Start'라고 해서 이벤트마다 자동 재조회되지도 않으며(C), 굳이 같은 화면으로 다시 이동할 필요도 없으므로(D) 정답은 A입니다.",
+    "explanation": "'At Start'로 설정된 Data Action(화면 로드 시 자동 실행되는 서버 조회)을 원하는 순간에 다시 실행하려면, 이벤트 핸들러 흐름에 Refresh Data 노드를 넣고 그 Data Action을 지정하면 됩니다. Refresh Data가 바로 '이 조회를 다시 돌려라'라는 명령이기 때문입니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Data Action은 Client Action처럼 흐름에서 직접 호출하는 방식이 아니라, Refresh Data로 재실행시킵니다.\n- **C** — 'At Start'는 화면 시작 때 한 번 도는 설정일 뿐, 이벤트마다 자동으로 다시 돌지 않습니다.\n- **D** — 같은 화면으로 다시 이동하지 않아도 Refresh Data 한 번이면 되므로 불필요합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2635,7 +2635,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "At Start Aggregate는 화면 초기화 시 비동기로 데이터를 가져옵니다. 데이터를 아직 못 가져온 동안에는 If의 False 분기(스피너)가 보이고, fetch가 끝나면 조건 값이 바뀌면서 If가 자동으로 다시 평가되어 True 분기(데이터)가 표시됩니다. If 위젯은 바인딩된 값이 변할 때마다 자동으로 재평가되므로, 수동 토글(A)이나 On Initialize에서 1회만 평가(C)하는 것이 아닙니다.",
+    "explanation": "'At Start' Aggregate(화면이 열릴 때 자동으로 데이터를 가져오는 조회)는 데이터를 즉시 주지 못하고 백그라운드에서 잠깐 시간이 걸려 가져옵니다. 아직 데이터가 없는 동안에는 If의 조건이 거짓이라 False 분기(스피너)가 보이고, fetch가 끝나 데이터가 채워지면 화면이 자동으로 다시 그려지면서 If가 재평가되어 True 분기(데이터)로 바뀝니다. 이렇게 이미 가져온 데이터가 바뀌면 UI는 알아서 다시 렌더링됩니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — On After Fetch에서 분기를 수동으로 토글할 필요 없이, If는 조건 값에 따라 스스로 바뀝니다.\n- **B** — 처음 보이는 것은 True가 아니라 False(스피너) 분기이므로 틀립니다.\n- **C** — If는 On Initialize에서 한 번만 평가되는 게 아니라, 바인딩된 값이 바뀔 때마다 다시 평가됩니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2688,7 +2688,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "Screen Aggregate는 화면이 열릴 때 'At Start'로 한 번 실행되며, filter에 쓰인 Screen Variable(local 변수)이 바뀌어도 자동으로 다시 실행되지 않습니다(입력 파라미터가 아니기 때문). 새 검색 결과를 보려면 변수 변경 후 Client Action에서 해당 Aggregate에 대해 'Refresh Data' node를 실행해야 합니다. 따라서 자동 refresh(D)는 틀리고, On Initialize 재할당(B)이나 화면 이동(A)도 해결책이 아닙니다.",
+    "explanation": "Aggregate(화면에서 데이터를 조회하는 질의)는 화면이 열릴 때 'At Start'로 딱 한 번 실행됩니다. 필터에 쓰인 Screen Variable(화면 안에서만 쓰는 임시 값)을 나중에 바꿔도 조회는 스스로 다시 돌지 않습니다. OutSystems에서는 변수·필터·입력값 중 무엇이 바뀌든 조회가 저절로 재실행되는 일은 없고, 새 결과를 보려면 항상 Refresh Data를 직접 호출해야 합니다. 그래서 변수를 바꾼 뒤 Client Action(버튼 등에서 실행되는 로직)에서 GetCustomers에 대해 Refresh Data node를 실행해야 합니다.\n**→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — 화면을 나갔다 다시 들어오는 방식은 검색할 때마다 반복할 수 없어 정상적인 해결책이 아닙니다.\n- **B** — On Initialize에서 필터를 다시 지정해도 조회를 다시 실행시키는 것이 아니라 결과가 갱신되지 않습니다.\n- **D** — 변수가 바뀌어도 Aggregate는 자동으로 refresh되지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2741,7 +2741,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "화면 로드 시 Aggregate는 'At Start'로 실행되며, Filter에 사용된 Local Variable 'MaxPrice'를 Client Action에서 바꿔도 Aggregate가 자동으로 다시 조회되지 않는다. 자동 재조회는 Input Parameter가 바뀔 때만 일어나고 Local Variable 변경은 해당하지 않으므로, 새 결과를 보려면 'GetProducts'에 대한 Refresh Data node를 명시적으로 실행해야 한다. 따라서 자동 refresh를 주장하는 D는 틀리다.",
+    "explanation": "화면이 열릴 때 Aggregate(데이터 조회)는 'At Start'로 한 번 실행되어 결과를 화면에 채웁니다. 그 뒤 필터에 쓰인 Local Variable 'MaxPrice'(화면 안 임시 값)를 Client Action에서 바꿔도 조회 자체는 스스로 다시 돌지 않습니다. OutSystems에서는 어떤 값이 바뀌어도 조회가 자동 재실행되지 않고, 항상 Refresh Data node를 직접 실행해야 새 데이터를 가져옵니다. 그래서 목록은 Refresh Data를 실행하기 전까지 그대로입니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 화면을 다시 그리기만 해서는 DB에서 새 레코드를 가져올 수 없고, 조회를 다시 하려면 Refresh Data가 필요합니다.\n- **C** — 변수를 바꾼다고 화면 실행이 멈추거나 백그라운드 자동 refresh를 기다리는 일은 없습니다.\n- **D** — Aggregate는 변수 변경을 감지해 스스로 refresh하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2794,7 +2794,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Pagination widget은 offset 변수만 갱신할 뿐 데이터를 자동으로 다시 가져오지 않는다. 새 페이지의 레코드를 보려면 Table을 채우는 Aggregate를 직접 Refresh Data로 다시 실행해야 한다. 그래서 B가 맞고, 자동 refresh를 주장하는 D는 틀리다.",
+    "explanation": "Pagination widget(페이지 넘김 UI)은 '다음'을 누르면 몇 번째 레코드부터 보여줄지 정하는 offset 변수(CurrentOffset)만 바꿔줍니다. 하지만 데이터를 실제로 다시 가져오지는 않습니다. OutSystems에서는 변수가 바뀌어도 조회가 자동으로 다시 실행되지 않기 때문에, 다음 페이지의 레코드를 보려면 Table을 채우는 Aggregate를 Refresh Data로 직접 다시 실행해야 합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Max Records는 '몇 건 가져올지'를 정하는 값이라 offset 값을 넣는 용도가 아니고, 그것만으로 다음 페이지가 조회되지 않습니다.\n- **C** — On Render는 매 렌더마다 실행되어 오히려 무한 루프 위험이 있고, 조회를 다시 하려면 결국 Refresh Data가 필요합니다.\n- **D** — Pagination widget이 Table을 자동으로 refresh해 주지는 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2847,7 +2847,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Data Action의 Fetch 속성을 'Only on demand'로 설정하면 화면이 로드될 때 자동으로 실행되지 않고, 입력 파라미터가 바뀌어도 자동 재실행되지 않습니다. 오직 Client Action 안의 Refresh Data 노드로 명시적으로 호출할 때만 실행됩니다. 따라서 A, D(자동 실행)와 C(입력 변경 시 자동 재fetch)는 'At start' 설정에서나 해당하는 동작이라 오답입니다.",
+    "explanation": "Data Action(화면과 별개로 서버에서 데이터를 가져오는 조회)의 Fetch 속성을 'Only on demand'로 설정하면, 화면이 열려도 자동으로 실행되지 않습니다. 오직 Client Action 안의 Refresh Data node로 직접 불러줄 때만 실행됩니다. 참고로 OutSystems에서는 어떤 변수나 입력값이 바뀌어도 조회가 저절로 다시 실행되는 일은 없습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 'Only on demand'는 화면 렌더링이 끝나도 자동 실행되지 않습니다(자동 실행은 'At start' 설정의 동작).\n- **C** — 입력 파라미터가 바뀌어도 조회는 스스로 재실행되지 않으며, 언제나 Refresh Data가 필요합니다.\n- **D** — On Initialize 때도 자동 실행되지 않고, 명시적으로 호출하기 전까지는 실행되지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2900,7 +2900,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Screen Aggregate는 'At Start'에 실행되며, Client Action에서 필터에 쓰인 Screen/Local Variable만 바꾼다고 해서 자동으로 다시 조회되지 않습니다. 변경을 반영하려면 명시적으로 Refresh Data 노드를 실행해야 합니다(자동 재조회는 Aggregate의 Input Parameter가 바뀔 때만 발생). 따라서 A는 틀리고, C·D는 존재하지 않는 동작입니다.",
+    "explanation": "Screen Aggregate(화면의 데이터 조회)는 화면이 열릴 때 'At Start'로 실행됩니다. Client Action에서 필터에 쓰인 Screen Variable(화면 임시 값)을 바꾸더라도 조회는 스스로 다시 실행되지 않습니다. OutSystems에서는 변수·필터·입력값 중 무엇이 바뀌어도 자동 재조회는 일어나지 않으므로, 변경을 결과에 반영하려면 그 Aggregate에 대한 Refresh Data node를 직접 추가해 실행해야 합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 변수가 바뀌어도 Aggregate가 자동으로 refresh되지는 않습니다.\n- **C** — 변수가 필터를 참조한다고 해서 순환 종속성(circular dependency) 오류가 나지는 않습니다.\n- **D** — 변수 값 변경이 Aggregate 실행이 끝날 때까지 막히는 동작도 없습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3165,7 +3165,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "REST API 호출과 Aggregate 결과를 합쳐 하나의 List로 만들어 Table에 바인딩하려면 Screen에 연결된 Data Action에 로직을 넣습니다. Data Action은 서버에서 비동기로 실행되며 화면 위젯에 직접 바인딩할 수 있습니다. On After Fetch(C)는 단일 Aggregate의 후처리용이고, Expression(D)은 동기식이라 이런 fetch 로직을 담을 수 없습니다.",
+    "explanation": "화면에 보여줄 데이터를 서버에서 직접 만들어내는 로직(예: 외부 REST API 결과와 로컬 Aggregate 결과를 하나의 List로 합치기)은 **Data Action** 안에 넣습니다. Data Action은 화면에 연결해 서버에서 비동기로 실행하는 '데이터 조회 로직 블록'으로, 그 output(결과)을 Table 같은 위젯에 바로 바인딩할 수 있습니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 화면이 전혀 참조하지 않는 Server Action은 실행되지도, 위젯에 연결되지도 않습니다\n- **C** — On After Fetch는 하나의 Aggregate가 끝난 뒤 후처리하는 자리일 뿐, 두 소스를 합쳐 반환하는 용도가 아닙니다\n- **D** — Expression은 값을 화면에 표시하는 간단한 위젯이라 REST 호출 같은 fetch 로직을 담을 수 없습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3218,7 +3218,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Data Action은 비동기로 실행됩니다. 화면은 먼저 렌더링되고(초기에는 값이 비어 있음), Data Action이 실행을 끝내 output을 반환한 뒤에야 Expression에 값이 표시됩니다(B 정답). 따라서 화면 시작 즉시 값이 보이지 않으며(A 오답), On Initialize 완료만으로 값이 채워지는 것도 아닙니다(D 오답).",
+    "explanation": "**Data Action**(서버에서 데이터를 가져오는 로직 블록)은 화면과 따로 비동기로 실행됩니다. 즉 화면은 먼저 그려지고(이때 값은 아직 비어 있음), Data Action이 실행을 끝내 output을 돌려준 뒤에야 그 값이 Expression에 나타납니다. 식당에서 주문을 넣고 음식이 나와야 상에 올리는 것과 같습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 렌더링이 막 시작될 때는 아직 데이터를 못 가져왔으므로 값이 보이지 않습니다\n- **C** — On Ready(첫 렌더 직후 1회 실행)가 끝나는 것과 값 표시는 직접 관계가 없고, 데이터는 Data Action이 끝나야 채워집니다\n- **D** — On Initialize가 끝나도 Data Action이 아직 안 끝났으면 값은 비어 있습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3271,7 +3271,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "At Start Aggregate는 filter에 쓰인 Local Variable 값이 바뀌어도 자동으로 다시 실행되지 않습니다. 자동 재조회는 Data Action/Aggregate의 Input Parameter가 바뀔 때만 일어나며, 일반 Local Variable은 여기에 해당하지 않습니다. 값만 바꾸고 끝내면 Refresh Data 호출이 없으므로 Table은 그대로이고(B 정답), 오류도 발생하지 않습니다(D 오답).",
+    "explanation": "**Aggregate**(화면이 데이터베이스에서 데이터를 읽어오는 조회)는 filter에 쓴 Local Variable 값이 바뀌어도 저절로 다시 조회하지 않습니다. 다시 가져오려면 **Refresh Data**(다시 조회 명령)를 직접 호출해야 합니다. 버튼이 변수 값만 바꾸고 끝나면 Refresh Data가 없으므로 Table은 그대로입니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 변수만 바꿔서는 자동 재조회가 안 되므로 즉시 갱신되지 않습니다\n- **C** — 변수 하나 바꿨다고 화면 전체가 다시 로드되지는 않습니다\n- **D** — filter 변수가 바뀌는 것은 정상 동작이라 오류가 나지 않습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3324,7 +3324,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "At Start Aggregate는 화면 초기화 시 이미 병렬로 데이터를 가져오는데, OnReady에서 Data Action에 Refresh Data를 호출하면 초기 로드 위에 추가 서버 요청이 얹혀 화면 깜빡임(flicker)이나 성능 저하가 생길 수 있습니다(정답 B). OnReady는 화면당 한 번만 실행되므로 무한 루프(D)는 발생하지 않고, Only on Demand도 Refresh Data로 정상 실행되므로 C는 틀리며, At Start fetch는 병렬 실행이라 서로를 막지 않으므로 A도 틀립니다.",
+    "explanation": "**At Start Aggregate**는 화면이 열릴 때 자동으로 데이터를 가져옵니다. 여기에 더해 OnReady(첫 렌더 직후 1회 실행되는 이벤트)에서 Data Action에 **Refresh Data**(데이터를 다시 가져오는 명령)를 또 호출하면, 이미 시작된 초기 로드 위에 서버 요청이 하나 더 얹힙니다. 그 결과 데이터가 두 차례에 걸쳐 들어오며 화면이 잠깐 깜빡이거나(flicker) 느려질 수 있습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — At Start fetch들은 서로를 막지 않고 병렬(동시)로 실행됩니다\n- **C** — Only on Demand는 자동 실행만 안 될 뿐 Refresh Data로는 정상 실행됩니다\n- **D** — OnReady는 화면당 한 번만 실행되므로 무한 루프가 생기지 않습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3430,7 +3430,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Fetch가 'Only on Demand'인 Data Action은 화면 로드 시 자동 실행되지 않으므로, 명시적으로 Refresh Data 문을 호출해야 합니다. 검색 버튼의 On Click에 연결된 Client Action 안에서 Refresh Data를 실행하면 버튼을 눌렀을 때만 데이터를 가져옵니다. On Initialize(B)에 넣으면 화면 로드 시 실행되어 요구사항과 어긋나고, On Parameters Changed(C)는 화면 입력 파라미터가 바뀔 때 동작하며, D의 'Method=Data Action' 같은 버튼 속성은 존재하지 않습니다.",
+    "explanation": "Fetch가 **Only on Demand**인 Data Action은 화면이 열릴 때 자동으로 실행되지 않고, **Refresh Data**(데이터를 가져오라는 명령)를 직접 불러줘야만 실행됩니다. '검색 버튼을 눌렀을 때만' 조회하려면, 그 버튼의 On Click에 연결된 **Client Action**(브라우저에서 도는 로직) 안에서 Refresh Data를 호출하면 됩니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — On Initialize에 넣으면 화면이 열릴 때 실행되어 '버튼을 눌렀을 때만'이라는 요구와 어긋납니다\n- **C** — On Parameters Changed는 화면 입력 파라미터가 바뀔 때 도는 이벤트라 검색 버튼과 무관합니다\n- **D** — 버튼에 'Method = Data Action' 같은 속성은 존재하지 않습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3483,7 +3483,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Aggregate의 'On After Fetch' event는 해당 Aggregate가 데이터를 모두 가져온 직후에 실행되므로, fetch 완료 시마다 수행할 계산 로직(JavaScript node 포함)을 넣기에 가장 적합합니다. On Initialize(B)는 데이터가 도착하기 전 화면 초기화 시점이고, On Render(C)는 화면이 다시 그려질 때마다 반복 실행되며, On Ready(D)는 최초 렌더 후 한 번만 실행되어 매 fetch 완료 시점과 맞지 않습니다.",
+    "explanation": "Aggregate가 데이터를 다 가져온 '직후'에 매번 실행할 로직(JavaScript 계산 포함)은 그 Aggregate의 **On After Fetch** 이벤트에 넣습니다. 이 이벤트는 fetch(데이터 가져오기)가 끝날 때마다 실행되므로 요구와 정확히 맞습니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — On Initialize는 데이터가 도착하기 전, 화면 초기화 시점이라 계산할 데이터가 아직 없습니다\n- **C** — On Render는 화면이 다시 그려질 때마다 반복 실행되어 'fetch 완료 시점'과 다릅니다\n- **D** — On Ready는 첫 렌더 후 딱 한 번만 실행되므로 매번 fetch가 끝날 때 실행되지 않습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3536,7 +3536,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "List 타입은 절대 Null이 되지 않고 항상 초기화된 빈 리스트로 시작하므로, 데이터가 아직 도착하지 않았을 때 .Length는 0을 반환합니다. Screen은 데이터를 기다리지 않고 먼저 렌더링되며(A 틀림), 오류도 나지 않고(B), Null도 아닙니다(D).",
+    "explanation": "OutSystems에서 **List**(여러 건의 데이터를 담는 목록) 타입은 절대 Null(값이 아예 없음)이 되지 않고, 항상 '비어 있는 목록'으로 시작합니다. 따라서 데이터가 아직 안 들어왔을 때 목록의 개수를 뜻하는 **.Length**는 0을 돌려줍니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — 화면은 데이터를 기다리지 않고 먼저 그려집니다\n- **B** — 빈 목록의 개수를 세는 것은 정상이라 오류가 나지 않습니다\n- **D** — List는 Null이 되지 않으므로 Null이 표시될 수 없습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3589,7 +3589,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "화면의 At Start Aggregate들은 기본적으로 병렬로 동시에 fetch되므로 실행 순서를 보장하려면 명시적으로 제어해야 합니다. Aggregate B를 'Only on Demand'로 두어 자동 실행을 막고, Aggregate A의 On After Fetch에서 Refresh Data(B)를 호출하면 A가 끝난 뒤에만 B가 실행됩니다(A). Aggregate에는 'Priority' 속성이 없고(C), 'Sleep' 함수도 존재하지 않으며(D), Container를 숨기는 것(B)은 화면 표시만 늦출 뿐 fetch 시점을 제어하지 못합니다.",
+    "explanation": "화면의 **At Start Aggregate**들은 기본적으로 서로 기다리지 않고 동시에(병렬) 데이터를 가져옵니다. 그래서 'A가 끝난 뒤 B'라는 순서를 원하면 직접 제어해야 합니다. B를 **Only on Demand**(자동 실행 안 함)로 두고, A의 **On After Fetch**(A가 다 가져온 직후 실행되는 이벤트)에서 **Refresh Data(B)**를 호출하면 A가 끝난 다음에만 B가 실행됩니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Container를 숨기는 것은 화면 표시만 늦출 뿐, B가 데이터를 가져오는 시점 자체는 못 바꿉니다\n- **C** — Aggregate에는 실행 순서를 정하는 'Priority' 속성이 없습니다\n- **D** — OutSystems에 화면 실행을 잠시 멈추는 'Sleep' 함수는 없습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3642,7 +3642,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "'Only on Demand' aggregate는 화면 시작 시 자동으로 실행되지 않으므로 중복 fetch(D)는 발생하지 않습니다. Refresh Data node는 On Initialize에서도 사용할 수 있으므로 '사용 불가'라는 A는 틀립니다. On Initialize는 화면이 렌더링되기 전에 실행되고 그 안의 Refresh Data 완료를 기다리므로, 데이터를 다 가져올 때까지 화면 첫 렌더링이 지연됩니다(B). 그래서 무거운 데이터를 On Initialize의 Refresh Data로 불러오는 것은 화면 표시가 늦어지는 anti-pattern입니다.",
+    "explanation": "On Initialize는 화면이 그려지기(첫 렌더) '전에' 실행되는 이벤트이고, 그 안의 **Refresh Data**(데이터를 가져오는 명령)가 끝날 때까지 기다린 뒤에 화면을 그립니다. 따라서 여기에 Refresh Data를 넣으면 데이터를 다 가져올 때까지 첫 화면 표시가 늦어집니다(무거운 데이터일수록 화면이 늦게 뜨는 anti-pattern). **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Refresh Data node는 On Initialize에서도 사용할 수 있어 '사용 불가'가 아닙니다\n- **C** — 가져온 데이터는 위젯에 정상적으로 표시할 수 있습니다\n- **D** — Only on Demand라 화면 시작 시 자동 실행이 없으므로 두 번 fetch되지 않습니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3695,7 +3695,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "At Start로 설정된 Aggregate와 Data Action은 화면 초기화 시 병렬로 실행되며, 어느 것이 먼저 끝날지는 보장되지 않습니다. 완료 순서는 서버 부하와 쿼리 복잡도 등 런타임 상황에 따라 달라집니다. 따라서 A, B처럼 특정 데이터 소스가 우선한다거나 C처럼 화면에 추가된 순서대로 끝난다는 설명은 모두 틀립니다.",
+    "explanation": "Aggregate(화면이 데이터베이스에서 데이터를 읽어오는 조회 도구)와 Data Action(개발자가 직접 만든 데이터 처리 로직)을 둘 다 'At Start'(화면이 열릴 때 실행)로 두면, 두 조회는 서로 기다리지 않고 동시에(병렬로) 출발합니다. 각자 따로 서버에 다녀오기 때문에 어느 쪽이 먼저 끝날지는 그때그때 서버 부하나 쿼리 복잡도에 따라 달라져 미리 보장할 수 없습니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Aggregate가 최적화된 SQL을 쓰더라도 플랫폼이 먼저 끝내주도록 우선순위를 주지 않습니다.\n- **B** — Data Action이 커스텀 로직이라고 해서 우선 처리되지 않습니다.\n- **C** — 화면에 먼저 추가한 순서와 실제 완료 순서는 아무 관계가 없습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3748,7 +3748,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "'At Start' Aggregate들은 Screen 초기화 시 병렬로 실행되므로 GetCategories가 끝나기를 기다렸다가 GetProducts를 실행해 주지 않습니다. 따라서 C처럼 플랫폼이 알아서 순서를 지켜줄 것이라 기대하면 GetProducts가 아직 준비되지 않은 값으로 조회될 수 있습니다. 올바른 방법은 GetProducts를 'Only on Demand'로 두고 GetCategories의 'On After Fetch'에서 값이 준비된 뒤 Refresh Data로 명시적으로 실행하는 것입니다. A, B는 불필요하게 복잡하거나 성능/유지보수에 불리합니다.",
+    "explanation": "'At Start' Aggregate들은 화면이 열릴 때 서로 기다리지 않고 동시에(병렬로) 실행됩니다. 그래서 GetProducts가 GetCategories의 결과값을 필터로 써야 한다면 순서를 잡아줄 장치가 필요합니다. GetProducts를 'Only on Demand'(자동 실행되지 않고 요청할 때만 실행)로 두고, GetCategories가 데이터를 다 가져온 직후 실행되는 'On After Fetch' 이벤트 안에서 Refresh Data(조회를 다시 실행하라는 명령)로 GetProducts를 돌려주면, 값이 준비된 뒤에 안전하게 필터링됩니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — On Initialize에서 loop로 순차 조회하는 방식은 불필요하게 복잡하고 성능에도 불리합니다.\n- **B** — 하나의 Data Action으로 합쳐도 두 조회 사이의 순서 의존 문제는 그대로 남습니다.\n- **C** — 플랫폼은 At Start Aggregate들의 의존 순서를 자동으로 지켜주지 않아, 준비 안 된 값으로 조회될 수 있습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3801,7 +3801,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Data Action은 화면 렌더링과 비동기로 실행되므로, 실패하더라도 화면 자체는 로드되고 해당 output에 연결된 widget만 데이터를 표시하지 못합니다. 자동 재시도(B), 'Invalid URL' 리디렉션(C), 화면 전체가 빈 화면이 됨(D)은 OutSystems의 동작이 아닙니다.",
+    "explanation": "Data Action(개발자가 만든 데이터 조회 로직)은 화면을 그리는 것과 따로, 비동기로(백그라운드에서 별개로) 실행됩니다. 그래서 이 조회가 도중에 오류로 실패해도 화면 자체는 정상적으로 뜨고, 다만 그 조회 결과에 연결된 위젯(widget, 화면 구성 요소)만 데이터를 표시하지 못할 뿐입니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 브라우저가 자동으로 3번 재시도하는 동작은 없습니다.\n- **C** — 'Invalid URL' 페이지로 리디렉션되지 않습니다.\n- **D** — 화면 전체가 빈 화면이 되는 게 아니라, 실패한 부분만 비어 보입니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3854,7 +3854,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "On After Fetch에서 Refresh Data로 다음 Aggregate를 연쇄 실행하면, 원래 At Start로 병렬 실행될 수 있는 두 조회가 순차적으로 바뀌어 서버 왕복이 두 번 직렬로 일어나 성능이 나빠진다. 이것이 이 방식의 핵심 단점이다. On After Fetch에서 Aggregate refresh는 가능하므로 C는 틀리고, On After Fetch는 fetch될 때마다 실행되므로 D도 틀리며, 역방향 refresh를 설정하지 않는 한 A의 무한 루프도 발생하지 않는다.",
+    "explanation": "원래 두 Aggregate를 모두 'At Start'로 두면 화면이 열릴 때 동시에(병렬로) 조회돼 빠릅니다. 그런데 GetCustomer의 'On After Fetch'(데이터를 다 가져온 직후 실행되는 이벤트)에서 Refresh Data로 GetOrders를 이어서 실행하게 만들면, 두 조회가 '하나 끝나고 → 그다음 하나' 식으로 순차 실행으로 바뀝니다. 결국 서버에 두 번 연달아 다녀오게 되어 사용자가 더 오래 기다리는 것이 이 설계의 핵심 단점입니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — GetOrders가 다시 GetCustomer를 새로고침하도록 걸어두지 않는 한 무한 루프는 생기지 않습니다.\n- **C** — On After Fetch 안에서 Aggregate를 Refresh하는 것은 허용되므로 컴파일 오류가 나지 않습니다.\n- **D** — On After Fetch는 fetch될 때마다 실행되므로 Customer가 바뀌면 GetOrders도 갱신됩니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3907,7 +3907,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Only On Demand Aggregate는 Refresh Data로 실행하기 전까지 List가 비어 있다. 이때 List.Current는 모든 속성이 기본값인 빈 record를 돌려주므로, Expression은 데이터 타입의 기본값(예: Decimal이면 0, Text면 빈 문자열)을 표시한다. OutSystems는 빈 List를 안전하게 처리하므로 A의 crash는 일어나지 않고, 자동 로딩 placeholder나 실행 일시정지(B, C) 같은 동작도 없다.",
+    "explanation": "'Only On Demand' Aggregate는 Refresh Data(조회 실행 명령)를 부르기 전까지는 아무 데이터도 가져오지 않아 List(결과 목록)가 비어 있습니다. 이때 List.Current(현재 행)는 모든 속성이 기본값으로 채워진 '빈 record(빈 데이터 한 줄)'를 돌려줍니다. 그래서 Expression(화면에 값을 표시하는 요소)은 데이터 타입의 기본값(예: 숫자면 0, 텍스트면 빈 문자열)을 보여줍니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — OutSystems는 빈 List를 안전하게 처리하므로 Null 오류로 멈추지 않습니다.\n- **B** — 'Data Loading' 같은 placeholder를 자동으로 보여주지 않습니다.\n- **C** — 데이터가 없다고 해서 화면 실행이 멈추거나 대기하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3960,7 +3960,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "On After Fetch는 Aggregate가 데이터를 가져온 직후, 그리고 Refresh될 때마다 실행되므로 여기서 Total을 계산하면 UI가 항상 최신 데이터와 동기화된다. On Initialize는 At Start fetch와 병렬로 실행되어 아직 데이터가 없으므로 B는 부정확하다. Calculated Attribute는 행 단위 계산이라 전체 합계 변수에는 맞지 않고(C), 타이머 방식(A)은 불안정하고 낭비다.",
+    "explanation": "'On After Fetch'는 Aggregate가 데이터를 가져온 직후, 그리고 이후 Refresh될 때마다 실행되는 이벤트입니다. 여기서 Total(합계)을 계산하면 데이터가 새로 들어올 때마다 값이 다시 계산돼 화면 합계가 항상 최신 데이터와 일치합니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 100ms 타이머로 계속 계산하는 방식은 불안정하고 자원 낭비입니다.\n- **B** — On Initialize는 At Start 조회와 병렬로 실행돼 그 시점엔 아직 데이터가 없어 부정확합니다.\n- **C** — Calculated Attribute는 한 행(row)씩 계산하는 것이라 전체를 더하는 합계 변수에는 맞지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4013,7 +4013,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Only On Demand Aggregate는 오직 Refresh Data node로 명시적으로 실행할 때만 데이터를 가져온다. 위젯의 Source에 List를 연결(B)하거나 Start Index를 바꾼다고(A) 실행되지 않으며, Only On Demand이므로 다른 Aggregate 의존성 변화(C)로도 자동 실행되지 않는다. 따라서 Client Action에서 Refresh Data를 호출하는 D가 정답이다.",
+    "explanation": "'Only On Demand' Aggregate는 오직 Refresh Data(조회를 실행하라는 명령) node로 직접 불러야만 데이터를 가져옵니다. 따라서 Client Action(화면 쪽 동작 로직) 안에서 Refresh Data를 호출하는 것이 유일한 실행 방법입니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Start Index(조회 시작 위치) 값을 바꾼다고 조회가 실행되지는 않습니다.\n- **B** — Table 위젯의 Source에 List를 연결해 두어도 Only On Demand는 자동 실행되지 않습니다.\n- **C** — 다른 At Start Aggregate에 의존하는 필터를 걸어도 자동으로 실행되지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4119,7 +4119,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Reactive에서 Fetch가 'At Start'인 Aggregate는 화면 초기화 시 병렬(parallel)로, 비동기로 실행되며 On Initialize가 끝나기를 기다리지 않으므로 D가 정답입니다. 그래서 On Initialize에서 필터 변수를 바꿔도 이미 시작된 Aggregate에는 반영되지 않아 명시적 Refresh Data가 필요합니다. A처럼 '완전히 먼저 끝난다'는 설명은 이 병렬 동작과 모순되고, B(둘 다 끝난 후)와 C(At Start가 없을 때만)는 lifecycle과 맞지 않습니다.",
+    "explanation": "'At Start' Aggregate(화면이 열릴 때 실행되는 조회)는 비동기로(백그라운드에서 별개로) 출발하며, On Initialize(화면이 그려지기 전에 실행되는 준비 이벤트)가 끝나기를 기다려 주지 않습니다. 즉 둘은 병렬로 함께 돌아갑니다. 그래서 On Initialize에서 필터 변수를 바꿔도 이미 출발한 조회에는 반영되지 않아, 필요하면 Refresh Data로 다시 조회해야 합니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — On Initialize가 조회보다 '완전히 먼저 끝난다'는 보장이 없어, 바꾼 변수가 반영되지 않을 수 있습니다.\n- **B** — 조회가 끝난 뒤에 On Initialize가 실행되는 것이 아닙니다(순서가 반대).\n- **C** — At Start Aggregate가 있든 없든 On Initialize는 항상 실행됩니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4172,7 +4172,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Traditional Web에서 DB를 수정한 뒤 화면에 반영하려면 먼저 Refresh Data로 Aggregate(query)를 다시 실행해 최신 데이터를 가져오고, 그다음 Ajax Refresh로 Form Widget을 다시 렌더링해야 합니다(D). 순서가 뒤바뀐 B는 렌더링 후에 데이터를 가져와 화면에 반영되지 않고, A는 Aggregate를 새로 고치지 않아 옛 데이터가 남으며, C는 Ajax Refresh가 없어 UI가 갱신되지 않습니다.",
+    "explanation": "Traditional Web에서 DB 값을 고친 뒤 화면에 반영하려면 순서가 중요합니다. 먼저 Refresh Data로 Aggregate(조회)를 다시 실행해 DB에서 최신 데이터를 가져오고, 그다음 Ajax Refresh(화면 일부만 다시 그리는 명령)로 Form Widget(입력 폼)을 다시 그려야 바뀐 값이 화면에 나타납니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Aggregate를 다시 조회하지 않고 화면만 새로고침하면 옛 데이터가 그대로 남습니다.\n- **B** — 폼을 먼저 다시 그린 뒤 데이터를 가져오면(순서가 반대) 화면에 반영되지 않습니다.\n- **C** — Ajax Refresh가 없어 데이터를 새로 가져와도 화면(UI)이 갱신되지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4278,7 +4278,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Fetch가 'At Start'인 Data Action들은 병렬(parallel)로 동시에 시작되어 서로의 완료를 기다리지 않습니다. 따라서 'GetCustomerOrders'는 'GetCustomer'가 끝나기 전에 시작되어 처음에는 비어 있거나 기본값 input을 받습니다(B). 플랫폼이 실행 순서를 보장하지 않으므로 A는 틀리고, 순환 참조가 아니므로 D도 틀립니다. (input parameter 의존성 추적으로 나중에 재실행될 수 있으나 이런 체이닝은 권장되지 않습니다.)",
+    "explanation": "Fetch를 'At Start'로 둔 Data Action(화면이 시작될 때 서버에서 데이터를 가져오는 작업)들은 줄을 서서 하나씩 실행되는 게 아니라, 심부름꾼 여러 명을 동시에 내보내듯 한꺼번에 병렬(parallel)로 시작합니다. 그래서 'GetCustomerOrders'는 'GetCustomer'가 결과를 돌려주기도 전에 출발하고, 그 시점에 'GetCustomer'의 출력을 받아쓰는 input은 아직 비어 있거나 기본값 상태입니다. 순서를 보장하려면 'GetCustomer'의 On After Fetch에서 Refresh Data로 두 번째를 직접 트리거해야 합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 플랫폼은 'At Start' 액션들을 동시에 시작할 뿐 실행 순서를 보장하지 않습니다.\n- **C** — 'Only On Demand'는 시작 시점에 아예 조회하지 않는다는 뜻일 뿐, 다른 액션을 기다리게 만드는 순서 옵션이 아닙니다.\n- **D** — 한 액션의 출력을 다른 액션의 input으로 쓰는 것은 순환 참조가 아니라 정상적인 구성이라 컴파일 오류가 나지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4702,7 +4702,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Aggregate의 IsFetching 속성은 데이터를 가져오는 동안 True이고 완료되면 False가 됩니다. 따라서 'Not GetTickets.IsFetching'은 fetch가 끝나 데이터가 준비된 시점에만 True가 되어 컨테이너를 표시하므로 '데이터가 실제로 준비될 때까지 숨김' 요구에 정확히 맞습니다(정답 A). Count > 0(B)이나 Empty = False(D)는 조회가 끝났더라도 결과가 0건이면 컨테이너를 숨겨버려, 로딩 완료 여부가 아니라 결과 존재 여부를 판단하므로 부적절합니다.",
+    "explanation": "Aggregate의 IsFetching은 데이터를 가져오는 '동안'에는 True, 다 가져오면 False가 되는 내장 속성(로딩 중 표시등 같은 것)입니다. 따라서 'Not GetTickets.IsFetching'은 fetch가 끝난 바로 그 순간에만 True가 되어, 결과가 몇 건이든 상관없이 '로딩이 실제로 끝났는지'만 정확히 판단합니다. 이것이 '데이터가 준비될 때까지 숨김' 요구에 정확히 맞습니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Count > 0은 조회가 끝났어도 결과가 0건이면 False라서, 로딩 완료 여부가 아니라 '결과가 있는지'를 검사합니다.\n- **C** — List.Current는 리스트의 현재 레코드를 가리키며 이를 NullIdentifier와 비교하는 것은 로딩 완료 여부와 무관합니다(빈 리스트의 .Current는 기본 레코드라 오히려 오해를 줍니다).\n- **D** — Empty = False도 결과 건수가 0인지만 볼 뿐, fetch가 끝났는지는 알려주지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4914,7 +4914,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Aggregate는 단일 소스에서 데이터를 간단히 조회할 때 쓰고, 복잡한 로직·여러 Server Action 호출·고급 계산이 필요하면 Server Action을 감싼 Data Action이 적합합니다. C는 두 방식 모두 화면 렌더링 전에 동기적으로 완료를 보장하지 않으므로 틀렸고(둘 다 비동기 fetch), A와 D처럼 단순 단일 Entity 조회는 Aggregate로 충분합니다.",
+    "explanation": "Aggregate는 화면에서 데이터를 손쉽게 가져오는 '시각적 조회 도구'이고, Data Action은 Server Action(서버에서 실행되는 로직)을 감싸서 화면에서 불러오는 방식입니다. 단순히 데이터를 읽어오는 정도면 Aggregate로 충분하지만, 여러 Server Action을 호출하거나 복잡한 계산·가공이 필요하면 자유롭게 로직을 짤 수 있는 Data Action이 더 적합합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 하나의 Entity(데이터 테이블)에서 값을 읽어오는 단순 조회는 Aggregate로 충분합니다.\n- **C** — Aggregate든 Data Action이든 둘 다 비동기(결과를 기다리지 않고 진행) 방식이라, 화면 렌더 전에 동기적으로 끝나는 것을 보장하지 못합니다.\n- **D** — 모바일 앱의 로컬 저장소에서 레코드를 읽는 단순 조회 역시 Aggregate로 처리할 수 있습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4967,7 +4967,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "CalculateTotals는 GetInvoices의 결과가 확정된 뒤에 실행되어야 하므로, CalculateTotals를 Only on Demand로 두고 GetInvoices의 On After Fetch에서 호출하면 순서가 보장되고 GetInvoices는 딱 한 번만 fetch됩니다. 둘 다 At Start면 CalculateTotals가 빈 데이터로 먼저 실행될 위험이 있고(B/D는 불필요하게 복잡하거나 타이밍 보장이 안 됨), Client Variable에 저장하는 방식(C)은 과도하고 관리가 어렵습니다.",
+    "explanation": "CalculateTotals는 반드시 GetInvoices의 결과가 확정된 뒤에 실행되어야 합니다. CalculateTotals를 'Only on Demand'(자동 실행하지 않고 필요할 때만 호출)로 두고, GetInvoices의 'On After Fetch'(조회가 끝난 직후 실행되는 이벤트)에서 호출하면 순서가 확실히 보장되고 GetInvoices는 딱 한 번만 fetch됩니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — GetInvoices를 On Demand로 바꿔 On Initialize에서 refresh하는 방식은 불필요하게 복잡하고, On Initialize는 화면이 그려지기 전 단계라 조회 흐름이 꼬입니다.\n- **C** — 결과를 Client Variable(클라이언트에 저장되는 변수)에 담는 방식은 과도하며 데이터 동기화를 직접 관리해야 해 번거롭습니다.\n- **D** — 둘 다 At Start로 두면 CalculateTotals가 빈 데이터로 먼저 실행될 위험이 있고, On Ready도 조회 완료 시점을 보장하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

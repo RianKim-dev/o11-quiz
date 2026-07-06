@@ -29,7 +29,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "브레이크포인트가 설정돼 있어도 **Breakpoints 패널에서 일시적으로 비활성화(disabled)** 되어 있으면 실행이 멈추지 않습니다 — 가장 흔한 원인입니다. (Client Action에도 브레이크포인트를 걸 수 있고, 브레이크포인트는 Render뿐 아니라 액션 플로우 전체에서 동작합니다.)",
+    "explanation": "브레이크포인트(breakpoint, 실행을 잠시 멈춰 값을 살펴보는 표시)는 걸어둬도 **Breakpoints 패널에서 잠시 꺼둔(disabled)** 상태면 실행이 멈추지 않습니다. 스위치를 꺼둔 것과 같아서, 코드에는 문제가 없는데도 그냥 지나가 버리죠. 가장 흔한 원인이라 이것이 정답입니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Client Action에도 브레이크포인트를 걸 수 있습니다. Server Action 전용이 아닙니다.\n- **C** — 화면 초기화가 실패했다면 별도의 오류 메시지가 떴을 것이므로, 단순히 안 멈추는 상황의 가장 흔한 원인은 아닙니다.\n- **D** — 브레이크포인트는 Render(화면 그리기) 때만이 아니라 액션 플로우 전체에서 동작합니다.",
     "distractors": {
       "B": "Client Action에도 브레이크포인트를 걸 수 있습니다(거짓).",
       "C": "화면 초기화 실패는 추측일 뿐, 이 상황의 핵심은 브레이크포인트 설정입니다.",
@@ -92,7 +92,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "실행이 일시정지되면 변수 값을 검사할 수 있습니다 — **현재 구문에서 사용 중(In Use), 스코프의 Locals, Screen Widgets, Client Variables, 앱/Site의 Global** 등. 따라서 A가 맞습니다.",
+    "explanation": "디버거가 실행을 일시정지하면, 그 순간의 여러 변수 값을 바로 들여다볼 수 있습니다 — **현재 구문이 쓰는 값(In Use), 해당 범위의 지역변수(Locals), Screen Widgets, Client Variables, 앱/Site의 Global 변수** 등. 즉 지역변수를 포함해 폭넓게 검사할 수 있으므로 A가 맞습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 지역(local) 변수도 검사할 수 있습니다. Global과 Widget만 되는 게 아닙니다.\n- **C** — Render 이벤트가 끝나길 기다릴 필요 없이, 멈춘 즉시 값을 볼 수 있습니다.\n- **D** — 콘솔 print 문을 넣을 필요가 없고, Inspector 패널은 Server Action도 지원합니다.",
     "distractors": {
       "B": "Global뿐 아니라 Locals·현재 구문 변수도 검사할 수 있습니다(거짓).",
       "C": "검사는 Render 이후가 아니라 브레이크포인트에서 멈춘 시점에 가능합니다(거짓).",
@@ -156,7 +156,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "다른(호출된) 모듈의 브레이크포인트에서 멈추려면, 디버깅하는 모듈(InvoiceManager)에서 **진입 지점 모듈(InvoiceFrontend)을 Entry module로 선택**해야 합니다. 크로스 모듈 디버깅이 지원됩니다.",
+    "explanation": "OutSystems에서는 한 모듈이 다른 모듈을 호출해도 그 호출된 모듈 안의 브레이크포인트에서 멈출 수 있습니다(cross-module 디버깅). 다만 디버깅 대상 모듈(InvoiceManager)에서 **실제 요청이 들어오는 진입 지점 모듈(InvoiceFrontend)을 Entry module로 지정**해줘야, 디버거가 그 요청을 따라 들어와 멈춥니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 호출된 모듈의 브레이크포인트도 디버깅할 수 있으므로, 옮길 필요가 없습니다.\n- **C** — 자동으로 진입점에만 라우팅되어 바꿀 수 없다는 말은 틀립니다. Entry module을 직접 고를 수 있습니다.\n- **D** — 'Cross-Module Debugging' 같은 별도 환경설정 항목은 없습니다. Entry module 지정이 올바른 방법입니다.",
     "distractors": {
       "B": "호출된 모듈의 브레이크포인트도 디버깅할 수 있습니다(거짓).",
       "C": "Entry module을 수동으로 선택해야 하며 자동 라우팅이 아닙니다(거짓).",
@@ -220,7 +220,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "화면 초기화 시 여러 Aggregate는 **비동기로 병렬 실행**되어, 기본적으로 **어느 것이 먼저 끝날지 보장되지 않습니다.**",
+    "explanation": "화면이 열릴 때 여러 Aggregate(데이터를 읽어오는 질의)는 **동시에 병렬로, 서로를 기다리지 않고 비동기 실행**됩니다. 여러 사람에게 심부름을 동시에 보낸 것과 같아서, 누가 먼저 돌아올지는 정해져 있지 않습니다. 그래서 완료 순서가 보장되지 않는다는 A가 맞습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 화면에 정의한 순서대로 끝난다는 보장은 없습니다.\n- **C** — 먼저 정의한 Aggregate가 나머지를 막고(block) 먼저 끝나는 구조가 아닙니다.\n- **D** — 데스크톱이든 모바일이든 똑같이 비동기로 실행됩니다.",
     "distractors": {
       "B": "정의 순서대로 실행된다는 보장은 없습니다(거짓).",
       "C": "비동기라 첫 Aggregate가 다른 것을 막지 않습니다(거짓).",
@@ -285,7 +285,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "**At Start**는 화면 초기화 때 자동 실행되고, **Only on Demand**는 자동 실행되지 않고 **Refresh Data 노드로 명시적으로 트리거**해야 합니다.",
+    "explanation": "Aggregate의 실행 시점(fetch 설정)에 따라 언제 데이터를 읽을지가 달라집니다. **At Start**는 화면이 열릴 때 자동으로 실행되고, **Only on Demand**는 저절로 실행되지 않고 **Refresh Data 노드로 코드에서 직접 실행시켜줘야** 합니다. 필요할 때만 불러오는 방식이죠.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — At Start는 사용자 입력을 기다리지 않고 바로 실행되며, Only on Demand는 Ready 때 자동 실행되지 않습니다.\n- **C** — 두 개가 같은 시점에 실행되는 게 아니라, 실행 시점 자체가 다릅니다.\n- **D** — 차이는 동기/비동기가 아니라 '언제 무엇이 실행을 촉발하느냐'입니다.",
     "distractors": {
       "B": "At Start는 사용자 입력을 기다리지 않고 초기화 때 자동 실행됩니다(거짓).",
       "C": "둘의 차이는 '언제 실행되는가'(타이밍)입니다(거짓).",
@@ -349,7 +349,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "**Step Over**는 현재 액션 내에서 다음 라인으로 진행하되, 호출된 액션의 내부 로직을 건너뜁니다(디버깅하지 않음). **Step Into**는 호출된 액션으로 진입, **Step Out**은 현재 액션을 완료하고 호출자로 돌아갑니다.",
+    "explanation": "디버깅 중 한 액션이 다른 액션을 호출할 때, 그 호출된 액션 속으로 들어가지 않고 결과만 받은 뒤 **현재 액션의 다음 줄에서 멈추는** 기능이 Step Over입니다. 안을 들여다보지 않고 한 칸 건너뛰는 셈이라, 불필요한 내부 로직을 건너뛰고 싶을 때 씁니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Step Into는 호출된 액션 '안으로' 들어가 한 줄씩 봅니다. 건너뛰는 게 아닙니다.\n- **C** — Step Out은 현재 액션을 끝까지 실행하고 그것을 호출한 쪽으로 빠져나옵니다.\n- **D** — Continue는 디버깅을 멈추지 않고 앱을 끝까지 그냥 실행시킵니다.",
     "source": "wb5 - Logic and Validations: Debugging Apps / Debug Code",
     "status": "verified",
     "verifyNote": "",
@@ -408,7 +408,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "**Break on All Exceptions**는 예외 발생 시점에 실행을 일시 중단하는 디버거 설정입니다. 이를 활성화하면 예외 발생 시 자동으로 멈춥니다.",
+    "explanation": "**Break on All Exceptions**는 어떤 예외(exception, 실행 중 발생하는 오류)든 발생하는 그 순간 디버거가 실행을 자동으로 멈추게 하는 설정입니다. 브레이크포인트를 일일이 안 걸어도 오류가 터지는 지점을 바로 잡아주므로 A가 맞습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 예외 핸들러 노드에 브레이크포인트를 거는 것은 특정 위치에서만 멈출 뿐, 모든 예외를 자동으로 잡아주지 않습니다.\n- **C** — 'Catch Exceptions'를 끄면 모든 오류가 멈춘다는 그런 설정은 없습니다.\n- **D** — 모든 런타임 오류를 잡는 'Exception Aggregate' 같은 것은 존재하지 않습니다.",
     "source": "wb5 - Logic and Validations: Debugging Apps / Debug Code",
     "status": "verified",
     "verifyNote": "",
@@ -469,7 +469,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "각 Aggregate는 **비동기로 독립 실행**되고, **After Fetch 이벤트 후** Render 이벤트가 발생합니다. Aggregate 개수만큼 여러 번 발생할 수 있으며, 완료 순서에 따라 **렌더링 순서는 보장되지 않습니다.**",
+    "explanation": "여러 Aggregate가 **비동기로 따로따로 실행**되므로, 각각의 데이터가 도착할 때마다(On After Fetch 후) 화면을 다시 그리는 Render가 일어날 수 있습니다. 즉 Render는 한 번이 아니라 **여러 번** 발생할 수 있습니다. 손님이 올 때마다 상을 다시 차리는 것과 비슷하죠.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 모든 Aggregate가 다 끝난 뒤 딱 한 번만 그리는 게 아니라, 각 데이터가 도착할 때마다 다시 그려질 수 있습니다.\n- **C** — Render는 화면 전환 때만이 아니라, 화면에 묶인 데이터가 바뀔 때도 발생합니다.\n- **D** — Render가 Aggregate 실행 전에 동기적으로 먼저 도는 것이 아닙니다.",
     "source": "wb9 - Screen Lifecycle: Screen Event / The Render event and After Fetch event",
     "status": "verified",
     "verifyNote": "",
@@ -529,7 +529,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "**Watch 리스트에 변수를 추가**하면, 디버거가 진행되는 동안 해당 변수의 값이 실시간으로 표시되어, 매번 수동으로 검사할 필요가 없습니다.",
+    "explanation": "디버깅 중에 특정 변수 하나가 어떻게 바뀌는지 계속 지켜보고 싶을 때는, 그 변수를 디버거의 **Watch 리스트**(감시 목록)에 추가하면 됩니다. 그러면 액션이 한 노드씩 실행될 때마다 그 변수의 값이 자동으로 갱신되어 표시되므로, 매번 멈춰 손으로 확인할 필요가 없습니다. 계기판에 특정 수치를 고정으로 띄워 두고 변화를 지켜보는 것과 비슷합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 할당마다 breakpoint를 걸어 일일이 확인하는 것은 바로 이 질문이 피하려는 번거로운 수동 방식입니다.\n- **C** — Refresh Data는 쿼리 데이터를 다시 불러오는 기능이지, 변수 값을 기록하거나 감시하는 도구가 아닙니다.\n- **D** — Global 변수로 바꾸는 것은 불필요하게 구조를 바꾸는 일이며, 변수 감시 문제의 올바른 해결책이 아닙니다.",
     "source": "wb5 - Logic and Validations: Debugging Apps / Inspecting Variables",
     "status": "verified",
     "verifyNote": "",
@@ -794,7 +794,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Step Over(F10)는 현재 노드를 실행한 뒤 흐름상 바로 다음 노드에서 멈춥니다. Assign 다음 노드가 Switch이므로 디버거는 Switch 노드 자체에서 멈춥니다. 분기 내부로 들어가 조건을 평가하며 멈추는 것은 그 다음 단계이므로 B, D는 틀립니다.",
+    "explanation": "**Step Over**(F10)는 지금 멈춰 있는 노드 하나를 실행한 뒤, 흐름에서 바로 다음에 오는 노드에서 멈추는 기능입니다. Assign 노드 다음에 오는 것이 Switch 노드이므로, 디버거는 그 Switch 노드 자체에서 멈춥니다. 어느 분기로 갈지 판단하는 것은 아직 그 다음 단계입니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 조건이 True인 분기의 첫 노드로 가는 것은 Switch에서 F10을 한 번 더 눌렀을 때의 다음 단계입니다.\n- **C** — F10은 다음 노드마다 멈추므로, 액션이 끝날 때까지 그냥 실행되어 버리지 않습니다.\n- **D** — 분기의 조건 평가는 Switch 노드에서 이뤄지며, 분기 '내부'로 먼저 들어가 평가하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -847,7 +847,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Step Over(F10)는 현재 노드가 Server Action 호출이면 그 Action 전체를 실행한 뒤 현재 flow의 다음 노드에서 멈춥니다. Step Into(F11)만 Action 내부의 첫 노드로 들어갑니다. 따라서 정답은 B입니다. A(실행 자체를 건너뜀)는 틀림 — Action은 정상 실행되지만 내부로 들어가지 않을 뿐이며, C는 Step Into의 동작입니다.",
+    "explanation": "**Step Over**(F10)는 현재 노드가 다른 Action을 호출하는 노드일 때, 그 Action **전체를 실행한 뒤** 지금 흐름의 다음 노드에서 멈춥니다. 즉 Server Action은 정상적으로 다 실행되지만, 그 내부로 한 노드씩 들어가 보지는 않습니다. 내부까지 따라 들어가려면 Step Into(F11)를 써야 합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Server Action은 건너뛰어지지 않고 정상적으로 실행됩니다. 단지 내부 노드를 하나씩 들여다보지 않을 뿐입니다.\n- **C** — Action 내부의 첫 노드에서 멈추는 것은 Step Into(F11)의 동작입니다.\n- **D** — F10은 디버깅 세션을 종료시키지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

@@ -29,7 +29,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "If 노드를 위에서 아래로 순서대로 평가하되 **경계값**에 주의합니다. N = 50 →\n1. `N > 100 ?` → 50 > 100 = **False** → 아래로.\n2. `N > 50 ?` → 50 > 50 = **False** (`>`는 초과이므로 50은 해당 안 됨) → 아래로.\n3. → `result = \"Low\"`.",
+    "explanation": "If 노드(조건 분기)는 위에서 아래로 순서대로 조건을 따져 내려가며, `>`는 '초과'(같은 값은 포함하지 않음)라는 점이 핵심입니다. N = 50일 때 ① `N > 100?` → 50 > 100 = False, 아래로 ② `N > 50?` → 50 > 50 = False(딱 50은 '초과'가 아님), 아래로 ③ 남은 경로에서 `result = \"Low\"`가 됩니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — \"High\"는 `N > 100`이 True일 때만인데, 50은 100을 넘지 않습니다.\n- **B** — \"Medium\"은 `N > 50`이 True여야 하지만, 50은 50보다 크지 않아 해당되지 않습니다.\n- **D** — 단순 숫자 비교라 예외(exception)가 날 이유가 없습니다.",
     "distractors": {
       "A": "N > 100이 True일 때(101 이상)만 해당합니다.",
       "B": "N > 50이 True일 때(51~100)만 해당합니다. 50은 여기 함정 — 50은 50보다 크지 않습니다.",
@@ -91,7 +91,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "OutSystems에서 Aggregate는 **레코드를 못 찾아도 예외를 던지지 않습니다.** 단지 **빈 리스트(Empty list)**를 반환합니다. \"레코드 없음\"을 예외로 처리하려면 개발자가 직접 `GetUserById.List.Empty`를 검사해 Raise Exception 해야 합니다.",
+    "explanation": "OutSystems에서 Aggregate(화면이나 로직에서 DB 데이터를 읽어오는 조회 도구)는 조건에 맞는 레코드를 하나도 못 찾아도 오류(예외)를 내지 않고, 그냥 비어 있는 목록(empty list)을 돌려줍니다. 즉 '결과 0건'은 정상 상황으로 취급됩니다. '사용자 없음'을 오류로 다루고 싶다면 개발자가 직접 목록이 비었는지 확인해(`GetUserById.List.Empty`) Raise Exception으로 예외를 일으켜야 합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 레코드가 없다고 NotFoundException이 자동으로 발생하지는 않습니다.\n- **C** — DatabaseException은 DB 연결·쿼리 오류 같은 문제일 때 나는 것이지, 결과가 0건이라고 나지 않습니다.\n- **D** — 흐름이 조용히 멈추는 게 아니라, 정상적으로 End(끝) 노드까지 계속 진행됩니다.",
     "distractors": {
       "A": "OutSystems가 자동으로 NotFound 예외를 던지지 않습니다.",
       "C": "DatabaseException은 실제 DB 오류 시에만 발생합니다. 빈 결과는 오류가 아닙니다.",
@@ -152,7 +152,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Exception Handler 플로우는 잡을 예외 종류를 지정합니다. **All Exceptions**로 설정한 핸들러는 **더 구체적인 핸들러가 잡지 않은 모든 예외**를 받는 포괄(catch-all) 역할을 합니다. 구체적인 핸들러가 우선하고, All Exceptions가 마지막 그물입니다.",
+    "explanation": "Exception Handler(예외 처리 흐름)는 '어떤 종류의 예외를 잡을지'를 지정합니다. All Exceptions로 설정한 핸들러는 더 구체적으로 지정된 핸들러가 잡지 못한 모든 예외를 받아 주는 마지막 그물(catch-all) 역할을 합니다. 구체적인 핸들러가 먼저 우선하고, 남은 예외를 All Exceptions가 처리합니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 한 Action에 예외 처리 흐름을 종류별로 여러 개 둘 수 있어, 하나로 제한되지 않습니다.\n- **C** — Exception Handler는 Server Action뿐 아니라 Client Action에도 추가할 수 있습니다.\n- **D** — 핸들러가 없으면 예외가 조용히 무시되는 게 아니라 흐름 위로 전파되어 실행이 중단됩니다.",
     "distractors": {
       "B": "한 Action에 예외 종류별로 여러 개의 Exception Handler를 둘 수 있습니다.",
       "C": "Client Action에도 Exception Handler를 추가할 수 있습니다.",
@@ -214,7 +214,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "\"처리를 중단하고 호출자에게 알린다\" = **예외를 발생시켜 전파**하는 것이 정석입니다. 유효하지 않은 입력을 If로 감지한 뒤 **Raise Exception(User Exception)** 노드로 예외를 던지면, 현재 플로우가 중단되고 호출한 쪽에서 이를 잡아 처리할 수 있습니다.",
+    "explanation": "\"처리를 멈추고 호출한 쪽에 알린다\"는 것은 곧 예외(Exception, 프로그램이 문제를 발견했을 때 흐름을 끊고 위로 알리는 신호)를 발생시킨다는 뜻입니다. If 노드(조건 분기)로 잘못된 입력을 걸러낸 뒤, 그 갈래에서 Raise Exception 노드로 User Exception(개발자가 직접 정의하는 예외)을 던지면 현재 로직이 즉시 중단되고, 이 액션을 호출한 쪽이 그 예외를 받아 처리할 수 있습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — End 노드로 그냥 흘려보내면 조용히 끝날 뿐, 호출한 쪽에 \"문제가 있었다\"는 신호가 전달되지 않습니다.\n- **C** — output 변수에 \"error\"만 넣고 계속 진행하면 처리를 멈추지도, 확실히 알리지도 못합니다.\n- **D** — OutSystems는 입력이 유효하지 않다고 알아서 예외를 던져주지 않습니다. 검증 로직은 직접 만들어야 합니다.",
     "distractors": {
       "B": "End로 바로 가면 조용히 끝날 뿐, 호출자에게 '문제가 있었다'는 신호를 주지 못합니다.",
       "C": "플로우가 계속 진행되므로 '중단'이 되지 않습니다.",
@@ -277,7 +277,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Logic Flow는 로직을 정의하는 곳이며 **Start 노드는 정확히 1개**만 가질 수 있습니다(플랫폼이 강제하는 기본 규칙).",
+    "explanation": "Start 노드는 로직 플로우(로직이 시작되어 흘러가는 그림)의 출발점입니다. 시작점이 하나여야 실행이 어디서부터 시작되는지 명확하므로, 플랫폼은 플로우마다 Start 노드를 정확히 1개만 두도록 강제합니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 0개는 불가능합니다. 시작점이 없으면 실행을 시작할 수 없습니다.\n- **C** — 여러 개면 어디서 시작할지 모호해지므로 허용되지 않습니다.\n- **D** — 개수 제한이 없다는 것도 틀립니다. 항상 정확히 1개입니다.",
     "distractors": {
       "B": "혼동: 시작 노드가 선택 사항이라고 잘못 생각함",
       "C": "혼동: 여러 시작 지점이 있을 수 있다고 잘못 이해함",
@@ -340,7 +340,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "하나의 Assign 노드에 여러 할당을 정의하면 **위에서 아래 순서대로** 값이 대입됩니다. 뒤 할당이 앞 할당 결과에 의존할 때 이 순서가 중요합니다.",
+    "explanation": "하나의 Assign 노드(변수에 값을 대입하는 노드) 안에 여러 줄의 할당을 적으면, 화면에 보이는 위에서 아래 순서 그대로 차례차례 실행됩니다. 그래서 아래쪽 할당이 위쪽 할당의 결과를 사용할 수 있습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 동시에 실행되지 않습니다. 순서대로 하나씩 처리됩니다.\n- **C** — 아래에서 위(역순)가 아니라 위에서 아래 순서입니다.\n- **D** — 무작위가 아니라 항상 적힌 순서대로 예측 가능하게 실행됩니다.",
     "distractors": {
       "A": "혼동: Assign 노드의 모든 할당이 동시에 실행된다고 생각함",
       "C": "혼동: 역순으로 처리된다고 잘못 이해함",
@@ -466,7 +466,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "예외가 처리된 뒤 **원래 흐름으로 자동 복귀하지 않습니다** — 실행은 Exception Handler 흐름으로 넘어가 그대로 진행되고 예외 발생 지점으로 되돌아오지 않습니다. 따라서 '자동 복귀한다'는 B가 틀린 설명입니다. 나머지는 모두 맞습니다.",
+    "explanation": "예외 처리(Exception Handling)의 흐름을 묻는 문제입니다. 예외가 발생하면 실행이 끊기고 Exception Handler(예외 처리 전용 흐름)로 넘어가는데, 처리가 끝나면 예외가 났던 원래 지점으로 저절로 돌아오지 않습니다. Handler 흐름을 따라 그대로 진행되고 끝납니다. 따라서 \"자동으로 원래 흐름에 복귀한다\"는 B가 틀린 설명이며, 틀린 것을 고르는 문제이므로 이것이 정답입니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가** (즉, 맞는 설명들)\n- **A** — 맞음: 예외가 나면 실행이 중단되고 Exception Handler 흐름으로 이동합니다.\n- **C** — 맞음: 한 액션 안에 예외 종류별로 여러 개의 핸들러를 둘 수 있습니다.\n- **D** — 맞음: 현재 위치에 핸들러가 없으면 바깥쪽 범위로 올라가며 찾는 bubble-up(상위로 전파)이 일어납니다.",
     "distractors": {
       "A": "맞는 설명 — 예외 시 실행이 중단되고 핸들러로 이동합니다.",
       "C": "맞는 설명 — 한 액션에 예외 종류별로 여러 핸들러를 둘 수 있습니다.",
@@ -530,7 +530,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Raise Exception이 실행되면 즉시 **매칭되는 Exception Handler로 점프**하고 **원래 흐름은 우회(중단)**됩니다. 명시적으로 발생시킨 예외도 동일합니다.",
+    "explanation": "Raise Exception 노드가 실행되면(신용 한도 초과처럼 개발자가 일부러 일으킨 경우도 마찬가지), 실행은 즉시 그 예외와 맞는 Exception Handler로 건너뜁니다. Raise Exception 뒤에 있던 원래 흐름은 실행되지 않고 건너뛰어집니다(bypass).\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 예외를 던진 뒤 노드 다음을 이어서 실행하지 않습니다. 흐름이 끊깁니다.\n- **C** — 로그만 남기고 정상 진행하는 것이 아니라 흐름 자체가 Handler로 넘어갑니다.\n- **D** — 사용자 확인을 기다리지 않고 즉시 Handler로 이동합니다.",
     "distractors": {
       "A": "혼동: 예외 발생 후에도 원래 흐름이 계속된다고 생각함",
       "C": "혼동: 예외가 단지 기록되고 실행이 계속된다고 생각함",
@@ -594,7 +594,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "If 조건이 False(역할 없음)일 때 Raise Exception으로 가야 하는데, 현재는 True(역할 통과)가 Raise로 연결돼 있습니다. **Swap Connectors**로 True→성공 흐름, False→예외로 바로잡습니다.",
+    "explanation": "역할(role) 검사를 If 노드로 할 때, 조건이 통과(True)면 정상 삭제 흐름으로, 통과 못 하면(False) Raise Exception으로 가야 맞습니다. 그런데 지금은 연결이 반대로 되어 있어(True가 예외로 감) 권한이 있는 사람이 오히려 막힙니다. Swap Connectors(두 갈래 연결선을 맞바꾸기) 기능으로 True→정상 흐름, False→예외로 바로잡으면 됩니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Raise Exception을 지우면 권한 없는 사용자를 막을 수단이 사라집니다. 문제는 연결 방향일 뿐입니다.\n- **C** — 예외 \"타입\"을 다시 확인하는 If를 더 넣을 필요는 없습니다. 원인이 그게 아닙니다.\n- **D** — 모든 예외를 잡도록 Handler를 바꾸는 것은 지금의 연결 오류와 상관없습니다.",
     "distractors": {
       "A": "혼동: Raise Exception을 제거해야 한다고 생각함",
       "C": "혼동: 예외 발생 전에 추가 If 노드가 필요하다고 생각함",
@@ -658,7 +658,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "리스트를 순회하려면 **For Each** 구문을 씁니다. 각 레코드마다 Cycle 분기가 실행되고, `List.Current`로 현재 레코드에 접근해 각 Invoice Item에 할인을 적용합니다.",
+    "explanation": "리스트(여러 레코드가 담긴 목록)의 항목을 하나하나 반복 처리하려면 For Each(각 항목마다 반복하는 구문)를 씁니다. 반복마다 Cycle 갈래가 실행되고 List.Current로 지금 처리 중인 항목을 가리키므로, 각 Invoice Item에 할인을 적용할 수 있습니다.\n**→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — If는 조건에 따라 한 번 갈라질 뿐, 목록을 반복하지 않습니다.\n- **B** — Switch도 값에 따라 한 번 분기할 뿐 반복 도구가 아닙니다.\n- **D** — Aggregate는 데이터를 가져오는 도구이지, 가져온 항목을 하나씩 순회하며 처리하는 도구가 아닙니다.",
     "distractors": {
       "A": "혼동: If 문으로 각 항목을 검사한다고 생각함",
       "B": "혼동: Switch를 사용해야 한다고 생각함",
@@ -722,7 +722,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Server Action 안의 Aggregate는 **액션 플로우 순서에 따라 동기적으로** 실행됩니다(화면 Aggregate와 달리 순차 진행).",
+    "explanation": "Server Action(서버에서 실행되는 로직) 안에 넣은 Aggregate(데이터를 조회하는 질의)는 플로우에 놓인 순서가 되면 그 자리에서 동기적으로(그 조회가 끝날 때까지 기다렸다가 다음으로 넘어가는 방식) 실행됩니다. 화면(Screen)의 Aggregate가 화면 로딩 시 알아서 도는 것과 달리, 서버 액션에서는 흐름 순서대로 실행됩니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 백그라운드에서 비동기로 도는 것이 아니라, 흐름이 그 지점에 오면 실행됩니다.\n- **C** — publish(게시) 시점까지 미뤄지지 않습니다. 실행 시점에 동작합니다.\n- **D** — If에서 참조될 때만 실행되는 것이 아니라 플로우 순서대로 실행됩니다.",
     "distractors": {
       "A": "혼동: Aggregate이 비동기로 실행된다고 생각함",
       "C": "혼동: Aggregate이 미연기되었다가 배포 시에만 실행된다고 생각함",
@@ -786,7 +786,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "한 액션에 예외 종류별로 여러 핸들러를 둘 수 있습니다. **InsufficientStock(커스텀)**, **Database Exceptions**, **All Exceptions(포괄)**를 각각 두면 유형별로 다른 메시지를 처리할 수 있습니다.",
+    "explanation": "한 액션 안에 예외 종류마다 별도의 Exception Handler(예외 처리 흐름)를 여러 개 둘 수 있고, 각 핸들러에서 다른 메시지를 보여줄 수 있습니다. InsufficientStock(직접 만든 커스텀 예외), Database Exceptions(DB 처리 중 오류), All Exceptions(그 밖의 모든 예외를 받는 포괄 핸들러)를 각각 두면 유형별로 다르게 대응할 수 있습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — All Exceptions 하나로 다 받아 안에서 타입을 판별할 수도 있지만, 유형별 핸들러를 따로 두는 편이 더 명확합니다.\n- **C** — 커스텀 예외와 DB 예외는 한 액션에서 함께 처리할 수 있습니다. 못 한다는 것은 틀립니다.\n- **D** — All Exceptions만 두면 특정 예외가 자동으로 따로 처리되지는 않습니다. 세부 처리를 하려면 해당 핸들러를 직접 만들어야 합니다.",
     "distractors": {
       "A": "부분 정답: 가능하지만 덜 우아한 패턴 (specific handler가 더 나음)",
       "C": "혼동: 커스텀과 데이터베이스 예외를 함께 처리할 수 없다고 생각함",
@@ -850,7 +850,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Switch 구문은 **첫 번째부터 마지막 순으로 조건을 평가**합니다. 첫 번째로 True가 되는 분기만 실행되고 나머지는 **스킵됩니다**. 어떤 조건도 True가 아니면 **Otherwise** 분기가 실행됩니다.",
+    "explanation": "Switch(값에 따라 여러 갈래로 나누는 구문)는 위에서부터 조건을 차례로 확인합니다. 처음으로 참(True)이 되는 갈래 하나만 실행하고 나머지는 건너뜁니다. OrderStatus가 'Pending'이면 그 조건 갈래가 실행됩니다. 참인 조건이 하나도 없으면 Otherwise(그 외) 갈래가 실행됩니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 첫 조건이 참이면 실행하지만, 나머지 조건까지 이어서 평가하지는 않습니다.\n- **C** — 모든 조건을 동시에 평가해 \"가장 잘 맞는 것\"을 고르는 방식이 아닙니다.\n- **D** — 여러 갈래가 맞을 수 있다고 예외를 던지지 않습니다. 그냥 첫 매칭만 실행합니다.",
     "distractors": {
       "A": "혼동: Switch에서 여러 조건이 평가된다고 생각함",
       "C": "혼동: 모든 조건이 동시에 평가된다고 생각함",
@@ -915,7 +915,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "For Each가 리스트의 모든 레코드를 처리한 뒤에는 **루프 종료 분기(After-loop branch)**로 진행됩니다. 이 분기에서 합계 계산, 최종 메시지 생성 등의 후처리를 합니다.",
+    "explanation": "For Each는 리스트에 담긴 레코드를 하나씩 순서대로 처리하는 반복(loop) 구조입니다. 5개 항목을 모두 돈 뒤에는 더 이상 처리할 것이 없으므로, 루프 뒤에 연결된 다음 흐름(after-loop branch, 루프 종료 분기)으로 자연스럽게 넘어갑니다. 이곳에서 합계 계산이나 완료 메시지 같은 마무리 작업을 합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 항목이 5개뿐이라 6번째 반복은 없습니다. 남은 레코드가 없으면 루프는 그대로 끝납니다.\n- **C** — 리스트를 다 처리하는 것은 정상적인 종료이지 오류(exception)가 아닙니다.\n- **D** — 반복이 끝나면 자동으로 다음 흐름으로 이어지며, 사람이 손으로 개입할 필요가 없습니다.",
     "distractors": {
       "A": "혼동: 6번째 순환을 시도한다고 생각함",
       "C": "혼동: 리스트 소진 시 예외를 발생시킨다고 생각함",
@@ -980,7 +980,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "해당 컨텍스트(Server Action)에서 예외를 처리하는 핸들러가 없으면 **bubble-up**이 발생합니다. 런타임이 호출 스택 위로 올라가며 **상위 컨텍스트(Screen Action)**의 핸들러를 찾아 예외를 넘깁니다.",
+    "explanation": "예외(exception)는 프로그램에서 문제가 생겼을 때 '이런 문제가 났다'고 알리는 신호입니다. 어떤 Action에서 예외가 발생했는데 그 Action 안에 이를 처리할 핸들러(handler)가 없으면, 신호가 사라지지 않고 자신을 호출한 상위 Action 쪽으로 거슬러 올라갑니다. 이것을 bubble-up(위로 전파)이라고 합니다. 그래서 Server Action의 CustomerAlreadyExists 예외는 이를 호출한 Screen Action의 핸들러에서 잡힙니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 핸들러가 없다고 예외가 조용히 사라지고 정상 종료되지는 않습니다. 반드시 어딘가에서 처리되어야 합니다.\n- **C** — 원래의 커스텀 예외가 그대로 전달되며, 일반(generic) 예외로 바뀌지 않습니다.\n- **D** — 상위 Screen Action에 핸들러가 있으므로 앱이 그냥 멈추거나 죽지 않고 그 핸들러가 처리합니다.",
     "distractors": {
       "A": "혼동: 예외가 자동으로 무시된다고 생각함",
       "C": "혼동: 커스텀 예외가 자동으로 일반 예외로 변환된다고 생각함",
@@ -1045,7 +1045,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "If를 사용한 수동 루프는 **개발자가 루프 상태(카운터 등)를 명시적으로 업데이트**해야 합니다. 업데이트가 누락되면 **무한 루프**가 발생합니다. For Each를 사용하면 플랫폼이 자동으로 관리하므로 안전합니다.",
+    "explanation": "For Each 대신 If 노드로 직접 반복을 만들면, 언제 멈출지(카운터 증가 등)를 개발자가 손수 관리해야 합니다. 만약 조건 값을 바꿔주는 것을 깜빡하면 조건이 계속 True로 남아 같은 처리를 끝없이 반복하는 무한 루프(infinite loop)에 빠집니다. For Each는 플랫폼이 반복 위치를 자동으로 관리해 이런 위험이 없습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — If 노드는 조건을 판단만 할 뿐, 루프 카운터를 자동으로 올려주지 않습니다.\n- **C** — If로도 반복을 만들 수 있으며, 루프를 막거나 예외를 던지지 않습니다.\n- **D** — OutSystems가 1000번에서 루프를 자동으로 끊어주지 않습니다. 무한 루프는 실제로 그대로 돌아갑니다.",
     "distractors": {
       "A": "혼동: If 노드가 루프 카운터를 자동으로 증가시킨다고 생각함",
       "C": "혼동: If 노드가 루프를 방지한다고 생각함",
@@ -1110,7 +1110,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Raise Exception 노드에서 **Exception Message** 속성에 설정한 값이 Exception Handler에 전달됩니다. 이를 통해 동적으로 구성한 상세 메시지를 핸들러에서 사용할 수 있습니다.",
+    "explanation": "Raise Exception 노드에는 Exception Message라는 속성이 있어, 여기에 넣은 문자열이 예외와 함께 Exception Handler로 전달됩니다. 그래서 OrderId나 CreditLimit 값을 조합해 만든 상세 메시지를 핸들러에서 그대로 꺼내 쓸 수 있습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 예외 종류(type)뿐 아니라 설정한 메시지도 함께 전달되므로 메시지가 사라지지 않습니다.\n- **C** — 메시지는 이미 하나의 완성된 문자열로 넘어가므로, 개별 변수들이 사라져도 메시지 내용은 그대로 남습니다.\n- **D** — 핸들러에는 여러분이 지정한 그 메시지만 전달될 뿐, 예외 발생 시점의 모든 지역 변수가 통째로 넘어오지는 않습니다.",
     "distractors": {
       "A": "혼동: 메시지가 손실된다고 생각함",
       "C": "혼동: 예외 후 메시지 변수가 접근 불가능하다고 생각함",
@@ -1175,7 +1175,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "폼 검증 패턴: **조건이 True(에러 상태)일 때**에만 Assign으로 `input.Valid = False`와 `ValidationMessage` 설정 → **False(정상)일 때**는 다음 검증이나 Form.Valid 체크로 진행합니다. 이렇게 하면 여러 검증을 체이닝하면서 각각 다른 메시지를 표시할 수 있습니다.",
+    "explanation": "폼(form) 검증의 표준 패턴은 이렇습니다. 각 If로 '값이 잘못됐는가'를 확인해서, 잘못됐을 때(True 분기)에만 Assign으로 해당 입력의 Valid를 False로 만들고 오류 메시지를 넣습니다. 정상일 때(False 분기)에는 그냥 다음 검증이나 마지막 Form.Valid 확인으로 넘어갑니다. 이렇게 If들을 이어 붙이면 항목마다 다른 메시지를 보여줄 수 있습니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 검증 실패는 사용자에게 메시지를 보여줄 정상 상황이라 예외(exception)를 던질 필요가 없고, 예외로 검증을 '건너뛰게' 만들 수도 없습니다.\n- **C** — Switch는 하나의 값이 여러 경우 중 어디에 해당하는지 고를 때 쓰며, 서로 다른 조건 여러 개를 각각 검사하는 데는 맞지 않습니다.\n- **D** — 조건을 따지지 않고 무조건 Form.Valid = False로 두면, 입력이 올바른 경우에도 폼이 항상 실패 처리됩니다.",
     "distractors": {
       "A": "정답",
       "B": "혼동: 검증에서 예외를 사용해야 한다고 생각함 (폼 검증은 Valid/ValidationMessage 속성 사용)",
@@ -1464,7 +1464,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "On After Fetch는 Aggregate가 데이터를 모두 가져온 직후에 실행되므로 이 시점에는 리스트가 채워져 있어 For Each 루프로 안전하게 합계를 계산할 수 있습니다. OnInitialize는 At Start Aggregate들이 병렬로 실행되기 전/도중에 동작해 데이터가 아직 준비되지 않았을 수 있고, Expression은 동기식 값만 표시할 뿐 루프를 담을 수 없어 오답입니다.",
+    "explanation": "Aggregate는 화면에서 데이터를 가져오는 조회 도구인데, 데이터를 가져오는 데는 시간이 걸립니다. On After Fetch 이벤트는 그 데이터가 '다 채워진 직후'에 실행되므로, 이 시점에서 For Each로 리스트를 돌며 Amount 합계를 안전하게 계산할 수 있습니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Expression 위젯은 값을 화면에 표시만 하는 자리라 For Each 같은 반복 로직을 담을 수 없습니다.\n- **B** — OnReady는 화면이 처음 그려진 뒤 실행되지만, 이 때 조회 데이터가 이미 준비돼 있다는 보장이 없어 합계 계산의 정석 위치가 아닙니다.\n- **C** — OnInitialize는 화면이 그려지기 전, Aggregate들이 아직 데이터를 다 가져오지 않은 시점이라 리스트가 비어 있을 수 있습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1570,7 +1570,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "List.Current의 속성에 값을 대입하면 메모리에 로드된 리스트의 해당 레코드만 바뀌며, 데이터베이스에는 아무 영향도 주지 않습니다. DB에 반영하려면 CreateOrUpdate 같은 Entity Action을 별도로 호출해야 하므로 D는 틀리고, 리스트는 반복 중에도 수정 가능하므로 crash가 난다는 C도 오답입니다.",
+    "explanation": "For Each 루프는 데이터베이스에서 잠깐 메모리로 불러온 리스트(복사본)를 한 줄씩 훑는 반복입니다. 이때 List.Current(지금 처리 중인 레코드)의 속성에 새 값을 넣으면, 메모리에 올라온 그 복사본만 바뀔 뿐 실제 저장소인 데이터베이스는 그대로입니다. DB에 반영하려면 CreateOrUpdate 같은 Entity Action(데이터를 저장하는 동작)을 따로 호출해야 합니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 바꾼 값은 그 레코드에 그대로 남아 메모리 리스트 전체에 반영되며, '다음 레코드에게만 보이는' 것이 아닙니다.\n- **C** — 리스트는 반복 도중에도 읽기 전용이 아니어서 값을 바꿔도 오류(crash)가 나지 않습니다.\n- **D** — 메모리 값 변경은 자동으로 DB에 저장되지 않으며, 저장하려면 별도의 Entity Action이 필요합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1941,7 +1941,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "OutSystems는 요청 처리 전체를 하나의 database transaction으로 감쌉니다. 처리되지 않은 exception이 Server Action 밖으로 전파되면 그 transaction 전체가 rollback되어, exception 이전에 실행된 두 Create 모두 취소됩니다. 그래서 B처럼 두 건이 남거나 D처럼 한 건만 남지 않고, 아무 레코드도 커밋되지 않습니다.",
+    "explanation": "OutSystems는 하나의 요청(request) 처리 전체를 단일 database transaction으로 묶습니다. transaction이란 '안에 있는 DB 작업을 전부 성공시키거나, 하나라도 실패하면 전부 취소'하는 한 덩어리입니다. Raise Exception(직접 예외 발생시키기)이 처리되지 않은 채 Server Action 밖으로 빠져나가면 그 덩어리 전체가 rollback(되돌리기)되어, 예외 전에 실행됐던 두 Create도 함께 취소됩니다. 그래서 결국 아무 레코드도 남지 않습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 예외가 Create 뒤에 일어났더라도 transaction 전체가 취소되므로 두 건이 남지 않습니다.\n- **C** — OutSystems에는 레코드를 'Invalid'로 표시해 남겨두는 자동 기능이 없습니다.\n- **D** — transaction이 통째로 rollback되므로 첫 번째 한 건만 남는 일도 없습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2047,7 +2047,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "OutSystems에서 Server Action 내의 데이터베이스 작업은 하나의 transaction으로 묶여 요청이 정상 종료될 때 commit됩니다. 처리되지 않은 Database Exception이 발생하면 transaction 전체가 rollback되므로 앞서 실행한 Delete도 취소되어 레코드는 그대로 남습니다(B). 따라서 '즉시 commit된다'(C)는 틀리며, soft delete(D)는 OutSystems의 기본 동작이 아닙니다.",
+    "explanation": "OutSystems에서는 하나의 서버 요청 안에서 일어나는 모든 데이터베이스 작업이 하나의 transaction(트랜잭션 = '전부 성공 아니면 전부 취소'로 묶인 한 덩어리, 은행 송금처럼 완전히 되거나 아예 안 되는 단위)으로 묶입니다. 이 변경들은 요청이 정상적으로 끝날 때에만 확정(commit)됩니다. 처리되지 않은 Database Exception이 도중에 발생하면 transaction 전체가 rollback(취소되어 원래대로 되돌림)되므로, 앞서 실행한 Delete도 없던 일이 되어 레코드는 그대로 남습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — rollback은 전체를 통째로 되돌리므로, 부모는 삭제된 채 자식 레코드만 복원되는 부분적 상황은 생기지 않는다.\n- **C** — Entity 작업은 즉시 확정되지 않고 요청이 정상 종료돼야 commit되므로 '즉시 commit'은 틀리다.\n- **D** — soft delete(실제 삭제 대신 '비활성' 표시)는 개발자가 직접 설계해야 하는 방식이지 OutSystems의 기본 동작이 아니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2100,7 +2100,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "각 요청은 하나의 데이터베이스 transaction 안에서 실행되며, AbortTransaction을 호출하면 그 transaction에서 지금까지 일어난 모든 데이터 변경(Create/Update/Delete)이 rollback됩니다. 따라서 방금 한 UpdateInvoice도 되돌려지고 레코드는 이전 상태로 복원됩니다(D). Update만 유지된다는 B, 레코드가 삭제된다는 C는 rollback 개념과 맞지 않습니다.",
+    "explanation": "AbortTransaction은 현재 요청의 transaction(한 요청 안의 모든 데이터베이스 변경을 '전부 아니면 전무'로 묶은 단위)을 취소하라고 지시하는 시스템 액션입니다. 이를 호출하면 그 요청에서 지금까지 일어난 모든 데이터 변경(Create/Update/Delete)이 rollback(원래 상태로 되돌림)됩니다. 따라서 방금 한 UpdateInvoice도 되돌려지고, 레코드는 이 transaction이 시작되기 전 상태로 복원됩니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — rollback은 지금까지의 모든 변경을 되돌리므로 Update만 살아남고 이후 로직만 멈추는 식이 아니다.\n- **B** — Create뿐 아니라 Update·Delete도 모두 되돌려지며, Update만 영구히 남는 구분은 없다.\n- **C** — rollback은 값을 이전 상태로 되돌릴 뿐, 레코드를 물리적으로 삭제하지는 않는다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2577,7 +2577,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Switch 노드는 조건을 위에서 아래로 평가하여 처음으로 True가 되는 분기 하나만 실행합니다. x=15는 x>10이 True이므로 Branch 1이 실행되고, 그 아래 조건들은 평가되지 않습니다. 여러 분기가 동시에 실행되는 일(C)은 없습니다.",
+    "explanation": "Switch 노드는 여러 조건 분기 중 하나를 고르는 갈림길입니다. 조건을 맨 위에서부터 차례로 확인해, 가장 먼저 True(참)가 되는 분기 하나만 실행하고 나머지는 아예 쳐다보지 않습니다. x=15는 첫 조건 x>10이 곧바로 True이므로 Branch 1이 실행되고 그 아래는 검사조차 하지 않습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — x>10이 먼저 참이 되어 Branch 1에서 멈추므로, 그 아래 x>5 조건은 평가되지도 않습니다.\n- **C** — Switch는 조건을 만족한 분기 딱 하나만 실행하므로 두 분기가 동시에 실행되는 일은 없습니다.\n- **D** — Otherwise는 위의 모든 조건이 False일 때만 쓰이는 예비 경로인데, x=15는 이미 Branch 1을 만족하므로 여기까지 오지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2683,7 +2683,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "OutSystems에는 Break나 Continue 같은 노드가 없습니다. 현재 반복의 남은 로직을 건너뛰고 다음 항목으로 넘어가려면 If의 True 분기를 다시 For Each 노드로 연결하면 됩니다. End 노드(D)는 전체 Action 흐름을 종료하므로 루프 안에 두면 반복 자체가 멈춰 버립니다.",
+    "explanation": "다른 언어의 Break/Continue 같은 반복 제어 명령이 OutSystems에는 없습니다. For Each는 흐름이 다시 For Each 노드에 도달할 때마다 '이제 다음 항목을 꺼내라'고 동작합니다. 그래서 현재 항목의 남은 로직을 건너뛰고 다음 항목으로 넘어가려면, If의 True 분기를 그 아래 로직으로 보내지 말고 곧장 For Each 노드로 되돌려 연결하면 됩니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — OutSystems에는 Break 노드 자체가 존재하지 않습니다.\n- **C** — 마찬가지로 Continue 노드도 없습니다.\n- **D** — End 노드는 Action 흐름 전체를 끝내는 표시라, 루프 안에 두면 다음 항목으로 넘어가는 게 아니라 반복 자체가 멈춰 버립니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2842,7 +2842,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "처리되지 않은 exception은 호출 스택(call stack)을 따라 위로 전파(propagate)됩니다. 따라서 ServerActionB, 이를 호출한 ServerActionA, 그리고 최종적으로 Client Action 중 어느 flow의 Exception Handler에서든 잡을 수 있습니다. B와 D는 exception이 action 경계를 넘지 못하거나 무시된다는 잘못된 전제이며, C처럼 global 처리로만 국한되지도 않습니다.",
+    "explanation": "Client Action이 ServerActionA를 부르고 A가 다시 ServerActionB를 부르는 구조는, 누가 누구를 불렀는지 이어지는 호출 사슬(call stack, 호출 스택)을 만듭니다. 어떤 flow 안에서 처리(catch)되지 않은 exception(예외)은 이 사슬을 거꾸로 거슬러 올라가며 자기를 부른 쪽으로 계속 전달(propagate, 전파)됩니다. 따라서 B에서 난 예외는 B에서든, 그를 부른 A에서든, 최종적으로 Client Action에서든 어느 flow의 Exception Handler에서나 잡을 수 있습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 예외는 action 경계를 넘어 호출한 쪽으로 전달되므로 B 안에서만 잡히는 게 아닙니다.\n- **C** — 각 action이 자기 Exception Handler로 직접 잡을 수 있어, module의 global 처리로만 국한되지 않습니다.\n- **D** — 예외는 조용히 무시되지 않고, 잡지 않으면 호출한 쪽으로 계속 올라갑니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3266,7 +3266,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Exception Handler의 Abort Transaction을 'No'로 두면 예외가 처리되어도 트랜잭션이 롤백되지 않으므로, SQL node로 변경한 내용은 액션이 끝날 때 정상적으로 commit됩니다. 'Yes'였다면 롤백되었을 것입니다. B처럼 SQL node가 수동 commit을 요구하지도 않고, C/D의 설명도 실제 동작이 아닙니다.",
+    "explanation": "Transaction(트랜잭션)은 데이터베이스에 가한 여러 변경을 하나의 묶음으로 다루는 단위입니다. Exception Handler(예외 처리 흐름)의 'Abort Transaction' 속성은 예외가 발생했을 때 이 묶음 전체를 취소(rollback, 되돌리기)할지를 정합니다. 이 값을 'No'로 두면 예외가 처리돼도 되돌리지 않으므로, SQL node가 바꾼 Employee 내용은 액션이 끝날 때 데이터베이스에 그대로 확정(commit)됩니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — SQL node의 변경도 트랜잭션에 자동으로 포함되며, 별도의 수동 commit이 필요하지 않습니다.\n- **C** — 예외가 정상적으로 처리되면 앱이 죽지 않으며, application pool이 크래시되는 일은 없습니다.\n- **D** — 플랫폼은 'Abort Transaction' 설정을 무시하지 않고 지정한 대로 정확히 따릅니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3425,7 +3425,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Server Action 안에 처리 핸들러가 없으면 예외는 호출자인 Client Action으로 전파됩니다. 같은 flow 안에서는 가장 구체적인(local) Exception Handler가 먼저 예외를 잡으므로 local 'All Exceptions' handler가 처리합니다. Global Exception Handler는 local 핸들러가 없을 때만 동작하므로 C는 틀리고, User Exception은 server-to-client 경계를 넘어 정상적으로 전파되므로 B도 틀립니다.",
+    "explanation": "Server Action 안에 예외를 잡을 Exception Handler(예외 처리 흐름)가 없으면, 그 예외는 자신을 호출한 Client Action으로 올라갑니다(propagate, 전파). 같은 흐름 안에 여러 핸들러가 있으면 더 구체적이고 가까운 것(local, 로컬)이 먼저 예외를 잡습니다. 여기서는 Client Action에 local 'All Exceptions' 핸들러가 있으므로 그것이 처리합니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — User Exception은 server에서 client로 넘어가며 사라지지 않고 정상적으로 전파됩니다.\n- **C** — Global Exception Handler는 local 핸들러가 없을 때만 동작하므로, local이 있는 이 경우엔 쓰이지 않습니다.\n- **D** — 예외는 서버에서 멈추지 않고 클라이언트로 전파되며, generic한 통신 오류가 표시되지도 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3478,7 +3478,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "빈 List에서 Current에 접근해도 오류가 발생하지 않고, 모든 속성이 기본값인 빈 record가 반환됩니다. Id 속성의 기본값은 0이고 이는 NullIdentifier()와 같으므로 조건이 True가 되어 True 분기를 탑니다. Current 접근이 예외를 일으킨다는 B나, 비교가 불가능하다는 D는 OutSystems의 실제 동작과 맞지 않습니다.",
+    "explanation": "OutSystems에서 빈 List의 '.Current'에 접근해도 오류가 나지 않고, 모든 속성이 기본값으로 채워진 '빈 record'가 돌아옵니다. Id 속성의 기본값은 0인데 이는 NullIdentifier()(빈 식별자)와 같은 값입니다. 따라서 조건이 성립해 True 분기를 탑니다. 마치 비어 있는 서랍을 열면 아무것도 없는 대신 '빈 칸'이 정해진 모습으로 놓여 있는 것과 같습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 빈 List에서 Current에 접근하는 것은 예외(Database Exception)를 일으키지 않습니다.\n- **C** — If node는 대기하거나 timeout 없이 즉시 조건을 계산해 분기하므로 흐름이 멈추지 않습니다.\n- **D** — 빈 record도 정상적으로 비교할 수 있고, Id가 NullIdentifier()와 같아 결과는 False가 아니라 True입니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3531,7 +3531,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Commit Transaction이 이미 실행되어 그 시점까지의 변경사항은 데이터베이스에 확정(commit)되었습니다. 이후에 예외가 발생하더라도 이미 커밋된 내용은 롤백 대상이 아니므로 변경사항은 그대로 유지됩니다. 따라서 Exception Handler가 자동으로 롤백한다는 A나, 데이터가 불안정 상태로 남는다는 D는 틀립니다.",
+    "explanation": "'Commit Transaction' node가 실행되면 그 시점까지의 데이터베이스 변경이 그 자리에서 확정(commit)됩니다. 확정된 뒤에 예외가 발생하더라도, 이미 저장이 끝난 내용은 되돌리기(rollback) 대상이 아닙니다. 그래서 변경사항은 그대로 남습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Exception Handler는 이미 commit이 끝난 변경을 자동으로 롤백하지 않습니다.\n- **C** — Commit 이후에도 'Raise Exception' node는 문제없이 정상적으로 실행됩니다.\n- **D** — 이미 확정되어 데이터는 일관된 상태이며, 불안정한 상태로 남지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3584,7 +3584,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Raise Exception이 발생하면 loop를 포함한 현재 흐름이 즉시 중단되고 제어가 Exception Handler로 넘어갑니다. 따라서 남은 5건은 전혀 처리되지 않습니다. 예외 처리 후 loop가 6번째부터 이어서 실행되지 않으므로 C는 틀리고, 핸들러가 남은 항목을 자동으로 처리하지도 않으므로 A도 틀립니다.",
+    "explanation": "'Raise Exception'이 실행되면 지금 진행 중이던 흐름이 그 자리에서 즉시 멈추고, 제어가 Exception Handler(예외 처리 흐름)로 넘어갑니다. For Each loop(반복문)도 이 흐름의 일부이므로 함께 중단되어, 5번째에서 멈춘 뒤 남은 5명은 전혀 처리되지 않습니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Exception Handler는 오류를 처리하는 곳이지, 남은 직원들을 대신 처리해 주는 곳이 아닙니다.\n- **B** — 핸들러는 큐에 쌓였다가 10번 반복이 끝난 뒤 실행되는 게 아니라, 예외가 나는 즉시 실행됩니다.\n- **C** — 핸들러가 끝난 뒤 loop가 6번째부터 이어서 재개되지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3637,7 +3637,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Switch는 분기 조건을 위에서부터 순서대로 평가하여 처음으로 True가 되는 분기 하나만 실행합니다. Condition1이 먼저 나열되어 있으므로 Condition1 분기만 실행됩니다. 두 분기가 동시에 병렬 실행되거나(C) 모호함 때문에 예외가 발생하지(B) 않습니다.",
+    "explanation": "Switch(스위치)는 여러 갈림길 중 하나를 고르는 노드로, 조건을 위에서 아래로 순서대로 확인하다가 **처음으로 True가 되는 분기 딱 하나만** 실행하고 멈춥니다. 둘 다 True여도 먼저 나열된 Condition1이 먼저 걸리므로 Condition1 분기만 실행됩니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Otherwise는 위의 모든 조건이 False일 때만 타는 예비 분기라, 조건이 맞은 지금은 실행되지 않습니다.\n- **B** — 조건이 겹쳐도 오류(Logic Exception)가 아니라 그냥 첫 True를 선택할 뿐입니다.\n- **C** — Switch는 한 번에 한 분기만 타며, 여러 분기를 동시에(병렬로) 실행하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3796,7 +3796,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Data Action 안의 Server Action이 exception을 던졌을 때 해당 Data Action에 Exception Handler가 없으면 exception은 상위로 전파되어 Screen의 Global Exception Handler가 실행됩니다. Exception Handler flow 안에서 수행한 UI 변경(메시지 표시, 변수 할당 등)은 실제로 적용됩니다. 따라서 정답은 D입니다. A(흰 화면 크래시)는 틀림 — Data Action도 exception을 전파할 수 있습니다. B(IsFetching이 영원히 True)도 사실이 아닙니다.",
+    "explanation": "Data Action(화면에 쓸 데이터를 서버에서 불러오는 로직)이 호출한 Server Action에서 exception(예외, 실행 중 발생한 오류)이 나고 Data Action 자신에 처리기가 없으면, 예외는 위로 전파되어 화면 모듈의 Global Exception Handler(모듈 전체의 예외 처리 담당)가 실행됩니다. 그 처리 흐름 안에서 한 UI 변경(메시지 표시, 변수 지정 등)은 실제로 화면에 적용됩니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — Data Action도 예외를 위로 전파할 수 있으므로 흰 화면 크래시가 나지 않습니다.\n- **B** — 예외가 처리되면서 불러오기 상태도 마무리되므로 IsFetching이 영원히 True로 남지 않습니다.\n- **C** — 발생한 것은 Not Found 예외 그대로이며, Database Exception 같은 다른 종류로 바뀌지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3849,7 +3849,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "하나의 server 요청은 하나의 transaction으로 실행됩니다. Server Action에서 User Exception이 handler 없이 전파되어 server 경계를 벗어나면 그 transaction은 자동으로 rollback됩니다. Client Action의 All Exceptions handler는 client 쪽에서 exception을 잡을 뿐 이미 rollback된 server transaction을 되돌리지 못합니다. 따라서 Order는 DB에 남지 않으므로 정답은 A입니다. C(User Exception은 rollback을 유발하지 않는다)는 틀린 진술입니다.",
+    "explanation": "하나의 서버 요청은 하나의 transaction(반드시 전부 성공해야 저장이 확정되는 작업 묶음)으로 실행됩니다. Server Action에서 User Exception이 처리기 없이 서버 경계를 벗어나면 그 transaction이 통째로 rollback(취소)되어, 방금 만든 Order 저장도 함께 사라집니다. Client Action의 handler는 브라우저(client) 쪽에서 예외를 잡을 뿐, 이미 취소된 서버 저장을 되살리지는 못합니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — client에서 예외를 잡아도 서버 transaction은 이미 rollback되었으므로 Order는 남지 않습니다.\n- **C** — 서버 밖으로 전파된 User Exception도 rollback을 일으키므로 이 진술은 틀립니다.\n- **D** — 저장이 'Pending(보류)' 상태로 남는 개념은 없으며, 그냥 취소됩니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3902,7 +3902,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "For Each는 각 항목을 처리한 뒤 loopback(Cycle) connector를 통해 다음 항목으로 돌아갑니다. 1번과 2번 항목은 Otherwise branch를 지나 Cycle connector를 통해 각각 다음 항목으로 진행되므로 connector가 2번 실행됩니다. 3번 항목에서 Raise Exception branch로 빠지면 loop가 중단되어 Cycle connector를 지나지 않습니다. 따라서 정답은 D(2회)입니다. 10회(C)는 exception 없이 끝까지 돌았을 때의 경우입니다.",
+    "explanation": "For Each(리스트의 항목을 하나씩 도는 반복문)는 한 항목을 처리한 뒤 Cycle(loopback) connector를 통해 다음 항목으로 되돌아갑니다. 1번·2번 항목은 Otherwise 분기를 지나 Cycle connector를 각각 한 번씩 통과하므로 2번 실행됩니다. 3번 항목에서 Raise Exception 분기로 빠지면 반복이 즉시 중단되어 Cycle connector를 지나지 않습니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 3번 항목은 Cycle을 지나기 전에 예외로 멈추므로 2번까지만 실행됩니다.\n- **B** — 1번·2번은 정상적으로 Cycle을 통과했으므로 0번이 아닙니다.\n- **C** — 10번은 예외 없이 리스트 끝까지 돌았을 때의 값입니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3955,7 +3955,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "B에서 발생한 Database Exception은 B에 handler가 없으므로 호출자인 A로 전파되고, A의 Database Exception handler가 이를 잡습니다. Database Exception이 발생하면 현재 transaction은 abort(rollback)됩니다. 따라서 정답은 A입니다. B(Action 간 전파 불가)는 틀림 — exception은 호출 체인을 따라 상위 Action으로 전파됩니다.",
+    "explanation": "exception(실행 중 발생한 오류)은 발생한 Action에 처리기가 없으면, 그것을 호출한 상위 Action으로 전파됩니다. B에는 handler가 없으므로 예외가 호출자인 A로 올라가고, A의 Database Exception handler가 이를 잡습니다. Database Exception이 발생하면 진행 중이던 transaction(DB 작업 묶음)은 rollback(취소)됩니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 예외는 호출 체인을 따라 상위 Action으로 전파될 수 있으므로 틀립니다.\n- **C** — A에 맞는 handler가 있으므로 거기서 잡히고, Global까지 올라가지 않습니다.\n- **D** — A가 호출한 B의 오류도 A로 전파되므로, 아무 일 없던 듯 계속 진행되지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4008,7 +4008,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Switch는 위에서부터 각 조건을 평가해 처음으로 True가 되는 branch 하나만 실행합니다. Quantity가 15이면 Branch 1(>10)이 이미 True이므로 Branch 1만 실행되고 Branch 2는 평가조차 되지 않습니다. 따라서 정답은 A입니다. B(둘 다 실행)는 틀림 — Switch는 여러 branch를 동시에 타지 않습니다.",
+    "explanation": "Switch(스위치)는 조건을 위에서 아래로 순서대로 확인해 **처음 True가 되는 분기 하나만** 실행합니다. Quantity가 15이면 맨 위 Branch 1(>10)이 이미 True이므로 Branch 1만 실행되고, Branch 2(>5)는 평가조차 되지 않습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Switch는 여러 분기를 동시에 실행하지 않습니다.\n- **C** — 조건이 겹쳐도 첫 True 분기를 타며, Otherwise로 가지 않습니다.\n- **D** — 순서상 Branch 1이 먼저 True라, Branch 2 차례가 오지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4061,7 +4061,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "OutSystems에서 Client Variable과 Screen Variable은 브라우저 메모리에 있는 값으로 데이터베이스 트랜잭션과 무관합니다. 예외가 발생해도 이런 in-memory 변수 값은 자동으로 초기화(rollback)되지 않고 예외 발생 직전 상태 그대로 유지됩니다. 롤백되는 것은 서버 측 데이터베이스 트랜잭션이지 클라이언트 변수가 아니므로 A는 틀리며, Commit 노드 여부(B)와도 무관합니다.",
+    "explanation": "Client Variable과 Screen Variable은 브라우저 메모리에 들어 있는 값이라 database transaction(서버 DB 작업 묶음)과 무관합니다. 예외가 발생해도 이런 in-memory(메모리상의) 값은 자동으로 초기화되지 않고 예외 직전 상태 그대로 유지됩니다. rollback(취소)되는 것은 서버 측 DB 작업뿐입니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 클라이언트/화면 변수는 rollback 대상이 아니므로 초기 상태로 되돌아가지 않습니다.\n- **B** — 값 유지 여부는 Commit 노드와 무관하며, 원래부터 유지됩니다.\n- **C** — 두 변수 모두 rollback되지 않으며, Screen Variable만 되돌아가는 것이 아닙니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4485,7 +4485,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Exception Handler의 'Log Error' 속성을 No로 설정하면 잡힌 예외는 Service Center의 Error Log에 기록되지 않습니다. 핸들러가 예외를 catch했고 로깅을 명시적으로 껐기 때문입니다. A(Security Exception은 감사 목적으로 항상 기록됨)는 사실이 아니며, 로깅 여부는 오직 Log Error 속성이 결정합니다. 따라서 정답은 B입니다.",
+    "explanation": "Exception Handler(예외를 붙잡아 처리하는 노드)에는 'Log Error'라는 속성이 있어, 붙잡은 예외를 Service Center(운영 관리 화면)의 Error Log(오류 기록)에 남길지 말지를 정합니다. 이 값을 No로 두면 예외를 처리는 하되 기록은 남기지 않습니다. 여기서는 All Exceptions handler가 Security Exception을 잡았고 로깅을 명시적으로 껐으므로 오류 로그에 나타나지 않습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 로그 기록 여부는 오직 Log Error 속성이 정하며, Security Exception이라고 항상 자동 기록되는 규칙은 없습니다.\n- **C** — 예외를 시스템이 냈든 개발자가 냈든, 그 출처는 로그 기록 여부와 아무 상관이 없습니다.\n- **D** — Log Error를 No로 껐으므로 Warning으로 바뀌어 남지도 않고, 기록 자체가 되지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4538,7 +4538,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "OutSystems의 Switch 노드는 개발자가 삭제할 수 없는 'Otherwise' 분기를 항상 유지합니다. 따라서 모든 조건이 False여도 흐름은 Otherwise 경로를 타므로, '경로가 없어진다'는 전제 자체가 성립하지 않습니다. Switch의 모든 출력 커넥터는 반드시 어떤 노드에 연결되어야 하므로 Runtime Error(B)나 암묵적 End(C)는 발생하지 않습니다. 정답은 D입니다.",
+    "explanation": "OutSystems의 Switch 노드(여러 조건 중 맞는 쪽으로 흐름을 갈라 보내는 분기점)는 개발자가 지울 수 없는 'Otherwise'(그 외 나머지) 분기를 항상 가지고 있습니다. 그래서 모든 조건이 False여도 흐름은 반드시 Otherwise 경로로 흘러가며, 문제에서 말한 '갈 경로가 없어지는' 상황 자체가 생길 수 없습니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 조건과 무관하게 첫 분기를 타는 게 아니라, 맞는 조건이 하나도 없을 때만 Otherwise로 갑니다.\n- **B** — 갈 곳(Otherwise)이 항상 보장되므로 Runtime Error는 발생하지 않습니다.\n- **C** — 숨겨진 암묵적 End 같은 건 없고, 눈에 보이게 존재하는 Otherwise 경로로 이어집니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4591,7 +4591,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "For Each가 순회하는 List는 이미 메모리에 로드된 데이터입니다. Server Action이 데이터베이스에서 레코드를 삭제해도 메모리상의 List는 자동으로 갱신되지 않으므로, Current 레코드의 Id를 그대로 읽을 수 있습니다. 값이 NullIdentifier()가 되거나(C) 예외가 발생(D)하지 않습니다. 따라서 정답은 B입니다.",
+    "explanation": "For Each가 훑는 List(목록)는 이미 메모리에 올라와 있는 데이터의 사본입니다. Server Action이 데이터베이스에서 그 레코드를 지워도 메모리 속 List는 자동으로 갱신되지 않으므로, Current(현재 항목)의 Id를 그대로 읽을 수 있습니다. 데이터베이스와 메모리 속 목록은 서로 별개라고 생각하면 됩니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 값을 읽는다고 해서 루프가 다음 항목으로 건너뛰지 않습니다.\n- **C** — 메모리의 값은 그대로 남아 있으므로 NullIdentifier()가 되지 않습니다.\n- **D** — 데이터베이스가 아니라 메모리에 있는 값을 읽는 것이라 Database Exception이 발생하지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4644,7 +4644,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "'All Exceptions' 핸들러가 Database Exception을 잡은 뒤 Raise 없이 End 노드로 끝나면, 예외는 그 지점에서 삼켜지고(handled) Server Action은 정상적으로 반환합니다. 따라서 호출한 Client Action은 성공으로 인식하고 다음 노드로 계속 진행합니다. 예외가 재발생(re-raise)되지 않았으므로 클라이언트 측 핸들러(B)나 Communication Error(A)는 발생하지 않습니다. 정답은 C입니다.",
+    "explanation": "'All Exceptions' handler가 Database Exception을 붙잡은 뒤 Raise(예외를 다시 위로 던지는 동작) 없이 End 노드로 끝나면, 예외는 그 자리에서 삼켜져(handled) 사라집니다. 그러면 Server Action은 아무 문제 없이 정상적으로 값을 돌려주므로, 호출한 Client Action은 성공으로 여기고 다음 노드로 계속 진행합니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — 예외가 서버에서 이미 처리되어 사라졌으므로 클라이언트에 Communication Error가 전달되지 않습니다.\n- **B** — 예외를 다시 던지지(re-raise) 않았으므로 Client Action 쪽의 handler는 작동하지 않습니다.\n- **D** — 예외가 처리되고 정상 반환했으므로 롤백으로 흐름이 멈추지 않고 그대로 이어집니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4697,7 +4697,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "루프 내부의 'End' 노드는 현재 반복만 끝내는 것이 아니라 액션 전체 흐름을 종료합니다. 따라서 2번째 Invoice가 End 경로를 타는 순간 액션이 끝나므로 3번째 이후 항목은 처리되지 않습니다. 특정 항목만 건너뛰려면 End가 아니라 If로 우회시켜 루프가 계속되도록 해야 합니다. 정답은 D입니다.",
+    "explanation": "루프(For Each, 리스트 항목을 하나씩 반복 처리하는 구조) 안에 있더라도 'End' 노드는 그 반복 한 번만 끝내는 게 아니라 액션(로직 흐름) 전체를 끝내 버립니다. 건물에서 그 자리만 정리하고 다음 자리로 가는 게 아니라, 아예 건물 밖으로 나가버리는 것과 같습니다. 그래서 2번째 Invoice가 End 경로로 가는 순간 액션이 통째로 종료되어 3번째 항목은 아예 처리되지 않습니다. 특정 항목만 건너뛰고 싶다면 End 대신 If로 우회시켜 루프가 계속 돌게 해야 합니다. **→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — End는 현재 반복만 끝내는 게 아니라 액션 전체를 끝내므로 다음 항목으로 넘어가지 않습니다.\n- **B** — End는 사용자 입력을 기다리지 않고 흐름을 즉시 끝냅니다.\n- **C** — 루프가 모든 항목을 반드시 끝까지 돌아야 하는 규칙은 없어 오류가 나지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4750,7 +4750,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "예외는 발생한 가장 안쪽 스코프에서 먼저 처리됩니다. 'Action B' 내부에서 Database Exception이 발생하면 'Action B'의 핸들러가 이를 잡아 처리하고, 재발생(re-raise)하지 않는 한 호출자인 'ProcessPayment'의 핸들러로 전파되지 않습니다. 따라서 두 핸들러가 모두 실행되거나(C) 호출자 핸들러가 먼저 실행되지(B) 않습니다. 정답은 A입니다.",
+    "explanation": "예외(Exception, 실행 중 발생하는 오류)는 그것이 터진 가장 안쪽 위치에서 먼저 잡힙니다. 'Action B' 안에서 Database Exception(데이터베이스 작업 중 생긴 오류)이 발생하면, 같은 'Action B' 안의 핸들러(예외를 받아 처리하는 노드)가 먼저 이를 잡습니다. 그 핸들러가 예외를 다시 던지지(re-raise) 않는 한, 호출한 쪽인 'ProcessPayment'까지는 오류가 전달되지 않으므로 그쪽 핸들러는 실행되지 않습니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 호출자가 더 우선인 게 아니라, 오류가 난 안쪽 Action B가 먼저 처리합니다.\n- **C** — 안쪽에서 잡고 다시 던지지 않으면 호출자 핸들러로 전파되지 않아 둘 다 실행되지는 않습니다.\n- **D** — Database Exception은 각 Action 안의 핸들러로 얼마든지 처리할 수 있어 Global Handler 전용이 아닙니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4856,7 +4856,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Service Action은 호출자와 분리된 별도의 트랜잭션 스코프에서 실행됩니다. 따라서 Service Action 내부에서 처리되지 않은 예외가 발생하더라도 호출자의 트랜잭션은 자동으로 롤백되지 않습니다. 이것이 호출자와 같은 트랜잭션을 공유하는 일반 Server Action과의 핵심 차이입니다. 정답은 B입니다.",
+    "explanation": "트랜잭션(transaction)이란 데이터베이스 변경들을 '전부 성공' 또는 '전부 취소(rollback, 되돌리기)'로 묶어서 처리하는 단위입니다. Service Action은 호출한 쪽과 분리된 자기만의 트랜잭션 단위에서 돌아갑니다. 그래서 Service Action 안에서 처리되지 않은 예외가 나더라도 호출자의 트랜잭션은 자동으로 되돌려지지 않습니다. 반대로 일반 Server Action은 호출자와 같은 트랜잭션을 공유해 롤백이 함께 일어나는데, 바로 이 점이 둘의 핵심 차이입니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 예외 종류(Database냐 아니냐)와 상관없이 호출자 트랜잭션은 롤백되지 않습니다.\n- **C** — 강제로 즉시 롤백시키는 게 아니라, 분리되어 있어 오히려 롤백되지 않습니다.\n- **D** — Service Action도 예외를 발생시킬 수 있으며, 항상 성공 여부 boolean만 돌려주지 않습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -4909,7 +4909,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "소비하는 REST API가 404 같은 오류(non-2xx) 상태 코드를 반환하면 OutSystems 플랫폼은 Communication Exception을 발생시킵니다. Database Exception은 데이터베이스 작업 오류, User Exception은 개발자가 명시적으로 Raise한 예외이므로 해당하지 않습니다. 정답은 B입니다.",
+    "explanation": "외부 REST API를 소비(consume, 다른 시스템의 기능을 불러다 씀)했을 때 상대가 404처럼 정상(2xx)이 아닌 상태 코드를 돌려주면, 이는 외부 시스템과의 '통신' 과정에서 생긴 문제이므로 플랫폼은 Communication Exception(통신 예외)을 발생시킵니다. 핸들러가 따로 없으면 이 예외가 그대로 위로 올라옵니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Database Exception은 데이터베이스 작업 중 생긴 오류일 때만 발생합니다.\n- **C** — User Exception은 개발자가 직접 Raise(의도적으로 발생)시킨 예외라 API 오류에는 해당하지 않습니다.\n- **D** — 404 같은 오류 코드는 무시되지 않고 반드시 예외를 일으킵니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
