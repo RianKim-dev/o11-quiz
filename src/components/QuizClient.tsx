@@ -6,7 +6,7 @@ import type { Question } from "@/types/question";
 import QuizRunner from "@/components/QuizRunner";
 import {
   ALL_QUESTIONS,
-  assembleMock,
+  assembleMockFrom,
   getBySubtopic,
   shuffle,
 } from "@/lib/questions";
@@ -29,14 +29,18 @@ export default function QuizClient({ mode, subtopic }: Props) {
       let qs: Question[] = [];
       let t = "";
       let n = "";
-      if (mode === "mock") {
-        const { questions: mq, shortfall } = assembleMock();
+      if (mode === "mock" || mode === "practice") {
+        // Prefer questions the user hasn't answered yet (blueprint ratio kept).
+        const answered = new Set((await loadAnswers()).map((r) => r.questionId));
+        const { questions: mq, shortfall } = assembleMockFrom(answered);
         qs = mq;
-        t = "모의고사";
+        t = mode === "practice" ? "연습 모드" : "모의고사";
         n =
           shortfall > 0
             ? `실제 시험은 50문항이지만 현재 은행에 문항이 부족해 ${qs.length}문항으로 구성했어요.`
-            : "";
+            : mode === "practice"
+              ? "연습 모드는 성적에 반영되지 않아요. 각 문항의 '정답 확인'을 열어 해설을 보며 풀어보세요."
+              : "";
       } else if (mode === "topic" && subtopic) {
         qs = shuffle(getBySubtopic(subtopic));
         t = subtopic;
@@ -98,7 +102,7 @@ export default function QuizClient({ mode, subtopic }: Props) {
         questions={questions}
         title={title}
         mode={mode}
-        timeLimitSec={mode === "mock" ? 40 * 60 : undefined}
+        timeLimitSec={mode === "mock" ? 120 * 60 : undefined}
       />
     </div>
   );

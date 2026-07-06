@@ -34,11 +34,26 @@ export function subtopicCounts(): Record<string, number> {
  * If a subtopic has fewer questions than the blueprint asks for, takes what exists.
  */
 export function assembleMock(): { questions: Question[]; shortfall: number } {
+  return assembleMockFrom(new Set());
+}
+
+/**
+ * Assemble a blueprint-accurate mock, preferring questions the user has NOT
+ * answered yet. The per-subtopic slot counts (and thus the exam ratio) are
+ * always honored: within each subtopic we take unanswered questions first,
+ * then fall back to already-answered ones to fill the count. Passing an empty
+ * set reproduces a fully random mock.
+ */
+export function assembleMockFrom(
+  answeredIds: Set<string>
+): { questions: Question[]; shortfall: number } {
   const out: Question[] = [];
   let shortfall = 0;
   for (const spec of BLUEPRINT) {
-    const pool = shuffle(getBySubtopic(spec.subtopic));
-    out.push(...pool.slice(0, spec.count));
+    const pool = getBySubtopic(spec.subtopic);
+    const fresh = shuffle(pool.filter((q) => !answeredIds.has(q.id)));
+    const seen = shuffle(pool.filter((q) => answeredIds.has(q.id)));
+    out.push(...[...fresh, ...seen].slice(0, spec.count));
     shortfall += Math.max(0, spec.count - pool.length);
   }
   return { questions: shuffle(out), shortfall };

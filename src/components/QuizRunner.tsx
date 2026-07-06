@@ -31,6 +31,8 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
 
   const { userId } = useAuth();
   const { lang } = useLang();
+  // Practice mode: no timer, no stats — reveal answers per question via a toggle.
+  const practice = mode === "practice";
   const current = questions[idx];
   const locCurrent = localizeQuestion(current, lang);
   const answeredCount = Object.keys(chosen).length;
@@ -50,10 +52,10 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
       mode,
       ts: Date.now(),
     }));
-    await saveAnswers(recs);
+    if (!practice) await saveAnswers(recs);
     setDone(true);
     if (typeof window !== "undefined") window.scrollTo(0, 0);
-  }, [questions, chosen, mode]);
+  }, [questions, chosen, mode, practice]);
 
   // Countdown timer for timed (mock) mode.
   useEffect(() => {
@@ -206,6 +208,27 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
             );
           })}
         </div>
+
+        {/* practice mode: reveal answer + explanation on demand */}
+        {practice ? (
+          <details
+            key={current.id}
+            className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3"
+          >
+            <summary className="cursor-pointer text-sm font-medium text-rose-600">
+              정답 확인 · 해설
+            </summary>
+            <div className="mt-2 text-sm">
+              <p className="mb-2 font-semibold text-emerald-700">
+                정답: {current.answer}.{" "}
+                {locCurrent.options.find((o) => o.key === current.answer)?.text}
+              </p>
+              <div className="text-slate-700">
+                <Markdown>{current.explanation}</Markdown>
+              </div>
+            </div>
+          </details>
+        ) : null}
       </div>
 
       {/* nav */}

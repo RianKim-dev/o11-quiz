@@ -90,7 +90,18 @@ export default function Dashboard() {
           className="rounded-xl bg-rose-600 p-4 text-white shadow-sm transition-colors hover:bg-rose-700"
         >
           <div className="text-base font-semibold">모의고사</div>
-          <div className="mt-1 text-xs text-rose-100">시험 비율대로 · 40분 타이머</div>
+          <div className="mt-1 text-xs text-rose-100">
+            시험 비율대로 · 120분 타이머 · 안 푼 문항 우선
+          </div>
+        </Link>
+        <Link
+          href="/quiz?mode=practice"
+          className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-slate-300"
+        >
+          <div className="text-base font-semibold">📖 연습 모드</div>
+          <div className="mt-1 text-xs text-slate-500">
+            한 문제씩 정답·해설 열어보며 · 성적 미반영
+          </div>
         </Link>
         <Link
           href="/quiz?mode=all"
