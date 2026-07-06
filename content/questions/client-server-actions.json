@@ -702,10 +702,22 @@
       "ko": {
         "stem": "고객 등록 폼의 'Save' Client Action이 'CreateOrUpdateCustomer' Server Action을 호출합니다. 서버가 처리하는 동안 사용자가 Save를 두 번 클릭하지 못하게 하려면 가장 좋은 방법은 무엇입니까?",
         "options": [
-          "액션 시작 시 Local Variable 'IsSaving'를 True로 설정하고 버튼의 Enabled 속성을 그 값의 반대로 바인딩한다.",
-          "Server Action이 실행 중이면 플랫폼이 모든 버튼을 자동으로 비활성화한다.",
-          "저장 로직을 Try-Catch 블록으로 감싼다.",
-          "Client Action 안에 'Wait' 노드를 추가한다."
+          {
+            "key": "A",
+            "text": "액션 시작 시 Local Variable 'IsSaving'를 True로 설정하고 버튼의 Enabled 속성을 그 값의 반대로 바인딩한다."
+          },
+          {
+            "key": "B",
+            "text": "Server Action이 실행 중이면 플랫폼이 모든 버튼을 자동으로 비활성화한다."
+          },
+          {
+            "key": "C",
+            "text": "저장 로직을 Try-Catch 블록으로 감싼다."
+          },
+          {
+            "key": "D",
+            "text": "Client Action 안에 'Wait' 노드를 추가한다."
+          }
         ]
       }
     }
@@ -742,10 +754,22 @@
       "ko": {
         "stem": "Reactive Screen의 Expression 위젯 안에서 Server Action을 참조하려고 하면 어떻게 됩니까?",
         "options": [
-          "서버가 값을 반환할 때마다 화면이 깜빡인다.",
-          "화면이 렌더링될 때마다 Server Action이 실행된다.",
-          "불가능하다. Expression은 Function만 호출할 수 있고 Server Action은 호출할 수 없다.",
-          "동작은 하지만 지속적인 네트워크 호출로 앱이 느려진다."
+          {
+            "key": "A",
+            "text": "서버가 값을 반환할 때마다 화면이 깜빡인다."
+          },
+          {
+            "key": "B",
+            "text": "화면이 렌더링될 때마다 Server Action이 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "불가능하다. Expression은 Function만 호출할 수 있고 Server Action은 호출할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "동작은 하지만 지속적인 네트워크 호출로 앱이 느려진다."
+          }
         ]
       }
     }
@@ -782,10 +806,22 @@
       "ko": {
         "stem": "Client Action이 Task 목록을 반복하며 레코드마다 'ArchiveTask' Server Action을 한 번씩 호출하는 'Bulk Archive' 기능을 구현했습니다. 이것이 나쁜 방식으로 여겨지는 이유는 무엇입니까?",
         "options": [
-          "Server Action은 루프 안에서 호출할 수 없다.",
-          "반복할 때마다 개별 네트워크 요청이 발생해 앱이 크게 느려진다.",
-          "화면 로딩이 끝나면 List는 읽기 전용이 된다.",
-          "Client Action에는 루프를 넣을 수 없다."
+          {
+            "key": "A",
+            "text": "Server Action은 루프 안에서 호출할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "반복할 때마다 개별 네트워크 요청이 발생해 앱이 크게 느려진다."
+          },
+          {
+            "key": "C",
+            "text": "화면 로딩이 끝나면 List는 읽기 전용이 된다."
+          },
+          {
+            "key": "D",
+            "text": "Client Action에는 루프를 넣을 수 없다."
+          }
         ]
       }
     }
@@ -822,10 +858,22 @@
       "ko": {
         "stem": "Reactive Web App에서 100개의 Order 레코드 상태를 한 번에 업데이트해야 합니다. 성능상 가장 효율적인 방법은 무엇입니까?",
         "options": [
-          "Aggregate를 Refresh하고 그 'On After Fetch' 이벤트에서 For Each로 각 레코드를 업데이트한다.",
-          "Order ID 목록을 하나의 Server Action으로 보내 서버 측에서 반복 처리한다.",
-          "Client Action의 For Each 루프에서 레코드마다 'UpdateOrder' Server Action을 호출한다.",
-          "브라우저에서 JavaScript 루프로 데이터베이스 레코드를 직접 업데이트한다."
+          {
+            "key": "A",
+            "text": "Aggregate를 Refresh하고 그 'On After Fetch' 이벤트에서 For Each로 각 레코드를 업데이트한다."
+          },
+          {
+            "key": "B",
+            "text": "Order ID 목록을 하나의 Server Action으로 보내 서버 측에서 반복 처리한다."
+          },
+          {
+            "key": "C",
+            "text": "Client Action의 For Each 루프에서 레코드마다 'UpdateOrder' Server Action을 호출한다."
+          },
+          {
+            "key": "D",
+            "text": "브라우저에서 JavaScript 루프로 데이터베이스 레코드를 직접 업데이트한다."
+          }
         ]
       }
     }

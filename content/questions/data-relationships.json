@@ -645,10 +645,22 @@
       "ko": {
         "stem": "junction 엔티티 'BookAuthor'를 사용해 'Book'과 'Author' 간 Many-to-Many 관계를 모델링했습니다. 'BookAuthor'에서 'BookId'의 Delete Rule은 'Delete', 'AuthorId'의 Delete Rule은 'Protect'로 설정되어 있습니다. 여러 권의 Book을 쓴 Author를 삭제하려고 하면 어떤 일이 발생합니까?",
         "options": [
-          "junction 레코드만 삭제되고 Author와 Book은 그대로 남는다.",
-          "Author, junction 레코드, Book이 모두 삭제된다.",
-          "시스템이 에러를 발생시키고 Author 삭제를 막는다.",
-          "Author가 삭제되고 그 'BookAuthor' 레코드도 삭제되지만 'Book' 레코드는 남는다."
+          {
+            "key": "A",
+            "text": "junction 레코드만 삭제되고 Author와 Book은 그대로 남는다."
+          },
+          {
+            "key": "B",
+            "text": "Author, junction 레코드, Book이 모두 삭제된다."
+          },
+          {
+            "key": "C",
+            "text": "시스템이 에러를 발생시키고 Author 삭제를 막는다."
+          },
+          {
+            "key": "D",
+            "text": "Author가 삭제되고 그 'BookAuthor' 레코드도 삭제되지만 'Book' 레코드는 남는다."
+          }
         ]
       }
     }
@@ -685,10 +697,22 @@
       "ko": {
         "stem": "'City' Entity의 'CountryId' 외래 키의 Delete Rule이 'Protect'로 설정되어 있습니다. 한 Country에 관련된 City가 3개 있습니다. 이 Country를 삭제하려고 하면 어떻게 됩니까?",
         "options": [
-          "데이터베이스가 삭제를 막고 예외를 던진다.",
-          "Country와 3개의 City가 모두 삭제된다.",
-          "Country는 삭제되고 3개 City의 CountryId가 null이 된다.",
-          "Country는 삭제되지만 3개의 City는 그대로 남는다."
+          {
+            "key": "A",
+            "text": "데이터베이스가 삭제를 막고 예외를 던진다."
+          },
+          {
+            "key": "B",
+            "text": "Country와 3개의 City가 모두 삭제된다."
+          },
+          {
+            "key": "C",
+            "text": "Country는 삭제되고 3개 City의 CountryId가 null이 된다."
+          },
+          {
+            "key": "D",
+            "text": "Country는 삭제되지만 3개의 City는 그대로 남는다."
+          }
         ]
       }
     }
@@ -725,10 +749,22 @@
       "ko": {
         "stem": "'Project' Entity와 'Task' Entity가 있습니다. 'Task' Entity의 'ProjectId'는 Delete Rule이 'Protect'로 설정되어 있습니다. 아직 'Task'가 할당된 'Project'를 삭제하려고 하면 어떤 일이 발생합니까?",
         "options": [
-          "예외가 발생하고 Project는 삭제되지 않는다.",
-          "Project가 삭제되고 Task의 'ProjectId'가 Null로 설정된다.",
-          "사용자에게 Task를 다른 Project로 옮기라는 안내가 표시된다.",
-          "Project가 삭제되고 그 Task들도 함께 삭제된다."
+          {
+            "key": "A",
+            "text": "예외가 발생하고 Project는 삭제되지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "Project가 삭제되고 Task의 'ProjectId'가 Null로 설정된다."
+          },
+          {
+            "key": "C",
+            "text": "사용자에게 Task를 다른 Project로 옮기라는 안내가 표시된다."
+          },
+          {
+            "key": "D",
+            "text": "Project가 삭제되고 그 Task들도 함께 삭제된다."
+          }
         ]
       }
     }
@@ -765,10 +801,22 @@
       "ko": {
         "stem": "세 개의 Entity가 있습니다: Blog, Post(Blog의 자식), Comment(Post의 자식). Post의 BlogId는 Delete Rule이 'Delete'이고, Comment의 PostId는 Delete Rule이 'Protect'입니다. Post들을 가진 Blog를 삭제하고, 그 Post들에는 Comment들이 있습니다. 어떻게 됩니까?",
         "options": [
-          "Blog와 Post는 삭제되지만 Comment는 orphan으로 데이터베이스에 남는다.",
-          "Comment만 보호되고 Blog와 Post는 그대로 삭제된다.",
-          "Blog 삭제가 데이터베이스 예외로 차단된다.",
-          "Blog가 삭제되고 그 Post와 Comment도 모두 삭제된다."
+          {
+            "key": "A",
+            "text": "Blog와 Post는 삭제되지만 Comment는 orphan으로 데이터베이스에 남는다."
+          },
+          {
+            "key": "B",
+            "text": "Comment만 보호되고 Blog와 Post는 그대로 삭제된다."
+          },
+          {
+            "key": "C",
+            "text": "Blog 삭제가 데이터베이스 예외로 차단된다."
+          },
+          {
+            "key": "D",
+            "text": "Blog가 삭제되고 그 Post와 Comment도 모두 삭제된다."
+          }
         ]
       }
     }
@@ -805,10 +853,22 @@
       "ko": {
         "stem": "Aggregate에서 'Order'(왼쪽)를 Order.CustomerId 기준으로 'Customer'(오른쪽)와 join하고, FK인 Order.CustomerId는 Mandatory=Yes입니다. 이 경우 'Only With' join과 'With or Without' join의 실질적 차이는 무엇입니까?",
         "options": [
-          "'With or Without'는 매칭 확인을 건너뛰므로 항상 더 빠르다.",
-          "'Only With'는 FK가 null이어도 행을 반환한다.",
-          "참조 무결성이 유지되는 한 결과 집합에 기능적 차이가 없다.",
-          "Mandatory 속성은 'With or Without' join에 사용할 수 없다."
+          {
+            "key": "A",
+            "text": "'With or Without'는 매칭 확인을 건너뛰므로 항상 더 빠르다."
+          },
+          {
+            "key": "B",
+            "text": "'Only With'는 FK가 null이어도 행을 반환한다."
+          },
+          {
+            "key": "C",
+            "text": "참조 무결성이 유지되는 한 결과 집합에 기능적 차이가 없다."
+          },
+          {
+            "key": "D",
+            "text": "Mandatory 속성은 'With or Without' join에 사용할 수 없다."
+          }
         ]
       }
     }
@@ -845,10 +905,22 @@
       "ko": {
         "stem": "Student <-> Enrollment <-> Course 형태의 다대다 관계에서, junction 엔티티인 Enrollment에 동일한 (StudentId, CourseId) 조합이 절대 두 번 나타나지 않도록 보장하려면 무엇을 해야 합니까?",
         "options": [
-          "junction 엔티티의 Primary Key를 Auto-number로 설정한다.",
-          "두 Foreign Key 모두에 'Set Null' delete rule을 적용한다.",
-          "두 Foreign Key를 모두 mandatory로 만든다.",
-          "두 Foreign Key 속성으로 구성된 하나의 Unique Index를 만든다."
+          {
+            "key": "A",
+            "text": "junction 엔티티의 Primary Key를 Auto-number로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "두 Foreign Key 모두에 'Set Null' delete rule을 적용한다."
+          },
+          {
+            "key": "C",
+            "text": "두 Foreign Key를 모두 mandatory로 만든다."
+          },
+          {
+            "key": "D",
+            "text": "두 Foreign Key 속성으로 구성된 하나의 Unique Index를 만든다."
+          }
         ]
       }
     }
