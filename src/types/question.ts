@@ -40,8 +40,9 @@ export interface Question {
   answer: OptionKey;
   /** Full Korean explanation of the correct answer (Markdown). */
   explanation: string;
-  /** Optional per-option "why this is wrong" notes, keyed by option. */
-  distractors?: Partial<Record<OptionKey, string>>;
+  /** Optional "why the wrong options are wrong". Either keyed per option
+   * ({A: "...", B: "..."}) or a single Markdown prose string. */
+  distractors?: Partial<Record<OptionKey, string>> | string;
   /** Where the answer is grounded (workbook chapter / official doc). */
   source: string;
   status: "draft" | "verified" | "flagged";

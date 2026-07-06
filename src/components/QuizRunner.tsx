@@ -392,13 +392,19 @@ function Results({
                       <p className="mb-1 text-xs font-semibold text-slate-500">
                         오답 정리
                       </p>
-                      <ul className="space-y-1">
-                        {Object.entries(q.distractors).map(([k, v]) => (
-                          <li key={k} className="text-xs text-slate-600">
-                            <span className="font-semibold">{k}.</span> {v}
-                          </li>
-                        ))}
-                      </ul>
+                      {typeof q.distractors === "string" ? (
+                        <div className="text-xs text-slate-600">
+                          <Markdown>{q.distractors}</Markdown>
+                        </div>
+                      ) : (
+                        <ul className="space-y-1">
+                          {Object.entries(q.distractors).map(([k, v]) => (
+                            <li key={k} className="text-xs text-slate-600">
+                              <span className="font-semibold">{k}.</span> {v}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   ) : null}
                   <p className="mt-3 text-xs text-slate-400">출처: {q.source}</p>
