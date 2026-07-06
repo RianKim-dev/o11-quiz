@@ -900,5 +900,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "MOD-016",
+    "subtopic": "Modular Dependencies",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A producer module changes a Public Server Action so that it now throws a new User Exception. The consumer module that calls this Server Action is NOT republished. When the consumer's Client Action invokes the Server Action at runtime, what is the most likely result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The User Exception is automatically converted into a Database Exception."
+      },
+      {
+        "key": "B",
+        "text": "The consumer still receives the failure, but as a generic communication or server error, because its metadata for the new exception is outdated."
+      },
+      {
+        "key": "C",
+        "text": "The platform automatically republishes the consumer module at runtime to guarantee compatibility."
+      },
+      {
+        "key": "D",
+        "text": "The Server Action refuses to execute at all because of a version mismatch."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Consumer가 republish되지 않으면 producer가 새로 추가한 User Exception에 대한 metadata를 알지 못합니다. producer의 새 로직 자체는 실행되지만, consumer는 이 예외를 구체적으로 인식하지 못해 일반적인 communication/server error 형태로 받게 됩니다. A는 예외가 Database Exception으로 자동 변환되지 않으므로 틀리고, C는 런타임에 자동으로 republish해 주는 기능이 없으며, D는 공개 signature가 바뀐 것이 아니므로 호출 자체는 실행됩니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 producer 모듈이 Public Server Action의 로직을 바꿔 새로운 User Exception을 던지도록 수정했습니다. 이 Server Action을 호출하는 consumer 모듈은 republish되지 않았습니다. 런타임에 consumer의 Client Action이 이 Server Action을 호출하면 가장 가능성이 높은 결과는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "User Exception이 자동으로 Database Exception으로 변환된다."
+          },
+          {
+            "key": "B",
+            "text": "consumer는 여전히 실패를 받지만, 새 예외에 대한 metadata가 오래되었기 때문에 일반적인 communication 또는 server error 형태로 받는다."
+          },
+          {
+            "key": "C",
+            "text": "플랫폼이 호환성을 보장하기 위해 런타임에 consumer 모듈을 자동으로 republish한다."
+          },
+          {
+            "key": "D",
+            "text": "버전 불일치로 인해 Server Action이 아예 실행되지 않는다."
+          }
+        ]
+      }
+    }
   }
 ]

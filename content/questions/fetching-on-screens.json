@@ -3252,5 +3252,473 @@
         ]
       }
     }
+  },
+  {
+    "id": "FDS-061",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Ticket screen has an Aggregate with Fetch = 'At Start' and a Data Action with Fetch = 'Only on Demand'. You call 'Refresh Data' for the Data Action inside the screen's OnReady event. What is the main risk of this design?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Aggregates always block Data Actions, so the Data Action waits for the Aggregate to finish before it starts."
+      },
+      {
+        "key": "B",
+        "text": "It can cause a visible flicker or a performance hit, because the extra Data Action fetch is added on top of the initial 'At Start' load."
+      },
+      {
+        "key": "C",
+        "text": "The Data Action fails, because 'Only on Demand' forbids it from being executed during screen events."
+      },
+      {
+        "key": "D",
+        "text": "It causes an infinite loop, because OnReady is re-triggered after every 'Refresh Data' call."
+      }
+    ],
+    "answer": "B",
+    "explanation": "At Start Aggregate는 화면 초기화 시 이미 병렬로 데이터를 가져오는데, OnReady에서 Data Action에 Refresh Data를 호출하면 초기 로드 위에 추가 서버 요청이 얹혀 화면 깜빡임(flicker)이나 성능 저하가 생길 수 있습니다(정답 B). OnReady는 화면당 한 번만 실행되므로 무한 루프(D)는 발생하지 않고, Only on Demand도 Refresh Data로 정상 실행되므로 C는 틀리며, At Start fetch는 병렬 실행이라 서로를 막지 않으므로 A도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "티켓 화면에 Fetch = 'At Start'인 Aggregate와 Fetch = 'Only on Demand'인 Data Action이 있습니다. 화면의 OnReady 이벤트 안에서 이 Data Action에 대해 'Refresh Data'를 호출합니다. 이 설계의 주된 위험은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate는 항상 Data Action을 막으므로, Data Action은 Aggregate가 끝날 때까지 기다렸다가 시작한다."
+          },
+          {
+            "key": "B",
+            "text": "초기 'At Start' 로드 위에 추가 Data Action fetch가 얹히므로, 화면 깜빡임(flicker)이나 성능 저하가 발생할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "'Only on Demand'는 화면 이벤트 중 실행을 금지하므로 Data Action이 실패한다."
+          },
+          {
+            "key": "D",
+            "text": "OnReady가 매 'Refresh Data' 호출 후 다시 트리거되므로 무한 루프가 발생한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-062",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Customer screen Aggregate uses its 'On After Fetch' event to run a Client Action. That Client Action changes a variable that is also used in the Aggregate's filter. What is the likely result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A compilation error, because 'On After Fetch' is not allowed to modify filter dependencies."
+      },
+      {
+        "key": "B",
+        "text": "The Aggregate refreshes exactly once and then stops to prevent recursion."
+      },
+      {
+        "key": "C",
+        "text": "An infinite loop of re-fetches and 'On After Fetch' triggers is likely to occur."
+      },
+      {
+        "key": "D",
+        "text": "The change is ignored until the user manually refreshes the screen."
+      }
+    ],
+    "answer": "C",
+    "explanation": "On After Fetch에서 실행한 Client Action이 Aggregate의 filter에 쓰이는 변수를 바꾸면, 의존성 추적(dependency tracking)에 의해 Aggregate가 다시 fetch되고 그러면 On After Fetch가 또 실행되어 무한 루프에 빠지기 쉽습니다(정답 C). 플랫폼이 한 번만 새로고침하고 멈추거나(B), 변경을 무시하거나(D), 컴파일 오류(A)를 내는 안전장치는 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "고객 화면의 Aggregate가 'On After Fetch' 이벤트로 Client Action을 실행합니다. 이 Client Action은 해당 Aggregate의 filter에도 사용되는 변수를 변경합니다. 예상되는 결과는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'On After Fetch'는 filter 의존성을 수정할 수 없으므로 컴파일 오류가 발생한다."
+          },
+          {
+            "key": "B",
+            "text": "재귀를 막기 위해 Aggregate가 정확히 한 번만 새로고침되고 멈춘다."
+          },
+          {
+            "key": "C",
+            "text": "재-fetch와 'On After Fetch' 트리거가 반복되는 무한 루프가 발생할 가능성이 높다."
+          },
+          {
+            "key": "D",
+            "text": "사용자가 수동으로 화면을 새로고침할 때까지 변경이 무시된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-063",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A Data Action with Fetch = 'Only on Demand' should run only when the user clicks the 'Search' button on a Ticket list screen. Where should you trigger its Refresh Data?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the Client Action bound to the 'On Click' event of the Search button."
+      },
+      {
+        "key": "B",
+        "text": "In the screen's 'On Initialize' event."
+      },
+      {
+        "key": "C",
+        "text": "In the screen's 'On Parameters Changed' event."
+      },
+      {
+        "key": "D",
+        "text": "By setting the Search button's 'Method' property to 'Data Action'."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Fetch가 'Only on Demand'인 Data Action은 화면 로드 시 자동 실행되지 않으므로, 명시적으로 Refresh Data 문을 호출해야 합니다. 검색 버튼의 On Click에 연결된 Client Action 안에서 Refresh Data를 실행하면 버튼을 눌렀을 때만 데이터를 가져옵니다. On Initialize(B)에 넣으면 화면 로드 시 실행되어 요구사항과 어긋나고, On Parameters Changed(C)는 화면 입력 파라미터가 바뀔 때 동작하며, D의 'Method=Data Action' 같은 버튼 속성은 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Fetch가 'Only on Demand'인 Data Action이 Ticket 목록 화면에서 사용자가 'Search' 버튼을 클릭할 때만 실행되도록 하려고 합니다. Refresh Data는 어디에서 호출해야 하나요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Search 버튼의 'On Click' 이벤트에 연결된 Client Action 안에서."
+          },
+          {
+            "key": "B",
+            "text": "화면의 'On Initialize' 이벤트에서."
+          },
+          {
+            "key": "C",
+            "text": "화면의 'On Parameters Changed' 이벤트에서."
+          },
+          {
+            "key": "D",
+            "text": "Search 버튼의 'Method' 속성을 'Data Action'으로 설정하여."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-064",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A screen has an Aggregate 'GetProducts'. You need to run a custom JavaScript calculation every time this Aggregate finishes loading its data. Where should this logic go?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the 'On After Fetch' event of the 'GetProducts' Aggregate."
+      },
+      {
+        "key": "B",
+        "text": "In the screen's 'On Initialize' event."
+      },
+      {
+        "key": "C",
+        "text": "In the screen's 'On Render' event."
+      },
+      {
+        "key": "D",
+        "text": "In the screen's 'On Ready' event."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate의 'On After Fetch' event는 해당 Aggregate가 데이터를 모두 가져온 직후에 실행되므로, fetch 완료 시마다 수행할 계산 로직(JavaScript node 포함)을 넣기에 가장 적합합니다. On Initialize(B)는 데이터가 도착하기 전 화면 초기화 시점이고, On Render(C)는 화면이 다시 그려질 때마다 반복 실행되며, On Ready(D)는 최초 렌더 후 한 번만 실행되어 매 fetch 완료 시점과 맞지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면에 'GetProducts' Aggregate가 있습니다. 이 Aggregate가 데이터를 모두 불러올 때마다 사용자 정의 JavaScript 계산을 실행하려고 합니다. 이 로직은 어디에 두는 것이 가장 적절한가요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'GetProducts' Aggregate의 'On After Fetch' 이벤트."
+          },
+          {
+            "key": "B",
+            "text": "화면의 'On Initialize' 이벤트."
+          },
+          {
+            "key": "C",
+            "text": "화면의 'On Render' 이벤트."
+          },
+          {
+            "key": "D",
+            "text": "화면의 'On Ready' 이벤트."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-065",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Data Action with 'Fetch: At Start' has an Output Parameter 'OrderList'. A Screen Expression shows 'GetOrders.OrderList.Length'. What value is displayed while the data is still being fetched?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Screen delays rendering until the length is greater than 0."
+      },
+      {
+        "key": "B",
+        "text": "The Expression shows an error message on the Screen."
+      },
+      {
+        "key": "C",
+        "text": "0"
+      },
+      {
+        "key": "D",
+        "text": "Null"
+      }
+    ],
+    "answer": "C",
+    "explanation": "List 타입은 절대 Null이 되지 않고 항상 초기화된 빈 리스트로 시작하므로, 데이터가 아직 도착하지 않았을 때 .Length는 0을 반환합니다. Screen은 데이터를 기다리지 않고 먼저 렌더링되며(A 틀림), 오류도 나지 않고(B), Null도 아닙니다(D).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Fetch: At Start'로 설정된 Data Action이 'OrderList'라는 Output Parameter를 가지고 있습니다. Screen Expression에 'GetOrders.OrderList.Length'를 표시합니다. 데이터를 아직 조회 중일 때 표시되는 값은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "길이가 0보다 커질 때까지 Screen이 렌더링을 미룬다."
+          },
+          {
+            "key": "B",
+            "text": "Expression이 화면에 오류 메시지를 표시한다."
+          },
+          {
+            "key": "C",
+            "text": "0"
+          },
+          {
+            "key": "D",
+            "text": "Null"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-066",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A screen has two Aggregates. 'Aggregate B' depends on data produced by 'Aggregate A', but B fetches too early. How do you ensure 'Aggregate B' runs only after 'Aggregate A' finishes?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set Aggregate B to 'Fetch: Only on Demand' and call 'Refresh Data (Aggregate B)' in the 'On After Fetch' event of Aggregate A."
+      },
+      {
+        "key": "B",
+        "text": "Place Aggregate B inside a Container hidden by an 'If' widget until Aggregate A is not empty."
+      },
+      {
+        "key": "C",
+        "text": "Increase the 'Priority' property of Aggregate A in the screen's property sheet."
+      },
+      {
+        "key": "D",
+        "text": "Call the 'Sleep' function in the screen's 'On Initialize' to delay Aggregate B."
+      }
+    ],
+    "answer": "A",
+    "explanation": "화면의 At Start Aggregate들은 기본적으로 병렬로 동시에 fetch되므로 실행 순서를 보장하려면 명시적으로 제어해야 합니다. Aggregate B를 'Only on Demand'로 두어 자동 실행을 막고, Aggregate A의 On After Fetch에서 Refresh Data(B)를 호출하면 A가 끝난 뒤에만 B가 실행됩니다(A). Aggregate에는 'Priority' 속성이 없고(C), 'Sleep' 함수도 존재하지 않으며(D), Container를 숨기는 것(B)은 화면 표시만 늦출 뿐 fetch 시점을 제어하지 못합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 화면에 두 개의 Aggregate가 있습니다. 'Aggregate B'는 'Aggregate A'가 만든 데이터에 의존하지만 B가 너무 일찍 fetch됩니다. 'Aggregate B'가 'Aggregate A'가 끝난 뒤에만 실행되도록 하려면 어떻게 해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate B를 'Fetch: Only on Demand'로 설정하고 Aggregate A의 'On After Fetch' 이벤트에서 'Refresh Data (Aggregate B)'를 호출한다."
+          },
+          {
+            "key": "B",
+            "text": "Aggregate A가 비어 있지 않을 때까지 'If' 위젯으로 숨기는 Container 안에 Aggregate B를 넣는다."
+          },
+          {
+            "key": "C",
+            "text": "화면 속성 시트에서 Aggregate A의 'Priority' 속성을 높인다."
+          },
+          {
+            "key": "D",
+            "text": "화면의 'On Initialize'에서 'Sleep' 함수를 호출해 Aggregate B를 지연시킨다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-067",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A Product listing screen has an Aggregate whose 'Fetch' property is set to 'Only on Demand'. In the screen's On Initialize event you add a 'Refresh Data' node for that Aggregate. What is the effect?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is not allowed — a 'Refresh Data' node cannot be placed in the On Initialize event."
+      },
+      {
+        "key": "B",
+        "text": "The screen delays its first render until the 'Refresh Data' finishes fetching the data."
+      },
+      {
+        "key": "C",
+        "text": "The data is fetched but the screen will never be able to display it."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate fetches twice: once at start and once from the Refresh Data."
+      }
+    ],
+    "answer": "B",
+    "explanation": "'Only on Demand' aggregate는 화면 시작 시 자동으로 실행되지 않으므로 중복 fetch(D)는 발생하지 않습니다. Refresh Data node는 On Initialize에서도 사용할 수 있으므로 '사용 불가'라는 A는 틀립니다. On Initialize는 화면이 렌더링되기 전에 실행되고 그 안의 Refresh Data 완료를 기다리므로, 데이터를 다 가져올 때까지 화면 첫 렌더링이 지연됩니다(B). 그래서 무거운 데이터를 On Initialize의 Refresh Data로 불러오는 것은 화면 표시가 늦어지는 anti-pattern입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product 목록 화면에 'Fetch' 속성이 'Only on Demand'로 설정된 Aggregate가 있습니다. 화면의 On Initialize 이벤트에 그 Aggregate에 대한 'Refresh Data' node를 추가합니다. 어떤 결과가 발생합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "허용되지 않는다 — 'Refresh Data' node는 On Initialize 이벤트에 배치할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "'Refresh Data'가 데이터를 다 가져올 때까지 화면의 첫 렌더링이 지연된다."
+          },
+          {
+            "key": "C",
+            "text": "데이터는 가져오지만 화면은 그것을 절대 표시하지 못한다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate가 두 번 fetch한다: 시작 시 한 번, Refresh Data로 한 번."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-068",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Reactive Screen has one Data Action and one Aggregate, and both are set to 'Fetch: At Start'. Which one is guaranteed to finish executing first?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate, because it uses optimized SQL and is prioritized by the platform."
+      },
+      {
+        "key": "B",
+        "text": "The Data Action, because its custom logic is given priority by the platform."
+      },
+      {
+        "key": "C",
+        "text": "Whichever one was added to the screen first in Service Studio."
+      },
+      {
+        "key": "D",
+        "text": "Neither; they run in parallel and their finish order depends on server load and query complexity."
+      }
+    ],
+    "answer": "D",
+    "explanation": "At Start로 설정된 Aggregate와 Data Action은 화면 초기화 시 병렬로 실행되며, 어느 것이 먼저 끝날지는 보장되지 않습니다. 완료 순서는 서버 부하와 쿼리 복잡도 등 런타임 상황에 따라 달라집니다. 따라서 A, B처럼 특정 데이터 소스가 우선한다거나 C처럼 화면에 추가된 순서대로 끝난다는 설명은 모두 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Reactive Screen에 Data Action 하나와 Aggregate 하나가 있고, 둘 다 'Fetch: At Start'로 설정되어 있습니다. 어느 것이 먼저 실행을 끝낸다고 보장할 수 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate, 최적화된 SQL을 사용하며 플랫폼이 우선 처리하기 때문이다."
+          },
+          {
+            "key": "B",
+            "text": "Data Action, 사용자 정의 로직을 플랫폼이 우선 처리하기 때문이다."
+          },
+          {
+            "key": "C",
+            "text": "Service Studio에서 화면에 먼저 추가된 쪽이 먼저 끝난다."
+          },
+          {
+            "key": "D",
+            "text": "어느 쪽도 아니다; 둘은 병렬로 실행되며 완료 순서는 서버 부하와 쿼리 복잡도에 따라 달라진다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-069",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has two Aggregates, GetCategories and GetProducts, where GetProducts must be filtered by a value produced by GetCategories. What is the best way to implement this dependency for performance?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a Client Action in 'On Initialize' to fetch both sequentially inside a loop."
+      },
+      {
+        "key": "B",
+        "text": "Combine both into a single Data Action that returns two separate lists."
+      },
+      {
+        "key": "C",
+        "text": "Set both Aggregates to 'Fetch: At Start' and rely on the platform to resolve the dependency automatically."
+      },
+      {
+        "key": "D",
+        "text": "Set GetProducts to 'Fetch: Only on Demand' and trigger its Refresh in the 'On After Fetch' of GetCategories."
+      }
+    ],
+    "answer": "D",
+    "explanation": "'At Start' Aggregate들은 Screen 초기화 시 병렬로 실행되므로 GetCategories가 끝나기를 기다렸다가 GetProducts를 실행해 주지 않습니다. 따라서 C처럼 플랫폼이 알아서 순서를 지켜줄 것이라 기대하면 GetProducts가 아직 준비되지 않은 값으로 조회될 수 있습니다. 올바른 방법은 GetProducts를 'Only on Demand'로 두고 GetCategories의 'On After Fetch'에서 값이 준비된 뒤 Refresh Data로 명시적으로 실행하는 것입니다. A, B는 불필요하게 복잡하거나 성능/유지보수에 불리합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen에 GetCategories와 GetProducts라는 두 개의 Aggregate가 있고, GetProducts는 GetCategories가 만들어낸 값으로 필터링되어야 합니다. 성능을 고려할 때 이 의존 관계를 구현하는 가장 좋은 방법은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'On Initialize'에서 Client Action을 사용해 loop 안에서 두 Aggregate를 순차적으로 조회한다."
+          },
+          {
+            "key": "B",
+            "text": "두 개를 하나의 Data Action으로 합쳐 두 개의 리스트를 반환하게 한다."
+          },
+          {
+            "key": "C",
+            "text": "두 Aggregate를 모두 'Fetch: At Start'로 설정하고 플랫폼이 의존 관계를 자동으로 처리하도록 맡긴다."
+          },
+          {
+            "key": "D",
+            "text": "GetProducts를 'Fetch: Only on Demand'로 설정하고 GetCategories의 'On After Fetch'에서 그 Refresh를 트리거한다."
+          }
+        ]
+      }
+    }
   }
 ]

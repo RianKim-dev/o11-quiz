@@ -939,5 +939,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "FV-018",
+    "subtopic": "Form Validations",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A screen has an input bound to a variable, and you must stop a Server Action from running when the input is empty. Where should the validation go for the best user experience?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only inside the Server Action, to keep client-side code minimal."
+      },
+      {
+        "key": "B",
+        "text": "In a global Client Action so it is consistent across the whole app."
+      },
+      {
+        "key": "C",
+        "text": "Only in the screen's On Initialize event."
+      },
+      {
+        "key": "D",
+        "text": "In the Client Action before the server call for instant feedback, and also in the Server Action for security."
+      }
+    ],
+    "answer": "D",
+    "explanation": "가장 좋은 UX는 Client Action(서버 호출 전)에서 먼저 검증해 사용자에게 즉시 피드백을 주고, 동시에 Server Action에서도 검증해 보안(우회 방지)을 확보하는 것입니다. A처럼 서버에서만 하면 왕복 후에야 오류를 알게 되어 UX가 나쁘고, C의 On Initialize는 입력 시점 검증에 맞지 않으며, B만으로는 서버 측 보안 검증이 빠집니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "화면에 변수에 바인딩된 입력 필드가 있고, 입력이 비어 있으면 Server Action이 실행되지 않도록 막아야 합니다. 최상의 사용자 경험을 위해 검증은 어디에 두어야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "클라이언트 측 코드를 최소화하기 위해 Server Action 안에만."
+          },
+          {
+            "key": "B",
+            "text": "앱 전체에서 일관되도록 전역 Client Action에."
+          },
+          {
+            "key": "C",
+            "text": "화면의 On Initialize 이벤트에만."
+          },
+          {
+            "key": "D",
+            "text": "즉각적인 피드백을 위해 서버 호출 전 Client Action에, 그리고 보안을 위해 Server Action에도."
+          }
+        ]
+      }
+    }
   }
 ]

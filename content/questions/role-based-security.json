@@ -1143,5 +1143,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "SEC-021",
+    "subtopic": "Role-based Security",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A 'Delete' button on the Order screen calls a Client Action that shows a confirmation dialog; on 'OK' it calls a Server Action to delete the record. What is the risk if the Server Action performs no 'CheckRole' verification?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Server Action will fail to compile because every Server Action requires a 'CheckRole'."
+      },
+      {
+        "key": "B",
+        "text": "A malicious user could bypass the UI and invoke the server request directly to delete records without belonging to the required Role."
+      },
+      {
+        "key": "C",
+        "text": "The button stays disabled for all users because no roles are defined."
+      },
+      {
+        "key": "D",
+        "text": "The platform automatically shows an 'Invalid Permissions' screen when the role is missing."
+      }
+    ],
+    "answer": "B",
+    "explanation": "UI에서 버튼을 숨기거나 confirmation dialog를 거치더라도 실제 삭제 로직은 서버 요청으로 실행되므로, 악의적 사용자가 화면을 우회해 그 요청을 직접 조작·재전송하면 권한 없이도 record를 삭제할 수 있습니다(B). 따라서 role 검사는 UI뿐 아니라 Server Action 내부에서 반드시 수행해야 합니다. CheckRole은 컴파일 필수 요소가 아니고(A), 없다고 버튼이 자동 비활성화(C)되거나 플랫폼이 자동 차단 화면을 띄우지도(D) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Order 화면의 'Delete' 버튼이 Client Action을 호출해 확인 dialog를 띄우고, 'OK'를 누르면 Server Action이 record를 삭제합니다. 이 Server Action이 'CheckRole' 검사를 전혀 하지 않으면 어떤 위험이 있습니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "모든 Server Action은 'CheckRole'이 있어야 컴파일되므로 Server Action이 실패한다."
+          },
+          {
+            "key": "B",
+            "text": "악의적 사용자가 UI를 우회해 서버 요청을 직접 호출하여 올바른 Role이 없어도 record를 삭제할 수 있다."
+          },
+          {
+            "key": "C",
+            "text": "Role이 정의되지 않아 모든 사용자에게 버튼이 비활성화된 채로 남는다."
+          },
+          {
+            "key": "D",
+            "text": "Role을 검사하지 않으면 플랫폼이 자동으로 'Invalid Permissions' 화면을 표시한다."
+          }
+        ]
+      }
+    }
   }
 ]

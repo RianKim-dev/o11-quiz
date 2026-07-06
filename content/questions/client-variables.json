@@ -752,5 +752,109 @@
         ]
       }
     }
+  },
+  {
+    "id": "CV-014",
+    "subtopic": "Client Variables",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A developer stores a sensitive API key in a Client Variable and passes it to a Server Action. Why is storing the key in a Client Variable a security risk?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Client Variables are kept in the browser's local storage, so users can view or modify them with browser developer tools."
+      },
+      {
+        "key": "B",
+        "text": "Passing a Client Variable to a Server Action always triggers a cross-site scripting (XSS) error."
+      },
+      {
+        "key": "C",
+        "text": "Client Variables are encrypted on the client, but Server Actions are unable to decrypt them."
+      },
+      {
+        "key": "D",
+        "text": "Client Variables only work in Mobile apps and always fail in Reactive Web apps."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Client Variable은 사용자의 브라우저(local storage)에 저장되기 때문에, 사용자가 개발자 도구로 값을 열람하거나 변경할 수 있습니다. 따라서 API key 같은 민감 정보를 저장하면 노출 위험이 매우 큽니다. B는 XSS 오류가 항상 난다는 잘못된 주장이고, C처럼 자동 암호화되지도 않으며, D처럼 Reactive Web에서 못 쓰는 것도 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 민감한 API key를 Client Variable에 저장하고 이를 Server Action에 전달합니다. 이렇게 Client Variable에 key를 저장하는 것이 보안상 위험한 이유는 무엇인가요?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Variable은 브라우저의 local storage에 저장되므로, 사용자가 브라우저 개발자 도구로 값을 열람하거나 변경할 수 있습니다."
+          },
+          {
+            "key": "B",
+            "text": "Client Variable을 Server Action에 전달하면 항상 cross-site scripting(XSS) 오류가 발생합니다."
+          },
+          {
+            "key": "C",
+            "text": "Client Variable은 클라이언트에서 암호화되지만, Server Action이 이를 복호화할 수 없습니다."
+          },
+          {
+            "key": "D",
+            "text": "Client Variable은 Mobile 앱에서만 동작하며 Reactive Web 앱에서는 항상 실패합니다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CV-015",
+    "subtopic": "Client Variables",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You store a user's preferred language in a Client Variable. When is that value synchronized back to the server?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Automatically whenever it is changed in a Client Action."
+      },
+      {
+        "key": "B",
+        "text": "Every time the user navigates to a new screen."
+      },
+      {
+        "key": "C",
+        "text": "Never automatically — Client Variables live in the browser and reach the server only when you explicitly pass them (e.g., as an Input Parameter)."
+      },
+      {
+        "key": "D",
+        "text": "Once per minute through a background system process."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Client Variable은 브라우저(클라이언트) 측에 저장되며 서버와 자동으로 동기화되지 않습니다. 값이 서버로 전달되려면 Server Action의 Input Parameter로 직접 넘기는 등 명시적으로 전달해야 합니다. 따라서 자동 동기화(A), 화면 이동 시 전송(B), 주기적 백그라운드 전송(D)은 모두 사실이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "사용자의 선호 언어를 Client Variable에 저장합니다. 이 값은 언제 서버와 동기화됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Action에서 값이 바뀔 때마다 자동으로."
+          },
+          {
+            "key": "B",
+            "text": "사용자가 새 화면으로 이동할 때마다."
+          },
+          {
+            "key": "C",
+            "text": "자동으로는 절대 되지 않는다 — Client Variable은 브라우저에 저장되며 명시적으로 전달할 때(예: Input Parameter로)만 서버에 도달한다."
+          },
+          {
+            "key": "D",
+            "text": "백그라운드 시스템 프로세스를 통해 분당 한 번."
+          }
+        ]
+      }
+    }
   }
 ]

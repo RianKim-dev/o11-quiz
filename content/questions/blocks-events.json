@@ -2029,5 +2029,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "BE-038",
+    "subtopic": "Blocks and Events",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Web app, what triggers a Block's 'On Parameters Changed' event?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It runs whenever the parent screen or block changes a value passed into one of the Block's Input Parameters."
+      },
+      {
+        "key": "B",
+        "text": "It runs only while the Block is currently visible on the screen."
+      },
+      {
+        "key": "C",
+        "text": "It must be triggered manually with a 'Trigger Event' node."
+      },
+      {
+        "key": "D",
+        "text": "It runs every time a Local Variable inside the Block is updated."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Block의 On Parameters Changed 이벤트는 부모 화면이나 부모 block이 그 block의 Input Parameter 값을 바꿀 때(초기화 이후) 실행됩니다. 화면에 보이는지 여부(B)와는 무관하고, 자동으로 발생하므로 수동 Trigger Event(C)가 필요 없으며, block 내부의 Local Variable 변경(D)으로는 발생하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web 앱에서 Block의 'On Parameters Changed' 이벤트는 무엇에 의해 트리거됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "부모 화면이나 부모 block이 그 Block의 Input Parameter 중 하나로 전달되는 값을 바꿀 때마다 실행된다."
+          },
+          {
+            "key": "B",
+            "text": "Block이 현재 화면에 보이는 동안에만 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "개발자가 'Trigger Event' node로 수동으로 발생시켜야 한다."
+          },
+          {
+            "key": "D",
+            "text": "Block 내부의 Local Variable이 갱신될 때마다 실행된다."
+          }
+        ]
+      }
+    }
   }
 ]

@@ -1775,5 +1775,109 @@
         ]
       }
     }
+  },
+  {
+    "id": "SL-033",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Product Search screen has a Local Variable 'SearchKeyword'. The user clicks a Link that navigates to the SAME screen (self-navigation). What happens to the value of 'SearchKeyword' after the navigation?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only variables marked as 'Global' survive the navigation."
+      },
+      {
+        "key": "B",
+        "text": "It is reset to its Default (Initial) Value, because a new instance of the screen is created."
+      },
+      {
+        "key": "C",
+        "text": "It is stored in the browser's View State and restored automatically."
+      },
+      {
+        "key": "D",
+        "text": "It keeps its value, because the platform optimizes self-navigation to skip resets."
+      }
+    ],
+    "answer": "B",
+    "explanation": "같은 화면으로의 Self-Navigation이라도 Link로 이동하면 화면 인스턴스가 새로 생성되어 Local Variable은 초기값(Default Value)으로 리셋됩니다(정답 B). 플랫폼은 이전 값을 자동 보존하지 않으므로 D는 틀리고, Reactive에는 브라우저 View State 복원(C) 개념이 없으며, Local Variable에 Global 구분(A)도 없습니다. 값을 유지하려면 Input Parameter로 넘기거나 Client Variable을 사용해야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "제품 검색 화면에 Local Variable 'SearchKeyword'가 있습니다. 사용자가 동일한 화면으로 이동하는 Link(Self-Navigation)를 클릭합니다. 이동 후 'SearchKeyword' 값은 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Global'로 표시된 변수만 이동 후에도 유지된다."
+          },
+          {
+            "key": "B",
+            "text": "새 화면 인스턴스가 생성되므로 초기값(Default Value)으로 리셋된다."
+          },
+          {
+            "key": "C",
+            "text": "브라우저의 View State에 저장되어 자동으로 복원된다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 Self-Navigation을 최적화하여 리셋을 건너뛰므로 값이 유지된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-034",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In the Screen Lifecycle, which event is the first place where you can reliably access and manipulate DOM elements with JavaScript?",
+    "options": [
+      {
+        "key": "A",
+        "text": "On Parameters Changed"
+      },
+      {
+        "key": "B",
+        "text": "On After Fetch"
+      },
+      {
+        "key": "C",
+        "text": "On Initialize"
+      },
+      {
+        "key": "D",
+        "text": "On Ready"
+      }
+    ],
+    "answer": "D",
+    "explanation": "On Initialize와 On After Fetch는 화면이 실제로 렌더링되기 '전'에 실행되므로 DOM 요소가 아직 존재하지 않아 안전하게 조작할 수 없습니다. On Ready는 Screen이 완전히 렌더링된 뒤 실행되는 이벤트여서, 이때 비로소 JavaScript로 DOM 요소에 안정적으로 접근할 수 있습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Screen Lifecycle에서 JavaScript로 DOM 요소에 안정적으로 접근하고 조작할 수 있는 첫 번째 이벤트는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "On Parameters Changed"
+          },
+          {
+            "key": "B",
+            "text": "On After Fetch"
+          },
+          {
+            "key": "C",
+            "text": "On Initialize"
+          },
+          {
+            "key": "D",
+            "text": "On Ready"
+          }
+        ]
+      }
+    }
   }
 ]
