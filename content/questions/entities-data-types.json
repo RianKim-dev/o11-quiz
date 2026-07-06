@@ -3155,5 +3155,213 @@
         ]
       }
     }
+  },
+  {
+    "id": "ENT-059",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "What is the primary difference between an Entity and a Static Entity in OutSystems 11?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Entities require an Id attribute, but Static Entities do not."
+      },
+      {
+        "key": "B",
+        "text": "A Static Entity has a fixed set of records defined at design-time that end-users cannot change at runtime."
+      },
+      {
+        "key": "C",
+        "text": "A Static Entity can have only one attribute, while an Entity can have many."
+      },
+      {
+        "key": "D",
+        "text": "Entities are stored in the database, while Static Entities live in the browser cache."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Static Entity는 design-time에 정의된 고정된 record 집합을 가지며, end-user가 런타임에 값을 바꿀 수 없습니다(예: 상태 코드, 카테고리). 따라서 B가 정답입니다. Static Entity도 Id를 가지므로 A는 틀리고, Label 외에 추가 attribute도 여러 개 가질 수 있어 C도 틀리며, Static Entity 역시 데이터베이스에 저장되므로 브라우저 캐시에 저장된다는 D도 오답입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "OutSystems 11에서 Entity와 Static Entity의 주요 차이는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Entity는 Id attribute가 필요하지만 Static Entity는 필요 없다."
+          },
+          {
+            "key": "B",
+            "text": "Static Entity는 design-time에 정의된 고정된 record 집합을 가지며 end-user가 런타임에 변경할 수 없다."
+          },
+          {
+            "key": "C",
+            "text": "Static Entity는 attribute를 하나만 가질 수 있고 Entity는 여러 개 가질 수 있다."
+          },
+          {
+            "key": "D",
+            "text": "Entity는 데이터베이스에 저장되고 Static Entity는 브라우저 캐시에 저장된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-060",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Server Action you use the 'CreateOrUpdate' entity action for the Order entity. What determines whether the record is Created or Updated?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It always Updates unless the Order table is completely empty."
+      },
+      {
+        "key": "B",
+        "text": "You must set a 'Mode' parameter to either 'Create' or 'Update'."
+      },
+      {
+        "key": "C",
+        "text": "If the Id of the input record is the Null Identifier, a new record is Created; otherwise it is Updated."
+      },
+      {
+        "key": "D",
+        "text": "The platform checks whether the 'OrderNumber' attribute already exists in the database."
+      }
+    ],
+    "answer": "C",
+    "explanation": "CreateOrUpdate는 입력 record의 Id를 기준으로 동작합니다. Id가 Null Identifier(비어 있음)이면 새 record를 Create하고, 기존에 존재하는 Id 값이면 해당 record를 Update합니다. 'Mode' 파라미터(B)나 OrderNumber 중복 검사(D) 같은 기능은 존재하지 않으며, 항상 Update한다(A)도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Server Action에서 Order 엔티티에 대해 'CreateOrUpdate' 엔티티 액션을 사용합니다. record가 Create될지 Update될지는 무엇으로 결정됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Order 테이블이 완전히 비어 있지 않는 한 항상 Update한다."
+          },
+          {
+            "key": "B",
+            "text": "'Mode' 파라미터를 'Create' 또는 'Update'로 직접 설정해야 한다."
+          },
+          {
+            "key": "C",
+            "text": "입력 record의 Id가 Null Identifier이면 새 record를 Create하고, 아니면 Update한다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 'OrderNumber' 속성이 이미 데이터베이스에 존재하는지 검사한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-061",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "You need to guarantee that every 'Employee' record always has a Salary greater than zero, with maximum data integrity. Where is the best place to enforce this rule?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In the 'On Change' event of the Salary Input widget on the screen."
+      },
+      {
+        "key": "B",
+        "text": "By setting a 'Min Value' property on the Employee entity attribute."
+      },
+      {
+        "key": "C",
+        "text": "In a Client Action that shows a 'Message' node to warn the user."
+      },
+      {
+        "key": "D",
+        "text": "In a Server Action that wraps the entity's Create/Update (a CRUD wrapper) and validates before writing."
+      }
+    ],
+    "answer": "D",
+    "explanation": "데이터 무결성은 화면(client)이 아니라 server 쪽에서 보장해야 하며, Entity 접근을 감싸는 Server Action(CRUD wrapper) 안에서 저장 전에 검증하는 것이 OutSystems 권장 패턴입니다. Entity attribute에는 'Min Value' 속성이 존재하지 않으므로 B는 없는 기능이고, On Change(A)나 client의 Message(C)는 화면에서만 동작해 API나 다른 로직으로 우회하면 무결성이 깨집니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "모든 'Employee' record의 Salary가 항상 0보다 크도록 최대한의 데이터 무결성으로 보장하려고 합니다. 이 규칙을 적용하기에 가장 좋은 위치는 어디입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "화면에 있는 Salary Input 위젯의 'On Change' 이벤트."
+          },
+          {
+            "key": "B",
+            "text": "Employee 엔티티 속성에 'Min Value' 속성을 설정한다."
+          },
+          {
+            "key": "C",
+            "text": "사용자에게 경고하는 'Message' node를 가진 Client Action."
+          },
+          {
+            "key": "D",
+            "text": "엔티티의 Create/Update를 감싸고 저장 전에 검증하는 Server Action(CRUD wrapper)."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ENT-062",
+    "subtopic": "Entities & Data Types",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "An entity attribute 'TotalAmount' has its Data Type set to 'Currency'. If no value is assigned, what default value does the platform use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Null"
+      },
+      {
+        "key": "B",
+        "text": "1"
+      },
+      {
+        "key": "C",
+        "text": "0"
+      },
+      {
+        "key": "D",
+        "text": "Empty String"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Currency는 OutSystems의 숫자 계열(decimal) 데이터 타입이며, 숫자 타입의 기본값은 0입니다. OutSystems의 기본 데이터 타입은 원칙적으로 Null이 아니라 타입별 기본값을 가지므로 A는 틀리고, Empty String(D)은 Text 타입의 기본값이며, 1(B)은 근거가 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "엔티티 속성 'TotalAmount'의 Data Type이 'Currency'로 설정되어 있습니다. 값을 할당하지 않으면 플랫폼이 사용하는 기본값은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Null"
+          },
+          {
+            "key": "B",
+            "text": "1"
+          },
+          {
+            "key": "C",
+            "text": "0"
+          },
+          {
+            "key": "D",
+            "text": "빈 문자열(Empty String)"
+          }
+        ]
+      }
+    }
   }
 ]

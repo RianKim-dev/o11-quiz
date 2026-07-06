@@ -2420,5 +2420,369 @@
         ]
       }
     }
+  },
+  {
+    "id": "FDS-045",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A Screen's Aggregate could return 1000 Ticket records, and a Table widget is bound to it. To paginate, the developer adds a Pagination widget and sets the Aggregate's 'Max Records' to 10. What happens to the other 990 records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate fails, because 'Max Records' must equal the total row count in the database."
+      },
+      {
+        "key": "B",
+        "text": "They are downloaded to the browser but hidden by the Table widget's CSS."
+      },
+      {
+        "key": "C",
+        "text": "They are never fetched from the database, which improves performance."
+      },
+      {
+        "key": "D",
+        "text": "They are cached in the browser's memory so page switching is instant."
+      }
+    ],
+    "answer": "C",
+    "explanation": "'Max Records'는 데이터베이스 쿼리 자체에 적용되는 한도라서 값을 10으로 설정하면 SQL이 딱 10건만 가져옵니다. 나머지 990건은 애초에 조회되지 않아 네트워크/메모리 부담이 줄어들므로 C가 정답입니다. 데이터를 다 받아온 뒤 숨기는 것이 아니므로 B, 브라우저에 캐싱되는 것도 아니므로 D는 틀립니다. Max Records는 조회 건수 상한일 뿐 전체 건수와 일치할 필요가 없으므로 A도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen의 Aggregate가 최대 1000건의 Ticket 레코드를 반환할 수 있고, Table 위젯이 여기에 바인딩되어 있습니다. 페이지네이션을 위해 개발자가 Pagination 위젯을 추가하고 Aggregate의 'Max Records'를 10으로 설정합니다. 나머지 990건은 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Max Records'는 데이터베이스의 전체 행 수와 같아야 하므로 Aggregate가 실패한다."
+          },
+          {
+            "key": "B",
+            "text": "브라우저로 다운로드되지만 Table 위젯의 CSS로 숨겨진다."
+          },
+          {
+            "key": "C",
+            "text": "데이터베이스에서 아예 조회되지 않아 성능이 향상된다."
+          },
+          {
+            "key": "D",
+            "text": "페이지 전환이 즉각적이도록 브라우저 메모리에 캐싱된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-046",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has an Aggregate 'GetOrders'. In its 'On After Fetch' event, a Message node shows 'GetOrders.List.Length'. After the initial load shows 5, the user clicks a button that runs a 'Refresh Data' for 'GetOrders'. What happens?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The 'On After Fetch' runs again only if the number of records returned has changed."
+      },
+      {
+        "key": "B",
+        "text": "The 'On After Fetch' logic runs again, and the Message is shown a second time."
+      },
+      {
+        "key": "C",
+        "text": "The Refresh Data node suppresses the 'On After Fetch' event to save performance."
+      },
+      {
+        "key": "D",
+        "text": "The Message only ever shows during the initial load of the Screen."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Refresh Data는 해당 Aggregate를 다시 실행하며, Aggregate가 실행될 때마다 On After Fetch가 다시 발생합니다. 따라서 버튼으로 Refresh Data를 하면 On After Fetch 안의 Message가 한 번 더 표시됩니다. 실행은 레코드 수 변화 여부와 무관하게 매번 일어나므로 A는 틀리고, 성능을 위해 이벤트를 건너뛰지 않으며(C) 최초 로드에서만 뜨는 것도 아니므로(D) 정답은 B입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Screen에 Aggregate 'GetOrders'가 있고, 그 'On After Fetch' 이벤트의 Message 노드가 'GetOrders.List.Length'를 보여줍니다. 최초 로드에서 5가 표시된 뒤, 사용자가 'GetOrders'에 대한 'Refresh Data'를 실행하는 버튼을 클릭하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "반환된 레코드 수가 바뀐 경우에만 'On After Fetch'가 다시 실행된다."
+          },
+          {
+            "key": "B",
+            "text": "'On After Fetch' 로직이 다시 실행되어 Message가 한 번 더 표시된다."
+          },
+          {
+            "key": "C",
+            "text": "Refresh Data 노드가 성능을 위해 'On After Fetch' 이벤트 발생을 막는다."
+          },
+          {
+            "key": "D",
+            "text": "Message는 Screen 최초 로드 시에만 표시된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-047",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Data Action on a Screen has its 'Fetch' set to 'At Start' and retrieves a Customer's profile. The developer wants to reload this profile every time a 'RefreshProfile' Event is handled. What should they do?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a 'Refresh Data' node in the Event handler flow and select that Data Action."
+      },
+      {
+        "key": "B",
+        "text": "Call the Data Action directly in the flow as if it were a Client Action."
+      },
+      {
+        "key": "C",
+        "text": "Do nothing, because a Data Action set to 'At Start' re-runs automatically on every Event."
+      },
+      {
+        "key": "D",
+        "text": "Navigate to the same Screen again to re-trigger the 'At Start' logic."
+      }
+    ],
+    "answer": "A",
+    "explanation": "'At Start'로 설정된 Data Action을 원하는 시점에 다시 실행하려면, 이벤트 핸들러 흐름에 Refresh Data 노드를 추가하고 해당 Data Action을 선택하면 됩니다. Data Action은 흐름에서 Client Action처럼 직접 호출하는 방식이 아니고(B), 'At Start'라고 해서 이벤트마다 자동 재조회되지도 않으며(C), 굳이 같은 화면으로 다시 이동할 필요도 없으므로(D) 정답은 A입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Screen의 한 Data Action이 'Fetch'가 'At Start'로 설정되어 Customer 프로필을 조회합니다. 개발자는 'RefreshProfile' Event가 처리될 때마다 이 프로필을 다시 불러오고 싶습니다. 어떻게 해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Event 핸들러 흐름에 'Refresh Data' 노드를 추가하고 해당 Data Action을 선택한다."
+          },
+          {
+            "key": "B",
+            "text": "흐름에서 Data Action을 Client Action처럼 직접 호출한다."
+          },
+          {
+            "key": "C",
+            "text": "아무것도 하지 않는다. 'At Start'로 설정된 Data Action은 모든 Event마다 자동으로 다시 실행된다."
+          },
+          {
+            "key": "D",
+            "text": "'At Start' 로직을 다시 트리거하기 위해 같은 Screen으로 다시 이동한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-048",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer shows a 'Loading' spinner while an 'At Start' Aggregate 'GetOrders' fetches data, using an 'If' widget whose condition is true only once the Aggregate has finished fetching. What is the behavior during the screen lifecycle?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The developer must manually toggle the branch inside the Aggregate's 'On After Fetch' event."
+      },
+      {
+        "key": "B",
+        "text": "The 'True' branch is always shown first, but the data inside it stays empty until the fetch finishes."
+      },
+      {
+        "key": "C",
+        "text": "The 'If' widget evaluates its condition only once, during the 'On Initialize' event."
+      },
+      {
+        "key": "D",
+        "text": "The 'False' branch (spinner) is shown initially, then the 'True' branch (data) is rendered automatically once the fetch completes."
+      }
+    ],
+    "answer": "D",
+    "explanation": "At Start Aggregate는 화면 초기화 시 비동기로 데이터를 가져옵니다. 데이터를 아직 못 가져온 동안에는 If의 False 분기(스피너)가 보이고, fetch가 끝나면 조건 값이 바뀌면서 If가 자동으로 다시 평가되어 True 분기(데이터)가 표시됩니다. If 위젯은 바인딩된 값이 변할 때마다 자동으로 재평가되므로, 수동 토글(A)이나 On Initialize에서 1회만 평가(C)하는 것이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 'At Start' Aggregate 'GetOrders'가 데이터를 가져오는 동안 'Loading' 스피너를 보여주려고, Aggregate의 fetch가 끝났을 때만 참이 되는 조건을 가진 'If' 위젯을 사용합니다. 화면 라이프사이클 동안의 동작은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "개발자가 Aggregate의 'On After Fetch' 이벤트에서 분기를 수동으로 전환해야 한다."
+          },
+          {
+            "key": "B",
+            "text": "'True' 분기가 항상 먼저 표시되지만, fetch가 끝날 때까지 그 안의 데이터는 비어 있다."
+          },
+          {
+            "key": "C",
+            "text": "'If' 위젯은 'On Initialize' 이벤트에서 조건을 단 한 번만 평가한다."
+          },
+          {
+            "key": "D",
+            "text": "처음에는 'False' 분기(스피너)가 표시되고, fetch가 완료되면 자동으로 'True' 분기(데이터)가 렌더링된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-049",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen Aggregate 'GetCustomers' has the filter 'Customer.IsActive = True'. The developer changes it to 'Customer.IsActive = SearchIsActive', where SearchIsActive is a Screen Variable. What must be done so a new search shows updated results?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Navigate away from the screen and back again."
+      },
+      {
+        "key": "B",
+        "text": "Re-assign the filter inside the 'On Initialize' event."
+      },
+      {
+        "key": "C",
+        "text": "Run a 'Refresh Data' node for 'GetCustomers' in a Client Action after the variable changes."
+      },
+      {
+        "key": "D",
+        "text": "Nothing — the Aggregate refreshes automatically whenever the variable changes."
+      }
+    ],
+    "answer": "C",
+    "explanation": "Screen Aggregate는 화면이 열릴 때 'At Start'로 한 번 실행되며, filter에 쓰인 Screen Variable(local 변수)이 바뀌어도 자동으로 다시 실행되지 않습니다(입력 파라미터가 아니기 때문). 새 검색 결과를 보려면 변수 변경 후 Client Action에서 해당 Aggregate에 대해 'Refresh Data' node를 실행해야 합니다. 따라서 자동 refresh(D)는 틀리고, On Initialize 재할당(B)이나 화면 이동(A)도 해결책이 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Screen Aggregate 'GetCustomers'에 'Customer.IsActive = True' filter가 있습니다. 개발자가 이를 Screen Variable인 SearchIsActive를 사용해 'Customer.IsActive = SearchIsActive'로 바꿉니다. 새 검색 결과를 보려면 무엇을 해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "화면을 벗어났다가 다시 돌아온다."
+          },
+          {
+            "key": "B",
+            "text": "'On Initialize' 이벤트 안에서 filter를 다시 할당한다."
+          },
+          {
+            "key": "C",
+            "text": "변수 변경 후 Client Action에서 'GetCustomers'에 대해 'Refresh Data' node를 실행한다."
+          },
+          {
+            "key": "D",
+            "text": "아무것도 필요 없다 — 변수가 바뀌면 Aggregate가 자동으로 refresh된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-050",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has an Aggregate 'GetProducts'. A Button runs a Client Action that changes a Local Variable 'MaxPrice', which is used in the Filter of 'GetProducts'. After the variable is changed inside the Client Action, what happens to the product list shown on the Screen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The product list stays the same until a 'Refresh Data' node for 'GetProducts' is explicitly executed."
+      },
+      {
+        "key": "B",
+        "text": "The Screen re-renders the existing data but does not query the database for new records."
+      },
+      {
+        "key": "C",
+        "text": "Screen execution pauses until the Aggregate finishes an automatic background refresh."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate detects the variable change and refreshes the data automatically."
+      }
+    ],
+    "answer": "A",
+    "explanation": "화면 로드 시 Aggregate는 'At Start'로 실행되며, Filter에 사용된 Local Variable 'MaxPrice'를 Client Action에서 바꿔도 Aggregate가 자동으로 다시 조회되지 않는다. 자동 재조회는 Input Parameter가 바뀔 때만 일어나고 Local Variable 변경은 해당하지 않으므로, 새 결과를 보려면 'GetProducts'에 대한 Refresh Data node를 명시적으로 실행해야 한다. 따라서 자동 refresh를 주장하는 D는 틀리다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen에 Aggregate 'GetProducts'가 있다. 한 Button이 Client Action을 실행하여 Local Variable 'MaxPrice'를 변경하며, 이 변수는 'GetProducts'의 Filter에 사용된다. Client Action 안에서 변수가 변경된 후 화면에 표시되는 제품 목록은 어떻게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'GetProducts'에 대한 'Refresh Data' node를 명시적으로 실행하기 전까지 목록은 그대로 유지된다."
+          },
+          {
+            "key": "B",
+            "text": "화면은 기존 데이터를 다시 렌더링하지만 데이터베이스에서 새 레코드를 조회하지는 않는다."
+          },
+          {
+            "key": "C",
+            "text": "Aggregate가 자동 백그라운드 refresh를 마칠 때까지 화면 실행이 일시 중지된다."
+          },
+          {
+            "key": "D",
+            "text": "Aggregate가 변수 변경을 감지하여 자동으로 데이터를 refresh한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "FDS-051",
+    "subtopic": "Fetching Data on Screens",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer adds a 'Pagination' widget and binds its 'StartIndex' to a variable 'CurrentOffset'. When the user clicks 'Next', the widget updates 'CurrentOffset'. What must the developer do to display the next set of records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the Table's 'Max Records' to the new 'CurrentOffset' value."
+      },
+      {
+        "key": "B",
+        "text": "Manually refresh the Aggregate that populates the Table."
+      },
+      {
+        "key": "C",
+        "text": "Use the Screen's 'On Render' event to detect the variable change."
+      },
+      {
+        "key": "D",
+        "text": "Nothing; the Pagination widget is linked to the Table and refreshes it automatically."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Pagination widget은 offset 변수만 갱신할 뿐 데이터를 자동으로 다시 가져오지 않는다. 새 페이지의 레코드를 보려면 Table을 채우는 Aggregate를 직접 Refresh Data로 다시 실행해야 한다. 그래서 B가 맞고, 자동 refresh를 주장하는 D는 틀리다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 화면에 'Pagination' widget을 추가하고 'StartIndex' 속성을 변수 'CurrentOffset'에 연결한다. 사용자가 'Next'를 클릭하면 widget이 'CurrentOffset'을 업데이트한다. 다음 레코드 집합을 보여주려면 개발자는 무엇을 해야 하는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Table의 'Max Records'를 새 'CurrentOffset' 값으로 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "Table을 채우는 Aggregate를 수동으로 refresh한다."
+          },
+          {
+            "key": "C",
+            "text": "Screen의 'On Render' event로 변수 변경을 감지한다."
+          },
+          {
+            "key": "D",
+            "text": "아무것도 필요 없음. Pagination widget이 Table과 연결되어 자동으로 refresh한다."
+          }
+        ]
+      }
+    }
   }
 ]

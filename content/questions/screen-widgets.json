@@ -1314,5 +1314,837 @@
         ]
       }
     }
+  },
+  {
+    "id": "SW-022",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A Dropdown widget is bound to an Aggregate 'GetCategories', with 'Options Text' set to Category.Label and 'Options Value' set to Category.Id. Its 'Variable' property is bound to a Screen Variable 'SelectedId'. What happens when the user selects a new item in the Dropdown?",
+    "options": [
+      {
+        "key": "A",
+        "text": "'SelectedId' is updated, but no logic runs unless an 'On Change' event is defined."
+      },
+      {
+        "key": "B",
+        "text": "The Dropdown reverts to its default value when no 'On Change' handler exists."
+      },
+      {
+        "key": "C",
+        "text": "'SelectedId' is updated and the Screen is automatically submitted to the server."
+      },
+      {
+        "key": "D",
+        "text": "The Aggregate 'GetCategories' is re-executed to confirm the selection."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Reactive에서 Dropdown 선택은 연결된 Variable('SelectedId')만 업데이트할 뿐 별도 로직은 실행하지 않는다. 어떤 동작을 하려면 'On Change' event를 정의해야 한다. 자동으로 서버에 submit되거나(C) Aggregate가 다시 실행되지는(D) 않으며, 값이 되돌아가지도(B) 않는다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Dropdown widget이 Aggregate 'GetCategories'에 연결되어 있고, 'Options Text'는 Category.Label, 'Options Value'는 Category.Id로 설정된다. 'Variable' 속성은 Screen Variable 'SelectedId'에 연결된다. 사용자가 Dropdown에서 새 항목을 선택하면 어떻게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'SelectedId' 변수는 업데이트되지만, 'On Change' event가 정의되어 있지 않으면 아무 로직도 실행되지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "'On Change' handler가 없으면 Dropdown이 기본값으로 되돌아간다."
+          },
+          {
+            "key": "C",
+            "text": "'SelectedId'가 업데이트되고 화면이 자동으로 서버에 submit된다."
+          },
+          {
+            "key": "D",
+            "text": "선택을 확인하기 위해 Aggregate 'GetCategories'가 다시 실행된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-023",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A 'Table' widget displays a list of 'Tickets'. One column contains a 'Close' button. In that button's 'On Click' Client Action, the developer accesses 'GetTickets.List.Current'. Which record does this refer to?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The first record of the Aggregate's result list."
+      },
+      {
+        "key": "B",
+        "text": "The specific record from the row where the button was clicked."
+      },
+      {
+        "key": "C",
+        "text": "Nothing; 'Current' is not available inside Table actions."
+      },
+      {
+        "key": "D",
+        "text": "The most recently inserted record in the database."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Table(또는 List) 안의 버튼에서 'GetTickets.List.Current'는 그 버튼이 놓인 행(row)의 레코드를 가리킨다. 각 행이 반복 렌더링되면서 Current가 해당 행을 참조하기 때문이다. 그래서 B가 맞고, 항상 첫 레코드(A)나 마지막 삽입 레코드(D)를 가리킨다는 설명은 틀리다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Table' widget이 'Tickets' 목록을 표시한다. 한 컬럼에 'Close' 버튼이 있다. 그 버튼의 'On Click' Client Action에서 개발자가 'GetTickets.List.Current'에 접근한다. 이는 어떤 레코드를 가리키는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate 결과 목록의 첫 번째 레코드."
+          },
+          {
+            "key": "B",
+            "text": "버튼을 클릭한 행(row)의 해당 레코드."
+          },
+          {
+            "key": "C",
+            "text": "아무것도 아님. 'Current'는 Table Action 안에서 사용할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "데이터베이스에 가장 최근에 추가된 레코드."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-024",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer wants to navigate to another Screen when a user clicks a 'Link' widget, but only if a certain condition is met. What is the correct configuration?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the Link's 'Destination' property directly to the Target Screen."
+      },
+      {
+        "key": "B",
+        "text": "Wrap the Link in an 'If' widget to change its 'Destination'."
+      },
+      {
+        "key": "C",
+        "text": "Set the Link to 'Redirect' and handle the logic in the Target Screen's 'On Initialize'."
+      },
+      {
+        "key": "D",
+        "text": "Set the Link's 'On Click' to a Client Action that uses an 'If' and a 'Destination' node."
+      }
+    ],
+    "answer": "D",
+    "explanation": "조건에 따라 이동하려면 Link의 'On Click'을 Client Action에 연결하고, 그 Action 안에서 'If'로 조건을 검사한 뒤 'Destination' node로 이동시켜야 한다. Destination을 화면에 직접 지정(A)하면 조건을 걸 수 없고, If widget으로 감싸는 것(B)은 표시/비표시 용도이지 조건부 이동 방식이 아니므로 D가 올바른 구성이다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 사용자가 'Link' widget을 클릭할 때 특정 조건이 충족된 경우에만 다른 Screen으로 이동시키려 한다. 올바른 구성은?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Link의 'Destination' 속성을 대상 Screen으로 직접 설정한다."
+          },
+          {
+            "key": "B",
+            "text": "Link를 'If' widget으로 감싸 'Destination'을 변경한다."
+          },
+          {
+            "key": "C",
+            "text": "Link를 'Redirect'로 설정하고 로직을 대상 Screen의 'On Initialize'에서 처리한다."
+          },
+          {
+            "key": "D",
+            "text": "Link의 'On Click'을 Client Action에 연결하고, 그 Action 안에서 'If'와 'Destination' node를 사용한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-025",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Expression widget shows 'GetAmount.List.Current.Value * ExchangeRate', where 'ExchangeRate' is a Screen Variable. If a Client Action updates 'ExchangeRate', when does the displayed Expression value update?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only after a 'Refresh Data' for 'GetAmount' is executed."
+      },
+      {
+        "key": "B",
+        "text": "Immediately, as soon as the 'ExchangeRate' variable is modified."
+      },
+      {
+        "key": "C",
+        "text": "Only after the developer calls an 'Ajax Refresh' node."
+      },
+      {
+        "key": "D",
+        "text": "Only when the user hovers over the Expression widget."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Reactive Web에서 Expression 위젯은 반응형이라 자신이 참조하는 변수 값이 바뀌면 자동으로 다시 계산되어 화면에 반영됩니다. 'ExchangeRate'가 수정되는 즉시 Expression이 갱신되므로 B가 정답입니다. GetAmount 데이터를 다시 조회할 필요가 없으므로 A는 틀리고, Reactive Web에는 Traditional Web의 'Ajax Refresh' 노드 개념이 없으므로 C도 틀립니다. 화면 갱신은 마우스 hover와 무관하므로 D도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Expression 위젯이 'GetAmount.List.Current.Value * ExchangeRate'를 표시하며, 여기서 'ExchangeRate'는 Screen Variable입니다. Client Action이 'ExchangeRate'를 갱신하면 화면의 Expression 값은 언제 업데이트됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'GetAmount'에 대한 'Refresh Data'가 실행된 후에만."
+          },
+          {
+            "key": "B",
+            "text": "'ExchangeRate' 변수가 수정되는 즉시."
+          },
+          {
+            "key": "C",
+            "text": "개발자가 'Ajax Refresh' 노드를 호출한 후에만."
+          },
+          {
+            "key": "D",
+            "text": "사용자가 Expression 위젯 위에 마우스를 올렸을 때만."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-026",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A 'Submit' Button on a form has its 'Is Default' property set to Yes. What does this mean for the user experience?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The button is always positioned at the top-left corner of the Screen."
+      },
+      {
+        "key": "B",
+        "text": "The button is triggered when the user presses the 'Enter' key while focused inside a form field."
+      },
+      {
+        "key": "C",
+        "text": "The button's Client Action runs automatically as soon as the Screen finishes loading."
+      },
+      {
+        "key": "D",
+        "text": "It becomes the only button on the Screen that the user is allowed to click."
+      }
+    ],
+    "answer": "B",
+    "explanation": "버튼의 'Is Default' 속성을 Yes로 설정하면, 사용자가 폼 필드에 포커스를 둔 상태에서 Enter 키를 눌렀을 때 그 버튼이 실행됩니다(정답 B). 이는 위치와 무관하므로 A는 틀리고, 화면 로드 시 자동 실행되는 것도 아니므로 C도 틀립니다. 다른 버튼들도 여전히 클릭 가능하므로 D도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "폼의 'Submit' 버튼에 'Is Default' 속성이 Yes로 설정되어 있습니다. 이것은 사용자 경험 측면에서 무엇을 의미합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "버튼이 항상 Screen의 왼쪽 상단 모서리에 배치된다."
+          },
+          {
+            "key": "B",
+            "text": "사용자가 폼 필드에 포커스를 둔 채 'Enter' 키를 누르면 이 버튼이 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "Screen 로딩이 끝나는 즉시 버튼의 Client Action이 자동으로 실행된다."
+          },
+          {
+            "key": "D",
+            "text": "사용자가 클릭할 수 있는 유일한 버튼이 된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-027",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Table widget showing Products, a developer enables the 'Sort' property on the 'Name' column. When the user clicks that column header at runtime, what happens by default?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate automatically detects the click and re-fetches the data already sorted."
+      },
+      {
+        "key": "B",
+        "text": "A value is assigned to a sort variable, but the developer must refresh the Aggregate using a Dynamic Sort to reorder the rows."
+      },
+      {
+        "key": "C",
+        "text": "The entire Screen reloads to apply the new sort order."
+      },
+      {
+        "key": "D",
+        "text": "The Table widget re-orders the rows instantly on the client without any server call."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Table 컬럼에 Sort를 켜면 헤더 클릭 시 정렬 대상/방향을 담는 sort 변수에 값만 할당될 뿐, 데이터가 저절로 다시 정렬되지는 않습니다. 실제로 정렬된 결과를 보려면 Aggregate의 Sort 설정을 Dynamic Sort로 구성하고 Refresh Data로 다시 조회해야 합니다. 그래서 A(자동 재조회)나 D(즉시 클라이언트 정렬)는 틀리고, 화면 전체가 리로드되는 것도 아니므로 C도 오답입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Product를 보여주는 Table widget에서 개발자가 'Name' 컬럼의 'Sort' 속성을 활성화했습니다. 런타임에 사용자가 그 컬럼 헤더를 클릭하면 기본적으로 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Aggregate가 클릭을 자동으로 감지해 정렬된 데이터를 다시 조회한다."
+          },
+          {
+            "key": "B",
+            "text": "sort 변수에 값이 할당될 뿐이며, 개발자가 Dynamic Sort로 Aggregate를 refresh해야 행이 재정렬된다."
+          },
+          {
+            "key": "C",
+            "text": "새 정렬 순서를 적용하기 위해 Screen 전체가 리로드된다."
+          },
+          {
+            "key": "D",
+            "text": "Table widget이 서버 호출 없이 클라이언트에서 즉시 행을 재정렬한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-028",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "Inside a List widget bound to Employees, a developer places an If widget whose Condition is 'List.Current.Employee.IsActive'. What is the main performance consideration of this structure?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The 'Current' pointer gets stuck on the first row where the condition is False."
+      },
+      {
+        "key": "B",
+        "text": "The If condition is evaluated individually for every single row rendered in the List."
+      },
+      {
+        "key": "C",
+        "text": "The If widget cannot access 'Current' record data when placed inside a List."
+      },
+      {
+        "key": "D",
+        "text": "The If widget forces the Aggregate to re-fetch data once for every row."
+      }
+    ],
+    "answer": "B",
+    "explanation": "List 안에 놓인 If widget의 Condition은 렌더링되는 각 행마다 개별적으로 평가됩니다. 행 수가 많고 조건 계산이 무거우면 그만큼 반복 평가가 늘어나 성능에 영향을 줄 수 있다는 점이 핵심입니다. If는 List.Current 데이터에 정상 접근할 수 있으므로 C는 틀리고, 행마다 Aggregate를 다시 조회하지 않으며(D) Current 포인터가 특정 행에 '고정'되지도 않으므로(A) 정답은 B입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee에 바인딩된 List widget 안에 개발자가 Condition이 'List.Current.Employee.IsActive'인 If widget을 넣었습니다. 이 구조의 주된 성능상 고려사항은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Current' 포인터가 조건이 False인 첫 행에서 고정되어 버린다."
+          },
+          {
+            "key": "B",
+            "text": "If 조건이 List에서 렌더링되는 모든 행마다 개별적으로 평가된다."
+          },
+          {
+            "key": "C",
+            "text": "List 안에 놓이면 If widget이 'Current' 레코드 데이터에 접근할 수 없다."
+          },
+          {
+            "key": "D",
+            "text": "If widget이 각 행마다 Aggregate를 한 번씩 다시 조회하게 만든다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-029",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer hides a 'Cart Summary' Block by placing it inside an 'If' widget bound to the Screen Variable 'IsCartOpen'. When 'IsCartOpen' changes from True to False, what happens to the Block's state?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Block is hidden via CSS, but its local variables remain intact in memory."
+      },
+      {
+        "key": "B",
+        "text": "The Block is destroyed, and any local data or unsaved changes in its variables are lost."
+      },
+      {
+        "key": "C",
+        "text": "The Block enters a 'Suspended' state and resumes when the variable becomes True."
+      },
+      {
+        "key": "D",
+        "text": "The Parent Screen throws an error if the Block had active asynchronous data fetches."
+      }
+    ],
+    "answer": "B",
+    "explanation": "If 위젯은 조건이 False가 되면 내부 내용을 CSS로 숨기는 것이 아니라 DOM에서 아예 렌더링하지 않고 제거합니다. 따라서 Block이 사라지면서 그 안의 Local Variable 값이나 저장하지 않은 상태도 함께 사라집니다. CSS로만 숨기는 것(A)은 Container의 Display=False 동작이고, OutSystems에는 'Suspended' 상태(C)라는 개념이 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 'Cart Summary' Block을 Screen Variable 'IsCartOpen'에 연결된 'If' 위젯 안에 넣어 숨깁니다. 'IsCartOpen'이 True에서 False로 바뀌면 Block의 상태는 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Block은 CSS로 숨겨지지만, 그 Local Variable은 메모리에 그대로 유지된다."
+          },
+          {
+            "key": "B",
+            "text": "Block이 제거(destroy)되며, 그 안의 Local 데이터나 저장하지 않은 변경 사항은 사라진다."
+          },
+          {
+            "key": "C",
+            "text": "Block이 'Suspended' 상태로 들어갔다가 변수가 True가 되면 재개된다."
+          },
+          {
+            "key": "D",
+            "text": "Block에 진행 중인 비동기 데이터 fetch가 있으면 Parent Screen이 오류를 던진다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-030",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A 'Table' widget listing Employees is sorted by 'Name'. The developer refreshes the underlying Aggregate. Does the Table automatically preserve the user's scroll position after the refresh?",
+    "options": [
+      {
+        "key": "A",
+        "text": "No, the list re-renders and the scroll position typically resets to the top of the Table."
+      },
+      {
+        "key": "B",
+        "text": "Yes, OutSystems Reactive always maintains the exact pixel position of the scrollbar."
+      },
+      {
+        "key": "C",
+        "text": "Only if the 'Max Records' property is set to a value less than 50."
+      },
+      {
+        "key": "D",
+        "text": "Only if a 'Pagination' widget is also present on the screen."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Aggregate를 Refresh Data로 다시 가져오면 그 데이터를 표시하는 Table이 다시 렌더링되며, 일반적으로 스크롤 위치는 맨 위로 초기화됩니다. OutSystems Reactive가 픽셀 단위 스크롤 위치를 자동으로 보존해 주지 않으므로 B는 틀립니다. Max Records(C)나 Pagination 위젯(D)은 스크롤 위치 보존과 관계가 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Employee를 나열하는 'Table' 위젯이 'Name' 기준으로 정렬되어 있습니다. 개발자가 기반 Aggregate를 Refresh합니다. Refresh 후 Table이 사용자의 스크롤 위치를 자동으로 보존합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아니다, 리스트가 다시 렌더링되며 스크롤 위치는 보통 Table 맨 위로 초기화된다."
+          },
+          {
+            "key": "B",
+            "text": "그렇다, OutSystems Reactive는 항상 스크롤바의 정확한 픽셀 위치를 유지한다."
+          },
+          {
+            "key": "C",
+            "text": "'Max Records' 속성이 50 미만으로 설정된 경우에만 유지된다."
+          },
+          {
+            "key": "D",
+            "text": "화면에 'Pagination' 위젯이 함께 있는 경우에만 유지된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-031",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Dropdown widget's 'List' property is set to 'GetEmployees.List'. To display each employee's name in a Reactive Web app, how should the 'Options Text' property be configured?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Employee.Name"
+      },
+      {
+        "key": "B",
+        "text": "GetEmployees.Employee.Name"
+      },
+      {
+        "key": "C",
+        "text": "Current(GetEmployees.List).Employee.Name"
+      },
+      {
+        "key": "D",
+        "text": "GetEmployees.List.Current.Employee.Name"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Reactive Web에서는 List/Table 기반 위젯 안에서 현재 반복 중인 record를 '<Aggregate>.List.Current.<Entity>.<Attribute>' 형식으로 참조합니다. 따라서 Options Text는 GetEmployees.List.Current.Employee.Name가 맞습니다. Employee.Name(A)은 Traditional Web 방식이라 Reactive에는 암시적 record 변수가 없어 동작하지 않고, B와 C는 존재하지 않는 문법입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Dropdown 위젯의 'List' 속성이 'GetEmployees.List'로 설정되어 있습니다. Reactive Web 앱에서 각 직원의 이름을 표시하려면 'Options Text'를 어떻게 설정해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Employee.Name"
+          },
+          {
+            "key": "B",
+            "text": "GetEmployees.Employee.Name"
+          },
+          {
+            "key": "C",
+            "text": "Current(GetEmployees.List).Employee.Name"
+          },
+          {
+            "key": "D",
+            "text": "GetEmployees.List.Current.Employee.Name"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-032",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Table widget is bound to 'GetProducts.List'. In one column an Expression must show the price including 15% tax (Price * 1.15). In a Reactive Web app, which expression is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Table1.List.Current.Product.Price * 1.15"
+      },
+      {
+        "key": "B",
+        "text": "GetProducts.List.Current.Product.Price * 1.15"
+      },
+      {
+        "key": "C",
+        "text": "Sum(Product.Price) * 1.15"
+      },
+      {
+        "key": "D",
+        "text": "Product.Price * 1.15"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Reactive Web의 Table/List 안에서는 현재 행을 'GetProducts.List.Current.Product.Price' 형태로 참조하므로 정답은 B입니다. Product.Price(D)는 Traditional Web 방식이라 Reactive에서는 동작하지 않고, 위젯 이름으로 접근하는 Table1.List(A)는 올바른 데이터 소스 참조가 아니며, Sum()(C)은 전체 합계를 내는 집계 함수여서 개별 행 계산에는 맞지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Table 위젯이 'GetProducts.List'에 바인딩되어 있습니다. 한 열에서 Expression으로 세금 15%가 포함된 가격(Price * 1.15)을 표시해야 합니다. Reactive Web 앱에서 올바른 Expression은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Table1.List.Current.Product.Price * 1.15"
+          },
+          {
+            "key": "B",
+            "text": "GetProducts.List.Current.Product.Price * 1.15"
+          },
+          {
+            "key": "C",
+            "text": "Sum(Product.Price) * 1.15"
+          },
+          {
+            "key": "D",
+            "text": "Product.Price * 1.15"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-033",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A List widget is bound to 'GetItems.List'. Inside each row there is an 'If' widget whose 'Condition' is 'Item.IsAvailable', and its 'True' branch contains a Button. What happens after 'GetItems' is refreshed by a 'Refresh Data' node?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The 'If' condition for every row is re-evaluated, and Buttons may appear or disappear based on the new data."
+      },
+      {
+        "key": "B",
+        "text": "The List stays static because 'If' widgets inside lists do not support dynamic data."
+      },
+      {
+        "key": "C",
+        "text": "The 'If' widget only re-evaluates if the developer explicitly calls 'Ajax Refresh' on the condition."
+      },
+      {
+        "key": "D",
+        "text": "Only the first row of the List is updated to save performance."
+      }
+    ],
+    "answer": "A",
+    "explanation": "Refresh Data가 Aggregate를 다시 실행하면 List 위젯이 새 데이터로 다시 렌더링되고, 각 행에 있는 If 위젯의 Condition(Item.IsAvailable)도 행마다 새로 평가됩니다(A). 그 결과 True/False에 따라 Button이 나타나거나 사라집니다. Reactive에는 수동 'Ajax Refresh' 개념이 없고(C 오답), 리스트 안의 If는 동적 데이터를 정상 지원하며(B 오답), 모든 행이 갱신됩니다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "List 위젯이 'GetItems.List'에 바인딩되어 있습니다. 각 행 안에는 Condition이 'Item.IsAvailable'인 'If' 위젯이 있고, 그 'True' 분기에 Button이 들어 있습니다. 'Refresh Data' 노드로 'GetItems'를 새로 고치면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "모든 행의 'If' Condition이 다시 평가되어, 새 데이터에 따라 Button이 나타나거나 사라질 수 있다."
+          },
+          {
+            "key": "B",
+            "text": "리스트 안의 'If' 위젯은 동적 데이터를 지원하지 않으므로 List는 그대로 유지된다."
+          },
+          {
+            "key": "C",
+            "text": "개발자가 Condition에 대해 명시적으로 'Ajax Refresh'를 호출해야만 'If'가 다시 평가된다."
+          },
+          {
+            "key": "D",
+            "text": "성능을 위해 List의 첫 번째 행만 갱신된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-034",
+    "subtopic": "Screen Widgets",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A developer wants to display the total number of records shown in a Table that is bound to 'GetOrders.List'. They place an Expression outside the Table. Which expression correctly returns the count?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Table1.Count"
+      },
+      {
+        "key": "B",
+        "text": "Count(GetOrders)"
+      },
+      {
+        "key": "C",
+        "text": "Order.Count"
+      },
+      {
+        "key": "D",
+        "text": "GetOrders.List.Length"
+      }
+    ],
+    "answer": "D",
+    "explanation": "OutSystems의 List 데이터 타입에는 요소 개수를 돌려주는 내장 속성 '.Length'가 있으므로 GetOrders.List.Length가 레코드 수를 반환합니다(D). Table 위젯에는 .Count 속성이 없고(A 오답), Count()는 존재하지 않는 함수이며(B 오답), 엔티티 이름에 .Count를 붙이는 문법도 없습니다(C 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 'GetOrders.List'에 바인딩된 Table에 표시되는 총 레코드 수를 보여주려고 합니다. Table 바깥에 Expression을 배치합니다. 어떤 표현식이 개수를 올바르게 반환합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Table1.Count"
+          },
+          {
+            "key": "B",
+            "text": "Count(GetOrders)"
+          },
+          {
+            "key": "C",
+            "text": "Order.Count"
+          },
+          {
+            "key": "D",
+            "text": "GetOrders.List.Length"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-035",
+    "subtopic": "Screen Widgets",
+    "difficulty": "hard",
+    "tags": [],
+    "stem": "A List widget is bound to 'GetProducts.List'. Inside a row, a Text should show 'Product.Description', but the developer accidentally wrote 'GetProducts.List.Current.Product.Description' instead. What is the runtime consequence?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Every row displays the description of the exact same Product (the one at the list's current pointer index)."
+      },
+      {
+        "key": "B",
+        "text": "The Screen crashes with a 'Circular Reference' error."
+      },
+      {
+        "key": "C",
+        "text": "The Text stays empty because 'Current' is not allowed inside a List."
+      },
+      {
+        "key": "D",
+        "text": "The platform automatically corrects the expression at compile time."
+      }
+    ],
+    "answer": "A",
+    "explanation": "리스트를 렌더링할 때 각 행은 반복 변수(Product.Description)를 사용해야 행마다 다른 값을 표시합니다. 반면 GetProducts.List.Current는 List의 현재 포인터 위치에 있는 '하나의' 레코드를 가리킬 뿐, 렌더링 중에 행마다 이동하지 않습니다. 따라서 모든 행이 동일한(포인터가 가리키는) Product의 Description을 보여줍니다(A). 이는 오류나 자동 수정 대상이 아니며(B, D 오답), Current 자체가 금지된 것도 아닙니다(C 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "List 위젯이 'GetProducts.List'에 바인딩되어 있습니다. 한 행 안에서 Text는 'Product.Description'을 표시해야 하는데, 개발자가 실수로 'GetProducts.List.Current.Product.Description'이라고 작성했습니다. 실행 시 어떤 결과가 발생합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "모든 행이 (List의 현재 포인터 인덱스에 있는) 완전히 동일한 Product의 Description을 표시한다."
+          },
+          {
+            "key": "B",
+            "text": "화면이 'Circular Reference' 오류로 중단된다."
+          },
+          {
+            "key": "C",
+            "text": "리스트 안에서는 'Current'가 허용되지 않으므로 Text가 비어 있게 된다."
+          },
+          {
+            "key": "D",
+            "text": "플랫폼이 컴파일 시점에 표현식을 자동으로 수정한다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-036",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer places a 'Container' on a Screen and sets its 'Display' property to 'False'. What is the impact on the Screen's runtime behavior?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregates used inside that container stop fetching data."
+      },
+      {
+        "key": "B",
+        "text": "The widgets inside the container are still rendered in the DOM, just hidden from view using CSS."
+      },
+      {
+        "key": "C",
+        "text": "The Screen loads faster because the browser ignores hidden containers entirely."
+      },
+      {
+        "key": "D",
+        "text": "The widgets inside the container are completely removed from the DOM and memory."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Container의 Display 속성을 False로 설정해도 위젯은 여전히 DOM에 렌더링되며 CSS로만 화면에서 숨겨집니다. 그래서 성능 관점에서 완전히 사라지는 것이 아니며, 실제로 DOM에서 제거하려면 If 위젯을 써야 합니다(그것이 보기 D의 설명). Aggregate는 Display 값과 무관하게 계속 데이터를 가져오므로 A는 틀리고, 숨긴다고 화면이 더 빨라지지도(C) 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 화면에 'Container' 위젯을 배치하고 'Display' 속성을 'False'로 설정합니다. 화면의 런타임 동작에 미치는 영향은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "해당 container 안에서 사용된 Aggregate가 데이터를 가져오는 것을 멈춘다."
+          },
+          {
+            "key": "B",
+            "text": "container 안의 위젯은 여전히 DOM에 렌더링되며, CSS로 화면에서 숨겨질 뿐이다."
+          },
+          {
+            "key": "C",
+            "text": "브라우저가 숨겨진 container를 완전히 무시하므로 화면이 더 빨리 로드된다."
+          },
+          {
+            "key": "D",
+            "text": "container 안의 위젯이 DOM과 메모리에서 완전히 제거된다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SW-037",
+    "subtopic": "Screen Widgets",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A List widget has its 'Source' set to a Screen Variable named 'TagList' whose data type is 'List of Text'. Inside the list, an Expression must display the value of each item. Which expression is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Text"
+      },
+      {
+        "key": "B",
+        "text": "TagList.Item"
+      },
+      {
+        "key": "C",
+        "text": "TagList.Current"
+      },
+      {
+        "key": "D",
+        "text": "Value"
+      }
+    ],
+    "answer": "A",
+    "explanation": "List 위젯을 기본 타입 리스트(List of Text)에 바인딩하면, 플랫폼이 각 행을 나타내는 반복 변수를 그 데이터 타입 이름인 'Text'로 만들어 줍니다. 따라서 Expression에는 'Text'를 그대로 사용해 현재 항목의 값을 표시합니다(A). TagList.Current는 렌더링 중 행마다 이동하지 않아 모든 행에 같은 값이 나오고(C 오답), List에는 .Item 속성이 없으며(B 오답), 'Value'라는 이름은 존재하지 않습니다(D 오답).",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "List 위젯의 'Source'가 데이터 타입이 'List of Text'인 'TagList'라는 Screen Variable로 설정되어 있습니다. 리스트 안에서 Expression으로 각 항목의 값을 표시해야 합니다. 올바른 표현식은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Text"
+          },
+          {
+            "key": "B",
+            "text": "TagList.Item"
+          },
+          {
+            "key": "C",
+            "text": "TagList.Current"
+          },
+          {
+            "key": "D",
+            "text": "Value"
+          }
+        ]
+      }
+    }
   }
 ]

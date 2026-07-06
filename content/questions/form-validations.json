@@ -679,5 +679,57 @@
         ]
       }
     }
+  },
+  {
+    "id": "FV-013",
+    "subtopic": "Form Validations",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Reactive Web app, a developer sets an Employee Input widget's 'Mandatory' property to True. When the user clicks the 'Save' button, what is the default behavior regarding validation?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Mandatory validation runs only on the Server side, never on the Client side."
+      },
+      {
+        "key": "B",
+        "text": "The platform automatically aborts the Client Action if any widget is invalid."
+      },
+      {
+        "key": "C",
+        "text": "The 'Save' button stays disabled until every mandatory field is filled in."
+      },
+      {
+        "key": "D",
+        "text": "The developer must check 'If Form.Valid' in the Client Action to stop the logic when validation fails."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Reactive Web에서 Mandatory 속성은 값이 비었을 때 검증 메시지를 표시해줄 뿐, 버튼 클릭 시 Client Action 흐름을 자동으로 멈추지는 않습니다. 따라서 개발자가 Client Action 안에서 If 'Form.Valid'로 유효성을 확인하고 실패 시 로직을 중단시켜야 하므로 D가 정답입니다. 플랫폼이 자동으로 중단해주지 않으므로 B는 틀리고, Mandatory 검증은 클라이언트에서도 동작하므로 A도 틀립니다. Save 버튼이 자동으로 비활성화되지도 않으므로 C도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Reactive Web 앱에서 개발자가 Employee Input 위젯의 'Mandatory' 속성을 True로 설정합니다. 사용자가 'Save' 버튼을 클릭할 때 유효성 검증과 관련한 기본 동작은 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Mandatory 검증은 Server 측에서만 동작하고 Client 측에서는 절대 동작하지 않는다."
+          },
+          {
+            "key": "B",
+            "text": "위젯이 하나라도 유효하지 않으면 플랫폼이 Client Action 실행을 자동으로 중단한다."
+          },
+          {
+            "key": "C",
+            "text": "모든 필수 필드가 채워질 때까지 'Save' 버튼이 비활성화 상태로 유지된다."
+          },
+          {
+            "key": "D",
+            "text": "검증 실패 시 로직을 멈추려면 개발자가 Client Action에서 'If Form.Valid'를 확인해야 한다."
+          }
+        ]
+      }
+    }
   }
 ]

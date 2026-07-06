@@ -1307,5 +1307,213 @@
         ]
       }
     }
+  },
+  {
+    "id": "SL-024",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "In a Screen's 'On Initialize' event, a developer assigns a value to a variable that is bound to a 'Text' widget. What will the user see once the Screen finishes rendering?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing, because the widget does not exist yet when 'On Initialize' runs."
+      },
+      {
+        "key": "B",
+        "text": "A runtime error, because variables cannot be changed during 'On Initialize'."
+      },
+      {
+        "key": "C",
+        "text": "The variable's default value, because 'On Initialize' runs after rendering."
+      },
+      {
+        "key": "D",
+        "text": "The value assigned during 'On Initialize'."
+      }
+    ],
+    "answer": "D",
+    "explanation": "'On Initialize'는 화면이 렌더링되기 전에 실행되므로, 여기서 변수에 넣은 값이 그대로 Text widget에 표시된다. 따라서 D가 맞다. On Initialize가 렌더링 이후 실행된다고 보는 A·C나 변수 수정이 불가능하다는 B는 모두 잘못된 전제이다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 Screen의 'On Initialize' event에서 'Text' widget에 연결된 변수에 값을 할당한다. 화면 렌더링이 끝나면 사용자는 무엇을 보게 되는가?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무것도 안 보임. 'On Initialize' 실행 시점에는 widget이 아직 생성되지 않았기 때문."
+          },
+          {
+            "key": "B",
+            "text": "오류. 'On Initialize' 중에는 변수를 수정할 수 없기 때문."
+          },
+          {
+            "key": "C",
+            "text": "변수의 기본값. 'On Initialize'는 렌더링 이후 실행되기 때문."
+          },
+          {
+            "key": "D",
+            "text": "'On Initialize'에서 할당한 값."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-025",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer must initialize a third-party JavaScript charting library that requires its target HTML element to already exist in the DOM. In which Screen/Block lifecycle event should this initialization code run?",
+    "options": [
+      {
+        "key": "A",
+        "text": "On Parameters Changed"
+      },
+      {
+        "key": "B",
+        "text": "On Ready"
+      },
+      {
+        "key": "C",
+        "text": "On Render"
+      },
+      {
+        "key": "D",
+        "text": "On Initialize"
+      }
+    ],
+    "answer": "B",
+    "explanation": "On Ready는 Screen이나 Block이 처음으로 완전히 렌더링되어 HTML 요소가 DOM에 존재하게 된 뒤에 딱 한 번 실행되는 이벤트라, DOM 요소가 있어야 동작하는 JavaScript 라이브러리 초기화에 적합합니다(정답 B). On Initialize는 화면이 그려지기 전에 실행되어 아직 DOM이 없으므로 D는 틀립니다. On Parameters Changed는 입력 파라미터가 바뀔 때, On Render는 UI가 다시 그려질 때마다 반복 실행되어 최초 초기화 위치로는 부적절하므로 A, C도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 대상 HTML 요소가 이미 DOM에 존재해야 동작하는 서드파티 JavaScript 차트 라이브러리를 초기화해야 합니다. 이 초기화 코드는 어떤 Screen/Block 라이프사이클 이벤트에서 실행해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "On Parameters Changed"
+          },
+          {
+            "key": "B",
+            "text": "On Ready"
+          },
+          {
+            "key": "C",
+            "text": "On Render"
+          },
+          {
+            "key": "D",
+            "text": "On Initialize"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-026",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer wants to move keyboard focus to a specific search Input widget using JavaScript as soon as the Screen is visible to the user. Which Screen lifecycle event is the most appropriate place for this logic?",
+    "options": [
+      {
+        "key": "A",
+        "text": "On Ready"
+      },
+      {
+        "key": "B",
+        "text": "On Render"
+      },
+      {
+        "key": "C",
+        "text": "On Initialize"
+      },
+      {
+        "key": "D",
+        "text": "On After Fetch"
+      }
+    ],
+    "answer": "A",
+    "explanation": "On Ready는 화면이 브라우저에서 처음 렌더링을 마친 뒤 DOM이 준비된 상태에서 한 번 실행되므로, JavaScript로 Input에 focus를 주는 작업에 가장 적합합니다. On Initialize는 렌더링 전에 실행되어 아직 DOM 요소가 없고(C), On Render는 재렌더링마다 반복 실행될 수 있어 focus 로직에 부적합하며(B), On After Fetch는 Screen이 아니라 Aggregate의 이벤트이므로(D) 정답은 A입니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 화면이 사용자에게 보이는 즉시 JavaScript로 특정 검색 Input widget에 키보드 focus를 주려고 합니다. 이 로직을 넣기에 가장 적합한 Screen lifecycle 이벤트는 무엇입니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "On Ready"
+          },
+          {
+            "key": "B",
+            "text": "On Render"
+          },
+          {
+            "key": "C",
+            "text": "On Initialize"
+          },
+          {
+            "key": "D",
+            "text": "On After Fetch"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "SL-027",
+    "subtopic": "Screen Lifecycle",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A Screen has an 'On Ready' event and an Aggregate 'GetTickets' set to run 'At Start'. Which one finishes first?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Aggregate always finishes first because the UI needs its data."
+      },
+      {
+        "key": "B",
+        "text": "The 'On Ready' event always waits for all Aggregates to complete before running."
+      },
+      {
+        "key": "C",
+        "text": "Screen execution is synchronous, so they finish in the order they appear in the tree."
+      },
+      {
+        "key": "D",
+        "text": "It is not guaranteed; the Aggregate fetches asynchronously and may finish before or after 'On Ready'."
+      }
+    ],
+    "answer": "D",
+    "explanation": "'At Start' Aggregate는 화면 초기화 시 비동기로 실행되고, 'On Ready'는 화면이 렌더링된 후 실행됩니다. 둘의 완료 순서는 보장되지 않아 Aggregate가 On Ready보다 먼저 끝날 수도, 나중에 끝날 수도 있습니다. 따라서 On Ready에서 Aggregate 데이터가 이미 준비되었다고 가정하면 안 되며, 데이터에 의존하는 로직은 On After Fetch에서 처리해야 합니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Screen에 'On Ready' 이벤트와 'At Start'로 실행되도록 설정된 Aggregate 'GetTickets'가 있습니다. 둘 중 어느 것이 먼저 완료됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "UI가 데이터를 필요로 하므로 Aggregate가 항상 먼저 완료된다."
+          },
+          {
+            "key": "B",
+            "text": "'On Ready' 이벤트는 항상 모든 Aggregate가 완료될 때까지 기다린 뒤 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "Screen 실행은 동기적이므로 트리에 나타나는 순서대로 완료된다."
+          },
+          {
+            "key": "D",
+            "text": "보장되지 않는다; Aggregate는 비동기로 fetch되어 'On Ready'보다 먼저 또는 나중에 끝날 수 있다."
+          }
+        ]
+      }
+    }
   }
 ]

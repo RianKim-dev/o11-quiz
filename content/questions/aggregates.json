@@ -6777,5 +6777,109 @@
         ]
       }
     }
+  },
+  {
+    "id": "AGG-125",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "An Aggregate fetches the 'Employee' entity, but the screen only uses the 'Employee.Name' attribute in a single Expression. Because of the OutSystems compiler's Aggregate optimization, what is the result?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The platform fetches only the 'Name' column from the database."
+      },
+      {
+        "key": "B",
+        "text": "The developer must manually hide the unused columns in the Aggregate editor."
+      },
+      {
+        "key": "C",
+        "text": "The Aggregate throws an error if more than 5 columns go unused."
+      },
+      {
+        "key": "D",
+        "text": "The entire 'Employee' record is fetched to guarantee data integrity."
+      }
+    ],
+    "answer": "A",
+    "explanation": "OutSystems compiler는 Aggregate에서 화면이나 로직에 실제로 사용되는 attribute만 SELECT 하도록 최적화합니다. Employee.Name만 Expression에서 쓰면 데이터베이스에서 Name column만 가져오므로 A가 정답입니다. 전체 record를 가져온다는 D는 이 최적화를 무시한 오답이고, column을 수동으로 숨길 필요(B)도 없으며, 5개 초과 시 에러(C)라는 규칙은 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "한 Aggregate가 'Employee' entity를 가져오지만, 화면에서는 'Employee.Name' attribute만 하나의 Expression에서 사용합니다. OutSystems compiler의 Aggregate 최적화 때문에 어떤 결과가 나타납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "플랫폼이 데이터베이스에서 'Name' column만 가져온다."
+          },
+          {
+            "key": "B",
+            "text": "개발자가 Aggregate 편집기에서 사용하지 않는 column을 수동으로 숨겨야 한다."
+          },
+          {
+            "key": "C",
+            "text": "사용하지 않는 column이 5개를 넘으면 Aggregate가 에러를 던진다."
+          },
+          {
+            "key": "D",
+            "text": "데이터 무결성을 위해 'Employee' record 전체를 가져온다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "AGG-126",
+    "subtopic": "Aggregates",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A developer needs to run a custom database query that uses a SQL 'GROUP BY' clause with logic beyond what a standard Aggregate offers. Which tool should they use in Service Studio?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A 'For Each' loop inside a Client Action."
+      },
+      {
+        "key": "B",
+        "text": "A standard Aggregate configured only with a 'Filter'."
+      },
+      {
+        "key": "C",
+        "text": "A Data Action calling a 'ListFilter' system action."
+      },
+      {
+        "key": "D",
+        "text": "The 'SQL' element (Advanced Query)."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Aggregate만으로 표현하기 어려운 커스텀 SQL 쿼리(복잡한 GROUP BY 등)는 SQL element(Advanced Query)를 사용해 직접 SQL을 작성합니다. 따라서 D가 정답입니다. Aggregate에 Filter만 추가(B)하는 것으로는 임의의 커스텀 집계 쿼리를 자유롭게 구성할 수 없고, For Each 루프(A)나 존재하지 않는 'ListFilter' 방식(C)은 데이터베이스 집계 쿼리 용도가 아닙니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "개발자가 표준 Aggregate로 제공되는 것 이상의 로직을 포함하는 SQL 'GROUP BY' 절을 사용하는 커스텀 데이터베이스 쿼리를 실행해야 합니다. Service Studio에서 어떤 도구를 사용해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Client Action 안의 'For Each' 루프."
+          },
+          {
+            "key": "B",
+            "text": "'Filter'만으로 구성한 표준 Aggregate."
+          },
+          {
+            "key": "C",
+            "text": "'ListFilter' system action을 호출하는 Data Action."
+          },
+          {
+            "key": "D",
+            "text": "'SQL' element (Advanced Query)."
+          }
+        ]
+      }
+    }
   }
 ]

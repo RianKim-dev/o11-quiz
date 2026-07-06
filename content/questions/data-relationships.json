@@ -2640,5 +2640,109 @@
         ]
       }
     }
+  },
+  {
+    "id": "REL-050",
+    "subtopic": "Data Relationships",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "You have two entities, 'Department' and 'Employee'. To model a 1-to-Many relationship where one Department has many Employees, where should the Foreign Key be placed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Inside the 'Employee' entity, as an attribute named 'DepartmentId'."
+      },
+      {
+        "key": "B",
+        "text": "In a third entity created only to link the two together."
+      },
+      {
+        "key": "C",
+        "text": "Inside the 'Department' entity, as an attribute named 'EmployeeId'."
+      },
+      {
+        "key": "D",
+        "text": "On both entities, to make the connection bidirectional."
+      }
+    ],
+    "answer": "A",
+    "explanation": "1-to-Many 관계에서 Foreign Key는 'Many' 쪽 Entity에 둡니다. 한 Department가 여러 Employee를 가지므로 Employee가 Many 쪽이고, Employee entity에 DepartmentId FK를 두어야 하므로 A가 정답입니다. Department에 EmployeeId를 두면(C) 관계가 뒤집혀 한 Department가 하나의 Employee만 참조하게 됩니다. 단순 1-to-Many에는 별도 연결 entity(B)나 양쪽 FK(D)가 필요 없습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Department'와 'Employee' 두 entity가 있습니다. 한 Department가 여러 Employee를 가지는 1-to-Many 관계를 모델링하려면 Foreign Key를 어디에 두어야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "'Employee' entity 안에 'DepartmentId' attribute로 둔다."
+          },
+          {
+            "key": "B",
+            "text": "둘을 연결하기 위해 만든 세 번째 entity에 둔다."
+          },
+          {
+            "key": "C",
+            "text": "'Department' entity 안에 'EmployeeId' attribute로 둔다."
+          },
+          {
+            "key": "D",
+            "text": "양방향 연결을 위해 두 entity 모두에 둔다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "REL-051",
+    "subtopic": "Data Relationships",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "In the 'Ticket' entity, the 'CustomerId' foreign key has its Delete Rule set to 'Protect'. What happens when someone tries to delete a Customer that still has related Tickets?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The Customer is deleted and all related Tickets are automatically deleted too."
+      },
+      {
+        "key": "B",
+        "text": "A database exception is raised and the Customer is not deleted."
+      },
+      {
+        "key": "C",
+        "text": "The Customer is deleted and the 'CustomerId' on the Tickets is set to Null."
+      },
+      {
+        "key": "D",
+        "text": "The related Tickets are automatically moved to a system 'Archive' entity."
+      }
+    ],
+    "answer": "B",
+    "explanation": "Delete Rule이 Protect이면 자식(Ticket) record가 존재하는 한 부모(Customer) 삭제가 차단되고 database exception이 발생합니다. 따라서 Customer가 삭제되지 않는 B가 정답입니다. 자식까지 함께 삭제되는 것은 Delete(cascade) 규칙이고(A), FK를 남겨 orphan이 되게 하는 것은 Ignore 규칙의 동작(C)입니다. Archive로 자동 이동(D)하는 기능은 존재하지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "'Ticket' entity의 'CustomerId' foreign key의 Delete Rule이 'Protect'로 설정되어 있습니다. 관련 Ticket이 아직 있는 Customer를 삭제하려고 하면 어떻게 됩니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Customer가 삭제되고 관련 Ticket도 모두 자동으로 삭제된다."
+          },
+          {
+            "key": "B",
+            "text": "database exception이 발생하고 Customer는 삭제되지 않는다."
+          },
+          {
+            "key": "C",
+            "text": "Customer가 삭제되고 Ticket의 'CustomerId'가 Null로 설정된다."
+          },
+          {
+            "key": "D",
+            "text": "관련 Ticket이 자동으로 시스템 'Archive' entity로 이동한다."
+          }
+        ]
+      }
+    }
   }
 ]

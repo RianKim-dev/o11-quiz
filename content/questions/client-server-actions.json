@@ -1189,5 +1189,109 @@
         ]
       }
     }
+  },
+  {
+    "id": "CSA-022",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "medium",
+    "tags": [],
+    "stem": "A calculation contains sensitive business logic and must be reused by several screens. Where should this logic be implemented?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Directly inside an Expression on each screen."
+      },
+      {
+        "key": "B",
+        "text": "In a Client Action placed on the Home screen."
+      },
+      {
+        "key": "C",
+        "text": "Inside the 'On After Fetch' flow of a Data Action."
+      },
+      {
+        "key": "D",
+        "text": "In a Server Action with its 'Public' property set to 'Yes'."
+      }
+    ],
+    "answer": "D",
+    "explanation": "민감한 business logic이면서 여러 화면에서 재사용해야 하는 계산은 server 측 Server Action에 두고, 재사용을 위해 Public 속성을 Yes로 설정합니다. Server Action은 로직이 client에 노출되지 않아 보안에 유리하고 재사용도 가능하므로 D가 정답입니다. Expression(A)은 복잡한 로직을 담을 수 없고, Home 화면의 Client Action(B)은 client에서 실행되어 로직이 노출되며, On After Fetch(C)는 데이터 조회 후처리용이라 목적에 맞지 않습니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "민감한 business logic을 포함하며 여러 화면에서 재사용해야 하는 계산이 있습니다. 이 로직을 어디에 구현해야 합니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "각 화면의 Expression에 직접 작성한다."
+          },
+          {
+            "key": "B",
+            "text": "Home 화면의 Client Action에 둔다."
+          },
+          {
+            "key": "C",
+            "text": "Data Action의 'On After Fetch' flow 안에 둔다."
+          },
+          {
+            "key": "D",
+            "text": "'Public' 속성을 'Yes'로 설정한 Server Action에 둔다."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "CSA-023",
+    "subtopic": "Client and Server Actions",
+    "difficulty": "easy",
+    "tags": [],
+    "stem": "A Client Action calls a Server Action that has an Output Parameter. What happens behind the scenes?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nothing — Server Actions cannot be called from Client Actions for security reasons."
+      },
+      {
+        "key": "B",
+        "text": "The Server Action is downloaded and executed locally in the browser."
+      },
+      {
+        "key": "C",
+        "text": "The Client Action continues immediately and the output arrives later through an Event."
+      },
+      {
+        "key": "D",
+        "text": "The browser sends a request to the server, waits for the server logic to finish, and receives the output back."
+      }
+    ],
+    "answer": "D",
+    "explanation": "Client Action에서 Server Action을 호출하면 브라우저가 서버로 요청을 보내고, 서버 로직이 끝날 때까지 기다린 뒤 Output 값을 돌려받습니다(호출 시점에 값을 받는 동기 방식). Server Action은 서버에서만 실행되므로 브라우저 로컬 실행(B)은 불가능하고, 보안상 호출이 막힌다(A)는 것도 사실이 아니며, 결과가 Event로 나중에 온다(C)도 틀립니다.",
+    "status": "verified",
+    "verifyNote": "",
+    "i18n": {
+      "ko": {
+        "stem": "Client Action이 Output Parameter를 가진 Server Action을 호출합니다. 내부적으로 어떤 일이 일어납니까?",
+        "options": [
+          {
+            "key": "A",
+            "text": "아무 일도 없다 — 보안상 Client Action에서 Server Action을 호출할 수 없다."
+          },
+          {
+            "key": "B",
+            "text": "Server Action이 브라우저로 다운로드되어 로컬에서 실행된다."
+          },
+          {
+            "key": "C",
+            "text": "Client Action은 즉시 계속 진행되고, output은 나중에 Event를 통해 도착한다."
+          },
+          {
+            "key": "D",
+            "text": "브라우저가 서버로 요청을 보내고, 서버 로직이 끝날 때까지 기다린 뒤 output을 돌려받는다."
+          }
+        ]
+      }
+    }
   }
 ]
