@@ -962,7 +962,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "버튼 숨김(A), On Click(B), On Initialize(D) 같은 클라이언트 측 검사는 브라우저에서 우회될 수 있어 보안상 신뢰할 수 없습니다. 실제 데이터베이스 Create를 수행하는 Server Action의 시작 부분에서 역할을 확인하면 서버에서 강제되므로 가장 안전합니다. UI 숨김은 사용성을 위한 것일 뿐 보안 장치가 아닙니다.",
+    "explanation": "버튼 숨김(A), On Click(B), On Initialize(D) 같은 클라이언트 측 검사는 브라우저에서 우회될 수 있어 보안상 신뢰할 수 없습니다. 실제 데이터베이스 Create를 수행하는 Server Action의 시작 부분에서 역할을 확인하면 서버에서 강제되므로 가장 안전합니다. UI 숨김은 사용성을 위한 것일 뿐 보안 장치가 아닙니다.\n\n**참고 · Client Action vs Server Action (실행 위치)**\n- **Client Action** = 사용자 **브라우저**에서 실행 (빠른 UI 반응)\n- **Server Action** = **서버**에서 실행 (DB 작업·민감한 계산·보안 검증)\n브라우저는 조작될 수 있어서, 가격·권한·검증 같은 **중요한 로직은 반드시 Server**에서 (다시) 처리해야 합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

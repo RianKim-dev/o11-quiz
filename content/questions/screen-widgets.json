@@ -153,7 +153,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "모든 입력(Input) 위젯에는 Variable(변수) 속성이 있고, 이 속성이 사용자가 타이핑한 값과 연결(bind)됩니다. 사용자가 이메일을 입력하면 그 값은 바로 이 Variable에 저장되어, 이후 저장·검증 로직에서 꺼내 쓸 수 있습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Screen의 Title은 화면 상단 제목 텍스트라서 사용자 입력값과 아무 관련이 없습니다.\n- **C** — Aggregate의 Test Values는 개발 중 데이터를 미리보기할 때 쓰는 임시 테스트값이라 실제 실행 시 입력과 무관합니다.\n- **D** — Button의 On Click은 클릭 시 실행할 동작을 지정하는 속성이지 값을 담아두는 곳이 아닙니다.",
+    "explanation": "모든 입력(Input) 위젯에는 Variable(변수) 속성이 있고, 이 속성이 사용자가 타이핑한 값과 연결(bind)됩니다. 사용자가 이메일을 입력하면 그 값은 바로 이 Variable에 저장되어, 이후 저장·검증 로직에서 꺼내 쓸 수 있습니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Screen의 Title은 화면 상단 제목 텍스트라서 사용자 입력값과 아무 관련이 없습니다.\n- **C** — Aggregate의 Test Values는 개발 중 데이터를 미리보기할 때 쓰는 임시 테스트값이라 실제 실행 시 입력과 무관합니다.\n- **D** — Button의 On Click은 클릭 시 실행할 동작을 지정하는 속성이지 값을 담아두는 곳이 아닙니다.\n\n**참고 · 변수(Variable)란?**\n값을 잠시 담아두는 **이름표 붙은 상자**예요. 이름으로 꺼내 쓰고, Assign 노드로 새 값을 넣습니다. 담기는 위치와 수명은 종류(Local / Client Variable / Session / Site Property 등)마다 다릅니다.",
     "distractors": {
       "B": "Title은 화면 제목 텍스트일 뿐입니다.",
       "C": "Test Values는 디자인타임 미리보기용이며 런타임 입력을 저장하지 않습니다.",
@@ -467,7 +467,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "**If 위젯**은 조건이 참일 때와 거짓일 때 각각 다른 내용을 보여주는 분기 부품입니다. 조건을 `Customer.IsVip`로 두고 True 쪽 칸에 VIP 배지를 넣으면, 그 손님이 VIP일 때만 배지가 나타나고 아니면 감춰집니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Dropdown은 목록에서 값을 고르는 입력 부품이지, 조건에 따라 무언가를 보이거나 숨기는 용도가 아닙니다.\n- **C** — Text Area는 긴 글을 입력받는 칸이라 배지 표시와 맞지 않습니다.\n- **D** — Table은 여러 건을 표로 나열하는 부품이라, 단 하나의 배지를 조건부로 보여주는 데는 부적절합니다.",
+    "explanation": "**If 위젯**은 조건이 참일 때와 거짓일 때 각각 다른 내용을 보여주는 분기 부품입니다. 조건을 `Customer.IsVip`로 두고 True 쪽 칸에 VIP 배지를 넣으면, 그 손님이 VIP일 때만 배지가 나타나고 아니면 감춰집니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Dropdown은 목록에서 값을 고르는 입력 부품이지, 조건에 따라 무언가를 보이거나 숨기는 용도가 아닙니다.\n- **C** — Text Area는 긴 글을 입력받는 칸이라 배지 표시와 맞지 않습니다.\n- **D** — Table은 여러 건을 표로 나열하는 부품이라, 단 하나의 배지를 조건부로 보여주는 데는 부적절합니다.\n\n**참고 · If / Switch 노드 (조건 분기)**\n- **If** = '만약 ~라면 A, 아니면 B'처럼 조건이 참이냐 거짓이냐로 흐름을 두 갈래로 나눔\n- **Switch** = 여러 조건을 위에서 아래로 검사해 **처음 맞는 갈래**로 감 (아무것도 안 맞으면 Otherwise)\n갈림길에서 신호를 보고 길을 고르는 것과 같아요.",
     "distractors": {
       "B": "Dropdown은 값 선택용이지 조건부 표시 도구가 아닙니다.",
       "C": "Text Area는 텍스트 입력용입니다.",
@@ -530,7 +530,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "**Expression** 위젯은 어떤 값 하나를 화면에 텍스트로 찍어 보여주는 부품입니다. `GetProduct.List.Current.Product.Price` 같은 값(제품 가격)을 그대로 화면에 표시할 때 사용합니다. 값을 \"보여주기만\" 할 뿐 사용자가 고치지는 못합니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Input은 사용자가 값을 타이핑해서 입력하는 칸이라, 단순히 값을 보여주는 용도와 다릅니다.\n- **C** — Form은 여러 입력 칸을 묶어 데이터를 제출하게 하는 틀이지 값 하나를 표시하는 부품이 아닙니다.\n- **D** — Button은 누르면 동작을 실행하는 버튼일 뿐 값을 표시하지 않습니다.",
+    "explanation": "**Expression** 위젯은 어떤 값 하나를 화면에 텍스트로 찍어 보여주는 부품입니다. `GetProduct.List.Current.Product.Price` 같은 값(제품 가격)을 그대로 화면에 표시할 때 사용합니다. 값을 \"보여주기만\" 할 뿐 사용자가 고치지는 못합니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Input은 사용자가 값을 타이핑해서 입력하는 칸이라, 단순히 값을 보여주는 용도와 다릅니다.\n- **C** — Form은 여러 입력 칸을 묶어 데이터를 제출하게 하는 틀이지 값 하나를 표시하는 부품이 아닙니다.\n- **D** — Button은 누르면 동작을 실행하는 버튼일 뿐 값을 표시하지 않습니다.\n\n**참고 · Expression (값 계산·표시)**\n화면이나 로직에서 **값을 즉석에서 계산해 보여주는** 작은 수식이에요 (예: `가격 × 1.1`). 저장하지 않고 필요할 때마다 계산합니다. ⚠️ 빠르게 끝나야 해서 Server Action은 호출 못 하고 Client 함수만 쓸 수 있어요.",
     "distractors": {
       "B": "Input은 사용자 입력을 받는 위젯입니다(표시 전용이 아님).",
       "C": "Form은 입력 위젯을 묶는 컨테이너입니다.",
@@ -1394,7 +1394,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Table이나 List는 목록의 각 줄(row)을 같은 틀로 반복해서 그립니다. 그 줄 안에 놓인 버튼의 'On Click'에서 'GetTickets.List.Current'를 쓰면, OutSystems는 지금 클릭된 바로 그 줄의 레코드를 가리켜 줍니다('Current' = 현재 반복해서 그리고 있는 행). 덕분에 어느 줄의 Close 버튼을 눌렀는지 따로 계산하지 않아도 해당 티켓을 정확히 알 수 있습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 항상 첫 번째 레코드가 아니라, 사용자가 클릭한 그 줄의 레코드를 가리킵니다.\n- **C** — Table 안의 버튼 액션에서도 'Current'는 정상적으로 사용할 수 있습니다.\n- **D** — 데이터베이스에 가장 최근 삽입된 레코드와는 아무 관련이 없습니다.",
+    "explanation": "Table이나 List는 목록의 각 줄(row)을 같은 틀로 반복해서 그립니다. 그 줄 안에 놓인 버튼의 'On Click'에서 'GetTickets.List.Current'를 쓰면, OutSystems는 지금 클릭된 바로 그 줄의 레코드를 가리켜 줍니다('Current' = 현재 반복해서 그리고 있는 행). 덕분에 어느 줄의 Close 버튼을 눌렀는지 따로 계산하지 않아도 해당 티켓을 정확히 알 수 있습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 항상 첫 번째 레코드가 아니라, 사용자가 클릭한 그 줄의 레코드를 가리킵니다.\n- **C** — Table 안의 버튼 액션에서도 'Current'는 정상적으로 사용할 수 있습니다.\n- **D** — 데이터베이스에 가장 최근 삽입된 레코드와는 아무 관련이 없습니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1500,7 +1500,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Reactive Web에서 Expression 위젯은 반응형이라 자신이 참조하는 변수 값이 바뀌면 자동으로 다시 계산되어 화면에 반영됩니다. 'ExchangeRate'가 수정되는 즉시 Expression이 갱신되므로 B가 정답입니다. GetAmount 데이터를 다시 조회할 필요가 없으므로 A는 틀리고, Reactive Web에는 Traditional Web의 'Ajax Refresh' 노드 개념이 없으므로 C도 틀립니다. 화면 갱신은 마우스 hover와 무관하므로 D도 틀립니다.",
+    "explanation": "Reactive Web에서 Expression 위젯은 반응형이라 자신이 참조하는 변수 값이 바뀌면 자동으로 다시 계산되어 화면에 반영됩니다. 'ExchangeRate'가 수정되는 즉시 Expression이 갱신되므로 B가 정답입니다. GetAmount 데이터를 다시 조회할 필요가 없으므로 A는 틀리고, Reactive Web에는 Traditional Web의 'Ajax Refresh' 노드 개념이 없으므로 C도 틀립니다. 화면 갱신은 마우스 hover와 무관하므로 D도 틀립니다.\n\n**참고 · Expression (값 계산·표시)**\n화면이나 로직에서 **값을 즉석에서 계산해 보여주는** 작은 수식이에요 (예: `가격 × 1.1`). 저장하지 않고 필요할 때마다 계산합니다. ⚠️ 빠르게 끝나야 해서 Server Action은 호출 못 하고 Client 함수만 쓸 수 있어요.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1818,7 +1818,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Reactive Web에서는 List/Table 기반 위젯 안에서 현재 반복 중인 record를 '<Aggregate>.List.Current.<Entity>.<Attribute>' 형식으로 참조합니다. 따라서 Options Text는 GetEmployees.List.Current.Employee.Name가 맞습니다. Employee.Name(A)은 Traditional Web 방식이라 Reactive에는 암시적 record 변수가 없어 동작하지 않고, B와 C는 존재하지 않는 문법입니다.",
+    "explanation": "Reactive Web에서는 List/Table 기반 위젯 안에서 현재 반복 중인 record를 '<Aggregate>.List.Current.<Entity>.<Attribute>' 형식으로 참조합니다. 따라서 Options Text는 GetEmployees.List.Current.Employee.Name가 맞습니다. Employee.Name(A)은 Traditional Web 방식이라 Reactive에는 암시적 record 변수가 없어 동작하지 않고, B와 C는 존재하지 않는 문법입니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1871,7 +1871,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Reactive Web의 Table/List 안에서는 현재 행을 'GetProducts.List.Current.Product.Price' 형태로 참조하므로 정답은 B입니다. Product.Price(D)는 Traditional Web 방식이라 Reactive에서는 동작하지 않고, 위젯 이름으로 접근하는 Table1.List(A)는 올바른 데이터 소스 참조가 아니며, Sum()(C)은 전체 합계를 내는 집계 함수여서 개별 행 계산에는 맞지 않습니다.",
+    "explanation": "Reactive Web의 Table/List 안에서는 현재 행을 'GetProducts.List.Current.Product.Price' 형태로 참조하므로 정답은 B입니다. Product.Price(D)는 Traditional Web 방식이라 Reactive에서는 동작하지 않고, 위젯 이름으로 접근하는 Table1.List(A)는 올바른 데이터 소스 참조가 아니며, Sum()(C)은 전체 합계를 내는 집계 함수여서 개별 행 계산에는 맞지 않습니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1924,7 +1924,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Refresh Data가 Aggregate를 다시 실행하면 List 위젯이 새 데이터로 다시 렌더링되고, 각 행에 있는 If 위젯의 Condition(Item.IsAvailable)도 행마다 새로 평가됩니다(A). 그 결과 True/False에 따라 Button이 나타나거나 사라집니다. Reactive에는 수동 'Ajax Refresh' 개념이 없고(C 오답), 리스트 안의 If는 동적 데이터를 정상 지원하며(B 오답), 모든 행이 갱신됩니다(D 오답).",
+    "explanation": "Refresh Data가 Aggregate를 다시 실행하면 List 위젯이 새 데이터로 다시 렌더링되고, 각 행에 있는 If 위젯의 Condition(Item.IsAvailable)도 행마다 새로 평가됩니다(A). 그 결과 True/False에 따라 Button이 나타나거나 사라집니다. Reactive에는 수동 'Ajax Refresh' 개념이 없고(C 오답), 리스트 안의 If는 동적 데이터를 정상 지원하며(B 오답), 모든 행이 갱신됩니다(D 오답).\n\n**참고 · Refresh Data (재조회)**\nAggregate나 Data Action이 **데이터를 다시 가져오게** 하는 노드예요. ⚠️ OutSystems 쿼리는 filter에 쓰인 변수가 바뀌어도 저절로 다시 조회하지 않으므로, 새 결과가 필요하면 Refresh Data를 직접 호출해야 합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1977,7 +1977,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "OutSystems의 List 데이터 타입에는 요소 개수를 돌려주는 내장 속성 '.Length'가 있으므로 GetOrders.List.Length가 레코드 수를 반환합니다(D). Table 위젯에는 .Count 속성이 없고(A 오답), Count()는 존재하지 않는 함수이며(B 오답), 엔티티 이름에 .Count를 붙이는 문법도 없습니다(C 오답).",
+    "explanation": "OutSystems의 List 데이터 타입에는 요소 개수를 돌려주는 내장 속성 '.Length'가 있으므로 GetOrders.List.Length가 레코드 수를 반환합니다(D). Table 위젯에는 .Count 속성이 없고(A 오답), Count()는 존재하지 않는 함수이며(B 오답), 엔티티 이름에 .Count를 붙이는 문법도 없습니다(C 오답).\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2030,7 +2030,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "리스트를 렌더링할 때 각 행은 반복 변수(Product.Description)를 사용해야 행마다 다른 값을 표시합니다. 반면 GetProducts.List.Current는 List의 현재 포인터 위치에 있는 '하나의' 레코드를 가리킬 뿐, 렌더링 중에 행마다 이동하지 않습니다. 따라서 모든 행이 동일한(포인터가 가리키는) Product의 Description을 보여줍니다(A). 이는 오류나 자동 수정 대상이 아니며(B, D 오답), Current 자체가 금지된 것도 아닙니다(C 오답).",
+    "explanation": "리스트를 렌더링할 때 각 행은 반복 변수(Product.Description)를 사용해야 행마다 다른 값을 표시합니다. 반면 GetProducts.List.Current는 List의 현재 포인터 위치에 있는 '하나의' 레코드를 가리킬 뿐, 렌더링 중에 행마다 이동하지 않습니다. 따라서 모든 행이 동일한(포인터가 가리키는) Product의 Description을 보여줍니다(A). 이는 오류나 자동 수정 대상이 아니며(B, D 오답), Current 자체가 금지된 것도 아닙니다(C 오답).\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2136,7 +2136,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "List 위젯을 기본 타입 리스트(List of Text)에 바인딩하면, 플랫폼이 각 행을 나타내는 반복 변수를 그 데이터 타입 이름인 'Text'로 만들어 줍니다. 따라서 Expression에는 'Text'를 그대로 사용해 현재 항목의 값을 표시합니다(A). TagList.Current는 렌더링 중 행마다 이동하지 않아 모든 행에 같은 값이 나오고(C 오답), List에는 .Item 속성이 없으며(B 오답), 'Value'라는 이름은 존재하지 않습니다(D 오답).",
+    "explanation": "List 위젯을 기본 타입 리스트(List of Text)에 바인딩하면, 플랫폼이 각 행을 나타내는 반복 변수를 그 데이터 타입 이름인 'Text'로 만들어 줍니다. 따라서 Expression에는 'Text'를 그대로 사용해 현재 항목의 값을 표시합니다(A). TagList.Current는 렌더링 중 행마다 이동하지 않아 모든 행에 같은 값이 나오고(C 오답), List에는 .Item 속성이 없으며(B 오답), 'Value'라는 이름은 존재하지 않습니다(D 오답).\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2189,7 +2189,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Reactive Web에서 List나 Table 위젯 안에 들어가면, 그 위젯이 리스트를 한 줄씩(행마다) 반복해서 그려 줍니다. 이때 \"지금 그리고 있는 행\"을 가리키는 이름은 데이터를 가져온 Aggregate(데이터 조회 도구)의 원본 Entity(데이터를 담는 표, 여기서는 '상품' 표) 이름인 Product입니다. 그래서 각 행의 상품 이름은 Product.Name으로 씁니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — GetProducts.List.Current는 옛 방식(Traditional Web)의 문법으로, Reactive에서는 행마다 움직이지 않아 모든 행이 같은 값으로 나옵니다.\n- **C** — Table1.List.Current 역시 .Current를 쓰는 옛 문법이라 Reactive에서 현재 행을 제대로 가리키지 못합니다.\n- **D** — GetProducts.Product.Name은 리스트를 한 줄씩 도는 반복 과정을 건너뛴 잘못된 경로라 존재하지 않습니다.",
+    "explanation": "Reactive Web에서 List나 Table 위젯 안에 들어가면, 그 위젯이 리스트를 한 줄씩(행마다) 반복해서 그려 줍니다. 이때 \"지금 그리고 있는 행\"을 가리키는 이름은 데이터를 가져온 Aggregate(데이터 조회 도구)의 원본 Entity(데이터를 담는 표, 여기서는 '상품' 표) 이름인 Product입니다. 그래서 각 행의 상품 이름은 Product.Name으로 씁니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — GetProducts.List.Current는 옛 방식(Traditional Web)의 문법으로, Reactive에서는 행마다 움직이지 않아 모든 행이 같은 값으로 나옵니다.\n- **C** — Table1.List.Current 역시 .Current를 쓰는 옛 문법이라 Reactive에서 현재 행을 제대로 가리키지 못합니다.\n- **D** — GetProducts.Product.Name은 리스트를 한 줄씩 도는 반복 과정을 건너뛴 잘못된 경로라 존재하지 않습니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2295,7 +2295,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Reactive의 If widget는 조건이 False일 때 해당 콘텐츠를 아예 렌더링하지 않아 DOM에서 완전히 제거됩니다. 이 때문에 화면에 존재하지 않아 보안과 성능 면에서 유리합니다. display:none이나 opacity:0은 요소가 DOM에 남아 CSS로만 숨기는 전통적 방식이므로 If widget의 동작과 다르며, placeholder comment로 대체된다는 설명도 사실이 아닙니다.",
+    "explanation": "Reactive의 If widget는 조건이 False일 때 해당 콘텐츠를 아예 렌더링하지 않아 DOM에서 완전히 제거됩니다. 이 때문에 화면에 존재하지 않아 보안과 성능 면에서 유리합니다. display:none이나 opacity:0은 요소가 DOM에 남아 CSS로만 숨기는 전통적 방식이므로 If widget의 동작과 다르며, placeholder comment로 대체된다는 설명도 사실이 아닙니다.\n\n**참고 · If / Switch 노드 (조건 분기)**\n- **If** = '만약 ~라면 A, 아니면 B'처럼 조건이 참이냐 거짓이냐로 흐름을 두 갈래로 나눔\n- **Switch** = 여러 조건을 위에서 아래로 검사해 **처음 맞는 갈래**로 감 (아무것도 안 맞으면 Otherwise)\n갈림길에서 신호를 보고 길을 고르는 것과 같아요.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2560,7 +2560,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Table(또는 List) 위젯 안에서 .Current는 현재 반복 중인 행의 레코드를 가리키는 메타 속성입니다. 따라서 GetEmployees.List.Current.Employee.Name은 각 행마다 그 행에 해당하는 직원의 이름을 정확히 표시합니다. B처럼 항상 첫 번째 직원만 나오지 않으며, C의 컴파일 오류나 D의 리터럴 텍스트 표시도 발생하지 않습니다. .Current는 위젯이 행을 순회하며 자동으로 해당 행으로 바뀝니다.",
+    "explanation": "Table(또는 List) 위젯 안에서 .Current는 현재 반복 중인 행의 레코드를 가리키는 메타 속성입니다. 따라서 GetEmployees.List.Current.Employee.Name은 각 행마다 그 행에 해당하는 직원의 이름을 정확히 표시합니다. B처럼 항상 첫 번째 직원만 나오지 않으며, C의 컴파일 오류나 D의 리터럴 텍스트 표시도 발생하지 않습니다. .Current는 위젯이 행을 순회하며 자동으로 해당 행으로 바뀝니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2613,7 +2613,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "OutSystems의 Tabs 패턴은 기본적으로 모든 탭의 콘텐츠를 DOM에 렌더링해 두고 CSS로 숨기기 때문에, 무거운 콘텐츠가 있으면 처음부터 모두 렌더링됩니다. 활성 탭만 렌더링하려면 각 탭 콘텐츠를 활성 탭 인덱스를 조건으로 하는 \"If\" 위젯으로 감싸는 것이 가장 효율적입니다. B는 Tabs가 자동으로 이를 해준다는 잘못된 전제이고, C의 Switch 위젯은 조건 분기용이라 탭 UI에 맞지 않으며, D처럼 탭마다 별도 Screen을 만드는 것은 과도하고 탭 UI의 목적에도 맞지 않습니다.",
+    "explanation": "OutSystems의 Tabs 패턴은 기본적으로 모든 탭의 콘텐츠를 DOM에 렌더링해 두고 CSS로 숨기기 때문에, 무거운 콘텐츠가 있으면 처음부터 모두 렌더링됩니다. 활성 탭만 렌더링하려면 각 탭 콘텐츠를 활성 탭 인덱스를 조건으로 하는 \"If\" 위젯으로 감싸는 것이 가장 효율적입니다. B는 Tabs가 자동으로 이를 해준다는 잘못된 전제이고, C의 Switch 위젯은 조건 분기용이라 탭 UI에 맞지 않으며, D처럼 탭마다 별도 Screen을 만드는 것은 과도하고 탭 UI의 목적에도 맞지 않습니다.\n\n**참고 · If / Switch 노드 (조건 분기)**\n- **If** = '만약 ~라면 A, 아니면 B'처럼 조건이 참이냐 거짓이냐로 흐름을 두 갈래로 나눔\n- **Switch** = 여러 조건을 위에서 아래로 검사해 **처음 맞는 갈래**로 감 (아무것도 안 맞으면 Otherwise)\n갈림길에서 신호를 보고 길을 고르는 것과 같아요.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2666,7 +2666,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "CreateOrUpdate 액션은 인자로 전달된 Entity 레코드에 들어 있는 속성만 데이터베이스에 저장합니다. 그 레코드의 속성이 아닌 별도 변수에 바인딩된 Input 값은 아무리 Form 안에 있어도 저장 대상에 포함되지 않아 무시됩니다. A는 Form 안에 있다는 이유만으로 저장된다는 잘못된 생각이고, C 같은 오류는 발생하지 않으며, D처럼 별도 Log 엔티티로 저장되는 자동 동작도 없습니다. 저장하려면 그 값을 명시적으로 레코드 속성에 Assign해야 합니다.",
+    "explanation": "CreateOrUpdate 액션은 인자로 전달된 Entity 레코드에 들어 있는 속성만 데이터베이스에 저장합니다. 그 레코드의 속성이 아닌 별도 변수에 바인딩된 Input 값은 아무리 Form 안에 있어도 저장 대상에 포함되지 않아 무시됩니다. A는 Form 안에 있다는 이유만으로 저장된다는 잘못된 생각이고, C 같은 오류는 발생하지 않으며, D처럼 별도 Log 엔티티로 저장되는 자동 동작도 없습니다. 저장하려면 그 값을 명시적으로 레코드 속성에 Assign해야 합니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2719,7 +2719,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "List widget(목록 위젯)은 데이터의 각 행마다 같은 위젯 묶음(여기서는 삭제 버튼)을 한 번씩 반복해서 그려줍니다. 이렇게 반복되는 안쪽에서 `Current`는 \"지금 그리고 있는 바로 그 행\"의 레코드를 자동으로 가리킵니다. 그래서 사용자가 누른 행의 삭제 대상 Id는 `GetProducts.List.Current.Product.Id`가 됩니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — `[3]`은 사용자가 누른 행과 상관없이 언제나 네 번째 행만 가리키는 고정 위치라, 엉뚱한 상품이 삭제됩니다.\n- **C** — CurrentId라는 Local Variable(화면 지역 변수)을 따로 만들어도, 그 안에 현재 행의 Id를 넣어주는 장치가 없으면 어떤 행인지 알 수 없습니다.\n- **D** — Button 위젯에는 애초에 \"Index\"라는 속성이 없어, 존재하지 않는 값을 참조하는 셈입니다.",
+    "explanation": "List widget(목록 위젯)은 데이터의 각 행마다 같은 위젯 묶음(여기서는 삭제 버튼)을 한 번씩 반복해서 그려줍니다. 이렇게 반복되는 안쪽에서 `Current`는 \"지금 그리고 있는 바로 그 행\"의 레코드를 자동으로 가리킵니다. 그래서 사용자가 누른 행의 삭제 대상 Id는 `GetProducts.List.Current.Product.Id`가 됩니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — `[3]`은 사용자가 누른 행과 상관없이 언제나 네 번째 행만 가리키는 고정 위치라, 엉뚱한 상품이 삭제됩니다.\n- **C** — CurrentId라는 Local Variable(화면 지역 변수)을 따로 만들어도, 그 안에 현재 행의 Id를 넣어주는 장치가 없으면 어떤 행인지 알 수 없습니다.\n- **D** — Button 위젯에는 애초에 \"Index\"라는 속성이 없어, 존재하지 않는 값을 참조하는 셈입니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2772,7 +2772,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Input(입력칸)의 Variable을 Aggregate(데이터를 읽어오는 질의) 결과의 `Current` 레코드 속성에 연결하면, 양방향(two-way) 바인딩이 됩니다. 즉 화면에는 그 값이 표시되고, 사용자가 글자를 칠 때마다 메모리에 들어 있는 그 레코드의 값도 즉시 함께 바뀝니다. 이는 어디까지나 메모리상의 변경이라는 점이 핵심입니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Aggregate 결과에 연결했다는 이유만으로 읽기 전용(read-only)이 되지는 않으며, Input은 그대로 편집할 수 있습니다.\n- **C** — 값은 글자를 입력하는 즉시 메모리에 반영되며, Enter를 눌러야만 갱신되는 것이 아닙니다.\n- **D** — 바뀌는 것은 메모리 속 레코드일 뿐이고, DB에 실제로 저장하려면 CreateOrUpdate 같은 저장 액션을 따로 호출해야 합니다.",
+    "explanation": "Input(입력칸)의 Variable을 Aggregate(데이터를 읽어오는 질의) 결과의 `Current` 레코드 속성에 연결하면, 양방향(two-way) 바인딩이 됩니다. 즉 화면에는 그 값이 표시되고, 사용자가 글자를 칠 때마다 메모리에 들어 있는 그 레코드의 값도 즉시 함께 바뀝니다. 이는 어디까지나 메모리상의 변경이라는 점이 핵심입니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Aggregate 결과에 연결했다는 이유만으로 읽기 전용(read-only)이 되지는 않으며, Input은 그대로 편집할 수 있습니다.\n- **C** — 값은 글자를 입력하는 즉시 메모리에 반영되며, Enter를 눌러야만 갱신되는 것이 아닙니다.\n- **D** — 바뀌는 것은 메모리 속 레코드일 뿐이고, DB에 실제로 저장하려면 CreateOrUpdate 같은 저장 액션을 따로 호출해야 합니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

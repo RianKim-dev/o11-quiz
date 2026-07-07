@@ -29,7 +29,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "OutSystems에서 **Entity**(데이터를 저장하는 테이블에 해당하는 요소)를 만들면 시스템이 자동으로 몇 가지를 함께 만들어 줍니다: 각 레코드를 구분하는 **Id**(고유 번호, Primary Key), 데이터를 만들고·읽고·수정·삭제하는 **CRUD** 액션, 그리고 데이터를 담는 기본 저장 구조입니다. 반면 계산으로 값을 만들어 내는 **Calculated attribute**(예: 합계 같은 파생 값)는 자동으로 생기지 않고, 필요할 때 개발자가 직접 Aggregate 등에서 추가해야 합니다. 이 문제는 '자동 생성되지 *않는* 것'을 묻고 있습니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — Id(Primary Key)는 모든 Entity에 자동으로 만들어집니다.\n- **B** — Create/Retrieve/Update/Delete 같은 CRUD 액션은 자동 생성됩니다.\n- **D** — 데이터를 저장하는 기본 구조도 Entity를 만들 때 자동으로 생성됩니다.",
+    "explanation": "OutSystems에서 **Entity**(데이터를 저장하는 테이블에 해당하는 요소)를 만들면 시스템이 자동으로 몇 가지를 함께 만들어 줍니다: 각 레코드를 구분하는 **Id**(고유 번호, Primary Key), 데이터를 만들고·읽고·수정·삭제하는 **CRUD** 액션, 그리고 데이터를 담는 기본 저장 구조입니다. 반면 계산으로 값을 만들어 내는 **Calculated attribute**(예: 합계 같은 파생 값)는 자동으로 생기지 않고, 필요할 때 개발자가 직접 Aggregate 등에서 추가해야 합니다. 이 문제는 '자동 생성되지 *않는* 것'을 묻고 있습니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — Id(Primary Key)는 모든 Entity에 자동으로 만들어집니다.\n- **B** — Create/Retrieve/Update/Delete 같은 CRUD 액션은 자동 생성됩니다.\n- **D** — 데이터를 저장하는 기본 구조도 Entity를 만들 때 자동으로 생성됩니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "distractors": {
       "A": "Entity는 자동으로 Long Integer 타입의 auto-numbered Id를 Primary Key로 생성합니다.",
       "B": "Entity는 자동으로 Create, Retrieve(Get), Update, Delete라는 6개의 CRUD 작업을 생성합니다.",
@@ -92,7 +92,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "OutSystems의 **Entity**는 화면에만 보이는 개념이 아니라, 실제 데이터베이스 **테이블**과 그대로 연결(매핑)됩니다. Entity의 **Attribute**(속성)는 테이블의 **column**(열)이 되고, 저장된 각 **Record**(레코드)는 **row**(행)가 되며, Id는 Primary Key로 연결됩니다. 즉 하나의 Entity가 하나의 테이블에 대응합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Entity는 단순한 화면(UI) 표현이 아니라 실제 테이블에 직접 연결됩니다.\n- **C** — 하나의 Entity는 여러 테이블이 아니라 하나의 테이블에 대응합니다.\n- **D** — 대응하는 테이블은 자동으로 생성되므로, 직접 SQL 코드를 작성할 필요가 없습니다.",
+    "explanation": "OutSystems의 **Entity**는 화면에만 보이는 개념이 아니라, 실제 데이터베이스 **테이블**과 그대로 연결(매핑)됩니다. Entity의 **Attribute**(속성)는 테이블의 **column**(열)이 되고, 저장된 각 **Record**(레코드)는 **row**(행)가 되며, Id는 Primary Key로 연결됩니다. 즉 하나의 Entity가 하나의 테이블에 대응합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Entity는 단순한 화면(UI) 표현이 아니라 실제 테이블에 직접 연결됩니다.\n- **C** — 하나의 Entity는 여러 테이블이 아니라 하나의 테이블에 대응합니다.\n- **D** — 대응하는 테이블은 자동으로 생성되므로, 직접 SQL 코드를 작성할 필요가 없습니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "distractors": {
       "A": "Entity는 UI 요소가 아니라 비즈니스 개념을 나타내는 데이터 저장소입니다.",
       "C": "한 Entity는 하나의 데이터베이스 테이블에만 매핑됩니다.",
@@ -407,7 +407,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Static Entity(정적 엔티티)는 개발할 때 값을 미리 정해 두는 표로, 앱이 실제로 돌아가는 중(runtime)에는 내용을 바꿀 수 없습니다. 활성/비활성 같은 고정된 선택지 목록을 담는 enumeration(열거형) 용도입니다. 반대로 일반(dynamic) Entity는 앱 사용 중에 사용자가 레코드를 추가·수정할 수 있습니다. 이 '런타임에 바뀌느냐'가 핵심 차이입니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Static Entity도 데이터베이스에 저장됩니다. 메모리에만 있는 것이 아닙니다.\n- **C** — CRUD 액션 자동 생성 여부는 두 종류를 가르는 기준이 아닙니다.\n- **D** — Static Entity도 여러 attribute를 가질 수 있어, attribute 개수와는 무관합니다.",
+    "explanation": "Static Entity(정적 엔티티)는 개발할 때 값을 미리 정해 두는 표로, 앱이 실제로 돌아가는 중(runtime)에는 내용을 바꿀 수 없습니다. 활성/비활성 같은 고정된 선택지 목록을 담는 enumeration(열거형) 용도입니다. 반대로 일반(dynamic) Entity는 앱 사용 중에 사용자가 레코드를 추가·수정할 수 있습니다. 이 '런타임에 바뀌느냐'가 핵심 차이입니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Static Entity도 데이터베이스에 저장됩니다. 메모리에만 있는 것이 아닙니다.\n- **C** — CRUD 액션 자동 생성 여부는 두 종류를 가르는 기준이 아닙니다.\n- **D** — Static Entity도 여러 attribute를 가질 수 있어, attribute 개수와는 무관합니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "distractors": {
       "A": "Static Entity도 데이터베이스에 저장됩니다.",
       "C": "Static Entity는 Get action만 포함합니다. 동적 Entity가 CRUD 작업을 생성합니다.",
@@ -655,7 +655,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Static Entity 레코드는 설계·개발(디자인 타임)에만 정의되며 런타임에는 변경할 수 없습니다(enumeration처럼 동작). 따라서 D가 참입니다. A: 런타임에 레코드를 추가하는 CreateOrUpdate<StaticEntity>는 존재하지 않습니다. B: Static Entity의 Id는 정해진 식별자 타입이며 Text로 바꿀 수 없습니다. C: Label 문자열 비교는 오타·다국어에 취약하므로 best practice가 아니며, Record Identifier(Entities.Status.Active)로 비교해야 합니다.",
+    "explanation": "Static Entity 레코드는 설계·개발(디자인 타임)에만 정의되며 런타임에는 변경할 수 없습니다(enumeration처럼 동작). 따라서 D가 참입니다. A: 런타임에 레코드를 추가하는 CreateOrUpdate<StaticEntity>는 존재하지 않습니다. B: Static Entity의 Id는 정해진 식별자 타입이며 Text로 바꿀 수 없습니다. C: Label 문자열 비교는 오타·다국어에 취약하므로 best practice가 아니며, Record Identifier(Entities.Status.Active)로 비교해야 합니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "distractors": {
       "A": "Static Entity는 런타임에 레코드를 추가할 수 없습니다.",
       "B": "Id는 임의 타입(Text)이 될 수 없습니다.",
@@ -891,7 +891,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "OutSystems에서 Record(여러 필드를 하나로 묶은 데이터 한 덩어리)는 값(value) 타입입니다. GetProducts.List.Current를 Record 타입 변수에 Assign하면 그 순간의 데이터가 통째로 복사됩니다(스냅샷 사진을 찍는 것과 같음). 그래서 나중에 원본 List에 ListFilter로 항목을 지워도, 이미 복사해 둔 SelectedProduct는 아무 영향 없이 그대로 남습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 값을 복사한 독립 사본이라 원본 List가 바뀌어도 비워지지 않습니다.\n- **C** — 변수는 원본을 '가리키는' 포인터가 아니라 별개의 복사본이라 필터된 목록을 따라가지 않습니다.\n- **D** — 애초에 포인터로 연결된 게 아니므로 잃을 참조도 없어 예외가 발생하지 않습니다.",
+    "explanation": "OutSystems에서 Record(여러 필드를 하나로 묶은 데이터 한 덩어리)는 값(value) 타입입니다. GetProducts.List.Current를 Record 타입 변수에 Assign하면 그 순간의 데이터가 통째로 복사됩니다(스냅샷 사진을 찍는 것과 같음). 그래서 나중에 원본 List에 ListFilter로 항목을 지워도, 이미 복사해 둔 SelectedProduct는 아무 영향 없이 그대로 남습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 값을 복사한 독립 사본이라 원본 List가 바뀌어도 비워지지 않습니다.\n- **C** — 변수는 원본을 '가리키는' 포인터가 아니라 별개의 복사본이라 필터된 목록을 따라가지 않습니다.\n- **D** — 애초에 포인터로 연결된 게 아니므로 잃을 참조도 없어 예외가 발생하지 않습니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "distractors": "A/C는 참조 의미로 오해한 것이고, D의 런타임 예외는 발생하지 않습니다.",
     "source": "동료 실전문제집 (검토·검증)",
     "status": "verified",
@@ -1157,7 +1157,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "Static Entity의 레코드는 개발 시점(design time)에 정의되어 애플리케이션에 함께 배포되므로, 런타임 로직으로 레코드를 추가/삭제/수정할 수 없습니다. A는 틀렸는데 Static Entity도 Aggregate에서 Join으로 사용할 수 있고, B도 틀렸는데 Static Entity Identifier는 일반 Entity의 Foreign Key로 흔히 사용되며, D처럼 Label/Order 외에 여러 사용자 정의 속성을 추가하는 것도 얼마든지 가능합니다.",
+    "explanation": "Static Entity의 레코드는 개발 시점(design time)에 정의되어 애플리케이션에 함께 배포되므로, 런타임 로직으로 레코드를 추가/삭제/수정할 수 없습니다. A는 틀렸는데 Static Entity도 Aggregate에서 Join으로 사용할 수 있고, B도 틀렸는데 Static Entity Identifier는 일반 Entity의 Foreign Key로 흔히 사용되며, D처럼 Label/Order 외에 여러 사용자 정의 속성을 추가하는 것도 얼마든지 가능합니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2694,7 +2694,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Static Entity(Low/Medium/High처럼 개발 단계에서 값을 미리 정해 두는 고정 목록용 Entity)도 일반 Entity와 똑같이 실제 데이터베이스 테이블에 행(row)으로 저장됩니다. 여기에 'Color' 속성을 추가하면 바로 그 같은 테이블에 새 컬럼(열)이 하나 생기고, 각 레코드의 색상 값이 그 열에 담깁니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 색상 값은 플랫폼이 따로 관리하는 별도 메타 테이블이 아니라 Priority 테이블 자체에 저장됩니다.\n- **C** — CSS 파일은 화면 디자인을 담는 곳이지 데이터 값을 저장하는 곳이 아닙니다.\n- **D** — Static Entity 데이터는 Service Studio 안에만 있는 게 아니라 데이터베이스로 실제 전송·저장됩니다.",
+    "explanation": "Static Entity(Low/Medium/High처럼 개발 단계에서 값을 미리 정해 두는 고정 목록용 Entity)도 일반 Entity와 똑같이 실제 데이터베이스 테이블에 행(row)으로 저장됩니다. 여기에 'Color' 속성을 추가하면 바로 그 같은 테이블에 새 컬럼(열)이 하나 생기고, 각 레코드의 색상 값이 그 열에 담깁니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 색상 값은 플랫폼이 따로 관리하는 별도 메타 테이블이 아니라 Priority 테이블 자체에 저장됩니다.\n- **C** — CSS 파일은 화면 디자인을 담는 곳이지 데이터 값을 저장하는 곳이 아닙니다.\n- **D** — Static Entity 데이터는 Service Studio 안에만 있는 게 아니라 데이터베이스로 실제 전송·저장됩니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3224,7 +3224,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Static Entity는 design-time에 정의된 고정된 record 집합을 가지며, end-user가 런타임에 값을 바꿀 수 없습니다(예: 상태 코드, 카테고리). 따라서 B가 정답입니다. Static Entity도 Id를 가지므로 A는 틀리고, Label 외에 추가 attribute도 여러 개 가질 수 있어 C도 틀리며, Static Entity 역시 데이터베이스에 저장되므로 브라우저 캐시에 저장된다는 D도 오답입니다.",
+    "explanation": "Static Entity는 design-time에 정의된 고정된 record 집합을 가지며, end-user가 런타임에 값을 바꿀 수 없습니다(예: 상태 코드, 카테고리). 따라서 B가 정답입니다. Static Entity도 Id를 가지므로 A는 틀리고, Label 외에 추가 attribute도 여러 개 가질 수 있어 C도 틀리며, Static Entity 역시 데이터베이스에 저장되므로 브라우저 캐시에 저장된다는 D도 오답입니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -3807,7 +3807,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "빈 List에서 .Current를 참조하면 각 attribute의 기본값을 가진 빈 record가 반환됩니다. Text 타입의 기본값은 NULL이 아니라 빈 문자열(\"\")입니다. OutSystems는 Text에 대해 NULL 개념을 사용하지 않으므로 정답은 C입니다. B(NULL)는 틀리고, A처럼 크래시가 발생하지도 않으며 D처럼 임의의 다른 record가 들어오지도 않습니다.",
+    "explanation": "빈 List에서 .Current를 참조하면 각 attribute의 기본값을 가진 빈 record가 반환됩니다. Text 타입의 기본값은 NULL이 아니라 빈 문자열(\"\")입니다. OutSystems는 Text에 대해 NULL 개념을 사용하지 않으므로 정답은 C입니다. B(NULL)는 틀리고, A처럼 크래시가 발생하지도 않으며 D처럼 임의의 다른 record가 들어오지도 않습니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

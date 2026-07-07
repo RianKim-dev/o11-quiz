@@ -1486,7 +1486,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "'IsActive'는 개발자가 직접 추가한 일반 속성일 뿐 특별한 동작을 하지 않으므로, 값을 False로 바꿔도 이를 참조하는 일반 Entity 레코드의 Foreign Key는 그대로 유지되어 여전히 그 (비활성) Static 레코드를 가리킵니다. B는 틀렸는데 IsActive는 Aggregate에서 자동으로 레코드를 숨기는 시스템 속성이 아니고, C처럼 FK가 자동으로 NullIdentifier()로 바뀌지도 않으며, D처럼 화면 표시 시 런타임 오류가 나지도 않습니다. 필터링이 필요하면 개발자가 Aggregate에서 직접 IsActive 조건을 걸어야 합니다.",
+    "explanation": "'IsActive'는 개발자가 직접 추가한 일반 속성일 뿐 특별한 동작을 하지 않으므로, 값을 False로 바꿔도 이를 참조하는 일반 Entity 레코드의 Foreign Key는 그대로 유지되어 여전히 그 (비활성) Static 레코드를 가리킵니다. B는 틀렸는데 IsActive는 Aggregate에서 자동으로 레코드를 숨기는 시스템 속성이 아니고, C처럼 FK가 자동으로 NullIdentifier()로 바뀌지도 않으며, D처럼 화면 표시 시 런타임 오류가 나지도 않습니다. 필터링이 필요하면 개발자가 Aggregate에서 직접 IsActive 조건을 걸어야 합니다.\n\n**참고 · Entity / Static Entity (데이터 테이블)**\n- **Entity** = 데이터를 저장하는 **데이터베이스 테이블**(고객·주문 등). 런타임에 레코드를 추가·수정·삭제할 수 있음\n- **Static Entity** = 개발할 때 값을 미리 정해두는 **고정 목록**(예: 상태 대기/완료). 런타임에는 못 바꿈",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

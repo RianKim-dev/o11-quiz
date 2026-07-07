@@ -863,7 +863,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "'For Each'가 5번 반복하면 Block의 인스턴스가 5개 생성되고, 각 인스턴스마다 On Initialize가 한 번씩 실행되므로 총 5번입니다(정답 B). On Initialize는 초기화용으로 한 번만 도는 이벤트라 A의 '렌더링용 추가 실행'은 없습니다. Block은 자동으로 초기화되므로 C의 '수동 초기화'는 틀리고, 인스턴스마다 개별 실행되므로 D의 '한 번만'도 틀립니다.",
+    "explanation": "'For Each'가 5번 반복하면 Block의 인스턴스가 5개 생성되고, 각 인스턴스마다 On Initialize가 한 번씩 실행되므로 총 5번입니다(정답 B). On Initialize는 초기화용으로 한 번만 도는 이벤트라 A의 '렌더링용 추가 실행'은 없습니다. Block은 자동으로 초기화되므로 C의 '수동 초기화'는 틀리고, 인스턴스마다 개별 실행되므로 D의 '한 번만'도 틀립니다.\n\n**참고 · For Each 루프란?**\n리스트(목록)에 담긴 항목을 **하나씩 차례로 꺼내** 같은 작업을 반복하는 구조예요. 예를 들어 장바구니 상품 10개에 각각 '재고 확인'을 하려면 1번 → 2번 → … → 10번까지 자동으로 돌며 처리합니다. 손으로 체크리스트를 위에서 아래로 훑는 것과 같아요. (지금 처리 중인 항목은 `List.Current`로 가리킵니다.)",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1446,7 +1446,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "List 위젯 안에서 각 행의 값을 Block의 Input Parameter로 넘길 때 Reactive Web에서는 'GetUsers.List.Current.User.ProfilePictureURL' 형식으로 현재 record를 참조합니다. 따라서 정답은 C입니다. User.ProfilePictureURL(D)은 Traditional Web 문법이고, User(A)와 GetUsers.List(B)는 Text(URL) 속성이 아니라 record 또는 list 전체여서 ImageURL(Text) 파라미터에 바인딩할 수 없습니다.",
+    "explanation": "List 위젯 안에서 각 행의 값을 Block의 Input Parameter로 넘길 때 Reactive Web에서는 'GetUsers.List.Current.User.ProfilePictureURL' 형식으로 현재 record를 참조합니다. 따라서 정답은 C입니다. User.ProfilePictureURL(D)은 Traditional Web 문법이고, User(A)와 GetUsers.List(B)는 Text(URL) 속성이 아니라 record 또는 list 전체여서 ImageURL(Text) 파라미터에 바인딩할 수 없습니다.\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1499,7 +1499,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Reactive Web에서는 List/Table 안의 위젯(Link, Button 등)에서 Action이 실행되면 플랫폼이 그 클릭된 행으로 List의 Current 포인터를 설정합니다. 따라서 GetTasks.List.Current.Task.Title은 클릭한 바로 그 행의 Title을 가져옵니다(D). 이는 On After Fetch 전용이 아니며(C 오답), 마지막/첫 번째 레코드로 고정되지도 않습니다(A, B 오답).",
+    "explanation": "Reactive Web에서는 List/Table 안의 위젯(Link, Button 등)에서 Action이 실행되면 플랫폼이 그 클릭된 행으로 List의 Current 포인터를 설정합니다. 따라서 GetTasks.List.Current.Task.Title은 클릭한 바로 그 행의 Title을 가져옵니다(D). 이는 On After Fetch 전용이 아니며(C 오답), 마지막/첫 번째 레코드로 고정되지도 않습니다(A, B 오답).\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1552,7 +1552,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Reactive Web에서 리스트 안의 위젯을 사용자가 조작하면 플랫폼이 List의 Current 포인터를 그 조작된 행으로 설정합니다. 따라서 세 번째 행의 Checkbox를 클릭하면 Current가 세 번째 레코드를 가리키게 되고, 양방향 바인딩으로 그 레코드의 IsSelected가 True로 갱신됩니다(B). 메모리 상의 List는 UI에서 직접 수정할 수 있고(C 오답), 모든 행이 함께 체크되지 않으며(A 오답), Aggregate를 다시 실행할 필요도 없습니다(D 오답).",
+    "explanation": "Reactive Web에서 리스트 안의 위젯을 사용자가 조작하면 플랫폼이 List의 Current 포인터를 그 조작된 행으로 설정합니다. 따라서 세 번째 행의 Checkbox를 클릭하면 Current가 세 번째 레코드를 가리키게 되고, 양방향 바인딩으로 그 레코드의 IsSelected가 True로 갱신됩니다(B). 메모리 상의 List는 UI에서 직접 수정할 수 있고(C 오답), 모든 행이 함께 체크되지 않으며(A 오답), Aggregate를 다시 실행할 필요도 없습니다(D 오답).\n\n**참고 · List / Record / Attribute (데이터 구조)**\n- **Record** = 한 건(예: 고객 1명)의 정보 묶음 = 표의 한 **행**\n- **Attribute** = 그 안의 한 칸(이름·이메일 등) = **열**\n- **List** = 그런 record 여러 개를 담은 **목록**(표 전체)\n목록에서 지금 가리키는 한 행은 `List.Current`로 집습니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

@@ -970,7 +970,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "가장 좋은 UX는 Client Action(서버 호출 전)에서 먼저 검증해 사용자에게 즉시 피드백을 주고, 동시에 Server Action에서도 검증해 보안(우회 방지)을 확보하는 것입니다. A처럼 서버에서만 하면 왕복 후에야 오류를 알게 되어 UX가 나쁘고, C의 On Initialize는 입력 시점 검증에 맞지 않으며, B만으로는 서버 측 보안 검증이 빠집니다.",
+    "explanation": "가장 좋은 UX는 Client Action(서버 호출 전)에서 먼저 검증해 사용자에게 즉시 피드백을 주고, 동시에 Server Action에서도 검증해 보안(우회 방지)을 확보하는 것입니다. A처럼 서버에서만 하면 왕복 후에야 오류를 알게 되어 UX가 나쁘고, C의 On Initialize는 입력 시점 검증에 맞지 않으며, B만으로는 서버 측 보안 검증이 빠집니다.\n\n**참고 · Client Action vs Server Action (실행 위치)**\n- **Client Action** = 사용자 **브라우저**에서 실행 (빠른 UI 반응)\n- **Server Action** = **서버**에서 실행 (DB 작업·민감한 계산·보안 검증)\n브라우저는 조작될 수 있어서, 가격·권한·검증 같은 **중요한 로직은 반드시 Server**에서 (다시) 처리해야 합니다.",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
