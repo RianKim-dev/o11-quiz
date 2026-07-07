@@ -299,7 +299,7 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
           })}
         </div>
 
-        {/* reveal (practice/review only) */}
+        {/* reveal (practice/review, before reveal) */}
         {!timed && !revealedNow ? (
           <button
             onClick={() => reveal(current.id)}
@@ -309,41 +309,45 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
           </button>
         ) : null}
 
-        {/* explanation + status buttons (when revealed) */}
+        {/* explanation (when revealed) */}
         {revealedNow ? (
-          <div className="mt-4 border-t border-slate-100 pt-3">
-            <details open className="rounded-lg bg-slate-50 p-3">
-              <summary className="cursor-pointer text-sm font-medium text-rose-600">해설</summary>
-              <div className="mt-2 text-sm">
-                <Markdown>{current.explanation}</Markdown>
-              </div>
-            </details>
-            <p className="mb-1 mt-3 text-xs text-slate-400">이 문항, 이제 어떤가요?</p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => mark(current.id, "known")}
-                className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
-                  curStatus === "known"
-                    ? "border-emerald-500 bg-emerald-500 text-white"
-                    : "border-emerald-300 text-emerald-700 hover:bg-emerald-50"
-                }`}
-              >
-                알아요 ✓
-              </button>
-              <button
-                onClick={() => mark(current.id, "review")}
-                title="'몰라요'로 표시하면 홈의 '다시 볼 목록'에 모입니다"
-                className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
-                  curStatus === "review"
-                    ? "border-amber-500 bg-amber-500 text-white"
-                    : "border-amber-300 text-amber-700 hover:bg-amber-50"
-                }`}
-              >
-                몰라요 🔖
-              </button>
+          <details open className="mt-4 rounded-lg bg-slate-50 p-3">
+            <summary className="cursor-pointer text-sm font-medium text-rose-600">해설</summary>
+            <div className="mt-2 text-sm">
+              <Markdown>{current.explanation}</Markdown>
             </div>
-          </div>
+          </details>
         ) : null}
+
+        {/* self-assessment — available in every mode/state (optional) */}
+        <div className="mt-4 border-t border-slate-100 pt-3">
+          <p className="mb-1 text-xs text-slate-400">
+            자가 표시 (선택) — 진도·복습 목록에 반영돼요
+          </p>
+          <div className="flex gap-2">
+            <button
+              onClick={() => mark(current.id, "known")}
+              className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
+                curStatus === "known"
+                  ? "border-emerald-500 bg-emerald-500 text-white"
+                  : "border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+              }`}
+            >
+              알아요 ✓
+            </button>
+            <button
+              onClick={() => mark(current.id, "review")}
+              title="'몰라요'로 표시하면 홈의 '다시 볼 목록'에 모입니다"
+              className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
+                curStatus === "review"
+                  ? "border-amber-500 bg-amber-500 text-white"
+                  : "border-amber-300 text-amber-700 hover:bg-amber-50"
+              }`}
+            >
+              몰라요 🔖
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* nav */}

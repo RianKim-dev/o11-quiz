@@ -7,6 +7,7 @@ import { BLUEPRINT, CATEGORY_ORDER } from "@/lib/blueprint";
 import { ALL_QUESTIONS } from "@/lib/questions";
 import { loadStatuses, clearStatuses, type QStatus } from "@/lib/progress";
 import { useAuth } from "@/lib/auth";
+import Help from "@/components/Help";
 
 interface SubStat {
   known: number;
@@ -55,7 +56,10 @@ export default function Dashboard() {
     <div className="space-y-6">
       {/* overall */}
       <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h1 className="text-lg font-semibold">예상문제집 대시보드</h1>
+        <div className="flex items-start justify-between gap-3">
+          <h1 className="text-lg font-semibold">예상문제집 대시보드</h1>
+          <Help />
+        </div>
         <p className="mt-1 text-sm text-slate-500">
           현재 문제 은행: <b>{MANIFEST.total}</b>문항 · 실제 시험은 50문항(합격 70%)
         </p>
