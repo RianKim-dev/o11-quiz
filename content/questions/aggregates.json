@@ -28,7 +28,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Aggregate는 여러 Entity(데이터 테이블)를 **Join**(연결)해서 한 번에 가져오는 쿼리예요. 어떤 Join을 쓰느냐가 결과를 정합니다. 여기서 왼쪽(첫 번째) Source는 `Product`이고 Join이 **With or Without**(왼쪽은 전부 두고 오른쪽 짝이 없으면 그 칸을 빈 값으로 채우는 left outer join)이므로, Category가 없는 Product까지 포함해 **모든 Product**가 나오고 Category 속성만 null이 됩니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Category가 있는 Product만 나오는 건 **Only With**(inner join)의 동작입니다\n- **C** — 기준이 되는 왼쪽은 Category가 아니라 Product이므로 'Product 가진 Category만'이 되지 않습니다\n- **D** — 양쪽을 전부 반환하는 full outer join은 OutSystems Aggregate가 지원하지 않습니다",
+    "explanation": "Aggregate는 여러 Entity(데이터 테이블)를 **Join**(연결)해서 한 번에 가져오는 쿼리예요. 여기서 왼쪽(첫 번째) Source는 `Product`이고 Join이 **With or Without**(왼쪽은 전부 두고, 오른쪽 짝이 없으면 그 칸을 빈 값으로 채우는 left outer join)이므로, Category가 없는 상품(Product)까지 포함해 **모든 상품**이 나오고 Category 속성만 null이 됩니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Category가 있는 상품만 나오는 건 **Only With**(inner join)의 동작입니다\n- **C** — 기준이 되는 왼쪽은 Category가 아니라 상품이므로 '상품 가진 Category만'이 되지 않습니다\n- **D** — 양쪽(상품·Category)을 전부 반환하는 건 **With**(full outer join)의 동작입니다. 여기 조인은 With or Without라서 Category만 있는 행은 나오지 않습니다\n\n**참고 · Aggregate Join 종류**\n- **Only With** = inner join — 양쪽에 짝이 있는 행만\n- **With or Without** = left outer join — 왼쪽은 전부, 오른쪽 짝 없으면 그 칸은 null\n- **With** = full outer join — 양쪽 전부 (짝 없어도)\n- (Join을 아예 안 걸면 = Cartesian, 모든 조합)",
     "distractors": {
       "A": "이건 Only With(Inner Join)일 때의 동작입니다.",
       "C": "방향이 반대입니다. 기준(왼쪽) Source는 Category가 아니라 Product예요.",
@@ -276,7 +276,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "**Only With** 조인은 두 Entity에 **짝이 모두 있는 레코드만** 반환합니다(inner join). 그래서 Genre가 연결된 Movie만 나오고, Genre가 없는 Movie는 빠집니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — With or Without(left outer join)은 Genre 없는 Movie까지 전부 포함하므로 조건에 맞지 않습니다\n- **C** — OutSystems Aggregate에는 그냥 'With'라는 조인 종류가 없습니다\n- **D** — Sorting은 정렬만 할 뿐 레코드를 걸러내지 못합니다",
+    "explanation": "**Only With** 조인은 두 Entity에 **짝이 모두 있는 레코드만** 반환합니다(inner join). 그래서 Genre가 연결된 영화(Movie)만 나오고, Genre가 없는 영화는 빠집니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — With or Without(left outer join)은 Genre 없는 영화까지 전부 포함하므로 조건에 맞지 않습니다\n- **C** — 'With'는 실재하는 조인이지만 **full outer join**이라 Genre 없는 영화까지 전부 포함하므로 '장르 있는 영화만'에 맞지 않습니다\n- **D** — Sorting은 정렬만 할 뿐 레코드를 걸러내지 못합니다\n\n**참고 · Aggregate Join 종류**\n- **Only With** = inner join — 양쪽에 짝이 있는 행만\n- **With or Without** = left outer join — 왼쪽은 전부, 오른쪽 짝 없으면 null\n- **With** = full outer join — 양쪽 전부 (짝 없어도)",
     "distractors": {
       "B": "With or Without는 왼쪽(Movie)의 모든 행을 반환해서, Genre가 없는 Movie까지 포함됩니다.",
       "C": "With는 두 Entity의 모든 행을 반환합니다.",
@@ -338,7 +338,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "OutSystems Aggregate의 조인은 두 종류예요 — **Only With**(양쪽에 짝이 다 있는 행만 반환, inner join)와 **With or Without**(왼쪽은 전부 두고, 오른쪽 짝이 없으면 그 칸은 빈 값으로 채움, left outer join). 문제의 **With or Without**는 후자라, 오른쪽에 매칭이 없어도 **왼쪽 Entity의 모든 행을 반환**합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 양쪽에 짝이 있는 것만 반환하는 건 **Only With**(inner join)의 동작입니다\n- **C** — 양쪽 전체를 다 반환하는 full outer join은 OutSystems Aggregate가 **지원하지 않습니다**\n- **D** — 중복 제거는 조인 종류가 하는 일이 아닙니다",
+    "explanation": "OutSystems Aggregate의 조인은 **Only With**(inner join, 양쪽에 짝이 다 있는 행만), **With or Without**(left outer join, 왼쪽은 전부 두고 오른쪽 짝이 없으면 빈 값), **With**(full outer join, 양쪽 전부) 세 가지가 있습니다. 문제의 **With or Without**는 left outer라 오른쪽에 매칭이 없어도 **왼쪽 Entity의 모든 행을 반환**합니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 양쪽에 짝이 있는 것만 반환하는 건 **Only With**(inner join)의 동작입니다\n- **C** — 양쪽 전체를 반환하는 full outer join은 **With** 조인의 동작이지, 여기서 묻는 With or Without가 아닙니다\n- **D** — 중복 제거는 조인 종류가 하는 일이 아닙니다",
     "distractors": {
       "A": "이건 Only With(일치하는 레코드만)의 동작입니다.",
       "B": "이건 With or Without(왼쪽 전체 유지)의 동작입니다.",
@@ -7054,7 +7054,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "Aggregate에서 'With or Without' 조인은 Left Outer Join으로 동작하여, 왼쪽 엔티티(Customer)의 모든 행을 유지하고 매칭되는 Order가 없으면 Order 컬럼을 Null로 채웁니다. 반면 'Only With'는 Inner Join이라 Order가 없는 Customer는 결과에서 빠집니다(A 오답). Aggregate는 Full Outer Join을 지원하지 않으며(D 오답), 'Left Anti Join'은 존재하지 않는 잘못된 명칭입니다(B 오답).",
+    "explanation": "Aggregate에서 'With or Without' 조인은 Left Outer Join으로 동작하여, 왼쪽 엔티티인 고객(Customer)의 모든 행을 유지하고 매칭되는 주문(Order)이 없으면 Order 컬럼을 Null로 채웁니다. 그래서 주문이 없는 고객도 목록에 나옵니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — 'Only With'는 Inner Join이라 주문이 없는 고객은 결과에서 빠집니다\n- **B** — 'Left Anti Join'은 OutSystems Aggregate에 존재하지 않는 잘못된 명칭입니다\n- **D** — Full Outer Join은 OutSystems의 **With** 조인으로 실재하지만, '모든 고객 표시'에는 왼쪽 전부만 남기는 With or Without(left outer)가 맞습니다. full outer는 짝 없는 주문까지 끌어오려 해서 과합니다\n\n**참고 · Aggregate Join 종류**\n- **Only With** = inner join — 양쪽에 짝이 있는 행만\n- **With or Without** = left outer join — 왼쪽은 전부, 오른쪽 짝 없으면 null\n- **With** = full outer join — 양쪽 전부 (짝 없어도)",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
