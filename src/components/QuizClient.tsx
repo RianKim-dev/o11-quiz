@@ -48,17 +48,24 @@ export default function QuizClient({ mode, subtopic }: Props) {
         // The "다시 볼 목록" — questions marked 몰라요.
         qs = shuffle(ALL_QUESTIONS.filter((q) => statuses.get(q.id) === "review"));
         t = "다시 볼 목록";
+      } else if (mode === "unknown") {
+        // The "미확인 목록" — questions not yet marked either way.
+        qs = shuffle(ALL_QUESTIONS.filter((q) => !statuses.get(q.id)));
+        t = "미확인 목록";
+        n = practiceNote;
       } else if (mode === "practice" && subtopic) {
         qs = shuffle(getBySubtopic(subtopic));
         t = `연습 · ${subtopic}`;
         n = practiceNote;
       } else {
-        // 전체 연습 — not-yet-"알아요" first.
-        const fresh = shuffle(ALL_QUESTIONS.filter((q) => !known.has(q.id)));
-        const seen = shuffle(ALL_QUESTIONS.filter((q) => known.has(q.id)));
-        qs = [...fresh, ...seen];
-        t = "전체 연습";
-        n = practiceNote;
+        // 연습 모드 — same 50-question blueprint as the mock, but untimed + with explanations.
+        const { questions: mq, shortfall } = assembleMockFrom(known);
+        qs = mq;
+        t = "연습 모드";
+        n =
+          shortfall > 0
+            ? `현재 은행에 문항이 부족해 ${qs.length}문항으로 구성했어요. ${practiceNote}`
+            : practiceNote;
       }
       if (!cancelled) {
         setQuestions(qs);
@@ -81,7 +88,9 @@ export default function QuizClient({ mode, subtopic }: Props) {
         <p className="text-sm text-slate-500">
           {mode === "review"
             ? "다시 볼 문항이 없어요. 문제를 풀며 '몰라요'로 표시하면 여기에 모입니다."
-            : "이 조건에 해당하는 문항이 아직 없어요."}
+            : mode === "unknown"
+              ? "미확인 문항이 없어요. 모든 문항을 '알아요' 또는 '몰라요'로 표시하셨네요! 👏"
+              : "이 조건에 해당하는 문항이 아직 없어요."}
         </p>
         <Link
           href="/"

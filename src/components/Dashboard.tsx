@@ -94,6 +94,15 @@ export default function Dashboard() {
           </div>
         </Link>
         <Link
+          href="/quiz?mode=practice"
+          className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-slate-300"
+        >
+          <div className="text-base font-semibold">📖 연습 모드</div>
+          <div className="mt-1 text-xs text-slate-500">
+            시험 비율 그대로 50문항 · 해설 보며 · 타이머 없음
+          </div>
+        </Link>
+        <Link
           href="/quiz?mode=review"
           className="rounded-xl border border-amber-300 bg-amber-50 p-4 shadow-sm transition-colors hover:bg-amber-100"
         >
@@ -108,13 +117,18 @@ export default function Dashboard() {
           <div className="mt-1 text-xs text-amber-700">'몰라요'로 표시한 문항만 모아 연습</div>
         </Link>
         <Link
-          href="/quiz?mode=practice"
+          href="/quiz?mode=unknown"
           className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-slate-300"
         >
-          <div className="text-base font-semibold">📖 전체 연습</div>
-          <div className="mt-1 text-xs text-slate-500">
-            타이머 없이 · 해설 보며 · 아직 모르는 문항 우선
+          <div className="text-base font-semibold">
+            ⚪ 미확인 목록
+            {mounted && overall.total - overall.known - overall.review > 0 ? (
+              <span className="ml-1 text-sm font-normal text-slate-500">
+                {overall.total - overall.known - overall.review}개
+              </span>
+            ) : null}
           </div>
+          <div className="mt-1 text-xs text-slate-500">아직 표시 안 한 문항만 모아 연습</div>
         </Link>
       </section>
 
