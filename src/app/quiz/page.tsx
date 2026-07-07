@@ -8,7 +8,8 @@ function QuizInner() {
   const sp = useSearchParams();
   const mode = sp.get("mode") ?? "all";
   const subtopic = sp.get("subtopic") ?? undefined;
-  return <QuizClient mode={mode} subtopic={subtopic} />;
+  const filter = sp.get("filter") ?? undefined;
+  return <QuizClient mode={mode} subtopic={subtopic} filter={filter} />;
 }
 
 export default function QuizPage() {

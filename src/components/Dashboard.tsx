@@ -178,16 +178,48 @@ export default function Dashboard() {
                             </>
                           ) : null}
                         </div>
-                        <span className="w-28 shrink-0 text-right text-xs tabular-nums text-slate-400">
-                          {mounted ? (
-                            <>
-                              <span className="text-emerald-600">{st.known}</span>/
-                              <span className="text-amber-600">{st.review}</span>/{st.total}
-                            </>
-                          ) : (
-                            `–/${st.total}`
-                          )}
-                        </span>
+                        {mounted ? (
+                          <span className="flex w-28 shrink-0 justify-end gap-1 text-xs tabular-nums">
+                            {(
+                              [
+                                ["known", st.known, "bg-emerald-100 text-emerald-700"],
+                                ["review", st.review, "bg-amber-100 text-amber-700"],
+                                [
+                                  "unknown",
+                                  st.total - st.known - st.review,
+                                  "bg-slate-100 text-slate-500",
+                                ],
+                              ] as const
+                            ).map(([key, count, cls]) =>
+                              count > 0 ? (
+                                <Link
+                                  key={key}
+                                  href={`/quiz?mode=practice&subtopic=${encodeURIComponent(
+                                    spec.subtopic
+                                  )}&filter=${key}`}
+                                  title={
+                                    key === "known"
+                                      ? "알아요 문항만 연습"
+                                      : key === "review"
+                                        ? "몰라요 문항만 연습"
+                                        : "미확인 문항만 연습"
+                                  }
+                                  className={`rounded px-1.5 py-0.5 ${cls} hover:ring-1 hover:ring-rose-400`}
+                                >
+                                  {count}
+                                </Link>
+                              ) : (
+                                <span key={key} className="px-1.5 py-0.5 text-slate-300">
+                                  {count}
+                                </span>
+                              )
+                            )}
+                          </span>
+                        ) : (
+                          <span className="w-28 shrink-0 text-right text-xs text-slate-400">
+                            –
+                          </span>
+                        )}
                       </div>
                     );
                   })}
@@ -197,8 +229,10 @@ export default function Dashboard() {
           })}
         </div>
         <p className="mt-3 text-xs text-slate-400">
-          숫자는 <span className="text-emerald-600">알아요</span>/
-          <span className="text-amber-600">몰라요</span>/전체 입니다. 주제 이름을 누르면 연습 모드로 열려요.
+          주제 이름을 누르면 그 과목 전체를 연습해요. 오른쪽 숫자
+          <span className="text-emerald-600"> 알아요</span> /
+          <span className="text-amber-600"> 몰라요</span> /
+          <span className="text-slate-500"> 미확인</span>을 누르면 그 상태의 문항만 골라 풀 수 있어요.
         </p>
       </section>
 

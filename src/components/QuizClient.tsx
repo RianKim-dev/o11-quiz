@@ -15,9 +15,10 @@ import { loadStatuses } from "@/lib/progress";
 interface Props {
   mode: string;
   subtopic?: string;
+  filter?: string; // "known" | "review" | "unknown" — filter a subtopic practice by status
 }
 
-export default function QuizClient({ mode, subtopic }: Props) {
+export default function QuizClient({ mode, subtopic, filter }: Props) {
   const [questions, setQuestions] = useState<Question[] | null>(null);
   const [title, setTitle] = useState("");
   const [note, setNote] = useState<string>("");
@@ -54,8 +55,20 @@ export default function QuizClient({ mode, subtopic }: Props) {
         t = "미확인 목록";
         n = practiceNote;
       } else if (mode === "practice" && subtopic) {
-        qs = shuffle(getBySubtopic(subtopic));
-        t = `연습 · ${subtopic}`;
+        let pool = getBySubtopic(subtopic);
+        let suffix = "";
+        if (filter === "known") {
+          pool = pool.filter((q) => statuses.get(q.id) === "known");
+          suffix = " · 🟢 알아요";
+        } else if (filter === "review") {
+          pool = pool.filter((q) => statuses.get(q.id) === "review");
+          suffix = " · 🟡 몰라요";
+        } else if (filter === "unknown") {
+          pool = pool.filter((q) => !statuses.get(q.id));
+          suffix = " · ⚪ 미확인";
+        }
+        qs = shuffle(pool);
+        t = `연습 · ${subtopic}${suffix}`;
         n = practiceNote;
       } else {
         // 연습 모드 — same 50-question blueprint as the mock, but untimed + with explanations.
@@ -76,7 +89,7 @@ export default function QuizClient({ mode, subtopic }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [mode, subtopic]);
+  }, [mode, subtopic, filter]);
 
   if (!questions) {
     return <p className="py-16 text-center text-sm text-slate-400">불러오는 중…</p>;
