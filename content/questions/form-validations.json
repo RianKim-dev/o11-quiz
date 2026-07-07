@@ -24,7 +24,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "폼(form, 사용자가 값을 입력하는 화면 영역) 안의 버튼이나 링크에는 **Built-in Validations** 속성이 있습니다. 이 값을 Yes로 켜면, 제출 전에 필수 입력 여부(Mandatory)와 입력한 값의 형식(예: 숫자 칸에 글자를 넣었는지)을 플랫폼이 자동으로 검사해 줍니다. 그래서 별도 코드 없이 기본 검증을 수행하려면 이 속성을 True로 설정해야 합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 'Validate'라는 이름의 속성은 존재하지 않습니다.\n- **C** — ValidationMessage는 각 입력 칸에 보여줄 오류 메시지 '텍스트'를 담는 속성일 뿐, 검증을 켜는 스위치가 아닙니다.\n- **D** — 'AutoValidate'라는 속성도 존재하지 않습니다.",
+    "explanation": "폼(form, 사용자가 값을 입력하는 화면 영역) 안의 버튼이나 링크에는 **Built-in Validations** 속성이 있습니다. 이 값을 Yes로 켜면, 제출 전에 필수 입력 여부(Mandatory)와 입력한 값의 형식(예: 숫자 칸에 글자를 넣었는지)을 플랫폼이 자동으로 검사해 줍니다. 그래서 별도 코드 없이 기본 검증을 수행하려면 이 속성을 True로 설정해야 합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 'Validate'라는 이름의 속성은 존재하지 않습니다.\n- **C** — ValidationMessage는 각 입력 칸에 보여줄 오류 메시지 '텍스트'를 담는 속성일 뿐, 검증을 켜는 스위치가 아닙니다.\n- **D** — 'AutoValidate'라는 속성도 존재하지 않습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": {
       "A": "OutSystems에는 'Validate' 속성이라는 것이 없습니다.",
       "C": "ValidationMessage는 커스텀 검증 메시지를 설정할 때 사용되며, 기본 검증을 활성화하는 데는 사용되지 않습니다.",
@@ -82,7 +82,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "폼(Form)은 그 안에 들어 있는 입력칸들의 상태를 종합해서 `Form.Valid`라는 하나의 신호로 알려줍니다. 입력칸 하나라도 유효하지 않게(Valid=False) 표시되면 폼 전체의 `Form.Valid`가 자동으로 False가 됩니다. 그래서 데이터를 저장하기 직전에 `Form.Valid`가 True인지 한 번만 확인하면, 잘못된 데이터가 DB에 저장되는 것을 막을 수 있습니다. 마치 시험지 전체를 낸 뒤 '틀린 문항이 하나라도 있나?'를 한 번에 확인하는 것과 같습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 입력칸마다 `Widget.Valid`를 일일이 확인하는 것은 폼이 이미 대신 종합해 주므로 불필요하고 비효율적입니다.\n- **C** — `ValidationMessage`는 사용자에게 보여줄 오류 문구일 뿐, 통과/실패 여부를 판단하는 값이 아닙니다.\n- **D** — `ValidInput`이라는 표준 속성/변수는 존재하지 않습니다(만들어낸 이름).",
+    "explanation": "폼(Form)은 그 안에 들어 있는 입력칸들의 상태를 종합해서 `Form.Valid`라는 하나의 신호로 알려줍니다. 입력칸 하나라도 유효하지 않게(Valid=False) 표시되면 폼 전체의 `Form.Valid`가 자동으로 False가 됩니다. 그래서 데이터를 저장하기 직전에 `Form.Valid`가 True인지 한 번만 확인하면, 잘못된 데이터가 DB에 저장되는 것을 막을 수 있습니다. 마치 시험지 전체를 낸 뒤 '틀린 문항이 하나라도 있나?'를 한 번에 확인하는 것과 같습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 입력칸마다 `Widget.Valid`를 일일이 확인하는 것은 폼이 이미 대신 종합해 주므로 불필요하고 비효율적입니다.\n- **C** — `ValidationMessage`는 사용자에게 보여줄 오류 문구일 뿐, 통과/실패 여부를 판단하는 값이 아닙니다.\n- **D** — `ValidInput`이라는 표준 속성/변수는 존재하지 않습니다(만들어낸 이름).\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": {
       "A": "Widget 단위의 확인보다는 Form.Valid를 확인하여 전체 폼의 유효성을 한 번에 판단하는 것이 권장됩니다.",
       "C": "ValidationMessage는 검증 실패 메시지를 설정하는 속성일 뿐, 데이터 지속성 전에 확인해야 할 조건이 아닙니다.",
@@ -140,7 +140,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "OutSystems의 입력 위젯(Input widget)에는 별도 코드 없이도 동작하는 기본 검증(Built-in validation)이 내장되어 있습니다. 필수 입력(Mandatory)으로 지정한 칸이 비었는지, 그리고 입력값이 연결된 변수의 데이터 타입(예: 숫자 칸에 글자)에 맞는지를 자동으로 확인해 줍니다. 문제에서 '코드 없이 자동으로' 이뤄진다고 했으므로 이 내장 검증이 답입니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Action Flow에 직접 만드는 커스텀 검증(Custom validation)은 개발자가 코드를 짜야 하므로 '자동'이 아닙니다.\n- **C** — 필수/타입 검증은 브라우저(클라이언트)에서 먼저 이뤄지며, 서버에서 하는 별도 절차가 아닙니다.\n- **D** — 화면 이벤트가 트리거하는 검증이라는 개념은 이 자동 동작을 설명하는 정식 메커니즘이 아닙니다.",
+    "explanation": "OutSystems의 입력 위젯(Input widget)에는 별도 코드 없이도 동작하는 기본 검증(Built-in validation)이 내장되어 있습니다. 필수 입력(Mandatory)으로 지정한 칸이 비었는지, 그리고 입력값이 연결된 변수의 데이터 타입(예: 숫자 칸에 글자)에 맞는지를 자동으로 확인해 줍니다. 문제에서 '코드 없이 자동으로' 이뤄진다고 했으므로 이 내장 검증이 답입니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — Action Flow에 직접 만드는 커스텀 검증(Custom validation)은 개발자가 코드를 짜야 하므로 '자동'이 아닙니다.\n- **C** — 필수/타입 검증은 브라우저(클라이언트)에서 먼저 이뤄지며, 서버에서 하는 별도 절차가 아닙니다.\n- **D** — 화면 이벤트가 트리거하는 검증이라는 개념은 이 자동 동작을 설명하는 정식 메커니즘이 아닙니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": {
       "A": "Custom 검증은 액션 플로우에서 명시적으로 정의해야 하므로, 자동으로 수행되지 않습니다.",
       "C": "Form.Valid는 검증 결과를 확인하는 메커니즘이지, 검증 자체를 수행하는 것이 아닙니다.",
@@ -198,7 +198,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "가격이 0보다 큰지, 할인율이 100%를 넘지 않는지 같은 검사는 개발자가 직접 만드는 커스텀 검증(Custom validation)입니다. 각 필드를 검사하며 문제가 있으면 해당 입력칸을 Valid=False로 표시하는데, `Form.Valid`는 이 표시들을 종합한 최종 결과입니다. 따라서 모든 개별 검증을 끝낸 뒤에 별도의 If 노드에서 `Form.Valid`를 한 번 확인하고, 통과했을 때만 저장을 진행해야 합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 첫 번째 검증 직후에 확인하면 두 번째 필드의 오류가 아직 반영되지 않아 잘못된 데이터를 저장할 수 있습니다.\n- **C** — 커스텀 검증을 시작하기도 전에 확인하면 검사 결과가 없어 아무 의미가 없습니다.\n- **D** — 이 검증은 클라이언트 액션에서 이뤄지며, 저장용 서버 액션 안에서만 확인하는 것은 이 상황에 맞지 않습니다.",
+    "explanation": "가격이 0보다 큰지, 할인율이 100%를 넘지 않는지 같은 검사는 개발자가 직접 만드는 커스텀 검증(Custom validation)입니다. 각 필드를 검사하며 문제가 있으면 해당 입력칸을 Valid=False로 표시하는데, `Form.Valid`는 이 표시들을 종합한 최종 결과입니다. 따라서 모든 개별 검증을 끝낸 뒤에 별도의 If 노드에서 `Form.Valid`를 한 번 확인하고, 통과했을 때만 저장을 진행해야 합니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 첫 번째 검증 직후에 확인하면 두 번째 필드의 오류가 아직 반영되지 않아 잘못된 데이터를 저장할 수 있습니다.\n- **C** — 커스텀 검증을 시작하기도 전에 확인하면 검사 결과가 없어 아무 의미가 없습니다.\n- **D** — 이 검증은 클라이언트 액션에서 이뤄지며, 저장용 서버 액션 안에서만 확인하는 것은 이 상황에 맞지 않습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": {
       "A": "첫 번째 검증 후에 Form.Valid를 확인하면 두 번째 검증이 수행되지 않을 수 있습니다.",
       "C": "Custom 검증이 시작되기 전에 Form.Valid를 확인하면 커스텀 검증 결과를 반영할 수 없습니다.",
@@ -314,7 +314,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "'송장 총액이 항목들의 합과 같은가'처럼 여러 입력값을 비교하고 계산해야 하는 검사는 내장 검증으로는 할 수 없는 커스텀 검증(Custom validation)입니다. 이런 비즈니스 로직은 저장 버튼을 눌렀을 때 실행되는 클라이언트 액션(예: SaveOnClick)의 Action Flow 안에 단계로 그려 넣어야 합니다. 그래야 계산과 비교를 수행하고 결과에 따라 입력칸을 오류 표시할 수 있습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 버튼의 내장 검증은 필수/타입만 자동 확인할 뿐, 이런 계산 로직을 '모든 필드에 자동으로' 적용해 주지 않습니다.\n- **C** — 커스텀 검증은 서버 액션에서만 가능한 것이 아니라 클라이언트 액션에서도 얼마든지 할 수 있습니다.\n- **D** — Form 위젯 속성에는 이런 계산식을 넣는 '검증 규칙(validation rule)' 칸이 존재하지 않습니다.",
+    "explanation": "'송장 총액이 항목들의 합과 같은가'처럼 여러 입력값을 비교하고 계산해야 하는 검사는 내장 검증으로는 할 수 없는 커스텀 검증(Custom validation)입니다. 이런 비즈니스 로직은 저장 버튼을 눌렀을 때 실행되는 클라이언트 액션(예: SaveOnClick)의 Action Flow 안에 단계로 그려 넣어야 합니다. 그래야 계산과 비교를 수행하고 결과에 따라 입력칸을 오류 표시할 수 있습니다.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 버튼의 내장 검증은 필수/타입만 자동 확인할 뿐, 이런 계산 로직을 '모든 필드에 자동으로' 적용해 주지 않습니다.\n- **C** — 커스텀 검증은 서버 액션에서만 가능한 것이 아니라 클라이언트 액션에서도 얼마든지 할 수 있습니다.\n- **D** — Form 위젯 속성에는 이런 계산식을 넣는 '검증 규칙(validation rule)' 칸이 존재하지 않습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": {
       "A": "Built-in Validations는 기본 검증(필수 필드, 데이터 타입)만 처리하며, 복잡한 비즈니스 로직을 수행할 수 없습니다.",
       "C": "Custom 검증은 클라이언트 액션에서도 수행할 수 있습니다. 서버 액션만으로 제한되지 않습니다.",
@@ -431,7 +431,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Form의 Built-in Validation은 Form 위젯 '안에 물리적으로 위치한' 모든 Input 위젯을 검사합니다. 어떤 변수에 바인딩되어 있는지는 상관없습니다. Mandatory인 Name Input이 비어 있으면 해당 Input이 invalid가 되고, 하나라도 invalid이면 Form.Valid는 자동으로 False가 됩니다(정답 B). Form의 main record(VarEmployee) 소속 위젯만 검사한다는 A는 오답입니다. Input을 Form 외부 변수에 바인딩하는 것은 완전히 허용됩니다(D 오답). 함정: 바인딩 대상이 Form record가 아니면 검증에서 빠질 것 같지만, 검증 기준은 '변수 소속'이 아니라 'Form 안에 위치하는가'입니다.",
+    "explanation": "Form의 Built-in Validation은 Form 위젯 '안에 물리적으로 위치한' 모든 Input 위젯을 검사합니다. 어떤 변수에 바인딩되어 있는지는 상관없습니다. Mandatory인 Name Input이 비어 있으면 해당 Input이 invalid가 되고, 하나라도 invalid이면 Form.Valid는 자동으로 False가 됩니다(정답 B). Form의 main record(VarEmployee) 소속 위젯만 검사한다는 A는 오답입니다. Input을 Form 외부 변수에 바인딩하는 것은 완전히 허용됩니다(D 오답). 함정: 바인딩 대상이 Form record가 아니면 검증에서 빠질 것 같지만, 검증 기준은 '변수 소속'이 아니라 'Form 안에 위치하는가'입니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": "A: 검증 기준은 변수 소속이 아니라 위젯 위치. C: VarInputName이 Employee 속성인지와 무관하게 False. D: 외부 변수 바인딩은 허용되며 Form.Valid는 Null이 되지 않음.",
     "source": "동료 실전문제집 (검토·검증)",
     "status": "verified",
@@ -486,7 +486,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Form 안의 Button/Link에는 Built-in Validations 속성이 있습니다. 이 값이 Yes일 때만 Mandatory·데이터 타입에 대한 자동 검증이 수행됩니다. Link의 Built-in Validation이 No이면 검증을 건너뛰고 곧바로 액션이 실행됩니다. 함정은 '위젯이 Form 안에 있으면 무조건 Form 규칙을 따른다'(C)는 오해입니다. 검증 수행 여부는 각 버튼/링크의 Built-in Validation 설정에 달려 있습니다.",
+    "explanation": "Form 안의 Button/Link에는 Built-in Validations 속성이 있습니다. 이 값이 Yes일 때만 Mandatory·데이터 타입에 대한 자동 검증이 수행됩니다. Link의 Built-in Validation이 No이면 검증을 건너뛰고 곧바로 액션이 실행됩니다. 함정은 '위젯이 Form 안에 있으면 무조건 Form 규칙을 따른다'(C)는 오해입니다. 검증 수행 여부는 각 버튼/링크의 Built-in Validation 설정에 달려 있습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": "A/C는 Form 안이면 항상 검증된다는 오해, D는 검증을 건너뛰므로 Form.Valid가 자동으로 평가되지 않음.",
     "source": "동료 실전문제집 (검토·검증)",
     "status": "verified",
@@ -541,7 +541,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Custom Validation으로 직접 Input.Valid = False를 설정한 값은 자동으로 되돌아가지 않습니다. 버튼의 Built-in Validation이 No이면 자동 검증이 수행되지 않으므로, 두 번째 클릭 시점에도 Input_Email.Valid는 여전히 이전에 설정한 False 상태입니다. 그래서 Custom Validation 로직 시작 부분에서 Valid = True로 명시적으로 리셋하는 것이 정석입니다. 함정: OutSystems가 클릭마다 Valid를 자동으로 True로 리셋한다(A)는 오해. 참고로 Built-in Validation이 Yes였다면 Mandatory·타입 자동 검증이 다시 돌면서 값이 채워진 입력의 Valid를 True로 되돌릴 수 있어 답이 달라지므로, 문제에서 Built-in Validation = No로 못박았습니다.",
+    "explanation": "Custom Validation으로 직접 Input.Valid = False를 설정한 값은 자동으로 되돌아가지 않습니다. 버튼의 Built-in Validation이 No이면 자동 검증이 수행되지 않으므로, 두 번째 클릭 시점에도 Input_Email.Valid는 여전히 이전에 설정한 False 상태입니다. 그래서 Custom Validation 로직 시작 부분에서 Valid = True로 명시적으로 리셋하는 것이 정석입니다. 함정: OutSystems가 클릭마다 Valid를 자동으로 True로 리셋한다(A)는 오해. 참고로 Built-in Validation이 Yes였다면 Mandatory·타입 자동 검증이 다시 돌면서 값이 채워진 입력의 Valid를 True로 되돌릴 수 있어 답이 달라지므로, 문제에서 Built-in Validation = No로 못박았습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": "A 자동 리셋은 없음. C는 Built-in Validation = No로 고정했으므로 성립하지 않음. D는 '위젯이 이전 상태를 감지'라는 잘못된 근거(값이 persist될 뿐 위젯이 감지하는 것이 아님).",
     "source": "동료 실전문제집 (검토·검증)",
     "status": "verified",
@@ -596,7 +596,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Dropdown의 Empty Text 항목은 실제로 선택된 값이 없음을 의미하며, 이때 바인딩된 Identifier에는 NullIdentifier()(즉 0)가 담깁니다. Mandatory = Yes인 필드의 Built-in Validation은 NullIdentifier를 '비어 있음'으로 간주하므로 검증에 실패하고 액션 실행이 막힙니다. 함정은 Empty Text를 하나의 유효한 선택으로 오해(A)하거나, 검증을 통과시켜 나중에 DB에서 터진다(C)고 생각하는 것입니다. Mandatory 검증이 브라우저에서 먼저 막습니다.",
+    "explanation": "Dropdown의 Empty Text 항목은 실제로 선택된 값이 없음을 의미하며, 이때 바인딩된 Identifier에는 NullIdentifier()(즉 0)가 담깁니다. Mandatory = Yes인 필드의 Built-in Validation은 NullIdentifier를 '비어 있음'으로 간주하므로 검증에 실패하고 액션 실행이 막힙니다. 함정은 Empty Text를 하나의 유효한 선택으로 오해(A)하거나, 검증을 통과시켜 나중에 DB에서 터진다(C)고 생각하는 것입니다. Mandatory 검증이 브라우저에서 먼저 막습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": "A Empty Text는 선택이 아님. C 검증 단계에서 이미 막히므로 DB까지 가지 않음. D 자동 선택 기능은 없음.",
     "source": "동료 실전문제집 (검토·검증)",
     "status": "verified",
@@ -651,7 +651,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "입력칸(Input)의 Mandatory 속성은 '이 칸은 필수'라고 화면에 표시해 주는 UI 표시일 뿐, 저장 자체를 막아 주지는 않습니다. 저장을 막으려면 개발자가 버튼의 Built-in Validation을 켜거나, 버튼을 눌렀을 때 실행되는 로직(Client Action) 안에서 Form.Valid(폼 전체가 유효한지 알려주는 값)를 직접 확인해 중단시켜야 합니다. 여기서는 둘 다 하지 않았으므로 검증이 전혀 일어나지 않아 Client Action이 그대로 실행되고 Create(레코드 생성)가 호출됩니다. DB(데이터베이스)가 빈 값을 허용하면 빈 값 레코드가 실제로 만들어집니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — OutSystems가 알아서 액션을 멈추고 빨간 오류를 띄워 주지 않습니다. 그렇게 하려면 개발자가 검증을 연결해야 합니다.\n- **C** — 필수 칸이 비었다고 브라우저 단계에서 예외(runtime exception)가 즉시 발생하지는 않습니다.\n- **D** — Form.Valid가 저절로 False가 되어 화면이 얼어붙는 일은 없습니다.",
+    "explanation": "입력칸(Input)의 Mandatory 속성은 '이 칸은 필수'라고 화면에 표시해 주는 UI 표시일 뿐, 저장 자체를 막아 주지는 않습니다. 저장을 막으려면 개발자가 버튼의 Built-in Validation을 켜거나, 버튼을 눌렀을 때 실행되는 로직(Client Action) 안에서 Form.Valid(폼 전체가 유효한지 알려주는 값)를 직접 확인해 중단시켜야 합니다. 여기서는 둘 다 하지 않았으므로 검증이 전혀 일어나지 않아 Client Action이 그대로 실행되고 Create(레코드 생성)가 호출됩니다. DB(데이터베이스)가 빈 값을 허용하면 빈 값 레코드가 실제로 만들어집니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — OutSystems가 알아서 액션을 멈추고 빨간 오류를 띄워 주지 않습니다. 그렇게 하려면 개발자가 검증을 연결해야 합니다.\n- **C** — 필수 칸이 비었다고 브라우저 단계에서 예외(runtime exception)가 즉시 발생하지는 않습니다.\n- **D** — Form.Valid가 저절로 False가 되어 화면이 얼어붙는 일은 없습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "distractors": "A/C OutSystems가 자동으로 막지 않음(검증을 우회했기 때문). D 검증을 건너뛰었으므로 Form.Valid가 자동 평가되지 않음.",
     "source": "동료 실전문제집 (검토·검증)",
     "status": "verified",
@@ -705,7 +705,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Reactive Web에서 Mandatory 속성은 값이 비었을 때 검증 메시지를 표시해줄 뿐, 버튼 클릭 시 Client Action 흐름을 자동으로 멈추지는 않습니다. 따라서 개발자가 Client Action 안에서 If 'Form.Valid'로 유효성을 확인하고 실패 시 로직을 중단시켜야 하므로 D가 정답입니다. 플랫폼이 자동으로 중단해주지 않으므로 B는 틀리고, Mandatory 검증은 클라이언트에서도 동작하므로 A도 틀립니다. Save 버튼이 자동으로 비활성화되지도 않으므로 C도 틀립니다.",
+    "explanation": "Reactive Web에서 Mandatory 속성은 값이 비었을 때 검증 메시지를 표시해줄 뿐, 버튼 클릭 시 Client Action 흐름을 자동으로 멈추지는 않습니다. 따라서 개발자가 Client Action 안에서 If 'Form.Valid'로 유효성을 확인하고 실패 시 로직을 중단시켜야 하므로 D가 정답입니다. 플랫폼이 자동으로 중단해주지 않으므로 B는 틀리고, Mandatory 검증은 클라이언트에서도 동작하므로 A도 틀립니다. Save 버튼이 자동으로 비활성화되지도 않으므로 C도 틀립니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -758,7 +758,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Form 제출 시 가장 먼저 Form.Valid 속성을 확인해 Mandatory 여부와 데이터 타입 등 내장 검증이 통과했는지 봐야 합니다(B). A처럼 각 필드를 수동 If로 검사하는 것은 비효율적이며 내장 검증을 활용하지 못하고, C(DB 존재 확인)와 D(비밀번호 길이)는 기본 검증을 통과한 뒤 수행할 비즈니스 로직입니다.",
+    "explanation": "Form 제출 시 가장 먼저 Form.Valid 속성을 확인해 Mandatory 여부와 데이터 타입 등 내장 검증이 통과했는지 봐야 합니다(B). A처럼 각 필드를 수동 If로 검사하는 것은 비효율적이며 내장 검증을 활용하지 못하고, C(DB 존재 확인)와 D(비밀번호 길이)는 기본 검증을 통과한 뒤 수행할 비즈니스 로직입니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -811,7 +811,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Reactive의 입력칸(Input) 위젯에는 '이 칸이 유효한가'를 나타내는 Valid 속성(True/False)이 따로 있습니다. ValidationMessage(오류 문구)만 채워 넣으면 보여 줄 메시지만 준비될 뿐, 위젯과 Form은 여전히 valid(유효) 상태로 남습니다. 폼을 무효로 만들어 제출을 막으려면 그 입력칸의 Valid를 직접 False로 바꿔 줘야 합니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Form.Valid는 각 Input의 Valid 상태를 모아 계산되는 값이라, 개발자가 직접 지정하는 값이 아닙니다.\n- **C** — 메시지만 설정하면 표시할 문구만 생기고 유효 상태는 그대로라, 제출이 막히지 않습니다.\n- **D** — Mandatory는 '필수 입력' 여부일 뿐, 이메일 형식 같은 직접 만든(custom) 검증과는 상관이 없습니다.",
+    "explanation": "Reactive의 입력칸(Input) 위젯에는 '이 칸이 유효한가'를 나타내는 Valid 속성(True/False)이 따로 있습니다. ValidationMessage(오류 문구)만 채워 넣으면 보여 줄 메시지만 준비될 뿐, 위젯과 Form은 여전히 valid(유효) 상태로 남습니다. 폼을 무효로 만들어 제출을 막으려면 그 입력칸의 Valid를 직접 False로 바꿔 줘야 합니다. **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — Form.Valid는 각 Input의 Valid 상태를 모아 계산되는 값이라, 개발자가 직접 지정하는 값이 아닙니다.\n- **C** — 메시지만 설정하면 표시할 문구만 생기고 유효 상태는 그대로라, 제출이 막히지 않습니다.\n- **D** — Mandatory는 '필수 입력' 여부일 뿐, 이메일 형식 같은 직접 만든(custom) 검증과는 상관이 없습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -864,7 +864,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "개별 Input 위젯의 Valid 속성을 False로 설정하고 ValidationMessage를 채우면 플랫폼이 제출을 막습니다. Form.Valid(A)는 모든 Input의 Valid를 종합한 읽기 전용 값이라 직접 설정하지 않으며, IsInvalid(C)나 Screen.Validation(D)은 존재하지 않는 속성입니다.",
+    "explanation": "개별 Input 위젯의 Valid 속성을 False로 설정하고 ValidationMessage를 채우면 플랫폼이 제출을 막습니다. Form.Valid(A)는 모든 Input의 Valid를 종합한 읽기 전용 값이라 직접 설정하지 않으며, IsInvalid(C)나 Screen.Validation(D)은 존재하지 않는 속성입니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -917,7 +917,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Button의 Validation 속성을 Client & Server로 설정하면 플랫폼이 액션 실행 전에 먼저 내장 검증을 수행합니다. Mandatory Input이 비어 있으면 검증이 실패하여 연결된 Client Action이 실행되지 않고, 해당 필드에 validation 메시지가 자동으로 표시됩니다. A는 Validation을 None으로 두었을 때처럼 Form.Valid를 수동 확인하는 경우라 틀렸고, C는 검증 실패 시 Server Action까지 호출되지 않으므로 틀렸으며, D처럼 화면이 리로드되지도 않습니다.",
+    "explanation": "Button의 Validation 속성을 Client & Server로 설정하면 플랫폼이 액션 실행 전에 먼저 내장 검증을 수행합니다. Mandatory Input이 비어 있으면 검증이 실패하여 연결된 Client Action이 실행되지 않고, 해당 필드에 validation 메시지가 자동으로 표시됩니다. A는 Validation을 None으로 두었을 때처럼 Form.Valid를 수동 확인하는 경우라 틀렸고, C는 검증 실패 시 Server Action까지 호출되지 않으므로 틀렸으며, D처럼 화면이 리로드되지도 않습니다.\n\n**참고 · Built-in Validation이 자동으로 검사하는 것**\n- ① 필수(Mandatory) 필드가 모두 입력됐는지\n- ② 입력값이 입력란의 **데이터 타입과 일치**하는지 (예: 숫자칸에 숫자)\n- 그 외 규칙(값 범위·중복·필드 간 비교 등)은 **사용자 정의 유효성 검사**로 직접 만들고 Form.Valid로 확인해야 합니다",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

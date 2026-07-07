@@ -155,7 +155,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Block(블록)은 여러 화면에서 재사용하는 UI 부품이고, 같은 블록을 두 번 놓으면 각각이 완전히 독립된 부품처럼 동작합니다. On Initialize(처음 화면에 만들어질 때 한 번 실행되는 준비 이벤트)는 인스턴스마다 따로 실행되어 각자의 StarList를 만듭니다(1번 참). On Parameters Changed(부모가 넘겨준 Input 값이 바뀌면 실행되는 이벤트)는 부모가 Rating을 바꿀 때 자동으로 발생합니다(2번 참). 하지만 블록이 스스로 자기 Input을 바꾼다고 이 이벤트가 뜨지는 않습니다(3번 거짓). **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 3번을 참으로 봤지만, 블록 내부에서 Input을 바꿔도 On Parameters Changed는 발생하지 않습니다(부모가 바꿀 때만).\n- **C** — 2번을 거짓으로 봤지만, 부모가 Rating을 바꾸면 On Parameters Changed는 자동 발생합니다.\n- **D** — 1번을 거짓으로 봤지만, 각 인스턴스는 독립적으로 On Initialize를 실행합니다.",
+    "explanation": "Block(블록)은 여러 화면에서 재사용하는 UI 부품이고, 같은 블록을 두 번 놓으면 각각이 완전히 독립된 부품처럼 동작합니다. On Initialize(처음 화면에 만들어질 때 한 번 실행되는 준비 이벤트)는 인스턴스마다 따로 실행되어 각자의 StarList를 만듭니다(1번 참). On Parameters Changed(부모가 넘겨준 Input 값이 바뀌면 실행되는 이벤트)는 부모가 Rating을 바꿀 때 자동으로 발생합니다(2번 참). 하지만 블록이 스스로 자기 Input을 바꾼다고 이 이벤트가 뜨지는 않습니다(3번 거짓). **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 3번을 참으로 봤지만, 블록 내부에서 Input을 바꿔도 On Parameters Changed는 발생하지 않습니다(부모가 바꿀 때만).\n- **C** — 2번을 거짓으로 봤지만, 부모가 Rating을 바꾸면 On Parameters Changed는 자동 발생합니다.\n- **D** — 1번을 거짓으로 봤지만, 각 인스턴스는 독립적으로 On Initialize를 실행합니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "distractors": {
       "B": "3번을 참으로 잘못 선택 - 블록 내부 변경은 On Parameters Changed를 트리거하지 않음",
       "C": "2번을 거짓으로 잘못 선택 - 부모의 변경은 자동으로 이벤트 트리거",
@@ -407,7 +407,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "별 표시 블록은 Rating이라는 Input을 받아 그 값으로 별 목록(StarList)을 만들어 보여줍니다. 사용자가 별을 눌렀을 때 화면에 새 별이 즉시 반영되게 하려면 네 단계가 모두 필요합니다. (1) 블록이 StarClicked 이벤트를 발생시켜 몇 번째 별인지 부모에 알리고, (2) 부모 화면의 핸들러가 그 값을 받고, (3) 새 평점을 DB에 저장하고, (4) 블록의 On Parameters Changed(Input이 바뀌면 실행되는 이벤트)가 실행되어 바뀐 Rating으로 별 목록을 다시 계산해 화면을 갱신합니다. 하나라도 빠지면 별이 즉시 바뀌지 않습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 4번은 선택이 아닙니다. DB에 저장만 해서는 블록 화면이 저절로 다시 그려지지 않습니다.\n- **C** — DB 저장(3번)이 4번을 자동으로 유발하지 않으며, 3·4번 모두 필요합니다.\n- **D** — 3번만으로는 안 되고, 이벤트 전달과 별 재계산까지 명시적으로 필요합니다.",
+    "explanation": "별 표시 블록은 Rating이라는 Input을 받아 그 값으로 별 목록(StarList)을 만들어 보여줍니다. 사용자가 별을 눌렀을 때 화면에 새 별이 즉시 반영되게 하려면 네 단계가 모두 필요합니다. (1) 블록이 StarClicked 이벤트를 발생시켜 몇 번째 별인지 부모에 알리고, (2) 부모 화면의 핸들러가 그 값을 받고, (3) 새 평점을 DB에 저장하고, (4) 블록의 On Parameters Changed(Input이 바뀌면 실행되는 이벤트)가 실행되어 바뀐 Rating으로 별 목록을 다시 계산해 화면을 갱신합니다. 하나라도 빠지면 별이 즉시 바뀌지 않습니다. **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 4번은 선택이 아닙니다. DB에 저장만 해서는 블록 화면이 저절로 다시 그려지지 않습니다.\n- **C** — DB 저장(3번)이 4번을 자동으로 유발하지 않으며, 3·4번 모두 필요합니다.\n- **D** — 3번만으로는 안 되고, 이벤트 전달과 별 재계산까지 명시적으로 필요합니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "distractors": {
       "A": "4단계가 선택사항이라고 잘못 선택 - 데이터베이스 자동 새로고침 없음",
       "C": "데이터베이스 업데이트가 자동으로 4단계를 트리거한다고 잘못 생각 - 명시적 구성 필요",
@@ -471,7 +471,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "블록은 처음 화면에 만들어질 때 On Initialize(준비 이벤트)가 실행되고(1번 참), 부모가 Quantity 같은 Input 값을 바꾸면 On Parameters Changed가 자동으로 실행됩니다(2번 참). 이 두 이벤트는 한 블록 인스턴스에 함께 존재할 수 있습니다(4번 참). 다만 블록이 스스로 내부 변수 CurrentStock를 바꾸는 것은 '부모가 Input을 바꾼 것'이 아니므로 On Parameters Changed를 유발하지 않습니다(3번 거짓). **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 3번을 참으로 봤지만, 블록 내부에서 값을 바꿔도 On Parameters Changed는 발생하지 않습니다.\n- **C** — 4번을 거짓으로 봤지만, 한 블록은 두 이벤트를 모두 가질 수 있습니다.\n- **D** — 2번·4번도 참이므로 1번만 맞다는 설명은 틀립니다.",
+    "explanation": "블록은 처음 화면에 만들어질 때 On Initialize(준비 이벤트)가 실행되고(1번 참), 부모가 Quantity 같은 Input 값을 바꾸면 On Parameters Changed가 자동으로 실행됩니다(2번 참). 이 두 이벤트는 한 블록 인스턴스에 함께 존재할 수 있습니다(4번 참). 다만 블록이 스스로 내부 변수 CurrentStock를 바꾸는 것은 '부모가 Input을 바꾼 것'이 아니므로 On Parameters Changed를 유발하지 않습니다(3번 거짓). **→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 3번을 참으로 봤지만, 블록 내부에서 값을 바꿔도 On Parameters Changed는 발생하지 않습니다.\n- **C** — 4번을 거짓으로 봤지만, 한 블록은 두 이벤트를 모두 가질 수 있습니다.\n- **D** — 2번·4번도 참이므로 1번만 맞다는 설명은 틀립니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "distractors": {
       "B": "3번을 참으로 잘못 선택 - 블록 내부 수정은 On Parameters Changed를 트리거하지 않음",
       "C": "4번을 거짓으로 잘못 선택 - 단일 인스턴스는 두 이벤트 모두 가질 수 있음",
@@ -593,7 +593,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "부모가 Block의 Input Parameter를 바꾸면 Block의 **On Parameters Changed** 이벤트가 자동으로 발생하지만, 그 이벤트는 당신이 넣은 로직만 실행합니다. Aggregate가 저절로 재조회되지는 않으므로, On Parameters Changed 안에 그 Aggregate의 **Refresh Data**를 명시적으로 넣어야 합니다. 함정: A가 흔한 오해(이벤트는 자동 발생하지만 새로고침은 아님), 화면의 Refresh Data는 블록으로 전파되지 않으며(C), 블록 Aggregate도 새로고침 가능합니다(D).",
+    "explanation": "부모가 Block의 Input Parameter를 바꾸면 Block의 **On Parameters Changed** 이벤트가 자동으로 발생하지만, 그 이벤트는 당신이 넣은 로직만 실행합니다. Aggregate가 저절로 재조회되지는 않으므로, On Parameters Changed 안에 그 Aggregate의 **Refresh Data**를 명시적으로 넣어야 합니다. 함정: A가 흔한 오해(이벤트는 자동 발생하지만 새로고침은 아님), 화면의 Refresh Data는 블록으로 전파되지 않으며(C), 블록 Aggregate도 새로고침 가능합니다(D).\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "distractors": {
       "A": "이벤트는 자동 발생하지만 Aggregate 재조회는 자동이 아닙니다.",
       "C": "화면의 Refresh Data는 블록 내부로 전파되지 않습니다.",
@@ -651,7 +651,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "블록의 On Initialize(준비 이벤트)는 블록이 화면에 처음 만들어질 때 딱 한 번만 실행됩니다. 이후 부모 화면이 EmployeeId 같은 Input 값을 Switch 위젯으로 바꿔도 On Initialize는 다시 실행되지 않습니다(값 변경 시에는 대신 On Parameters Changed가 실행됨). **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 값이 처음 바뀔 때 On Initialize가 다시 실행되지 않으므로 '두 번'은 틀립니다.\n- **C** — 값이 바뀔 때마다 실행되는 것은 On Initialize가 아니라 On Parameters Changed입니다.\n- **D** — On Initialize도 Input Parameter를 정상적으로 읽을 수 있으므로 '못 읽는다'는 틀립니다.",
+    "explanation": "블록의 On Initialize(준비 이벤트)는 블록이 화면에 처음 만들어질 때 딱 한 번만 실행됩니다. 이후 부모 화면이 EmployeeId 같은 Input 값을 Switch 위젯으로 바꿔도 On Initialize는 다시 실행되지 않습니다(값 변경 시에는 대신 On Parameters Changed가 실행됨). **→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 값이 처음 바뀔 때 On Initialize가 다시 실행되지 않으므로 '두 번'은 틀립니다.\n- **C** — 값이 바뀔 때마다 실행되는 것은 On Initialize가 아니라 On Parameters Changed입니다.\n- **D** — On Initialize도 Input Parameter를 정상적으로 읽을 수 있으므로 '못 읽는다'는 틀립니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -757,7 +757,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "Block(재사용 부품)을 화면에 올리면 그 부품의 '복사본(instance)'이 만들어집니다. Block instance의 Local Variable은 그 복사본 안에서만 쓰는 개인 메모지 같은 것이라, 다른 복사본은 이름이 같아도 자기만의 메모지를 따로 갖습니다. 그래서 첫 번째 Block이 자기 'IsActive'를 True로 바꿔도 두 번째 Block의 'IsActive'와는 완전히 별개라 아무 영향이 없습니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 이름이 같아도 각자 별개의 변수라 충돌이 아니므로 'Duplicate Variable' 오류는 나지 않습니다.\n- **B** — 두 Block이 공유하는 Screen Variable이 자동으로 생기지 않습니다. 각자의 Local Variable일 뿐입니다.\n- **C** — 같은 '정의(definition)'에서 나왔더라도 실행 시엔 복사본마다 상태가 분리되므로 값이 함께 바뀌지 않습니다.",
+    "explanation": "Block(재사용 부품)을 화면에 올리면 그 부품의 '복사본(instance)'이 만들어집니다. Block instance의 Local Variable은 그 복사본 안에서만 쓰는 개인 메모지 같은 것이라, 다른 복사본은 이름이 같아도 자기만의 메모지를 따로 갖습니다. 그래서 첫 번째 Block이 자기 'IsActive'를 True로 바꿔도 두 번째 Block의 'IsActive'와는 완전히 별개라 아무 영향이 없습니다.\n**→ 정답 D**\n\n**왜 나머지는 아닌가**\n- **A** — 이름이 같아도 각자 별개의 변수라 충돌이 아니므로 'Duplicate Variable' 오류는 나지 않습니다.\n- **B** — 두 Block이 공유하는 Screen Variable이 자동으로 생기지 않습니다. 각자의 Local Variable일 뿐입니다.\n- **C** — 같은 '정의(definition)'에서 나왔더라도 실행 시엔 복사본마다 상태가 분리되므로 값이 함께 바뀌지 않습니다.\n\n**참고 · 값을 어디에 저장하나 (변수 종류)**\n- **Local Variable** = 화면·액션 안에서만, 벗어나면 사라짐 (임시)\n- **Input Parameter** = 화면·블록에 넘겨받는 값, 그 인스턴스 동안 유지\n- **Client Variable** = 브라우저(클라이언트)에 사용자별로 지속 (테마·최근 검색 등)\n- **Session Variable** = 서버(DB)에 세션 단위로 지속\n- **Site Property** = 서버 측 전역 설정값, 모든 사용자 공통, 재배포 없이 런타임 변경 (VAT율 등)",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -916,7 +916,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "Reactive Web는 데이터 바인딩이 자동으로 반응합니다. Screen Variable 'OrderTotal'이 바뀌면 그 값에 바인딩된 두 번째 Block의 Input Parameter가 갱신되고, Input Parameter가 바뀌었으므로 그 Block의 On Parameters Changed 이벤트가 실행됩니다(정답 C). 반응성은 값이 어디서 바뀌었는지(이벤트 핸들러인지 사용자 조작인지)를 따지지 않으므로 A는 틀립니다. Refresh Data는 서버 Aggregate/Data Action 재조회용이지 Block 파라미터 반응과 무관하므로 B, 그리고 별도 이벤트를 다시 처리할 필요가 없으므로 D도 틀립니다.",
+    "explanation": "Reactive Web는 데이터 바인딩이 자동으로 반응합니다. Screen Variable 'OrderTotal'이 바뀌면 그 값에 바인딩된 두 번째 Block의 Input Parameter가 갱신되고, Input Parameter가 바뀌었으므로 그 Block의 On Parameters Changed 이벤트가 실행됩니다(정답 C). 반응성은 값이 어디서 바뀌었는지(이벤트 핸들러인지 사용자 조작인지)를 따지지 않으므로 A는 틀립니다. Refresh Data는 서버 Aggregate/Data Action 재조회용이지 Block 파라미터 반응과 무관하므로 B, 그리고 별도 이벤트를 다시 처리할 필요가 없으므로 D도 틀립니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1181,7 +1181,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "여러 Block의 On Initialize 실행 순서는 OutSystems가 보장하지 않으므로, 특정 Block이 먼저 실행되는 것에 의존하는 로직을 만들면 안 됩니다. 화면상의 위치(위→아래)나 Input Parameter 개수로 순서가 정해지지 않으므로 B, C는 틀리고, On Initialize는 렌더링 전에 도는 반면 On Ready는 렌더링 후에 실행되어 순서 관계가 반대이므로 D도 틀립니다. 따라서 정답은 A입니다.",
+    "explanation": "여러 Block의 On Initialize 실행 순서는 OutSystems가 보장하지 않으므로, 특정 Block이 먼저 실행되는 것에 의존하는 로직을 만들면 안 됩니다. 화면상의 위치(위→아래)나 Input Parameter 개수로 순서가 정해지지 않으므로 B, C는 틀리고, On Initialize는 렌더링 전에 도는 반면 On Ready는 렌더링 후에 실행되어 순서 관계가 반대이므로 D도 틀립니다. 따라서 정답은 A입니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1234,7 +1234,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "On Render 이벤트는 Block이 화면에 다시 그려질 때마다 실행됩니다. 이 안에서 렌더링에 영향을 주는 변수를 변경하면 재렌더링이 유발되고, 그러면 On Render가 또 실행되어 무한 루프에 빠집니다. 그래서 브라우저가 멈추거나 느려집니다. Circular Dependency(A)는 컴파일 단계 개념이라 해당하지 않고, On Initialize(C)는 최초 1회만 실행되며, 1초마다 갱신(D)되는 타이머 개념도 아닙니다.",
+    "explanation": "On Render 이벤트는 Block이 화면에 다시 그려질 때마다 실행됩니다. 이 안에서 렌더링에 영향을 주는 변수를 변경하면 재렌더링이 유발되고, 그러면 On Render가 또 실행되어 무한 루프에 빠집니다. 그래서 브라우저가 멈추거나 느려집니다. Circular Dependency(A)는 컴파일 단계 개념이라 해당하지 않고, On Initialize(C)는 최초 1회만 실행되며, 1초마다 갱신(D)되는 타이머 개념도 아닙니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1393,7 +1393,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "Reactive Web에서 Block의 On Parameters Changed 이벤트는 부모의 Client Action이 여러 Input Parameter를 한 번에 변경하더라도, 변경이 모두 적용된 뒤 한 번만 실행됩니다. 따라서 C가 정답입니다. 변수 개수만큼 실행되지 않으므로 A는 틀리고, 변경이 서로 상쇄되어 0번(B) 실행되지도 않으며, data type(D)과도 무관합니다.",
+    "explanation": "Reactive Web에서 Block의 On Parameters Changed 이벤트는 부모의 Client Action이 여러 Input Parameter를 한 번에 변경하더라도, 변경이 모두 적용된 뒤 한 번만 실행됩니다. 따라서 C가 정답입니다. 변수 개수만큼 실행되지 않으므로 A는 틀리고, 변경이 서로 상쇄되어 0번(B) 실행되지도 않으며, data type(D)과도 무관합니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1605,7 +1605,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "List(목록) 안에 Block을 넣으면, 행이 10개면 Block 복사본(instance, 인스턴스)도 10개가 만들어집니다. On Parameters Changed(Block의 input parameter 값이 바뀌면 실행되는 이벤트)는 값이 나중에 바뀔 때뿐 아니라 화면이 처음 그려질 때도 각 복사본마다 한 번씩 실행됩니다. 그래서 10개 행이면 총 10번 실행됩니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 최초 로드 때도 각 인스턴스에서 실행되므로 0번이 아닙니다.\n- **C** — 첫 행 하나만이 아니라 모든 행(모든 인스턴스)에서 각각 실행됩니다.\n- **D** — List 그 자체를 위한 추가 실행은 없으므로 11번이 아니라 정확히 10번입니다.",
+    "explanation": "List(목록) 안에 Block을 넣으면, 행이 10개면 Block 복사본(instance, 인스턴스)도 10개가 만들어집니다. On Parameters Changed(Block의 input parameter 값이 바뀌면 실행되는 이벤트)는 값이 나중에 바뀔 때뿐 아니라 화면이 처음 그려질 때도 각 복사본마다 한 번씩 실행됩니다. 그래서 10개 행이면 총 10번 실행됩니다.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — 최초 로드 때도 각 인스턴스에서 실행되므로 0번이 아닙니다.\n- **C** — 첫 행 하나만이 아니라 모든 행(모든 인스턴스)에서 각각 실행됩니다.\n- **D** — List 그 자체를 위한 추가 실행은 없으므로 11번이 아니라 정확히 10번입니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -1870,7 +1870,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "Block은 Input Parameter 값이 바뀌면 해당 인스턴스의 \"On Parameters Changed\" 이벤트가 자동으로 실행됩니다. 소스 리스트에서 특정 상품의 Price가 변경되면 그 행의 Block 인스턴스만 새 값을 전달받아 이 이벤트가 발생합니다. A는 Block이 부모 데이터 변화에 반응하지 않는다는 잘못된 전제이고, C처럼 전체 List가 파괴/재생성되지 않으며, D의 Refresh Data는 데이터 조회용 노드로 Block 입력값 반영과 무관합니다.",
+    "explanation": "Block은 Input Parameter 값이 바뀌면 해당 인스턴스의 \"On Parameters Changed\" 이벤트가 자동으로 실행됩니다. 소스 리스트에서 특정 상품의 Price가 변경되면 그 행의 Block 인스턴스만 새 값을 전달받아 이 이벤트가 발생합니다. A는 Block이 부모 데이터 변화에 반응하지 않는다는 잘못된 전제이고, C처럼 전체 List가 파괴/재생성되지 않으며, D의 Refresh Data는 데이터 조회용 노드로 Block 입력값 반영과 무관합니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {
@@ -2082,7 +2082,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Block의 On Parameters Changed 이벤트는 부모 화면이나 부모 block이 그 block의 Input Parameter 값을 바꿀 때(초기화 이후) 실행됩니다. 화면에 보이는지 여부(B)와는 무관하고, 자동으로 발생하므로 수동 Trigger Event(C)가 필요 없으며, block 내부의 Local Variable 변경(D)으로는 발생하지 않습니다.",
+    "explanation": "Block의 On Parameters Changed 이벤트는 부모 화면이나 부모 block이 그 block의 Input Parameter 값을 바꿀 때(초기화 이후) 실행됩니다. 화면에 보이는지 여부(B)와는 무관하고, 자동으로 발생하므로 수동 Trigger Event(C)가 필요 없으며, block 내부의 Local Variable 변경(D)으로는 발생하지 않습니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "status": "verified",
     "verifyNote": "",
     "i18n": {

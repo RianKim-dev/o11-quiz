@@ -285,7 +285,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "Aggregate의 실행 시점(fetch 설정)에 따라 언제 데이터를 읽을지가 달라집니다. **At Start**는 화면이 열릴 때 자동으로 실행되고, **Only on Demand**는 저절로 실행되지 않고 **Refresh Data 노드로 코드에서 직접 실행시켜줘야** 합니다. 필요할 때만 불러오는 방식이죠.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — At Start는 사용자 입력을 기다리지 않고 바로 실행되며, Only on Demand는 Ready 때 자동 실행되지 않습니다.\n- **C** — 두 개가 같은 시점에 실행되는 게 아니라, 실행 시점 자체가 다릅니다.\n- **D** — 차이는 동기/비동기가 아니라 '언제 무엇이 실행을 촉발하느냐'입니다.",
+    "explanation": "Aggregate의 실행 시점(fetch 설정)에 따라 언제 데이터를 읽을지가 달라집니다. **At Start**는 화면이 열릴 때 자동으로 실행되고, **Only on Demand**는 저절로 실행되지 않고 **Refresh Data 노드로 코드에서 직접 실행시켜줘야** 합니다. 필요할 때만 불러오는 방식이죠.\n**→ 정답 A**\n\n**왜 나머지는 아닌가**\n- **B** — At Start는 사용자 입력을 기다리지 않고 바로 실행되며, Only on Demand는 Ready 때 자동 실행되지 않습니다.\n- **C** — 두 개가 같은 시점에 실행되는 게 아니라, 실행 시점 자체가 다릅니다.\n- **D** — 차이는 동기/비동기가 아니라 '언제 무엇이 실행을 촉발하느냐'입니다.\n\n**참고 · Aggregate/Data Action의 Fetch 속성**\n- **At Start** = 화면이 열릴 때 자동 실행 (여러 개면 서로 병렬로)\n- **Only on Demand** = 자동 실행 안 함 → Refresh Data를 호출해야 실행\n- ⚠️ 둘 중 무엇이든, filter에 쓰인 변수가 바뀌어도 **자동 재조회는 안 됨** — 새 값을 반영하려면 Refresh Data가 필요",
     "distractors": {
       "B": "At Start는 사용자 입력을 기다리지 않고 초기화 때 자동 실행됩니다(거짓).",
       "C": "둘의 차이는 '언제 실행되는가'(타이밍)입니다(거짓).",
@@ -469,7 +469,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "여러 Aggregate가 **비동기로 따로따로 실행**되므로, 각각의 데이터가 도착할 때마다(On After Fetch 후) 화면을 다시 그리는 Render가 일어날 수 있습니다. 즉 Render는 한 번이 아니라 **여러 번** 발생할 수 있습니다. 손님이 올 때마다 상을 다시 차리는 것과 비슷하죠.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 모든 Aggregate가 다 끝난 뒤 딱 한 번만 그리는 게 아니라, 각 데이터가 도착할 때마다 다시 그려질 수 있습니다.\n- **C** — Render는 화면 전환 때만이 아니라, 화면에 묶인 데이터가 바뀔 때도 발생합니다.\n- **D** — Render가 Aggregate 실행 전에 동기적으로 먼저 도는 것이 아닙니다.",
+    "explanation": "여러 Aggregate가 **비동기로 따로따로 실행**되므로, 각각의 데이터가 도착할 때마다(On After Fetch 후) 화면을 다시 그리는 Render가 일어날 수 있습니다. 즉 Render는 한 번이 아니라 **여러 번** 발생할 수 있습니다. 손님이 올 때마다 상을 다시 차리는 것과 비슷하죠.\n**→ 정답 B**\n\n**왜 나머지는 아닌가**\n- **A** — 모든 Aggregate가 다 끝난 뒤 딱 한 번만 그리는 게 아니라, 각 데이터가 도착할 때마다 다시 그려질 수 있습니다.\n- **C** — Render는 화면 전환 때만이 아니라, 화면에 묶인 데이터가 바뀔 때도 발생합니다.\n- **D** — Render가 Aggregate 실행 전에 동기적으로 먼저 도는 것이 아닙니다.\n\n**참고 · Reactive 수명주기 이벤트** (화면·블록 공통)\n- **On Initialize** — 렌더링·데이터 fetch 전 (DOM 없음). 리디렉션·초기 변수 설정에 사용\n- **On Ready** — 첫 렌더 후 1회, DOM 준비됨 → DOM 조작·JavaScript·포커스에 사용\n- **On Render** — 매 렌더마다 (표시 중인 데이터를 여기서 바꾸면 무한 렌더 루프 주의)\n- **On After Fetch** — 각 Aggregate/Data Action이 데이터를 가져온 직후\n- **On Parameters Changed** — Block 전용, 부모가 Input Parameter를 바꿀 때",
     "source": "wb9 - Screen Lifecycle: Screen Event / The Render event and After Fetch event",
     "status": "verified",
     "verifyNote": "",

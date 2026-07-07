@@ -265,7 +265,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "**Exception(예외)** 은 실행 중 발생하는 오류 상황을 가리키며, OutSystems는 오류 종류별로 전용 **Handler(처리기)** 를 붙여 각기 다르게 대응할 수 있습니다. 처리기를 붙일 수 있는 종류는 Database(데이터베이스), Security(보안), Communication(통신), 그리고 개발자가 직접 정의한 User(사용자 정의) 예외입니다. 'Business Logic Exception'이라는 이름의 예외 유형은 OutSystems에 존재하지 않으므로 이것이 정답(NOT에 해당)입니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — Database Exception은 실재하는 유형입니다(DB 접근 오류 처리).\n- **B** — Security Exception은 실재합니다(권한/보안 위반 처리).\n- **D** — Communication Exception은 실재합니다(외부 통신 실패 처리).",
+    "explanation": "**Exception(예외)** 은 실행 중 발생하는 오류 상황을 가리키며, OutSystems는 오류 종류별로 전용 **Handler(처리기)** 를 붙여 각기 다르게 대응할 수 있습니다. 처리기를 붙일 수 있는 종류는 Database(데이터베이스), Security(보안), Communication(통신), 그리고 개발자가 직접 정의한 User(사용자 정의) 예외입니다. 'Business Logic Exception'이라는 이름의 예외 유형은 OutSystems에 존재하지 않으므로 이것이 정답(NOT에 해당)입니다. **→ 정답 C**\n\n**왜 나머지는 아닌가**\n- **A** — Database Exception은 실재하는 유형입니다(DB 접근 오류 처리).\n- **B** — Security Exception은 실재합니다(권한/보안 위반 처리).\n- **D** — Communication Exception은 실재합니다(외부 통신 실패 처리).\n\n**참고 · Exception(예외) 종류**\n- **All Exceptions** = 가장 상위. 더 구체적인 핸들러가 없을 때 모든 예외를 잡음\n- **Database Exception** = DB 작업(Aggregate·SQL·Entity Action) 중 발생\n- **Security Exception** = 인증·권한 등 보안 관련\n- **Communication Exception** = (Reactive/Mobile 전용) 서버 연결 실패 시\n- **User Exception** = 개발자가 정의해 Raise하는 사용자 예외\n- 💡 같은 흐름에 여러 핸들러가 있으면 **더 구체적인(자식) 핸들러**가 우선 잡습니다",
     "source": "Training Workbook 6 - Exception Handler (Exception handler flows)",
     "status": "verified",
     "verifyNote": "",
