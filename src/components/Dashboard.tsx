@@ -138,7 +138,13 @@ export default function Dashboard() {
 
       {/* per-subtopic practice */}
       <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="mb-3 text-sm font-semibold">주제별 연습 &amp; 진도</h2>
+        <h2 className="text-sm font-semibold">주제별 연습 &amp; 진도</h2>
+        <p className="mb-3 mt-1 text-xs text-slate-400">
+          주제 이름을 누르면 그 과목 전체를 연습해요. 오른쪽 숫자
+          <span className="text-emerald-600"> 알아요</span> /
+          <span className="text-amber-600"> 몰라요</span> /
+          <span className="text-slate-500"> 미확인</span>을 누르면 그 상태의 문항만 골라 풀 수 있어요.
+        </p>
         <div className="space-y-4">
           {CATEGORY_ORDER.map((cat) => {
             const specs = BLUEPRINT.filter((b) => b.category === cat);
@@ -209,7 +215,10 @@ export default function Dashboard() {
                                   {count}
                                 </Link>
                               ) : (
-                                <span key={key} className="px-1.5 py-0.5 text-slate-300">
+                                <span
+                                  key={key}
+                                  className={`rounded px-1.5 py-0.5 ${cls} opacity-40`}
+                                >
                                   {count}
                                 </span>
                               )
@@ -228,12 +237,6 @@ export default function Dashboard() {
             );
           })}
         </div>
-        <p className="mt-3 text-xs text-slate-400">
-          주제 이름을 누르면 그 과목 전체를 연습해요. 오른쪽 숫자
-          <span className="text-emerald-600"> 알아요</span> /
-          <span className="text-amber-600"> 몰라요</span> /
-          <span className="text-slate-500"> 미확인</span>을 누르면 그 상태의 문항만 골라 풀 수 있어요.
-        </p>
       </section>
 
       {mounted && overall.known + overall.review > 0 ? (
