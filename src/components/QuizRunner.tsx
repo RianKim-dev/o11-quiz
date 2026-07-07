@@ -290,9 +290,25 @@ function Results({
   title: string;
 }) {
   const { lang } = useLang();
+  const { userId } = useAuth();
   const total = questions.length;
   const pct = Math.round((correctCount / total) * 100);
   const passed = pct >= 70;
+
+  const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    loadBookmarks().then(setBookmarks);
+  }, [userId]);
+  const toggleMark = async (id: string) => {
+    const on = !bookmarks.has(id);
+    await setBookmark(id, on);
+    setBookmarks((prev) => {
+      const next = new Set(prev);
+      if (on) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  };
 
   // per-subtopic breakdown
   const bySub = new Map<string, { correct: number; total: number }>();
@@ -346,6 +362,36 @@ function Results({
 
       {/* per-question review */}
       <h2 className="mt-6 mb-2 text-sm font-semibold">문항별 해설</h2>
+
+      {/* jump navigation — click a number to scroll to that question */}
+      <div className="sticky top-0 z-10 -mx-1 mb-3 rounded-lg border border-slate-100 bg-white/95 px-2 py-2 backdrop-blur">
+        <div className="flex flex-wrap gap-1">
+          {questions.map((q, i) => {
+            const ok = chosen[q.id] === q.answer;
+            const marked = bookmarks.has(q.id);
+            return (
+              <button
+                key={q.id}
+                onClick={() =>
+                  document
+                    .getElementById(`res-q-${i}`)
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+                title={`Q${i + 1}${marked ? " ⭐" : ""}`}
+                className={`relative h-7 w-7 rounded text-xs font-medium ${
+                  ok ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
+                }`}
+              >
+                {i + 1}
+                {marked ? (
+                  <span className="absolute -right-1 -top-1.5 text-[10px]">⭐</span>
+                ) : null}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div className="space-y-3">
         {questions.map((q, i) => {
           const mine = chosen[q.id];
@@ -354,7 +400,8 @@ function Results({
           return (
             <div
               key={q.id}
-              className={`rounded-xl border bg-white p-4 shadow-sm ${
+              id={`res-q-${i}`}
+              className={`scroll-mt-16 rounded-xl border bg-white p-4 shadow-sm ${
                 ok ? "border-emerald-200" : "border-rose-200"
               }`}
             >
@@ -362,13 +409,26 @@ function Results({
                 <span className="text-xs font-medium text-slate-400">
                   Q{i + 1} · {q.subtopic}
                 </span>
-                <span
-                  className={`text-xs font-semibold ${
-                    ok ? "text-emerald-600" : "text-rose-600"
-                  }`}
-                >
-                  {ok ? "정답 ✓" : "오답 ✗"}
-                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => toggleMark(q.id)}
+                    title="북마크 (홈의 '⭐ 북마크 복습'에서 모아 볼 수 있어요)"
+                    className={`rounded px-1 text-sm leading-none ${
+                      bookmarks.has(q.id)
+                        ? "text-amber-500"
+                        : "text-slate-300 hover:text-amber-400"
+                    }`}
+                  >
+                    {bookmarks.has(q.id) ? "⭐" : "☆"}
+                  </button>
+                  <span
+                    className={`text-xs font-semibold ${
+                      ok ? "text-emerald-600" : "text-rose-600"
+                    }`}
+                  >
+                    {ok ? "정답 ✓" : "오답 ✗"}
+                  </span>
+                </div>
               </div>
               <div className="text-sm font-medium">
                 <Markdown>{loc.stem}</Markdown>
