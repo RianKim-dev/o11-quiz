@@ -29,7 +29,12 @@ export default function QuizClient({ mode, subtopic }: Props) {
       let qs: Question[] = [];
       let t = "";
       let n = "";
-      if (mode === "mock" || mode === "practice") {
+      if (mode === "practice" && subtopic) {
+        // Practice a single subtopic: reveal-as-you-go, no timer, no stats.
+        qs = shuffle(getBySubtopic(subtopic));
+        t = `연습 · ${subtopic}`;
+        n = "연습 모드는 성적에 반영되지 않아요. 각 문항의 '정답 확인'을 열어 해설을 보며 풀어보세요.";
+      } else if (mode === "mock" || mode === "practice") {
         // Prefer questions the user hasn't answered yet (blueprint ratio kept).
         const answered = new Set((await loadAnswers()).map((r) => r.questionId));
         const { questions: mq, shortfall } = assembleMockFrom(answered);

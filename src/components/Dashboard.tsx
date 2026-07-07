@@ -188,6 +188,19 @@ export default function Dashboard() {
                           {mounted ? `${st.answered}/${available}문항` : `–/${available}`}
                           {mounted && st.answered > 0 ? ` · ${pct}%` : ""}
                         </span>
+                        {disabled ? (
+                          <span className="w-8 shrink-0" />
+                        ) : (
+                          <Link
+                            href={`/quiz?mode=practice&subtopic=${encodeURIComponent(
+                              spec.subtopic
+                            )}`}
+                            title="연습 모드 (정답·해설 열어보며, 성적 미반영)"
+                            className="w-8 shrink-0 text-center text-slate-400 hover:text-rose-500"
+                          >
+                            📖
+                          </Link>
+                        )}
                       </div>
                     );
                   })}
