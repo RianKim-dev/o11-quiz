@@ -322,7 +322,9 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
         {/* self-assessment — available in every mode/state (optional) */}
         <div className="mt-4 border-t border-slate-100 pt-3">
           <p className="mb-1 text-xs text-slate-400">
-            자가 표시 (선택) — 진도·복습 목록에 반영돼요
+            {timed
+              ? "자가 표시 (선택) — 지금 안 눌러도 돼요. 채점 후 위 '일괄 표시'로 틀린 것만·맞은 것만 한 번에 바꿀 수 있어요."
+              : "자가 표시 (선택) — 진도·복습 목록에 반영돼요"}
           </p>
           <div className="flex gap-2">
             <button
