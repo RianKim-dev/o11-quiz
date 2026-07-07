@@ -10,8 +10,7 @@ import {
   getBySubtopic,
   shuffle,
 } from "@/lib/questions";
-import { wrongIdsFrom } from "@/lib/storage";
-import { loadAnswers, loadBookmarks } from "@/lib/progress";
+import { loadStatuses } from "@/lib/progress";
 
 interface Props {
   mode: string;
@@ -29,37 +28,37 @@ export default function QuizClient({ mode, subtopic }: Props) {
       let qs: Question[] = [];
       let t = "";
       let n = "";
-      if (mode === "practice" && subtopic) {
-        // Practice a single subtopic: reveal-as-you-go, no timer, no stats.
-        qs = shuffle(getBySubtopic(subtopic));
-        t = `연습 · ${subtopic}`;
-        n = "연습 모드는 성적에 반영되지 않아요. 각 문항의 '정답 확인'을 열어 해설을 보며 풀어보세요.";
-      } else if (mode === "mock" || mode === "practice") {
-        // Prefer questions the user hasn't answered yet (blueprint ratio kept).
-        const answered = new Set((await loadAnswers()).map((r) => r.questionId));
-        const { questions: mq, shortfall } = assembleMockFrom(answered);
+      const statuses = await loadStatuses();
+      const known = new Set(
+        [...statuses].filter(([, s]) => s === "known").map(([id]) => id)
+      );
+      const practiceNote =
+        "연습 모드는 성적에 반영되지 않아요. '정답 확인'을 열어 해설을 보고, '알아요/몰라요'로 표시해 보세요.";
+
+      if (mode === "mock") {
+        // Prefer questions not yet marked "알아요" (focus on what you don't know).
+        const { questions: mq, shortfall } = assembleMockFrom(known);
         qs = mq;
-        t = mode === "practice" ? "연습 모드" : "모의고사";
+        t = "모의고사";
         n =
           shortfall > 0
             ? `실제 시험은 50문항이지만 현재 은행에 문항이 부족해 ${qs.length}문항으로 구성했어요.`
-            : mode === "practice"
-              ? "연습 모드는 성적에 반영되지 않아요. 각 문항의 '정답 확인'을 열어 해설을 보며 풀어보세요."
-              : "";
-      } else if (mode === "topic" && subtopic) {
-        qs = shuffle(getBySubtopic(subtopic));
-        t = subtopic;
+            : "";
       } else if (mode === "review") {
-        const wrong = wrongIdsFrom(await loadAnswers());
-        qs = shuffle(ALL_QUESTIONS.filter((q) => wrong.has(q.id)));
-        t = "오답 복습";
-      } else if (mode === "bookmark") {
-        const marks = await loadBookmarks();
-        qs = shuffle(ALL_QUESTIONS.filter((q) => marks.has(q.id)));
-        t = "북마크 복습";
+        // The "다시 볼 목록" — questions marked 몰라요.
+        qs = shuffle(ALL_QUESTIONS.filter((q) => statuses.get(q.id) === "review"));
+        t = "다시 볼 목록";
+      } else if (mode === "practice" && subtopic) {
+        qs = shuffle(getBySubtopic(subtopic));
+        t = `연습 · ${subtopic}`;
+        n = practiceNote;
       } else {
-        qs = shuffle(ALL_QUESTIONS);
+        // 전체 연습 — not-yet-"알아요" first.
+        const fresh = shuffle(ALL_QUESTIONS.filter((q) => !known.has(q.id)));
+        const seen = shuffle(ALL_QUESTIONS.filter((q) => known.has(q.id)));
+        qs = [...fresh, ...seen];
         t = "전체 연습";
+        n = practiceNote;
       }
       if (!cancelled) {
         setQuestions(qs);
@@ -81,10 +80,8 @@ export default function QuizClient({ mode, subtopic }: Props) {
       <div className="py-16 text-center">
         <p className="text-sm text-slate-500">
           {mode === "review"
-            ? "복습할 오답이 없어요. 먼저 문제를 풀어보세요!"
-            : mode === "bookmark"
-              ? "북마크한 문항이 없어요. 퀴즈 중 ☆ 북마크를 눌러 저장해보세요."
-              : "이 조건에 해당하는 문항이 아직 없어요."}
+            ? "다시 볼 문항이 없어요. 문제를 풀며 '몰라요'로 표시하면 여기에 모입니다."
+            : "이 조건에 해당하는 문항이 아직 없어요."}
         </p>
         <Link
           href="/"

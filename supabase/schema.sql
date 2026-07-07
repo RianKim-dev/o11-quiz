@@ -41,3 +41,23 @@ create policy "bookmarks are private to their owner"
   on public.bookmarks for all
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+-- ============ question_status (self-assessment: 알아요 / 몰라요) ============
+-- One row per question the user has assessed. status 'known' = 알아요,
+-- 'review' = 몰라요(다시 볼 목록). No row = 미확인(default). Replaces the old
+-- answers-based progress and the star bookmarks.
+create table if not exists public.question_status (
+  user_id     uuid        not null references auth.users (id) on delete cascade,
+  question_id text        not null,
+  status      text        not null check (status in ('known', 'review')),
+  updated_at  timestamptz not null default now(),
+  primary key (user_id, question_id)
+);
+
+alter table public.question_status enable row level security;
+
+drop policy if exists "question_status is private to its owner" on public.question_status;
+create policy "question_status is private to its owner"
+  on public.question_status for all
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);

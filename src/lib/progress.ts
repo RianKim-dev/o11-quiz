@@ -12,6 +12,13 @@ import {
   setBookmark as localSetBookmark,
   type AnswerRecord,
 } from "@/lib/storage";
+import {
+  getStatusMap,
+  setStatusLocal,
+  setStatusBulkLocal,
+  clearStatusLocal,
+  type QStatus,
+} from "@/lib/status";
 
 function remote() {
   const uid = currentUserId();
@@ -91,4 +98,68 @@ export async function setBookmark(id: string, on: boolean): Promise<boolean> {
   return on;
 }
 
-export type { AnswerRecord };
+/* ---------------- question status (알아요 / 몰라요) ---------------- */
+
+export async function loadStatuses(): Promise<Map<string, QStatus>> {
+  const r = remote();
+  if (!r) return new Map(Object.entries(getStatusMap()));
+  const { data, error } = await r.sb
+    .from("question_status")
+    .select("question_id,status")
+    .eq("user_id", r.uid);
+  if (error || !data) return new Map();
+  return new Map(data.map((row) => [row.question_id as string, row.status as QStatus]));
+}
+
+/** Set a question's status; pass null to clear it back to 미확인. */
+export async function setStatus(id: string, status: QStatus | null): Promise<void> {
+  const r = remote();
+  if (!r) {
+    setStatusLocal(id, status);
+    return;
+  }
+  if (status) {
+    await r.sb
+      .from("question_status")
+      .upsert({ user_id: r.uid, question_id: id, status, updated_at: new Date().toISOString() });
+  } else {
+    await r.sb.from("question_status").delete().eq("user_id", r.uid).eq("question_id", id);
+  }
+}
+
+export async function setStatusBulk(
+  entries: { id: string; status: QStatus | null }[]
+): Promise<void> {
+  if (entries.length === 0) return;
+  const r = remote();
+  if (!r) {
+    setStatusBulkLocal(entries);
+    return;
+  }
+  const toSet = entries.filter((e) => e.status);
+  const toClear = entries.filter((e) => !e.status).map((e) => e.id);
+  if (toSet.length) {
+    await r.sb.from("question_status").upsert(
+      toSet.map((e) => ({
+        user_id: r.uid,
+        question_id: e.id,
+        status: e.status,
+        updated_at: new Date().toISOString(),
+      }))
+    );
+  }
+  if (toClear.length) {
+    await r.sb.from("question_status").delete().eq("user_id", r.uid).in("question_id", toClear);
+  }
+}
+
+export async function clearStatuses(): Promise<void> {
+  const r = remote();
+  if (!r) {
+    clearStatusLocal();
+    return;
+  }
+  await r.sb.from("question_status").delete().eq("user_id", r.uid);
+}
+
+export type { AnswerRecord, QStatus };

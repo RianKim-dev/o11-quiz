@@ -2,56 +2,54 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { MANIFEST, countFor } from "@/lib/manifest";
+import { MANIFEST } from "@/lib/manifest";
 import { BLUEPRINT, CATEGORY_ORDER } from "@/lib/blueprint";
-import { latestByQuestion } from "@/lib/storage";
-import { loadAnswers, clearAnswers, loadBookmarks } from "@/lib/progress";
+import { ALL_QUESTIONS } from "@/lib/questions";
+import { loadStatuses, clearStatuses, type QStatus } from "@/lib/progress";
 import { useAuth } from "@/lib/auth";
 
 interface SubStat {
-  answered: number;
-  correct: number;
+  known: number;
+  review: number;
+  total: number;
 }
 
 export default function Dashboard() {
   const [mounted, setMounted] = useState(false);
   const [stats, setStats] = useState<Record<string, SubStat>>({});
-  const [overall, setOverall] = useState({ answered: 0, correct: 0 });
-  const [bookmarkCount, setBookmarkCount] = useState(0);
+  const [overall, setOverall] = useState({ known: 0, review: 0, total: 0 });
   const { userId } = useAuth();
 
   const load = async () => {
-    const answers = await loadAnswers();
-    const latest = latestByQuestion(answers);
+    const statuses: Map<string, QStatus> = await loadStatuses();
     const s: Record<string, SubStat> = {};
-    let answered = 0;
-    let correct = 0;
-    for (const rec of latest.values()) {
-      const sub = rec.subtopic;
-      if (!sub) continue;
-      const cur = (s[sub] ??= { answered: 0, correct: 0 });
-      cur.answered += 1;
-      answered += 1;
-      if (rec.correct) {
-        cur.correct += 1;
-        correct += 1;
+    let known = 0;
+    let review = 0;
+    let total = 0;
+    for (const q of ALL_QUESTIONS) {
+      const cur = (s[q.subtopic] ??= { known: 0, review: 0, total: 0 });
+      cur.total += 1;
+      total += 1;
+      const st = statuses.get(q.id);
+      if (st === "known") {
+        cur.known += 1;
+        known += 1;
+      } else if (st === "review") {
+        cur.review += 1;
+        review += 1;
       }
     }
     setStats(s);
-    setOverall({ answered, correct });
-    const bm = await loadBookmarks();
-    setBookmarkCount(bm.size);
+    setOverall({ known, review, total });
   };
 
   useEffect(() => {
     setMounted(true);
     load();
-    // reload when the logged-in user changes (guest <-> account)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
-  const overallPct =
-    overall.answered > 0 ? Math.round((overall.correct / overall.answered) * 100) : 0;
+  const knownPct = overall.total > 0 ? Math.round((overall.known / overall.total) * 100) : 0;
 
   return (
     <div className="space-y-6">
@@ -61,26 +59,27 @@ export default function Dashboard() {
         <p className="mt-1 text-sm text-slate-500">
           현재 문제 은행: <b>{MANIFEST.total}</b>문항 · 실제 시험은 50문항(합격 70%)
         </p>
-        {mounted && overall.answered > 0 ? (
-          <div className="mt-3 flex flex-wrap items-center gap-3">
-            <span
-              className={`rounded-full px-3 py-1 text-sm font-semibold ${
-                overallPct >= 70
-                  ? "bg-emerald-100 text-emerald-700"
-                  : "bg-rose-100 text-rose-700"
-              }`}
-            >
-              최근 정답률 {overallPct}%
-            </span>
-            <span className="text-sm text-slate-500">
-              풀어본 문항 {overall.answered} / {MANIFEST.total}
-            </span>
+        {mounted ? (
+          <div className="mt-3">
+            <div className="flex items-center justify-between text-sm">
+              <span className="font-medium text-slate-700">
+                아는 문항 <b className="text-emerald-600">{overall.known}</b> / {overall.total}
+              </span>
+              <span className="text-slate-500">{knownPct}%</span>
+            </div>
+            <div className="mt-1 flex h-2 overflow-hidden rounded bg-slate-100">
+              <div className="h-full bg-emerald-500" style={{ width: `${knownPct}%` }} />
+              <div
+                className="h-full bg-amber-400"
+                style={{ width: `${(overall.review / overall.total) * 100}%` }}
+              />
+            </div>
+            <p className="mt-1 text-xs text-slate-400">
+              🟢 알아요 {overall.known} · 🟡 몰라요 {overall.review} · ⚪ 미확인{" "}
+              {overall.total - overall.known - overall.review}
+            </p>
           </div>
-        ) : (
-          <p className="mt-3 text-sm text-slate-400">
-            아직 푼 문제가 없어요. 아래에서 시작해보세요.
-          </p>
-        )}
+        ) : null}
       </section>
 
       {/* actions */}
@@ -91,51 +90,35 @@ export default function Dashboard() {
         >
           <div className="text-base font-semibold">모의고사</div>
           <div className="mt-1 text-xs text-rose-100">
-            시험 비율대로 · 120분 타이머 · 안 푼 문항 우선
+            시험 비율대로 50문항 · 120분 · 아직 모르는 문항 우선
           </div>
+        </Link>
+        <Link
+          href="/quiz?mode=review"
+          className="rounded-xl border border-amber-300 bg-amber-50 p-4 shadow-sm transition-colors hover:bg-amber-100"
+        >
+          <div className="text-base font-semibold text-amber-800">
+            🔖 다시 볼 목록
+            {mounted && overall.review > 0 ? (
+              <span className="ml-1 text-sm font-normal text-amber-600">
+                {overall.review}개
+              </span>
+            ) : null}
+          </div>
+          <div className="mt-1 text-xs text-amber-700">'몰라요'로 표시한 문항만 모아 연습</div>
         </Link>
         <Link
           href="/quiz?mode=practice"
           className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-slate-300"
         >
-          <div className="text-base font-semibold">📖 연습 모드</div>
+          <div className="text-base font-semibold">📖 전체 연습</div>
           <div className="mt-1 text-xs text-slate-500">
-            한 문제씩 정답·해설 열어보며 · 성적 미반영
-          </div>
-        </Link>
-        <Link
-          href="/quiz?mode=all"
-          className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-slate-300"
-        >
-          <div className="text-base font-semibold">전체 연습</div>
-          <div className="mt-1 text-xs text-slate-500">타이머 없이 전 문항</div>
-        </Link>
-        <Link
-          href="/quiz?mode=review"
-          className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-slate-300"
-        >
-          <div className="text-base font-semibold">오답 복습</div>
-          <div className="mt-1 text-xs text-slate-500">최근에 틀린 문항만</div>
-        </Link>
-        <Link
-          href="/quiz?mode=bookmark"
-          className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-slate-300"
-        >
-          <div className="text-base font-semibold">
-            ⭐ 북마크 복습
-            {mounted && bookmarkCount > 0 ? (
-              <span className="ml-1 text-xs font-normal text-amber-600">
-                ({bookmarkCount})
-              </span>
-            ) : null}
-          </div>
-          <div className="mt-1 text-xs text-slate-500">
-            퀴즈 중 별표한 “다시 볼” 문항
+            타이머 없이 · 해설 보며 · 아직 모르는 문항 우선
           </div>
         </Link>
       </section>
 
-      {/* per-topic practice + stats */}
+      {/* per-subtopic practice */}
       <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="mb-3 text-sm font-semibold">주제별 연습 &amp; 진도</h2>
         <div className="space-y-4">
@@ -148,59 +131,45 @@ export default function Dashboard() {
                 </div>
                 <div className="space-y-1">
                   {specs.map((spec) => {
-                    const available = countFor(spec.subtopic);
-                    const st = stats[spec.subtopic] ?? { answered: 0, correct: 0 };
-                    const pct =
-                      st.answered > 0
-                        ? Math.round((st.correct / st.answered) * 100)
-                        : 0;
-                    const disabled = available === 0;
+                    const st = stats[spec.subtopic] ?? { known: 0, review: 0, total: 0 };
+                    const disabled = st.total === 0;
+                    const kp = st.total ? (st.known / st.total) * 100 : 0;
+                    const rp = st.total ? (st.review / st.total) * 100 : 0;
                     return (
-                      <div
-                        key={spec.subtopic}
-                        className="flex items-center gap-3 text-sm"
-                      >
+                      <div key={spec.subtopic} className="flex items-center gap-3 text-sm">
                         {disabled ? (
                           <span className="w-52 shrink-0 truncate text-slate-300">
                             {spec.subtopic}
                           </span>
                         ) : (
                           <Link
-                            href={`/quiz?mode=topic&subtopic=${encodeURIComponent(
+                            href={`/quiz?mode=practice&subtopic=${encodeURIComponent(
                               spec.subtopic
                             )}`}
+                            title="연습 모드 (해설 보며, 성적 미반영)"
                             className="w-52 shrink-0 truncate text-slate-700 underline decoration-slate-300 hover:decoration-rose-500"
                           >
                             {spec.subtopic}
                           </Link>
                         )}
-                        <div className="h-2 flex-1 overflow-hidden rounded bg-slate-100">
-                          {mounted && st.answered > 0 ? (
-                            <div
-                              className={`h-full ${
-                                pct >= 70 ? "bg-emerald-500" : "bg-rose-400"
-                              }`}
-                              style={{ width: `${pct}%` }}
-                            />
+                        <div className="flex h-2 flex-1 overflow-hidden rounded bg-slate-100">
+                          {mounted ? (
+                            <>
+                              <div className="h-full bg-emerald-500" style={{ width: `${kp}%` }} />
+                              <div className="h-full bg-amber-400" style={{ width: `${rp}%` }} />
+                            </>
                           ) : null}
                         </div>
-                        <span className="w-24 shrink-0 text-right text-xs tabular-nums text-slate-400">
-                          {mounted ? `${st.answered}/${available}문항` : `–/${available}`}
-                          {mounted && st.answered > 0 ? ` · ${pct}%` : ""}
+                        <span className="w-28 shrink-0 text-right text-xs tabular-nums text-slate-400">
+                          {mounted ? (
+                            <>
+                              <span className="text-emerald-600">{st.known}</span>/
+                              <span className="text-amber-600">{st.review}</span>/{st.total}
+                            </>
+                          ) : (
+                            `–/${st.total}`
+                          )}
                         </span>
-                        {disabled ? (
-                          <span className="w-8 shrink-0" />
-                        ) : (
-                          <Link
-                            href={`/quiz?mode=practice&subtopic=${encodeURIComponent(
-                              spec.subtopic
-                            )}`}
-                            title="연습 모드 (정답·해설 열어보며, 성적 미반영)"
-                            className="w-8 shrink-0 text-center text-slate-400 hover:text-rose-500"
-                          >
-                            📖
-                          </Link>
-                        )}
                       </div>
                     );
                   })}
@@ -210,22 +179,22 @@ export default function Dashboard() {
           })}
         </div>
         <p className="mt-3 text-xs text-slate-400">
-          숫자는 (풀어본 / 은행에 있는) 문항 수입니다. 회색은 아직 문제가 없는 주제예요.
+          숫자는 <span className="text-emerald-600">알아요</span>/
+          <span className="text-amber-600">몰라요</span>/전체 입니다. 주제 이름을 누르면 연습 모드로 열려요.
         </p>
       </section>
 
-      {mounted && overall.answered > 0 ? (
+      {mounted && overall.known + overall.review > 0 ? (
         <div className="text-center">
           <button
             onClick={async () => {
-              if (confirm("모든 진도/오답 기록을 지울까요? (북마크는 유지됩니다)")) {
-                await clearAnswers();
-                load();
-              }
+              if (!confirm("모든 '알아요/몰라요' 표시를 지울까요? (되돌릴 수 없어요)")) return;
+              await clearStatuses();
+              load();
             }}
-            className="text-xs text-slate-400 underline"
+            className="text-xs text-slate-400 underline hover:text-rose-500"
           >
-            진도 기록 초기화
+            진도 초기화
           </button>
         </div>
       ) : null}

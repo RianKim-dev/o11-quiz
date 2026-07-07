@@ -4,8 +4,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { OptionKey, Question } from "@/types/question";
 import { Markdown } from "@/components/Markdown";
-import type { AnswerRecord } from "@/lib/storage";
-import { saveAnswers, loadBookmarks, setBookmark } from "@/lib/progress";
+import { loadStatuses, setStatus as saveStatus, setStatusBulk } from "@/lib/progress";
+import type { QStatus } from "@/lib/status";
 import { useAuth } from "@/lib/auth";
 import { useLang, localizeQuestion } from "@/lib/i18n";
 
@@ -23,137 +23,200 @@ function fmtTime(sec: number): string {
 }
 
 export default function QuizRunner({ questions, title, mode, timeLimitSec }: Props) {
+  const timed = mode === "mock";
   const [idx, setIdx] = useState(0);
   const [chosen, setChosen] = useState<Record<string, OptionKey>>({});
-  const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
-  const [done, setDone] = useState(false);
+  const [statusMap, setStatusMap] = useState<Map<string, QStatus>>(new Map());
+  const [revealed, setRevealed] = useState<Set<string>>(new Set());
+  const [submitted, setSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(timeLimitSec ?? 0);
 
   const { userId } = useAuth();
   const { lang } = useLang();
-  // Practice mode: no timer, no stats — reveal answers per question via a toggle.
-  const practice = mode === "practice";
-  const current = questions[idx];
-  const locCurrent = localizeQuestion(current, lang);
-  const answeredCount = Object.keys(chosen).length;
 
-  // Load persisted bookmarks (from Supabase if logged in, else localStorage).
   useEffect(() => {
-    loadBookmarks().then(setBookmarks);
+    loadStatuses().then(setStatusMap);
   }, [userId]);
 
-  const finish = useCallback(async () => {
-    const recs: AnswerRecord[] = questions.map((q) => ({
-      questionId: q.id,
-      chosen: chosen[q.id] ?? "",
-      correct: chosen[q.id] === q.answer,
-      subtopic: q.subtopic,
-      category: q.category,
-      mode,
-      ts: Date.now(),
-    }));
-    if (!practice) await saveAnswers(recs);
-    setDone(true);
-    if (typeof window !== "undefined") window.scrollTo(0, 0);
-  }, [questions, chosen, mode, practice]);
-
-  // Countdown timer for timed (mock) mode.
-  useEffect(() => {
-    if (!timeLimitSec || done) return;
-    if (timeLeft <= 0) {
-      finish();
-      return;
-    }
-    const t = setTimeout(() => setTimeLeft((s) => s - 1), 1000);
-    return () => clearTimeout(t);
-  }, [timeLeft, done, timeLimitSec, finish]);
-
+  const current = questions[idx];
+  const loc = localizeQuestion(current, lang);
+  const total = questions.length;
+  const answeredCount = Object.keys(chosen).length;
   const correctCount = useMemo(
     () => questions.filter((q) => chosen[q.id] === q.answer).length,
     [questions, chosen]
   );
 
-  if (done) {
-    return (
-      <Results
-        questions={questions}
-        chosen={chosen}
-        correctCount={correctCount}
-        title={title}
-      />
-    );
-  }
+  const submit = useCallback(() => {
+    setSubmitted(true);
+    setIdx(0);
+    if (typeof window !== "undefined") window.scrollTo(0, 0);
+  }, []);
 
+  // Countdown (mock only).
+  useEffect(() => {
+    if (!timeLimitSec || submitted) return;
+    if (timeLeft <= 0) {
+      submit();
+      return;
+    }
+    const t = setTimeout(() => setTimeLeft((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [timeLeft, submitted, timeLimitSec, submit]);
+
+  const solving = timed && !submitted; // blind solving phase of a mock
+  const isRevealed = (q: Question) => submitted || revealed.has(q.id);
+  const reveal = (id: string) => setRevealed((s) => new Set(s).add(id));
   const pick = (key: OptionKey) =>
     setChosen((c) => ({ ...c, [current.id]: key }));
 
-  const toggleMark = async () => {
-    const on = !bookmarks.has(current.id);
-    await setBookmark(current.id, on);
-    setBookmarks((prev) => {
-      const next = new Set(prev);
-      if (on) next.add(current.id);
-      else next.delete(current.id);
-      return next;
+  const mark = async (id: string, s: QStatus) => {
+    const next = statusMap.get(id) === s ? null : s; // click again to clear
+    setStatusMap((prev) => {
+      const m = new Map(prev);
+      if (next) m.set(id, next);
+      else m.delete(id);
+      return m;
     });
+    await saveStatus(id, next);
   };
+
+  const bulk = async (kind: "wrongReview" | "correctKnown" | "correctUnseenKnown") => {
+    const entries: { id: string; status: QStatus }[] = [];
+    for (const q of questions) {
+      const ok = chosen[q.id] === q.answer;
+      if (kind === "wrongReview" && !ok) entries.push({ id: q.id, status: "review" });
+      else if (kind === "correctKnown" && ok) entries.push({ id: q.id, status: "known" });
+      else if (kind === "correctUnseenKnown" && ok && !statusMap.has(q.id))
+        entries.push({ id: q.id, status: "known" });
+    }
+    if (!entries.length) return;
+    setStatusMap((prev) => {
+      const m = new Map(prev);
+      for (const e of entries) m.set(e.id, e.status);
+      return m;
+    });
+    await setStatusBulk(entries);
+  };
+
+  const pct = total ? Math.round((correctCount / total) * 100) : 0;
+  const passed = pct >= 70;
+  const revealedNow = isRevealed(current);
+  const curStatus = statusMap.get(current.id);
 
   return (
     <div>
-      {/* header row */}
+      {/* header */}
       <div className="mb-3 flex items-center justify-between">
         <div>
           <h1 className="text-lg font-semibold">{title}</h1>
           <p className="text-xs text-slate-500">
-            {idx + 1} / {questions.length} 문항 · 답변 {answeredCount}개
+            {idx + 1} / {total} 문항
+            {solving ? ` · 답변 ${answeredCount}개` : ""}
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          {timeLimitSec ? (
-            <span
-              className={`rounded-md px-2 py-1 text-sm font-medium tabular-nums ${
-                timeLeft < 60 ? "bg-rose-100 text-rose-700" : "bg-slate-100 text-slate-700"
-              }`}
-            >
-              ⏱ {fmtTime(timeLeft)}
-            </span>
-          ) : null}
-          <button
-            onClick={toggleMark}
-            title="나중에 다시 풀 문항으로 저장 (홈의 '북마크 복습'에서 모아 볼 수 있어요)"
-            className={`rounded-md border px-2 py-1 text-sm ${
-              bookmarks.has(current.id)
-                ? "border-amber-400 bg-amber-50 text-amber-700"
-                : "border-slate-300 text-slate-600"
+        {solving && timeLimitSec ? (
+          <span
+            className={`rounded-md px-2 py-1 text-sm font-medium tabular-nums ${
+              timeLeft < 60 ? "bg-rose-100 text-rose-700" : "bg-slate-100 text-slate-700"
             }`}
           >
-            {bookmarks.has(current.id) ? "⭐ 북마크됨" : "☆ 북마크"}
-          </button>
-        </div>
+            ⏱ {fmtTime(timeLeft)}
+          </span>
+        ) : null}
       </div>
 
-      {/* question palette */}
+      {/* score + bulk actions (after a mock is submitted) */}
+      {submitted ? (
+        <div className="mb-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-slate-500">채점 결과</span>
+            <span className="text-sm tabular-nums">
+              <b className="text-lg">{correctCount}</b>
+              <span className="text-slate-400"> / {total}</span>
+              <span
+                className={`ml-2 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                  passed ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
+                }`}
+              >
+                {pct}% · {passed ? "합격선 통과 ✓" : "합격선 미달"}
+              </span>
+            </span>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2 border-t border-slate-100 pt-3">
+            <span className="self-center text-xs text-slate-400">일괄 표시:</span>
+            <button
+              onClick={() => bulk("wrongReview")}
+              className="rounded-md border border-amber-300 bg-amber-50 px-2.5 py-1 text-xs text-amber-700 hover:bg-amber-100"
+            >
+              틀린 것 → 몰라요
+            </button>
+            <button
+              onClick={() => bulk("correctKnown")}
+              className="rounded-md border border-emerald-300 bg-emerald-50 px-2.5 py-1 text-xs text-emerald-700 hover:bg-emerald-100"
+            >
+              맞은 것 → 알아요
+            </button>
+            <button
+              onClick={() => bulk("correctUnseenKnown")}
+              className="rounded-md border border-slate-300 px-2.5 py-1 text-xs text-slate-600 hover:bg-slate-50"
+            >
+              맞은 미확인만 → 알아요
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {/* number palette */}
       <div className="mb-4 flex flex-wrap gap-1">
         {questions.map((q, i) => {
           const isCur = i === idx;
-          const isAns = chosen[q.id] !== undefined;
-          const isMarked = bookmarks.has(q.id);
+          if (solving) {
+            const isAns = chosen[q.id] !== undefined;
+            return (
+              <button
+                key={q.id}
+                onClick={() => setIdx(i)}
+                title={q.subtopic}
+                className={`h-7 w-7 rounded text-xs font-medium ${
+                  isCur
+                    ? "bg-rose-600 text-white"
+                    : isAns
+                      ? "bg-slate-800 text-white"
+                      : "bg-slate-200 text-slate-600"
+                }`}
+              >
+                {i + 1}
+              </button>
+            );
+          }
+          const st = statusMap.get(q.id);
+          const bg =
+            st === "known"
+              ? "bg-emerald-100 text-emerald-700"
+              : st === "review"
+                ? "bg-amber-100 text-amber-700"
+                : "bg-slate-200 text-slate-600";
+          const ok = chosen[q.id] === q.answer;
           return (
             <button
               key={q.id}
               onClick={() => setIdx(i)}
-              title={q.subtopic}
-              className={`h-7 w-7 rounded text-xs font-medium ${
-                isCur
-                  ? "bg-rose-600 text-white"
-                  : isMarked
-                    ? "bg-amber-100 text-amber-800 ring-1 ring-amber-400"
-                    : isAns
-                      ? "bg-slate-800 text-white"
-                      : "bg-slate-200 text-slate-600"
+              title={`${q.subtopic}${st === "known" ? " · 알아요" : st === "review" ? " · 몰라요" : ""}`}
+              className={`relative h-7 w-7 rounded text-xs font-medium ${bg} ${
+                isCur ? "ring-2 ring-rose-500" : ""
               }`}
             >
               {i + 1}
+              {submitted ? (
+                <span
+                  className={`absolute -right-1 -top-1.5 text-[10px] ${
+                    ok ? "text-emerald-600" : "text-rose-600"
+                  }`}
+                >
+                  {ok ? "✓" : "✗"}
+                </span>
+              ) : null}
             </button>
           );
         })}
@@ -162,30 +225,57 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
       {/* question card */}
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-2 flex flex-wrap gap-2 text-xs">
-          <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-600">
-            {current.category}
-          </span>
-          <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-600">
-            {current.subtopic}
-          </span>
-          <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-500">
-            {current.difficulty}
-          </span>
+          <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-600">{current.category}</span>
+          <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-600">{current.subtopic}</span>
+          <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-500">{current.difficulty}</span>
+          {submitted ? (
+            <span
+              className={`rounded px-2 py-0.5 font-semibold ${
+                chosen[current.id] === current.answer
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "bg-rose-50 text-rose-700"
+              }`}
+            >
+              {chosen[current.id] === current.answer ? "정답 ✓" : "오답 ✗"}
+            </span>
+          ) : null}
         </div>
 
         <div className="text-[15px] font-medium text-slate-900">
-          <Markdown>{locCurrent.stem}</Markdown>
+          <Markdown>{loc.stem}</Markdown>
         </div>
-
-        {locCurrent.diagram ? (
+        {loc.diagram ? (
           <div className="mt-3">
-            <Markdown>{locCurrent.diagram}</Markdown>
+            <Markdown>{loc.diagram}</Markdown>
           </div>
         ) : null}
 
         <div className="mt-4 space-y-2">
-          {locCurrent.options.map((opt) => {
+          {loc.options.map((opt) => {
             const selected = chosen[current.id] === opt.key;
+            if (revealedNow) {
+              const isAnswer = opt.key === current.answer;
+              return (
+                <div
+                  key={opt.key}
+                  className={`flex items-start gap-3 rounded-lg border px-4 py-3 text-sm ${
+                    isAnswer
+                      ? "border-emerald-300 bg-emerald-50 text-emerald-900"
+                      : selected
+                        ? "border-rose-300 bg-rose-50 text-rose-900"
+                        : "border-slate-200 text-slate-700"
+                  }`}
+                >
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-sm font-semibold">
+                    {opt.key}
+                  </span>
+                  <span>
+                    {opt.text}
+                    {isAnswer ? " ← 정답" : selected ? " ← 내 선택" : ""}
+                  </span>
+                </div>
+              );
+            }
             return (
               <button
                 key={opt.key}
@@ -209,25 +299,50 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
           })}
         </div>
 
-        {/* practice mode: reveal answer + explanation on demand */}
-        {practice ? (
-          <details
-            key={current.id}
-            className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3"
+        {/* reveal (practice/review only) */}
+        {!timed && !revealedNow ? (
+          <button
+            onClick={() => reveal(current.id)}
+            className="mt-4 w-full rounded-lg border border-rose-200 bg-rose-50 py-2 text-sm font-medium text-rose-600 hover:bg-rose-100"
           >
-            <summary className="cursor-pointer text-sm font-medium text-rose-600">
-              정답 확인 · 해설
-            </summary>
-            <div className="mt-2 text-sm">
-              <p className="mb-2 font-semibold text-emerald-700">
-                정답: {current.answer}.{" "}
-                {locCurrent.options.find((o) => o.key === current.answer)?.text}
-              </p>
-              <div className="text-slate-700">
+            정답 확인 · 해설 보기
+          </button>
+        ) : null}
+
+        {/* explanation + status buttons (when revealed) */}
+        {revealedNow ? (
+          <div className="mt-4 border-t border-slate-100 pt-3">
+            <details open className="rounded-lg bg-slate-50 p-3">
+              <summary className="cursor-pointer text-sm font-medium text-rose-600">해설</summary>
+              <div className="mt-2 text-sm">
                 <Markdown>{current.explanation}</Markdown>
               </div>
+            </details>
+            <p className="mb-1 mt-3 text-xs text-slate-400">이 문항, 이제 어떤가요?</p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => mark(current.id, "known")}
+                className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
+                  curStatus === "known"
+                    ? "border-emerald-500 bg-emerald-500 text-white"
+                    : "border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                }`}
+              >
+                알아요 ✓
+              </button>
+              <button
+                onClick={() => mark(current.id, "review")}
+                title="'몰라요'로 표시하면 홈의 '다시 볼 목록'에 모입니다"
+                className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
+                  curStatus === "review"
+                    ? "border-amber-500 bg-amber-500 text-white"
+                    : "border-amber-300 text-amber-700 hover:bg-amber-50"
+                }`}
+              >
+                몰라요 🔖
+              </button>
             </div>
-          </details>
+          </div>
         ) : null}
       </div>
 
@@ -241,269 +356,40 @@ export default function QuizRunner({ questions, title, mode, timeLimitSec }: Pro
           ← 이전
         </button>
 
-        {idx < questions.length - 1 ? (
+        {idx < total - 1 ? (
           <button
-            onClick={() => setIdx((i) => Math.min(questions.length - 1, i + 1))}
+            onClick={() => setIdx((i) => Math.min(total - 1, i + 1))}
             className="rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white"
           >
             다음 →
           </button>
-        ) : (
+        ) : solving ? (
           <button
             onClick={() => {
               if (
-                answeredCount < questions.length &&
-                !confirm(
-                  `아직 ${questions.length - answeredCount}문항이 미답변입니다. 그래도 제출할까요?`
-                )
+                answeredCount < total &&
+                !confirm(`아직 ${total - answeredCount}문항이 미답변입니다. 제출하고 채점할까요?`)
               )
                 return;
-              finish();
+              submit();
             }}
             className="rounded-lg bg-rose-600 px-5 py-2 text-sm font-semibold text-white"
           >
             제출하고 채점
           </button>
+        ) : (
+          <Link
+            href="/"
+            className="rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white"
+          >
+            홈으로
+          </Link>
         )}
       </div>
 
       <div className="mt-6 text-center">
         <Link href="/" className="text-xs text-slate-400 underline">
-          그만두고 홈으로
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-/* ---------------- Results ---------------- */
-
-function Results({
-  questions,
-  chosen,
-  correctCount,
-  title,
-}: {
-  questions: Question[];
-  chosen: Record<string, OptionKey>;
-  correctCount: number;
-  title: string;
-}) {
-  const { lang } = useLang();
-  const { userId } = useAuth();
-  const total = questions.length;
-  const pct = Math.round((correctCount / total) * 100);
-  const passed = pct >= 70;
-
-  const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
-  useEffect(() => {
-    loadBookmarks().then(setBookmarks);
-  }, [userId]);
-  const toggleMark = async (id: string) => {
-    const on = !bookmarks.has(id);
-    await setBookmark(id, on);
-    setBookmarks((prev) => {
-      const next = new Set(prev);
-      if (on) next.add(id);
-      else next.delete(id);
-      return next;
-    });
-  };
-
-  // per-subtopic breakdown
-  const bySub = new Map<string, { correct: number; total: number }>();
-  for (const q of questions) {
-    const s = bySub.get(q.subtopic) ?? { correct: 0, total: 0 };
-    s.total += 1;
-    if (chosen[q.id] === q.answer) s.correct += 1;
-    bySub.set(q.subtopic, s);
-  }
-
-  return (
-    <div>
-      <div className="rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-        <p className="text-sm text-slate-500">{title} · 결과</p>
-        <p className="mt-1 text-4xl font-bold tabular-nums">
-          {correctCount}
-          <span className="text-slate-400"> / {total}</span>
-        </p>
-        <p
-          className={`mt-1 inline-block rounded-full px-3 py-1 text-sm font-semibold ${
-            passed ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
-          }`}
-        >
-          {pct}% · {passed ? "합격선(70%) 통과 ✓" : "합격선(70%) 미달"}
-        </p>
-      </div>
-
-      {/* subtopic breakdown */}
-      <div className="mt-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="mb-3 text-sm font-semibold">주제별 정답률</h2>
-        <div className="space-y-2">
-          {[...bySub.entries()].map(([sub, s]) => {
-            const p = Math.round((s.correct / s.total) * 100);
-            return (
-              <div key={sub} className="flex items-center gap-3 text-sm">
-                <span className="w-56 shrink-0 truncate text-slate-600">{sub}</span>
-                <div className="h-2 flex-1 overflow-hidden rounded bg-slate-100">
-                  <div
-                    className={`h-full ${p >= 70 ? "bg-emerald-500" : "bg-rose-400"}`}
-                    style={{ width: `${p}%` }}
-                  />
-                </div>
-                <span className="w-14 shrink-0 text-right tabular-nums text-slate-500">
-                  {s.correct}/{s.total}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* per-question review */}
-      <h2 className="mt-6 mb-2 text-sm font-semibold">문항별 해설</h2>
-
-      {/* jump navigation — click a number to scroll to that question */}
-      <div className="sticky top-0 z-10 -mx-1 mb-3 rounded-lg border border-slate-100 bg-white/95 px-2 py-2 backdrop-blur">
-        <div className="flex flex-wrap gap-1">
-          {questions.map((q, i) => {
-            const ok = chosen[q.id] === q.answer;
-            const marked = bookmarks.has(q.id);
-            return (
-              <button
-                key={q.id}
-                onClick={() =>
-                  document
-                    .getElementById(`res-q-${i}`)
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
-                }
-                title={`Q${i + 1}${marked ? " ⭐" : ""}`}
-                className={`relative h-7 w-7 rounded text-xs font-medium ${
-                  ok ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
-                }`}
-              >
-                {i + 1}
-                {marked ? (
-                  <span className="absolute -right-1 -top-1.5 text-[10px]">⭐</span>
-                ) : null}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        {questions.map((q, i) => {
-          const mine = chosen[q.id];
-          const ok = mine === q.answer;
-          const loc = localizeQuestion(q, lang);
-          return (
-            <div
-              key={q.id}
-              id={`res-q-${i}`}
-              className={`scroll-mt-16 rounded-xl border bg-white p-4 shadow-sm ${
-                ok ? "border-emerald-200" : "border-rose-200"
-              }`}
-            >
-              <div className="mb-1 flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-400">
-                  Q{i + 1} · {q.subtopic}
-                </span>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => toggleMark(q.id)}
-                    title="북마크 (홈의 '⭐ 북마크 복습'에서 모아 볼 수 있어요)"
-                    className={`rounded px-1 text-sm leading-none ${
-                      bookmarks.has(q.id)
-                        ? "text-amber-500"
-                        : "text-slate-300 hover:text-amber-400"
-                    }`}
-                  >
-                    {bookmarks.has(q.id) ? "⭐" : "☆"}
-                  </button>
-                  <span
-                    className={`text-xs font-semibold ${
-                      ok ? "text-emerald-600" : "text-rose-600"
-                    }`}
-                  >
-                    {ok ? "정답 ✓" : "오답 ✗"}
-                  </span>
-                </div>
-              </div>
-              <div className="text-sm font-medium">
-                <Markdown>{loc.stem}</Markdown>
-              </div>
-              {loc.diagram ? (
-                <div className="mt-2">
-                  <Markdown>{loc.diagram}</Markdown>
-                </div>
-              ) : null}
-
-              <div className="mt-3 space-y-1 text-sm">
-                {loc.options.map((opt) => {
-                  const isAnswer = opt.key === q.answer;
-                  const isMine = opt.key === mine;
-                  return (
-                    <div
-                      key={opt.key}
-                      className={`rounded px-2 py-1 ${
-                        isAnswer
-                          ? "bg-emerald-50 text-emerald-800"
-                          : isMine
-                            ? "bg-rose-50 text-rose-800"
-                            : "text-slate-600"
-                      }`}
-                    >
-                      <span className="font-semibold">{opt.key}.</span> {opt.text}
-                      {isAnswer ? " ← 정답" : isMine ? " ← 내 선택" : ""}
-                    </div>
-                  );
-                })}
-                {mine === undefined ? (
-                  <div className="text-xs text-slate-400">(미답변)</div>
-                ) : null}
-              </div>
-
-              <details className="mt-3" open>
-                <summary className="cursor-pointer text-sm font-medium text-rose-600">
-                  해설
-                </summary>
-                <div className="mt-2 rounded-lg bg-slate-50 p-3 text-sm">
-                  <Markdown>{q.explanation}</Markdown>
-                  {q.distractors ? (
-                    <div className="mt-3 border-t border-slate-200 pt-2">
-                      <p className="mb-1 text-xs font-semibold text-slate-500">
-                        오답 정리
-                      </p>
-                      {typeof q.distractors === "string" ? (
-                        <div className="text-xs text-slate-600">
-                          <Markdown>{q.distractors}</Markdown>
-                        </div>
-                      ) : (
-                        <ul className="space-y-1">
-                          {Object.entries(q.distractors).map(([k, v]) => (
-                            <li key={k} className="text-xs text-slate-600">
-                              <span className="font-semibold">{k}.</span> {v}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ) : null}
-                  <p className="mt-3 text-xs text-slate-400">출처: {q.source}</p>
-                </div>
-              </details>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="mt-6 flex justify-center gap-3">
-        <Link
-          href="/"
-          className="rounded-lg bg-slate-800 px-5 py-2 text-sm font-medium text-white"
-        >
-          홈으로
+          {solving ? "그만두고 홈으로" : "홈으로"}
         </Link>
       </div>
     </div>
