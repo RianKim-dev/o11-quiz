@@ -1,7 +1,6 @@
 # O11 Quiz — OutSystems 11 Associate Developer 예상문제집
 
 OutSystems 11 Associate Reactive Developer 자격증 대비 연습문제 웹앱.
-Concentrix 사내 스터디용 (비공개).
 
 ## 무엇을 하는가
 
